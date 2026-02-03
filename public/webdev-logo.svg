@@ -1,0 +1,25 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none"
+ xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="webdevGradient" x1="80" y1="40" x2="440" y2="472" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#A855F7"/>
+   <stop offset="0.55" stop-color="#7C3AED"/>
+   <stop offset="1" stop-color="#22C55E"/>
+  </linearGradient>
+  <linearGradient id="webdevGlow" x1="140" y1="120" x2="360" y2="392" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#F3E8FF" stop-opacity="0.95"/>
+   <stop offset="1" stop-color="#22C55E" stop-opacity="0.65"/>
+  </linearGradient>
+  <radialGradient id="webdevHalo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 120) rotate(90) scale(190)">
+   <stop stop-color="#A855F7" stop-opacity="0.45"/>
+   <stop offset="1" stop-color="#22C55E" stop-opacity="0"/>
+  </radialGradient>
+ </defs>
+ <rect width="512" height="512" rx="120" fill="#0B1020"/>
+ <path d="M108 194C108 146.392 146.392 108 194 108H318C365.608 108 404 146.392 404 194V318C404 365.608 365.608 404 318 404H194C146.392 404 108 365.608 108 318V194Z" fill="url(#webdevGradient)"/>
+ <ellipse cx="256" cy="148" rx="170" ry="120" fill="url(#webdevHalo)"/>
+ <path d="M177 215L235 256L177 297" stroke="#0B1020" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M335 215L277 256L335 297" stroke="#0B1020" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M238 332L274 180" stroke="#0B1020" stroke-width="22" stroke-linecap="round"/>
+ <path d="M210 168H324C350 168 371 189 371 215V342C371 368 350 389 324 389H210C184 389 163 368 163 342V215C163 189 184 168 210 168Z" fill="url(#webdevGlow)" opacity="0.55"/>
+</svg>

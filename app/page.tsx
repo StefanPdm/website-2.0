@@ -1,63 +1,153 @@
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+    <div className='landing-shell'>
+      <main className='landing-main'>
+        <header className='landing-header'>
+          <div className='landing-brand'>
+            <span className='landing-logo'>S</span>
+            <div>
+              <div className='landing-name'>Stefan</div>
+              <div className='landing-role'>Coaching & Development</div>
+            </div>
+          </div>
+          <div className='landing-tags'>
+            <span>klar</span>
+            <span>sauber</span>
+            <span>wirksam</span>
+          </div>
+        </header>
+
+        <section className='landing-grid'>
+          <div className='landing-left'>
+            <span className='landing-badge'>Wähle deinen Weg</span>
+            <h1 className='landing-title'>
+              Zwei Welten.
+              <br />
+              Eine Entscheidung.
+            </h1>
+            <p className='landing-subtitle'>
+              Du bekommst entweder innere Klarheit (NLP Coaching) oder digitale Systeme
+              (Webdevelopment). Beides sauber. Beides persönlich. Ohne Blabla.
+            </p>
+            <div className='landing-actions'>
+              <a
+                className='landing-cta landing-cta--primary'
+                href='#choose'>
+                Jetzt wählen
+              </a>
+              <Link
+                className='landing-cta landing-cta--ghost'
+                href='/contact'>
+                Kontakt
+              </Link>
+            </div>
+          </div>
+
+          <div className='landing-right'>
+            <div className='orbit'>
+              <div className='orbit-item orbit-item--one'>
+                <Image
+                  src='/nlp-logo.svg'
+                  alt='NLP'
+                  width={40}
+                  height={40}
+                />
+              </div>
+              <div className='orbit-item orbit-item--two'>
+                <Image
+                  src='/webdesign.svg'
+                  alt='Web'
+                  width={40}
+                  height={40}
+                />
+              </div>
+              <div className='orbit-item orbit-item--three'>
+                <span>UI</span>
+              </div>
+              <div className='orbit-item orbit-item--four'>
+                <span>API</span>
+              </div>
+            </div>
+            {/* Choise your path cards */}
+            <div
+              className='choice-card'
+              id='choose'>
+              <div className='choice-title mb-8'>Wähle deinen Weg</div>
+
+              <div className='choice-grid'>
+                {/* left card */}
+                <Link
+                  className='choice-tile choice-tile--nlp relative'
+                  href='/nlp'>
+                  <div className='choice-logo-big'>
+                    <Image
+                      src='/nlp-logo.svg'
+                      alt='NLP Logo'
+                      width={64}
+                      height={64}
+                    />
+                  </div>
+                  <div className='choice-pill-slot'>
+                    <Image
+                      className='choice-pill-image'
+                      src='/red-pill.webp'
+                      alt='Rote Pille'
+                      width={64}
+                      height={64}
+                      quality={100}
+                    />
+                  </div>
+                  <div className='choice-meta'>
+                    <div className='choice-heading'>NLP Coaching</div>
+                    <div className='choice-text'>Kopf. Körper. Fokus.</div>
+                    <br />
+                    <span className='choice-link'>Rote Pille wählen →</span>
+                  </div>
+                </Link>
+                {/* right card */}
+                <Link
+                  className='choice-tile choice-tile--dev relative'
+                  href='/dev'>
+                  <div className='choice-logo-big'>
+                    <Image
+                      src='/webdesign-logo.svg'
+                      alt='Webdevelopment Logo'
+                      width={64}
+                      height={64}
+                    />
+                  </div>
+                  <div className='choice-pill-slot'>
+                    <Image
+                      className='choice-pill-image'
+                      src='/blue-pill.webp'
+                      alt='Blaue Pille'
+                      width={64}
+                      height={64}
+                      quality={100}
+                    />
+                  </div>
+                  <div className='choice-meta'>
+                    <div className='choice-heading'>Webdevelopment</div>
+                    <div className='choice-text'>
+                      Websites. Shops.
+                      <br />
+                      Systeme.
+                    </div>
+                    <br />
+                    <span className='choice-link'>Blaue Pille wählen →</span>
+                  </div>
+                </Link>
+              </div>
+              <div className='choice-footer'>Minimal. Premium. Klar. © Stefan</div>
+            </div>
+          </div>
+        </section>
+
+        <div className='landing-tip'>
+          Tipp: Hover/Tap auf eine Karte – die Seite „entscheidet“ optisch mit dir 🙂
         </div>
       </main>
     </div>
