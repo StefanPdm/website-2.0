@@ -7,9 +7,16 @@ export default function Home() {
       <main className='landing-main'>
         <header className='landing-header'>
           <div className='landing-brand'>
-            <span className='landing-logo'>S</span>
             <div>
-              <div className='landing-name'>Stefan</div>
+              <Image
+                src='/Global-logo-W.webp'
+                alt='Studio Fokus Logo'
+                width={120}
+                height={120}
+              />
+            </div>
+            <div>
+              <div className='landing-name'>Stefan Heinemann</div>
               <div className='landing-role'>Coaching & Development</div>
             </div>
           </div>
@@ -45,8 +52,9 @@ export default function Home() {
               </Link>
             </div>
           </div>
-
+          {/* right side */}
           <div className='landing-right'>
+            {/* orbit */}
             <div className='orbit'>
               <div className='orbit-item orbit-item--one'>
                 <Image
@@ -56,16 +64,17 @@ export default function Home() {
                   height={40}
                 />
               </div>
-              <div className='orbit-item orbit-item--two'>
+
+              <div className='orbit-item orbit-item--three'>
                 <Image
-                  src='/webdesign.svg'
+                  src='/webdesign-logo.png'
                   alt='Web'
                   width={40}
                   height={40}
                 />
               </div>
-              <div className='orbit-item orbit-item--three'>
-                <span>UI</span>
+              <div className='orbit-item orbit-item--two'>
+                <span>NLP</span>
               </div>
               <div className='orbit-item orbit-item--four'>
                 <span>API</span>
