@@ -23,6 +23,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
+  --color-accent-web: var(--accent-web);
+  --color-accent-nlp: var(--accent-nlp);
 }
 
 * {
@@ -437,7 +439,6 @@ body {
   opacity: 0.75;
   animation: orbFloat 10s ease-in-out infinite;
 }
-
 .hero-orb--primary {
   top: 18%;
   left: 14%;
@@ -1011,6 +1012,23 @@ body {
   }
 }
 
+@keyframes orbitSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes orbitSpinReverse {
+  0% {
+    transform: rotate(var(--orbit-tilt, -6deg));
+  }
+  100% {
+    transform: rotate(calc(var(--orbit-tilt, -6deg) - 360deg));
+  }
+}
+
 @keyframes orbFloat {
   0%,
   100% {
@@ -1229,59 +1247,131 @@ body {
   display: grid;
   gap: 1.5rem;
   justify-items: center;
+  margin-top: -0;
 }
 
-.orbit {
+.orbit-system {
   position: relative;
-  width: 280px;
-  height: 280px;
+  width: 320px;
+  height: 320px;
+  display: grid;
+  place-items: center;
+  transform: translate(-170px, -220px);
+}
+
+.orbit-center {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe58a 0%, #ffb703 60%, rgba(255, 183, 3, 0.2) 100%);
+  box-shadow:
+    0 0 18px rgba(255, 214, 102, 0.9),
+    0 0 48px rgba(255, 183, 3, 0.6),
+    0 0 90px rgba(255, 183, 3, 0.45);
+  z-index: 3;
+  transform: translate(100px, 100px) !important;
+}
+
+.orbit-ring {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  transform: translate(-50%, -50%);
   border-radius: 999px;
   border: 1px dashed rgba(255, 255, 255, 0.15);
   display: grid;
   place-items: center;
+  animation: orbitSpin var(--orbit-speed) linear infinite;
+  overflow: visible;
+  z-index: 1;
+}
+
+.orbit-ring--one {
+  --orbit-size: 220px;
+  --orbit-speed: 14s;
+  --orbit-tilt: -6deg;
+  z-index: 2;
+}
+
+.orbit-ring--two {
+  --orbit-size: 260px;
+  --orbit-speed: 18s;
+  --orbit-tilt: -6deg;
+  z-index: 4;
+}
+
+.orbit-ring--three {
+  --orbit-size: 300px;
+  --orbit-speed: 22s;
+  --orbit-tilt: -6deg;
+  z-index: 3;
+}
+
+.orbit-ring--four {
+  --orbit-size: 340px;
+  --orbit-speed: 12s;
+  --orbit-tilt: -6deg;
+  z-index: 1;
 }
 
 .orbit-item {
   position: absolute;
   width: 54px;
   height: 54px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  display: grid;
-  place-items: center;
-  color: rgba(248, 250, 252, 0.8);
-  font-size: 0.7rem;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-  animation: orbitFloat 12s linear infinite;
-}
-
-.orbit-item--one {
   top: -8px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.orbit-item--two {
-  right: -8px;
-  top: 50%;
-  transform: translateY(-50%);
-  animation-delay: -3s;
+.orbit-item__shell {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  position: relative;
+  display: grid;
+  place-items: center;
+  /* color: rgba(248, 250, 252, 0.8); */
+  font-size: 1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  animation: orbitSpinReverse var(--orbit-speed) linear infinite;
+  z-index: 2;
 }
 
-.orbit-item--three {
-  bottom: -8px;
+.orbit-badge {
+  position: absolute;
+  top: -30px;
   left: 50%;
-  transform: translateX(-50%);
-  animation-delay: -6s;
+  transform: translate(-50%, 6px);
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(10, 12, 16, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(248, 250, 252, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  white-space: nowrap;
+  z-index: 3;
 }
 
-.orbit-item--four {
-  left: -8px;
-  top: 50%;
-  transform: translateY(-50%);
-  animation-delay: -9s;
+.orbit-item__shell:hover .orbit-badge,
+.orbit-item__shell:focus-within .orbit-badge {
+  opacity: 1;
+  transform: translate(-50%, 0px);
+}
+
+.orbit-item__content {
+  display: grid;
+  place-items: center;
 }
 
 .choice-card {

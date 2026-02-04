@@ -17,7 +17,7 @@ export default function Home() {
             </div>
             <div>
               <div className='landing-name'>Stefan Heinemann</div>
-              <div className='landing-role'>Coaching & Development</div>
+              <div className='landing-role'>Coaching & Webdevelopment</div>
             </div>
           </div>
           <div className='landing-tags'>
@@ -37,8 +37,10 @@ export default function Home() {
             </h1>
             <p className='landing-subtitle'>
               Du bekommst entweder innere Klarheit (NLP Coaching) oder digitale Systeme
-              (Webdevelopment). Beides sauber. Beides persönlich. Ohne Blabla.
+              (Webdevelopment).
+              <br /> Beides sauber. Beides persönlich. Ohne Blabla.
             </p>
+
             <div className='landing-actions'>
               <a
                 className='landing-cta landing-cta--primary'
@@ -52,37 +54,81 @@ export default function Home() {
               </Link>
             </div>
           </div>
+
           {/* right side */}
           <div className='landing-right'>
-            {/* orbit */}
-            <div className='orbit'>
-              <div className='orbit-item orbit-item--one'>
-                <Image
-                  src='/nlp-logo.svg'
-                  alt='NLP'
-                  width={40}
-                  height={40}
-                />
+            {/* orbits */}
+            <div className='orbit-system'>
+              <div className='orbit-center' />
+
+              <div className='orbit-ring orbit-ring--four'>
+                <div className='orbit-item'>
+                  <div className='orbit-item__shell'>
+                    <div className='orbit-item__content'>
+                      <Image
+                        src='/nlp-logo.svg'
+                        alt='NLP'
+                        width={40}
+                        height={40}
+                      />
+                    </div>
+                    <span className='orbit-badge'>NLP</span>
+                  </div>
+                </div>
               </div>
 
-              <div className='orbit-item orbit-item--three'>
-                <Image
-                  src='/webdesign-logo.png'
-                  alt='Web'
-                  width={40}
-                  height={40}
-                />
+              <div className='orbit-ring orbit-ring--two'>
+                <div className='orbit-item'>
+                  <div className='orbit-item__shell'>
+                    <div className='orbit-item__content'>
+                      <Image
+                        src='/webdesign-logo.png'
+                        alt='Web'
+                        width={40}
+                        height={40}
+                      />
+                    </div>
+                    <span className='orbit-badge'>Webdesign</span>
+                  </div>
+                </div>
               </div>
-              <div className='orbit-item orbit-item--two'>
-                <span>NLP</span>
+
+              <div className='orbit-ring orbit-ring--three'>
+                <div className='orbit-item'>
+                  <div className='orbit-item__shell'>
+                    <div className='orbit-item__content'>
+                      <Image
+                        src='/tony-robbins.png'
+                        alt='Web'
+                        width={40}
+                        height={40}
+                      />
+                    </div>
+                    <span className='orbit-badge'>Tony Robbins</span>
+                  </div>
+                </div>
               </div>
-              <div className='orbit-item orbit-item--four'>
-                <span>API</span>
+
+              <div className='orbit-ring orbit-ring--one'>
+                <div className='orbit-item'>
+                  <div className='orbit-item__shell'>
+                    <div className='orbit-item__content'>
+                      <Image
+                        src='/Nextjs_Symbol.svg'
+                        alt='Web'
+                        width={40}
+                        height={40}
+                      />
+                    </div>
+                    <span className='orbit-badge'>Next.js</span>
+                  </div>
+                </div>
               </div>
             </div>
+
             {/* Choise your path cards */}
             <div
-              className='choice-card'
+              className='choice-card mt-8'
               id='choose'>
               <div className='choice-title mb-8'>Wähle deinen Weg</div>
 
