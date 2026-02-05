@@ -9,7 +9,7 @@ export default function Home() {
           <div className='landing-brand'>
             <div>
               <Image
-                src='/Global-logo-W.webp'
+                src='/Global-Logo-SH-1.webp'
                 alt='Studio Fokus Logo'
                 width={120}
                 height={120}
@@ -35,12 +35,12 @@ export default function Home() {
               <br />
               Eine Entscheidung.
             </h1>
-            <p className='landing-subtitle'>
-              Du bekommst entweder innere Klarheit (NLP Coaching) oder digitale Systeme
-              (Webdevelopment).
-              <br /> Beides sauber. Beides persönlich. Ohne Blabla.
-            </p>
-
+            <span className='landing-subtitle'>Du bekommst entweder: </span>
+            <ul className='landing-subtitle'>
+              <li>⋙ innere Klarheit &nbsp; → &nbsp; NLP Coaching</li>
+              <li>⋙ digitale Systeme &nbsp; → &nbsp; Webdevelopment</li>
+            </ul>
+            <span className='landing-subtitle'>Beides sauber. Beides persönlich. Ohne Blabla.</span>
             <div className='landing-actions'>
               <a
                 className='landing-cta landing-cta--primary'

@@ -1205,6 +1205,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
+  padding-top: 2rem;
 }
 
 .landing-cta {
