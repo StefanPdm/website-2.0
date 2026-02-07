@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 // use your own icon import if react-icons is not available
@@ -41,7 +42,7 @@ const CardNav = ({
         contentEl.style.position = 'static';
         contentEl.style.height = 'auto';
 
-        contentEl.offsetHeight;
+        void contentEl.offsetHeight;
 
         const topBar = 60;
         const padding = 16;
@@ -158,10 +159,13 @@ const CardNav = ({
           </div>
 
           <div className='logo-container'>
-            <img
+            <Image
               src={logo}
               alt={logoAlt}
               className='logo'
+              width={120}
+              height={80}
+              priority
             />
           </div>
 

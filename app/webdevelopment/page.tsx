@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { ComponentType, PropsWithChildren } from 'react';
 import CardNav from '@/components/CardNav';
 import LightPillar from '@/components/LightPillar';
+import HyperspeedStrip from '@/components/HyperspeedStrip';
 import PixelCard from '@/components/PixelCard';
 
 const trustItems = ['Persönlich & direkt', 'Sauberer Code', 'Wartbar & skalierbar'];
@@ -146,10 +147,6 @@ export default function WebdevelopmentPage() {
           pillarRotation={15}
           mixBlendMode='screen'
         />
-        <div className='pointer-events-none absolute inset-0 z-0'>
-          {/* <div className='absolute -top-24 right-0 h-72 w-[48rem] rounded-full bg-gradient-to-r from-[#1D6FA8]/20 via-[#7A2C8E]/10 to-transparent blur-3xl'></div> */}
-          {/* <div className='absolute bottom-0 left-0 h-48 w-48 rounded-full bg-[#F6B35A]/20 blur-2xl'></div> */}
-        </div>
 
         <div className='relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-24'>
           <div>
@@ -212,7 +209,7 @@ export default function WebdevelopmentPage() {
 
       <section
         id='leistungen'
-        className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col items-start gap-10 justify-center'>
+        className='relative mx-auto flex min-h-[70vh] max-w-6xl flex-col items-start justify-center gap-10 px-4 py-16 pb-28'>
         <div className='max-w-2xl'>
           <h2 className='text-3xl font-bold tracking-tight text-white'>
             Digitale Lösungen mit Struktur.
@@ -225,7 +222,7 @@ export default function WebdevelopmentPage() {
             Kein Overengineering. Kein Plugin-Chaos. Sondern klare Systeme, die funktionieren.
           </p>
         </div>
-        <div className='mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
+        <div className='mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 z-10'>
           {services.map((service) => (
             <PixelCardView
               key={service.title}
@@ -247,6 +244,10 @@ export default function WebdevelopmentPage() {
               </div>
             </PixelCardView>
           ))}
+        </div>
+
+        <div className='z-0 pointer-events-none absolute bottom-0 left-1/2 h-96 w-screen -translate-x-1/2 opacity-100'>
+          <HyperspeedStrip />
         </div>
       </section>
 
