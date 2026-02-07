@@ -1440,7 +1440,7 @@ body {
   position: absolute;
   top: -30px;
   left: 50%;
-  transform: translate(-50%, 6px);
+  transform: translate(-50%, 0px);
   padding: 0.25rem 0.55rem;
   border-radius: 999px;
   font-size: 0.65rem;
@@ -1449,19 +1449,13 @@ body {
   background: rgba(10, 12, 16, 0.78);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: rgba(248, 250, 252, 0.9);
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
   white-space: nowrap;
   z-index: 3;
-}
-
-.orbit-item__shell:hover .orbit-badge,
-.orbit-item__shell:focus-within .orbit-badge {
-  opacity: 1;
-  transform: translate(-50%, 0px);
 }
 
 .orbit-item__content {

@@ -633,7 +633,7 @@ const Hyperspeed = ({
         this.update(delta);
         requestAnimationFrame(this.tick);
       }
-    }
+    };
 
     const distortion_uniforms = {
       uDistortionX: { value: new THREE.Vector2(80, 3) },
@@ -795,7 +795,7 @@ const Hyperspeed = ({
       update(time) {
         this.mesh.material.uniforms.uTime.value = time;
       }
-    }
+    };
 
     const carLightsFragment = `
       #define USE_FOG;
@@ -928,7 +928,7 @@ const Hyperspeed = ({
       update(time) {
         this.mesh.material.uniforms.uTime.value = time;
       }
-    }
+    };
 
     const sideSticksVertex = `
       #define USE_FOG;
@@ -1048,7 +1048,7 @@ const Hyperspeed = ({
       update(time) {
         this.uTime.value = time;
       }
-    }
+    };
 
     const roadBaseFragment = `
       #define USE_FOG;
