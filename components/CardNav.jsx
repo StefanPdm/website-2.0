@@ -141,6 +141,10 @@ const CardNav = ({
         ref={navRef}
         className={`card-nav ${isExpanded ? 'open' : ''}`}
         style={{ backgroundColor: baseColor }}>
+        <div
+          className='card-nav-blur'
+          aria-hidden='true'
+        />
         <div className='card-nav-top'>
           <div
             className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''}`}
@@ -161,12 +165,12 @@ const CardNav = ({
             />
           </div>
 
-          <button
-            type='button'
+          <a
+            href='#kontakt'
             className='card-nav-cta-button'
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}>
-            Get Started
-          </button>
+            Kontakt
+          </a>
         </div>
 
         <div

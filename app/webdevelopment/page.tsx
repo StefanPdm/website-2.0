@@ -121,7 +121,7 @@ const cardNavItems = [
 export default function WebdevelopmentPage() {
   return (
     <div className='min-h-screen bg-[#0B1B2B] text-slate-100'>
-      <header className='z-50 fixed top-0 w-full border-b border-white/10 bg-[#0B1B2B]/70 backdrop-blur-sm'>
+      <header className='z-50 fixed top-0 w-full bg-transparent'>
         <CardNav
           logo='/Global-logo-W.webp'
           logoAlt='Studio Fokus Logo'
