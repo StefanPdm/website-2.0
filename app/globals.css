@@ -99,6 +99,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  scroll-behavior: smooth;
+}
+
 body {
   min-height: 100vh;
   background:

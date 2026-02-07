@@ -225,7 +225,7 @@ export default function WebdevelopmentPage() {
 
       <section
         id='leistungen'
-        className='mx-auto max-w-6xl px-4 py-16'>
+        className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col items-start gap-10 justify-center'>
         <div className='max-w-2xl'>
           <h2 className='text-3xl font-bold tracking-tight text-white'>
             Digitale Lösungen mit Struktur.
@@ -244,7 +244,7 @@ export default function WebdevelopmentPage() {
               key={service.title}
               variant='blue'
               className='w-full bg-[#0B1B2B]/70 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
-              <div className='relative z-10 w-full rounded-[22px] bg-transparent p-5 text-slate-100'>
+              <div className='relative z-10 w-full rounded-[22px] border border-white/20 bg-white/5 p-5 text-slate-100 h-full'>
                 <h3 className='text-lg font-semibold text-white'>{service.title}</h3>
                 <p className='mt-2 text-sm text-slate-300'>{service.intro}</p>
                 <ul className='mt-4 space-y-2 text-sm text-slate-300'>
@@ -265,7 +265,7 @@ export default function WebdevelopmentPage() {
 
       <section
         id='technologien'
-        className='bg-white/5 py-16 ring-1 ring-white/10'>
+        className='bg-white/5 py-16 ring-1 ring-white/10 min-h-[70vh] flex flex-col justify-center'>
         <div className='mx-auto max-w-6xl px-4'>
           <div className='max-w-2xl'>
             <h2 className='text-3xl font-bold tracking-tight text-white'>
@@ -301,7 +301,7 @@ export default function WebdevelopmentPage() {
 
       <section
         id='prozess'
-        className='mx-auto max-w-6xl px-4 py-16'>
+        className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col justify-center'>
         <div className='max-w-2xl'>
           <h2 className='text-3xl font-bold tracking-tight text-white'>
             Strukturierter Prozess. Klare Kommunikation.
@@ -326,7 +326,7 @@ export default function WebdevelopmentPage() {
 
       <section
         id='zielgruppe'
-        className='bg-white/5 py-16 ring-1 ring-white/10'>
+        className='bg-white/5 py-16 ring-1 ring-white/10 min-h-[70vh] flex flex-col justify-center'>
         <div className='mx-auto max-w-6xl px-4'>
           <div className='max-w-2xl'>
             <h2 className='text-3xl font-bold tracking-tight text-white'>
@@ -349,7 +349,7 @@ export default function WebdevelopmentPage() {
         </div>
       </section>
 
-      <section className='mx-auto max-w-6xl px-4 py-16'>
+      <section className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col justify-center'>
         <div className='max-w-2xl'>
           <h2 className='text-3xl font-bold tracking-tight text-white'>Cases</h2>
           <p className='mt-3 text-slate-300'>
@@ -370,7 +370,7 @@ export default function WebdevelopmentPage() {
 
       <section
         id='kontakt'
-        className='mx-auto max-w-6xl px-4 py-16'>
+        className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col justify-center'>
         <div className='grid gap-8 md:grid-cols-2 md:items-start'>
           <div>
             <h2 className='text-3xl font-bold tracking-tight text-white'>Projekt anfragen</h2>
