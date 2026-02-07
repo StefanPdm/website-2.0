@@ -1,4 +1,11 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'NLP Coaching · Klarheit. Fokus. Veränderung.',
+  description:
+    'NLP-Coaching für Menschen, die viel leisten – und wieder bei sich ankommen wollen. Praktisch, direkt, ohne Blabla.',
+};
 
 const trustItems = [
   '100+ Sessions',

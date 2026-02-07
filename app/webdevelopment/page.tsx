@@ -1,6 +1,13 @@
 import Link from 'next/link';
+import type { ComponentType, PropsWithChildren } from 'react';
+import LightPillar from '@/components/LightPillar';
+import PixelCard from '@/components/PixelCard';
 
 const trustItems = ['Persönlich & direkt', 'Sauberer Code', 'Wartbar & skalierbar'];
+
+const PixelCardView = PixelCard as ComponentType<
+  PropsWithChildren<{ variant?: string; className?: string }>
+>;
 
 const services = [
   {
@@ -83,7 +90,7 @@ const cases = ['Interne Projekte', 'Kundenportal', 'B2B-Websites'];
 export default function WebdevelopmentPage() {
   return (
     <div className='min-h-screen bg-[#0B1B2B] text-slate-100'>
-      <header className='sticky top-0 z-50 border-b border-white/10 bg-[#0B1B2B]/80 backdrop-blur'>
+      <header className='fixed w-full top-0 z-50 border-b border-white/10 bg-[#0B1B2B]/60 backdrop-blur'>
         <div className='mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3'>
           <Link
             className='flex items-center gap-3 font-semibold text-white'
@@ -140,13 +147,24 @@ export default function WebdevelopmentPage() {
         </div>
       </header>
 
-      <section className='relative overflow-hidden'>
-        <div className='absolute inset-0'>
-          <div className='absolute -top-24 right-0 h-72 w-[48rem] rounded-full bg-gradient-to-r from-[#1D6FA8]/20 via-[#7A2C8E]/10 to-transparent blur-3xl'></div>
-          <div className='absolute bottom-0 left-0 h-48 w-48 rounded-full bg-[#F6B35A]/20 blur-2xl'></div>
+      <section className='relative min-h-svh overflow-hidden flex items-center '>
+        <LightPillar
+          className='z-0'
+          topColor='#1D6FA8'
+          bottomColor='#7A2C8E'
+          intensity={0.9}
+          glowAmount={0.004}
+          pillarWidth={3.2}
+          pillarHeight={0.45}
+          pillarRotation={15}
+          mixBlendMode='screen'
+        />
+        <div className='pointer-events-none absolute inset-0 z-0'>
+          {/* <div className='absolute -top-24 right-0 h-72 w-[48rem] rounded-full bg-gradient-to-r from-[#1D6FA8]/20 via-[#7A2C8E]/10 to-transparent blur-3xl'></div> */}
+          {/* <div className='absolute bottom-0 left-0 h-48 w-48 rounded-full bg-[#F6B35A]/20 blur-2xl'></div> */}
         </div>
 
-        <div className='relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-24'>
+        <div className='relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-24'>
           <div>
             <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10'>
               Technischer Möglichmacher · Klarheit & Struktur
@@ -165,7 +183,7 @@ export default function WebdevelopmentPage() {
             <div className='mt-7 flex flex-wrap gap-3'>
               <a
                 href='#kontakt'
-                className='rounded-xl bg-gradient-to-r from-[#1D6FA8] to-[#7A2C8E] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90'>
+                className='rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90'>
                 Projekt anfragen
               </a>
               <a
@@ -188,14 +206,14 @@ export default function WebdevelopmentPage() {
 
           <div className='relative'>
             <div className='rounded-3xl bg-white/10 p-6 ring-1 ring-white/10 shadow-[0_40px_80px_-60px_rgba(0,0,0,0.7)]'>
-              <div className='grid gap-4'>
-                <div className='rounded-2xl bg-white/95 p-4 text-xs text-slate-500'>
+              <div className='grid gap-3'>
+                <div className='rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10 text-center'>
                   UI Mockups / Code Snippets
                 </div>
-                <div className='rounded-2xl bg-white/95 p-4 text-xs text-slate-500'>
+                <div className='rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10 text-center'>
                   Architektur & Systeme
                 </div>
-                <div className='rounded-2xl bg-white/95 p-4 text-xs text-slate-500'>
+                <div className='rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10 text-center'>
                   Skalierbare Prozesse
                 </div>
               </div>
@@ -220,24 +238,27 @@ export default function WebdevelopmentPage() {
             Kein Overengineering. Kein Plugin-Chaos. Sondern klare Systeme, die funktionieren.
           </p>
         </div>
-        <div className='mt-10 grid gap-5 md:grid-cols-2'>
+        <div className='mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
           {services.map((service) => (
-            <div
+            <PixelCardView
               key={service.title}
-              className='rounded-2xl bg-white/95 p-6 text-slate-900 ring-1 ring-white/20 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
-              <h3 className='text-lg font-semibold text-[#0B1B2B]'>{service.title}</h3>
-              <p className='mt-2 text-sm text-slate-600'>{service.intro}</p>
-              <ul className='mt-4 space-y-2 text-sm text-slate-600'>
-                {service.bullets.map((bullet) => (
-                  <li
-                    key={bullet}
-                    className='flex items-center gap-2'>
-                    <span className='h-2 w-2 rounded-full bg-[#1D6FA8]'></span>
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              variant='blue'
+              className='w-full bg-[#0B1B2B]/70 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
+              <div className='relative z-10 w-full rounded-[22px] bg-transparent p-5 text-slate-100'>
+                <h3 className='text-lg font-semibold text-white'>{service.title}</h3>
+                <p className='mt-2 text-sm text-slate-300'>{service.intro}</p>
+                <ul className='mt-4 space-y-2 text-sm text-slate-300'>
+                  {service.bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className='flex items-center gap-2'>
+                      <span className='h-2 w-2 rounded-full bg-[#86C243]'></span>
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </PixelCardView>
           ))}
         </div>
       </section>
@@ -444,7 +465,7 @@ export default function WebdevelopmentPage() {
               </label>
               <button
                 type='submit'
-                className='h-11 rounded-xl bg-gradient-to-r from-[#1D6FA8] to-[#7A2C8E] text-sm font-semibold text-white transition hover:opacity-90'>
+                className='h-11 rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] text-sm font-semibold text-white transition hover:opacity-90'>
                 Anfrage senden
               </button>
               <p className='text-xs text-slate-500'>
