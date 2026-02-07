@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ComponentType, PropsWithChildren } from 'react';
+import CardNav from '@/components/CardNav';
 import LightPillar from '@/components/LightPillar';
 import PixelCard from '@/components/PixelCard';
 
@@ -87,64 +88,50 @@ const audiences = [
 
 const cases = ['Interne Projekte', 'Kundenportal', 'B2B-Websites'];
 
+const cardNavItems = [
+  {
+    label: 'Leistungen',
+    bgColor: '#ffffff0d',
+    textColor: '#fff',
+    links: [
+      { label: 'Überblick', ariaLabel: 'Leistungen Überblick', href: '#leistungen' },
+      { label: 'Technologien', ariaLabel: 'Zu Technologien', href: '#technologien' },
+    ],
+  },
+  {
+    label: 'Prozess',
+    bgColor: '#ffffff0d',
+    textColor: '#fff',
+    links: [
+      { label: 'Arbeitsweise', ariaLabel: 'Zum Prozess', href: '#prozess' },
+      { label: 'Zielgruppe', ariaLabel: 'Zur Zielgruppe', href: '#zielgruppe' },
+    ],
+  },
+  {
+    label: 'Kontakt',
+    bgColor: '#ffffff0d',
+    textColor: '#fff',
+    links: [
+      { label: 'Cases', ariaLabel: 'Zu Cases', href: '#cases' },
+      { label: 'Anfrage', ariaLabel: 'Zum Kontakt', href: '#kontakt' },
+    ],
+  },
+];
+
 export default function WebdevelopmentPage() {
   return (
     <div className='min-h-screen bg-[#0B1B2B] text-slate-100'>
-      <header className='fixed w-full top-0 z-50 border-b border-white/10 bg-[#0B1B2B]/60 backdrop-blur'>
-        <div className='mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3'>
-          <Link
-            className='flex items-center gap-3 font-semibold text-white'
-            href='/'>
-            <span className='grid h-9 w-9 place-items-center rounded-xl bg-[#1D6FA8] text-white'>
-              S
-            </span>
-            <span className='leading-tight'>
-              <span className='block text-sm'>[Dein Name] Systems</span>
-              <span className='block text-xs font-normal text-slate-300'>
-                Klare Systeme. Digitale Wirkung.
-              </span>
-            </span>
-          </Link>
-
-          <nav className='hidden items-center gap-6 text-sm text-slate-300 md:flex'>
-            <Link
-              href='/'
-              className='hover:text-white'>
-              Start
-            </Link>
-            <a
-              href='#leistungen'
-              className='hover:text-white'>
-              Leistungen
-            </a>
-            <a
-              href='#technologien'
-              className='hover:text-white'>
-              Technologien
-            </a>
-            <a
-              href='#prozess'
-              className='hover:text-white'>
-              Arbeitsweise
-            </a>
-            <a
-              href='#zielgruppe'
-              className='hover:text-white'>
-              Für wen
-            </a>
-            <a
-              href='#kontakt'
-              className='hover:text-white'>
-              Kontakt
-            </a>
-          </nav>
-
-          <a
-            href='#kontakt'
-            className='inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-[#0B1B2B] transition hover:opacity-90'>
-            Projekt anfragen
-          </a>
-        </div>
+      <header className='z-50 fixed top-0 w-full border-b border-white/10 bg-[#0B1B2B]/70 backdrop-blur-sm'>
+        <CardNav
+          logo='/Global-logo-W.webp'
+          logoAlt='Studio Fokus Logo'
+          items={cardNavItems}
+          baseColor='transparent'
+          menuColor='#fff'
+          buttonBgColor='#ffffff1a'
+          buttonTextColor='#fff'
+          ease='power3.out'
+        />
       </header>
 
       <section className='relative min-h-svh overflow-hidden flex items-center '>
@@ -349,7 +336,9 @@ export default function WebdevelopmentPage() {
         </div>
       </section>
 
-      <section className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col justify-center'>
+      <section
+        id='cases'
+        className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col justify-center'>
         <div className='max-w-2xl'>
           <h2 className='text-3xl font-bold tracking-tight text-white'>Cases</h2>
           <p className='mt-3 text-slate-300'>
