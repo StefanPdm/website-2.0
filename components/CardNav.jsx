@@ -163,14 +163,16 @@ const CardNav = ({
           </div>
 
           <div className='logo-container'>
-            <Image
-              src={logo}
-              alt={logoAlt}
-              className='logo'
-              width={120}
-              height={80}
-              priority
-            />
+            <a href='/webdevelopment/'>
+              <Image
+                src={logo}
+                alt={logoAlt}
+                className='logo'
+                width={120}
+                height={80}
+                priority
+              />
+            </a>
           </div>
 
           <a
