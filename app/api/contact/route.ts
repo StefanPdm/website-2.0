@@ -81,9 +81,8 @@ export async function POST(req: Request) {
     }
 
     const ts = new Date().toISOString();
-    const signaturePlain = "\n\nMit lieben Grüßen\nStefan";
-    const signatureHtml =
-      '<p style="margin-top:16px">Mit lieben Grüßen<br/>Stefan</p>';
+    const signaturePlain = '\n\nMit lieben Grüßen\nStefan';
+    const signatureHtml = '<p style="margin-top:16px">Mit lieben Grüßen<br/>Stefan</p>';
 
     const plain = `Neue Projektanfrage\n\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\nProjektart: ${projectType}\nBudget: ${budget || '-'}\nZeitrahmen: ${timeline}\n\nNachricht:\n${message}${signaturePlain}\n`;
 
@@ -160,8 +159,7 @@ export async function POST(req: Request) {
       to: String(email),
       replyTo: OWNER_EMAIL,
       subject: 'Danke für Ihre Anfrage – ich melde mich',
-      text:
-        `Hallo ${name},\n\nDanke für Ihre Anfrage! Ich melde mich in der Regel innerhalb von 24–48 Stunden mit einer Einschätzung zurück.${signaturePlain}`,
+      text: `Hallo ${name},\n\nDanke für Ihre Anfrage! Ich melde mich in der Regel innerhalb von 24–48 Stunden mit einer Einschätzung zurück.${signaturePlain}`,
       html: htmlCustomer,
     });
 
