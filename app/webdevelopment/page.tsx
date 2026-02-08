@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
+import type { ComponentType, HTMLAttributes, PropsWithChildren, ReactElement } from 'react';
 import { Boxes, ClipboardCheck, Code2, Search, ShieldCheck, Sparkles } from 'lucide-react';
 import {
   SiAngular,
@@ -25,16 +25,35 @@ import {
   FaScrewdriverWrench,
 } from 'react-icons/fa6';
 import CardNav from '@/components/CardNav';
+import CardSwap, { Card } from '@/components/CardSwap';
 import ElectricBorder from '@/components/ElectricBorder';
 import LightPillar from '@/components/LightPillar';
 import HyperspeedStrip from '@/components/HyperspeedStrip';
 import PixelCard from '@/components/PixelCard';
+import CaseCard from '../../components/CaseCard';
 
 const trustItems = ['Persönlich & direkt', 'Sauberer Code', 'Wartbar & skalierbar'];
 
 const PixelCardView = PixelCard as ComponentType<
   PropsWithChildren<{ variant?: string; className?: string }>
 >;
+const CardSwapView = CardSwap as ComponentType<
+  PropsWithChildren<{
+    width?: number;
+    height?: number;
+    cardDistance?: number;
+    verticalDistance?: number;
+    delay?: number;
+    pauseOnHover?: boolean;
+    onCardClick?: (index: number) => void;
+    skewAmount?: number;
+    easing?: string;
+  }>
+>;
+const CardView = Card as ComponentType<
+  PropsWithChildren<HTMLAttributes<HTMLDivElement> & { customClass?: string }>
+>;
+// ProfileCard removed – replaced by custom CaseCard component
 
 const services = [
   {
@@ -111,8 +130,6 @@ const audiences = [
   'Kleine bis mittlere Unternehmen',
   'Agenturen (White Label)',
 ];
-
-const cases = ['Interne Projekte', 'Kundenportal', 'B2B-Websites'];
 
 const processIconMap: Record<string, ReactElement> = {
   Verstehen: <Search className='h-8 w-8' />,
@@ -258,47 +275,90 @@ export default function WebdevelopmentPage() {
             </div>
 
             <div className='relative'>
-              <div className='rounded-3xl bg-white/10 p-6 ring-1 ring-white/10 shadow-[0_40px_80px_-60px_rgba(0,0,0,0.7)]'>
-                <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                  Kompetenzen
-                </div>
-                <div className='mt-4 space-y-4 text-slate-100'>
-                  <div className='flex items-start gap-3'>
-                    <span className='mt-0.5 grid h-10 w-10 place-items-center rounded-2xl bg-white/10 text-white/80'>
-                      <Code2 className='h-5 w-5' />
-                    </span>
-                    <div>
-                      <div className='text-sm font-semibold'>UI Mockups / Code Snippets</div>
-                      <div className='mt-1 text-xs text-slate-300'>
-                        Saubere UI-Struktur, realistische Prototypen.
+              <div className='relative h-105 w-full'>
+                <CardSwapView
+                  width={380}
+                  height={260}
+                  cardDistance={80}
+                  verticalDistance={85}
+                  delay={3500}
+                  pauseOnHover>
+                  <CardView
+                    style={{
+                      borderRadius: 28,
+                      background: 'rgba(11, 27, 43, 0.82)',
+                      border: '1px solid rgba(255, 255, 255, 0.14)',
+                      boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
+                    }}
+                    className='text-slate-100'>
+                    <div className='flex h-full flex-col justify-between p-6'>
+                      <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
+                        Kompetenzen
+                      </div>
+                      <div className='mt-5 flex items-start gap-3'>
+                        <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
+                          <Code2 className='h-6 w-6' />
+                        </span>
+                        <div>
+                          <div className='text-sm font-semibold'>UI Mockups / Code Snippets</div>
+                          <div className='mt-1 text-xs text-slate-300'>
+                            Saubere UI-Struktur, realistische Prototypen.
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className='h-px bg-white/10'></div>
-                  <div className='flex items-start gap-3'>
-                    <span className='mt-0.5 grid h-10 w-10 place-items-center rounded-2xl bg-white/10 text-white/80'>
-                      <Boxes className='h-5 w-5' />
-                    </span>
-                    <div>
-                      <div className='text-sm font-semibold'>Architektur & Systeme</div>
-                      <div className='mt-1 text-xs text-slate-300'>
-                        Logik, Datenflüsse, skalierbare Struktur.
+                  </CardView>
+                  <CardView
+                    style={{
+                      borderRadius: 28,
+                      background: 'rgba(11, 27, 43, 0.82)',
+                      border: '1px solid rgba(255, 255, 255, 0.14)',
+                      boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
+                    }}
+                    className='text-slate-100'>
+                    <div className='flex h-full flex-col justify-between p-6'>
+                      <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
+                        Kompetenzen
+                      </div>
+                      <div className='mt-5 flex items-start gap-3'>
+                        <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
+                          <Boxes className='h-6 w-6' />
+                        </span>
+                        <div>
+                          <div className='text-sm font-semibold'>Architektur & Systeme</div>
+                          <div className='mt-1 text-xs text-slate-300'>
+                            Logik, Datenflüsse, skalierbare Struktur.
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className='h-px bg-white/10'></div>
-                  <div className='flex items-start gap-3'>
-                    <span className='mt-0.5 grid h-10 w-10 place-items-center rounded-2xl bg-white/10 text-white/80'>
-                      <Sparkles className='h-5 w-5' />
-                    </span>
-                    <div>
-                      <div className='text-sm font-semibold'>Skalierbare Prozesse</div>
-                      <div className='mt-1 text-xs text-slate-300'>
-                        Stabiler Betrieb, saubere Übergabe, Wartung.
+                  </CardView>
+                  <CardView
+                    style={{
+                      borderRadius: 28,
+                      background: 'rgba(11, 27, 43, 0.82)',
+                      border: '1px solid rgba(255, 255, 255, 0.14)',
+                      boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
+                    }}
+                    className='text-slate-100'>
+                    <div className='flex h-full flex-col justify-between p-6'>
+                      <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
+                        Kompetenzen
+                      </div>
+                      <div className='mt-5 flex items-start gap-3'>
+                        <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
+                          <Sparkles className='h-6 w-6' />
+                        </span>
+                        <div>
+                          <div className='text-sm font-semibold'>Skalierbare Prozesse</div>
+                          <div className='mt-1 text-xs text-slate-300'>
+                            Stabiler Betrieb, saubere Übergabe, Wartung.
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </CardView>
+                </CardSwapView>
               </div>
               <div className='pointer-events-none absolute -bottom-6 -right-6 hidden h-24 w-24 rounded-3xl bg-[#1D6FA8]/30 blur-xl md:block'></div>
             </div>
@@ -457,32 +517,53 @@ export default function WebdevelopmentPage() {
             </div>
           </div>
         </section>
-
+        {/* Cases */}
         <section
           id='cases'
-          className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col justify-center'>
+          className='mx-auto max-w-6xl px-4 py-32 min-h-[90vh] flex flex-col justify-center gap-6'>
           <div className='max-w-2xl'>
             <h2 className='text-3xl font-bold tracking-tight text-white'>Cases</h2>
             <p className='mt-3 text-slate-300'>
-              Projekte, die aktuell nicht öffentlich sind – aber Struktur, Wirkung und Klarheit
+              Projekte, die (teilweise) nicht öffentlich sind – aber Struktur, Wirkung und Klarheit
               beweisen.
             </p>
           </div>
-          <div className='mt-8 grid gap-4 md:grid-cols-3'>
-            {cases.map((item) => (
-              <div
-                key={item}
-                className='rounded-2xl bg-white/95 p-5 text-sm text-slate-700 ring-1 ring-white/20'>
-                {item}
-              </div>
-            ))}
+          <div className='mt-10 grid gap-x-8 gap-y-21 md:grid-cols-2'>
+            <CaseCard
+              title='Linde · TRAFÖ GmbH'
+              status='Projekt abgeschlossen'
+              image='/project-images/project-trafoe.webp'
+              href='https://trafoe.de'
+              cta='Case ansehen'
+            />
+            <CaseCard
+              title='Rund um Berlin'
+              status='Relaunch 2026'
+              image='/project-images/project-rund-um-berlin.webp'
+              href='#'
+              cta='Case ansehen'
+            />
+            <CaseCard
+              title='Pulse AI'
+              status='Launch Q2'
+              image='https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=900&auto=format&fit=crop'
+              href='#'
+              cta='Case ansehen'
+            />
+            <CaseCard
+              title='Signal Ops'
+              status='Scale-up 2025'
+              image='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=900&auto=format&fit=crop'
+              href='#'
+              cta='Case ansehen'
+            />
           </div>
         </section>
-
+        {/* Kontakt */}
         <section
           id='kontakt'
-          className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col justify-center'>
-          <div className='grid gap-8 md:grid-cols-2 md:items-start'>
+          className='mx-auto w-full px-4 py-32 min-h-[70vh] flex flex-col justify-center items-center backdrop-blur-xl border-y border-white/20'>
+          <div className='grid gap-8 md:grid-cols-2 md:items-start  max-w-6xl'>
             <div>
               <h2 className='text-3xl font-bold tracking-tight text-white'>Projekt anfragen</h2>
               <p className='mt-3 text-slate-300'>
@@ -597,16 +678,16 @@ export default function WebdevelopmentPage() {
               className='hover:text-white'>
               Start
             </Link>
-            <a
+            <Link
               href='/impressum'
               className='hover:text-white'>
               Impressum
-            </a>
-            <a
+            </Link>
+            <Link
               href='/impressum'
               className='hover:text-white'>
               Datenschutz
-            </a>
+            </Link>
           </div>
         </div>
       </footer>

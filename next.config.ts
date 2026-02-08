@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: 'neon.com',
         pathname: '/brand/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
     ],
   },
 };
