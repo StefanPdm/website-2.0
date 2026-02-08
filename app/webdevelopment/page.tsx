@@ -198,10 +198,15 @@ export default function WebdevelopmentPage() {
                 Technischer Möglichmacher · Klarheit & Struktur
               </p>
               <h1 className='text-4xl font-extrabold tracking-tight text-white md:text-5xl mb-8 max-w-[520px]'>
-                Klare Websites.<br />Saubere Systeme.<br />Entwicklung, die trägt.
+                Klare Websites.
+                <br />
+                Saubere Systeme.
+                <br />
+                Entwicklung, die trägt.
               </h1>
               <p className='text-lg text-slate-300 mb-8 max-w-[520px]'>
-                Webentwicklung für Unternehmer, Coaches und Teams, die keine Bastellösungen wollen – sondern Struktur, Performance und Zukunftssicherheit.
+                Webentwicklung für Unternehmer, Coaches und Teams, die keine Bastellösungen wollen –
+                sondern Struktur, Performance und Zukunftssicherheit.
               </p>
               <div className='flex gap-4 mb-8'>
                 <a
@@ -217,7 +222,9 @@ export default function WebdevelopmentPage() {
               </div>
               <div className='mt-2 flex flex-wrap gap-6 text-sm text-slate-300'>
                 {trustItems.map((item) => (
-                  <span key={item} className='flex items-center gap-2'>
+                  <span
+                    key={item}
+                    className='flex items-center gap-2'>
                     <span className='h-2 w-2 rounded-full bg-[#86C243]'></span>
                     {item}
                   </span>
@@ -630,19 +637,49 @@ export default function WebdevelopmentPage() {
             </div>
           </div>
           <div className='flex flex-wrap items-center gap-4'>
-            <Link href='/' className='hover:text-white'>Start</Link>
+            <Link
+              href='/'
+              className='hover:text-white'>
+              Start
+            </Link>
             <span className='text-slate-600'>·</span>
-            <Link href='/webdevelopment/impressum' className='hover:text-white'>Impressum</Link>
+            <Link
+              href='/webdevelopment/impressum'
+              className='hover:text-white'>
+              Impressum
+            </Link>
             <span className='text-slate-600'>·</span>
-            <Link href='/webdevelopment/datenschutz' className='hover:text-white'>Datenschutzerklärung</Link>
+            <Link
+              href='/webdevelopment/datenschutz'
+              className='hover:text-white'>
+              Datenschutzerklärung
+            </Link>
             <span className='text-slate-600'>·</span>
-            <Link href='/webdevelopment/cookies' className='hover:text-white'>Cookie‑Einstellungen</Link>
+            <Link
+              href='/webdevelopment/cookies'
+              className='hover:text-white'>
+              Cookie‑Einstellungen
+            </Link>
             <span className='text-slate-600'>·</span>
-            <Link href='/webdevelopment/agb' className='hover:text-white'>AGB</Link>
+            <Link
+              href='/webdevelopment/agb'
+              className='hover:text-white'>
+              AGB
+            </Link>
             <span className='text-slate-600'>·</span>
-            <Link href='/webdevelopment/widerruf' className='hover:text-white'>Widerruf</Link>
+            <Link
+              href='/webdevelopment/widerruf'
+              className='hover:text-white'>
+              Widerruf
+            </Link>
             <span className='text-slate-600'>·</span>
-            <a href='https://www.linkedin.com/in/your-profile' target='_blank' rel='noopener noreferrer' className='hover:text-white'>LinkedIn</a>
+            <a
+              href='https://www.linkedin.com/in/your-profile'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='hover:text-white'>
+              LinkedIn
+            </a>
           </div>
         </div>
       </footer>
