@@ -325,7 +325,7 @@ export default function WebdevelopmentPage() {
         {/* Digitale Lösungen Section */}
         <section
           id='leistungen'
-          className='relative mx-auto flex min-h-[70vh] max-w-6xl flex-col items-start justify-center gap-10 px-4 py-16 pb-28 overflow-hidden'>
+          className='relative mx-auto flex min-h-[60vh] max-w-6xl flex-col items-start justify-start gap-10 px-4 overflow-hidden'>
           <div className='max-w-2xl'>
             <h2 className='text-3xl font-bold tracking-tight text-white'>
               Digitale Lösungen mit Struktur.
@@ -369,7 +369,7 @@ export default function WebdevelopmentPage() {
         {/* Technologien Section */}
         <section
           id='technologien'
-          className='bg-white/5 py-16 ring-1 ring-white/10 min-h-[70vh] flex flex-col justify-center backdrop-blur-xl border-y border-white/20'>
+          className='bg-white/5 py-16 ring-1 ring-white/10 min-h-[80vh] flex flex-col justify-center backdrop-blur-xl border-y border-white/20'>
           <div className='mx-auto max-w-6xl px-4'>
             <div className='max-w-2xl'>
               <h2 className='text-3xl font-bold tracking-tight text-white'>
