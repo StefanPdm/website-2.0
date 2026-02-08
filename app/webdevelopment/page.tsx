@@ -26,6 +26,7 @@ import {
 } from 'react-icons/fa6';
 import CardSwap, { Card } from '@/components/CardSwap';
 import ElectricBorder from '@/components/ElectricBorder';
+import ContactForm from '@/components/ContactForm';
 import LightPillar from '@/components/LightPillar';
 import HyperspeedStrip from '@/components/HyperspeedStrip';
 import PixelCard from '@/components/PixelCard';
@@ -369,7 +370,7 @@ export default function WebdevelopmentPage() {
         {/* Technologien Section */}
         <section
           id='technologien'
-          className='bg-white/5 py-16 ring-1 ring-white/10 min-h-[80vh] flex flex-col justify-center backdrop-blur-xl border-y border-white/20'>
+          className='backdrop-blur-xs bg-white/5 py-16 ring-1 ring-white/10 min-h-[80vh] flex flex-col justify-center border-y border-white/20'>
           <div className='mx-auto max-w-6xl px-4'>
             <div className='max-w-2xl'>
               <h2 className='text-3xl font-bold tracking-tight text-white'>
@@ -447,7 +448,7 @@ export default function WebdevelopmentPage() {
         {/* Nicht für jeden */}
         <section
           id='zielgruppe'
-          className='bg-white/5 py-16 ring-1 ring-white/10 min-h-[70vh] flex flex-col justify-center border-y border-white/20'>
+          className='backdrop-blur-xs bg-white/5 py-16 ring-1 ring-white/10 min-h-[70vh] flex flex-col justify-center border-y border-white/20'>
           <div className='mx-auto max-w-6xl px-4'>
             <div className='max-w-2xl'>
               <h2 className='text-3xl font-bold tracking-tight text-white'>
@@ -458,7 +459,7 @@ export default function WebdevelopmentPage() {
                 wir gut zusammen.
               </p>
             </div>
-            <div className='mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
+            <div className='mt-8 grid gap-4 sm:grid-cols-2 '>
               {audiences.map((audience) => (
                 <ElectricBorder
                   key={audience}
@@ -520,8 +521,8 @@ export default function WebdevelopmentPage() {
         {/* Kontakt */}
         <section
           id='kontakt'
-          className='mx-auto w-full px-4 py-32 min-h-[70vh] flex flex-col justify-center items-center backdrop-blur-xl border-y border-white/20'>
-          <div className='grid gap-8 md:grid-cols-2 md:items-start  max-w-6xl'>
+          className='backdrop-blur-xs mx-auto w-full px-4 py-32 min-h-[70vh] flex flex-col justify-center items-center bg-white/5 border-y border-white/20'>
+          <div className='grid gap-8 md:grid-cols-2 md:items-start max-w-6xl'>
             <div>
               <h2 className='text-3xl font-bold tracking-tight text-white'>Projekt anfragen</h2>
               <p className='mt-3 text-slate-300'>
@@ -529,105 +530,35 @@ export default function WebdevelopmentPage() {
                 ehrlich zurück und sage dir, ob ich der Richtige dafür bin und wie ein sinnvoller
                 nächster Schritt aussieht.
               </p>
-              <div className='mt-6 rounded-2xl bg-white/95 p-6 text-slate-700 ring-1 ring-white/20'>
-                <div className='text-sm font-semibold text-[#0B1B2B]'>Klarheit & Struktur</div>
-                <p className='mt-2 text-sm text-slate-600'>
-                  Du bekommst eine klare Einschätzung, keine Verkaufsfloskel. Wenn es nicht passt,
-                  sage ich das.
-                </p>
-              </div>
+              <ElectricBorder
+                color='#2dd4bf'
+                speed={0.5}
+                chaos={0.04}
+                style={{ borderRadius: 18 }}
+                className='mt-6'>
+                <div className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100'>
+                  <div className='text-sm font-semibold text-white'>Klarheit & Struktur</div>
+                  <p className='mt-2 text-sm text-slate-300'>
+                    Du bekommst eine klare Einschätzung, keine Verkaufsfloskel. Wenn es nicht passt,
+                    sage ich das.
+                  </p>
+                </div>
+              </ElectricBorder>
             </div>
 
-            <form className='rounded-3xl bg-white p-6 text-slate-900 ring-1 ring-white/20'>
-              <div className='grid gap-4'>
-                <div className='grid gap-1'>
-                  <label className='text-sm font-medium'>Name *</label>
-                  <input
-                    required
-                    name='name'
-                    className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'
-                  />
-                </div>
-                <div className='grid gap-1'>
-                  <label className='text-sm font-medium'>E-Mail *</label>
-                  <input
-                    required
-                    name='email'
-                    type='email'
-                    className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'
-                  />
-                </div>
-                <div className='grid gap-1'>
-                  <label className='text-sm font-medium'>Projektart *</label>
-                  <select
-                    required
-                    name='projectType'
-                    className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
-                    <option value=''>Bitte wählen</option>
-                    <option>Website / Landingpage</option>
-                    <option>Web App / Kundenportal</option>
-                    <option>System / Automatisierung</option>
-                    <option>Etwas anderes</option>
-                  </select>
-                </div>
-                <div className='grid gap-1'>
-                  <label className='text-sm font-medium'>Budget (optional)</label>
-                  <select
-                    name='budget'
-                    className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
-                    <option value=''>Budgetrahmen</option>
-                    <option>Unter 2.500 €</option>
-                    <option>2.500 – 7.500 €</option>
-                    <option>7.500 – 15.000 €</option>
-                    <option>15.000 €+</option>
-                  </select>
-                </div>
-                <div className='grid gap-1'>
-                  <label className='text-sm font-medium'>Zeitrahmen *</label>
-                  <select
-                    required
-                    name='timeline'
-                    className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
-                    <option value=''>Bitte wählen</option>
-                    <option>2–4 Wochen</option>
-                    <option>1–2 Monate</option>
-                    <option>3+ Monate</option>
-                    <option>Flexibel</option>
-                  </select>
-                </div>
-                <div className='grid gap-1'>
-                  <label className='text-sm font-medium'>Nachricht *</label>
-                  <textarea
-                    required
-                    name='message'
-                    rows={5}
-                    className='rounded-xl border border-slate-200 px-3 py-2 outline-none focus:border-slate-400'></textarea>
-                </div>
-                <label className='flex items-start gap-2 text-xs text-slate-600'>
-                  <input
-                    required
-                    type='checkbox'
-                    name='privacy'
-                    className='mt-1'
-                  />
-                  Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten
-                  zur Kontaktaufnahme zu.
-                </label>
-                <button
-                  type='submit'
-                  className='h-11 rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] text-sm font-semibold text-white transition hover:opacity-90'>
-                  Anfrage senden
-                </button>
-                <p className='text-xs text-slate-500'>
-                  Kein Spam. Kein Weiterverkauf. Antwort in der Regel innerhalb von 24–48 Stunden.
-                </p>
-              </div>
-            </form>
+            <ElectricBorder
+              color='#2dd4bf'
+              speed={0.5}
+              chaos={0.04}
+              style={{ borderRadius: 18 }}
+              className=''>
+              <ContactForm />
+            </ElectricBorder>
           </div>
         </section>
         <ScrollToTop />
       </div>
-
+      {/* Footer */}
       <footer className='relative z-20 border-t border-white/10 bg-transparent'>
         <div className='mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between'>
           <div className='flex flex-col gap-1'>
