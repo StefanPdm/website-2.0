@@ -31,6 +31,7 @@ import LightPillar from '@/components/LightPillar';
 import HyperspeedStrip from '@/components/HyperspeedStrip';
 import PixelCard from '@/components/PixelCard';
 import CaseCard from '../../components/CaseCard';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const trustItems = ['Persönlich & direkt', 'Sauberer Code', 'Wartbar & skalierbar'];
 
@@ -190,12 +191,17 @@ const cardNavItems = [
     ],
   },
   {
-    label: 'Kontakt',
+    label: 'Good to know',
     bgColor: '#ffffff0d',
     textColor: '#fff',
     links: [
       { label: 'Cases', ariaLabel: 'Zu Cases', href: '#cases' },
       { label: 'Anfrage', ariaLabel: 'Zum Kontakt', href: '#kontakt' },
+      {
+        label: 'Zurück zur Hauptseite',
+        ariaLabel: 'Zurück zur Hauptseite',
+        href: '/',
+      },
     ],
   },
 ];
@@ -667,27 +673,49 @@ export default function WebdevelopmentPage() {
             </form>
           </div>
         </section>
+        <ScrollToTop />
       </div>
 
-      <footer className='border-t border-white/10 bg-[#0B1B2B]'>
-        <div className='mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between'>
-          <div>[Dein Name] · Web Development · Klare Systeme für digitale Ideen.</div>
-          <div className='flex gap-4'>
+      <footer className='relative z-20 border-t border-white/10'>
+        <div className='mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between'>
+          <div className='flex flex-col gap-1'>
+            <div>© {new Date().getFullYear()} StefanPdm · Alle Rechte vorbehalten.</div>
+            <div className='text-xs text-slate-500'>
+              Web Development · Klare Systeme für digitale Ideen.
+            </div>
+          </div>
+          <div className='flex flex-wrap items-center gap-4'>
             <Link
               href='/'
               className='hover:text-white'>
               Start
             </Link>
+            <span className='text-slate-600'>·</span>
             <Link
               href='/impressum'
               className='hover:text-white'>
               Impressum
             </Link>
+            <span className='text-slate-600'>·</span>
             <Link
-              href='/impressum'
+              href='/impressum#datenschutz'
               className='hover:text-white'>
-              Datenschutz
+              Datenschutzerklärung
             </Link>
+            <span className='text-slate-600'>·</span>
+            <a
+              href='#cookies'
+              className='hover:text-white'>
+              Cookie‑Einstellungen
+            </a>
+            <span className='text-slate-600'>·</span>
+            <a
+              href='https://www.linkedin.com/in/your-profile'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='hover:text-white'>
+              LinkedIn
+            </a>
           </div>
         </div>
       </footer>
