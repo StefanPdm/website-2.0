@@ -24,7 +24,6 @@ import {
   FaMagnifyingGlass,
   FaScrewdriverWrench,
 } from 'react-icons/fa6';
-import CardNav from '@/components/CardNav';
 import CardSwap, { Card } from '@/components/CardSwap';
 import ElectricBorder from '@/components/ElectricBorder';
 import LightPillar from '@/components/LightPillar';
@@ -171,41 +170,6 @@ const techIconMap: Record<string, ReactElement> = {
   'Saubere Übergabe': <FaClipboardCheck className='h-4 w-4' />,
 };
 
-const cardNavItems = [
-  {
-    label: 'Leistungen',
-    bgColor: '#ffffff0d',
-    textColor: '#fff',
-    links: [
-      { label: 'Überblick', ariaLabel: 'Leistungen Überblick', href: '#leistungen' },
-      { label: 'Technologien', ariaLabel: 'Zu Technologien', href: '#technologien' },
-    ],
-  },
-  {
-    label: 'Prozess',
-    bgColor: '#ffffff0d',
-    textColor: '#fff',
-    links: [
-      { label: 'Arbeitsweise', ariaLabel: 'Zum Prozess', href: '#prozess' },
-      { label: 'Zielgruppe', ariaLabel: 'Zur Zielgruppe', href: '#zielgruppe' },
-    ],
-  },
-  {
-    label: 'Good to know',
-    bgColor: '#ffffff0d',
-    textColor: '#fff',
-    links: [
-      { label: 'Cases', ariaLabel: 'Zu Cases', href: '#cases' },
-      { label: 'Anfrage', ariaLabel: 'Zum Kontakt', href: '#kontakt' },
-      {
-        label: 'Zurück zur Hauptseite',
-        ariaLabel: 'Zurück zur Hauptseite',
-        href: '/',
-      },
-    ],
-  },
-];
-
 export default function WebdevelopmentPage() {
   return (
     <div className='relative min-h-screen overflow-x-clip bg-[#0B1B2B] text-slate-100'>
@@ -223,43 +187,26 @@ export default function WebdevelopmentPage() {
           mixBlendMode='screen'
         />
       </div>
-      {/* Header */}
-      <header className='z-50 fixed top-0 w-full bg-transparent'>
-        <CardNav
-          logo='/Global-logo-W.webp'
-          logoAlt='Studio Fokus Logo'
-          items={cardNavItems}
-          baseColor='transparent'
-          menuColor='#fff'
-          buttonBgColor='#ffffff1a'
-          buttonTextColor='#fff'
-          ease='power3.out'
-        />
-      </header>
       {/* content */}
       <div className='relative z-10'>
         {/* Hero Section */}
-        <section className='relative min-h-svh overflow-hidden flex items-center '>
-          <div className='relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-24'>
-            <div>
-              <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10'>
+        <section className='relative min-h-svh overflow-hidden flex items-center'>
+          <div className='relative z-10 mx-auto max-w-6xl w-full flex flex-row items-center gap-12 px-4 py-16 md:py-24'>
+            {/* Left: All content left-aligned */}
+            <div className='flex-1 flex flex-col justify-center items-start'>
+              <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 mb-6 max-w-[420px]'>
                 Technischer Möglichmacher · Klarheit & Struktur
               </p>
-              <h1 className='mt-5 text-4xl font-extrabold tracking-tight text-white md:text-5xl'>
-                Klare Websites.
-                <br className='hidden md:block' />
-                Saubere Systeme.
-                <br className='hidden md:block' />
-                Entwicklung, die trägt.
+              <h1 className='text-4xl font-extrabold tracking-tight text-white md:text-5xl mb-8 max-w-[520px]'>
+                Klare Websites.<br />Saubere Systeme.<br />Entwicklung, die trägt.
               </h1>
-              <p className='mt-4 text-lg text-slate-300'>
-                Webentwicklung für Unternehmer, Coaches und Teams, die keine Bastellösungen wollen –
-                sondern Struktur, Performance und Zukunftssicherheit.
+              <p className='text-lg text-slate-300 mb-8 max-w-[520px]'>
+                Webentwicklung für Unternehmer, Coaches und Teams, die keine Bastellösungen wollen – sondern Struktur, Performance und Zukunftssicherheit.
               </p>
-              <div className='mt-7 flex flex-wrap gap-3'>
+              <div className='flex gap-4 mb-8'>
                 <a
                   href='#kontakt'
-                  className='rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90'>
+                  className='rounded-xl bg-gradient-to-r from-[#1D6FA8] to-[#7A2C8E] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90'>
                   Projekt anfragen
                 </a>
                 <a
@@ -268,20 +215,18 @@ export default function WebdevelopmentPage() {
                   Technologien ansehen
                 </a>
               </div>
-              <div className='mt-6 flex flex-wrap gap-4 text-sm text-slate-300'>
+              <div className='mt-2 flex flex-wrap gap-6 text-sm text-slate-300'>
                 {trustItems.map((item) => (
-                  <span
-                    key={item}
-                    className='flex items-center gap-2'>
+                  <span key={item} className='flex items-center gap-2'>
                     <span className='h-2 w-2 rounded-full bg-[#86C243]'></span>
                     {item}
                   </span>
                 ))}
               </div>
             </div>
-
-            <div className='relative'>
-              <div className='relative h-105 w-full'>
+            {/* Right: Hero cards */}
+            <div className='flex-1 flex items-center justify-end relative'>
+              <div className='relative h-105 w-[380px]'>
                 <CardSwapView
                   width={380}
                   height={260}
@@ -685,37 +630,19 @@ export default function WebdevelopmentPage() {
             </div>
           </div>
           <div className='flex flex-wrap items-center gap-4'>
-            <Link
-              href='/'
-              className='hover:text-white'>
-              Start
-            </Link>
+            <Link href='/' className='hover:text-white'>Start</Link>
             <span className='text-slate-600'>·</span>
-            <Link
-              href='/impressum'
-              className='hover:text-white'>
-              Impressum
-            </Link>
+            <Link href='/webdevelopment/impressum' className='hover:text-white'>Impressum</Link>
             <span className='text-slate-600'>·</span>
-            <Link
-              href='/datenschutz'
-              className='hover:text-white'>
-              Datenschutzerklärung
-            </Link>
+            <Link href='/webdevelopment/datenschutz' className='hover:text-white'>Datenschutzerklärung</Link>
             <span className='text-slate-600'>·</span>
-            <Link
-              href='/cookies'
-              className='hover:text-white'>
-              Cookie‑Einstellungen
-            </Link>
+            <Link href='/webdevelopment/cookies' className='hover:text-white'>Cookie‑Einstellungen</Link>
             <span className='text-slate-600'>·</span>
-            <a
-              href='https://www.linkedin.com/in/your-profile'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='hover:text-white'>
-              LinkedIn
-            </a>
+            <Link href='/webdevelopment/agb' className='hover:text-white'>AGB</Link>
+            <span className='text-slate-600'>·</span>
+            <Link href='/webdevelopment/widerruf' className='hover:text-white'>Widerruf</Link>
+            <span className='text-slate-600'>·</span>
+            <a href='https://www.linkedin.com/in/your-profile' target='_blank' rel='noopener noreferrer' className='hover:text-white'>LinkedIn</a>
           </div>
         </div>
       </footer>
