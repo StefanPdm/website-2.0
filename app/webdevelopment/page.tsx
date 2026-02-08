@@ -698,16 +698,16 @@ export default function WebdevelopmentPage() {
             </Link>
             <span className='text-slate-600'>·</span>
             <Link
-              href='/impressum#datenschutz'
+              href='/datenschutz'
               className='hover:text-white'>
               Datenschutzerklärung
             </Link>
             <span className='text-slate-600'>·</span>
-            <a
-              href='#cookies'
+            <Link
+              href='/cookies'
               className='hover:text-white'>
               Cookie‑Einstellungen
-            </a>
+            </Link>
             <span className='text-slate-600'>·</span>
             <a
               href='https://www.linkedin.com/in/your-profile'
