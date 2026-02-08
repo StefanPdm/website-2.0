@@ -194,24 +194,24 @@ export default function WebdevelopmentPage() {
           <div className='relative z-10 mx-auto max-w-6xl w-full flex flex-row items-center gap-12 px-4 py-16 md:py-24'>
             {/* Left: All content left-aligned */}
             <div className='flex-1 flex flex-col justify-center items-start'>
-              <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 mb-6 max-w-[420px]'>
+              <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 mb-6 max-w-105'>
                 Technischer Möglichmacher · Klarheit & Struktur
               </p>
-              <h1 className='text-4xl font-extrabold tracking-tight text-white md:text-5xl mb-8 max-w-[520px]'>
+              <h1 className='text-4xl font-extrabold tracking-tight text-white md:text-5xl mb-8 max-w-130'>
                 Klare Websites.
                 <br />
                 Saubere Systeme.
                 <br />
                 Entwicklung, die trägt.
               </h1>
-              <p className='text-lg text-slate-300 mb-8 max-w-[520px]'>
+              <p className='text-lg text-slate-300 mb-8 max-w-130'>
                 Webentwicklung für Unternehmer, Coaches und Teams, die keine Bastellösungen wollen –
                 sondern Struktur, Performance und Zukunftssicherheit.
               </p>
               <div className='flex gap-4 mb-8'>
                 <a
                   href='#kontakt'
-                  className='rounded-xl bg-gradient-to-r from-[#1D6FA8] to-[#7A2C8E] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90'>
+                  className='rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90'>
                   Projekt anfragen
                 </a>
                 <a
@@ -233,7 +233,7 @@ export default function WebdevelopmentPage() {
             </div>
             {/* Right: Hero cards */}
             <div className='flex-1 flex items-center justify-end relative'>
-              <div className='relative h-105 w-[380px]'>
+              <div className='relative h-105 w-95'>
                 <CardSwapView
                   width={380}
                   height={260}
@@ -658,19 +658,13 @@ export default function WebdevelopmentPage() {
             <Link
               href='/webdevelopment/cookies'
               className='hover:text-white'>
-              Cookie‑Einstellungen
+              Cookies
             </Link>
             <span className='text-slate-600'>·</span>
             <Link
               href='/webdevelopment/agb'
               className='hover:text-white'>
               AGB
-            </Link>
-            <span className='text-slate-600'>·</span>
-            <Link
-              href='/webdevelopment/widerruf'
-              className='hover:text-white'>
-              Widerruf
             </Link>
             <span className='text-slate-600'>·</span>
             <a

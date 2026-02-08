@@ -32,16 +32,16 @@ const items = [
     bgColor: '#ffffff0d',
     textColor: '#fff',
     links: [
-      { label: 'Impressum', ariaLabel: 'Zum Impressum', href: 'webdevelopment/impressum' },
+      { label: 'Impressum', ariaLabel: 'Zum Impressum', href: '/webdevelopment/impressum' },
       {
         label: 'Datenschutz',
         ariaLabel: 'Zur Datenschutzerklärung',
-        href: 'webdevelopment/datenschutz',
+        href: '/webdevelopment/datenschutz',
       },
       {
         label: 'Cookies',
         ariaLabel: 'Zu den Cookie-Einstellungen',
-        href: 'webdevelopment/cookies',
+        href: '/webdevelopment/cookies',
       },
     ],
   },
