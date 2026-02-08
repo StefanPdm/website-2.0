@@ -136,6 +136,10 @@ const CardNav = ({
     if (el) cardsRef.current[i] = el;
   };
 
+  const handleLinkClick = () => {
+    if (isExpanded) toggleMenu();
+  };
+
   return (
     <div className={`card-nav-container ${className}`}>
       <nav
@@ -172,6 +176,7 @@ const CardNav = ({
           <a
             href='#kontakt'
             className='card-nav-cta-button'
+            onClick={handleLinkClick}
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}>
             Kontakt
           </a>
@@ -193,6 +198,7 @@ const CardNav = ({
                     key={`${lnk.label}-${i}`}
                     className='nav-card-link'
                     href={lnk.href}
+                    onClick={handleLinkClick}
                     aria-label={lnk.ariaLabel}>
                     <GoArrowUpRight
                       className='nav-card-link-icon'
