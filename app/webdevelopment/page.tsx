@@ -192,7 +192,7 @@ export default function WebdevelopmentPage() {
       <div className='relative z-10'>
         {/* Hero Section */}
         <section className='relative min-h-svh overflow-hidden flex items-center'>
-          <div className='relative z-10 mx-auto max-w-6xl w-full flex flex-row items-center gap-12 px-4 py-16 md:py-24'>
+          <div className='relative z-10 mx-auto max-w-6xl w-full flex flex-col md:flex-row items-start md:items-center gap-10 md:gap-12 px-4 sm:px-6 md:px-8 py-12 md:py-24'>
             {/* Left: All content left-aligned */}
             <div className='flex-1 flex flex-col justify-center items-start'>
               <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 mb-6 max-w-105'>
@@ -209,15 +209,15 @@ export default function WebdevelopmentPage() {
                 Webentwicklung für Unternehmer, Coaches und Teams, die keine Bastellösungen wollen –
                 sondern Struktur, Performance und Zukunftssicherheit.
               </p>
-              <div className='flex gap-4 mb-8'>
+              <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 w-full sm:w-auto'>
                 <a
                   href='#kontakt'
-                  className='rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90'>
+                  className='rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 text-center w-full sm:w-auto'>
                   Projekt anfragen
                 </a>
                 <a
                   href='#technologien'
-                  className='rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10'>
+                  className='rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10 text-center w-full sm:w-auto'>
                   Technologien ansehen
                 </a>
               </div>
@@ -233,7 +233,7 @@ export default function WebdevelopmentPage() {
               </div>
             </div>
             {/* Right: Hero cards */}
-            <div className='flex-1 flex items-center justify-end relative'>
+            <div className='flex-1 relative items-center justify-end max-md:hidden md:flex'>
               <div className='relative h-105 w-95'>
                 <CardSwapView
                   width={380}
