@@ -208,7 +208,7 @@ const cardNavItems = [
 
 export default function WebdevelopmentPage() {
   return (
-    <div className='relative min-h-screen bg-[#0B1B2B] text-slate-100'>
+    <div className='relative min-h-screen overflow-x-clip bg-[#0B1B2B] text-slate-100'>
       {/* Page Background */}
       <div className='pointer-events-none fixed inset-0 z-0'>
         <LightPillar
@@ -299,7 +299,7 @@ export default function WebdevelopmentPage() {
                     className='text-slate-100'>
                     <div className='flex h-full flex-col justify-between p-6'>
                       <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                        Kompetenzen
+                        Kompetenz 1/42
                       </div>
                       <div className='mt-5 flex items-start gap-3'>
                         <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
@@ -324,7 +324,7 @@ export default function WebdevelopmentPage() {
                     className='text-slate-100'>
                     <div className='flex h-full flex-col justify-between p-6'>
                       <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                        Kompetenzen
+                        Kompetenz 2/42
                       </div>
                       <div className='mt-5 flex items-start gap-3'>
                         <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
@@ -349,7 +349,7 @@ export default function WebdevelopmentPage() {
                     className='text-slate-100'>
                     <div className='flex h-full flex-col justify-between p-6'>
                       <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                        Kompetenzen
+                        Kompetenz 3/42
                       </div>
                       <div className='mt-5 flex items-start gap-3'>
                         <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
@@ -366,14 +366,14 @@ export default function WebdevelopmentPage() {
                   </CardView>
                 </CardSwapView>
               </div>
-              <div className='pointer-events-none absolute -bottom-6 -right-6 hidden h-24 w-24 rounded-3xl bg-[#1D6FA8]/30 blur-xl md:block'></div>
+              <div className='pointer-events-none absolute -bottom-6 right-0 hidden h-24 w-24 rounded-3xl bg-[#1D6FA8]/30 blur-xl md:block'></div>
             </div>
           </div>
         </section>
         {/* Digitale Lösungen Section */}
         <section
           id='leistungen'
-          className='relative mx-auto flex min-h-[70vh] max-w-6xl flex-col items-start justify-center gap-10 px-4 py-16 pb-28'>
+          className='relative mx-auto flex min-h-[70vh] max-w-6xl flex-col items-start justify-center gap-10 px-4 py-16 pb-28 overflow-hidden'>
           <div className='max-w-2xl'>
             <h2 className='text-3xl font-bold tracking-tight text-white'>
               Digitale Lösungen mit Struktur.
@@ -676,10 +676,10 @@ export default function WebdevelopmentPage() {
         <ScrollToTop />
       </div>
 
-      <footer className='relative z-20 border-t border-white/10'>
+      <footer className='relative z-20 border-t border-white/10 bg-transparent'>
         <div className='mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between'>
           <div className='flex flex-col gap-1'>
-            <div>© {new Date().getFullYear()} StefanPdm · Alle Rechte vorbehalten.</div>
+            <div>© {new Date().getFullYear()} Stefan Heinemann · Alle Rechte vorbehalten.</div>
             <div className='text-xs text-slate-500'>
               Web Development · Klare Systeme für digitale Ideen.
             </div>
