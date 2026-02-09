@@ -45,7 +45,8 @@ export default function ContactFormWeb() {
               Danke{submittedName ? `, ${submittedName}` : ''}! 🚀
             </h3>
             <p className='mt-1 text-sm text-slate-300'>
-              Ich melde mich innerhalb von 24–48 Stunden mit der nächsten sinnvollen Etappe.
+              Ich melde mich innerhalb von 24–48 Stunden, um die nächsten sinnvollen Schritte zu
+              besprechen.
             </p>
             <button
               type='button'
@@ -69,7 +70,7 @@ export default function ContactFormWeb() {
           <div className='flex-1'>
             <h3 className='text-lg font-semibold text-white'>Senden fehlgeschlagen</h3>
             <p className='mt-1 text-sm text-slate-300'>
-              Bitte später erneut versuchen oder direkt per E‑Mail schreiben.
+              Bitte lade die Seite neu oder versuche es erneut.
             </p>
             <button
               type='button'
@@ -93,7 +94,7 @@ export default function ContactFormWeb() {
           <input
             name='name'
             required
-            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
           />
         </div>
         <div className='grid gap-1'>
@@ -102,14 +103,14 @@ export default function ContactFormWeb() {
             name='email'
             type='email'
             required
-            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
           />
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Firma (optional)</label>
           <input
             name='company'
-            className='h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'
+            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
           />
         </div>
         <div className='grid gap-1'>
@@ -118,7 +119,7 @@ export default function ContactFormWeb() {
             name='website'
             type='url'
             placeholder='https://…'
-            className='h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'
+            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
           />
         </div>
         <div className='grid gap-1'>
@@ -126,7 +127,7 @@ export default function ContactFormWeb() {
           <select
             name='projectType'
             required
-            className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
+            className='select-caret h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
             <option value=''>Bitte wählen</option>
             <option>Website / Landingpage</option>
             <option>Web App / Kundenportal</option>
@@ -138,7 +139,7 @@ export default function ContactFormWeb() {
           <select
             name='scope'
             required
-            className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
+            className='select-caret h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
             <option value=''>Bitte wählen</option>
             <option>Design + Entwicklung</option>
             <option>Entwicklung (Design vorhanden)</option>
@@ -149,7 +150,7 @@ export default function ContactFormWeb() {
           <label className='text-sm font-medium text-slate-200'>Budget (optional)</label>
           <select
             name='budget'
-            className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
+            className='select-caret h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
             <option value=''>Budgetrahmen</option>
             <option>Unter 2.500 €</option>
             <option>2.500 – 7.500 €</option>
@@ -162,7 +163,7 @@ export default function ContactFormWeb() {
           <select
             name='timeline'
             required
-            className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
+            className='select-caret h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
             <option value=''>Bitte wählen</option>
             <option>2–4 Wochen</option>
             <option>1–2 Monate</option>
@@ -176,7 +177,7 @@ export default function ContactFormWeb() {
             name='message'
             rows={5}
             required
-            className='rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-slate-100 placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'></textarea>
+            className='rounded-xl border border-white/20 bg-white/40 px-3 py-2 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'></textarea>
         </div>
         <label className='flex items-start gap-2 text-xs text-slate-300'>
           <input

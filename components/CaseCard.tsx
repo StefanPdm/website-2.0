@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
@@ -12,12 +12,21 @@ type Props = {
   cta?: string;
 };
 
-export default function CaseCard({ title, status, image, video, href, cta = 'Nicht öffentlich' }: Props) {
+export default function CaseCard({
+  title,
+  status,
+  image,
+  video,
+  href,
+  cta = 'Nicht öffentlich',
+}: Props) {
   const isExternal = typeof href === 'string' && /^https?:\/\//i.test(href);
   const isRemoteImage = typeof image === 'string' && /^https?:\/\//i.test(image);
   const tiltRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef<number | null>(null);
-  const [transform, setTransform] = useState<string>('perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)');
+  const [transform, setTransform] = useState<string>(
+    'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)',
+  );
 
   function handlePointerMove(e: React.MouseEvent<HTMLDivElement>) {
     const el = tiltRef.current;
@@ -28,7 +37,7 @@ export default function CaseCard({ title, status, image, video, href, cta = 'Nic
     const px = (x / rect.width) * 2 - 1; // -1 to 1
     const py = (y / rect.height) * 2 - 1;
     const max = 8; // deg
-    const rx = (-py) * max; // invert so up moves negative
+    const rx = -py * max; // invert so up moves negative
     const ry = px * max;
     const next = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) scale(1.02)`;
 
@@ -42,7 +51,7 @@ export default function CaseCard({ title, status, image, video, href, cta = 'Nic
   }
 
   return (
-    <div className='border border-white/10 rounded-2xl p-4 md:p-8'>
+    <div className='border border-white/10 rounded-2xl p-4 md:p-8 transition-shadow duration-300 hover:shadow-[0_60px_160px_-60px_rgba(45,212,191,.55),_0_0_44px_0_rgba(45,212,191,.28)]'>
       {/* Media Container */}
       <div
         ref={tiltRef}
@@ -50,6 +59,16 @@ export default function CaseCard({ title, status, image, video, href, cta = 'Nic
         onMouseLeave={handlePointerLeave}
         className='group relative overflow-hidden rounded-2xl bg-neutral-900/60 will-change-transform'
         style={{ transform, transition: 'transform 300ms ease' }}>
+        {/* Hover Glow */}
+        <div
+          aria-hidden
+          className='pointer-events-none absolute -inset-24 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-screen'
+          style={{
+            background:
+              'radial-gradient(70% 90% at 50% 40%, rgba(45,212,191,0.75), transparent 65%), radial-gradient(50% 70% at 20% 10%, rgba(45,212,191,0.5), transparent 62%), radial-gradient(50% 70% at 85% 85%, rgba(45,212,191,0.45), transparent 62%)',
+            filter: 'blur(70px)',
+          }}
+        />
         {/* Image or Video */}
         <div className='relative h-52 md:h-[20.8rem] w-full'>
           {video ? (

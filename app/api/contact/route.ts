@@ -142,8 +142,8 @@ export async function POST(req: Request) {
 
     const htmlCustomer = `
       <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.6;color:#0B1B2B">
-        <h2>Danke für Ihre Anfrage, ${name}!</h2>
-        <p>Ich habe Ihre Nachricht erhalten und melde mich in der Regel innerhalb von 24–48 Stunden zurück.</p>
+        <h2>Danke für Deine Anfrage, ${name}!</h2>
+        <p>Ich habe Deine Nachricht erhalten und melde mich in der Regel innerhalb von 24–48 Stunden zurück.</p>
         <hr style="border:none;height:1px;background:#e5e7eb;margin:16px 0" />
         <p><strong>Zusammenfassung</strong></p>
         <p>
@@ -153,9 +153,9 @@ export async function POST(req: Request) {
         ${budget ? `<strong>Budget:</strong> ${budget}<br/>` : ''}
         ${timeline ? `<strong>Zeitrahmen:</strong> ${timeline}<br/>` : ''}
         </p>
-        <p><strong>Ihre Nachricht</strong><br/>${String(message).replace(/\n/g, '<br/>')}</p>
+        <p><strong>Deine Nachricht</strong><br/>${String(message).replace(/\n/g, '<br/>')}</p>
         ${signatureHtml}
-        <p style="color:#475569;font-size:12px;margin-top:16px">Diese E-Mail wurde automatisch gesendet. Antworten Sie gerne direkt auf diese Nachricht.</p>
+        <p style="color:#475569;font-size:12px;margin-top:16px">Diese E-Mail wurde automatisch gesendet. Antworte gerne direkt auf diese Nachricht.</p>
       </div>
     `;
 
@@ -202,8 +202,8 @@ export async function POST(req: Request) {
       from: SMTP_FROM,
       to: String(email),
       replyTo: OWNER_EMAIL,
-      subject: 'Danke für Ihre Anfrage – ich melde mich',
-      text: `Hallo ${name},\n\nDanke für Ihre Anfrage! Ich melde mich in der Regel innerhalb von 24–48 Stunden mit einer Einschätzung zurück.${signaturePlain}`,
+      subject: 'Danke für Deine Anfrage – ich melde mich',
+      text: `Hallo ${name},\n\nDanke für Deine Anfrage! Ich melde mich in der Regel innerhalb von 24–48 Stunden mit einer Einschätzung zurück.${signaturePlain}`,
       html: htmlCustomer,
     });
 

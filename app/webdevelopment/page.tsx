@@ -370,7 +370,7 @@ export default function WebdevelopmentPage() {
         {/* Technologien Section */}
         <section
           id='technologien'
-          className='backdrop-blur-xs bg-white/5 py-16 ring-1 ring-white/10 min-h-[80vh] flex flex-col justify-center border-y border-white/20'>
+          className='backdrop-blur-md py-16 ring-1 ring-white/10 min-h-[80vh] flex flex-col justify-center border-y border-white/20'>
           <div className='mx-auto max-w-6xl px-4'>
             <div className='max-w-2xl'>
               <h2 className='text-3xl font-bold tracking-tight text-white'>
@@ -448,7 +448,7 @@ export default function WebdevelopmentPage() {
         {/* Nicht für jeden */}
         <section
           id='zielgruppe'
-          className='backdrop-blur-xs bg-white/5 py-16 ring-1 ring-white/10 min-h-[70vh] flex flex-col justify-center border-y border-white/20'>
+          className='backdrop-blur-md py-16 ring-1 ring-white/10 min-h-[70vh] flex flex-col justify-center border-y border-white/20'>
           <div className='mx-auto max-w-6xl px-4'>
             <div className='max-w-2xl'>
               <h2 className='text-3xl font-bold tracking-tight text-white'>
@@ -490,30 +490,33 @@ export default function WebdevelopmentPage() {
           <div className='mt-10 grid gap-x-8 gap-y-21 md:grid-cols-2'>
             <CaseCard
               title='Linde · TRAFÖ GmbH'
-              status='Projekt abgeschlossen'
-              image='/case-images-videos/project-trafoe.webp'
+              status='Relaunch 2024'
+              // image='/case-images-videos/project-trafoe.webp'
+              video='/case-images-videos/trafoe.webm'
               href='https://trafoe.de'
               cta='Case ansehen'
             />
             <CaseCard
-              title='Rund um Berlin'
-              status='Relaunch 2026'
+              title='Rund um Berlin Rallye'
+              status='Abgeschlossen 2026'
               // image='/case-images-videos/project-rund-um-berlin.webp'
               video='/case-images-videos/rub.webm'
-              href='#'
+              href='rundumberlin-classic.de'
               cta='Case ansehen'
             />
             <CaseCard
-              title='Pulse AI'
-              status='Launch Q2'
-              image='https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=900&auto=format&fit=crop'
-              href='#'
+              title='Kaiser Classic Rallye'
+              status='Abgeschlossen 2025'
+              // image='https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=900&auto=format&fit=crop'
+              video='/case-images-videos/kaiserclassic.webm'
+              href='kaiser-classic.de'
               cta='Case ansehen'
             />
             <CaseCard
-              title='Signal Ops'
-              status='Scale-up 2025'
-              image='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=900&auto=format&fit=crop'
+              title='Kundenportal Intralogistik'
+              status='Launch 03/2026'
+              video='/case-images-videos/kundenportal.webm'
+              // image='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=900&auto=format&fit=crop'
               // href='#'
               // cta='Case ansehen'
             />
@@ -523,20 +526,22 @@ export default function WebdevelopmentPage() {
         <section
           id='kontakt'
           className='backdrop-blur-xs mx-auto w-full px-4 py-32 min-h-[70vh] flex flex-col justify-center items-center bg-white/5 border-y border-white/20'>
+          <div className='w-full md:max-w-6xl flex flex-col items-start justify-start gap-6 mb-12'>
+            <h2 className='text-3xl font-bold tracking-tight text-white'>Projekt anfragen</h2>
+            <p className='mt-3 text-slate-300'>
+              Beschreib mir kurz dein Vorhaben – Website, Web App oder System. <br />
+              Ich melde mich ehrlich zurück und sage dir, ob ich der Richtige dafür bin und wie ein
+              sinnvoller nächster Schritt aussieht.
+            </p>
+          </div>
           <div className='grid gap-8 md:grid-cols-2 md:items-start w-full md:max-w-6xl'>
             <div className='max-w-full'>
-              <h2 className='text-3xl font-bold tracking-tight text-white'>Projekt anfragen</h2>
-              <p className='mt-3 text-slate-300'>
-                Beschreib mir kurz dein Vorhaben – Website, Web App oder System. Ich melde mich
-                ehrlich zurück und sage dir, ob ich der Richtige dafür bin und wie ein sinnvoller
-                nächster Schritt aussieht.
-              </p>
               <ElectricBorder
                 color='#2dd4bf'
                 speed={0.5}
                 chaos={0.04}
                 style={{ borderRadius: 18 }}
-                className='mt-6 w-max-full'>
+                className='mb-6 w-max-full'>
                 <div className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100'>
                   <div className='text-sm font-semibold text-white'>Klarheit & Struktur</div>
                   <p className='mt-2 text-sm text-slate-300'>
