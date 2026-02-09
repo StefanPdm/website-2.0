@@ -26,7 +26,7 @@ import {
 } from 'react-icons/fa6';
 import CardSwap, { Card } from '@/components/CardSwap';
 import ElectricBorder from '@/components/ElectricBorder';
-import ContactForm from '@/components/ContactForm';
+import ContactFormWeb from '@/components/ContactFormWeb';
 import LightPillar from '@/components/LightPillar';
 import HyperspeedStrip from '@/components/HyperspeedStrip';
 import PixelCard from '@/components/PixelCard';
@@ -191,7 +191,7 @@ export default function WebdevelopmentPage() {
       {/* content */}
       <div className='relative z-10'>
         {/* Hero Section */}
-        <section className='relative min-h-svh overflow-hidden flex items-center'>
+        <section className='relative min-h-svh overflow-hidden flex items-center pt-32 md:pt-0'>
           <div className='relative z-10 mx-auto max-w-6xl w-full flex flex-col md:flex-row items-start md:items-center gap-10 md:gap-12 px-4 sm:px-6 md:px-8 py-12 md:py-24'>
             {/* Left: All content left-aligned */}
             <div className='flex-1 flex flex-col justify-center items-start'>
@@ -522,8 +522,8 @@ export default function WebdevelopmentPage() {
         <section
           id='kontakt'
           className='backdrop-blur-xs mx-auto w-full px-4 py-32 min-h-[70vh] flex flex-col justify-center items-center bg-white/5 border-y border-white/20'>
-          <div className='grid gap-8 md:grid-cols-2 md:items-start max-w-6xl'>
-            <div>
+          <div className='grid gap-8 md:grid-cols-2 md:items-start w-full md:max-w-6xl'>
+            <div className='max-w-full'>
               <h2 className='text-3xl font-bold tracking-tight text-white'>Projekt anfragen</h2>
               <p className='mt-3 text-slate-300'>
                 Beschreib mir kurz dein Vorhaben – Website, Web App oder System. Ich melde mich
@@ -535,7 +535,7 @@ export default function WebdevelopmentPage() {
                 speed={0.5}
                 chaos={0.04}
                 style={{ borderRadius: 18 }}
-                className='mt-6'>
+                className='mt-6 w-max-full'>
                 <div className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100'>
                   <div className='text-sm font-semibold text-white'>Klarheit & Struktur</div>
                   <p className='mt-2 text-sm text-slate-300'>
@@ -552,7 +552,7 @@ export default function WebdevelopmentPage() {
               chaos={0.04}
               style={{ borderRadius: 18 }}
               className=''>
-              <ContactForm />
+              <ContactFormWeb />
             </ElectricBorder>
           </div>
         </section>

@@ -1,3 +1,4 @@
+import ContactFormNlp from '@/components/ContactFormNlp';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -171,7 +172,7 @@ export default function NlpPage() {
 
       <section className='relative overflow-hidden'>
         <div className='absolute inset-0'>
-          <div className='absolute -top-24 left-1/2 h-72 w-[48rem] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#1D6FA8]/10 via-[#86C243]/10 to-[#7A2C8E]/10 blur-3xl'></div>
+          <div className='absolute -top-24 left-1/2 h-72 w-3xl -translate-x-1/2 rounded-full bg-linear-to-r from-[#1D6FA8]/10 via-[#86C243]/10 to-[#7A2C8E]/10 blur-3xl'></div>
           <div className='absolute bottom-0 right-0 h-52 w-52 rounded-full bg-[#F6B35A]/25 blur-2xl'></div>
         </div>
 
@@ -221,7 +222,7 @@ export default function NlpPage() {
 
           <div className='relative'>
             <div className='aspect-square w-full overflow-hidden rounded-[28px] bg-white/70 ring-1 ring-slate-200 shadow-[0_40px_80px_-60px_rgba(11,27,43,0.6)]'>
-              <div className='flex h-full items-center justify-center bg-gradient-to-br from-[#1D6FA8]/10 via-white to-[#F6B35A]/20 text-sm text-slate-500'>
+              <div className='flex h-full items-center justify-center bg-linear-to-br from-[#1D6FA8]/10 via-white to-[#F6B35A]/20 text-sm text-slate-500'>
                 Portrait / Hero-Visual
               </div>
             </div>
@@ -343,8 +344,8 @@ export default function NlpPage() {
         id='ueber'
         className='mx-auto max-w-6xl px-4 py-16'>
         <div className='grid gap-10 md:grid-cols-2 md:items-center'>
-          <div className='aspect-[4/3] overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200'>
-            <div className='flex h-full items-center justify-center bg-gradient-to-br from-[#1D6FA8]/10 via-white to-[#F6B35A]/20 text-sm text-slate-500'>
+          <div className='aspect-4/3 overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200'>
+            <div className='flex h-full items-center justify-center bg-linear-to-br from-[#1D6FA8]/10 via-white to-[#F6B35A]/20 text-sm text-slate-500'>
               Über-mich Bild
             </div>
           </div>
@@ -431,7 +432,7 @@ export default function NlpPage() {
               />
               <button
                 type='submit'
-                className='h-11 rounded-xl bg-gradient-to-r from-[#7A2C8E] to-[#1D6FA8] text-sm font-semibold text-white transition hover:opacity-90'>
+                className='h-11 rounded-xl bg-linear-to-r from-[#7A2C8E] to-[#1D6FA8] text-sm font-semibold text-white transition hover:opacity-90'>
                 PDF erhalten
               </button>
             </form>
@@ -483,88 +484,7 @@ export default function NlpPage() {
             </div>
           </div>
 
-          <form className='rounded-3xl bg-white p-6 ring-1 ring-slate-200'>
-            <div className='grid gap-4'>
-              <div className='grid gap-1'>
-                <label className='text-sm font-medium'>Name *</label>
-                <input
-                  required
-                  name='name'
-                  className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'
-                />
-              </div>
-
-              <div className='grid gap-1'>
-                <label className='text-sm font-medium'>E-Mail *</label>
-                <input
-                  required
-                  name='email'
-                  type='email'
-                  className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'
-                />
-              </div>
-
-              <div className='grid gap-1'>
-                <label className='text-sm font-medium'>Telefon (optional)</label>
-                <input
-                  name='phone'
-                  type='tel'
-                  className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'
-                />
-              </div>
-
-              <div className='grid gap-1'>
-                <label className='text-sm font-medium'>Anliegen *</label>
-                <select
-                  required
-                  name='topic'
-                  className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
-                  <option value=''>Bitte wählen</option>
-                  <option>Klarheit / Fokus</option>
-                  <option>Beziehung</option>
-                  <option>Business</option>
-                  <option>Selbstwert</option>
-                  <option>Stress / Überforderung</option>
-                  <option>Anderes</option>
-                </select>
-              </div>
-
-              <div className='grid gap-1'>
-                <label className='text-sm font-medium'>Nachricht *</label>
-                <textarea
-                  required
-                  name='message'
-                  rows={5}
-                  className='rounded-xl border border-slate-200 px-3 py-2 outline-none focus:border-slate-400'></textarea>
-              </div>
-
-              <label className='flex items-start gap-2 text-xs text-slate-600'>
-                <input
-                  required
-                  type='checkbox'
-                  name='privacy'
-                  className='mt-1'
-                />
-                Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten
-                zur Kontaktaufnahme zu.
-              </label>
-
-              <button
-                type='submit'
-                className='h-11 rounded-xl bg-[#0B1B2B] text-sm font-semibold text-white transition hover:opacity-90'>
-                Anfrage senden
-              </button>
-
-              <p className='text-xs text-slate-500'>
-                Antwort in der Regel innerhalb von 24–48 Stunden. Vertraulich, wie es sein soll.{' '}
-                <a
-                  href='/impressum'
-                  className='underline'>
-                  Datenschutz
-                </a>
-              </p>
-            </div>
-          </form>
+          <ContactFormNlp />
         </div>
       </section>
 

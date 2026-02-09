@@ -93,7 +93,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100 mt-8 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
+      className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
       <div className='grid gap-4'>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Name *</label>
@@ -132,7 +132,7 @@ export default function ContactForm() {
           <select
             name='budget'
             className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
-            <option value=''>Budgetrahmen (nur bei Webdevelopment)</option>
+            <option value=''>Budgetrahmen (nur Web)</option>
             <option>Unter 2.500 €</option>
             <option>2.500 – 7.500 €</option>
             <option>7.500 – 15.000 €</option>

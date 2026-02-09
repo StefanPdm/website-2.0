@@ -21,11 +21,20 @@ function extractErrorMessage(e: unknown): string {
 type ContactPayload = {
   name: string;
   email: string;
-  projectType: string;
+  projectType?: string; // web
   budget?: string;
-  timeline: string;
+  timeline?: string;
   message: string;
   privacy: string | boolean;
+  // web extras
+  company?: string;
+  website?: string;
+  scope?: string;
+  // nlp extras
+  phone?: string;
+  topic?: string;
+  sessionType?: string;
+  preferredTime?: string;
 };
 
 export async function POST(req: Request) {
@@ -52,10 +61,24 @@ export async function POST(req: Request) {
       }
     }
 
-    const { name, email, projectType, budget, timeline, message, privacy } = (data ||
-      {}) as ContactPayload;
+    const {
+      name,
+      email,
+      projectType,
+      budget,
+      timeline,
+      message,
+      privacy,
+      company,
+      website,
+      scope,
+      phone,
+      topic,
+      sessionType,
+      preferredTime,
+    } = (data || {}) as ContactPayload;
 
-    if (!name || !email || !projectType || !timeline || !message || !privacy) {
+    if (!name || !email || !message || !privacy) {
       return NextResponse.json(
         { error: 'Bitte füllen Sie alle Pflichtfelder aus.' },
         { status: 400 },
@@ -84,7 +107,19 @@ export async function POST(req: Request) {
     const signaturePlain = '\n\nMit lieben Grüßen\nStefan';
     const signatureHtml = '<p style="margin-top:16px">Mit lieben Grüßen<br/>Stefan</p>';
 
-    const plain = `Neue Anfrage über Webseite\n\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\nProjektart: ${projectType}\nBudget: ${budget || '-'}\nZeitrahmen: ${timeline}\n\nNachricht:\n${message}${signaturePlain}\n`;
+    const subjectHint = sessionType || topic || projectType || 'Kontakt';
+
+    const extraLines = [
+      company ? `Firma: ${company}` : null,
+      website ? `Website: ${website}` : null,
+      scope ? `Umfang: ${scope}` : null,
+      phone ? `Telefon: ${phone}` : null,
+      preferredTime ? `Bevorzugte Zeit: ${preferredTime}` : null,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    const plain = `Neue Anfrage über Webseite\n\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\n${projectType ? `Projektart: ${projectType}\n` : ''}${sessionType ? `Format: ${sessionType}\n` : ''}${topic ? `Thema: ${topic}\n` : ''}${budget ? `Budget: ${budget}\n` : ''}${timeline ? `Zeitrahmen: ${timeline}\n` : ''}${extraLines ? `\nZusatz:\n${extraLines}\n` : ''}\nNachricht:\n${message}${signaturePlain}\n`;
 
     const htmlOwner = `
       <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.6;color:#0B1B2B">
@@ -92,9 +127,14 @@ export async function POST(req: Request) {
         <p><strong>Zeitpunkt:</strong> ${ts}</p>
         <p><strong>Name:</strong> ${name}<br/>
         <strong>E-Mail:</strong> ${email}<br/>
-        <strong>Projektart:</strong> ${projectType}<br/>
-        <strong>Budget:</strong> ${budget || '-'}<br/>
-        <strong>Zeitrahmen:</strong> ${timeline}</p>
+        ${projectType ? `<strong>Projektart:</strong> ${projectType}<br/>` : ''}
+        ${sessionType ? `<strong>Format:</strong> ${sessionType}<br/>` : ''}
+        ${topic ? `<strong>Thema:</strong> ${topic}<br/>` : ''}
+        ${company ? `<strong>Firma:</strong> ${company}<br/>` : ''}
+        ${website ? `<strong>Website:</strong> ${website}<br/>` : ''}
+        ${scope ? `<strong>Umfang:</strong> ${scope}<br/>` : ''}
+        ${budget ? `<strong>Budget:</strong> ${budget}<br/>` : ''}
+        ${timeline ? `<strong>Zeitrahmen:</strong> ${timeline}` : ''}</p>
         <p><strong>Nachricht</strong><br/>${String(message).replace(/\n/g, '<br/>')}</p>
         ${signatureHtml}
       </div>
@@ -106,9 +146,13 @@ export async function POST(req: Request) {
         <p>Ich habe Ihre Nachricht erhalten und melde mich in der Regel innerhalb von 24–48 Stunden zurück.</p>
         <hr style="border:none;height:1px;background:#e5e7eb;margin:16px 0" />
         <p><strong>Zusammenfassung</strong></p>
-        <p><strong>Projektart:</strong> ${projectType}<br/>
-        <strong>Budget:</strong> ${budget || '-'}<br/>
-        <strong>Zeitrahmen:</strong> ${timeline}</p>
+        <p>
+        ${projectType ? `<strong>Projektart:</strong> ${projectType}<br/>` : ''}
+        ${sessionType ? `<strong>Format:</strong> ${sessionType}<br/>` : ''}
+        ${topic ? `<strong>Thema:</strong> ${topic}<br/>` : ''}
+        ${budget ? `<strong>Budget:</strong> ${budget}<br/>` : ''}
+        ${timeline ? `<strong>Zeitrahmen:</strong> ${timeline}<br/>` : ''}
+        </p>
         <p><strong>Ihre Nachricht</strong><br/>${String(message).replace(/\n/g, '<br/>')}</p>
         ${signatureHtml}
         <p style="color:#475569;font-size:12px;margin-top:16px">Diese E-Mail wurde automatisch gesendet. Antworten Sie gerne direkt auf diese Nachricht.</p>
@@ -148,7 +192,7 @@ export async function POST(req: Request) {
       from: SMTP_FROM,
       to: OWNER_EMAIL,
       replyTo: String(email),
-      subject: `Neue Anfrage: ${projectType} – ${name}`,
+      subject: `Neue Anfrage: ${subjectHint} – ${name}`,
       text: plain,
       html: htmlOwner,
     });
