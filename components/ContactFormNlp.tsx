@@ -41,8 +41,12 @@ export default function ContactFormNlp() {
             <CheckCircle2 className='h-7 w-7' />
           </span>
           <div className='flex-1'>
-            <h3 className='text-lg font-semibold text-[#0B1B2B]'>Danke{submittedName ? `, ${submittedName}` : ''}!</h3>
-            <p className='mt-1 text-sm text-slate-600'>Ich melde mich in der Regel innerhalb von 24–48 Stunden für ein kurzes Kennenlernen.</p>
+            <h3 className='text-lg font-semibold text-[#0B1B2B]'>
+              Danke{submittedName ? `, ${submittedName}` : ''}!
+            </h3>
+            <p className='mt-1 text-sm text-slate-600'>
+              Ich melde mich in der Regel innerhalb von 24–48 Stunden für ein kurzes Kennenlernen.
+            </p>
             <button
               type='button'
               onClick={() => setStatus(null)}
@@ -64,7 +68,9 @@ export default function ContactFormNlp() {
           </span>
           <div className='flex-1'>
             <h3 className='text-lg font-semibold text-[#0B1B2B]'>Leider ein Fehler</h3>
-            <p className='mt-1 text-sm text-slate-600'>Bitte versuche es später erneut oder schreibe direkt per E‑Mail.</p>
+            <p className='mt-1 text-sm text-slate-600'>
+              Bitte versuche es später erneut oder schreibe direkt per E‑Mail.
+            </p>
             <button
               type='button'
               onClick={() => setStatus(null)}
@@ -78,23 +84,41 @@ export default function ContactFormNlp() {
   }
 
   return (
-    <form onSubmit={onSubmit} className='rounded-3xl bg-white p-6 ring-1 ring-slate-200'>
+    <form
+      onSubmit={onSubmit}
+      className='rounded-3xl bg-white p-6 ring-1 ring-slate-200'>
       <div className='grid gap-4'>
         <div className='grid gap-1'>
           <label className='text-sm font-medium'>Name *</label>
-          <input name='name' required className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400' />
+          <input
+            name='name'
+            required
+            className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'
+          />
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium'>E-Mail *</label>
-          <input name='email' type='email' required className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400' />
+          <input
+            name='email'
+            type='email'
+            required
+            className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'
+          />
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium'>Telefon (optional)</label>
-          <input name='phone' type='tel' className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400' />
+          <input
+            name='phone'
+            type='tel'
+            className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'
+          />
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium'>Thema *</label>
-          <select name='topic' required className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
+          <select
+            name='topic'
+            required
+            className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
             <option value=''>Bitte wählen</option>
             <option>Klarheit / Fokus</option>
             <option>Beziehung</option>
@@ -106,7 +130,10 @@ export default function ContactFormNlp() {
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium'>Format *</label>
-          <select name='sessionType' required className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
+          <select
+            name='sessionType'
+            required
+            className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
             <option value=''>Bitte wählen</option>
             <option>Kennenlernen (15 Min.)</option>
             <option>1:1 Intensiv (90 Min.)</option>
@@ -116,7 +143,10 @@ export default function ContactFormNlp() {
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium'>Bevorzugte Zeit *</label>
-          <select name='preferredTime' required className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
+          <select
+            name='preferredTime'
+            required
+            className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'>
             <option value=''>Bitte wählen</option>
             <option>Vormittags</option>
             <option>Nachmittags</option>
@@ -126,13 +156,25 @@ export default function ContactFormNlp() {
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium'>Nachricht *</label>
-          <textarea name='message' rows={5} required className='rounded-xl border border-slate-200 px-3 py-2 outline-none focus:border-slate-400'></textarea>
+          <textarea
+            name='message'
+            rows={5}
+            required
+            className='rounded-xl border border-slate-200 px-3 py-2 outline-none focus:border-slate-400'></textarea>
         </div>
         <label className='flex items-start gap-2 text-xs text-slate-600'>
-          <input type='checkbox' name='privacy' required className='mt-1' />
+          <input
+            type='checkbox'
+            name='privacy'
+            required
+            className='mt-1'
+          />
           Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zu.
         </label>
-        <button type='submit' disabled={loading} className='h-11 rounded-xl bg-[#0B1B2B] text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60'>
+        <button
+          type='submit'
+          disabled={loading}
+          className='h-11 rounded-xl bg-[#0B1B2B] text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60'>
           {loading ? 'Wird gesendet…' : 'Anfrage senden'}
         </button>
         <p className='text-xs text-slate-500'>Antwort in der Regel innerhalb von 24–48 Stunden.</p>

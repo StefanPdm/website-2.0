@@ -41,8 +41,12 @@ export default function ContactFormWeb() {
             <CheckCircle2 className='h-7 w-7' />
           </span>
           <div className='flex-1'>
-            <h3 className='text-lg font-semibold text-white'>Danke{submittedName ? `, ${submittedName}` : ''}! 🚀</h3>
-            <p className='mt-1 text-sm text-slate-300'>Ich melde mich innerhalb von 24–48 Stunden mit der nächsten sinnvollen Etappe.</p>
+            <h3 className='text-lg font-semibold text-white'>
+              Danke{submittedName ? `, ${submittedName}` : ''}! 🚀
+            </h3>
+            <p className='mt-1 text-sm text-slate-300'>
+              Ich melde mich innerhalb von 24–48 Stunden mit der nächsten sinnvollen Etappe.
+            </p>
             <button
               type='button'
               onClick={() => setStatus(null)}
@@ -64,7 +68,9 @@ export default function ContactFormWeb() {
           </span>
           <div className='flex-1'>
             <h3 className='text-lg font-semibold text-white'>Senden fehlgeschlagen</h3>
-            <p className='mt-1 text-sm text-slate-300'>Bitte später erneut versuchen oder direkt per E‑Mail schreiben.</p>
+            <p className='mt-1 text-sm text-slate-300'>
+              Bitte später erneut versuchen oder direkt per E‑Mail schreiben.
+            </p>
             <button
               type='button'
               onClick={() => setStatus(null)}
@@ -78,27 +84,49 @@ export default function ContactFormWeb() {
   }
 
   return (
-    <form onSubmit={onSubmit} className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
+    <form
+      onSubmit={onSubmit}
+      className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
       <div className='grid gap-4'>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Name *</label>
-          <input name='name' required className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90' />
+          <input
+            name='name'
+            required
+            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+          />
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>E-Mail *</label>
-          <input name='email' type='email' required className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90' />
+          <input
+            name='email'
+            type='email'
+            required
+            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+          />
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Firma (optional)</label>
-          <input name='company' className='h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15' />
+          <input
+            name='company'
+            className='h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'
+          />
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Website (optional)</label>
-          <input name='website' type='url' placeholder='https://…' className='h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15' />
+          <input
+            name='website'
+            type='url'
+            placeholder='https://…'
+            className='h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'
+          />
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Projektart *</label>
-          <select name='projectType' required className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
+          <select
+            name='projectType'
+            required
+            className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
             <option value=''>Bitte wählen</option>
             <option>Website / Landingpage</option>
             <option>Web App / Kundenportal</option>
@@ -107,7 +135,10 @@ export default function ContactFormWeb() {
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Umfang *</label>
-          <select name='scope' required className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
+          <select
+            name='scope'
+            required
+            className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
             <option value=''>Bitte wählen</option>
             <option>Design + Entwicklung</option>
             <option>Entwicklung (Design vorhanden)</option>
@@ -116,7 +147,9 @@ export default function ContactFormWeb() {
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Budget (optional)</label>
-          <select name='budget' className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
+          <select
+            name='budget'
+            className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
             <option value=''>Budgetrahmen</option>
             <option>Unter 2.500 €</option>
             <option>2.500 – 7.500 €</option>
@@ -126,7 +159,10 @@ export default function ContactFormWeb() {
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Zeitrahmen *</label>
-          <select name='timeline' required className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
+          <select
+            name='timeline'
+            required
+            className='select-caret h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-slate-100 outline-none focus:border-white/40 focus:bg-white/15'>
             <option value=''>Bitte wählen</option>
             <option>2–4 Wochen</option>
             <option>1–2 Monate</option>
@@ -136,13 +172,25 @@ export default function ContactFormWeb() {
         </div>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Nachricht *</label>
-          <textarea name='message' rows={5} required className='rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-slate-100 placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'></textarea>
+          <textarea
+            name='message'
+            rows={5}
+            required
+            className='rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-slate-100 placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'></textarea>
         </div>
         <label className='flex items-start gap-2 text-xs text-slate-300'>
-          <input type='checkbox' name='privacy' required className='mt-1 accent-[#2dd4bf]' />
+          <input
+            type='checkbox'
+            name='privacy'
+            required
+            className='mt-1 accent-[#2dd4bf]'
+          />
           Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zu.
         </label>
-        <button type='submit' disabled={loading} className='h-11 rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60'>
+        <button
+          type='submit'
+          disabled={loading}
+          className='h-11 rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60'>
           {loading ? 'Wird gesendet…' : 'Anfrage senden'}
         </button>
         <p className='text-xs text-slate-400'>Kein Spam. Kein Weiterverkauf.</p>
