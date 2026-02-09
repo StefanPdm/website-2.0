@@ -33,7 +33,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100'>
+      className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100 mt-8'>
       <div className='grid gap-4'>
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-slate-200'>Name *</label>

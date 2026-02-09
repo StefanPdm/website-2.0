@@ -1,13 +1,31 @@
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRef, useState } from 'react';
+import ContactForm from '@/components/ContactForm';
 
 export default function Home() {
+  const contactRef = useRef<HTMLDivElement | null>(null);
+  const [showContact, setShowContact] = useState(false);
+
+  const handleContactClick = () => {
+    if (!showContact) setShowContact(true);
+    // Wait for reveal, then scroll smoothly into view
+    requestAnimationFrame(() => {
+      setTimeout(
+        () => contactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+        50,
+      );
+    });
+  };
+
   return (
     <div className='landing-shell'>
       <main className='landing-main'>
+        {/* Header */}
         <header className='landing-header'>
           <div className='landing-brand'>
-            <div>
+            <div className='w-12 h-12'>
               <Image
                 src='/Global-Logo-SH-1.webp'
                 alt='Studio Fokus Logo'
@@ -20,14 +38,14 @@ export default function Home() {
               <div className='landing-role'>Coaching & Webdevelopment</div>
             </div>
           </div>
-          <div className='landing-tags'>
+          <div className='landing-tags hidden md:flex'>
             <span>klar</span>
             <span>sauber</span>
             <span>wirksam</span>
           </div>
         </header>
-
-        <section className='landing-grid'>
+        {/* Entscheidung */}
+        <section className='landing-grid pt-20 md:pt-10'>
           <div className='landing-left'>
             <span className='landing-badge'>Wähle deinen Weg</span>
             <h1 className='landing-title'>
@@ -43,15 +61,16 @@ export default function Home() {
             <span className='landing-subtitle'>Beides sauber. Beides persönlich. Ohne Blabla.</span>
             <div className='landing-actions'>
               <a
-                className='landing-cta landing-cta--primary'
+                className='landing-cta landing-cta--primary inline-flex md:hidden'
                 href='#choose'>
                 Jetzt wählen
               </a>
-              <Link
-                className='landing-cta landing-cta--ghost'
-                href='/contact'>
+              <button
+                type='button'
+                className='cursor-pointer landing-cta landing-cta--ghost w-full sm:w-auto'
+                onClick={handleContactClick}>
                 Kontakt
-              </Link>
+              </button>
             </div>
           </div>
 
@@ -128,7 +147,7 @@ export default function Home() {
 
             {/* Choise your path cards */}
             <div
-              className='choice-card mt-8'
+              className='choice-card mt-20 md:mt-8'
               id='choose'>
               <div className='choice-title mb-8'>Wähle deinen Weg</div>
 
@@ -201,8 +220,35 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Hidden contact section, revealed on click and scrolled into view */}
+        <section
+          id='root-contact'
+          ref={contactRef}
+          style={{ display: showContact ? 'block' : 'none' }}
+          className='landing-grid contact-grid pt-8'>
+          <div className='landing-left'>
+            <span className='landing-badge'>Kontakt</span>
+            <h2 className='landing-title'>Lass uns sprechen.</h2>
+            <p className='landing-subtitle'>
+              Kurze Beschreibung reicht. Ich melde mich ehrlich zurück.
+            </p>
+            <div className='contact-points'>
+              <div>Antwort i. d. R. innerhalb von 24–48 Stunden.</div>
+              <div>Vertraulich. Persönlich. Ohne Umwege.</div>
+            </div>
+          </div>
+
+          <div className='contact-card mt-16 md:mt-0 px-4! md:px-unset'>
+            <h3 className='contact-title'>Nachricht senden</h3>
+            <p className='contact-subtitle'>
+              Erzähl mir kurz, worum es geht – Website, Coaching oder etwas anderes.
+            </p>
+            <ContactForm />
+          </div>
+        </section>
+
         <div className='landing-tip'>
-          Tipp: Hover/Tap auf eine Karte – die Seite „entscheidet“ optisch mit dir 🙂
+          Tipp: Bei mir kannst du jederzeit wechseln. Oder beides machen. 😁
         </div>
       </main>
     </div>
