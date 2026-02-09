@@ -14,11 +14,11 @@ export default function CaseCard({ title, status, image, href, cta = 'ansehen' }
   const isRemoteImage = typeof image === 'string' && /^https?:\/\//i.test(image);
 
   return (
-    <div className='border border-white/10 rounded-2xl p-8'>
+    <div className='border border-white/10 rounded-2xl p-4 md:p-8'>
       {/* Image Container */}
       <div className='group relative  overflow-hidden rounded-2xl  bg-neutral-900/60'>
         {/* Image */}
-        <div className='relative h-[20.8rem] w-full'>
+        <div className='relative h-52 md:h-[20.8rem] w-full'>
           <Image
             src={image}
             alt={title}
@@ -32,7 +32,7 @@ export default function CaseCard({ title, status, image, href, cta = 'ansehen' }
         </div>
       </div>
       {/* Info bar */}
-      <div className='flex items-center justify-between rounded-xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-md w-[80%] mx-auto relative z-10 mt-4'>
+      <div className='flex items-center justify-between rounded-xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-md w-full md:w-[80%] mx-auto relative z-10 mt-4'>
         <div className='min-w-0'>
           <p className='truncate text-sm font-semibold text-white'>{title}</p>
           <p className='truncate text-xs font-medium text-sky-200/90'>{status}</p>
