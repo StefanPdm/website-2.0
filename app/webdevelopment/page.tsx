@@ -221,7 +221,7 @@ export default function WebdevelopmentPage() {
                   Technologien ansehen
                 </a>
               </div>
-              <div className='mt-2 flex flex-wrap gap-6 text-sm text-slate-300'>
+              <div className='mt-2 flex flex-col md:flex-row flex-wrap gap-6 text-sm text-slate-300'>
                 {trustItems.map((item) => (
                   <span
                     key={item}
@@ -233,7 +233,7 @@ export default function WebdevelopmentPage() {
               </div>
             </div>
             {/* Right: Hero cards */}
-            <div className='flex-1 relative items-center justify-end max-md:hidden md:flex'>
+            <div className='flex-1 relative items-center justify-end '>
               <div className='relative h-105 w-95'>
                 <CardSwapView
                   width={380}
@@ -339,7 +339,7 @@ export default function WebdevelopmentPage() {
               Kein Overengineering. Kein Plugin-Chaos. Sondern klare Systeme, die funktionieren.
             </p>
           </div>
-          <div className='mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 z-10'>
+          <div className='my-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 z-10 justify-self-center'>
             {services.map((service) => (
               <PixelCardView
                 key={service.title}
@@ -432,7 +432,7 @@ export default function WebdevelopmentPage() {
                 variant='blue'
                 className='w-full bg-[#0B1B2B]/70 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
                 <div className='relative z-10 w-full rounded-[22px] border border-white/20 bg-white/5 p-5 text-slate-100 h-full'>
-                  <div className='text-xs font-semibold text-accent-web'>Step {index + 1}</div>
+                  <div className='text-sm font-semibold text-accent-web'>Step {index + 1}</div>
                   <div className='mt-3 flex flex-col gap-2 text-sm font-semibold text-white items-center'>
                     <span className='my-6 grid h-16 w-16 place-items-center rounded-full bg-white/10 text-accent-web'>
                       {processIconMap[step.title]}

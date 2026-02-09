@@ -12,10 +12,13 @@ export default function Home() {
     if (!showContact) setShowContact(true);
     // Wait for reveal, then scroll smoothly into view
     requestAnimationFrame(() => {
-      setTimeout(
-        () => contactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
-        50,
-      );
+      setTimeout(() => {
+        contactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const firstInput = contactRef.current?.querySelector(
+          'input[name="name"]',
+        ) as HTMLInputElement | null;
+        firstInput?.focus();
+      }, 60);
     });
   };
 

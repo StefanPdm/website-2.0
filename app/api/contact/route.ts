@@ -84,11 +84,11 @@ export async function POST(req: Request) {
     const signaturePlain = '\n\nMit lieben Grüßen\nStefan';
     const signatureHtml = '<p style="margin-top:16px">Mit lieben Grüßen<br/>Stefan</p>';
 
-    const plain = `Neue Projektanfrage\n\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\nProjektart: ${projectType}\nBudget: ${budget || '-'}\nZeitrahmen: ${timeline}\n\nNachricht:\n${message}${signaturePlain}\n`;
+    const plain = `Neue Anfrage über Webseite\n\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\nProjektart: ${projectType}\nBudget: ${budget || '-'}\nZeitrahmen: ${timeline}\n\nNachricht:\n${message}${signaturePlain}\n`;
 
     const htmlOwner = `
       <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.6;color:#0B1B2B">
-        <h2>Neue Projektanfrage</h2>
+        <h2>Neue Anfrage über Webseite</h2>
         <p><strong>Zeitpunkt:</strong> ${ts}</p>
         <p><strong>Name:</strong> ${name}<br/>
         <strong>E-Mail:</strong> ${email}<br/>
