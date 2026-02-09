@@ -491,14 +491,15 @@ export default function WebdevelopmentPage() {
             <CaseCard
               title='Linde · TRAFÖ GmbH'
               status='Projekt abgeschlossen'
-              image='/project-images/project-trafoe.webp'
+              image='/case-images-videos/project-trafoe.webp'
               href='https://trafoe.de'
               cta='Case ansehen'
             />
             <CaseCard
               title='Rund um Berlin'
               status='Relaunch 2026'
-              image='/project-images/project-rund-um-berlin.webp'
+              // image='/case-images-videos/project-rund-um-berlin.webp'
+              video='/case-images-videos/rub.webm'
               href='#'
               cta='Case ansehen'
             />
@@ -513,8 +514,8 @@ export default function WebdevelopmentPage() {
               title='Signal Ops'
               status='Scale-up 2025'
               image='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=900&auto=format&fit=crop'
-              href='#'
-              cta='Case ansehen'
+              // href='#'
+              // cta='Case ansehen'
             />
           </div>
         </section>
