@@ -1,515 +1,726 @@
-import ContactFormNlp from '@/components/ContactFormNlp';
-import Link from 'next/link';
-import type { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'NLP Coaching · Klarheit. Fokus. Veränderung.',
-  description:
-    'NLP-Coaching für Menschen, die viel leisten – und wieder bei sich ankommen wollen. Praktisch, direkt, ohne Blabla.',
+import { useMemo, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const FloatingLines = dynamic(() => import('@/components/FloatingLines'), { ssr: false });
+
+type ButtonProps = {
+  children: React.ReactNode;
+  className?: string;
+  href?: string;
+  onClick?: () => void;
 };
 
-const trustItems = [
-  '100+ Sessions',
-  'Online möglich',
-  'Vertraulich',
-  'In 60–90 Min. spürbar mehr Klarheit',
-];
-
-const focusAreas = [
-  {
-    title: 'Gedankenkarussell stoppen',
-    description: 'Kurze Tools für sofort mehr Ruhe & Entscheidungsfähigkeit.',
-  },
-  {
-    title: 'Emotionen regulieren',
-    description: 'Trigger verstehen, reagieren statt explodieren.',
-  },
-  {
-    title: 'Ziele, die wirklich passen',
-    description: 'Fokus finden, Prioritäten setzen, dranbleiben.',
-  },
-];
-
-const offers = [
-  {
-    title: '1:1 Intensiv (90 Min.)',
-    subtitle: 'Wenn du schnell Klarheit brauchst.',
-    details: ['1 Session', 'Konkrete Interventionen', 'Sofort-Transfer'],
-    cta: 'Intensiv anfragen',
-  },
-  {
-    title: 'Coaching-Serie (6 Sessions)',
-    subtitle: 'Wenn du nachhaltig Muster verändern willst.',
-    details: ['6 Sessions', 'Zwischen-Impulse', 'Alltags-Transfer'],
-    cta: 'Serie starten',
-  },
-  {
-    title: 'VIP Performance (12 Wochen)',
-    subtitle: 'Wenn du Performance + Erfüllung verbinden willst.',
-    details: ['12 Wochen', 'Direktzugang', 'Strategie + Umsetzung'],
-    cta: 'VIP Gespräch',
-  },
-];
-
-const steps = [
-  {
-    title: 'Kennenlernen',
-    description: '15 Minuten, ob’s passt und was du brauchst.',
-  },
-  {
-    title: 'Zielbild & Ist-Analyse',
-    description: 'Wir klären, was konkret anders sein soll.',
-  },
-  {
-    title: 'Interventionen',
-    description: 'NLP-Formate, die Wirkung zeigen – direkt im Gespräch.',
-  },
-  {
-    title: 'Transfer in den Alltag',
-    description: 'Praktische Routinen, klare nächste Schritte.',
-  },
-  {
-    title: 'Follow-up',
-    description: 'Check-in, Feinschliff, nächste Etappe.',
-  },
-];
-
-const testimonials = [
-  {
-    quote: '„Nach einer Session war’s im Kopf plötzlich still – und ich wusste, was zu tun ist.“',
-    author: 'Klient · Unternehmer',
-  },
-  {
-    quote: '„Sehr klar, sehr menschlich. Kein Tschakka – sondern echte Umsetzung.“',
-    author: 'Klientin · Führungskraft',
-  },
-  {
-    quote: '„Trigger erkannt, Muster gelöst. Und ich hab Tools, die ich täglich nutze.“',
-    author: 'Klient · Privat',
-  },
-];
-
-const faqs = [
-  {
-    question: 'Ist das Therapie?',
-    answer:
-      'Nein. Coaching ist zukunfts- und lösungsorientiert. Wenn therapeutische Unterstützung sinnvoll ist, empfehle ich das transparent.',
-  },
-  {
-    question: 'Funktioniert das online wirklich?',
-    answer:
-      'Ja. Die meisten Formate funktionieren online sehr gut – klar strukturiert, mit Fokus auf Transfer.',
-  },
-  {
-    question: 'Wie schnell sehe ich Ergebnisse?',
-    answer:
-      'Viele spüren bereits nach 1–2 Sessions mehr Klarheit. Nachhaltige Veränderungen brauchen oft mehrere Wochen.',
-  },
-  {
-    question: 'Was, wenn ich nicht weiß, was ich will?',
-    answer:
-      'Dann starten wir genau dort. Wir sortieren Gedanken, finden Prioritäten und schaffen Orientierung.',
-  },
-];
-
-export default function NlpPage() {
+function PrimaryButton({ children, className, href, onClick }: ButtonProps) {
+  const base =
+    'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[#001018] bg-gradient-to-r from-[#00E5FF] to-[#22C55E] shadow-[0_0_30px_rgba(0,229,255,0.25)] ring-1 ring-white/10 transition duration-200 hover:shadow-[0_0_40px_rgba(0,229,255,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF] active:translate-y-px';
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={`${base} ${className ?? ''}`}>
+        {children}
+      </Link>
+    );
+  }
   return (
-    <div className='min-h-screen bg-[#F8FAFC] text-[#0F172A]'>
-      <header className='sticky top-0 z-50 border-b border-slate-200/70 bg-white/70 backdrop-blur'>
-        <div className='mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3'>
-          <Link
-            className='flex items-center gap-3 font-semibold text-[#0B1B2B]'
-            href='/'>
-            <span className='grid h-9 w-9 place-items-center rounded-xl bg-[#1D6FA8] text-white'>
-              N
-            </span>
-            <span className='leading-tight'>
-              <span className='block text-sm'>NLP Coaching</span>
-              <span className='block text-xs font-normal text-slate-500'>Klar. Warm. Wirksam.</span>
-            </span>
-          </Link>
+    <button
+      type='button'
+      onClick={onClick}
+      className={`${base} ${className ?? ''}`}>
+      {children}
+    </button>
+  );
+}
 
-          <nav className='hidden items-center gap-6 text-sm text-slate-600 md:flex'>
+function SecondaryButton({ children, className, href, onClick }: ButtonProps) {
+  const base =
+    'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[#E6F7FF] bg-white/5 ring-1 ring-white/15 shadow-[0_0_20px_rgba(0,229,255,0.12)] transition duration-200 hover:bg-white/10 hover:ring-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] active:translate-y-px';
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={`${base} ${className ?? ''}`}>
+        {children}
+      </Link>
+    );
+  }
+  return (
+    <button
+      type='button'
+      onClick={onClick}
+      className={`${base} ${className ?? ''}`}>
+      {children}
+    </button>
+  );
+}
+
+function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div
+      className={`group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.4)] transition duration-200 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_rgba(0,229,255,0.18)] ${className ?? ''}`}>
+      {children}
+    </div>
+  );
+}
+
+function StarRow() {
+  return (
+    <div
+      className='flex items-center gap-1 text-[#7DE3FF]'
+      aria-label='5 von 5 Sternen'>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <span
+          key={i}
+          aria-hidden='true'>
+          ★
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export default function NLP() {
+  const [formState, setFormState] = useState({ name: '', email: '' });
+  const [touched, setTouched] = useState({ name: false, email: false });
+
+  const errors = useMemo(() => {
+    return {
+      name: formState.name.trim().length === 0 ? 'Bitte gib deinen Namen an.' : '',
+      email:
+        formState.email.trim().length === 0
+          ? 'Bitte gib deine E-Mail an.'
+          : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)
+            ? 'Bitte gib eine gültige E-Mail an.'
+            : '',
+    };
+  }, [formState]);
+
+  const hasError = (field: 'name' | 'email') => touched[field] && Boolean(errors[field]);
+
+  return (
+    <div className='scroll-smooth bg-[#050B12] text-[#E6F7FF] font-sans relative min-h-dvh'>
+      <div className='relative isolate overflow-hidden'>
+        <div className='pointer-events-none absolute inset-0'>
+          {/* <div className='absolute -top-24 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(0,229,255,0.35),rgba(0,0,0,0))] blur-3xl' /> */}
+          {/* <div className='absolute left-[-120px] top-[20%] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.25),rgba(0,0,0,0))] blur-3xl motion-safe:animate-pulse' /> */}
+          {/* <div className='absolute right-[-140px] top-[35%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(125,227,255,0.22),rgba(0,0,0,0))] blur-3xl motion-safe:animate-pulse' /> */}
+          {/* <div className='absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:20px_20px] opacity-40' /> */}
+          {/* <div className='absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,11,18,0.2),rgba(5,11,18,0.9))]' /> */}
+        </div>
+        {/* Header */}
+        <header className='fixed w-full top-0 z-50 border-b border-white/10 bg-white/5 backdrop-blur-xl'>
+          <div className='container mx-auto flex items-center justify-between px-4 py-3'>
             <Link
-              href='/'
-              className='hover:text-slate-900'>
-              Start
+              href='/nlp/'
+              className='flex items-center gap-3'>
+              <div className='relative'>
+                <Image
+                  src='/nlp-logo.svg'
+                  alt='Logo'
+                  width={64}
+                  height={64}
+                />
+              </div>
+              <div className='flex flex-col items-start justify-center'>
+                <span className='text-lg font-semibold text-left tracking-widest text-[#7DE3FF] uppercase'>
+                  NLP Coaching Potsdam
+                </span>
+                <span className='text-left tracking-wider text-sm text-white/80'>
+                  Stefan Heinemann
+                </span>
+              </div>
             </Link>
-            <a
-              href='#coaching'
-              className='hover:text-slate-900'>
-              Coaching
-            </a>
-            <a
-              href='#ablauf'
-              className='hover:text-slate-900'>
-              Ablauf
-            </a>
-            <a
-              href='#ueber'
-              className='hover:text-slate-900'>
-              Über mich
-            </a>
-            <a
-              href='#stimmen'
-              className='hover:text-slate-900'>
-              Stimmen
-            </a>
-            <a
-              href='#kontakt'
-              className='hover:text-slate-900'>
-              Kontakt
-            </a>
-          </nav>
-
-          <a
-            href='#kontakt'
-            className='inline-flex items-center justify-center rounded-xl bg-[#0B1B2B] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90'>
-            Kostenloses Kennenlernen
-          </a>
-        </div>
-      </header>
-
-      <section className='relative overflow-hidden'>
-        <div className='absolute inset-0'>
-          <div className='absolute -top-24 left-1/2 h-72 w-3xl -translate-x-1/2 rounded-full bg-linear-to-r from-[#1D6FA8]/10 via-[#86C243]/10 to-[#7A2C8E]/10 blur-3xl'></div>
-          <div className='absolute bottom-0 right-0 h-52 w-52 rounded-full bg-[#F6B35A]/25 blur-2xl'></div>
-        </div>
-
-        <div className='relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:py-24'>
-          <div>
-            <p className='inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-medium text-slate-600 ring-1 ring-slate-200'>
-              <span className='h-2 w-2 rounded-full bg-[#86C243]'></span>
-              Online & vor Ort · vertraulich · klarer Prozess
-            </p>
-
-            <h1 className='mt-5 text-4xl font-extrabold tracking-tight text-[#0B1B2B] md:text-5xl'>
-              Klarheit im Kopf.
-              <br className='hidden md:block' />
-              Ruhe im Körper.
-              <br className='hidden md:block' />
-              Fokus im Leben.
-            </h1>
-
-            <p className='mt-4 text-lg text-slate-600'>
-              NLP-Coaching für Menschen, die viel leisten – und wieder bei sich ankommen wollen.
-              Praktisch, direkt, ohne Blabla.
-            </p>
-
-            <div className='mt-7 flex flex-wrap gap-3'>
-              <a
+            <nav className='hidden items-center gap-8 text-sm text-white/80 md:flex'>
+              <Link
+                href='/'
+                className='transition hover:text-white'>
+                Home
+              </Link>
+              <Link
+                href='#ueber'
+                className='transition hover:text-white'>
+                Über mich
+              </Link>
+              <Link
+                href='#programme'
+                className='transition hover:text-white'>
+                Programme
+              </Link>
+              <Link
+                href='#workshops'
+                className='transition hover:text-white'>
+                Workshops
+              </Link>
+              <Link
                 href='#kontakt'
-                className='rounded-xl bg-[#0B1B2B] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90'>
-                Kennenlerngespräch buchen
-              </a>
-              <a
-                href='#ablauf'
-                className='rounded-xl bg-white px-5 py-3 text-sm font-semibold text-[#0B1B2B] ring-1 ring-slate-200 transition hover:bg-slate-50'>
-                Wie ich arbeite
-              </a>
+                className='transition hover:text-white'>
+                Kontakt
+              </Link>
+            </nav>
+            <div className='flex items-center gap-3'>
+              <button
+                type='button'
+                className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] md:hidden'
+                aria-label='Menü öffnen'>
+                ☰
+              </button>
+              <PrimaryButton
+                href='#kontakt'
+                className='px-4 py-2 text-xs md:px-6 md:py-3 md:text-sm'>
+                Kostenloses Erstgespräch
+              </PrimaryButton>
             </div>
+          </div>
+        </header>
 
-            <div className='mt-8 grid grid-cols-2 gap-3 text-sm text-slate-600 md:grid-cols-4'>
-              {trustItems.map((item) => (
-                <div
-                  key={item}
-                  className='rounded-xl bg-white px-3 py-3 text-center ring-1 ring-slate-200'>
-                  {item}
+        <main className='z-10'>
+          {/* Hero */}
+          <section
+            id='start'
+            className='relative min-h-dvh flex items-center'>
+            <div className='container mx-auto px-4 pb-20 pt-16 lg:pb-32 lg:pt-24 z-10'>
+              <div className='grid items-center gap-12 lg:grid-cols-2'>
+                <div>
+                  <p className='text-xs uppercase tracking-[0.3em] text-[#7DE3FF]'>
+                    NLP - Neuro Linguistisches Programmieren
+                  </p>
+                  <h1 className='mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl'>
+                    Meistere deinen Geist.
+                    <br />
+                    Ruhe im Körper.
+                    <br />
+                    Verändere dein Leben.
+                  </h1>
+                  <p className='mt-6 max-w-xl text-base text-white/75 sm:text-lg'>
+                    Entfalte dein volles Potenzial mit Klarheit, Sprache und innerer Ausrichtung –
+                    ohne esoterischen Nebel.
+                  </p>
+                  <div className='mt-8 flex flex-wrap gap-4'>
+                    <PrimaryButton href='#kontakt'>Jetzt starten</PrimaryButton>
+                    <SecondaryButton href='#ueber'>Mehr erfahren</SecondaryButton>
+                  </div>
+                  <div className='mt-10 flex flex-wrap gap-3'>
+                    {['1:1 Coaching', 'Workshops', 'Praxisnah & messbar'].map((item) => (
+                      <span
+                        key={item}
+                        className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/80 backdrop-blur'>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+                <div className='space-y-6'>
+                  <GlassCard className='relative overflow-hidden p-6'>
+                    <div className='absolute inset-0 rounded-2xl ring-1 ring-[#00E5FF]/40 shadow-[0_0_40px_rgba(0,229,255,0.35)]' />
+                    <div className='relative'>
+                      <div className='aspect-square w-full rounded-3xl bg-[radial-gradient(circle_at_top,rgba(0,229,255,0.35),rgba(5,11,18,0.6))] p-6'>
+                        <div className='relative flex h-full w-full items-end justify-center rounded-3xl border border-white/15 bg-white/5 text-sm text-white/70 overflow-hidden'>
+                          <Image
+                            src='/images-nlp/nlp-portrait.webp'
+                            alt='NLP Coaching'
+                            width={990}
+                            height={990}
+                          />
+                        </div>
+                        <div className='absolute right-8 top-8 h-24 w-24 rounded-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.45),rgba(0,0,0,0))] blur-xl' />
+                      </div>
+                    </div>
+                  </GlassCard>
+                  <div className='flex flex-wrap gap-3'>
+                    <span className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/75'>
+                      Ø 90 Min / Session
+                    </span>
+                    <span className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/75'>
+                      Fokus: Identität & Entscheidungen
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='absolute inset-0 -z-10'>
+              <FloatingLines
+                linesGradient={['#050b12', '#47f5d8']}
+                animationSpeed={0.4}
+                interactive
+                bendRadius={15}
+                bendStrength={1.2}
+                mouseDamping={0.01}
+                topWavePosition={{ x: 10, y: 0.6, rotate: -0.35 }}
+                middleWavePosition={{ x: 5, y: 0.0, rotate: 0.2 }}
+                parallax={false}
+                parallaxStrength={0}
+              />
+            </div>
+          </section>
+          {/* Was ist NLP? */}
+          <section
+            id='ueber'
+            className='py-20 border-y border-white/20 relative min-h-[60dvh] flex flex-col justify-center items-center'>
+            <div className='container px-4 flex flex-col justify-center items-center mx-auto'>
+              <div className='mx-auto max-w-3xl text-center'>
+                <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Was ist NLP?</h2>
+                <p className='mt-4 text-base text-white/70 sm:text-lg'>
+                  Die Wissenschaft wirksamer Kommunikation & Transformation
+                </p>
+              </div>
+              <div className='mt-12 grid gap-6 lg:grid-cols-3'>
+                {[
+                  {
+                    title: 'Geistige Meisterschaft',
+                    text: 'Nutze die Macht deines Unterbewusstseins, um Fokus und Klarheit zu etablieren.',
+                    icon: (
+                      <span
+                        className='text-2xl'
+                        aria-hidden='true'>
+                        🧠
+                      </span>
+                    ),
+                  },
+                  {
+                    title: 'Verhaltensänderung',
+                    text: 'Durchbreche limitierende Muster mit präzisen sprachlichen Interventionen.',
+                    icon: (
+                      <span
+                        className='text-2xl'
+                        aria-hidden='true'>
+                        ⟲
+                      </span>
+                    ),
+                  },
+                  {
+                    title: 'Zielerreichung',
+                    text: 'Setze klare innere Zielbilder und bringe Entscheidungen in den Alltag.',
+                    icon: (
+                      <span
+                        className='text-2xl'
+                        aria-hidden='true'>
+                        ⊙
+                      </span>
+                    ),
+                  },
+                ].map((feature) => (
+                  <GlassCard
+                    key={feature.title}
+                    className='p-6'>
+                    <div className='flex items-center gap-3'>
+                      <div className='flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/10'>
+                        {feature.icon}
+                      </div>
+                      <h3 className='text-lg font-semibold text-white'>{feature.title}</h3>
+                    </div>
+                    <p className='mt-4 text-sm text-white/70'>{feature.text}</p>
+                    <Link
+                      href='#programme'
+                      className='mt-5 inline-flex items-center text-sm font-semibold text-[#7DE3FF] transition hover:text-white'>
+                      Mehr erfahren →
+                    </Link>
+                  </GlassCard>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Woran wir arbeiten */}
+          <section className='relative py-20 backdrop-blur-2xl bg-white/5 flex flex-col justify-center items-center min-h-[60dvh]'>
+            <div className='container mx-auto px-4'>
+              <div className='mx-auto max-w-3xl text-center'>
+                <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
+                  Woran wir arbeiten
+                </h2>
+                <p className='mt-4 text-base text-white/70 sm:text-lg'>
+                  Ruhe im Körper. Fokus im Leben.
+                </p>
+              </div>
+              <div className='mt-12 grid gap-6 lg:grid-cols-3'>
+                {[
+                  {
+                    title: 'Gedankenkarussell',
+                    text: 'Mehr innere Ruhe, weniger Dauerschleifen im Kopf.',
+                    points: ['Klarer denken', 'Selbststeuerung stärken'],
+                    icon: '🌀',
+                  },
+                  {
+                    title: 'Emotionen regulieren',
+                    text: 'Trigger bewusster wahrnehmen und souveräner reagieren.',
+                    points: ['Gelassen bleiben', 'Stress schneller lösen'],
+                    icon: '💗',
+                  },
+                  {
+                    title: 'Ziele, die wirklich passen',
+                    text: 'Fokus setzen, Prioritäten ordnen und dranbleiben.',
+                    points: ['Konsequent handeln', 'Energie zielgerichtet nutzen'],
+                    icon: '🎯',
+                  },
+                ].map((item) => (
+                  <GlassCard
+                    key={item.title}
+                    className='p-6'>
+                    <div className='flex items-center gap-3'>
+                      <div className='flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/10 text-xl'>
+                        <span aria-hidden='true'>{item.icon}</span>
+                      </div>
+                      <h3 className='text-lg font-semibold text-white'>{item.title}</h3>
+                    </div>
+                    <p className='mt-4 text-sm text-white/70'>{item.text}</p>
+                    <ul className='mt-4 space-y-2 text-xs text-white/60'>
+                      {item.points.map((point) => (
+                        <li
+                          key={point}
+                          className='flex items-center gap-2'>
+                          <span className='h-1.5 w-1.5 rounded-full bg-[#7DE3FF]' />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </GlassCard>
+                ))}
+              </div>
+            </div>
+          </section>
+          {/* Dein Weg zur Transformation */}
+          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-white/20'>
+            <div className='container mx-auto px-4'>
+              <div className='mx-auto max-w-3xl text-center'>
+                <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
+                  Dein Weg zur Transformation
+                </h2>
+                <p className='mt-4 text-base text-white/70 sm:text-lg'>
+                  Strukturierte Schritte, die messbare Veränderungen ermöglichen.
+                </p>
+              </div>
+              <div className='mt-12 grid gap-6 lg:grid-cols-4'>
+                {[
+                  'Status Quo klären',
+                  'Limitierende Muster lösen',
+                  'Neue Identität verankern',
+                  'Alltag stabilisieren',
+                ].map((step, index) => (
+                  <div
+                    key={step}
+                    className='relative'>
+                    <GlassCard className='h-full p-6'>
+                      <div className='flex items-center gap-4'>
+                        <span className='flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-[#7DE3FF] shadow-[0_0_25px_rgba(0,229,255,0.35)] ring-1 ring-white/20'>
+                          0{index + 1}
+                        </span>
+                        <p className='text-sm font-medium text-white/90'>{step}</p>
+                      </div>
+                    </GlassCard>
+                    {index < 3 && (
+                      <div className='absolute -right-3 top-1/2 hidden h-px w-6 -translate-y-1/2 bg-gradient-to-r from-[#7DE3FF] to-transparent lg:block' />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+          {/* Programme */}
+          <section
+            id='programme'
+            className='relative py-20  border-y border-white/20 bg-white/5 backdrop-blur-2xl flex flex-col justify-center items-center min-h-[60dvh]'>
+            <div className='container mx-auto px-4'>
+              <div className='mx-auto max-w-3xl text-center'>
+                <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Programme</h2>
+                <p className='mt-4 text-base text-white/70 sm:text-lg'>
+                  Wähle den Pfad, der zu deiner aktuellen Entwicklungsphase passt.
+                </p>
+              </div>
+              <div className='mt-12 grid gap-6 lg:grid-cols-3'>
+                {[
+                  {
+                    title: '1:1 Tiefenwandel',
+                    featured: true,
+                    points: [
+                      'Individuelle Diagnose & Zielklärung',
+                      'Intensive Prozessarbeit über 6–8 Sessions',
+                      'Integration in Alltag & Entscheidungen',
+                      'Begleitende Übungen & Follow-ups',
+                    ],
+                    price: 'ab Premium-Paket',
+                  },
+                  {
+                    title: 'Workshop: Sprache, die wirkt',
+                    featured: false,
+                    points: [
+                      'Live-Training in Kleingruppen',
+                      'Praktische Interventionen für Gespräche',
+                      'Feedback & Supervision',
+                    ],
+                    price: 'ab Gruppen-Format',
+                  },
+                  {
+                    title: 'NLP Essentials (Starter)',
+                    featured: false,
+                    points: [
+                      'Grundlagen für Selbstführung',
+                      'Werkzeuge für Fokus & Klarheit',
+                      '3 Sessions + Workbook',
+                    ],
+                    price: 'ab Einstieg',
+                  },
+                ].map((program) => (
+                  <GlassCard
+                    key={program.title}
+                    className={`flex h-full flex-col p-6 ${program.featured ? 'ring-1 ring-[#00E5FF]/40 shadow-[0_0_50px_rgba(0,229,255,0.35)]' : ''}`}>
+                    <div className='flex items-center justify-between'>
+                      <h3 className='text-lg font-semibold text-white'>{program.title}</h3>
+                      {program.featured && (
+                        <span className='rounded-full bg-[#00E5FF]/15 px-3 py-1 text-xs text-[#7DE3FF]'>
+                          Premium
+                        </span>
+                      )}
+                    </div>
+                    <ul className='mt-5 space-y-3 text-sm text-white/75'>
+                      {program.points.map((point) => (
+                        <li
+                          key={point}
+                          className='flex gap-2'>
+                          <span className='text-[#7DE3FF]'>•</span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className='mt-6 text-sm text-white/60'>{program.price}</div>
+                    <SecondaryButton
+                      href='#kontakt'
+                      className='mt-6'>
+                      Details
+                    </SecondaryButton>
+                  </GlassCard>
+                ))}
+              </div>
+            </div>
+          </section>
+          {/* Erfolgsgeschichten */}
+          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-white/20'>
+            <div className='container mx-auto px-4'>
+              <div className='mx-auto max-w-3xl text-center'>
+                <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
+                  Erfolgsgeschichten
+                </h2>
+                <p className='mt-4 text-base text-white/70 sm:text-lg'>
+                  Stimmen von Menschen, die Klarheit und innere Stabilität gewonnen haben.
+                </p>
+              </div>
+              <div className='mt-12 grid gap-6 lg:grid-cols-3'>
+                {[
+                  {
+                    name: 'Lena K.',
+                    text: 'Weniger Grübeln, mehr Handlungsfokus. Die Sessions haben mir geholfen, Entscheidungen schneller zu treffen.',
+                  },
+                  {
+                    name: 'Daniel M.',
+                    text: 'Ich kann klarer Nein sagen, ohne Schuldgefühl. Besonders die Sprachmuster-Übungen waren extrem hilfreich.',
+                  },
+                  {
+                    name: 'Mira S.',
+                    text: 'Meine Gespräche im Team sind strukturierter. Ich erkenne schneller, was mich wirklich bewegt.',
+                  },
+                ].map((testimonial) => (
+                  <GlassCard
+                    key={testimonial.name}
+                    className='p-6'>
+                    <StarRow />
+                    <p className='mt-4 text-sm text-white/75'>{testimonial.text}</p>
+                    <p className='mt-6 text-sm font-semibold text-white'>{testimonial.name}</p>
+                  </GlassCard>
+                ))}
+              </div>
+            </div>
+          </section>
+          {/* Workshops */}
+          <section
+            id='workshops'
+            className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-white/20 backdrop-blur-2xl bg-white/5'>
+            <div className='container mx-auto px-4'>
+              <div className='mx-auto max-w-3xl text-center'>
+                <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
+                  Bevorstehende Workshops & Seminare
+                </h2>
+                <p className='mt-4 text-base text-white/70 sm:text-lg'>
+                  Live-Formate für tiefere Praxis und direkte Umsetzung.
+                </p>
+              </div>
+              <div className='mt-12 grid gap-6 lg:grid-cols-3'>
+                {[
+                  {
+                    title: 'Fortgeschrittene NLP-Techniken',
+                    date: '16–17. Juni',
+                    place: 'Berlin / Online',
+                  },
+                  {
+                    title: 'NLP Mastery',
+                    date: '8–10. Juli',
+                    place: 'Hamburg / Online',
+                  },
+                  {
+                    title: 'Durchbruch Bootcamp',
+                    date: '5–7. August',
+                    place: 'München / Online',
+                  },
+                ].map((event) => (
+                  <GlassCard
+                    key={event.title}
+                    className='p-6'>
+                    <h3 className='text-lg font-semibold text-white'>{event.title}</h3>
+                    <p className='mt-3 text-sm text-white/70'>{event.date}</p>
+                    <p className='text-xs text-white/50'>{event.place}</p>
+                    <SecondaryButton
+                      href='#kontakt'
+                      className='mt-6 w-full'>
+                      Platz reservieren
+                    </SecondaryButton>
+                  </GlassCard>
+                ))}
+              </div>
+            </div>
+          </section>
+          {/* Kontakt */}
+          <section
+            id='kontakt'
+            className='relative py-20'>
+            <div className='container mx-auto px-4'>
+              <div className='grid gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
+                <div>
+                  <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
+                    Sichere dir deinen kostenlosen NLP-Leitfaden
+                  </h2>
+                  <p className='mt-4 max-w-xl text-base text-white/70 sm:text-lg'>
+                    Praktische Übungen für Klarheit, Selbstführung und Gesprächsführung.
+                  </p>
+                  <div className='mt-8 grid gap-4 sm:grid-cols-2'>
+                    <GlassCard className='p-4'>
+                      <p className='text-sm text-white/70'>Klarheit im Kopf</p>
+                      <p className='mt-2 text-xs text-white/50'>
+                        Erkenne Muster und fokussiere dich neu.
+                      </p>
+                    </GlassCard>
+                    <GlassCard className='p-4'>
+                      <p className='text-sm text-white/70'>Souveräne Gespräche</p>
+                      <p className='mt-2 text-xs text-white/50'>
+                        Sprache bewusst einsetzen und wirken lassen.
+                      </p>
+                    </GlassCard>
+                  </div>
+                </div>
+                <GlassCard className='p-6'>
+                  <form
+                    suppressHydrationWarning
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                      setTouched({ name: true, email: true });
+                    }}
+                    className='space-y-4'>
+                    <div>
+                      <label
+                        htmlFor='lead-name'
+                        className='text-sm text-white/80'>
+                        Name
+                      </label>
+                      <input
+                        id='lead-name'
+                        type='text'
+                        required
+                        value={formState.name}
+                        onChange={(event) =>
+                          setFormState((prev) => ({ ...prev, name: event.target.value }))
+                        }
+                        onBlur={() => setTouched((prev) => ({ ...prev, name: true }))}
+                        className={`mt-2 w-full rounded-xl border bg-[#050B12]/40 px-4 py-3 text-sm text-white/90 placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF] ${
+                          hasError('name') ? 'border-red-400/70' : 'border-white/10'
+                        }`}
+                        placeholder='Dein Name'
+                      />
+                      {hasError('name') && (
+                        <p className='mt-2 text-xs text-red-300'>{errors.name}</p>
+                      )}
+                    </div>
+                    <div>
+                      <label
+                        htmlFor='lead-email'
+                        className='text-sm text-white/80'>
+                        E-Mail
+                      </label>
+                      <input
+                        id='lead-email'
+                        type='email'
+                        required
+                        value={formState.email}
+                        onChange={(event) =>
+                          setFormState((prev) => ({ ...prev, email: event.target.value }))
+                        }
+                        onBlur={() => setTouched((prev) => ({ ...prev, email: true }))}
+                        className={`mt-2 w-full rounded-xl border bg-[#050B12]/40 px-4 py-3 text-sm text-white/90 placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF] ${
+                          hasError('email') ? 'border-red-400/70' : 'border-white/10'
+                        }`}
+                        placeholder='dein.name@email.de'
+                      />
+                      {hasError('email') && (
+                        <p className='mt-2 text-xs text-red-300'>{errors.email}</p>
+                      )}
+                    </div>
+                    <PrimaryButton className='w-full'>Jetzt herunterladen</PrimaryButton>
+                    <p className='text-xs text-white/50'>Kein Spam. Abmeldung jederzeit.</p>
+                  </form>
+                </GlassCard>
+              </div>
+            </div>
+          </section>
+        </main>
+        {/* Footer   */}
+        <footer className='border-t border-white/10 bg-white/5 py-10'>
+          <div className='container mx-auto flex flex-col gap-6 px-4 text-sm text-white/70 md:flex-row md:items-center md:justify-between'>
+            <div className='flex items-center gap-3'>
+              <span className='flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#00E5FF] to-[#22C55E] text-[#001018]'>
+                ✦
+              </span>
+              <div>
+                <p className='text-white'>NLP</p>
+                <p className='text-xs text-white/50'>NLP Coaching für klare Entscheidungen.</p>
+              </div>
+            </div>
+            <div className='flex flex-wrap items-center gap-4'>
+              <Link
+                href='#'
+                className='transition hover:text-white'>
+                Datenschutz
+              </Link>
+              <Link
+                href='#'
+                className='transition hover:text-white'>
+                AGB
+              </Link>
+              <Link
+                href='#'
+                className='transition hover:text-white'>
+                Impressum
+              </Link>
+            </div>
+            <div className='flex items-center gap-3'>
+              {[
+                { label: 'Instagram', icon: '◎' },
+                { label: 'LinkedIn', icon: 'in' },
+                { label: 'YouTube', icon: '▶' },
+              ].map((item) => (
+                <Link
+                  key={item.label}
+                  href='#'
+                  aria-label={item.label}
+                  className='inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xs text-white/70 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF]'>
+                  {item.icon}
+                </Link>
               ))}
             </div>
           </div>
-
-          <div className='relative'>
-            <div className='aspect-square w-full overflow-hidden rounded-[28px] bg-white/70 ring-1 ring-slate-200 shadow-[0_40px_80px_-60px_rgba(11,27,43,0.6)]'>
-              <div className='flex h-full items-center justify-center bg-linear-to-br from-[#1D6FA8]/10 via-white to-[#F6B35A]/20 text-sm text-slate-500'>
-                Portrait / Hero-Visual
-              </div>
-            </div>
-            <div className='pointer-events-none absolute -bottom-6 -left-6 hidden h-24 w-24 rounded-3xl bg-[#7A2C8E]/20 blur-xl md:block'></div>
+          <div className='container mx-auto mt-6 px-4 text-xs text-white/40'>
+            © 2026 NLP Coaching. Alle Rechte vorbehalten.
           </div>
-        </div>
-      </section>
-
-      <section
-        id='coaching'
-        className='mx-auto max-w-6xl px-4 py-16'>
-        <div className='max-w-2xl'>
-          <h2 className='text-3xl font-bold tracking-tight text-[#0B1B2B]'>Woran wir arbeiten</h2>
-          <p className='mt-3 text-slate-600'>
-            Du bringst das Thema – ich bring Struktur, Fragen und Interventionen. Ziel: spürbare
-            Veränderung, die im Alltag hält.
-          </p>
-        </div>
-
-        <div className='mt-10 grid gap-5 md:grid-cols-3'>
-          {focusAreas.map((area) => (
-            <div
-              key={area.title}
-              className='rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow-[0_30px_70px_-60px_rgba(11,27,43,0.4)]'>
-              <div className='mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1D6FA8]/10 text-[#1D6FA8]'>
-                <svg
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='1.6'
-                  className='h-5 w-5'>
-                  <circle
-                    cx='12'
-                    cy='12'
-                    r='8'
-                  />
-                  <path d='M12 8v4l3 2' />
-                </svg>
-              </div>
-              <div className='text-base font-semibold text-[#0B1B2B]'>{area.title}</div>
-              <p className='mt-2 text-sm text-slate-600'>{area.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className='bg-white/60 py-16 ring-1 ring-slate-200/60'>
-        <div className='mx-auto max-w-6xl px-4'>
-          <div className='flex flex-col justify-between gap-6 md:flex-row md:items-center'>
-            <div className='max-w-2xl'>
-              <h2 className='text-3xl font-bold tracking-tight text-[#0B1B2B]'>Pakete</h2>
-              <p className='mt-3 text-slate-600'>
-                Wähle das Format, das zu deinem Tempo passt. Klar definiert, mit einem starken
-                nächsten Schritt.
-              </p>
-            </div>
-            <a
-              href='#kontakt'
-              className='inline-flex items-center justify-center rounded-xl bg-[#7A2C8E] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90'>
-              Angebot wählen
-            </a>
-          </div>
-
-          <div className='mt-10 grid gap-5 md:grid-cols-3'>
-            {offers.map((offer) => (
-              <div
-                key={offer.title}
-                className='rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow-[0_30px_70px_-60px_rgba(11,27,43,0.4)]'>
-                <div className='text-xs font-semibold uppercase tracking-[0.2em] text-slate-400'>
-                  Angebot
-                </div>
-                <h3 className='mt-3 text-lg font-semibold text-[#0B1B2B]'>{offer.title}</h3>
-                <p className='mt-2 text-sm text-slate-600'>{offer.subtitle}</p>
-                <ul className='mt-4 space-y-2 text-sm text-slate-600'>
-                  {offer.details.map((detail) => (
-                    <li
-                      key={detail}
-                      className='flex items-center gap-2'>
-                      <span className='h-2 w-2 rounded-full bg-[#86C243]'></span>
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href='#kontakt'
-                  className='mt-6 inline-flex items-center text-sm font-semibold text-[#1D6FA8] hover:text-[#0B1B2B]'>
-                  {offer.cta}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section
-        id='ablauf'
-        className='mx-auto max-w-6xl px-4 py-16'>
-        <div className='max-w-2xl'>
-          <h2 className='text-3xl font-bold tracking-tight text-[#0B1B2B]'>Ablauf</h2>
-          <p className='mt-3 text-slate-600'>
-            Schritt für Schritt, klar strukturiert. So entsteht Sicherheit und Verbindlichkeit.
-          </p>
-        </div>
-
-        <div className='mt-8 grid gap-5 md:grid-cols-5'>
-          {steps.map((step, index) => (
-            <div
-              key={step.title}
-              className='rounded-2xl bg-white p-5 ring-1 ring-slate-200'>
-              <div className='text-xs font-semibold text-slate-400'>Schritt {index + 1}</div>
-              <div className='mt-1 text-sm font-semibold text-[#0B1B2B]'>{step.title}</div>
-              <p className='mt-2 text-sm text-slate-600'>{step.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id='ueber'
-        className='mx-auto max-w-6xl px-4 py-16'>
-        <div className='grid gap-10 md:grid-cols-2 md:items-center'>
-          <div className='aspect-4/3 overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200'>
-            <div className='flex h-full items-center justify-center bg-linear-to-br from-[#1D6FA8]/10 via-white to-[#F6B35A]/20 text-sm text-slate-500'>
-              Über-mich Bild
-            </div>
-          </div>
-          <div>
-            <h2 className='text-3xl font-bold tracking-tight text-[#0B1B2B]'>Über mich</h2>
-            <p className='mt-4 text-slate-600'>
-              Ich arbeite klar, wertschätzend – und manchmal mit einem Augenzwinkern. Mir geht’s
-              nicht um „Motivation“, sondern um echte Veränderung, die im Alltag hält.
-            </p>
-            <div className='mt-6 grid gap-3 text-sm text-slate-700'>
-              <div className='rounded-2xl bg-white p-4 ring-1 ring-slate-200'>
-                Klarer Prozess statt Blabla
-              </div>
-              <div className='rounded-2xl bg-white p-4 ring-1 ring-slate-200'>
-                Wärmende Präsenz, direkte Fragen
-              </div>
-              <div className='rounded-2xl bg-white p-4 ring-1 ring-slate-200'>
-                Transfer: Umsetzung zählt
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        id='stimmen'
-        className='bg-white py-16 ring-1 ring-slate-200/60'>
-        <div className='mx-auto max-w-6xl px-4'>
-          <div className='flex flex-col justify-between gap-6 md:flex-row md:items-center'>
-            <h2 className='text-3xl font-bold tracking-tight text-[#0B1B2B]'>Stimmen</h2>
-            <div className='inline-flex items-center gap-2 rounded-full bg-[#1D6FA8]/10 px-3 py-1 text-xs font-medium text-[#1D6FA8]'>
-              ⭐ 5.0 · 40+ Bewertungen
-            </div>
-          </div>
-          <div className='mt-8 grid gap-5 md:grid-cols-3'>
-            {testimonials.map((item) => (
-              <figure
-                key={item.author}
-                className='rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-200'>
-                <blockquote className='text-sm text-slate-700'>{item.quote}</blockquote>
-                <figcaption className='mt-4 text-xs font-semibold text-slate-500'>
-                  {item.author}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className='mx-auto max-w-6xl px-4 py-16'>
-        <div className='grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-center'>
-          <div>
-            <h2 className='text-3xl font-bold tracking-tight text-[#0B1B2B]'>Free Resource</h2>
-            <p className='mt-3 text-slate-600'>
-              PDF „Trigger-Reset in 3 Minuten“ – eine kurze Übung für sofort mehr Ruhe. Perfekt für
-              zwischendurch.
-            </p>
-            <ul className='mt-4 space-y-2 text-sm text-slate-600'>
-              <li className='flex items-center gap-2'>
-                <span className='h-2 w-2 rounded-full bg-[#86C243]'></span>
-                3-Minuten-Übung, sofort anwendbar
-              </li>
-              <li className='flex items-center gap-2'>
-                <span className='h-2 w-2 rounded-full bg-[#86C243]'></span>
-                Mini-Guide zum Ausdrucken
-              </li>
-              <li className='flex items-center gap-2'>
-                <span className='h-2 w-2 rounded-full bg-[#86C243]'></span>
-                Kein Spam, jederzeit abmeldbar
-              </li>
-            </ul>
-          </div>
-          <div className='rounded-3xl bg-white p-6 ring-1 ring-slate-200 shadow-[0_30px_70px_-60px_rgba(11,27,43,0.4)]'>
-            <div className='text-sm font-semibold text-[#0B1B2B]'>PDF sofort erhalten</div>
-            <p className='mt-2 text-sm text-slate-600'>
-              Trag dich kurz ein und wir schicken dir den Download.
-            </p>
-            <form className='mt-4 grid gap-3'>
-              <input
-                type='email'
-                required
-                placeholder='E-Mail-Adresse'
-                className='h-11 rounded-xl border border-slate-200 px-3 outline-none focus:border-slate-400'
-              />
-              <button
-                type='submit'
-                className='h-11 rounded-xl bg-linear-to-r from-[#7A2C8E] to-[#1D6FA8] text-sm font-semibold text-white transition hover:opacity-90'>
-                PDF erhalten
-              </button>
-            </form>
-            <p className='mt-3 text-xs text-slate-500'>Datenschutzfreundlich. Kein Weitergeben.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className='bg-white/60 py-16 ring-1 ring-slate-200/60'>
-        <div className='mx-auto max-w-6xl px-4'>
-          <div className='max-w-2xl'>
-            <h2 className='text-3xl font-bold tracking-tight text-[#0B1B2B]'>FAQ</h2>
-            <p className='mt-3 text-slate-600'>
-              Antworten auf die wichtigsten Fragen – klar und ohne Umwege.
-            </p>
-          </div>
-          <div className='mt-8 grid gap-4 md:grid-cols-2'>
-            {faqs.map((item) => (
-              <div
-                key={item.question}
-                className='rounded-2xl bg-white p-6 ring-1 ring-slate-200'>
-                <div className='text-sm font-semibold text-[#0B1B2B]'>{item.question}</div>
-                <p className='mt-2 text-sm text-slate-600'>{item.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section
-        id='kontakt'
-        className='mx-auto max-w-6xl px-4 py-16'>
-        <div className='grid gap-8 md:grid-cols-2 md:items-start'>
-          <div>
-            <h2 className='text-3xl font-bold tracking-tight text-[#0B1B2B]'>Kontakt</h2>
-            <p className='mt-3 text-slate-600'>
-              Schreib mir kurz, worum’s geht. Ich melde mich zeitnah zurück – in der Regel innerhalb
-              von 24–48 Stunden.
-            </p>
-            <div className='mt-6 rounded-2xl bg-white p-6 ring-1 ring-slate-200'>
-              <div className='text-sm font-semibold text-[#0B1B2B]'>Kostenloses Kennenlernen</div>
-              <p className='mt-2 text-sm text-slate-600'>
-                15 Minuten. Du bekommst Klarheit, ob Coaching jetzt der richtige Schritt ist.
-              </p>
-            </div>
-            <div className='mt-6 text-sm text-slate-600'>
-              <p className='font-semibold text-[#0B1B2B]'>Online & vor Ort</p>
-              <p>Diskret, zuverlässig und strukturiert.</p>
-            </div>
-          </div>
-
-          <ContactFormNlp />
-        </div>
-      </section>
-
-      <footer className='border-t border-slate-200 bg-white'>
-        <div className='mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-slate-600 md:flex-row md:items-center md:justify-between'>
-          <div>© {new Date().getFullYear()} · NLP Coaching</div>
-          <div className='flex gap-4'>
-            <Link
-              href='/'
-              className='hover:text-slate-900'>
-              Start
-            </Link>
-            <a
-              href='/impressum'
-              className='hover:text-slate-900'>
-              Impressum
-            </a>
-            <a
-              href='/impressum'
-              className='hover:text-slate-900'>
-              Datenschutz
-            </a>
-          </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 }

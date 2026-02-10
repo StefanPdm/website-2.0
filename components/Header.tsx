@@ -59,6 +59,7 @@ export default function Header() {
         buttonBgColor='#ffffff1a'
         buttonTextColor='#fff'
         ease='power3.out'
+        backgroundImage={undefined}
       />
     </header>
   );

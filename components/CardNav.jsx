@@ -17,6 +17,7 @@ const CardNav = ({
   menuColor,
   buttonBgColor,
   buttonTextColor,
+  backgroundImage,
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -140,12 +141,30 @@ const CardNav = ({
     if (isExpanded) toggleMenu();
   };
 
+  const navStyle = {
+    backgroundColor: baseColor,
+    ...(backgroundImage
+      ? {
+          backgroundImage: `linear-gradient(90deg, rgba(8, 14, 24, 0.78), rgba(8, 14, 24, 0.45), rgba(8, 14, 24, 0.78)), url(${backgroundImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }
+      : {}),
+  };
+
   return (
     <div className={`card-nav-container ${className}`}>
       <nav
         ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''}`}
-        style={{ backgroundColor: baseColor }}>
+        className={`card-nav ${isExpanded ? 'open' : ''} ${backgroundImage ? 'has-image' : ''}`}
+        style={navStyle}>
+        <div
+          className='card-nav-ornaments'
+          aria-hidden='true'>
+          <span className='sparkle sparkle-left' />
+          <span className='sparkle sparkle-right' />
+        </div>
         <div
           className='card-nav-blur'
           aria-hidden='true'
