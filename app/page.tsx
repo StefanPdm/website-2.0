@@ -88,7 +88,7 @@ export default function Home() {
                   <div className='orbit-item__shell'>
                     <div className='orbit-item__content'>
                       <Image
-                        src='/nlp-logo.svg'
+                        src='/logos/nlp-logo.svg'
                         alt='NLP'
                         width={40}
                         height={40}
@@ -161,7 +161,7 @@ export default function Home() {
                   href='/nlp'>
                   <div className='choice-logo-big'>
                     <Image
-                      src='/nlp-logo.svg'
+                      src='/logos/nlp-logo.svg'
                       alt='NLP Logo'
                       width={64}
                       height={64}
