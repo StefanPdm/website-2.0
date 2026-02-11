@@ -19,7 +19,7 @@ type ButtonProps = {
 
 function PrimaryButton({ children, className, href, onClick }: ButtonProps) {
   const base =
-    'cursor-pointer inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[#001018] bg-gradient-to-r from-[#00E5FF] to-[#22C55E] shadow-[0_0_30px_rgba(0,229,255,0.25)] ring-1 ring-white/10 transition duration-200 hover:shadow-[0_0_40px_rgba(0,229,255,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF] active:translate-y-px';
+    'cursor-pointer inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[var(--button-text)] bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] shadow-[0_0_30px_var(--glow)] ring-1 ring-[var(--border)] transition duration-200 hover:shadow-[0_0_40px_var(--glow-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] active:translate-y-px';
   if (href) {
     return (
       <Link
@@ -41,7 +41,7 @@ function PrimaryButton({ children, className, href, onClick }: ButtonProps) {
 
 function SecondaryButton({ children, className, href, onClick }: ButtonProps) {
   const base =
-    'cursor-pointer inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[#E6F7FF] bg-white/5 ring-1 ring-white/15 shadow-[0_0_20px_rgba(0,229,255,0.12)] transition duration-200 hover:bg-white/10 hover:ring-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] active:translate-y-px';
+    'cursor-pointer inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[var(--text)] bg-[var(--surface)] ring-1 ring-[var(--border)] shadow-[0_0_20px_var(--glow)] transition duration-200 hover:bg-[var(--surface-strong)] hover:ring-[var(--border-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-soft)] active:translate-y-px';
   if (href) {
     return (
       <Link
@@ -64,7 +64,7 @@ function SecondaryButton({ children, className, href, onClick }: ButtonProps) {
 function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <div
-      className={`group rounded-2xl border border-white/40 bg-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.4),0_0_44px_rgba(0,229,255,0.24)] transition duration-200 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_rgba(0,229,255,0.28),0_0_34px_rgba(0,229,255,0.32)] ${className ?? ''}`}>
+      className={`group rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-strong)] shadow-[0_10px_40px_rgba(0,0,0,0.4),0_0_44px_var(--glow)] transition duration-200 hover:-translate-y-1 hover:border-[var(--border)] hover:shadow-[0_20px_60px_var(--glow),0_0_34px_var(--glow-strong)] ${className ?? ''}`}>
       {children}
     </div>
   );
@@ -73,7 +73,7 @@ function GlassCard({ children, className }: { children: React.ReactNode; classNa
 function StarRow() {
   return (
     <div
-      className='flex items-center gap-1 text-[#7DE3FF]'
+      className='flex items-center gap-1 text-[var(--accent-soft)]'
       aria-label='5 von 5 Sternen'>
       {Array.from({ length: 5 }).map((_, i) => (
         <span
@@ -90,6 +90,7 @@ export default function NLP() {
   const [formState, setFormState] = useState({ name: '', email: '' });
   const [touched, setTouched] = useState({ name: false, email: false });
   const [aboutModal, setAboutModal] = useState<null | 'before' | 'education'>(null);
+  const [isWarmTheme, setIsWarmTheme] = useState(true);
 
   const errors = useMemo(() => {
     return {
@@ -106,7 +107,10 @@ export default function NLP() {
   const hasError = (field: 'name' | 'email') => touched[field] && Boolean(errors[field]);
 
   return (
-    <div className='scroll-smooth bg-[#050B12] text-[#E6F7FF] font-sans relative min-h-dvh'>
+    <div
+      className={`scroll-smooth font-sans relative min-h-dvh  text-[var(--text)] ${
+        isWarmTheme ? 'theme-warm' : 'theme-cool'
+      }`}>
       <div className='relative isolate overflow-hidden'>
         {/****** Header **********/}
         <header className='fixed w-full top-0 z-50 border-b border-white/10 bg-white/5 backdrop-blur-xl'>
@@ -123,7 +127,7 @@ export default function NLP() {
                 />
               </div>
               <div className='flex flex-col items-start justify-center'>
-                <span className='text-lg font-semibold text-left tracking-widest text-[#7DE3FF] uppercase'>
+                <span className='text-lg font-semibold text-left tracking-widest text-[var(--accent-soft)] uppercase'>
                   SNAC Coaching
                 </span>
                 <span className='text-left tracking-wider text-sm text-white/80'>
@@ -161,6 +165,13 @@ export default function NLP() {
             <div className='flex items-center gap-3'>
               <button
                 type='button'
+                onClick={() => setIsWarmTheme((prev) => !prev)}
+                className='hidden items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold text-[var(--text)] transition hover:bg-[var(--surface-strong)] md:inline-flex'
+                aria-pressed={isWarmTheme}>
+                {isWarmTheme ? 'Kühles Schema' : 'Warmes Schema'}
+              </button>
+              <button
+                type='button'
                 className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] md:hidden'
                 aria-label='Menü öffnen'>
                 ☰
@@ -182,7 +193,7 @@ export default function NLP() {
             <div className='container mx-auto px-4 pb-20 pt-16 lg:pb-32 lg:pt-24 z-10'>
               <div className='grid items-center gap-12 lg:grid-cols-2'>
                 <div>
-                  <p className='text-xs uppercase tracking-[0.3em] text-[#7DE3FF]'>
+                  <p className='text-xs uppercase tracking-[0.3em] text-[var(--accent-soft)]'>
                     NLP - Neuro Linguistisches Programmieren
                   </p>
                   <h1 className='mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl'>
@@ -240,20 +251,38 @@ export default function NLP() {
                 </div>
               </div>
             </div>
-            <div className='absolute inset-0 -z-10'>
-              <FloatingLines
-                linesGradient={['#050b12', '#47f5d8']}
-                animationSpeed={0.4}
-                interactive
-                bendRadius={15}
-                bendStrength={1.2}
-                mouseDamping={0.01}
-                topWavePosition={{ x: 10, y: 0.6, rotate: -0.35 }}
-                middleWavePosition={{ x: 5, y: 0.0, rotate: 0.2 }}
-                parallax={false}
-                parallaxStrength={0}
-              />
-            </div>
+            {isWarmTheme && (
+              <div className='absolute inset-0 -z-10 bg-[#ffad13a1]'>
+                <FloatingLines
+                  linesGradient={['#f1c38a', '#fff']}
+                  animationSpeed={0.4}
+                  interactive
+                  bendRadius={15}
+                  bendStrength={1.2}
+                  mouseDamping={0.01}
+                  topWavePosition={{ x: 10, y: 0.6, rotate: -0.35 }}
+                  middleWavePosition={{ x: 5, y: 0.0, rotate: 0.2 }}
+                  parallax={false}
+                  parallaxStrength={0}
+                />
+              </div>
+            )}
+            {!isWarmTheme && (
+              <div className='absolute inset-0 -z-10'>
+                <FloatingLines
+                  linesGradient={['#050b12', '#47f5d8']}
+                  animationSpeed={0.4}
+                  interactive
+                  bendRadius={15}
+                  bendStrength={1.2}
+                  mouseDamping={0.01}
+                  topWavePosition={{ x: 10, y: 0.6, rotate: -0.35 }}
+                  middleWavePosition={{ x: 5, y: 0.0, rotate: 0.2 }}
+                  parallax={false}
+                  parallaxStrength={0}
+                />
+              </div>
+            )}
           </section>
 
           {/* Was ist NLP? */}
@@ -430,14 +459,14 @@ export default function NLP() {
                     className='relative'>
                     <GlassCard className='h-full p-6'>
                       <div className='flex items-center gap-4'>
-                        <span className='flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-[#7DE3FF] shadow-[0_0_25px_rgba(0,229,255,0.35)] ring-1 ring-white/20'>
+                        <span className='flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface)] text-sm font-semibold text-[var(--accent)] shadow-[0_0_20px_var(--glow)] ring-1 ring-[var(--border)]'>
                           0{index + 1}
                         </span>
-                        <p className='text-sm font-medium text-white/90'>{step}</p>
+                        <p className='text-sm font-medium text-[var(--text)]'>{step}</p>
                       </div>
                     </GlassCard>
                     {index < 3 && (
-                      <div className='absolute -right-3 top-1/2 hidden h-px w-6 -translate-y-1/2 bg-gradient-to-r from-[#7DE3FF] to-transparent lg:block' />
+                      <div className='absolute -right-3 top-1/2 hidden h-px w-6 -translate-y-1/2 bg-gradient-to-r from-[var(--accent)] to-transparent lg:block' />
                     )}
                   </div>
                 ))}
@@ -1022,6 +1051,77 @@ export default function NLP() {
             © 2026 NLP Coaching. Alle Rechte vorbehalten.
           </div>
         </footer>
+        <style
+          jsx
+          global>{`
+          .theme-cool {
+            --bg: #050b12;
+            --text: #e6f7ff;
+            --muted: rgba(230, 247, 255, 0.75);
+            --accent: #00e5ff;
+            --accent-2: #22c55e;
+            --accent-soft: #7de3ff;
+            --surface: rgba(255, 255, 255, 0.05);
+            --surface-strong: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.2);
+            --border-strong: rgba(255, 255, 255, 0.45);
+            --button-text: #001018;
+            --glow: rgba(0, 229, 255, 0.24);
+            --glow-strong: rgba(0, 229, 255, 0.36);
+          }
+          .theme-warm {
+            --bg: #fff6ea;
+            --text: #2b1a0f;
+            --muted: rgba(43, 26, 15, 0.75);
+            --accent: #e8a05a;
+            --accent-2: #d6734b;
+            --accent-soft: #f1c38a;
+            --surface: rgba(255, 255, 255, 0.7);
+            --surface-strong: rgba(255, 255, 255, 0.85);
+            --border: rgba(198, 137, 94, 0.25);
+            --border-strong: rgba(198, 137, 94, 0.45);
+            --button-text: #2b1a0f;
+            --glow: rgba(232, 160, 90, 0.25);
+            --glow-strong: rgba(232, 160, 90, 0.4);
+          }
+          .theme-warm .text-white {
+            color: var(--text) !important;
+          }
+          .theme-warm .text-white\/80 {
+            color: rgba(43, 26, 15, 0.85) !important;
+          }
+          .theme-warm .text-white\/75 {
+            color: rgba(43, 26, 15, 0.78) !important;
+          }
+          .theme-warm .text-white\/70 {
+            color: rgba(43, 26, 15, 0.72) !important;
+          }
+          .theme-warm .text-white\/60 {
+            color: rgba(43, 26, 15, 0.62) !important;
+          }
+          .theme-warm .text-white\/50 {
+            color: rgba(43, 26, 15, 0.55) !important;
+          }
+          .theme-warm .text-white\/40 {
+            color: rgba(43, 26, 15, 0.48) !important;
+          }
+          .theme-warm .text-\[\#7DE3FF\],
+          .theme-warm .text-\[\#00E5FF\] {
+            color: var(--accent) !important;
+          }
+          .theme-warm .bg-\[\#7DE3FF\],
+          .theme-warm .bg-\[\#00E5FF\] {
+            background-color: var(--accent) !important;
+          }
+          .theme-warm .border-\[\#7DE3FF\],
+          .theme-warm .border-\[\#00E5FF\] {
+            border-color: var(--accent) !important;
+          }
+          .theme-warm .ring-\[\#7DE3FF\],
+          .theme-warm .ring-\[\#00E5FF\] {
+            --tw-ring-color: var(--accent) !important;
+          }
+        `}</style>
       </div>
     </div>
   );

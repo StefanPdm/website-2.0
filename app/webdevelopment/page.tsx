@@ -501,7 +501,7 @@ export default function WebdevelopmentPage() {
               status='Abgeschlossen 2026'
               // image='/case-images-videos/project-rund-um-berlin.webp'
               video='/case-images-videos/rub.webm'
-              href='rundumberlin-classic.de'
+              href='https://rundumberlin-classic.de'
               cta='Case ansehen'
             />
             <CaseCard
@@ -509,7 +509,7 @@ export default function WebdevelopmentPage() {
               status='Abgeschlossen 2025'
               // image='https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=900&auto=format&fit=crop'
               video='/case-images-videos/kaiserclassic.webm'
-              href='kaiser-classic.de'
+              href='https://kaiser-classic.de'
               cta='Case ansehen'
             />
             <CaseCard
