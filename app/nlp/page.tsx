@@ -5,6 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
+import ContactFormNlp from '@/components/ContactFormNlp';
+import LaserFlow from '@/components/LaserFlow';
+
 const FloatingLines = dynamic(() => import('@/components/FloatingLines'), { ssr: false });
 
 type ButtonProps = {
@@ -61,7 +64,7 @@ function SecondaryButton({ children, className, href, onClick }: ButtonProps) {
 function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <div
-      className={`group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.4)] transition duration-200 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_rgba(0,229,255,0.18)] ${className ?? ''}`}>
+      className={`group rounded-2xl border border-white/40 bg-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.4),0_0_44px_rgba(0,229,255,0.24)] transition duration-200 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_rgba(0,229,255,0.28),0_0_34px_rgba(0,229,255,0.32)] ${className ?? ''}`}>
       {children}
     </div>
   );
@@ -104,14 +107,7 @@ export default function NLP() {
   return (
     <div className='scroll-smooth bg-[#050B12] text-[#E6F7FF] font-sans relative min-h-dvh'>
       <div className='relative isolate overflow-hidden'>
-        <div className='pointer-events-none absolute inset-0'>
-          {/* <div className='absolute -top-24 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(0,229,255,0.35),rgba(0,0,0,0))] blur-3xl' /> */}
-          {/* <div className='absolute left-[-120px] top-[20%] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.25),rgba(0,0,0,0))] blur-3xl motion-safe:animate-pulse' /> */}
-          {/* <div className='absolute right-[-140px] top-[35%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(125,227,255,0.22),rgba(0,0,0,0))] blur-3xl motion-safe:animate-pulse' /> */}
-          {/* <div className='absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:20px_20px] opacity-40' /> */}
-          {/* <div className='absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,11,18,0.2),rgba(5,11,18,0.9))]' /> */}
-        </div>
-        {/* Header */}
+        {/****** Header **********/}
         <header className='fixed w-full top-0 z-50 border-b border-white/10 bg-white/5 backdrop-blur-xl'>
           <div className='container mx-auto flex items-center justify-between px-4 py-3'>
             <Link
@@ -127,10 +123,10 @@ export default function NLP() {
               </div>
               <div className='flex flex-col items-start justify-center'>
                 <span className='text-lg font-semibold text-left tracking-widest text-[#7DE3FF] uppercase'>
-                  NLP Coaching Potsdam
+                  NLP
                 </span>
                 <span className='text-left tracking-wider text-sm text-white/80'>
-                  Stefan Heinemann
+                  Coaching für klare Entscheidungen.
                 </span>
               </div>
             </Link>
@@ -176,9 +172,9 @@ export default function NLP() {
             </div>
           </div>
         </header>
-
+        {/****************** Main *************************/}
         <main className='z-10'>
-          {/* Hero */}
+          {/****** Hero *****/}
           <section
             id='start'
             className='relative min-h-dvh flex items-center'>
@@ -213,20 +209,22 @@ export default function NLP() {
                     ))}
                   </div>
                 </div>
-                <div className='space-y-6'>
-                  <GlassCard className='relative overflow-hidden p-6'>
-                    <div className='absolute inset-0 rounded-2xl ring-1 ring-[#00E5FF]/40 shadow-[0_0_40px_rgba(0,229,255,0.35)]' />
-                    <div className='relative'>
-                      <div className='aspect-square w-full rounded-3xl bg-[radial-gradient(circle_at_top,rgba(0,229,255,0.35),rgba(5,11,18,0.6))] p-6'>
-                        <div className='relative flex h-full w-full items-end justify-center rounded-3xl border border-white/15 bg-white/5 text-sm text-white/70 overflow-hidden'>
-                          <Image
-                            src='/images-nlp/nlp-portrait.webp'
-                            alt='NLP Coaching'
-                            width={990}
-                            height={990}
-                          />
+                <div className='space-y-6 '>
+                  <GlassCard className='relative p-0 '>
+                    <div className='relative overflow-hidden rounded-2xl p-6'>
+                      <div className='absolute inset-0 rounded-2xl ring-1 ring-[#00E5FF]/40 shadow-[0_0_40px_rgba(0,229,255,0.35)] [clip-path:polygon(6%_2%,100%_0%,96%_100%,0%_98%)]' />
+                      <div className='relative'>
+                        <div className='aspect-square w-full rounded-3xl bg-[radial-gradient(circle_at_top,rgba(0,229,255,0.35),rgba(5,11,18,0.6))] p-6'>
+                          <div className='relative flex h-full w-full items-end justify-center rounded-3xl border border-white/15 bg-white/5 text-sm text-white/70 overflow-hidden'>
+                            <Image
+                              src='/images-nlp/nlp-portrait.webp'
+                              alt='NLP Coaching'
+                              width={990}
+                              height={990}
+                            />
+                          </div>
+                          <div className='absolute right-8 top-8 h-24 w-24 rounded-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.45),rgba(0,0,0,0))] blur-xl' />
                         </div>
-                        <div className='absolute right-8 top-8 h-24 w-24 rounded-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.45),rgba(0,0,0,0))] blur-xl' />
                       </div>
                     </div>
                   </GlassCard>
@@ -256,9 +254,10 @@ export default function NLP() {
               />
             </div>
           </section>
+
           {/* Was ist NLP? */}
           <section
-            id='ueber'
+            id='nlp'
             className='py-20 border-y border-white/20 relative min-h-[60dvh] flex flex-col justify-center items-center'>
             <div className='container px-4 flex flex-col justify-center items-center mx-auto'>
               <div className='mx-auto max-w-3xl text-center'>
@@ -325,7 +324,7 @@ export default function NLP() {
           </section>
 
           {/* Woran wir arbeiten */}
-          <section className='relative py-20 backdrop-blur-2xl bg-white/5 flex flex-col justify-center items-center min-h-[60dvh]'>
+          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] overflow-hidden bg-white/5'>
             <div className='container mx-auto px-4'>
               <div className='mx-auto max-w-3xl text-center'>
                 <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
@@ -335,7 +334,7 @@ export default function NLP() {
                   Ruhe im Körper. Fokus im Leben.
                 </p>
               </div>
-              <div className='mt-12 grid gap-6 lg:grid-cols-3'>
+              <div className='mt-12 grid gap-6 lg:grid-cols-4'>
                 {[
                   {
                     title: 'Gedankenkarussell',
@@ -351,6 +350,12 @@ export default function NLP() {
                   },
                   {
                     title: 'Ziele, die wirklich passen',
+                    text: 'Fokus setzen, Prioritäten ordnen und dranbleiben.',
+                    points: ['Konsequent handeln', 'Energie zielgerichtet nutzen'],
+                    icon: '🎯',
+                  },
+                  {
+                    title: 'Ziele, die wirklich passe',
                     text: 'Fokus setzen, Prioritäten ordnen und dranbleiben.',
                     points: ['Konsequent handeln', 'Energie zielgerichtet nutzen'],
                     icon: '🎯',
@@ -382,8 +387,28 @@ export default function NLP() {
             </div>
           </section>
           {/* Dein Weg zur Transformation */}
-          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-white/20'>
+          <section className='relative py-20 flex flex-col justify-center items-center min-h-[70dvh] border-y border-white/20'>
             <div className='container mx-auto px-4'>
+              <div className='pointer-events-none absolute inset-0 -z-10 top-0 rotate-180 md:rotate-0 md:bottom-0'>
+                <div className='absolute inset-0 opacity-90'>
+                  <LaserFlow
+                    color='#79d9f5'
+                    wispDensity={1}
+                    flowSpeed={0.35}
+                    verticalSizing={1.2}
+                    horizontalSizing={0.5}
+                    fogIntensity={0.45}
+                    fogScale={0.3}
+                    wispSpeed={15}
+                    wispIntensity={5}
+                    flowStrength={0.25}
+                    decay={1.1}
+                    horizontalBeamOffset={0}
+                    verticalBeamOffset={-0.5}
+                    falloffStart={0.85}
+                  />
+                </div>
+              </div>
               <div className='mx-auto max-w-3xl text-center'>
                 <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
                   Dein Weg zur Transformation
@@ -581,7 +606,7 @@ export default function NLP() {
           </section>
           {/* Kontakt */}
           <section
-            id='kontakt'
+            id='leitfaden'
             className='relative py-20'>
             <div className='container mx-auto px-4'>
               <div className='grid gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
@@ -667,6 +692,117 @@ export default function NLP() {
                     <p className='text-xs text-white/50'>Kein Spam. Abmeldung jederzeit.</p>
                   </form>
                 </GlassCard>
+              </div>
+            </div>
+          </section>
+
+          {/* Über mich */}
+          <section
+            id='ueber'
+            className='py-20 border-y border-white/20 relative min-h-[60dvh] flex flex-col justify-center items-center'>
+            <div className='container px-4 mx-auto'>
+              <div className='grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
+                <div>
+                  <p className='text-xs uppercase tracking-[0.3em] text-[#7DE3FF]'>Über mich</p>
+                  <h2 className='mt-4 text-3xl font-semibold text-white sm:text-4xl'>
+                    Stefan Heinemann
+                  </h2>
+                  <p className='mt-4 text-base text-white/70 sm:text-lg'>
+                    Ich begleite Menschen dabei, aus innerem Chaos klare Entscheidungen zu formen.
+                    NLP nutze ich pragmatisch: als Werkzeugkasten für Fokus, emotionale Stabilität
+                    und zielgerichtetes Handeln – ohne leere Versprechen.
+                  </p>
+                  <div className='mt-6 flex flex-wrap gap-3'>
+                    {['NLP Coach', 'Identität & Entscheidungen', 'Potsdam'].map((item) => (
+                      <span
+                        key={item}
+                        className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/80'>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  <div className='mt-8 grid gap-4 sm:grid-cols-2'>
+                    {[
+                      {
+                        title: 'Klarheit statt Overload',
+                        text: 'Gedanken sortieren, Entscheidungen treffen, Energie bündeln.',
+                      },
+                      {
+                        title: 'Ruhiger Körper, wacher Geist',
+                        text: 'Emotionen regulieren und den Fokus halten – auch unter Druck.',
+                      },
+                    ].map((item) => (
+                      <GlassCard
+                        key={item.title}
+                        className='p-5'>
+                        <h3 className='text-base font-semibold text-white'>{item.title}</h3>
+                        <p className='mt-2 text-sm text-white/70'>{item.text}</p>
+                      </GlassCard>
+                    ))}
+                  </div>
+                </div>
+                <GlassCard className='p-6'>
+                  <div className='relative overflow-hidden rounded-2xl bg-white/5'>
+                    <div className='aspect-[4/5] w-full'>
+                      <Image
+                        src='/images-nlp/nlp-portrait.webp'
+                        alt='Stefan Heinemann'
+                        fill
+                        className='object-cover'
+                        sizes='(min-width: 1024px) 40vw, 80vw'
+                      />
+                    </div>
+                    <div className='absolute inset-0 ring-1 ring-white/10' />
+                  </div>
+                  <div className='mt-5 space-y-2 text-sm text-white/70'>
+                    <p>Schwerpunkte: Identität, Entscheidungen, innere Ausrichtung.</p>
+                    <p>Formate: 1:1 Sessions, Workshops, praxisnahe Übungen.</p>
+                  </div>
+                  <div className='mt-6'>
+                    <PrimaryButton href='#kontakt'>Unverbindlich anfragen</PrimaryButton>
+                  </div>
+                </GlassCard>
+              </div>
+            </div>
+          </section>
+          {/* Kontakt */}
+          <section
+            id='kontakt'
+            className='relative py-20 border-t border-white/10'>
+            <div className='container mx-auto px-4'>
+              <div className='grid gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
+                <div>
+                  <p className='text-xs uppercase tracking-[0.3em] text-[#7DE3FF]'>Kontakt</p>
+                  <h2 className='mt-4 text-3xl font-semibold text-white sm:text-4xl'>
+                    Lass uns starten
+                  </h2>
+                  <p className='mt-4 max-w-xl text-base text-white/70 sm:text-lg'>
+                    Schreib mir ein paar Zeilen zu deinem Anliegen. Ich melde mich in der Regel
+                    innerhalb von 24–48 Stunden mit einem Vorschlag für das weitere Vorgehen.
+                  </p>
+                  <div className='mt-8 grid gap-4 sm:grid-cols-2'>
+                    {[
+                      {
+                        title: 'Erstgespräch',
+                        text: 'Kurz, klar, unverbindlich. Wir prüfen, ob es passt.',
+                      },
+                      {
+                        title: 'Präziser Fokus',
+                        text: 'Konkretes Ziel definieren und nächste Schritte festlegen.',
+                      },
+                    ].map((item) => (
+                      <GlassCard
+                        key={item.title}
+                        className='p-4'>
+                        <p className='text-sm text-white/80'>{item.title}</p>
+                        <p className='mt-2 text-xs text-white/60'>{item.text}</p>
+                      </GlassCard>
+                    ))}
+                  </div>
+                </div>
+                <div className='lg:translate-y-2'>
+                  <ContactFormNlp />
+                </div>
               </div>
             </div>
           </section>
