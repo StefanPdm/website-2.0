@@ -127,7 +127,7 @@ export default function NLP() {
                   SNAC Coaching
                 </span>
                 <span className='text-left tracking-wider text-sm text-white/80'>
-                  NLP für klare Entscheidungen.
+                  NLP für klare Entscheidungen
                 </span>
               </div>
             </Link>
