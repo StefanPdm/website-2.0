@@ -177,7 +177,9 @@ export default function ContactFormNlp() {
           className='h-11 rounded-xl bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] text-sm font-semibold text-[var(--button-text)] shadow-[0_0_24px_var(--glow)] transition hover:shadow-[0_0_32px_var(--glow-strong)] disabled:opacity-60'>
           {loading ? 'Wird gesendet…' : 'Anfrage senden'}
         </button>
-        <p className='text-xs text-[var(--muted)]'>Antwort in der Regel innerhalb von 24–48 Stunden.</p>
+        <p className='text-xs text-[var(--muted)]'>
+          Antwort in der Regel innerhalb von 24–48 Stunden.
+        </p>
       </div>
     </form>
   );

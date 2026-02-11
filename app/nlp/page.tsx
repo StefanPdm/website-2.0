@@ -91,6 +91,7 @@ export default function NLP() {
   const [touched, setTouched] = useState({ name: false, email: false });
   const [aboutModal, setAboutModal] = useState<null | 'before' | 'education'>(null);
   const [isWarmTheme, setIsWarmTheme] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const errors = useMemo(() => {
     return {
@@ -108,13 +109,13 @@ export default function NLP() {
 
   return (
     <div
-      className={`scroll-smooth font-sans relative min-h-dvh  text-[var(--text)] ${
+      className={`scroll-smooth font-sans relative min-h-dvh bg-[var(--bg)] text-[var(--text)] ${
         isWarmTheme ? 'theme-warm' : 'theme-cool'
       }`}>
       <div className='relative isolate overflow-hidden'>
         {/****** Header **********/}
-        <header className='fixed w-full top-0 z-50 border-b border-white/10 bg-white/5 backdrop-blur-xl'>
-          <div className='container mx-auto flex items-center justify-between px-4 py-3'>
+        <header className='fixed w-full top-0 z-50 border-b border-black/10 bg-white/5 backdrop-blur-xl'>
+          <div className='container mx-auto flex items-center justify-between gap-3 px-4 py-3 md:py-4'>
             <Link
               href='/nlp/'
               className='flex items-center gap-3'>
@@ -122,20 +123,21 @@ export default function NLP() {
                 <Image
                   src='logos/nlp-logo.svg'
                   alt='Logo'
-                  width={64}
-                  height={64}
+                  width={56}
+                  height={56}
+                  className='h-10 w-10 md:h-12 md:w-12'
                 />
               </div>
-              <div className='flex flex-col items-start justify-center'>
-                <span className='text-lg font-semibold text-left tracking-widest text-[var(--accent-soft)] uppercase'>
+              <div className='hidden md:flex flex-col items-start justify-center'>
+                <span className='text-base font-semibold text-left tracking-[0.2em] text-[var(--accent-soft)] uppercase sm:text-lg'>
                   SNAC Coaching
                 </span>
-                <span className='text-left tracking-wider text-sm text-white/80'>
+                <span className='text-left tracking-wider text-xs text-white/70 sm:text-sm'>
                   NLP für klare Entscheidungen
                 </span>
               </div>
             </Link>
-            <nav className='hidden items-center gap-8 text-sm text-white/80 md:flex'>
+            <nav className='hidden items-center gap-8 text-sm text-white/80 md:flex font-semibold'>
               <Link
                 href='/'
                 className='transition hover:text-white'>
@@ -162,7 +164,7 @@ export default function NLP() {
                 Kontakt
               </Link>
             </nav>
-            <div className='flex items-center gap-3'>
+            <div className='flex items-center gap-2 sm:gap-3'>
               <button
                 type='button'
                 onClick={() => setIsWarmTheme((prev) => !prev)}
@@ -170,17 +172,81 @@ export default function NLP() {
                 aria-pressed={isWarmTheme}>
                 {isWarmTheme ? 'Kühles Schema' : 'Warmes Schema'}
               </button>
-              <button
-                type='button'
-                className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] md:hidden'
-                aria-label='Menü öffnen'>
-                ☰
-              </button>
               <PrimaryButton
                 href='#kontakt'
-                className='px-4 py-2 text-xs md:px-6 md:py-3 md:text-sm'>
+                className='hidden px-4 py-2 text-xs sm:inline-flex md:px-6 md:py-3 md:text-sm'>
                 Kostenloses Erstgespräch
               </PrimaryButton>
+              <button
+                type='button'
+                onClick={() => setIsMenuOpen((prev) => !prev)}
+                className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] md:hidden'
+                aria-label={isMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+                aria-expanded={isMenuOpen}>
+                {isMenuOpen ? '✕' : '☰'}
+              </button>
+            </div>
+          </div>
+          <div
+            className={`md:hidden overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-in-out ${
+              isMenuOpen
+                ? 'max-h-[420px] opacity-100 translate-y-0'
+                : 'max-h-0 opacity-0 -translate-y-2 pointer-events-none'
+            }`}>
+            <div
+              className={`mx-4 mb-4 mt-2 rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] p-4 text-sm text-[var(--text)] shadow-[0_20px_60px_var(--glow)] transition-[opacity,transform] duration-500 ease-out delay-100 ${
+                isMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.98]'
+              }`}>
+              <nav className='flex flex-col gap-3 '>
+                <Link
+                  href='/'
+                  onClick={() => setIsMenuOpen(false)}
+                  className='transition hover:text-[var(--accent)]'>
+                  Home
+                </Link>
+                <Link
+                  href='#ueber'
+                  onClick={() => setIsMenuOpen(false)}
+                  className='transition hover:text-[var(--accent)]'>
+                  Über mich
+                </Link>
+                <Link
+                  href='#programme'
+                  onClick={() => setIsMenuOpen(false)}
+                  className='transition hover:text-[var(--accent)]'>
+                  Programme
+                </Link>
+                <Link
+                  href='#workshops'
+                  onClick={() => setIsMenuOpen(false)}
+                  className='transition hover:text-[var(--accent)]'>
+                  Workshops
+                </Link>
+                <Link
+                  href='#kontakt'
+                  onClick={() => setIsMenuOpen(false)}
+                  className='transition hover:text-[var(--accent)]'>
+                  Kontakt
+                </Link>
+                <button
+                  type='button'
+                  onClick={() => {
+                    setIsWarmTheme((prev) => !prev);
+                    setIsMenuOpen(false);
+                  }}
+                  className='mt-2 inline-flex items-center justify-between rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold text-[var(--text)] transition hover:bg-[var(--surface-strong)]'>
+                  <span>{isWarmTheme ? 'Kühles Schema' : 'Warmes Schema'}</span>
+                  <span className='text-[var(--accent)]'>{isWarmTheme ? '❄️' : '🌅'}</span>
+                </button>
+              </nav>
+              <div className='mt-4'>
+                <PrimaryButton
+                  href='#kontakt'
+                  className='w-full'
+                  onClick={() => setIsMenuOpen(false)}>
+                  Kostenloses Erstgespräch
+                </PrimaryButton>
+              </div>
             </div>
           </div>
         </header>
@@ -215,7 +281,7 @@ export default function NLP() {
                     {['1:1 Coaching', 'Workshops', 'Praxisnah & messbar'].map((item) => (
                       <span
                         key={item}
-                        className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/80 backdrop-blur'>
+                        className='rounded-full border border-white/10 bg-white/20 px-4 py-2 text-xs text-white/80 backdrop-blur'>
                         {item}
                       </span>
                     ))}
@@ -226,7 +292,7 @@ export default function NLP() {
                     <div className='relative overflow-hidden rounded-2xl p-6'>
                       <div className='absolute inset-0 rounded-2xl ring-1 ring-[#00E5FF]/40 shadow-[0_0_40px_rgba(0,229,255,0.35)] [clip-path:polygon(6%_2%,100%_0%,96%_100%,0%_98%)]' />
                       <div className='relative'>
-                        <div className='aspect-square w-full rounded-3xl bg-[radial-gradient(circle_at_top,rgba(0,229,255,0.35),rgba(5,11,18,0.6))] p-6'>
+                        <div className='aspect-square w-full rounded-3xl bg-[radial-gradient(circle_at_top,var(--hero-glow),var(--hero-fade))] p-6'>
                           <div className='relative flex h-full w-full items-end justify-center rounded-3xl border border-white/15 bg-white/5 text-sm text-white/70 overflow-hidden'>
                             <Image
                               src='/images-nlp/nlp-portrait.webp'
@@ -241,18 +307,18 @@ export default function NLP() {
                     </div>
                   </GlassCard>
                   <div className='flex flex-wrap gap-3'>
-                    <span className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/75'>
+                    <span className='rounded-full border border-white/10 bg-white/20 px-4 py-2 text-xs text-white/75'>
                       Ø 90 Min / Session
                     </span>
-                    <span className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/75'>
+                    <span className='rounded-full border border-white/10 bg-white/20 px-4 py-2 text-xs text-white/75'>
                       Fokus: Identität & Entscheidungen
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            {isWarmTheme && (
-              <div className='absolute inset-0 -z-10 bg-[#ffad13a1]'>
+            {isWarmTheme ? (
+              <div className='absolute inset-0 -z-10 bg-[#ff9e13c7]'>
                 <FloatingLines
                   linesGradient={['#f1c38a', '#fff']}
                   animationSpeed={0.4}
@@ -266,8 +332,7 @@ export default function NLP() {
                   parallaxStrength={0}
                 />
               </div>
-            )}
-            {!isWarmTheme && (
+            ) : (
               <div className='absolute inset-0 -z-10'>
                 <FloatingLines
                   linesGradient={['#050b12', '#47f5d8']}
@@ -288,7 +353,7 @@ export default function NLP() {
           {/* Was ist NLP? */}
           <section
             id='nlp'
-            className='py-20 border-y border-white/20 relative min-h-[60dvh] flex flex-col justify-center items-center'>
+            className='py-20 border-y border-[var(--border)] relative min-h-[60dvh] flex flex-col justify-center items-center'>
             <div className='container px-4 flex flex-col justify-center items-center mx-auto'>
               <div className='mx-auto max-w-3xl text-center'>
                 <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Was ist NLP?</h2>
@@ -417,7 +482,7 @@ export default function NLP() {
             </div>
           </section>
           {/* Dein Weg zur Transformation */}
-          <section className='relative py-20 flex flex-col justify-center items-center min-h-[70dvh] border-y border-white/20'>
+          <section className='relative py-20 flex flex-col justify-center items-center min-h-[70dvh] border-y border-[--border]'>
             <div className='container mx-auto px-4'>
               <div className='pointer-events-none absolute inset-0 -z-10 top-0 rotate-180 md:rotate-0 md:bottom-0'>
                 <div className='absolute inset-0 opacity-90'>
@@ -551,7 +616,7 @@ export default function NLP() {
             </div>
           </section>
           {/* Erfolgsgeschichten */}
-          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-white/20'>
+          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-[--border]'>
             <div className='container mx-auto px-4'>
               <div className='mx-auto max-w-3xl text-center'>
                 <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
@@ -590,7 +655,7 @@ export default function NLP() {
           {/* Workshops */}
           <section
             id='workshops'
-            className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-white/20 backdrop-blur-2xl bg-white/5'>
+            className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] backdrop-blur-2xl bg-white/5'>
             <div className='container mx-auto px-4'>
               <div className='mx-auto max-w-3xl text-center'>
                 <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
@@ -637,8 +702,8 @@ export default function NLP() {
           {/****** Leitfaden Download ******/}
           <section
             id='leitfaden'
-            className='relative py-20'>
-            <div className='container mx-auto px-4 min-h-[60dvh] flex flex-col justify-center items-center'>
+            className='relative py-20 border-y border-[var(--border)]'>
+            <div className='container mx-auto px-4 min-h-[60dvh] flex flex-col justify-center items-center '>
               <div className='grid gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
                 <div>
                   <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
@@ -729,7 +794,7 @@ export default function NLP() {
           {/***** Über mich *****/}
           <section
             id='ueber'
-            className='py-20 border-y border-white/20 relative min-h-[60dvh] flex flex-col justify-center items-center bg-white/5 backdrop-blur-2xl'>
+            className='py-40  relative min-h-[60dvh] flex flex-col justify-center items-center bg-white/5 backdrop-blur-2xl'>
             <div className='container px-4 mx-auto'>
               <div className='grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
                 <GlassCard className='p-6'>
@@ -957,7 +1022,7 @@ export default function NLP() {
           {/****** Kontakt ******/}
           <section
             id='kontakt'
-            className='relative py-20 border-t border-white/10'>
+            className='relative py-40 border-y border-[--border]'>
             <div className='container mx-auto px-4'>
               <div className='grid gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
                 <div>
@@ -1051,6 +1116,7 @@ export default function NLP() {
             © 2026 NLP Coaching. Alle Rechte vorbehalten.
           </div>
         </footer>
+        {/******  Theme Styles ******/}
         <style
           jsx
           global>{`
@@ -1065,24 +1131,29 @@ export default function NLP() {
             --surface-strong: rgba(255, 255, 255, 0.1);
             --border: rgba(255, 255, 255, 0.2);
             --border-strong: rgba(255, 255, 255, 0.45);
+            --border-section: rgba(255, 255, 255, 0.05);
             --button-text: #001018;
             --glow: rgba(0, 229, 255, 0.24);
             --glow-strong: rgba(0, 229, 255, 0.36);
+            --hero-glow: rgba(0, 229, 255, 0.35);
+            --hero-fade: rgba(5, 11, 18, 0.6);
           }
           .theme-warm {
             --bg: #fff6ea;
             --text: #2b1a0f;
             --muted: rgba(43, 26, 15, 0.75);
-            --accent: #e8a05a;
-            --accent-2: #d6734b;
-            --accent-soft: #f1c38a;
-            --surface: rgba(255, 255, 255, 0.7);
-            --surface-strong: rgba(255, 255, 255, 0.85);
-            --border: rgba(198, 137, 94, 0.25);
-            --border-strong: rgba(198, 137, 94, 0.45);
+            --accent: #eaa765;
+            --accent-2: #b97029;
+            --accent-soft: rgba(0, 0, 0, 0.8);
+            --surface: rgba(255, 255, 255, 0.26);
+            --surface-strong: rgba(255, 255, 255, 0.45);
+            --border: rgba(0, 0, 0, 0.55);
+            --border-strong: rgba(0, 0, 0, 0.75);
             --button-text: #2b1a0f;
             --glow: rgba(232, 160, 90, 0.25);
             --glow-strong: rgba(232, 160, 90, 0.4);
+            --hero-glow: rgba(241, 195, 138, 0.45);
+            --hero-fade: rgba(255, 246, 234, 0.85);
           }
           .theme-warm .text-white {
             color: var(--text) !important;
