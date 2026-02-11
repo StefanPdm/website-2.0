@@ -19,7 +19,7 @@ type ButtonProps = {
 
 function PrimaryButton({ children, className, href, onClick }: ButtonProps) {
   const base =
-    'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[#001018] bg-gradient-to-r from-[#00E5FF] to-[#22C55E] shadow-[0_0_30px_rgba(0,229,255,0.25)] ring-1 ring-white/10 transition duration-200 hover:shadow-[0_0_40px_rgba(0,229,255,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF] active:translate-y-px';
+    'cursor-pointer inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[#001018] bg-gradient-to-r from-[#00E5FF] to-[#22C55E] shadow-[0_0_30px_rgba(0,229,255,0.25)] ring-1 ring-white/10 transition duration-200 hover:shadow-[0_0_40px_rgba(0,229,255,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF] active:translate-y-px';
   if (href) {
     return (
       <Link
@@ -41,7 +41,7 @@ function PrimaryButton({ children, className, href, onClick }: ButtonProps) {
 
 function SecondaryButton({ children, className, href, onClick }: ButtonProps) {
   const base =
-    'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[#E6F7FF] bg-white/5 ring-1 ring-white/15 shadow-[0_0_20px_rgba(0,229,255,0.12)] transition duration-200 hover:bg-white/10 hover:ring-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] active:translate-y-px';
+    'cursor-pointer inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[#E6F7FF] bg-white/5 ring-1 ring-white/15 shadow-[0_0_20px_rgba(0,229,255,0.12)] transition duration-200 hover:bg-white/10 hover:ring-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] active:translate-y-px';
   if (href) {
     return (
       <Link
@@ -89,6 +89,7 @@ function StarRow() {
 export default function NLP() {
   const [formState, setFormState] = useState({ name: '', email: '' });
   const [touched, setTouched] = useState({ name: false, email: false });
+  const [aboutModal, setAboutModal] = useState<null | 'before' | 'education'>(null);
 
   const errors = useMemo(() => {
     return {
@@ -115,7 +116,7 @@ export default function NLP() {
               className='flex items-center gap-3'>
               <div className='relative'>
                 <Image
-                  src='/nlp-logo.svg'
+                  src='logos/nlp-logo.svg'
                   alt='Logo'
                   width={64}
                   height={64}
@@ -123,10 +124,10 @@ export default function NLP() {
               </div>
               <div className='flex flex-col items-start justify-center'>
                 <span className='text-lg font-semibold text-left tracking-widest text-[#7DE3FF] uppercase'>
-                  NLP
+                  SNAC Coaching
                 </span>
                 <span className='text-left tracking-wider text-sm text-white/80'>
-                  Coaching für klare Entscheidungen.
+                  NLP für klare Entscheidungen.
                 </span>
               </div>
             </Link>
@@ -499,7 +500,7 @@ export default function NLP() {
                         </span>
                       )}
                     </div>
-                    <ul className='mt-5 space-y-3 text-sm text-white/75'>
+                    <ul className='mt-5 space-y-3 text-sm text-white/75 flex-1'>
                       {program.points.map((point) => (
                         <li
                           key={point}
@@ -604,11 +605,11 @@ export default function NLP() {
               </div>
             </div>
           </section>
-          {/* Kontakt */}
+          {/****** Leitfaden Download ******/}
           <section
             id='leitfaden'
             className='relative py-20'>
-            <div className='container mx-auto px-4'>
+            <div className='container mx-auto px-4 min-h-[60dvh] flex flex-col justify-center items-center'>
               <div className='grid gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
                 <div>
                   <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
@@ -696,12 +697,51 @@ export default function NLP() {
             </div>
           </section>
 
-          {/* Über mich */}
+          {/***** Über mich *****/}
           <section
             id='ueber'
-            className='py-20 border-y border-white/20 relative min-h-[60dvh] flex flex-col justify-center items-center'>
+            className='py-20 border-y border-white/20 relative min-h-[60dvh] flex flex-col justify-center items-center bg-white/5 backdrop-blur-2xl'>
             <div className='container px-4 mx-auto'>
               <div className='grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
+                <GlassCard className='p-6'>
+                  <div className='relative overflow-hidden rounded-2xl bg-white/5'>
+                    <div className='aspect-5/4 w-full'>
+                      <Image
+                        src='/images-nlp/portrait-workshop.png'
+                        alt='Stefan Heinemann'
+                        fill
+                        className='object-cover object-top transition duration-500 ease-out group-hover:opacity-0'
+                        sizes='(min-width: 1024px) 40vw, 80vw'
+                      />
+                      <Image
+                        src='/images-nlp/portrait-treppe.png'
+                        alt='Stefan Heinemann im Coaching'
+                        fill
+                        className='object-cover object-top opacity-0 transition duration-500 ease-out group-hover:opacity-100'
+                        sizes='(min-width: 1024px) 40vw, 80vw'
+                      />
+                    </div>
+                    <div className='absolute inset-0 ring-1 ring-white/10' />
+                  </div>
+                  <div className='mt-5 space-y-2 text-sm text-white/70'>
+                    <p>
+                      <span className='font-bold text-white'>Schwerpunkte:</span> Identität &nbsp;
+                      |&nbsp; Entscheidungen &nbsp;|&nbsp; innere Ausrichtung.
+                    </p>
+                    <p>
+                      <span className='font-bold text-white'>Formate:</span> 1:1 Sessions
+                      &nbsp;|&nbsp; Workshops &nbsp;|&nbsp; Keynotes.
+                    </p>
+                  </div>
+                  <div className='mt-6 flex flex-wrap gap-3 justify-end '>
+                    <SecondaryButton onClick={() => setAboutModal('before')}>
+                      Mein Weg vor NLP
+                    </SecondaryButton>
+                    <PrimaryButton onClick={() => setAboutModal('education')}>
+                      Aus- & Weiterbildungen
+                    </PrimaryButton>
+                  </div>
+                </GlassCard>
                 <div>
                   <p className='text-xs uppercase tracking-[0.3em] text-[#7DE3FF]'>Über mich</p>
                   <h2 className='mt-4 text-3xl font-semibold text-white sm:text-4xl'>
@@ -721,6 +761,7 @@ export default function NLP() {
                       </span>
                     ))}
                   </div>
+
                   <div className='mt-8 grid gap-4 sm:grid-cols-2'>
                     {[
                       {
@@ -741,31 +782,150 @@ export default function NLP() {
                     ))}
                   </div>
                 </div>
-                <GlassCard className='p-6'>
-                  <div className='relative overflow-hidden rounded-2xl bg-white/5'>
-                    <div className='aspect-[4/5] w-full'>
-                      <Image
-                        src='/images-nlp/nlp-portrait.webp'
-                        alt='Stefan Heinemann'
-                        fill
-                        className='object-cover'
-                        sizes='(min-width: 1024px) 40vw, 80vw'
-                      />
-                    </div>
-                    <div className='absolute inset-0 ring-1 ring-white/10' />
-                  </div>
-                  <div className='mt-5 space-y-2 text-sm text-white/70'>
-                    <p>Schwerpunkte: Identität, Entscheidungen, innere Ausrichtung.</p>
-                    <p>Formate: 1:1 Sessions, Workshops, praxisnahe Übungen.</p>
-                  </div>
-                  <div className='mt-6'>
-                    <PrimaryButton href='#kontakt'>Unverbindlich anfragen</PrimaryButton>
-                  </div>
-                </GlassCard>
               </div>
             </div>
           </section>
-          {/* Kontakt */}
+          {aboutModal && (
+            <div
+              className='fixed inset-0 z-50 flex items-center justify-center px-4 py-10'
+              role='dialog'
+              aria-modal='true'>
+              <button
+                type='button'
+                onClick={() => setAboutModal(null)}
+                className='absolute inset-0 bg-[#050B12]/60 backdrop-blur-sm'
+                aria-label='Modal schließen'
+              />
+              <div className='relative w-full max-w-3xl rounded-3xl border border-white/60 bg-[linear-gradient(140deg,rgba(255,255,255,0.95),rgba(230,247,255,0.86))] p-6 text-[#0B1B2B] shadow-[0_30px_90px_rgba(0,229,255,0.25)] backdrop-blur-xl'>
+                <div className='flex items-start justify-between gap-4'>
+                  <div>
+                    <p className='text-xs uppercase tracking-[0.3em] text-[#0B1B2B]/70'>
+                      {aboutModal === 'before' ? 'Vor NLP' : 'Aus- & Weiterbildungen'}
+                    </p>
+                    <h3 className='mt-3 text-2xl font-semibold text-[#0B1B2B]'>
+                      {aboutModal === 'before'
+                        ? 'Mein beruflicher Weg vor NLP'
+                        : 'Meine Aus- & Weiterbildungen + Interessen'}
+                    </h3>
+                  </div>
+                  <button
+                    type='button'
+                    onClick={() => setAboutModal(null)}
+                    className='cursor-pointer inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:border-slate-300 hover:text-slate-900'
+                    aria-label='Modal schließen'>
+                    ✕
+                  </button>
+                </div>
+                {aboutModal === 'before' ? (
+                  <div className='mt-6 space-y-6 text-sm text-[#0B1B2B]/80'>
+                    <p>
+                      Vor NLP lag mein Fokus auf Führung, Projektsteuerung und kommunikativer
+                      Präzision. In dynamischen Umfeldern habe ich Teams durch Veränderungen
+                      begleitet und gelernt, wie sehr innere Klarheit Entscheidungen, Stimmung und
+                      Ergebnisqualität beeinflusst.
+                    </p>
+                    <div className='grid gap-4 sm:grid-cols-3'>
+                      {[
+                        { icon: '💼', title: '8+ Jahre', text: 'Praxis in Führung & Beratung' },
+                        { icon: '🧭', title: '120+ Projekte', text: 'Struktur & Umsetzung' },
+                        { icon: '⚡', title: 'Fokus-Methoden', text: 'alltagstauglich & messbar' },
+                      ].map((fact) => (
+                        <div
+                          key={fact.title}
+                          className='rounded-2xl border border-white/60 bg-white/70 p-4 shadow-[0_10px_30px_rgba(0,229,255,0.12)]'>
+                          <div className='text-xl'>{fact.icon}</div>
+                          <p className='mt-2 text-sm font-semibold text-[#0B1B2B]'>{fact.title}</p>
+                          <p className='mt-1 text-xs text-[#0B1B2B]/70'>{fact.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
+                      <p className='text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
+                        💡 Erkenntnis
+                      </p>
+                      <p className='mt-2 text-sm text-[#0B1B2B]/80'>
+                        Je klarer Sprache und innere Ausrichtung, desto schneller entstehen ruhige,
+                        tragfähige Entscheidungen.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className='mt-6 grid gap-6'>
+                    <div className='space-y-3 text-sm text-[#0B1B2B]/80'>
+                      <p>
+                        Meine Aus- und Weiterbildungen bündeln NLP, Kommunikation und moderne
+                        Coaching-Methoden. Ergänzend fließen Mentaltraining und systemische
+                        Werkzeuge ein – pragmatisch, wirksam, messbar.
+                      </p>
+                    </div>
+                    <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
+                      <p className='text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
+                        🎓 Timeline
+                      </p>
+                      <ol className='mt-4 space-y-4 border-l border-[#0B1B2B]/15 pl-5'>
+                        {[
+                          {
+                            year: '2016',
+                            title: 'NLP Practitioner',
+                            text: 'Grundlagen, Sprache, Wahrnehmung & Reframing.',
+                          },
+                          {
+                            year: '2018',
+                            title: 'NLP Master',
+                            text: 'Vertiefung: Identität, Wertearbeit & Change-Strategien.',
+                          },
+                          {
+                            year: '2020',
+                            title: 'Coach & Mentaltrainer',
+                            text: 'Zielarbeit, Ressourcenaktivierung, Umsetzungspläne.',
+                          },
+                          {
+                            year: '2023',
+                            title: 'Systemische Tools',
+                            text: 'Kontext, Muster, Dynamiken in Teams & Beziehungen.',
+                          },
+                        ].map((item) => (
+                          <li
+                            key={item.year}
+                            className='relative'>
+                            <span className='absolute -left-[27px] top-1.5 h-3 w-3 rounded-full bg-[#00E5FF] shadow-[0_0_10px_rgba(0,229,255,0.6)]' />
+                            <div className='rounded-xl border border-white/60 bg-white/90 p-3'>
+                              <div className='flex items-center justify-between gap-3'>
+                                <p className='text-sm font-semibold text-[#0B1B2B]'>{item.title}</p>
+                                <span className='text-xs font-semibold text-[#0B1B2B]/60'>
+                                  {item.year}
+                                </span>
+                              </div>
+                              <p className='mt-2 text-xs text-[#0B1B2B]/70'>{item.text}</p>
+                            </div>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                    <div className='grid gap-3 sm:grid-cols-2'>
+                      {[
+                        { icon: '🥋', title: 'WingTsun', text: 'Fokus, Präsenz & Klarheit.' },
+                        { icon: '🧊', title: 'Eisbaden', text: 'Resilienz & Nervensystem-Reset.' },
+                        { icon: '🎯', title: 'Mentales Training', text: 'Zielbilder verankern.' },
+                        { icon: '🗣️', title: 'Kommunikation', text: 'Sprache als Werkzeug.' },
+                      ].map((item) => (
+                        <div
+                          key={item.title}
+                          className='flex items-start gap-3 rounded-2xl border border-white/60 bg-white/70 p-4'>
+                          <span className='text-xl'>{item.icon}</span>
+                          <div>
+                            <p className='text-sm font-semibold text-[#0B1B2B]'>{item.title}</p>
+                            <p className='mt-1 text-xs text-[#0B1B2B]/70'>{item.text}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          {/****** Kontakt ******/}
           <section
             id='kontakt'
             className='relative py-20 border-t border-white/10'>
@@ -783,8 +943,8 @@ export default function NLP() {
                   <div className='mt-8 grid gap-4 sm:grid-cols-2'>
                     {[
                       {
-                        title: 'Erstgespräch',
-                        text: 'Kurz, klar, unverbindlich. Wir prüfen, ob es passt.',
+                        title: 'Kostenloses Erstgespräch (max. 30 Min)',
+                        text: 'Kurz, klar, unverbindlich.Wir prüfen beide, ob es passt.',
                       },
                       {
                         title: 'Präziser Fokus',
@@ -811,11 +971,17 @@ export default function NLP() {
         <footer className='border-t border-white/10 bg-white/5 py-10'>
           <div className='container mx-auto flex flex-col gap-6 px-4 text-sm text-white/70 md:flex-row md:items-center md:justify-between'>
             <div className='flex items-center gap-3'>
-              <span className='flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#00E5FF] to-[#22C55E] text-[#001018]'>
-                ✦
-              </span>
               <div>
-                <p className='text-white'>NLP</p>
+                <Image
+                  src='/logos/nlp-logo.svg'
+                  alt='NLP Coaching Logo'
+                  width={32}
+                  height={32}
+                  className='h-12 w-12 '
+                />
+              </div>
+              <div>
+                <p className='text-white'>SNAC COACHING</p>
                 <p className='text-xs text-white/50'>NLP Coaching für klare Entscheidungen.</p>
               </div>
             </div>
