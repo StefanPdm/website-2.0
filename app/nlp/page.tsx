@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
+import { Public_Sans } from 'next/font/google';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
@@ -9,6 +10,8 @@ import ContactFormNlp from '@/components/ContactFormNlp';
 import LaserFlow from '@/components/LaserFlow';
 
 const FloatingLines = dynamic(() => import('@/components/FloatingLines'), { ssr: false });
+
+const publicSans = Public_Sans({ subsets: ['latin'], display: 'swap' });
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -61,9 +64,17 @@ function SecondaryButton({ children, className, href, onClick }: ButtonProps) {
   );
 }
 
-function GlassCard({ children, className }: { children: React.ReactNode; className?: string }) {
+function GlassCard({
+  children,
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement> & {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
     <div
+      {...props}
       className={`group rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-strong)] shadow-[0_10px_40px_rgba(0,0,0,0.4),0_0_44px_var(--glow)] transition duration-200 hover:-translate-y-1 hover:border-[var(--border)] hover:shadow-[0_20px_60px_var(--glow),0_0_34px_var(--glow-strong)] ${className ?? ''}`}>
       {children}
     </div>
@@ -90,6 +101,7 @@ export default function NLP() {
   const [formState, setFormState] = useState({ name: '', email: '' });
   const [touched, setTouched] = useState({ name: false, email: false });
   const [aboutModal, setAboutModal] = useState<null | 'before' | 'education'>(null);
+  const [nlpModal, setNlpModal] = useState<null | 'mastery' | 'change' | 'goals'>(null);
   const [isWarmTheme, setIsWarmTheme] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -109,7 +121,7 @@ export default function NLP() {
 
   return (
     <div
-      className={`scroll-smooth font-sans relative min-h-dvh bg-[var(--bg)] text-[var(--text)] ${
+      className={`scroll-smooth ${publicSans.className} relative min-h-dvh bg-[var(--bg)] text-[var(--text)] ${
         isWarmTheme ? 'theme-warm' : 'theme-cool'
       }`}>
       <div className='relative isolate overflow-hidden'>
@@ -129,7 +141,7 @@ export default function NLP() {
                 />
               </div>
               <div className='hidden md:flex flex-col items-start justify-center'>
-                <span className='text-base font-semibold text-left tracking-[0.2em] text-[var(--accent-soft)] uppercase sm:text-lg'>
+                <span className='text-base font-extrabold text-left tracking-[0.2em] text-[var(--accent-soft)] uppercase sm:text-lg'>
                   SNAC Coaching
                 </span>
                 <span className='text-left tracking-wider text-xs text-white/70 sm:text-sm'>
@@ -364,6 +376,7 @@ export default function NLP() {
               <div className='mt-12 grid gap-6 lg:grid-cols-3'>
                 {[
                   {
+                    id: 'mastery',
                     title: 'Geistige Meisterschaft',
                     text: 'Nutze die Macht deines Unterbewusstseins, um Fokus und Klarheit zu etablieren.',
                     icon: (
@@ -375,6 +388,7 @@ export default function NLP() {
                     ),
                   },
                   {
+                    id: 'change',
                     title: 'Verhaltensänderung',
                     text: 'Durchbreche limitierende Muster mit präzisen sprachlichen Interventionen.',
                     icon: (
@@ -386,6 +400,7 @@ export default function NLP() {
                     ),
                   },
                   {
+                    id: 'goals',
                     title: 'Zielerreichung',
                     text: 'Setze klare innere Zielbilder und bringe Entscheidungen in den Alltag.',
                     icon: (
@@ -399,7 +414,16 @@ export default function NLP() {
                 ].map((feature) => (
                   <GlassCard
                     key={feature.title}
-                    className='p-6'>
+                    className='p-6 cursor-pointer'
+                    role='button'
+                    tabIndex={0}
+                    onClick={() => setNlpModal(feature.id as 'mastery' | 'change' | 'goals')}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        setNlpModal(feature.id as 'mastery' | 'change' | 'goals');
+                      }
+                    }}>
                     <div className='flex items-center gap-3'>
                       <div className='flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/10'>
                         {feature.icon}
@@ -407,24 +431,142 @@ export default function NLP() {
                       <h3 className='text-lg font-semibold text-white'>{feature.title}</h3>
                     </div>
                     <p className='mt-4 text-sm text-white/70'>{feature.text}</p>
-                    <Link
-                      href='#programme'
-                      className='mt-5 inline-flex items-center text-sm font-semibold text-[#7DE3FF] transition hover:text-white'>
+                    <span className='mt-5 inline-flex items-center text-sm font-semibold text-[#7DE3FF] transition group-hover:text-white'>
                       Mehr erfahren →
-                    </Link>
+                    </span>
                   </GlassCard>
                 ))}
               </div>
             </div>
           </section>
+          {nlpModal && (
+            <div
+              className='fixed inset-0 z-50 flex items-center justify-center px-4 py-10'
+              role='dialog'
+              aria-modal='true'>
+              <button
+                type='button'
+                onClick={() => setNlpModal(null)}
+                className='absolute inset-0 bg-black/40 backdrop-blur-sm'
+                aria-label='Modal schließen'
+              />
+              <div className='relative w-full max-w-3xl rounded-3xl border border-slate-200 bg-white/90 p-6 text-[#1b1410] shadow-[0_30px_90px_rgba(0,0,0,0.25)]'>
+                <div className='flex items-start justify-between gap-4'>
+                  <div>
+                    <p className='text-xs uppercase tracking-[0.3em] text-[#5a4637]'>
+                      {nlpModal === 'mastery'
+                        ? 'Geistige Meisterschaft'
+                        : nlpModal === 'change'
+                          ? 'Verhaltensänderung'
+                          : 'Zielerreichung'}
+                    </p>
+                    <h3 className='mt-3 text-2xl font-semibold text-[#1b1410]'>
+                      {nlpModal === 'mastery'
+                        ? 'Fokus, Klarheit & innere Steuerung'
+                        : nlpModal === 'change'
+                          ? 'Muster erkennen & neu programmieren'
+                          : 'Ziele definieren & konsequent umsetzen'}
+                    </h3>
+                  </div>
+                  <button
+                    type='button'
+                    onClick={() => setNlpModal(null)}
+                    className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-[#1b1410] transition hover:bg-slate-100'
+                    aria-label='Modal schließen'>
+                    ✕
+                  </button>
+                </div>
+                {nlpModal === 'mastery' && (
+                  <div className='mt-6 grid gap-5 text-sm text-[#5a4637]'>
+                    <p>
+                      NLP macht unbewusste Denk- und Sprachmuster sichtbar. Du lernst, deinen Fokus
+                      bewusst zu steuern, innere Zustände zu regulieren und mentale Klarheit
+                      aufzubauen – statt im Grübeln zu versinken.
+                    </p>
+                    <p>
+                      Wir arbeiten mit Aufmerksamkeit, Sprache und inneren Bildern, um schnell vom
+                      Problemfokus in lösungsorientierte Handlungsschritte zu wechseln.
+                    </p>
+                    <ul className='grid gap-2'>
+                      <li>• mentale Landkarten präzisieren und neu bewerten</li>
+                      <li>• innere Dialoge neu ausrichten und beruhigen</li>
+                      <li>• klare Entscheidungen schneller treffen</li>
+                      <li>• Fokus halten, auch unter Druck</li>
+                    </ul>
+                    <div className='rounded-2xl border border-slate-200 bg-white p-4'>
+                      <p className='text-xs uppercase tracking-[0.2em] text-[#5a4637]'>
+                        Tony Robbins – Inspiration
+                      </p>
+                      <p className='mt-2 text-sm text-[#1b1410]'>
+                        Fokus, State-Management und klare Zielbilder als Hebel für nachhaltige
+                        Veränderung.
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {nlpModal === 'change' && (
+                  <div className='mt-6 grid gap-5 text-sm text-[#5a4637]'>
+                    <p>
+                      Verhaltensänderung beginnt bei Sprache und inneren Mustern. Wir identifizieren
+                      Trigger, unterbrechen Automatismen und installieren neue, wirksame Strategien.
+                    </p>
+                    <p>
+                      Dadurch entsteht ein neues Reaktionsmuster, das in Alltagssituationen stabil
+                      bleibt – nicht nur im Coaching-Moment.
+                    </p>
+                    <ul className='grid gap-2'>
+                      <li>• limitierende Glaubenssätze auflösen</li>
+                      <li>• neue Reaktionsmuster verankern</li>
+                      <li>• emotionale Stabilität aufbauen</li>
+                      <li>• souverän reagieren statt impulsiv handeln</li>
+                    </ul>
+                    <div className='rounded-2xl border border-slate-200 bg-white p-4'>
+                      <p className='text-xs uppercase tracking-[0.2em] text-[#5a4637]'>
+                        Tony Robbins – Inspiration
+                      </p>
+                      <p className='mt-2 text-sm text-[#1b1410]'>
+                        Change entsteht, wenn deine Standards steigen und du neue Muster konsequent
+                        lebst.
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {nlpModal === 'goals' && (
+                  <div className='mt-6 grid gap-5 text-sm text-[#5a4637]'>
+                    <p>
+                      Ziele werden wirksam, wenn sie emotional stimmig sind. NLP hilft, Zielbilder
+                      zu klären, Hindernisse zu erkennen und Umsetzungsschritte zu verankern.
+                    </p>
+                    <p>
+                      Gemeinsam übersetzen wir Visionen in konkrete Meilensteine, sodass Umsetzung
+                      messbar und machbar bleibt.
+                    </p>
+                    <ul className='grid gap-2'>
+                      <li>• Zielbild schärfen & priorisieren</li>
+                      <li>• Motivation stabilisieren</li>
+                      <li>• Umsetzung im Alltag sichern</li>
+                      <li>• Fortschritt sichtbar machen</li>
+                    </ul>
+                    <div className='rounded-2xl border border-slate-200 bg-white p-4'>
+                      <p className='text-xs uppercase tracking-[0.2em] text-[#5a4637]'>
+                        Tony Robbins – Inspiration
+                      </p>
+                      <p className='mt-2 text-sm text-[#1b1410]'>
+                        Klare Outcomes, starke Why-Story und messbare Schritte – so bleibt
+                        Veränderung nachhaltig.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
-          {/* Woran wir arbeiten */}
-          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] overflow-hidden bg-white/5'>
+          {/* Woran ich arbeite */}
+          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] overflow-hidden bg-[var(--section-bg-accent)]'>
             <div className='container mx-auto px-4'>
               <div className='mx-auto max-w-3xl text-center'>
-                <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
-                  Woran wir arbeiten
-                </h2>
+                <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Woran ich arbeite</h2>
                 <p className='mt-4 text-base text-white/70 sm:text-lg'>
                   Ruhe im Körper. Fokus im Leben.
                 </p>
@@ -434,26 +576,54 @@ export default function NLP() {
                   {
                     title: 'Gedankenkarussell',
                     text: 'Mehr innere Ruhe, weniger Dauerschleifen im Kopf.',
+                    detail:
+                      'Wir identifizieren wiederkehrende Gedankenketten, entkoppeln sie von Stressreaktionen und trainieren Fokus-Wechsel. Du bekommst klare Anker für den Alltag, damit Grübeln nicht mehr automatisch übernimmt.',
                     points: ['Klarer denken', 'Selbststeuerung stärken'],
                     icon: '🌀',
+                    how: [
+                      'Gedankenmuster erkennen & benennen',
+                      'Stopp- & Reframe-Techniken aufbauen',
+                      'Fokus-Rituale für Alltag & Arbeit',
+                    ],
                   },
                   {
                     title: 'Emotionen regulieren',
                     text: 'Trigger bewusster wahrnehmen und souveräner reagieren.',
+                    detail:
+                      'Wir entschlüsseln Trigger, stabilisieren den inneren Zustand und üben neue Reaktionen in realen Situationen. So entsteht Ruhe, ohne Gefühle zu unterdrücken.',
                     points: ['Gelassen bleiben', 'Stress schneller lösen'],
                     icon: '💗',
+                    how: [
+                      'Trigger-Map & Auslöser analysieren',
+                      'State-Management für Sofort-Beruhigung',
+                      'Neue Reaktionsketten verankern',
+                    ],
                   },
                   {
                     title: 'Ziele, die wirklich passen',
                     text: 'Fokus setzen, Prioritäten ordnen und dranbleiben.',
+                    detail:
+                      'Wir prüfen Ziele auf innere Stimmigkeit, klären Prioritäten und bauen messbare Schritte. Du bekommst eine klare Roadmap mit realistischen Meilensteinen.',
                     points: ['Konsequent handeln', 'Energie zielgerichtet nutzen'],
                     icon: '🎯',
+                    how: [
+                      'Zielbild schärfen & Werte checken',
+                      'Prioritäten-Filter für Entscheidungen',
+                      'Umsetzungsplan mit Wochenfokus',
+                    ],
                   },
                   {
-                    title: 'Ziele, die wirklich passe',
-                    text: 'Fokus setzen, Prioritäten ordnen und dranbleiben.',
-                    points: ['Konsequent handeln', 'Energie zielgerichtet nutzen'],
-                    icon: '🎯',
+                    title: 'Selbstwert & Grenzen',
+                    text: 'Klar kommunizieren, Nein sagen und dich selbst ernst nehmen.',
+                    detail:
+                      'Wir stärken Selbstbild und Sprache, üben klare Grenzen und trainieren Konfliktgespräche. So entsteht Sicherheit in Auftreten und Beziehungen.',
+                    points: ['Sicher auftreten', 'Grenzen respektieren'],
+                    icon: '🛡️',
+                    how: [
+                      'Selbstbild stärken & innere Regeln klären',
+                      'Grenzen formulieren & halten üben',
+                      'Konfliktgespräche strukturiert führen',
+                    ],
                   },
                 ].map((item) => (
                   <GlassCard
@@ -466,6 +636,7 @@ export default function NLP() {
                       <h3 className='text-lg font-semibold text-white'>{item.title}</h3>
                     </div>
                     <p className='mt-4 text-sm text-white/70'>{item.text}</p>
+                    <p className='mt-3 text-xs text-white/60 leading-relaxed'>{item.detail}</p>
                     <ul className='mt-4 space-y-2 text-xs text-white/60'>
                       {item.points.map((point) => (
                         <li
@@ -476,13 +647,28 @@ export default function NLP() {
                         </li>
                       ))}
                     </ul>
+                    <div className='mt-4 rounded-xl border border-white/10 bg-white/5 p-3'>
+                      <p className='text-[11px] uppercase tracking-[0.2em] text-white/50'>
+                        So erreichen wir das
+                      </p>
+                      <ul className='mt-2 space-y-2 text-xs text-white/70'>
+                        {item.how.map((step) => (
+                          <li
+                            key={step}
+                            className='flex items-start gap-2'>
+                            <span className='mt-1 h-1.5 w-1.5 rounded-full bg-[#7DE3FF]' />
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </GlassCard>
                 ))}
               </div>
             </div>
           </section>
           {/* Dein Weg zur Transformation */}
-          <section className='relative py-20 flex flex-col justify-center items-center min-h-[70dvh] border-y border-[--border]'>
+          <section className='relative py-20 flex flex-col justify-center items-center min-h-[70dvh] border-y border-[var(--border)]'>
             <div className='container mx-auto px-4'>
               <div className='pointer-events-none absolute inset-0 -z-10 top-0 rotate-180 md:rotate-0 md:bottom-0'>
                 <div className='absolute inset-0 opacity-90'>
@@ -541,7 +727,7 @@ export default function NLP() {
           {/****** Programme ******/}
           <section
             id='programme'
-            className='relative py-20  border-y border-white/20 bg-white/5 backdrop-blur-2xl flex flex-col justify-center items-center min-h-[70dvh]'>
+            className='relative py-20 border-y border-white/20 bg-[var(--section-bg-accent)] flex flex-col justify-center items-center min-h-[70dvh]'>
             <div className='container mx-auto px-4'>
               <div className='mx-auto max-w-3xl text-center'>
                 <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Programme</h2>
@@ -616,7 +802,7 @@ export default function NLP() {
             </div>
           </section>
           {/* Erfolgsgeschichten */}
-          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-[--border]'>
+          <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-[var(--border)]'>
             <div className='container mx-auto px-4'>
               <div className='mx-auto max-w-3xl text-center'>
                 <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
@@ -655,7 +841,7 @@ export default function NLP() {
           {/* Workshops */}
           <section
             id='workshops'
-            className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] backdrop-blur-2xl bg-white/5'>
+            className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] backdrop-blur-2xl bg-[var(--section-bg-accent)]'>
             <div className='container mx-auto px-4'>
               <div className='mx-auto max-w-3xl text-center'>
                 <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
@@ -794,7 +980,7 @@ export default function NLP() {
           {/***** Über mich *****/}
           <section
             id='ueber'
-            className='py-40  relative min-h-[60dvh] flex flex-col justify-center items-center bg-white/5 backdrop-blur-2xl'>
+            className='py-40 relative min-h-[60dvh] flex flex-col justify-center items-center bg-[var(--section-bg-accent)]'>
             <div className='container px-4 mx-auto'>
               <div className='grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
                 <GlassCard className='p-6'>
@@ -850,7 +1036,7 @@ export default function NLP() {
                     {['NLP Coach', 'Identität & Entscheidungen', 'Potsdam'].map((item) => (
                       <span
                         key={item}
-                        className='rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/80'>
+                        className='rounded-full border border-[--border] bg-white/5 px-4 py-2 text-xs text-white/80'>
                         {item}
                       </span>
                     ))}
@@ -954,33 +1140,48 @@ export default function NLP() {
                     </div>
                     <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
                       <p className='text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
-                        🎓 Timeline
+                        🎓 Ausbildungen
                       </p>
                       <ol className='mt-4 space-y-4 border-l border-[#0B1B2B]/15 pl-5'>
                         {[
                           {
-                            year: '2016',
+                            year: 'Best Life NLP - Ronny Rhode',
                             title: 'NLP Practitioner',
                             text: 'Grundlagen, Sprache, Wahrnehmung & Reframing.',
                           },
                           {
-                            year: '2018',
-                            title: 'NLP Master',
+                            year: 'Neures - DVNLP',
+                            title: 'NLP Practitioner (Zweitausbildung)',
                             text: 'Vertiefung: Identität, Wertearbeit & Change-Strategien.',
                           },
                           {
-                            year: '2020',
-                            title: 'Coach & Mentaltrainer',
+                            year: 'Best Life NLP - Ronny Rhode',
+                            title: 'NLP Master',
                             text: 'Zielarbeit, Ressourcenaktivierung, Umsetzungspläne.',
                           },
                           {
-                            year: '2023',
-                            title: 'Systemische Tools',
+                            year: 'Best Life NLP - Ronny Rhode',
+                            title: 'NLP Coach',
                             text: 'Kontext, Muster, Dynamiken in Teams & Beziehungen.',
+                          },
+                          {
+                            year: 'Reiki Meisterin Andrea Brüsch',
+                            title: 'Reiki Heilung I',
+                            text: 'Einweihung zur Selbst- & Fremdheilung. Energiearbeit & Achtsamkeit.',
+                          },
+                          {
+                            year: 'Tony Robbins - Greator',
+                            title: 'Unleash the Power Within',
+                            text: 'Firewalk und intensive Persönlichkeitsentwicklung. Fokus auf Durchbruchsmomente.',
+                          },
+                          {
+                            year: 'Best Life NLP - Ronny Rhode',
+                            title: 'NLP Trainer',
+                            text: 'Ausbildung angefangen. Abschluß Ende 2026',
                           },
                         ].map((item) => (
                           <li
-                            key={item.year}
+                            key={item.text}
                             className='relative'>
                             <span className='absolute -left-[27px] top-1.5 h-3 w-3 rounded-full bg-[#00E5FF] shadow-[0_0_10px_rgba(0,229,255,0.6)]' />
                             <div className='rounded-xl border border-white/60 bg-white/90 p-3'>
@@ -998,10 +1199,18 @@ export default function NLP() {
                     </div>
                     <div className='grid gap-3 sm:grid-cols-2'>
                       {[
-                        { icon: '🥋', title: 'WingTsun', text: 'Fokus, Präsenz & Klarheit.' },
-                        { icon: '🧊', title: 'Eisbaden', text: 'Resilienz & Nervensystem-Reset.' },
-                        { icon: '🎯', title: 'Mentales Training', text: 'Zielbilder verankern.' },
-                        { icon: '🗣️', title: 'Kommunikation', text: 'Sprache als Werkzeug.' },
+                        { icon: '🥋', title: 'WingTsun', text: 'Graduierung: 1. Techniker' },
+                        {
+                          icon: '🧊',
+                          title: 'Eisbaden',
+                          text: 'Resilienz & Gesundheit. Zeit 5:50 min',
+                        },
+                        { icon: '🎯', title: 'Fitness', text: 'Fokus, Ausdauer & Kraft.' },
+                        {
+                          icon: '🆘',
+                          title: 'Sanitätsdienst DRK Berlin',
+                          text: 'Leben retten und helfen.',
+                        },
                       ].map((item) => (
                         <div
                           key={item.title}
@@ -1022,7 +1231,7 @@ export default function NLP() {
           {/****** Kontakt ******/}
           <section
             id='kontakt'
-            className='relative py-40 border-y border-[--border]'>
+            className='relative py-40 border-y border-[var(--border)]'>
             <div className='container mx-auto px-4'>
               <div className='grid gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
                 <div>
@@ -1062,7 +1271,7 @@ export default function NLP() {
           </section>
         </main>
         {/* Footer   */}
-        <footer className='border-t border-white/10 bg-white/5 py-10'>
+        <footer className='bg-[var(--section-bg-accent)] py-10'>
           <div className='container mx-auto flex flex-col gap-6 px-4 text-sm text-white/70 md:flex-row md:items-center md:justify-between'>
             <div className='flex items-center gap-3'>
               <div>
@@ -1131,12 +1340,32 @@ export default function NLP() {
             --surface-strong: rgba(255, 255, 255, 0.1);
             --border: rgba(255, 255, 255, 0.2);
             --border-strong: rgba(255, 255, 255, 0.45);
-            --border-section: rgba(255, 255, 255, 0.05);
             --button-text: #001018;
             --glow: rgba(0, 229, 255, 0.24);
             --glow-strong: rgba(0, 229, 255, 0.36);
             --hero-glow: rgba(0, 229, 255, 0.35);
             --hero-fade: rgba(5, 11, 18, 0.6);
+            --section-bg-accent: rgba(255, 255, 255, 0.05);
+            background-image:
+              radial-gradient(circle at 12% 18%, rgba(0, 229, 255, 0.08), transparent 45%),
+              radial-gradient(circle at 86% 22%, rgba(34, 197, 94, 0.08), transparent 40%),
+              radial-gradient(circle at 20% 78%, rgba(125, 227, 255, 0.08), transparent 45%),
+              repeating-linear-gradient(
+                90deg,
+                rgba(125, 227, 255, 0.06) 0,
+                rgba(125, 227, 255, 0.06) 1px,
+                transparent 1px,
+                transparent 26px
+              ),
+              repeating-linear-gradient(
+                0deg,
+                rgba(125, 227, 255, 0.04) 0,
+                rgba(125, 227, 255, 0.04) 1px,
+                transparent 1px,
+                transparent 26px
+              ),
+              linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
+            background-attachment: fixed;
           }
           .theme-warm {
             --bg: #fff6ea;
@@ -1154,6 +1383,27 @@ export default function NLP() {
             --glow-strong: rgba(232, 160, 90, 0.4);
             --hero-glow: rgba(241, 195, 138, 0.45);
             --hero-fade: rgba(255, 246, 234, 0.85);
+            --section-bg-accent: #ff9e001f;
+            background-image:
+              radial-gradient(circle at 14% 16%, rgba(232, 160, 90, 0.18), transparent 50%),
+              radial-gradient(circle at 82% 24%, rgba(215, 115, 75, 0.16), transparent 45%),
+              radial-gradient(circle at 18% 82%, rgba(241, 195, 138, 0.2), transparent 55%),
+              repeating-linear-gradient(
+                90deg,
+                rgba(232, 160, 90, 0.08) 0,
+                rgba(232, 160, 90, 0.08) 1px,
+                transparent 1px,
+                transparent 28px
+              ),
+              repeating-linear-gradient(
+                0deg,
+                rgba(215, 115, 75, 0.06) 0,
+                rgba(215, 115, 75, 0.06) 1px,
+                transparent 1px,
+                transparent 28px
+              ),
+              linear-gradient(180deg, rgba(255, 255, 255, 0.25), transparent 40%);
+            background-attachment: fixed;
           }
           .theme-warm .text-white {
             color: var(--text) !important;
