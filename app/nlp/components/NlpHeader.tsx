@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { PrimaryButton } from '@/app/nlp/components/Buttons';
 
@@ -13,9 +14,17 @@ type NlpHeaderProps = {
 
 export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const isNlpLanding = pathname === '/nlp';
+  const sectionHref = (id: string) => (isNlpLanding ? `#${id}` : `/nlp#${id}`);
 
   const handleContactClick = () => {
-    document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (isNlpLanding) {
+      document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      router.push('/nlp#kontakt');
+    }
     setIsMenuOpen(false);
   };
 
@@ -43,35 +52,35 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
             </span>
           </div>
         </Link>
-        <nav className='hidden items-center gap-8 text-sm text-white/80 md:flex font-semibold'>
+        <nav className='hidden items-center gap-4 lg:gap-8 text-sm text-white/80 md:flex font-semibold'>
           <Link
             href='/'
             className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
             Hauptseite
           </Link>
           <Link
-            href='#ueber'
+            href={sectionHref('ueber')}
             className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
             Über mich
           </Link>
           <Link
-            href='#programme'
+            href={sectionHref('programme')}
             className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
             Programme
           </Link>
           <Link
-            href='#workshops'
+            href={sectionHref('workshops')}
             className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
             Preise
           </Link>
           <Link
-            href='#kontakt'
+            href={sectionHref('kontakt')}
             className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
             Kontakt
           </Link>
         </nav>
         <PrimaryButton
-          href='#kontakt'
+          href={sectionHref('kontakt')}
           onClick={handleContactClick}
           className='inline-flex md:hidden! px-4 py-2! text-xs md:px-6 md:py-3 md:text-sm'>
           Gratis Erstgespräch
@@ -82,12 +91,12 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
             onClick={onToggleTheme}
             className='cursor-pointer hidden items-center gap-2 rounded-full border border-border bg-(--surface) px-4 py-2 text-xs font-semibold text-(--text) transition hover:bg-(--surface-strong) md:inline-flex'
             aria-pressed={isWarmTheme}>
-            {isWarmTheme ? 'Cool Mood' : 'Warm Mood'}
+            {isWarmTheme ? 'Kühl' : 'Warm'}
           </button>
           <PrimaryButton
-            href='#kontakt'
+            href={sectionHref('kontakt')}
             onClick={handleContactClick}
-            className='hidden! md:inline-flex px-4 py-2 text-xs md:px-6 md:py-3 md:text-sm'>
+            className='hidden! lg:inline-flex! px-4 py-2 text-xs md:px-6 md:py-3 md:text-sm'>
             Gratis Erstgespräch
           </PrimaryButton>
           <button
@@ -118,25 +127,25 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
               Hauptseite
             </Link>
             <Link
-              href='#ueber'
+              href={sectionHref('ueber')}
               onClick={() => setIsMenuOpen(false)}
               className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
               Über mich
             </Link>
             <Link
-              href='#programme'
+              href={sectionHref('programme')}
               onClick={() => setIsMenuOpen(false)}
               className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
               Programme
             </Link>
             <Link
-              href='#workshops'
+              href={sectionHref('workshops')}
               onClick={() => setIsMenuOpen(false)}
               className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
               Preise
             </Link>
             <Link
-              href='#kontakt'
+              href={sectionHref('kontakt')}
               onClick={() => setIsMenuOpen(false)}
               className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
               Kontakt
@@ -148,13 +157,13 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
                 setIsMenuOpen(false);
               }}
               className='mt-2 inline-flex items-center justify-between rounded-xl border border-border bg-(--surface) px-4 py-2 text-xs font-semibold text-(--text) transition hover:bg-(--surface-strong)'>
-              <span>{isWarmTheme ? 'Kühles Schema' : 'Warmes Schema'}</span>
+              <span>{isWarmTheme ? 'Kühl' : 'Warm'}</span>
               <span className='text-accent'>{isWarmTheme ? '❄️' : '🌅'}</span>
             </button>
           </nav>
           <div className='mt-4'>
             <PrimaryButton
-              href='#kontakt'
+              href={sectionHref('kontakt')}
               className='w-full'
               onClick={handleContactClick}>
               Kostenloses Erstgespräch

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import AboutSection from '@/app/nlp/components/AboutSection';
 import ContactSection from '@/app/nlp/components/ContactSection';

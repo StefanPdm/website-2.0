@@ -23,25 +23,22 @@ export default function ImpressumPage() {
         <h2 className='text-xl font-semibold text-white mb-3'>Anbieter</h2>
         <div className='space-y-1 text-slate-300'>
           <p>Stefan Heinemann</p>
-          <p>Straße Hausnummer</p>
-          <p>PLZ Ort, Deutschland</p>
+          <p>Schmiedegasse 53</p>
+          <p>14469 Potsdam</p>
         </div>
         <div className='mt-4 space-y-1 text-slate-300'>
           <p>
             E-Mail:{' '}
             <a
               className='underline decoration-white/30 hover:text-white'
-              href='mailto:mail@example.com'>
-              mail@example.com
+              href='mailto:webdeveloper@heinemann.berlin'>
+              webdeveloper@heinemann.berlin
             </a>
           </p>
-          <p>Telefon: +49 (0) 000 000000</p>
         </div>
         <div className='mt-4 grid gap-1 text-slate-300'>
           <p>Vertretungsberechtigt: Stefan Heinemann</p>
-          <p>USt-IdNr.: DE000000000 (falls vorhanden)</p>
-          <p>Registergericht: — (falls vorhanden)</p>
-          <p>Registernummer: — (falls vorhanden)</p>
+          <p>Steuerliche ID: 54 265 071 397</p>
         </div>
       </section>
 

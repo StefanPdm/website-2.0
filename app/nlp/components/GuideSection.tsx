@@ -26,7 +26,7 @@ export default function GuideSection() {
   return (
     <section
       id='leitfaden'
-      className='relative py-20 border-y border-[var(--border)]'>
+      className='relative py-20 border-y border-border'>
       <div className='container mx-auto px-4 min-h-[60dvh] flex flex-col justify-center items-center '>
         <div className='grid gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
           <div>
@@ -103,8 +103,10 @@ export default function GuideSection() {
                 />
                 {hasError('email') && <p className='mt-2 text-xs text-red-300'>{errors.email}</p>}
               </div>
-              <PrimaryButton className='w-full'>Jetzt herunterladen</PrimaryButton>
-              <p className='text-xs text-white/50'>Kein Spam. Abmeldung jederzeit.</p>
+              <PrimaryButton className='w-full'>Jetzt Link anfordern</PrimaryButton>
+              <p className='text-xs text-white/50'>
+                Kein Spam. Kein Verkauf. Keine weiteren Nachrichten.
+              </p>
             </form>
           </GlassCard>
         </div>
