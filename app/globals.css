@@ -134,6 +134,145 @@ body {
     sans-serif;
 }
 
+/* NLP theme tokens */
+.theme-cool {
+  --bg: #050b12;
+  --text: #e6f7ff;
+  --muted: rgba(230, 247, 255, 0.75);
+  --accent: #00e5ff;
+  --accent-2: #22c55e;
+  --accent-soft: #7de3ff;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-strong: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.2);
+  --border-strong: rgba(255, 255, 255, 0.45);
+  --button-text: #001018;
+  --glow: rgba(0, 229, 255, 0.24);
+  --glow-strong: rgba(0, 229, 255, 0.36);
+  --hero-glow: rgba(0, 229, 255, 0.35);
+  --hero-fade: rgba(5, 11, 18, 0.6);
+  --section-bg-accent: rgba(255, 255, 255, 0.05);
+  background-color: var(--bg);
+  color: var(--text);
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(0, 229, 255, 0.08), transparent 45%),
+    radial-gradient(circle at 86% 22%, rgba(34, 197, 94, 0.08), transparent 40%),
+    radial-gradient(circle at 20% 78%, rgba(125, 227, 255, 0.08), transparent 45%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(125, 227, 255, 0.06) 0,
+      rgba(125, 227, 255, 0.06) 1px,
+      transparent 1px,
+      transparent 26px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(125, 227, 255, 0.04) 0,
+      rgba(125, 227, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 26px
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
+  background-attachment: fixed;
+}
+
+.theme-warm {
+  --bg: #fff6ea;
+  --text: #2b1a0f;
+  --muted: rgba(43, 26, 15, 0.75);
+  --accent: #eaa765;
+  --accent-2: #b97029;
+  --accent-soft: rgba(0, 0, 0, 0.8);
+  --surface: rgba(255, 255, 255, 0.26);
+  --surface-strong: rgba(255, 255, 255, 0.45);
+  --border: rgba(0, 0, 0, 0.55);
+  --border-strong: rgba(0, 0, 0, 0.75);
+  --button-text: #2b1a0f;
+  --glow: rgba(232, 160, 90, 0.25);
+  --glow-strong: rgba(232, 160, 90, 0.4);
+  --hero-glow: rgba(241, 195, 138, 0.45);
+  --hero-fade: rgba(255, 246, 234, 0.85);
+  --section-bg-accent: #ff9e001f;
+  background-color: var(--bg);
+  color: var(--text);
+  background-image:
+    radial-gradient(circle at 14% 16%, rgba(232, 160, 90, 0.18), transparent 50%),
+    radial-gradient(circle at 82% 24%, rgba(215, 115, 75, 0.16), transparent 45%),
+    radial-gradient(circle at 18% 82%, rgba(241, 195, 138, 0.2), transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(232, 160, 90, 0.08) 0,
+      rgba(232, 160, 90, 0.08) 1px,
+      transparent 1px,
+      transparent 28px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(215, 115, 75, 0.06) 0,
+      rgba(215, 115, 75, 0.06) 1px,
+      transparent 1px,
+      transparent 28px
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.25), transparent 40%);
+  background-attachment: fixed;
+}
+
+.theme-warm .text-white {
+  color: var(--text) !important;
+}
+
+.theme-warm .text-white\/80 {
+  color: rgba(43, 26, 15, 0.85) !important;
+}
+
+.theme-warm .text-white\/75 {
+  color: rgba(43, 26, 15, 0.78) !important;
+}
+
+.theme-warm .text-white\/70 {
+  color: rgba(43, 26, 15, 0.72) !important;
+}
+
+.theme-warm .text-white\/60 {
+  color: rgba(43, 26, 15, 0.62) !important;
+}
+
+.theme-warm .text-white\/50 {
+  color: rgba(43, 26, 15, 0.55) !important;
+}
+
+.theme-warm .text-white\/40 {
+  color: rgba(43, 26, 15, 0.48) !important;
+}
+
+.theme-warm .text-\[\#7DE3FF\],
+.theme-warm .text-\[\#00E5FF\] {
+  color: var(--accent) !important;
+}
+
+.theme-warm .bg-\[\#7DE3FF\],
+.theme-warm .bg-\[\#00E5FF\] {
+  background-color: var(--accent) !important;
+}
+
+.theme-warm .border-\[\#7DE3FF\],
+.theme-warm .border-\[\#00E5FF\] {
+  border-color: var(--accent) !important;
+}
+
+.theme-warm .ring-\[\#7DE3FF\],
+.theme-warm .ring-\[\#00E5FF\] {
+  --tw-ring-color: var(--accent) !important;
+}
+
+.theme-warm .nlp-primary-button:hover {
+  box-shadow:
+    0 0 45px rgba(255, 255, 255, 0.95),
+    0 0 90px rgba(255, 255, 255, 0.7),
+    0 0 140px rgba(255, 255, 255, 0.45);
+  filter: drop-shadow(0 0 26px rgba(255, 255, 255, 0.85));
+}
+
 .glow-cyan {
   filter: drop-shadow(0 0 10px rgba(41, 172, 218, 0.55))
     drop-shadow(0 0 30px rgba(41, 172, 218, 0.18));
