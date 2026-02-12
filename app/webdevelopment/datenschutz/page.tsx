@@ -23,13 +23,13 @@ export default function DatenschutzPage() {
         <h2 className='text-xl font-semibold text-white mb-3'>Verantwortlicher</h2>
         <div className='space-y-1 text-slate-300'>
           <p>Stefan Heinemann</p>
-          <p>Straße Hausnummer · PLZ Ort</p>
+          <p>Schmiedegasse 53 ⁍ 14469 Potsdam</p>
           <p>
             E-Mail:{' '}
             <a
               className='underline decoration-white/30 hover:text-white'
-              href='mailto:mail@example.com'>
-              mail@example.com
+              href='mailto:webdeveloper@heinemann.berlin'>
+              webdeveloper@heinemann.berlin
             </a>
           </p>
         </div>

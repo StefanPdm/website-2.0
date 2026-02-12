@@ -562,7 +562,6 @@ export default function WebdevelopmentPage() {
             </ElectricBorder>
           </div>
         </section>
-        <ScrollToTop />
       </div>
       {/* Footer */}
       <footer className='relative z-20 border-t border-white/10 bg-transparent'>
@@ -597,15 +596,10 @@ export default function WebdevelopmentPage() {
               className='hover:text-white'>
               Cookies
             </Link>
-            <span className='text-slate-600'>·</span>
-            <Link
-              href='/webdevelopment/agb'
-              className='hover:text-white'>
-              AGB
-            </Link>
+
             <span className='text-slate-600'>·</span>
             <a
-              href='https://www.linkedin.com/in/your-profile'
+              href='https://www.linkedin.com/in/stefan-h-317377267/'
               target='_blank'
               rel='noopener noreferrer'
               className='hover:text-white'>
@@ -614,6 +608,7 @@ export default function WebdevelopmentPage() {
           </div>
         </div>
       </footer>
+      <ScrollToTop />
     </div>
   );
 }
