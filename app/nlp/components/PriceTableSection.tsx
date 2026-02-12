@@ -78,19 +78,20 @@ export default function PriceTableSection() {
         <div className='mt-12 grid gap-6 lg:grid-cols-2 xl:grid-cols-4'>
           {prices.map((item) => {
             const isMentoring = item.mentoring;
+            const isHighlight = item.highlight;
 
             return (
               <GlassCard
                 key={item.title}
-                className={`flex h-full flex-col p-6 text-left ${
+                className={`flex h-full flex-col p-6 text-left relative ${
                   item.highlight
                     ? 'ring-1 ring-(--accent)/45 shadow-[0_0_60px_var(--glow-strong)]'
                     : ''
-                }`}>
+                } ${isHighlight ? 'border-2' : 'border'}`}>
                 <div className='flex items-start justify-between gap-3'>
                   <div>
                     <span
-                      className={`inline-flex items-center rounded-full border px-3 py-1 text-[0.65rem] uppercase tracking-[0.25em] ${
+                      className={`inline-flex items-center rounded-full px-3 py-1 text-[0.65rem] border uppercase tracking-[0.25em] ${
                         isMentoring
                           ? 'border-(--accent)/40 bg-(--accent)/10 font-semibold text-accent'
                           : 'border-(--accent)/40 bg-white/5 text-white/70'
@@ -107,7 +108,7 @@ export default function PriceTableSection() {
                       {item.icon}
                     </span>
                     {item.highlight && (
-                      <span className='rounded-full border border-(--accent)/40 bg-(--accent)/15 px-3 py-1 text-[0.6rem] uppercase tracking-[0.2em] text-accent'>
+                      <span className='rounded-full border-2 border-(--border-strong) bg-(--accent)/15 px-3 py-1 text-[0.6rem] uppercase tracking-[0.2em] text-accent absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white'>
                         Beliebt
                       </span>
                     )}

@@ -10,10 +10,10 @@ export default function AboutSection() {
   const [aboutModal, setAboutModal] = useState<null | 'before' | 'education'>(null);
   const [activeImage, setActiveImage] = useState(0);
   const images = [
-    '/images-nlp/portrait-workshop.png',
-    '/images-nlp/portrait-treppe.png',
-    '/images-nlp/portrait-workshop.png',
-    '/images-nlp/portrait-treppe.png',
+    '/images-nlp/portrait-workshop.webp',
+    '/images-nlp/portrait-treppe.webp',
+    '/images-nlp/portrait-coaching.webp',
+    '/images-nlp/portrait-firewalk.webp',
   ];
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function AboutSection() {
         className='py-40 relative min-h-[60dvh] flex flex-col justify-center items-center bg-(--section-bg-accent)'>
         <div className='container px-4 mx-auto'>
           <div className='grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
-            <GlassCard className='p-6'>
+            <GlassCard className='p-6 order-2 md:order-1'>
               <div className='relative overflow-hidden rounded-2xl bg-white/5'>
                 <div className='aspect-5/4 w-full overflow-hidden'>
                   <div
@@ -69,7 +69,7 @@ export default function AboutSection() {
                   ))}
                 </div>
               </div>
-              <div className='mt-5 space-y-2 text-sm text-white/70'>
+              <div className='mt-5 space-y-2 text-sm text-white/70 order-1 md:order-2'>
                 <p>
                   <span className='font-bold text-white'>Schwerpunkte:</span> Identität
                   &nbsp;|&nbsp; Entscheidungen &nbsp;|&nbsp; innere Ausrichtung.
@@ -133,7 +133,7 @@ export default function AboutSection() {
       </section>
       {aboutModal && (
         <div
-          className='fixed inset-0 z-50 flex items-center justify-center px-4 py-10'
+          className='fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 py-10'
           role='dialog'
           aria-modal='true'>
           <button
@@ -142,7 +142,7 @@ export default function AboutSection() {
             className='absolute inset-0 bg-[#050B12]/60 backdrop-blur-sm'
             aria-label='Modal schließen'
           />
-          <div className='relative w-full max-w-3xl rounded-3xl border border-white/60 bg-[linear-gradient(140deg,rgba(255,255,255,0.95),rgba(230,247,255,0.86))] p-6 text-[#0B1B2B] shadow-[0_30px_90px_rgba(0,229,255,0.25)] backdrop-blur-xl'>
+          <div className='relative w-full max-w-3xl max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-3xl border border-white/60 bg-[linear-gradient(140deg,rgba(255,255,255,0.95),rgba(230,247,255,0.86))] p-6 text-[#0B1B2B] shadow-[0_30px_90px_rgba(0,229,255,0.25)] backdrop-blur-xl'>
             <div className='flex items-start justify-between gap-4'>
               <div>
                 <p className='text-xs uppercase tracking-[0.3em] text-[#0B1B2B]/70'>

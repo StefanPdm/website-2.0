@@ -217,7 +217,7 @@ export default function ProgrammeSection() {
       </section>
       {activeModal && (
         <div
-          className='fixed inset-0 z-50 flex items-center justify-center px-4 py-10'
+          className='fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 py-10'
           role='dialog'
           aria-modal='true'>
           <button
@@ -226,7 +226,7 @@ export default function ProgrammeSection() {
             className='absolute inset-0 bg-[#050B12]/60 backdrop-blur-sm'
             aria-label='Modal schließen'
           />
-          <div className='relative w-full max-w-4xl overflow-hidden rounded-[32px] border border-white/40 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.85),rgba(255,255,255,0.65))] p-6 text-[#0B1B2B] shadow-[0_30px_100px_rgba(0,0,0,0.25)] backdrop-blur-xl'>
+          <div className='relative w-full max-w-4xl max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-[32px] border border-white/40 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.85),rgba(255,255,255,0.65))] p-6 text-[#0B1B2B] shadow-[0_30px_100px_rgba(0,0,0,0.25)] backdrop-blur-xl'>
             <div className='absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,229,255,0.15),transparent_45%),radial-gradient(circle_at_80%_10%,rgba(34,197,94,0.18),transparent_40%)] opacity-80' />
             <div className='relative z-10'>
               <div className='flex items-start justify-between gap-4'>

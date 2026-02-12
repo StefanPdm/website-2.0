@@ -60,7 +60,10 @@ export default function TransformationSection({ isWarmTheme }: TransformationSec
                 </div>
               </GlassCard>
               {index < steps.length - 1 && (
-                <div className='absolute -right-3 top-1/2 hidden h-px w-6 -translate-y-1/2 bg-gradient-to-r from-[var(--accent)] to-transparent lg:block' />
+                <>
+                  <div className='absolute -right-3 top-1/2 hidden h-px w-6 -translate-y-1/2 bg-gradient-to-r from-[var(--accent)] to-transparent lg:block' />
+                  <div className='absolute bottom-0 left-0 h-6 w-px translate-x-12 translate-y-full bg-gradient-to-b from-[var(--accent)] to-transparent lg:hidden' />
+                </>
               )}
             </div>
           ))}

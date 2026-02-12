@@ -11,7 +11,7 @@ export default function NlpIntroSection() {
     <>
       <section
         id='nlp'
-        className='py-20 border-y border-[var(--border)] relative min-h-[60dvh] flex flex-col justify-center items-center'>
+        className='py-20 border-y border-border relative min-h-[60dvh] flex flex-col justify-center items-center'>
         <div className='container px-4 flex flex-col justify-center items-center mx-auto'>
           <div className='mx-auto max-w-3xl text-center'>
             <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Was ist NLP?</h2>
@@ -87,7 +87,7 @@ export default function NlpIntroSection() {
       </section>
       {nlpModal && (
         <div
-          className='fixed inset-0 z-50 flex items-center justify-center px-4 py-10'
+          className='fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 py-10'
           role='dialog'
           aria-modal='true'>
           <button
@@ -96,7 +96,7 @@ export default function NlpIntroSection() {
             className='absolute inset-0 bg-black/40 backdrop-blur-sm'
             aria-label='Modal schließen'
           />
-          <div className='relative w-full max-w-3xl rounded-3xl border border-slate-200 bg-white/90 p-6 text-[#1b1410] shadow-[0_30px_90px_rgba(0,0,0,0.25)]'>
+          <div className='relative w-full max-w-3xl max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-3xl border border-slate-200 bg-white/90 p-6 text-[#1b1410] shadow-[0_30px_90px_rgba(0,0,0,0.25)]'>
             <div className='flex items-start justify-between gap-4'>
               <div>
                 <p className='text-xs uppercase tracking-[0.3em] text-[#5a4637]'>
@@ -117,7 +117,7 @@ export default function NlpIntroSection() {
               <button
                 type='button'
                 onClick={() => setNlpModal(null)}
-                className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-[#1b1410] transition hover:bg-slate-100'
+                className='inline-flex h-10 w-10 aspect-square flex-shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-[#1b1410] transition hover:bg-slate-100'
                 aria-label='Modal schließen'>
                 ✕
               </button>

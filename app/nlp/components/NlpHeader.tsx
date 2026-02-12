@@ -34,7 +34,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
               className='h-10 w-10 md:h-12 md:w-12'
             />
           </div>
-          <div className='hidden md:flex flex-col items-start justify-center'>
+          <div className='hidden! md:flex flex-col items-start justify-center'>
             <span className='text-base font-extrabold text-left tracking-[0.2em] text-(--accent-soft) uppercase sm:text-lg'>
               SNAC Coaching
             </span>
@@ -70,6 +70,12 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
             Kontakt
           </Link>
         </nav>
+        <PrimaryButton
+          href='#kontakt'
+          onClick={handleContactClick}
+          className='inline-flex md:hidden! px-4 py-2! text-xs md:px-6 md:py-3 md:text-sm'>
+          Gratis Erstgespräch
+        </PrimaryButton>
         <div className='flex items-center gap-2 sm:gap-3'>
           <button
             type='button'
@@ -81,7 +87,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
           <PrimaryButton
             href='#kontakt'
             onClick={handleContactClick}
-            className='hidden px-4 py-2 text-xs sm:inline-flex md:px-6 md:py-3 md:text-sm'>
+            className='hidden! md:inline-flex px-4 py-2 text-xs md:px-6 md:py-3 md:text-sm'>
             Gratis Erstgespräch
           </PrimaryButton>
           <button

@@ -12,35 +12,35 @@ export default function NlpFooter() {
         </div>
         <div className='flex flex-wrap items-center gap-6 text-xs'>
           <Link
-            href='#'
+            href='/nlp/datenschutz'
             className='transition hover:text-white'>
             Datenschutz
           </Link>
           <Link
-            href='#'
+            href='/nlp/cookies'
+            className='transition hover:text-white'>
+            Cookies
+          </Link>
+          <Link
+            href='/nlp/agb'
             className='transition hover:text-white'>
             AGB
           </Link>
           <Link
-            href='#'
+            href='/nlp/impressum'
             className='transition hover:text-white'>
             Impressum
           </Link>
         </div>
         <div className='flex items-center gap-3'>
-          {[
-            { label: 'Instagram', icon: '◎' },
-            { label: 'LinkedIn', icon: 'in' },
-            { label: 'YouTube', icon: '▶' },
-          ].map((item) => (
-            <Link
-              key={item.label}
-              href='#'
-              aria-label={item.label}
-              className='inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xs text-white/70 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF]'>
-              {item.icon}
-            </Link>
-          ))}
+          <Link
+            href='https://www.linkedin.com/in/stefan-h-317377267/'
+            rel='noopener noreferrer'
+            target='_blank'
+            aria-label='LinkedIn'
+            className='inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5  text-white/70 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF]'>
+            in
+          </Link>
         </div>
       </div>
       <div className='container mx-auto mt-6 px-4 text-xs text-white/40'>
