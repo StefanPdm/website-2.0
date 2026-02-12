@@ -69,7 +69,7 @@ export default function AboutSection() {
                   ))}
                 </div>
               </div>
-              <div className='mt-5 space-y-2 text-sm text-white/70 order-1 md:order-2'>
+              <div className='mt-5 space-y-2 text-sm text-white/70 '>
                 <p>
                   <span className='font-bold text-white'>Schwerpunkte:</span> Identität
                   &nbsp;|&nbsp; Entscheidungen &nbsp;|&nbsp; innere Ausrichtung.
@@ -88,7 +88,7 @@ export default function AboutSection() {
                 </PrimaryButton>
               </div>
             </GlassCard>
-            <div>
+            <div className='order-1 md:order-2'>
               <p className='text-xs uppercase tracking-[0.3em] text-[#7DE3FF]'>Über mich</p>
               <h2 className='mt-4 text-3xl font-semibold text-white sm:text-4xl'>
                 Stefan Heinemann
