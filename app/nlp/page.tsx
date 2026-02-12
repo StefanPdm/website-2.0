@@ -19,7 +19,7 @@ import PriceTableSection from '@/app/nlp/components/PriceTableSection';
 const publicSans = Public_Sans({ subsets: ['latin'], display: 'swap' });
 
 export default function NLP() {
-  const [isWarmTheme, setIsWarmTheme] = useState(true);
+  const [isWarmTheme, setIsWarmTheme] = useState(false);
 
   return (
     <div

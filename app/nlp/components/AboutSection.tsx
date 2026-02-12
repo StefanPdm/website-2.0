@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import GlassCard from '@/components/GlassCard';
@@ -8,6 +8,21 @@ import { PrimaryButton, SecondaryButton } from '@/app/nlp/components/Buttons';
 
 export default function AboutSection() {
   const [aboutModal, setAboutModal] = useState<null | 'before' | 'education'>(null);
+  const [activeImage, setActiveImage] = useState(0);
+  const images = [
+    '/images-nlp/portrait-workshop.png',
+    '/images-nlp/portrait-treppe.png',
+    '/images-nlp/portrait-workshop.png',
+    '/images-nlp/portrait-treppe.png',
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveImage((prev) => (prev + 1) % images.length);
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
     <>
@@ -18,23 +33,41 @@ export default function AboutSection() {
           <div className='grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
             <GlassCard className='p-6'>
               <div className='relative overflow-hidden rounded-2xl bg-white/5'>
-                <div className='aspect-5/4 w-full'>
-                  <Image
-                    src='/images-nlp/portrait-workshop.png'
-                    alt='Stefan Heinemann'
-                    fill
-                    className='object-cover object-top transition duration-500 ease-out group-hover:opacity-0'
-                    sizes='(min-width: 1024px) 40vw, 80vw'
-                  />
-                  <Image
-                    src='/images-nlp/portrait-treppe.png'
-                    alt='Stefan Heinemann im Coaching'
-                    fill
-                    className='object-cover object-top opacity-0 transition duration-500 ease-out group-hover:opacity-100'
-                    sizes='(min-width: 1024px) 40vw, 80vw'
-                  />
+                <div className='aspect-5/4 w-full overflow-hidden'>
+                  <div
+                    className='flex h-full w-full transition-transform duration-700 ease-out'
+                    style={{ transform: `translateX(-${activeImage * 100}%)` }}>
+                    {images.map((src, index) => (
+                      <div
+                        key={`${src}-${index}`}
+                        className='relative h-full w-full shrink-0'>
+                        <Image
+                          src={src}
+                          alt='Stefan Heinemann'
+                          fill
+                          className='object-cover object-top'
+                          sizes='(min-width: 1024px) 40vw, 80vw'
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 <div className='absolute inset-0 ring-1 ring-white/10' />
+                <div className='absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-2 backdrop-blur'>
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      type='button'
+                      onClick={() => setActiveImage(index)}
+                      className={`h-2 w-2 rounded-full transition ${
+                        index === activeImage
+                          ? 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
+                          : 'bg-white/40 hover:bg-white/70'
+                      }`}
+                      aria-label={`Bild ${index + 1} anzeigen`}
+                    />
+                  ))}
+                </div>
               </div>
               <div className='mt-5 space-y-2 text-sm text-white/70'>
                 <p>

@@ -136,9 +136,11 @@ export default function ContactFormNlp() {
             className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
             <option value=''>Bitte wählen</option>
             <option>Kennenlernen (15 Min.)</option>
-            <option>1:1 Intensiv (90 Min.)</option>
-            <option>Coaching-Serie (6 Sessions)</option>
-            <option>VIP Performance (12 Wochen)</option>
+            <option>1:1 Starter (150 Min.)</option>
+            <option>Mentoring (3 Monate)</option>
+            <option>Mentoring (6 Monate)</option>
+            <option>Workshop: Sprache</option>
+            <option>NLP Essentials </option>
           </select>
         </div>
         <div className='grid gap-1'>

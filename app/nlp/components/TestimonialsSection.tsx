@@ -49,7 +49,7 @@ function StarRow() {
 
 export default function TestimonialsSection() {
   return (
-    <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] border-y border-border'>
+    <section className='relative py-20 flex flex-col justify-center items-center min-h-[80dvh] border-y border-border'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
           <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Erfolgsgeschichten</h2>

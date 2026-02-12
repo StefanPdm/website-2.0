@@ -17,6 +17,7 @@ export function PrimaryButton({ children, className, href, onClick }: ButtonProp
     return (
       <Link
         href={href}
+        onClick={onClick}
         className={`${base} ${className ?? ''}`}>
         {children}
       </Link>
@@ -39,6 +40,7 @@ export function SecondaryButton({ children, className, href, onClick }: ButtonPr
     return (
       <Link
         href={href}
+        onClick={onClick}
         className={`${base} ${className ?? ''}`}>
         {children}
       </Link>

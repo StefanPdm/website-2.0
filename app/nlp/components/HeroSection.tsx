@@ -17,7 +17,7 @@ export default function HeroSection({ isWarmTheme }: HeroSectionProps) {
     <section
       id='start'
       className='relative min-h-dvh flex items-center'>
-      <div className='container mx-auto px-4 pb-20 pt-16 lg:pb-32 lg:pt-24 z-10'>
+      <div className='container mx-auto px-4 pb-20 pt-20 md:pt-16 lg:pb-32 lg:pt-24 z-10'>
         <div className='grid items-center gap-12 lg:grid-cols-2'>
           <div>
             <p className='text-xs uppercase tracking-[0.3em] text-[var(--accent-soft)]'>
@@ -34,7 +34,7 @@ export default function HeroSection({ isWarmTheme }: HeroSectionProps) {
               Entfalte dein volles Potenzial mit Klarheit, Sprache und innerer Ausrichtung – ohne
               esoterischen Nebel.
             </p>
-            <div className='mt-8 flex flex-wrap gap-4'>
+            <div className='hidden mt-8 md:flex flex-wrap gap-4'>
               <PrimaryButton href='#kontakt'>Jetzt starten</PrimaryButton>
               <SecondaryButton href='#ueber'>Mehr erfahren</SecondaryButton>
             </div>

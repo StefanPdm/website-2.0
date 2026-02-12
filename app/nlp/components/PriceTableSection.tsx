@@ -67,7 +67,7 @@ export default function PriceTableSection() {
   return (
     <section
       id='workshops'
-      className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] backdrop-blur-2xl bg-(--section-bg-accent)'>
+      className='relative py-20 flex flex-col justify-center items-center min-h-[80dvh] backdrop-blur-2xl bg-(--section-bg-accent)'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
           <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Preisübersicht</h2>

@@ -14,6 +14,11 @@ type NlpHeaderProps = {
 export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleContactClick = () => {
+    document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className='fixed w-full top-0 z-50 border-b border-black/10 bg-white/5 backdrop-blur-xl'>
       <div className='container mx-auto flex items-center justify-between gap-3 px-4 py-3 md:py-4'>
@@ -42,7 +47,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
           <Link
             href='/'
             className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
-            Home
+            Hauptseite
           </Link>
           <Link
             href='#ueber'
@@ -75,6 +80,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
           </button>
           <PrimaryButton
             href='#kontakt'
+            onClick={handleContactClick}
             className='hidden px-4 py-2 text-xs sm:inline-flex md:px-6 md:py-3 md:text-sm'>
             Gratis Erstgespräch
           </PrimaryButton>
@@ -144,7 +150,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
             <PrimaryButton
               href='#kontakt'
               className='w-full'
-              onClick={() => setIsMenuOpen(false)}>
+              onClick={handleContactClick}>
               Kostenloses Erstgespräch
             </PrimaryButton>
           </div>
