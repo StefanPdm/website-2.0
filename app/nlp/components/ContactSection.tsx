@@ -6,7 +6,7 @@ export default function ContactSection() {
   return (
     <section
       id='kontakt'
-      className='relative py-28 bg-(--section-bg-accent)'>
+      className='relative py-28 border-t border-(--border) '>
       <div className='container px-4 mx-auto'>
         <div className='grid gap-8 lg:grid-cols-[1.1fr_0.9fr]'>
           <div>

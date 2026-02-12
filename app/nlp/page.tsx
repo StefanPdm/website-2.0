@@ -14,7 +14,7 @@ import ProgrammeSection from '@/app/nlp/components/ProgrammeSection';
 import TestimonialsSection from '@/app/nlp/components/TestimonialsSection';
 import TransformationSection from '@/app/nlp/components/TransformationSection';
 import WorkSection from '@/app/nlp/components/WorkSection';
-import WorkshopsSection from '@/app/nlp/components/WorkshopsSection';
+import PriceTableSection from '@/app/nlp/components/PriceTableSection';
 
 const publicSans = Public_Sans({ subsets: ['latin'], display: 'swap' });
 
@@ -38,7 +38,7 @@ export default function NLP() {
           <TransformationSection isWarmTheme={isWarmTheme} />
           <ProgrammeSection />
           <TestimonialsSection />
-          <WorkshopsSection />
+          <PriceTableSection />
           <GuideSection />
           <AboutSection />
           <ContactSection />
