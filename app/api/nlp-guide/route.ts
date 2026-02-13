@@ -26,6 +26,10 @@ function resolveSiteUrl(req: Request) {
     return `${proto}://${host}`;
   }
 
+  if (process.env.NODE_ENV === 'production') {
+    return 'https://www.heinemann.berlin';
+  }
+
   return url.origin;
 }
 
