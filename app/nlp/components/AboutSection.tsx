@@ -31,6 +31,7 @@ export default function AboutSection() {
         className='py-40 relative min-h-[60dvh] flex flex-col justify-center items-center bg-(--section-bg-accent)'>
         <div className='container px-4 mx-auto'>
           <div className='grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
+            {/* left side */}
             <GlassCard className='p-6 order-2 md:order-1'>
               <div className='relative overflow-hidden rounded-2xl bg-white/5'>
                 <div className='aspect-5/4 w-full overflow-hidden'>
@@ -47,6 +48,7 @@ export default function AboutSection() {
                           fill
                           className='object-cover object-top'
                           sizes='(min-width: 1024px) 40vw, 80vw'
+                          quality={100}
                         />
                       </div>
                     ))}
@@ -59,7 +61,7 @@ export default function AboutSection() {
                       key={index}
                       type='button'
                       onClick={() => setActiveImage(index)}
-                      className={`h-2 w-2 rounded-full transition ${
+                      className={`h-2 w-2 rounded-full transition cursor-pointer ${
                         index === activeImage
                           ? 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
                           : 'bg-white/40 hover:bg-white/70'
@@ -88,6 +90,7 @@ export default function AboutSection() {
                 </PrimaryButton>
               </div>
             </GlassCard>
+            {/* right side */}
             <div className='order-1 md:order-2'>
               <p className='text-xs uppercase tracking-[0.3em] text-[#7DE3FF]'>Über mich</p>
               <h2 className='mt-4 text-3xl font-semibold text-white sm:text-4xl'>
@@ -127,6 +130,49 @@ export default function AboutSection() {
                   </GlassCard>
                 ))}
               </div>
+              <GlassCard className='mt-8 p-5'>
+                <p className='text-xs uppercase tracking-[0.2em] text-white/60'>
+                  Zertifizierungen durch:
+                </p>
+                <div className='mt-2 flex items-center  gap-6 justify-around'>
+                  <a
+                    href='https://www.dvnlp.de/'
+                    target='_blank'
+                    aria-label='DVNLP-Link'
+                    rel='noopener noreferrer'
+                    className='inline-flex'>
+                    <span className='group/tooltip relative inline-flex items-center'>
+                      <Image
+                        src='/logos/Logo-DVNLP-black.svg'
+                        alt='Certification 1'
+                        height={30}
+                        width={120}
+                      />
+                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[--border] bg-white/70 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-black/90 opacity-0 shadow-[0_10px_30px_rgba(11,27,43,0.25)] transition-opacity group-hover/tooltip:opacity-100'>
+                        DVNLP - Deutscher Verband fur NLP
+                      </span>
+                    </span>
+                  </a>
+                  <a
+                    href='https://www.ronnyrohde.com/'
+                    target='_blank'
+                    aria-label='Ronny Rohde-Link'
+                    rel='noopener noreferrer'
+                    className='inline-flex'>
+                    <span className='group/tooltip relative inline-flex items-center'>
+                      <Image
+                        src='/logos/Logo-RR-black.webp'
+                        alt='Certification 2'
+                        height={30}
+                        width={120}
+                      />
+                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[--border] bg-white/70 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-black/90 opacity-0 shadow-[0_10px_30px_rgba(11,27,43,0.25)] transition-opacity group-hover/tooltip:opacity-100'>
+                        Ronny Rohde - Best Life NLP
+                      </span>
+                    </span>
+                  </a>
+                </div>
+              </GlassCard>
             </div>
           </div>
         </div>
