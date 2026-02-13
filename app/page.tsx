@@ -148,7 +148,8 @@ export default function Home() {
           {/* right side */}
           {/* Balance Image */}
           <div className='flex flex-col items-center justify-start md:-translate-y-20 mt-20 md:mt-0'>
-            <div className='pointer-events-none overflow-hidden md:w-96'>
+            <div className='pointer-events-none relative isolate  md:w-96'>
+              <span className='absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00E5FF]/20 blur-3xl' />
               <Image
                 src='/images-startseite/portrait-balance-free.webp'
                 alt='Stefan Heinemann'
