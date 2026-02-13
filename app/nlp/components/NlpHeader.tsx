@@ -36,7 +36,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
           className='flex items-center gap-3'>
           <div className='relative'>
             <Image
-              src='logos/nlp-logo.svg'
+              src='/logos/nlp-logo.svg'
               alt='Logo'
               width={56}
               height={56}
