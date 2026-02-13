@@ -134,7 +134,7 @@ export default function AboutSection() {
                 <p className='text-xs uppercase tracking-[0.2em] text-white/60'>
                   Zertifizierungen durch:
                 </p>
-                <div className='mt-2 flex items-center  gap-6 justify-around'>
+                <div className='mt-2 flex items-center  gap-[10%] justify-start'>
                   <a
                     href='https://www.dvnlp.de/'
                     target='_blank'

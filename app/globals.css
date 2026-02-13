@@ -1434,7 +1434,7 @@ body {
   display: grid;
   gap: clamp(2rem, 6vw, 4.5rem);
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  align-items: center;
+  align-items: flex-start;
 }
 
 .landing-left {
@@ -1522,7 +1522,7 @@ body {
   height: 320px;
   display: grid;
   place-items: center;
-  transform: translate(-170px, -220px);
+  transform: translate(0px, -160px);
 }
 
 .orbit-center {
@@ -1752,6 +1752,7 @@ body {
   flex-direction: column;
   gap: 0.3rem;
   text-align: start;
+  height: 100%;
 }
 
 .choice-tile:hover {
@@ -1801,6 +1802,7 @@ body {
 .choice-text {
   font-size: 0.85rem;
   color: rgba(226, 232, 240, 0.7);
+  flex-grow: 1;
 }
 
 .choice-link {
@@ -1853,7 +1855,7 @@ body {
   .orbit-system {
     width: 260px;
     height: 260px;
-    transform: translate(-137px, -109px);
+    transform: translate(-137px, -36px);
     margin: 0 auto -0.25rem auto;
   }
   .orbit-ring--one {

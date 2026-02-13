@@ -75,10 +75,6 @@ export default function Home() {
                 Kontakt
               </button>
             </div>
-          </div>
-
-          {/* right side */}
-          <div className='landing-right'>
             {/* orbits */}
             <div className='orbit-system'>
               <div className='orbit-center' />
@@ -147,44 +143,28 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
 
+          {/* right side */}
+          {/* Balance Image */}
+          <div className='flex flex-col items-center justify-start md:-translate-y-20 mt-20 md:mt-0'>
+            <div className='pointer-events-none overflow-hidden md:w-96'>
+              <Image
+                src='/images-startseite/portrait-balance-free.webp'
+                alt='Stefan Heinemann'
+                width={800}
+                height={800}
+                priority
+              />
+            </div>
             {/* Choise your path cards */}
             <div
-              className='choice-card mt-20 md:mt-8'
+              className='choice-card relative'
               id='choose'>
               <div className='choice-title mb-8'>Wähle deinen Weg</div>
 
               <div className='choice-grid'>
                 {/* left card */}
-                <Link
-                  className='choice-tile choice-tile--nlp relative'
-                  href='/nlp'>
-                  <div className='choice-logo-big'>
-                    <Image
-                      src='/logos/nlp-logo.svg'
-                      alt='NLP Logo'
-                      width={64}
-                      height={64}
-                    />
-                  </div>
-                  <div className='choice-pill-slot'>
-                    <Image
-                      className='choice-pill-image'
-                      src='/red-pill.webp'
-                      alt='Rote Pille'
-                      width={64}
-                      height={64}
-                      quality={100}
-                    />
-                  </div>
-                  <div className='choice-meta'>
-                    <div className='choice-heading'>NLP Coaching</div>
-                    <div className='choice-text'>Kopf. Körper. Fokus.</div>
-                    <br />
-                    <span className='choice-link'>Rote Pille wählen →</span>
-                  </div>
-                </Link>
-                {/* right card */}
                 <Link
                   className='choice-tile choice-tile--dev relative'
                   href='/dev'>
@@ -217,8 +197,38 @@ export default function Home() {
                     <span className='choice-link'>Blaue Pille wählen →</span>
                   </div>
                 </Link>
+
+                {/* right card */}
+                <Link
+                  className='choice-tile choice-tile--nlp relative'
+                  href='/nlp'>
+                  <div className='choice-logo-big'>
+                    <Image
+                      src='/logos/nlp-logo.svg'
+                      alt='NLP Logo'
+                      width={64}
+                      height={64}
+                    />
+                  </div>
+                  <div className='choice-pill-slot'>
+                    <Image
+                      className='choice-pill-image'
+                      src='/red-pill.webp'
+                      alt='Rote Pille'
+                      width={64}
+                      height={64}
+                      quality={100}
+                    />
+                  </div>
+                  <div className='choice-meta'>
+                    <div className='choice-heading'>NLP Coaching</div>
+                    <div className='choice-text'>Kopf. Körper. Fokus.</div>
+                    <br />
+                    <span className='choice-link'>Rote Pille wählen →</span>
+                  </div>
+                </Link>
               </div>
-              <div className='choice-footer'>Minimal. Premium. Klar. © Stefan</div>
+              <div className='choice-footer'>Minimal. Premium. Klar. © Stefan Heinemann</div>
             </div>
           </div>
         </section>

@@ -85,7 +85,7 @@ export async function POST(req: Request) {
     const expiresAt = Math.floor(Date.now() / 1000) + expiresInSeconds;
     const downloadToken = createDownloadToken(String(email), expiresAt);
 
-    const guideUrl = `${SITE_URL}/api/nlp-guide/download?token=${encodeURIComponent(downloadToken)}`;
+    const guideUrl = `${SITE_URL}/nlp/guide-download?token=${encodeURIComponent(downloadToken)}`;
     const logoUrl = `${SITE_URL}/logos/nlp-logo.png`;
 
     const signaturePlain = '\n\nMit lieben Gruessen\nStefan\n\n\www.heinemann.berlin\n\n';
