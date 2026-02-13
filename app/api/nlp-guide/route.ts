@@ -10,8 +10,24 @@ const SMTP_PASS = process.env.SMTP_PASS;
 const SMTP_FROM = process.env.SMTP_FROM;
 const OWNER_EMAIL = process.env.OWNER_EMAIL;
 const DOWNLOAD_TOKEN_SECRET = process.env.DOWNLOAD_TOKEN_SECRET;
-const SITE_URL =
-  process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+function resolveSiteUrl(req: Request) {
+  const envUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+  if (envUrl) return envUrl.replace(/\/$/, '');
+
+  const vercelUrl = process.env.VERCEL_URL;
+  if (vercelUrl) return `https://${vercelUrl}`;
+
+  const url = new URL(req.url);
+  const forwardedHost = req.headers.get('x-forwarded-host');
+  const host = forwardedHost || req.headers.get('host');
+  if (host) {
+    const forwardedProto = req.headers.get('x-forwarded-proto');
+    const proto = forwardedProto || url.protocol.replace(':', '') || 'https';
+    return `${proto}://${host}`;
+  }
+
+  return url.origin;
+}
 
 function isValidEmail(email: string) {
   return /.+@.+\..+/.test(email);
@@ -85,10 +101,11 @@ export async function POST(req: Request) {
     const expiresAt = Math.floor(Date.now() / 1000) + expiresInSeconds;
     const downloadToken = createDownloadToken(String(email), expiresAt);
 
-    const guideUrl = `${SITE_URL}/nlp/guide-download?token=${encodeURIComponent(downloadToken)}`;
-    const logoUrl = `${SITE_URL}/logos/nlp-logo.png`;
+    const siteUrl = resolveSiteUrl(req);
+    const guideUrl = `${siteUrl}/nlp/guide-download?token=${encodeURIComponent(downloadToken)}`;
+    const logoUrl = `${siteUrl}/logos/nlp-logo.png`;
 
-    const signaturePlain = '\n\nMit lieben Gruessen\nStefan\n\n\www.heinemann.berlin\n\n';
+    const signaturePlain = '\n\nMit lieben Gruessen\nStefan\n\nwww.heinemann.berlin\n\n';
 
     const subject = 'Dein kostenloser NLP-Leitfaden';
 
