@@ -11,6 +11,10 @@ const SMTP_FROM = process.env.SMTP_FROM;
 const OWNER_EMAIL = process.env.OWNER_EMAIL;
 const DOWNLOAD_TOKEN_SECRET = process.env.DOWNLOAD_TOKEN_SECRET;
 function resolveSiteUrl(req: Request) {
+  if (process.env.NODE_ENV === 'production') {
+    return 'https://heinemann.berlin';
+  }
+
   const envUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
   if (envUrl) return envUrl.replace(/\/$/, '');
 
@@ -24,10 +28,6 @@ function resolveSiteUrl(req: Request) {
     const forwardedProto = req.headers.get('x-forwarded-proto');
     const proto = forwardedProto || url.protocol.replace(':', '') || 'https';
     return `${proto}://${host}`;
-  }
-
-  if (process.env.NODE_ENV === 'production') {
-    return 'https://www.heinemann.berlin';
   }
 
   return url.origin;

@@ -7,7 +7,7 @@ import GlassCard from '@/components/GlassCard';
 const testimonials = [
   {
     name: 'Lena K.',
-    imageUrl: '/images-nlp/testimonial-f-1.png',
+    imageUrl: '/images-nlp/testimonial-f-8.png',
     text: 'Weniger Grübeln, mehr Handlungsfokus. Die Sessions haben mir geholfen, Entscheidungen schneller zu treffen.',
   },
   {
