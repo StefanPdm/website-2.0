@@ -95,7 +95,9 @@ export default function GuideDownloadPage() {
         <section className='relative py-20 border-y border-border'>
           <div className='container mx-auto px-4 min-h-[60dvh] flex flex-col justify-center items-center'>
             <GlassCard className='w-full max-w-2xl p-6'>
-              <h1 className='text-2xl font-semibold text-[var(--text)]'>Download wird vorbereitet</h1>
+              <h1 className='text-2xl font-semibold text-[var(--text)]'>
+                Download wird vorbereitet
+              </h1>
               <p className='mt-3 text-sm text-[var(--muted)]'>
                 Bitte warte einen Moment. Der Leitfaden startet automatisch.
               </p>
