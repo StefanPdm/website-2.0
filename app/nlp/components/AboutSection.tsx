@@ -165,15 +165,61 @@ export default function AboutSection() {
             {aboutModal === 'before' ? (
               <div className='mt-6 space-y-6 text-sm text-[#0B1B2B]/80'>
                 <p>
-                  Vor NLP lag mein Fokus auf Führung, Projektsteuerung und kommunikativer Präzision.
-                  In dynamischen Umfeldern habe ich Teams durch Veränderungen begleitet und gelernt,
-                  wie sehr innere Klarheit Entscheidungen, Stimmung und Ergebnisqualität
-                  beeinflusst.
+                  Vor NLP lag mein Fokus auf Leistung und Funktionieren. Nach über 20 Jahren als
+                  erfolgreicher Unternehmer im Interieur Design (mit 3 Filialen und großem Team)
+                  suchte ich den Wandel.
+                  <br />
+                  <br />
+                  Ich folgte meiner alten C64-Leidenschaft und stürzte mich mit Begeisterung in die
+                  Welt des Fullstack-Developments. Das Programmieren machte mir Spaß und forderte
+                  mich intellektuell – doch ich musste schmerzhaft erkennen: Spaß ist nicht gleich
+                  Erfüllung. Die IT war eine faszinierende Welt, doch sie hielt mich nicht davon ab,
+                  in eine tiefe Krise zu rutschen. Ich wurde krank, depressiv und landete im
+                  Burnout, weil ich das Glück vergeblich im Außen suchte.
+                  <br />
+                  <br /> 2024 war mein absoluter Wendepunkt. Ich holte mir Hilfe und begann meine
+                  NLP Ausbildung. Dort begriff ich das Wichtigste: Ich muss nicht die Welt um mich
+                  herum ändern, sondern mich selbst. Inspiriert von meinem Mentor{' '}
+                  <a
+                    href='https://ronyrhode.com'
+                    target='_blank'
+                    rel='noopener noreferrer'>
+                    <strong>Rony Rhode </strong>
+                  </a>
+                  und dem unglaublichen{' '}
+                  <a
+                    href='https://www.tonyrobbins.com/de'
+                    target='_blank'
+                    rel='noopener noreferrer'>
+                    <strong>Tony Robbins</strong>
+                  </a>{' '}
+                  fand ich zum ersten Mal tiefes Glück. Das Interesse an meiner Wandlung war riesig.
+                  <br />
+                  <br />
+                  Was privat begann, ist seit Mitte 2025 meine zweite Profession:&nbsp;
+                  <strong>
+                    Als Coach begleite ich heute Menschen dabei, ihre eigene Erfüllung zu finden.
+                  </strong>
                 </p>
                 <div className='grid gap-4 sm:grid-cols-3'>
                   {[
-                    { icon: '💼', title: '8+ Jahre', text: 'Praxis in Führung & Beratung' },
-                    { icon: '🧭', title: '120+ Projekte', text: 'Struktur & Umsetzung' },
+                    { icon: '💼', title: '20+ Jahre', text: 'Unternehmer in Berlin & Hamburg' },
+                    {
+                      icon: '🧭',
+                      title: 'Spannenstes Projekt',
+                      text: (
+                        <>
+                          Luxus Sportclub Berlin Ku´Damm ·{' '}
+                          <a
+                            href='https://www.bodylife.com/body-life-club-des-monats-sportsaal-berlin/'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            className='text-[#0B1B2B] underline decoration-[#0B1B2B]/30 underline-offset-2 transition hover:decoration-[#0B1B2B]'>
+                            Sportsaal
+                          </a>
+                        </>
+                      ),
+                    },
                     { icon: '⚡', title: 'Fokus-Methoden', text: 'alltagstauglich & messbar' },
                   ].map((fact) => (
                     <div
@@ -187,11 +233,28 @@ export default function AboutSection() {
                 </div>
                 <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
                   <p className='text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
-                    💡 Erkenntnis
+                    💡 Erkenntnis 1
                   </p>
                   <p className='mt-2 text-sm text-[#0B1B2B]/80'>
-                    Je klarer Sprache und innere Ausrichtung, desto schneller entstehen ruhige,
-                    tragfähige Entscheidungen.
+                    Die Tür zum Glück geht nach innen auf.
+                  </p>
+                </div>
+                <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
+                  <p className='text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
+                    💡 Erkenntnis 2
+                  </p>
+                  <p className='mt-2 text-sm text-[#0B1B2B]/80'>
+                    Erfolg ohne Erfüllung ist der ultimative Fehlschlag. Erfüllung ist die neue
+                    Währung.
+                  </p>
+                </div>
+                <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
+                  <p className='text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
+                    💡 Erkenntnis 3
+                  </p>
+                  <p className='mt-2 text-sm text-[#0B1B2B]/80'>
+                    Es sind nicht die Umstände oder anderen Menschen, die dein Leben bestimmen. Es
+                    sind deine Entscheidungen, die du triffts oder eben nicht triffst.
                   </p>
                 </div>
               </div>
@@ -265,13 +328,28 @@ export default function AboutSection() {
                 </div>
                 <div className='grid gap-3 sm:grid-cols-2'>
                   {[
-                    { icon: '🥋', title: 'WingTsun', text: 'Graduierung: 1. Techniker' },
+                    { icon: '🥋', title: 'WingTsun & Fitness', text: 'Graduierung: 1. Techniker' },
                     {
                       icon: '🧊',
                       title: 'Eisbaden',
-                      text: 'Resilienz & Gesundheit. Zeit 5:50 min',
+                      text: 'Resilienz & Gesundheit. Bestzeit 5:50 min',
                     },
-                    { icon: '🎯', title: 'Fitness', text: 'Fokus, Ausdauer & Kraft.' },
+                    {
+                      icon: '🚗',
+                      title: '68er Ford Mustang',
+                      text: (
+                        <>
+                          Rallye &amp; Hochzeiten ·{' '}
+                          <a
+                            href='https://www.mustang-mieten.berlin/'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            className='text-[#0B1B2B] underline decoration-[#0B1B2B]/30 underline-offset-2 transition hover:decoration-[#0B1B2B]'>
+                            mustang-mieten.berlin
+                          </a>
+                        </>
+                      ),
+                    },
                     {
                       icon: '🆘',
                       title: 'Sanitätsdienst DRK Berlin',
