@@ -7,6 +7,49 @@ import ContactForm from '@/components/ContactForm';
 export default function Home() {
   const contactRef = useRef<HTMLDivElement | null>(null);
   const [showContact, setShowContact] = useState(false);
+  const useWarmPills = true;
+
+  const pillScheme = useWarmPills
+    ? {
+        devPill: '/images-startseite/green-pill.webp',
+        nlpPill: '/images-startseite/orange-pill.webp',
+        devColors: {
+          border: 'rgba(34, 197, 94, 0.25)',
+          borderStrong: 'rgba(34, 197, 94, 0.6)',
+          shadow: 'rgba(16, 122, 60, 0.18)',
+          shadowStrong: 'rgba(16, 122, 60, 0.35)',
+          glow: 'rgba(34, 197, 94, 0.35)',
+          pillGlow: 'rgba(34, 197, 94, 0.45)',
+        },
+        nlpColors: {
+          border: 'rgba(245, 158, 11, 0.25)',
+          borderStrong: 'rgba(245, 158, 11, 0.6)',
+          shadow: 'rgba(180, 83, 9, 0.18)',
+          shadowStrong: 'rgba(180, 83, 9, 0.35)',
+          glow: 'rgba(245, 158, 11, 0.35)',
+          pillGlow: 'rgba(245, 158, 11, 0.45)',
+        },
+      }
+    : {
+        devPill: '/blue-pill.webp',
+        nlpPill: '/red-pill.webp',
+        devColors: {
+          border: 'rgba(99, 179, 237, 0.25)',
+          borderStrong: 'rgba(99, 179, 237, 0.6)',
+          shadow: 'rgba(29, 111, 168, 0.18)',
+          shadowStrong: 'rgba(29, 111, 168, 0.35)',
+          glow: 'rgba(29, 111, 168, 0.35)',
+          pillGlow: 'rgba(99, 179, 237, 0.45)',
+        },
+        nlpColors: {
+          border: 'rgba(248, 113, 113, 0.25)',
+          borderStrong: 'rgba(248, 113, 113, 0.6)',
+          shadow: 'rgba(239, 68, 68, 0.18)',
+          shadowStrong: 'rgba(239, 68, 68, 0.35)',
+          glow: 'rgba(239, 68, 68, 0.35)',
+          pillGlow: 'rgba(248, 113, 113, 0.45)',
+        },
+      };
 
   const handleContactClick = () => {
     if (!showContact) setShowContact(true);
@@ -168,7 +211,17 @@ export default function Home() {
                 {/* left card */}
                 <Link
                   className='choice-tile choice-tile--dev relative'
-                  href='/dev'>
+                  href='/dev'
+                  style={
+                    {
+                      '--choice-border': pillScheme.devColors.border,
+                      '--choice-border-strong': pillScheme.devColors.borderStrong,
+                      '--choice-shadow': pillScheme.devColors.shadow,
+                      '--choice-shadow-strong': pillScheme.devColors.shadowStrong,
+                      '--choice-glow': pillScheme.devColors.glow,
+                      '--choice-pill-glow': pillScheme.devColors.pillGlow,
+                    } as React.CSSProperties
+                  }>
                   <div className='choice-logo-big'>
                     <Image
                       src='/webdesign-logo.svg'
@@ -180,8 +233,8 @@ export default function Home() {
                   <div className='choice-pill-slot'>
                     <Image
                       className='choice-pill-image'
-                      src='/blue-pill.webp'
-                      alt='Blaue Pille'
+                      src={pillScheme.devPill}
+                      alt={useWarmPills ? 'Grüne Pille' : 'Blaue Pille'}
                       width={64}
                       height={64}
                       quality={100}
@@ -195,14 +248,26 @@ export default function Home() {
                       Systeme.
                     </div>
                     <br />
-                    <span className='choice-link'>Blaue Pille wählen →</span>
+                    <span className='choice-link'>
+                      {useWarmPills ? 'Grüne Pille wählen →' : 'Blaue Pille wählen →'}
+                    </span>
                   </div>
                 </Link>
 
                 {/* right card */}
                 <Link
                   className='choice-tile choice-tile--nlp relative'
-                  href='/nlp'>
+                  href='/nlp'
+                  style={
+                    {
+                      '--choice-border': pillScheme.nlpColors.border,
+                      '--choice-border-strong': pillScheme.nlpColors.borderStrong,
+                      '--choice-shadow': pillScheme.nlpColors.shadow,
+                      '--choice-shadow-strong': pillScheme.nlpColors.shadowStrong,
+                      '--choice-glow': pillScheme.nlpColors.glow,
+                      '--choice-pill-glow': pillScheme.nlpColors.pillGlow,
+                    } as React.CSSProperties
+                  }>
                   <div className='choice-logo-big'>
                     <Image
                       src='/logos/nlp-logo.svg'
@@ -214,8 +279,8 @@ export default function Home() {
                   <div className='choice-pill-slot'>
                     <Image
                       className='choice-pill-image'
-                      src='/red-pill.webp'
-                      alt='Rote Pille'
+                      src={pillScheme.nlpPill}
+                      alt={useWarmPills ? 'Orange Pille' : 'Rote Pille'}
                       width={64}
                       height={64}
                       quality={100}
@@ -225,7 +290,9 @@ export default function Home() {
                     <div className='choice-heading'>NLP Coaching</div>
                     <div className='choice-text'>Kopf. Körper. Fokus.</div>
                     <br />
-                    <span className='choice-link'>Rote Pille wählen →</span>
+                    <span className='choice-link'>
+                      {useWarmPills ? 'Orange Pille wählen →' : 'Rote Pille wählen →'}
+                    </span>
                   </div>
                 </Link>
               </div>

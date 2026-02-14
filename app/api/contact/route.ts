@@ -104,6 +104,40 @@ export async function POST(req: Request) {
     }
 
     const ts = new Date().toISOString();
+    const headers = req.headers;
+    const userAgent = headers.get('user-agent') || undefined;
+    const acceptLanguage = headers.get('accept-language') || undefined;
+    const referer = headers.get('referer') || undefined;
+    const origin = headers.get('origin') || undefined;
+    const forwardedFor = headers.get('x-forwarded-for') || undefined;
+    const realIp = headers.get('x-real-ip') || undefined;
+    const ip = (forwardedFor || realIp || '').split(',')[0]?.trim() || undefined;
+    const country = headers.get('x-vercel-ip-country') || headers.get('cf-ipcountry') || undefined;
+    const region = headers.get('x-vercel-ip-region') || undefined;
+    const city = headers.get('x-vercel-ip-city') || undefined;
+    const latitude = headers.get('x-vercel-ip-latitude') || undefined;
+    const longitude = headers.get('x-vercel-ip-longitude') || undefined;
+    const secChUa = headers.get('sec-ch-ua') || undefined;
+    const secChUaMobile = headers.get('sec-ch-ua-mobile') || undefined;
+    const secChUaPlatform = headers.get('sec-ch-ua-platform') || undefined;
+
+    const locationParts = [city, region, country].filter(Boolean).join(', ');
+    const locationCoords = latitude && longitude ? `${latitude}, ${longitude}` : undefined;
+    const location = [locationParts, locationCoords].filter(Boolean).join(' • ');
+
+    const clientInfoLines = [
+      ip ? `IP: ${ip}` : null,
+      location ? `Standort: ${location}` : null,
+      userAgent ? `Browser: ${userAgent}` : null,
+      secChUa ? `Sec-CH-UA: ${secChUa}` : null,
+      secChUaPlatform ? `Plattform: ${secChUaPlatform}` : null,
+      secChUaMobile ? `Mobil: ${secChUaMobile}` : null,
+      acceptLanguage ? `Sprache: ${acceptLanguage}` : null,
+      referer ? `Referer: ${referer}` : null,
+      origin ? `Origin: ${origin}` : null,
+    ]
+      .filter(Boolean)
+      .join('\n');
     const signaturePlain = '\n\nMit lieben Grüßen\nStefan';
     const signatureHtml = '<p style="margin-top:16px">Mit lieben Grüßen<br/>Stefan</p>';
 
@@ -119,7 +153,7 @@ export async function POST(req: Request) {
       .filter(Boolean)
       .join('\n');
 
-    const plain = `Neue Anfrage über Webseite\n\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\n${projectType ? `Projektart: ${projectType}\n` : ''}${sessionType ? `Format: ${sessionType}\n` : ''}${topic ? `Thema: ${topic}\n` : ''}${budget ? `Budget: ${budget}\n` : ''}${timeline ? `Zeitrahmen: ${timeline}\n` : ''}${extraLines ? `\nZusatz:\n${extraLines}\n` : ''}\nNachricht:\n${message}${signaturePlain}\n`;
+    const plain = `Neue Anfrage über Webseite\n\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\n${projectType ? `Projektart: ${projectType}\n` : ''}${sessionType ? `Format: ${sessionType}\n` : ''}${topic ? `Thema: ${topic}\n` : ''}${budget ? `Budget: ${budget}\n` : ''}${timeline ? `Zeitrahmen: ${timeline}\n` : ''}${extraLines ? `\nZusatz:\n${extraLines}\n` : ''}${clientInfoLines ? `\nNutzerinfos:\n${clientInfoLines}\n` : ''}\nNachricht:\n${message}${signaturePlain}\n`;
 
     const htmlOwner = `
       <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.6;color:#0B1B2B">
@@ -135,6 +169,7 @@ export async function POST(req: Request) {
         ${scope ? `<strong>Umfang:</strong> ${scope}<br/>` : ''}
         ${budget ? `<strong>Budget:</strong> ${budget}<br/>` : ''}
         ${timeline ? `<strong>Zeitrahmen:</strong> ${timeline}` : ''}</p>
+        ${clientInfoLines ? `<p><strong>Nutzerinfos</strong><br/>${clientInfoLines.replace(/\n/g, '<br/>')}</p>` : ''}
         <p><strong>Nachricht</strong><br/>${String(message).replace(/\n/g, '<br/>')}</p>
         ${signatureHtml}
       </div>

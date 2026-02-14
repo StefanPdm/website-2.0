@@ -101,6 +101,42 @@ export async function POST(req: Request) {
       );
     }
 
+    const ts = new Date().toISOString();
+    const headers = req.headers;
+    const userAgent = headers.get('user-agent') || undefined;
+    const acceptLanguage = headers.get('accept-language') || undefined;
+    const referer = headers.get('referer') || undefined;
+    const origin = headers.get('origin') || undefined;
+    const forwardedFor = headers.get('x-forwarded-for') || undefined;
+    const realIp = headers.get('x-real-ip') || undefined;
+    const ip = (forwardedFor || realIp || '').split(',')[0]?.trim() || undefined;
+    const country = headers.get('x-vercel-ip-country') || headers.get('cf-ipcountry') || undefined;
+    const region = headers.get('x-vercel-ip-region') || undefined;
+    const city = headers.get('x-vercel-ip-city') || undefined;
+    const latitude = headers.get('x-vercel-ip-latitude') || undefined;
+    const longitude = headers.get('x-vercel-ip-longitude') || undefined;
+    const secChUa = headers.get('sec-ch-ua') || undefined;
+    const secChUaMobile = headers.get('sec-ch-ua-mobile') || undefined;
+    const secChUaPlatform = headers.get('sec-ch-ua-platform') || undefined;
+
+    const locationParts = [city, region, country].filter(Boolean).join(', ');
+    const locationCoords = latitude && longitude ? `${latitude}, ${longitude}` : undefined;
+    const location = [locationParts, locationCoords].filter(Boolean).join(' • ');
+
+    const clientInfoLines = [
+      ip ? `IP: ${ip}` : null,
+      location ? `Standort: ${location}` : null,
+      userAgent ? `Browser: ${userAgent}` : null,
+      secChUa ? `Sec-CH-UA: ${secChUa}` : null,
+      secChUaPlatform ? `Plattform: ${secChUaPlatform}` : null,
+      secChUaMobile ? `Mobil: ${secChUaMobile}` : null,
+      acceptLanguage ? `Sprache: ${acceptLanguage}` : null,
+      referer ? `Referer: ${referer}` : null,
+      origin ? `Origin: ${origin}` : null,
+    ]
+      .filter(Boolean)
+      .join('\n');
+
     const expiresInSeconds = 7 * 24 * 60 * 60;
     const expiresAt = Math.floor(Date.now() / 1000) + expiresInSeconds;
     const downloadToken = createDownloadToken(String(email), expiresAt);
@@ -147,6 +183,17 @@ export async function POST(req: Request) {
       </div>
     `;
 
+    const htmlOwner = `
+      <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.6;color:#0B1B2B">
+        <h2>Neuer NLP-Leitfaden Download</h2>
+        <p><strong>Zeitpunkt:</strong> ${ts}</p>
+        <p><strong>Name:</strong> ${name}<br/>
+        <strong>E-Mail:</strong> ${email}</p>
+        ${clientInfoLines ? `<p><strong>Nutzerinfos</strong><br/>${clientInfoLines.replace(/\n/g, '<br/>')}</p>` : ''}
+        <p><strong>Download-Link</strong><br/><a href="${guideUrl}">${guideUrl}</a></p>
+      </div>
+    `;
+
     const transporter = nodemailer.createTransport({
       host: SMTP_HOST,
       port: SMTP_PORT,
@@ -171,6 +218,17 @@ export async function POST(req: Request) {
         ? 'E-Mail Versand nicht möglich (SMTP Verbindung fehlgeschlagen).'
         : `SMTP Verify Fehler: ${extractErrorMessage(verifyErr)}`;
       return NextResponse.json({ error: message }, { status: 500 });
+    }
+
+    if (OWNER_EMAIL) {
+      await transporter.sendMail({
+        from: SMTP_FROM,
+        to: OWNER_EMAIL,
+        replyTo: String(email),
+        subject: `NLP-Leitfaden Download – ${name}`,
+        text: `Neuer NLP-Leitfaden Download\n\nZeitpunkt: ${ts}\nName: ${name}\nE-Mail: ${email}\n${clientInfoLines ? `\nNutzerinfos:\n${clientInfoLines}\n` : ''}\nDownload-Link: ${guideUrl}\n`,
+        html: htmlOwner,
+      });
     }
 
     await transporter.sendMail({
