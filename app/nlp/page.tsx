@@ -10,7 +10,7 @@ import TestimonialsSection from '@/app/nlp/components/TestimonialsSection';
 import TransformationSection from '@/app/nlp/components/TransformationSection';
 import WorkSection from '@/app/nlp/components/WorkSection';
 import PriceTableSection from '@/app/nlp/components/PriceTableSection';
-import { useNlpTheme } from '@/app/nlp/layout';
+import { useNlpTheme } from '@/app/nlp/NlpLayoutClient';
 
 export default function NLP() {
   const { isWarmTheme } = useNlpTheme();

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     'Webdesign',
     'NLP Coaching',
     'Digitale Systeme',
-    'Berlin',
+    'Potsdam',
     'Stefan Heinemann',
   ],
   alternates: {
