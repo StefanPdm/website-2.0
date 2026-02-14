@@ -70,10 +70,7 @@ export const metadata: Metadata = {
     images: ['/Global-Logo-SH-1.webp'],
   },
   icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/Global-Logo-SH-1.webp', type: 'image/webp' },
-    ],
+    icon: [{ url: '/favicon.ico' }, { url: '/Global-Logo-SH-1.webp', type: 'image/webp' }],
     apple: [{ url: '/Global-Logo-SH-1.webp', type: 'image/webp' }],
   },
   manifest: '/manifest.webmanifest',
