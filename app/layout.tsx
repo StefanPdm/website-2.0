@@ -14,7 +14,7 @@ const displayFont = Syne({
   weight: ['500', '600', '700', '800'],
 });
 
-const siteUrl = 'https://heinemann.berlin';
+const siteUrl = 'https://www.heinemann.berlin';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

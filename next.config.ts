@@ -2,6 +2,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
+    qualities: [100, 75],
     remotePatterns: [
       {
         protocol: 'https',
@@ -25,17 +26,6 @@ const nextConfig: NextConfig = {
       {
         source: '/index.php',
         destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'www.heinemann.berlin',
-          },
-        ],
-        destination: 'https://heinemann.berlin/:path*',
         permanent: true,
       },
     ];
