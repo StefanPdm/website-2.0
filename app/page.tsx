@@ -1,12 +1,8 @@
-'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
 import ContactForm from '@/components/ContactForm';
 
 export default function Home() {
-  const contactRef = useRef<HTMLDivElement | null>(null);
-  const [showContact, setShowContact] = useState(false);
   const useWarmPills = true;
 
   const pillScheme = useWarmPills
@@ -51,25 +47,11 @@ export default function Home() {
         },
       };
 
-  const handleContactClick = () => {
-    if (!showContact) setShowContact(true);
-    // Wait for reveal, then scroll smoothly into view
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        contactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        const firstInput = contactRef.current?.querySelector(
-          'input[name="name"]',
-        ) as HTMLInputElement | null;
-        firstInput?.focus();
-      }, 60);
-    });
-  };
-
   return (
     <div className='landing-shell'>
       <main className='landing-main'>
         {/* Header */}
-        <header className='landing-header'>
+        <header className='pt-4 w-full max-w-7xl sticky top-0 z-50 mx-auto flex items-center justify-between'>
           <div className='landing-brand'>
             <div className='w-12 h-12'>
               <Image
@@ -91,7 +73,7 @@ export default function Home() {
           </div>
         </header>
         {/* Entscheidung */}
-        <section className='landing-grid pt-20 md:pt-10'>
+        <section className='landing-grid pt-10 md:pt-20 '>
           <div className='landing-left'>
             <span className='landing-badge'>Wähle deinen Weg</span>
             <h1 className='landing-title'>
@@ -111,12 +93,11 @@ export default function Home() {
                 href='#choose'>
                 Jetzt wählen
               </a>
-              <button
-                type='button'
-                className='cursor-pointer landing-cta landing-cta--ghost w-full sm:w-auto'
-                onClick={handleContactClick}>
+              <a
+                className='landing-cta landing-cta--ghost w-full sm:w-auto'
+                href='#root-contact'>
                 Kontakt
-              </button>
+              </a>
             </div>
             {/* orbits */}
             <div className='orbit-system'>
@@ -190,7 +171,7 @@ export default function Home() {
 
           {/* right side */}
           {/* Balance Image */}
-          <div className='flex flex-col items-center justify-start md:-translate-y-20 mt-20 md:mt-0'>
+          <div className='flex flex-col items-center justify-star mt-20 md:-mt-28'>
             <div className='pointer-events-none relative isolate  md:w-96'>
               <span className='absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00E5FF]/20 blur-3xl' />
               <Image
@@ -304,9 +285,7 @@ export default function Home() {
         {/* Hidden contact section, revealed on click and scrolled into view */}
         <section
           id='root-contact'
-          ref={contactRef}
-          style={{ display: showContact ? 'block' : 'none' }}
-          className='landing-grid contact-grid pt-8'>
+          className='landing-grid contact-grid contact-grid--hidden pt-8'>
           <div className='landing-left'>
             <span className='landing-badge'>Kontakt</span>
             <h2 className='landing-title'>Lass uns sprechen.</h2>

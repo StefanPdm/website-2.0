@@ -1335,7 +1335,7 @@ body {
     radial-gradient(900px 500px at 15% 20%, rgba(29, 111, 168, 0.25), transparent 60%),
     radial-gradient(800px 500px at 85% 70%, rgba(246, 179, 90, 0.16), transparent 65%), #070b12;
   color: #e2e8f0;
-  padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 6vw, 4.5rem);
+  padding: 0 clamp(1.5rem, 6vw, 4.5rem);
   position: relative;
   overflow: hidden;
 }
@@ -1355,10 +1355,10 @@ body {
 .landing-main {
   position: relative;
   z-index: 1;
-  width: min(1200px, 100%);
+  width: min(1280px, 100%);
   margin: 0 auto;
   display: grid;
-  gap: clamp(2rem, 5vw, 4rem);
+  gap: 1rem;
 }
 
 .landing-header {
@@ -1366,6 +1366,8 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
+  position: fixed;
+  width: 100%;
 }
 
 .landing-brand {
@@ -1475,6 +1477,7 @@ body {
 }
 
 .landing-cta {
+  text-align: center;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
@@ -1522,7 +1525,8 @@ body {
   height: 320px;
   display: grid;
   place-items: center;
-  transform: translate(0px, -160px);
+  transform: translate(0px, -190px);
+  pointer-events: none;
 }
 
 .orbit-center {
@@ -1900,7 +1904,7 @@ body {
   .orbit-system {
     width: 320px;
     height: 320px;
-    transform: translate(-178px, -198px);
+    transform: translate(-176px, -140px);
   }
   .orbit-ring--one {
     --orbit-size: 220px;
@@ -1916,6 +1920,14 @@ body {
   }
 }
 
+@media (min-width: 901px) and (max-width: 1200px) {
+  .orbit-system {
+    width: 320px;
+    height: 320px;
+    transform: translate(-70px, -165px);
+  }
+}
+
 /* Landscape phones: tighten vertical rhythm but keep spacing readable */
 @media (max-height: 700px) and (orientation: landscape) {
   .landing-shell {
@@ -1928,9 +1940,9 @@ body {
     padding-top: 1rem;
   }
   .orbit-system {
-    width: 260px;
-    height: 260px;
-    transform: translate(-103px, -131px);
+    width: 300px;
+    height: 300px;
+    transform: translate(50px, -131px);
   }
   .orbit-ring--one {
     --orbit-size: 160px;
@@ -1948,6 +1960,14 @@ body {
 
 .contact-grid {
   align-items: start;
+}
+
+.contact-grid--hidden {
+  display: none;
+}
+
+#root-contact:target {
+  display: grid;
 }
 
 .contact-points {
