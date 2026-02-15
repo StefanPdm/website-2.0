@@ -19,7 +19,7 @@ const siteUrl = 'https://heinemann.berlin';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Digitale Services | Webentwicklung & NLP Coaching',
+    default: 'Webentwicklung & NLP Coaching',
     template: '%s | Stefan Heinemann',
   },
   description:
@@ -31,6 +31,14 @@ export const metadata: Metadata = {
     'Digitale Systeme',
     'Potsdam',
     'Stefan Heinemann',
+    'WordPress',
+    'Next.js',
+    'React',
+    'Angular',
+    'Vue.js',
+    'Svelte',
+    'Berlin',
+    'Brandenburg',
   ],
   alternates: {
     canonical: siteUrl,

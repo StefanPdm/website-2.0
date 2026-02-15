@@ -7,32 +7,32 @@ import GlassCard from '@/components/GlassCard';
 const testimonials = [
   {
     name: 'Lena K.',
-    imageUrl: '/images-nlp/testimonial-f-8.png',
+    imageUrl: '/images-nlp/testimonial-f-10.png',
     text: 'Weniger Grübeln, mehr Handlungsfokus. Die Sessions haben mir geholfen, Entscheidungen schneller zu treffen.',
   },
   {
     name: 'Daniel M.',
-    imageUrl: '/images-nlp/testimonial-m-3.png',
+    imageUrl: '/images-nlp/testimonial-m-5.png',
     text: 'Ich kann klarer Nein sagen, ohne Schuldgefühl. Besonders die Sprachmuster-Übungen waren extrem hilfreich.',
   },
   {
     name: 'Mira S.',
-    imageUrl: '/images-nlp/testimonial-f-5.png',
+    imageUrl: '/images-nlp/testimonial-f-11.png',
     text: 'Meine Gespräche im Team sind strukturierter. Ich erkenne schneller, was mich wirklich bewegt.',
   },
   {
     name: 'Fabian R.',
-    imageUrl: '/images-nlp/testimonial-m-4.png',
+    imageUrl: '/images-nlp/testimonial-m-6.png',
     text: 'Ich habe endlich eine klare Prioritätenliste und setze sie konsequent um. Die Methoden sind praxisnah und sofort wirksam.',
   },
   {
     name: 'Nora V.',
-    imageUrl: '/images-nlp/testimonial-f-6.png',
+    imageUrl: '/images-nlp/testimonial-f-12.png',
     text: 'Mehr Ruhe, weniger Druck. Besonders die Arbeit an meinen inneren Standards hat mir geholfen, Entscheidungen leichter zu treffen.',
   },
   {
     name: 'Jasmin T.',
-    imageUrl: '/images-nlp/testimonial-f-7.png',
+    imageUrl: '/images-nlp/testimonial-f-13.png',
     text: 'Die Kommunikation im Team ist deutlich klarer. Ich fühle mich sicherer in Gesprächen und kann meine Punkte präzise formulieren.',
   },
 ];
@@ -69,12 +69,12 @@ export default function TestimonialsSection() {
               key={testimonial.name}
               className='p-6'>
               <div className='flex items-center gap-3'>
-                <div className='relative h-11 w-11 overflow-hidden rounded-full border border-white/20 bg-white/10'>
+                <div className='relative h-12 w-12 overflow-hidden rounded-full border border-white/20 bg-white/10'>
                   <Image
                     src={testimonial.imageUrl}
                     alt={`Kundenportrait ${testimonial.name}`}
                     fill
-                    sizes='44px'
+                    sizes='48px'
                     className='object-cover'
                   />
                 </div>

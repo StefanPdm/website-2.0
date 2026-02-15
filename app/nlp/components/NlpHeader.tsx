@@ -31,28 +31,30 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
   return (
     <header className='fixed w-full top-0 z-50 border-b border-black/10 bg-white/5 backdrop-blur-xl'>
       <div className='container mx-auto flex items-center justify-between gap-3 px-4 py-3 md:py-4'>
+        {/* Logo */}
         <Link
           href='/nlp/'
           className='flex items-center gap-3'>
-          <div className='relative'>
+          <div className='relative whitespace-nowrap w-14 h-14'>
             <Image
               src='/logos/nlp-logo.svg'
               alt='Logo'
-              width={56}
-              height={56}
+              fill
+              sizes='56px'
               className='h-10 w-10 md:h-12 md:w-12'
             />
           </div>
-          <div className='hidden! md:flex flex-col items-start justify-center'>
-            <span className='text-base font-extrabold text-left tracking-[0.2em] text-(--accent-soft) uppercase sm:text-lg'>
+          <div className='hidden md:flex flex-col items-start justify-center'>
+            <span className='whitespace-nowrap text-base font-extrabold text-left tracking-[0.2em] text-(--accent-soft) uppercase sm:text-lg'>
               SNAC Coaching
             </span>
-            <span className='text-left tracking-wider text-xs text-white/70 sm:text-sm'>
+            <span className='whitespace-nowrap text-left tracking-wider text-xs text-white/70 sm:text-sm'>
               NLP für klare Entscheidungen
             </span>
           </div>
         </Link>
-        <nav className='hidden items-center gap-4 lg:gap-8 text-sm text-white/80 md:flex font-semibold'>
+        {/* Navigation Desktop */}
+        <nav className='hidden items-center gap-4 lg:gap-8 text-sm text-white/80 lg:flex font-semibold'>
           <Link
             href='/'
             className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
@@ -79,30 +81,32 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
             Kontakt
           </Link>
         </nav>
+        {/* Button Kontakt mobile */}
         <PrimaryButton
           href={sectionHref('kontakt')}
           onClick={handleContactClick}
-          className='inline-flex md:hidden! px-4 py-2! text-xs md:px-6 md:py-3 md:text-sm'>
+          className='whitespace-nowrap inline-flex lg:hidden! px-4 py-2! text-xs md:px-6 md:py-3 md:text-sm'>
           Gratis Erstgespräch
         </PrimaryButton>
+        {/* Buttons  & Theme Toggle & mobile menu */}
         <div className='flex items-center gap-2 sm:gap-3'>
           <button
             type='button'
             onClick={onToggleTheme}
-            className='cursor-pointer hidden items-center gap-2 rounded-full border border-border bg-(--surface) px-4 py-2 text-xs font-semibold text-(--text) transition hover:bg-(--surface-strong) md:inline-flex'
+            className='cursor-pointer hidden items-center gap-2 rounded-full border border-border bg-(--surface) px-4 py-2 text-xs font-semibold text-(--text) transition hover:bg-(--surface-strong) xl:inline-flex'
             aria-pressed={isWarmTheme}>
             {isWarmTheme ? 'Kühl' : 'Warm'}
           </button>
           <PrimaryButton
             href={sectionHref('kontakt')}
             onClick={handleContactClick}
-            className='hidden! lg:inline-flex! px-4 py-2 text-xs md:px-6 md:py-3 md:text-sm'>
+            className='whitespace-nowrap hidden! xl:inline-flex! px-4 py-2 text-xs md:px-6 md:py-3 md:text-sm'>
             Gratis Erstgespräch
           </PrimaryButton>
           <button
             type='button'
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] md:hidden'
+            className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DE3FF] lg:hidden'
             aria-label={isMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
             aria-expanded={isMenuOpen}>
             {isMenuOpen ? '✕' : '☰'}

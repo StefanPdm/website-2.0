@@ -17,10 +17,10 @@ export default function HeroSection({ isWarmTheme }: HeroSectionProps) {
     <section
       id='start'
       className='relative min-h-dvh flex items-center'>
-      <div className='container mx-auto px-4 pb-20 pt-20 md:pt-16 lg:pb-32 lg:pt-24 z-10'>
+      <div className='container mx-auto px-4 pt-44 lg:pt-32 pb-12 flex flex-col justify-center items-center z-10'>
         <div className='grid items-center gap-12 lg:grid-cols-2'>
           <div>
-            <p className='text-xs uppercase tracking-[0.3em] text-[var(--accent-soft)]'>
+            <p className='text-xs uppercase tracking-[0.3em] text-(--accent-soft)'>
               NLP - Neuro Linguistisches Programmieren
             </p>
             <h1 className='mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl'>
