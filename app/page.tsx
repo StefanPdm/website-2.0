@@ -144,7 +144,7 @@ export default function Home() {
                     <div className='orbit-item__content'>
                       <Image
                         src='/webdesign-logo.png'
-                        alt='Web'
+                        alt='Webdesign'
                         width={40}
                         height={40}
                       />
@@ -160,7 +160,7 @@ export default function Home() {
                     <div className='orbit-item__content'>
                       <Image
                         src='/tony-robbins.png'
-                        alt='Web'
+                        alt='Tony Robbins'
                         width={40}
                         height={40}
                       />
@@ -176,7 +176,7 @@ export default function Home() {
                     <div className='orbit-item__content'>
                       <Image
                         src='/Nextjs_Symbol.svg'
-                        alt='Web'
+                        alt='Next.js'
                         width={40}
                         height={40}
                       />
@@ -211,7 +211,7 @@ export default function Home() {
                 {/* left card */}
                 <Link
                   className='choice-tile choice-tile--dev relative'
-                  href='/dev'
+                  href='/webdevelopment/'
                   style={
                     {
                       '--choice-border': pillScheme.devColors.border,
