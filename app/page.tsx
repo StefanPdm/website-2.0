@@ -1,9 +1,22 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import ContactForm from '@/components/ContactForm';
+import InfoOrb from '@/components/InfoOrb';
 
 export default function Home() {
   const useWarmPills = true;
+  const InfoOrbTitel = `"Stefan, du musst dich entscheiden! Entweder du bist Entwickler oder NLP Coach!"`;
+  const InfoOrbText = `Das hörte ich beim Launch von einem Marketing-Profi. "Konzentriere dich auf eine Sache! - Alles andere versteht niemand."
+  Meine Antwort: **„Warum? Genau das macht mich aus. Ich bin beides.“**
+
+In der Psychologie gibt es den Persönlichkeitstyp **Scanner**. Das sind Menschen, die viele Interessen und Talente haben, aber oft das Gefühl, sich entscheiden zu müssen, weil die Gesellschaft das erwartet. 
+
+Seit dem berühmten Buch von Barbara Sher über Scanner wissen wir: **Du musst dich nicht entscheiden.**
+
+**Scanner** können viele Dinge parallel tun. Dabei vermischen sich ihre Leidenschaften oft — und genau daraus entstehen einzigartige Ergebnisse.
+Das ist auch mein Ansatz: Webentwicklung und NLP-Coaching sind für mich zwei Seiten derselben Medaille. Beide Bereiche profitieren voneinander und machen mich zu einem vielseitigen Dienstleister.
+
+Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden Wegen zu begleiten — egal, ob du eine Website brauchst oder Klarheit in deinem Kopf willst.`;
 
   const pillScheme = useWarmPills
     ? {
@@ -187,6 +200,11 @@ export default function Home() {
               className='choice-card relative'
               id='choose'>
               <div className='choice-title mb-8'>Wähle deinen Weg</div>
+              <InfoOrb
+                headline={InfoOrbTitel}
+                text={InfoOrbText}
+                buttonClassName='absolute -top-4 right-2 xl:right-4 z-20 cursor-pointer'
+              />
 
               <div className='choice-grid'>
                 {/* left card */}
