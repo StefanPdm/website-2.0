@@ -108,7 +108,7 @@ export default function PriceTableSection() {
                       {item.icon}
                     </span>
                     {item.highlight && (
-                      <span className='rounded-full border-2 border-(--border-strong) bg-(--accent)/15 px-3 py-1 text-[0.6rem] uppercase tracking-[0.2em] text-accent absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white'>
+                      <span className='rounded-full border-2 border-(--border-strong) bg-(--accent)/100 font-semibold text-black/90 px-3 py-1 text-[0.6rem] uppercase tracking-[0.2em] absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 '>
                         Beliebt
                       </span>
                     )}
