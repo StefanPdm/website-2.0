@@ -67,6 +67,16 @@
   }
 }
 
+@keyframes scroll-hint-bump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
 /* NLP theme tokens */
 .theme-cool {
   --bg: #050b12;

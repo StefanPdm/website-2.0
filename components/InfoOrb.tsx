@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
 
@@ -50,6 +50,8 @@ function renderMarkdownLines(value: string) {
 
 export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [showScrollHint, setShowScrollHint] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const canUseDom = typeof document !== 'undefined';
 
   useEffect(() => {
@@ -73,6 +75,37 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    const handleScroll = () => {
+      if (!isOpen) return;
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+      // Hide hint when user scrolls near the bottom (within 50px)
+      const isNearBottom = scrollTop + clientHeight >= scrollHeight - 50;
+      setShowScrollHint(!isNearBottom);
+    };
+
+    if (isOpen) {
+      // Initial check for scroll hint visibility - synchronizing with DOM state
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+      const hasScroll = scrollHeight > clientHeight;
+      const isNearBottom = scrollTop + clientHeight >= scrollHeight - 50;
+      if (hasScroll && !isNearBottom && !showScrollHint) {
+        setShowScrollHint(true);
+      }
+      scrollContainer.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('scroll', handleScroll);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const modal = (
@@ -122,7 +155,9 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
             />
             <div className='h-px w-full bg-[rgba(125,227,255,0.35)]' />
           </div>
-          <div className='relative z-2 min-h-0 flex-1 overflow-y-auto px-6 pb-7 pt-6 text-[#e8fbff] md:px-7.5 md:pt-14'>
+          <div
+            ref={scrollContainerRef}
+            className='relative z-2 min-h-0 flex-1 overflow-y-auto px-6 pb-7 pt-6 text-[#e8fbff] md:px-7.5 md:pt-14'>
             <span className='text-[11px] uppercase tracking-[0.32em] text-[rgba(125,227,255,0.8)]'>
               Kurzinfo
             </span>
@@ -139,6 +174,28 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
                 onClick={() => setIsOpen(false)}>
                 Schliessen
               </button>
+            </div>
+            {/* Mobile scroll hint arrow */}
+            <div
+              className={`pointer-events-none fixed bottom-1 right-0 z-10 md:hidden transition-opacity duration-300 ${
+                showScrollHint && isOpen ? 'opacity-100' : 'opacity-0'
+              }`}
+              aria-hidden='true'>
+              <div className='relative flex h-10 w-10 items-center justify-center'>
+                <span className='absolute inset-0 rounded-full bg-[rgba(0,229,255,0.15)] blur-md' />
+                <svg
+                  className='relative z-1 h-6 w-6 text-[rgba(125,227,255,0.9)] animate-[scroll-hint-bump_1.8s_ease-in-out_infinite]'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                  strokeWidth={2.5}>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M19 9l-7 7-7-7'
+                  />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
