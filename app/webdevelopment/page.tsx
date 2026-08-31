@@ -88,6 +88,7 @@ const services = [
   {
     title: 'Websites & Landingpages',
     intro: 'Websites, die führen – nicht verwirren.',
+    from: 'ab 2.500 €',
     bullets: [
       'SEO-ready',
       'Mobile-first',
@@ -98,11 +99,13 @@ const services = [
   {
     title: 'Web Apps & Kundenportale',
     intro: 'Individuelle Anwendungen statt Insellösungen.',
+    from: 'ab 7.500 €',
     bullets: ['Login-Bereiche', 'Dashboards', 'Dokumentenverwaltung', 'Rollen & Rechte'],
   },
   {
     title: 'Headless & Schnittstellen',
     intro: 'Systeme, die miteinander sprechen.',
+    from: 'ab 4.000 €',
     bullets: [
       'Headless CMS',
       'REST & GraphQL APIs',
@@ -113,6 +116,7 @@ const services = [
   {
     title: 'UX & Struktur',
     intro: 'Technik folgt Klarheit.',
+    from: 'ab 1.500 €',
     bullets: [
       'UX-Konzeption',
       'Seiten- & Datenstruktur',
@@ -357,6 +361,16 @@ export default function WebdevelopmentPage() {
             <p className='mt-3 text-slate-300'>
               Kein Overengineering. Kein Plugin-Chaos. Sondern klare Systeme, die funktionieren.
             </p>
+            {/*
+              Budgetrahmen gehört vor das Formular, nicht hinein. Vorher tauchten
+              diese Zahlen nur als Frage im Budget-Select auf – wer zu klein
+              dachte, schrieb trotzdem; wer passend dachte, sprang vorher ab.
+            */}
+            <p className='mt-4 text-sm text-slate-400'>
+              Richtwerte für den Einstieg, damit du vorher weißt, woran du bist. Der genaue Rahmen
+              hängt vom Umfang ab – die Einschätzung dazu bekommst du im Erstgespräch, kostenlos
+              und unverbindlich.
+            </p>
           </div>
           <div className='my-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 z-10 justify-self-center'>
             {services.map((service) => (
@@ -367,6 +381,7 @@ export default function WebdevelopmentPage() {
                 <div className='relative z-10 w-full rounded-[22px] border border-white/20 bg-white/5 p-5 text-slate-100 h-full'>
                   <h3 className='text-lg font-semibold text-white'>{service.title}</h3>
                   <p className='mt-2 text-sm text-slate-300'>{service.intro}</p>
+                  <p className='mt-3 text-sm font-semibold text-accent-web'>{service.from}</p>
                   <ul className='mt-4 space-y-2 text-sm text-slate-300'>
                     {service.bullets.map((bullet) => (
                       <li

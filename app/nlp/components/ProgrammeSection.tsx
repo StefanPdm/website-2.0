@@ -20,7 +20,7 @@ const programs = [
       'Ideal für Menschen mit klarer Veränderungsabsicht',
       'Maßgeschneiderte Interventionen für nachhaltige Transformation',
     ],
-    price: 'ab € 339,15 (weitere Infos unten) ',
+    price: 'ab € 339,15 · Details in der Preisübersicht',
   },
   {
     title: 'Workshop: Sprache, die wirkt',

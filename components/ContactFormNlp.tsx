@@ -156,13 +156,19 @@ export default function ContactFormNlp() {
             name='sessionType'
             required
             className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
+            {/* Reihenfolge folgt der Preisübersicht: erst Einstieg, dann Umfang. */}
             <option value=''>Bitte wählen</option>
-            <option>Kennenlernen (15 Min.)</option>
-            <option>1:1 Starter (150 Min.)</option>
+            <option>Kennenlernen (15 Min., kostenlos)</option>
+            <option>Klarheits-Session (60 Min., Telefon oder Video)</option>
+            <option>Startersession (150 Min.)</option>
+            <option>Folgesession (90 Min.)</option>
+            <option>5er-Paket</option>
+            <option>10er-Paket</option>
             <option>Mentoring (3 Monate)</option>
             <option>Mentoring (6 Monate)</option>
-            <option>Workshop: Sprache</option>
-            <option>NLP Essentials </option>
+            <option>Workshop: Sprache (Firmen)</option>
+            <option>NLP Essentials</option>
+            <option>Noch unklar – bitte beraten</option>
           </select>
         </div>
         <div className='grid gap-1'>
