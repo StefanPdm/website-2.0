@@ -3,7 +3,10 @@
 import { useState } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
 
+import { useFormShield } from '@/components/FormShield';
+
 export default function ContactFormNlp() {
+  const shield = useFormShield();
   const [status, setStatus] = useState<null | 'success' | 'error'>(null);
   const [loading, setLoading] = useState(false);
   const [submittedName, setSubmittedName] = useState<string | null>(null);
@@ -14,7 +17,10 @@ export default function ContactFormNlp() {
     setLoading(true);
 
     const form = e.currentTarget as HTMLFormElement;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data: Record<string, unknown> = {
+      ...Object.fromEntries(new FormData(form).entries()),
+      ...shield.payload(),
+    };
 
     try {
       const res = await fetch('/api/contact', {
@@ -88,6 +94,7 @@ export default function ContactFormNlp() {
       onSubmit={onSubmit}
       className='rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] p-6 text-[var(--text)] shadow-[0_20px_60px_var(--glow)] backdrop-blur-xl'>
       <div className='grid gap-4'>
+        {shield.fields}
         <div className='grid gap-1'>
           <label className='text-sm font-medium text-[var(--muted)]'>Name *</label>
           <input

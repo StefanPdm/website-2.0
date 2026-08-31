@@ -177,7 +177,7 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
             </div>
             {/* Mobile scroll hint arrow */}
             <div
-              className={`pointer-events-none fixed bottom-1 right-0 z-10 md:hidden transition-opacity duration-300 ${
+              className={`pointer-events-none fixed bottom-2 right-0 z-10 md:hidden transition-opacity duration-300 ${
                 showScrollHint && isOpen ? 'opacity-100' : 'opacity-0'
               }`}
               aria-hidden='true'>

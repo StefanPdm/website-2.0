@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+import {
+  ELAPSED_FIELD,
+  HONEYPOT_FIELD,
+  isRateLimited,
+  logVerdict,
+  scoreSubmission,
+} from '@/lib/anti-spam';
+
 // SMTP configuration from environment
 const SMTP_HOST = process.env.SMTP_HOST;
 const SMTP_PORT = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined;
@@ -35,6 +43,9 @@ type ContactPayload = {
   topic?: string;
   sessionType?: string;
   preferredTime?: string;
+  // Bot-Schutz (siehe lib/anti-spam.ts) – wird nie in die Mail übernommen
+  [HONEYPOT_FIELD]?: string;
+  [ELAPSED_FIELD]?: number | null;
 };
 
 export async function POST(req: Request) {
@@ -138,6 +149,39 @@ export async function POST(req: Request) {
     ]
       .filter(Boolean)
       .join('\n');
+
+    // --- Bot-Schutz: greift, bevor irgendeine Mail das System verlässt -------
+    // Wichtig, weil die Bestätigungsmail an eine frei wählbare (und damit
+    // potenziell fremde) Adresse geht – ungefiltert wäre das ein Mail-Relay.
+    const verdict = scoreSubmission({
+      headers,
+      honeypot: (data as ContactPayload)[HONEYPOT_FIELD],
+      elapsedMs: (data as ContactPayload)[ELAPSED_FIELD],
+      name: String(name),
+      message: String(message),
+      website,
+    });
+    logVerdict('/api/contact', verdict, ip);
+
+    if (verdict.action === 'drop' || isRateLimited(ip)) {
+      // Bewusst 200 mit Erfolgsform: Der Bot erhält kein Signal, dass er
+      // erkannt wurde, und variiert seine Payload nicht.
+      return NextResponse.json({ ok: true });
+    }
+
+    const isSuspect = verdict.action === 'suspect';
+    const suspectPlain = isSuspect
+      ? `\n\n--- SPAM-VERDACHT (Score ${verdict.score}) ---\n${verdict.reasons.join('\n')}\nKeine Bestaetigungsmail an den Absender versendet.\n---\n`
+      : '';
+    const suspectHtml = isSuspect
+      ? `<div style="border:2px solid #f59e0b;background:#fffbeb;padding:12px;border-radius:8px;margin-bottom:16px">
+           <strong>⚠️ Spam-Verdacht (Score ${verdict.score})</strong>
+           <ul style="margin:8px 0 0;padding-left:18px">${verdict.reasons.map((r) => `<li>${r}</li>`).join('')}</ul>
+           <p style="margin:8px 0 0;font-size:12px">Es wurde <strong>keine</strong> Bestätigungsmail an den Absender versendet.</p>
+         </div>`
+      : '';
+    // ------------------------------------------------------------------------
+
     const signaturePlain = '\n\nMit lieben Grüßen\nStefan';
     const signatureHtml = '<p style="margin-top:16px">Mit lieben Grüßen<br/>Stefan</p>';
 
@@ -153,10 +197,11 @@ export async function POST(req: Request) {
       .filter(Boolean)
       .join('\n');
 
-    const plain = `Neue Anfrage über Webseite\n\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\n${projectType ? `Projektart: ${projectType}\n` : ''}${sessionType ? `Format: ${sessionType}\n` : ''}${topic ? `Thema: ${topic}\n` : ''}${budget ? `Budget: ${budget}\n` : ''}${timeline ? `Zeitrahmen: ${timeline}\n` : ''}${extraLines ? `\nZusatz:\n${extraLines}\n` : ''}${clientInfoLines ? `\nNutzerinfos:\n${clientInfoLines}\n` : ''}\nNachricht:\n${message}${signaturePlain}\n`;
+    const plain = `Neue Anfrage über Webseite\n${suspectPlain}\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\n${projectType ? `Projektart: ${projectType}\n` : ''}${sessionType ? `Format: ${sessionType}\n` : ''}${topic ? `Thema: ${topic}\n` : ''}${budget ? `Budget: ${budget}\n` : ''}${timeline ? `Zeitrahmen: ${timeline}\n` : ''}${extraLines ? `\nZusatz:\n${extraLines}\n` : ''}${clientInfoLines ? `\nNutzerinfos:\n${clientInfoLines}\n` : ''}\nNachricht:\n${message}${signaturePlain}\n`;
 
     const htmlOwner = `
       <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.6;color:#0B1B2B">
+        ${suspectHtml}
         <h2>Neue Anfrage über Webseite</h2>
         <p><strong>Zeitpunkt:</strong> ${ts}</p>
         <p><strong>Name:</strong> ${name}<br/>
@@ -227,20 +272,24 @@ export async function POST(req: Request) {
       from: SMTP_FROM,
       to: OWNER_EMAIL,
       replyTo: String(email),
-      subject: `Neue Anfrage: ${subjectHint} – ${name}`,
+      subject: `${isSuspect ? '[SPAM?] ' : ''}Neue Anfrage: ${subjectHint} – ${name}`,
       text: plain,
       html: htmlOwner,
     });
 
-    // Send confirmation to customer
-    await transporter.sendMail({
-      from: SMTP_FROM,
-      to: String(email),
-      replyTo: OWNER_EMAIL,
-      subject: 'Danke für Deine Anfrage – ich melde mich',
-      text: `Hallo ${name},\n\nDanke für Deine Anfrage! Ich melde mich in der Regel innerhalb von 24–48 Stunden mit einer Einschätzung zurück.${signaturePlain}`,
-      html: htmlCustomer,
-    });
+    // Bestätigung an den Absender – nur bei unverdächtigen Anfragen.
+    // Bei Verdacht bleibt der Lead für dich sichtbar, aber es geht keine Mail
+    // an eine möglicherweise gefälschte fremde Adresse hinaus.
+    if (!isSuspect) {
+      await transporter.sendMail({
+        from: SMTP_FROM,
+        to: String(email),
+        replyTo: OWNER_EMAIL,
+        subject: 'Danke für Deine Anfrage – ich melde mich',
+        text: `Hallo ${name},\n\nDanke für Deine Anfrage! Ich melde mich in der Regel innerhalb von 24–48 Stunden mit einer Einschätzung zurück.${signaturePlain}`,
+        html: htmlCustomer,
+      });
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err: unknown) {

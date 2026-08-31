@@ -2,6 +2,14 @@ import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 
+import {
+  ELAPSED_FIELD,
+  HONEYPOT_FIELD,
+  isRateLimited,
+  logVerdict,
+  scoreSubmission,
+} from '@/lib/anti-spam';
+
 const SMTP_HOST = process.env.SMTP_HOST;
 const SMTP_PORT = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined;
 const SMTP_SECURE = String(process.env.SMTP_SECURE || '').toLowerCase() === 'true';
@@ -44,6 +52,9 @@ function extractErrorMessage(e: unknown): string {
 type GuidePayload = {
   name: string;
   email: string;
+  // Bot-Schutz (siehe lib/anti-spam.ts) – wird nie in die Mail übernommen
+  [HONEYPOT_FIELD]?: string;
+  [ELAPSED_FIELD]?: number | null;
 };
 
 function createDownloadToken(email: string, expiresAt: number) {
@@ -136,6 +147,23 @@ export async function POST(req: Request) {
     ]
       .filter(Boolean)
       .join('\n');
+
+    // --- Bot-Schutz: vor jedem Mailversand -----------------------------------
+    // Die Leitfaden-Mail geht an eine frei waehlbare Adresse. Ungefiltert
+    // waere das derselbe Relay-Vektor wie beim Kontaktformular.
+    const verdict = scoreSubmission({
+      headers,
+      honeypot: (data as GuidePayload)[HONEYPOT_FIELD],
+      elapsedMs: (data as GuidePayload)[ELAPSED_FIELD],
+      name: String(name),
+    });
+    logVerdict('/api/nlp-guide', verdict, ip);
+
+    if (verdict.action === 'drop' || isRateLimited(ip)) {
+      // Still bestaetigen, damit der Bot kein Erkennungssignal bekommt.
+      return NextResponse.json({ ok: true });
+    }
+    // -------------------------------------------------------------------------
 
     const expiresInSeconds = 7 * 24 * 60 * 60;
     const expiresAt = Math.floor(Date.now() / 1000) + expiresInSeconds;

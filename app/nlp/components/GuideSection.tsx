@@ -5,8 +5,10 @@ import { CheckCircle2, XCircle } from 'lucide-react';
 
 import GlassCard from '@/components/GlassCard';
 import { PrimaryButton } from '@/app/nlp/components/Buttons';
+import { useFormShield } from '@/components/FormShield';
 
 export default function GuideSection() {
+  const shield = useFormShield();
   const [formState, setFormState] = useState({ name: '', email: '' });
   const [touched, setTouched] = useState({ name: false, email: false });
   const [status, setStatus] = useState<null | 'success' | 'error'>(null);
@@ -40,7 +42,7 @@ export default function GuideSection() {
       const res = await fetch('/api/nlp-guide', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({ ...formState, ...shield.payload() }),
       });
       if (!res.ok) throw new Error('failed');
       setSubmittedName(formState.name.trim());
@@ -130,6 +132,7 @@ export default function GuideSection() {
                 suppressHydrationWarning
                 onSubmit={onSubmit}
                 className='space-y-4'>
+                {shield.fields}
                 <div>
                   <label
                     htmlFor='lead-name'
