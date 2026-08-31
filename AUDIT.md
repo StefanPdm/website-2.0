@@ -20,13 +20,15 @@ Die Probleme liegen in drei Bereichen:
 3. **Konversion & Vertrauen** — Kontakt auf `/` versteckt, Preissprung ohne Brücke, Testimonials ohne Beleg.
 
 Insgesamt **24 Befunde**: 7× P0, 10× P1, 7× P2.
-**Erledigt:** #7 (Bot-Schutz, 31.08.) · #2 #3 #4 #9 #10 #11 #12 #13 #16 #17 (Sprint 1, 01.09.)
+**Erledigt:** #7 (Sprint 0) · #2 #3 #4 #9 #10 #11 #12 #13 #16 #17 (Sprint 1) · #1 #8 #15 (Sprint 2)
+**Teilweise:** #6 (InfoOrb-Ladeverhalten behoben, Fokus-Falle offen)
+**Offen:** #5 #6 #14 #18 #19 #20 #21 #22 #23 #24
 
 ---
 
 # A. Technik
 
-### #1 · P0 · `public/` ist ~150 MB groß und enthält Quelldateien
+### #1 · ✅ ERLEDIGT (01.09.2026) · `public/` ist ~150 MB groß und enthält Quelldateien
 
 **Belegt.** Größte Dateien:
 
@@ -176,7 +178,14 @@ nicht**. Für eine wirksame DSGVO-Einwilligung muss der Text erreichbar sein.
 
 ---
 
-### #6 · P0 · Modals ohne Fokus-Management
+### #6 · ⚠️ TEILWEISE (01.09.2026) · Modals ohne Fokus-Management
+
+> **Erledigt:** InfoOrb mountet das Modal nur noch bei `isOpen`, die beiden
+> `priority`-Bilder sind entfernt – sie konkurrierten mit dem echten LCP-Bild
+> der Startseite, obwohl das Modal geschlossen war.
+>
+> **Weiterhin offen:** die Fokus-Falle und die Fokus-Rückgabe in allen fünf
+> Modals. Bleibt P0.
 
 **Belegt:** Fünf Modals — `NlpIntroSection`, `ProgrammeSection`, `AboutSection`,
 `InfoOrb` — setzen korrekt `role='dialog'`, `aria-modal='true'` und schließen per
@@ -259,7 +268,7 @@ Sperrung des Absenders führen. `/api/nlp-guide` hat dasselbe Problem.
 
 ---
 
-### #8 · P1 · Drei WebGL-Kontexte gleichzeitig auf `/webdevelopment`
+### #8 · ✅ ERLEDIGT (01.09.2026) · Drei WebGL-Kontexte gleichzeitig auf `/webdevelopment`
 
 **Belegt** in `app/webdevelopment/page.tsx` — alle statisch importiert, kein `next/dynamic`:
 
@@ -442,7 +451,7 @@ sonst die Überschrift der angesprungenen Sektion verdeckt.
 
 ---
 
-### #15 · P2 · `prefers-reduced-motion` wird nirgends berücksichtigt
+### #15 · ✅ ERLEDIGT (01.09.2026) · `prefers-reduced-motion` wird nirgends berücksichtigt
 
 **Belegt:** 0 Treffer für `prefers-reduced-motion` im gesamten Projekt.
 Dauerhaft laufend: Orbit-Ringe (14–22 s), `pillPulse` (2,6 s), `info-orb-float`
@@ -711,7 +720,7 @@ Sie sehen aber klickbar aus. Entweder verlinken oder visuell entschärfen.
 `#10` PDF-Kopien löschen · `#13` toten Code löschen · `#12` totes CSS löschen ·
 `#24` Textkorrekturen
 
-**Sprint 2 — „Gewicht runter" (~1 Tag)**
+**Sprint 2 — „Gewicht runter"** ✅ erledigt 01.09.2026
 `#1` Assets · `#8` Effekt-Budget + Video-Lazy-Loading · `#6` InfoOrb-Priority
 
 **Sprint 3 — „Zugänglichkeit & Sicherheit" (~1 Tag)**

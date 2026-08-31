@@ -140,7 +140,6 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
               width={300}
               height={300}
               className='min-h-75 h-75 w-auto object-contain object-bottom'
-              priority
             />
           </div>
           <div className='relative block w-full px-6 pt-6 md:hidden'>
@@ -151,7 +150,6 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
               width={600}
               height={600}
               className='max-h-80 w-full object-contain'
-              priority
             />
             <div className='h-px w-full bg-[rgba(125,227,255,0.35)]' />
           </div>
@@ -217,7 +215,7 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
         <span className='absolute -inset-4.5 rounded-full border border-[rgba(125,227,255,0.55)] opacity-35 animate-[info-orb-ring_2.8s_ease-out_infinite] [animation-delay:1.2s]' />
         <span className='relative z-2'>Info</span>
       </button>
-      {canUseDom ? createPortal(modal, document.body) : null}
+      {canUseDom && isOpen ? createPortal(modal, document.body) : null}
     </>
   );
 }

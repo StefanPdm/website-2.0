@@ -27,8 +27,8 @@ export default function DatenschutzPage() {
             E-Mail:&nbsp;
             <a
               className='underline decoration-[var(--text)]/30 hover:text-[var(--text)]'
-              href='mailto:webdeveloper@heinemann.berlin'>
-              webdeveloper@heinemann.berlin
+              href='mailto:coach.stefan@heinemann.berlin'>
+              coach.stefan@heinemann.berlin
             </a>
           </p>
         </div>

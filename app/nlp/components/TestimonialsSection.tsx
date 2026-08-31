@@ -7,32 +7,32 @@ import GlassCard from '@/components/GlassCard';
 const testimonials = [
   {
     name: 'Lena K.',
-    imageUrl: '/images-nlp/testimonial-f-10.png',
+    imageUrl: '/images-nlp/testimonial-f-10.webp',
     text: 'Weniger Grübeln, mehr Handlungsfokus. Die Sessions haben mir geholfen, Entscheidungen schneller zu treffen.',
   },
   {
     name: 'Daniel M.',
-    imageUrl: '/images-nlp/testimonial-m-5.png',
+    imageUrl: '/images-nlp/testimonial-m-5.webp',
     text: 'Ich kann klarer Nein sagen, ohne Schuldgefühl. Besonders die Sprachmuster-Übungen waren extrem hilfreich.',
   },
   {
     name: 'Mira S.',
-    imageUrl: '/images-nlp/testimonial-f-11.png',
+    imageUrl: '/images-nlp/testimonial-f-11.webp',
     text: 'Meine Gespräche im Team sind strukturierter. Ich erkenne schneller, was mich wirklich bewegt.',
   },
   {
     name: 'Fabian R.',
-    imageUrl: '/images-nlp/testimonial-m-6.png',
+    imageUrl: '/images-nlp/testimonial-m-6.webp',
     text: 'Ich habe endlich eine klare Prioritätenliste und setze sie konsequent um. Die Methoden sind praxisnah und sofort wirksam.',
   },
   {
     name: 'Nora V.',
-    imageUrl: '/images-nlp/testimonial-f-12.png',
+    imageUrl: '/images-nlp/testimonial-f-12.webp',
     text: 'Mehr Ruhe, weniger Druck. Besonders die Arbeit an meinen inneren Standards hat mir geholfen, Entscheidungen leichter zu treffen.',
   },
   {
     name: 'Jasmin T.',
-    imageUrl: '/images-nlp/testimonial-f-13.png',
+    imageUrl: '/images-nlp/testimonial-f-13.webp',
     text: 'Die Kommunikation im Team ist deutlich klarer. Ich fühle mich sicherer in Gesprächen und kann meine Punkte präzise formulieren.',
   },
 ];

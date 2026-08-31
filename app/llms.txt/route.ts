@@ -32,7 +32,8 @@ function build() {
 - Rollen: NLP Coach (Marke „SNAC Coaching"), Webentwickler
 - Standort: ${OWNER.street}, ${OWNER.postalCode} ${OWNER.city}, Deutschland
 - Einzugsgebiet: ${AREA_SERVED.join(', ')}, zusätzlich remote/online
-- Kontakt: ${OWNER.email}
+- Kontakt Coaching: ${OWNER.emailCoaching}
+- Kontakt Webentwicklung: ${OWNER.email}
 - LinkedIn: ${OWNER.linkedIn}
 - Sprachen: Deutsch, Englisch
 - Hintergrund: über 20 Jahre Unternehmer im Interieur Design, danach Wechsel in

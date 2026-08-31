@@ -37,7 +37,7 @@ export default function NlpLayoutClient({ children }: { children: React.ReactNod
   return (
     <NlpThemeContext.Provider value={contextValue}>
       <div
-        className={`scroll-smooth ${publicSans.className} relative min-h-dvh ${
+        className={`${publicSans.className} relative min-h-dvh ${
           isWarmTheme ? 'theme-warm' : 'theme-cool'
         }`}>
         <div className='relative isolate overflow-hidden'>

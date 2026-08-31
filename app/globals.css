@@ -979,3 +979,38 @@
     color: var(--foreground);
   }
 }
+
+/**
+ * Bewegung respektieren.
+ *
+ * Die Seite hält dauerhaft laufende Animationen vor (Orbit-Ringe 14–22 s,
+ * Pillen-Puls, InfoOrb-Ringe, Karten-Karussells). Für Menschen mit
+ * vestibulären Beschwerden ist das unangenehm bis unbenutzbar.
+ *
+ * WCAG 2.1: 2.2.2 (Auto-Bewegung über 5 s pausierbar) und 2.3.3.
+ * Die WebGL-Effekte prüfen dieselbe Einstellung zusätzlich in JS
+ * (components/LazyEffect.tsx) und starten dann gar nicht erst.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/**
+ * Weiches Scrollen für Anker-Links.
+ *
+ * Muss auf dem scrollenden Element stehen. Zuvor lag `scroll-smooth` auf einem
+ * <div> im NLP-Layout und blieb damit wirkungslos – die Header-Links sprangen
+ * hart. scroll-padding-top hält Platz für den fixierten Header frei, sonst
+ * verdeckt er die Überschrift des angesprungenen Abschnitts.
+ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}

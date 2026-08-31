@@ -19,7 +19,9 @@ export function absoluteUrl(path = '/') {
 
 export const OWNER = {
   name: 'Stefan Heinemann',
+  /** Allgemein / Welt B. Welt A hat eine eigene Adresse – siehe emailCoaching. */
   email: 'webdeveloper@heinemann.berlin',
+  emailCoaching: 'coach.stefan@heinemann.berlin',
   street: 'Schmiedegasse 53',
   postalCode: '14469',
   city: 'Potsdam',

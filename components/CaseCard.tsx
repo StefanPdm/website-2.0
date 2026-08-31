@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   title: string;
@@ -24,6 +24,36 @@ export default function CaseCard({
   const isRemoteImage = typeof image === 'string' && /^https?:\/\//i.test(image);
   const tiltRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  /**
+   * Video erst laden und starten, wenn die Karte sichtbar wird – und wieder
+   * pausieren, sobald sie den Viewport verlässt. Bei prefers-reduced-motion
+   * bleibt es beim Standbild (Poster), das Video wird gar nicht geladen.
+   */
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || !video) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!el.src) el.src = video;
+          void el.play().catch(() => {
+            /* Autoplay kann vom Browser blockiert werden – Poster bleibt stehen. */
+          });
+        } else {
+          el.pause();
+        }
+      },
+      { rootMargin: '200px' },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [video]);
   const [transform, setTransform] = useState<string>(
     'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)',
   );
@@ -73,14 +103,19 @@ export default function CaseCard({
         <div className='relative h-52 md:h-[20.8rem] w-full'>
           {video ? (
             <video
+              ref={videoRef}
               className='h-full w-full object-cover object-top'
-              src={video}
+              // Kein `src`-Attribut: die Quelle wird erst gesetzt, wenn die
+              // Karte in den Viewport kommt. Sonst laden die vier Case-Videos
+              // (zusammen rund 10 MB) sofort beim Seitenaufruf – obwohl sie
+              // weit unter dem Fold liegen.
               muted
               loop
-              autoPlay
               playsInline
               controls={false}
+              preload='none'
               poster={image}
+              aria-label={`Videovorschau: ${title}`}
             />
           ) : image ? (
             <Image

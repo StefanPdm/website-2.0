@@ -369,9 +369,40 @@ Alles Weitere ist ein CSS-Effekt oder existiert nicht.
 - Ambient-Animationen sind **dekorativ** → immer `aria-hidden` bzw. `pointer-events-none`.
 - Auto-Rotationen (`CardSwap` 3500 ms, About-Slider 4500 ms) brauchen eine
   manuelle Steuerung (Dots) oder `pauseOnHover`.
-- **`prefers-reduced-motion` respektieren.** Neue Animationen kommen mit
-  `@media (prefers-reduced-motion: reduce)`-Abschaltung. *(global noch offen — `AUDIT.md` #6)*
-- Autoplay-Videos: `muted loop playsInline` — Pflicht, sonst blockiert iOS.
+- `prefers-reduced-motion` ist global in `app/globals.css` abgeschaltet.
+  Effekte, die in JS starten, prüfen es zusätzlich selbst.
+
+### Jeder schwere Effekt läuft über `LazyEffect`
+
+`components/LazyEffect.tsx` ist die verbindliche Hülle für WebGL, Canvas und
+alles mit Dauer-Renderloop. Es rendert den Effekt nur, wenn **alle drei**
+Bedingungen stimmen: im Viewport, Display breit genug (Default 1024 px),
+keine reduzierte Bewegung.
+
+```tsx
+// components/WebBackdrop.tsx – Muster für neue Effekte
+'use client';
+const Schwer = dynamic(() => import('@/components/Schwer'), { ssr: false });
+
+<LazyEffect fallback={<CssVerlauf />}>
+  <Schwer />
+</LazyEffect>;
+```
+
+Drei Punkte, die dabei nicht verhandelbar sind:
+
+1. **`dynamic({ ssr: false })` in einem Client-Wrapper.** In einer Server
+   Component ist `ssr: false` nicht erlaubt — deshalb liegen `WebBackdrop`
+   und `HyperspeedBand` als eigene `'use client'`-Dateien vor.
+2. **Immer ein `fallback`.** Auf Mobil und bei reduzierter Bewegung sieht der
+   Nutzer sonst ein Loch. Ein CSS-Verlauf in denselben Markenfarben genügt.
+3. **Ein aktiver WebGL-Kontext pro Viewport.** Zwei Effekte dürfen sich nicht
+   überlappen — das war der Zustand, der `/webdevelopment` mobil ausgebremst hat.
+
+**Videos** (Muster: `components/CaseCard.tsx`): kein `src` im Markup, `preload='none'`,
+`poster` gesetzt. Quelle und `play()` erst über einen `IntersectionObserver`,
+Pause beim Verlassen des Viewports, bei reduzierter Bewegung gar nicht laden.
+`muted loop playsInline` bleibt Pflicht, sonst blockiert iOS das Autoplay.
 
 ---
 
@@ -423,7 +454,15 @@ Das ist die Scanner-Story des Betreibers und ein bewusstes Alleinstellungsmerkma
 
 - **Immer `next/image`.** `<img>` nur in Vendor-Code.
 - Format: **WebP** für Fotos, **SVG** für Logos. Keine PSD, keine unkomprimierten PNG in `public/`.
-- **Obergrenze pro Datei in `public/`: 500 KB.** *(aktuell massiv verletzt — `AUDIT.md` #1)*
+- **Obergrenze pro Datei in `public/`: 500 KB.** Ausnahme sind die Case-Videos.
+- **`public/` enthält nur ausgelieferte Dateien.** Quelldateien (PSD,
+  hochauflösende Originale, verworfene Varianten) gehören nach `design-source/`
+  — das Verzeichnis ist gitignored und landet nicht im Vercel-Deployment.
+- **Bildgröße an die Anzeigegröße koppeln.** Ein Avatar mit `sizes='48px'`
+  braucht kein 2048×2048-Original. `next/image` optimiert zwar zur Laufzeit,
+  die Quelldatei liegt aber trotzdem im Deployment und im Git-Verlauf.
+  Skalieren mit `sharp` (ist als Next-Abhängigkeit bereits installiert):
+  `sharp(src).resize(w, h, { withoutEnlargement: true }).webp({ quality: 82 })`.
 - `priority` **nur** für das LCP-Bild einer Route — maximal eines.
 - `sizes` bei jedem `fill`-Bild angeben.
 - `quality={100}` ist die Ausnahme, nicht der Standard (`next.config.ts` erlaubt `[100, 75]`).

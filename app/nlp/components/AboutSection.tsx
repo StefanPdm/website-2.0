@@ -12,7 +12,6 @@ export default function AboutSection() {
   const images = [
     '/images-nlp/portrait-workshop.webp',
     '/images-nlp/portrait-treppe.webp',
-    '/images-nlp/portrait-coaching.webp',
     '/images-nlp/portrait-firewalk.webp',
   ];
 

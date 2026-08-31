@@ -27,11 +27,13 @@ import {
 import CardSwap, { Card } from '@/components/CardSwap';
 import ElectricBorder from '@/components/ElectricBorder';
 import ContactFormWeb from '@/components/ContactFormWeb';
-import LightPillar from '@/components/LightPillar';
-import HyperspeedStrip from '@/components/HyperspeedStrip';
+
+
 import PixelCard from '@/components/PixelCard';
 import CaseCard from '../../components/CaseCard';
 import ScrollToTop from '@/components/ScrollToTop';
+import WebBackdrop from '@/components/WebBackdrop';
+import HyperspeedBand from '@/components/HyperspeedBand';
 import { WebStructuredData } from '@/components/StructuredData';
 
 const cases = [
@@ -203,17 +205,7 @@ export default function WebdevelopmentPage() {
       <WebStructuredData cases={cases} />
       {/* Page Background */}
       <div className='pointer-events-none fixed inset-0 z-0'>
-        <LightPillar
-          className='z-0'
-          topColor='#1D6FA8'
-          bottomColor='#7A2C8E'
-          intensity={0.9}
-          glowAmount={0.004}
-          pillarWidth={3.2}
-          pillarHeight={0.45}
-          pillarRotation={15}
-          mixBlendMode='screen'
-        />
+        <WebBackdrop />
       </div>
       {/* content */}
       <div className='relative z-10'>
@@ -391,7 +383,7 @@ export default function WebdevelopmentPage() {
           </div>
 
           <div className='z-0 pointer-events-none absolute bottom-0 left-1/2 h-1/2 w-screen -translate-x-1/2 opacity-100'>
-            <HyperspeedStrip />
+            <HyperspeedBand />
           </div>
         </section>
         {/* Technologien Section */}

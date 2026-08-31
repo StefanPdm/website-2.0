@@ -119,6 +119,8 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
               'NLP Coaching in Potsdam, Berlin und online: Klarheit im Kopf, Entscheidungen ohne Grübeln, Selbstwert und Grenzen, Emotionsregulation. Einzelcoaching, Mentoring und Workshops für Unternehmen.',
             url: absoluteUrl('/nlp'),
             provider: { '@id': PERSON_ID },
+            // Welt A hat eine eigene Kontaktadresse.
+            email: `mailto:${OWNER.emailCoaching}`,
             areaServed: AREA_SERVED.map((name) => ({ '@type': 'Place', name })),
             audience: {
               '@type': 'Audience',
