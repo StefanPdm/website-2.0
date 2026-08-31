@@ -40,7 +40,7 @@ export default function AgbPage() {
           §3 Verantwortung des Klienten
         </h2>
         <p className='text-[var(--muted)]'>
-          Der Klient handelt eigenverantwortlich fuer Entscheidungen, Handlungen und Ergebnisse.
+          Der Klient handelt eigenverantwortlich für Entscheidungen, Handlungen und Ergebnisse.
         </p>
       </section>
 

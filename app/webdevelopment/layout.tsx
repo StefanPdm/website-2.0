@@ -1,34 +1,30 @@
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
+import { KEYWORDS_WEB, OWNER } from '@/lib/site';
+
+const title = 'Webentwicklung Potsdam & Berlin – Websites, Web Apps, Kundenportale';
+const description =
+  'Freelance Webentwicklung aus Potsdam für Berlin und Brandenburg: Websites und Landingpages, Web Apps und Kundenportale, Headless CMS und Schnittstellen. Umgesetzt mit Next.js, React, Angular und TypeScript – sauber, wartbar, dokumentiert.';
 
 export const metadata: Metadata = {
-  title: 'Webdevelopment – Klare Websites & saubere Systeme',
-  description:
-    'Webentwicklung für Unternehmer, Coaches und Teams: klare Websites, saubere Systeme, Performance und Struktur. Von Landingpages bis Web Apps und Schnittstellen.',
+  title,
+  description,
+  keywords: [...KEYWORDS_WEB],
   alternates: {
     canonical: '/webdevelopment',
   },
   openGraph: {
-    title: 'Webdevelopment – Klare Websites & saubere Systeme',
-    description:
-      'Webentwicklung für Unternehmer, Coaches und Teams: klare Websites, saubere Systeme, Performance und Struktur. Von Landingpages bis Web Apps und Schnittstellen.',
+    title,
+    description,
     url: '/webdevelopment',
     type: 'website',
-    images: [
-      {
-        url: '/Global-Logo-SH-1.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Webdevelopment von Stefan Heinemann',
-      },
-    ],
+    locale: 'de_DE',
+    siteName: OWNER.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Webdevelopment – Klare Websites & saubere Systeme',
-    description:
-      'Webentwicklung für Unternehmer, Coaches und Teams: klare Websites, saubere Systeme, Performance und Struktur. Von Landingpages bis Web Apps und Schnittstellen.',
-    images: ['/Global-Logo-SH-1.webp'],
+    title,
+    description,
   },
 };
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Syne } from 'next/font/google';
 import './globals.css';
+import { KEYWORDS_ROOT, OWNER, SITE_URL } from '@/lib/site';
 
 const bodyFont = Plus_Jakarta_Sans({
   variable: '--font-body',
@@ -14,34 +15,20 @@ const displayFont = Syne({
   weight: ['500', '600', '700', '800'],
 });
 
-const siteUrl = 'https://www.heinemann.berlin';
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Webentwicklung & NLP Coaching',
+    default: 'NLP Coaching & Webentwicklung in Potsdam und Berlin',
     template: '%s | Stefan Heinemann',
   },
   description:
-    'Moderne Webentwicklung und NLP Coaching – wähle den Service, der dich weiterbringt.',
-  keywords: [
-    'Webentwicklung',
-    'Webdesign',
-    'NLP Coaching',
-    'Digitale Systeme',
-    'Potsdam',
-    'Stefan Heinemann',
-    'WordPress',
-    'Next.js',
-    'React',
-    'Angular',
-    'Vue.js',
-    'Svelte',
-    'Berlin',
-    'Brandenburg',
-  ],
+    'Stefan Heinemann aus Potsdam: NLP Coaching für Klarheit und Entscheidungen sowie Webentwicklung für Websites, Web Apps und Kundenportale. Für Potsdam, Berlin, Brandenburg und remote.',
+  keywords: [...KEYWORDS_ROOT],
+  authors: [{ name: OWNER.name, url: SITE_URL }],
+  creator: OWNER.name,
+  publisher: OWNER.name,
   alternates: {
-    canonical: siteUrl,
+    canonical: SITE_URL,
   },
   robots: {
     index: true,
@@ -56,26 +43,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: siteUrl,
-    title: 'Digitale Services | Webentwicklung & NLP Coaching',
+    url: SITE_URL,
+    title: 'NLP Coaching & Webentwicklung in Potsdam und Berlin',
     description:
-      'Moderne Webentwicklung und NLP Coaching – wähle den Service, der dich weiterbringt.',
-    siteName: 'Stefan Heinemann',
-    images: [
-      {
-        url: '/Global-Logo-SH-1.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Stefan Heinemann',
-      },
-    ],
+      'Zwei Geschäftsbereiche, eine Person: NLP Coaching für innere Klarheit und Webentwicklung für digitale Systeme. Potsdam, Berlin, Brandenburg und remote.',
+    siteName: OWNER.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Digitale Services | Webentwicklung & NLP Coaching',
+    title: 'NLP Coaching & Webentwicklung in Potsdam und Berlin',
     description:
-      'Moderne Webentwicklung und NLP Coaching – wähle den Service, der dich weiterbringt.',
-    images: ['/Global-Logo-SH-1.webp'],
+      'Zwei Geschäftsbereiche, eine Person: NLP Coaching für innere Klarheit und Webentwicklung für digitale Systeme. Potsdam, Berlin, Brandenburg und remote.',
   },
   icons: {
     icon: [{ url: '/favicon.ico' }, { url: '/Global-Logo-SH-1.webp', type: 'image/webp' }],

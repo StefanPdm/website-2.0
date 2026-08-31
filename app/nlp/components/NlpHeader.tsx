@@ -71,7 +71,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
             Programme
           </Link>
           <Link
-            href={sectionHref('workshops')}
+            href={sectionHref('preise')}
             className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
             Preise
           </Link>
@@ -93,14 +93,14 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
           <button
             type='button'
             onClick={onToggleTheme}
-            className='cursor-pointer hidden items-center gap-2 rounded-full border border-border bg-(--surface) px-4 py-2 text-xs font-semibold text-(--text) transition hover:bg-(--surface-strong) xl:inline-flex'
+            className='cursor-pointer hidden items-center gap-2 rounded-full border border-border bg-(--surface) px-4 py-2 text-xs font-semibold text-(--text) transition hover:bg-(--surface-strong) lg:inline-flex'
             aria-pressed={isWarmTheme}>
             {isWarmTheme ? 'Kühl' : 'Warm'}
           </button>
           <PrimaryButton
             href={sectionHref('kontakt')}
             onClick={handleContactClick}
-            className='whitespace-nowrap hidden! xl:inline-flex! px-4 py-2 text-xs md:px-6 md:py-3 md:text-sm'>
+            className='whitespace-nowrap hidden! lg:inline-flex! px-4 py-2 text-xs md:px-6 md:py-3 md:text-sm'>
             Gratis Erstgespräch
           </PrimaryButton>
           <button
@@ -114,7 +114,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
         </div>
       </div>
       <div
-        className={`md:hidden overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-in-out ${
+        className={`lg:hidden overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-in-out ${
           isMenuOpen
             ? 'max-h-105 opacity-100 translate-y-0'
             : 'max-h-0 opacity-0 -translate-y-2 pointer-events-none'
@@ -143,7 +143,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
               Programme
             </Link>
             <Link
-              href={sectionHref('workshops')}
+              href={sectionHref('preise')}
               onClick={() => setIsMenuOpen(false)}
               className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
               Preise

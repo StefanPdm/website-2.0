@@ -32,6 +32,32 @@ import HyperspeedStrip from '@/components/HyperspeedStrip';
 import PixelCard from '@/components/PixelCard';
 import CaseCard from '../../components/CaseCard';
 import ScrollToTop from '@/components/ScrollToTop';
+import { WebStructuredData } from '@/components/StructuredData';
+
+const cases = [
+  {
+    name: 'Linde · TRAFÖ GmbH',
+    url: 'https://trafoe.de',
+    description:
+      'Relaunch 2024 der Website für einen Anbieter aus der Intralogistik – Struktur, Performance und Pflegbarkeit.',
+  },
+  {
+    name: 'Rund um Berlin Rallye',
+    url: 'https://rundumberlin-classic.de',
+    description:
+      'Website für eine Oldtimer-Rallye in Berlin: Termine, Anmeldung und Ergebnisse in klarer Struktur.',
+  },
+  {
+    name: 'Kaiser Classic Rallye',
+    url: 'https://kaiser-classic.de',
+    description: 'Website für die Kaiser Classic Rallye, abgeschlossen 2025.',
+  },
+  {
+    name: 'Kundenportal Intralogistik',
+    description:
+      'Web App mit Login-Bereich, Rollen und Dokumentenverwaltung für einen Intralogistik-Kunden. Launch 03/2026.',
+  },
+];
 
 const trustItems = ['Persönlich & direkt', 'Sauberer Code', 'Wartbar & skalierbar'];
 
@@ -54,7 +80,7 @@ const CardSwapView = CardSwap as ComponentType<
 const CardView = Card as ComponentType<
   PropsWithChildren<HTMLAttributes<HTMLDivElement> & { customClass?: string }>
 >;
-// ProfileCard removed – replaced by custom CaseCard component
+
 
 const services = [
   {
@@ -174,6 +200,7 @@ const techIconMap: Record<string, ReactElement> = {
 export default function WebdevelopmentPage() {
   return (
     <div className='relative min-h-screen overflow-x-clip bg-[#0B1B2B] text-slate-100'>
+      <WebStructuredData cases={cases} />
       {/* Page Background */}
       <div className='pointer-events-none fixed inset-0 z-0'>
         <LightPillar
@@ -252,7 +279,7 @@ export default function WebdevelopmentPage() {
                     className='text-slate-100'>
                     <div className='flex h-full flex-col justify-between p-6'>
                       <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                        Kompetenz 1/42
+                        Kompetenz 1/3
                       </div>
                       <div className='mt-5 flex items-start gap-3'>
                         <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
@@ -277,7 +304,7 @@ export default function WebdevelopmentPage() {
                     className='text-slate-100'>
                     <div className='flex h-full flex-col justify-between p-6'>
                       <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                        Kompetenz 2/42
+                        Kompetenz 2/3
                       </div>
                       <div className='mt-5 flex items-start gap-3'>
                         <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
@@ -302,7 +329,7 @@ export default function WebdevelopmentPage() {
                     className='text-slate-100'>
                     <div className='flex h-full flex-col justify-between p-6'>
                       <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                        Kompetenz 3/42
+                        Kompetenz 3/3
                       </div>
                       <div className='mt-5 flex items-start gap-3'>
                         <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>

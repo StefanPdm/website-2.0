@@ -20,7 +20,7 @@ Die Probleme liegen in drei Bereichen:
 3. **Konversion & Vertrauen** — Kontakt auf `/` versteckt, Preissprung ohne Brücke, Testimonials ohne Beleg.
 
 Insgesamt **24 Befunde**: 7× P0, 10× P1, 7× P2.
-**Erledigt: #7** (Bot-Schutz, 31.08.2026).
+**Erledigt:** #7 (Bot-Schutz, 31.08.) · #2 #3 #4 #9 #10 #11 #12 #13 #16 #17 (Sprint 1, 01.09.)
 
 ---
 
@@ -65,7 +65,7 @@ Realistisches Ziel: **unter 8 MB**.
 
 ---
 
-### #2 · P0 · Domain-Schreibweise ist an drei Stellen uneinheitlich
+### #2 · ✅ ERLEDIGT (01.09.2026) · Domain-Schreibweise ist an drei Stellen uneinheitlich
 
 **Belegt:**
 
@@ -90,7 +90,7 @@ und in allen vier Dateien importieren. Zusätzlich in Vercel einen 301-Redirect
 
 ---
 
-### #3 · P0 · NLP-Menü öffnet zwischen 768 px und 1023 px nicht
+### #3 · ✅ ERLEDIGT (01.09.2026) · NLP-Menü öffnet zwischen 768 px und 1023 px nicht
 
 **Belegt** in `app/nlp/components/NlpHeader.tsx`:
 
@@ -115,7 +115,7 @@ Theme-Toggle auf `lg:inline-flex`. Danach 768 / 1024 / 1280 durchklicken.
 
 ---
 
-### #4 · P0 · CSS-Klassen ohne Wirkung — `@theme`-Block fehlt
+### #4 · ✅ ERLEDIGT (01.09.2026) · CSS-Klassen ohne Wirkung — `@theme`-Block fehlt
 
 **Belegt:** `app/globals.css` importiert `shadcn/tailwind.css`, aber diese Datei
 enthält (verifiziert in `node_modules/shadcn/dist/tailwind.css`) **nur Keyframes
@@ -296,7 +296,7 @@ mobil realistisch von „rot" auf „gelb/grün".
 
 ---
 
-### #9 · P1 · `/about` und `/contact` sind verwaiste Altseiten mit falscher Marke
+### #9 · ✅ ERLEDIGT (01.09.2026) · `/about` und `/contact` sind verwaiste Altseiten mit falscher Marke
 
 **Belegt:**
 
@@ -319,7 +319,7 @@ sollen: 301 auf `/` in `next.config.ts`.
 
 ---
 
-### #10 · P1 · Der Lead-Magnet ist nicht geschützt
+### #10 · ✅ ERLEDIGT (01.09.2026) · Der Lead-Magnet ist nicht geschützt
 
 **Belegt:** Das HMAC-Token-System (`/api/nlp-guide` erzeugt, `/api/nlp-guide/download`
 prüft Signatur + 7-Tage-Ablauf) ist sauber gebaut. Es ist nur wirkungslos, weil
@@ -345,7 +345,7 @@ Vercel-File-Tracing erfasst sein.
 
 ---
 
-### #11 · P1 · OG-Bild ist 341×300 px, deklariert als 1200×630
+### #11 · ✅ ERLEDIGT (01.09.2026) · OG-Bild ist 341×300 px, deklariert als 1200×630
 
 **Belegt:** `public/Global-Logo-SH-1.webp` — tatsächliche Abmessungen **341 × 300 px**
 (VP8X-Header ausgelesen), 67 KB. Deklariert wird in `app/layout.tsx`,
@@ -366,7 +366,7 @@ immer korrekt dimensioniert).
 
 ---
 
-### #12 · P1 · Rund 900 Zeilen totes CSS
+### #12 · ✅ ERLEDIGT (01.09.2026) · Rund 900 Zeilen totes CSS
 
 **Belegt:** `app/globals.css` hat 2069 Zeilen. Der Block von ca. Zeile 356 bis 1270
 stammt aus einer früheren Designiteration. Prüfung per `grep` über `app/` und
@@ -400,7 +400,7 @@ was aktiv ist. Genau das erschwert konsistente Weiterentwicklung.
 
 ---
 
-### #13 · P1 · Toter Code und ungenutzte Abhängigkeiten
+### #13 · ✅ ERLEDIGT (01.09.2026) · Toter Code und ungenutzte Abhängigkeiten
 
 | Fund | Beleg |
 |---|---|
@@ -468,7 +468,7 @@ reduce)')` abfragen und gar nicht erst mounten.
 
 ---
 
-### #16 · P2 · Kein strukturiertes Datenmarkup (JSON-LD)
+### #16 · ✅ ERLEDIGT (01.09.2026) · Kein strukturiertes Datenmarkup (JSON-LD)
 
 **Belegt:** 0 Treffer für `ld+json` in `.next/server/app/index.html`.
 
@@ -485,7 +485,7 @@ Die Preisdaten für `Offer` liegen bereits strukturiert in
 
 ---
 
-### #17 · P2 · Keine Security-Header
+### #17 · ✅ ERLEDIGT (01.09.2026) · Keine Security-Header
 
 **Belegt:** `next.config.ts` enthält nur `images` und `redirects`.
 Kein `headers()`, kein `poweredByHeader: false`.
@@ -706,7 +706,7 @@ Sie sehen aber klickbar aus. Entweder verlinken oder visuell entschärfen.
 **Sprint 0 — Spam-Stopp** ✅ erledigt 31.08.2026
 `#7`
 
-**Sprint 1 — „aufräumen, was stillschweigend kaputt ist" (~1 Tag)**
+**Sprint 1 — „aufräumen, was stillschweigend kaputt ist"** ✅ erledigt 01.09.2026
 `#4` @theme · `#3` Nav-Breakpoints · `#2` Domain · `#9` Altseiten löschen ·
 `#10` PDF-Kopien löschen · `#13` toten Code löschen · `#12` totes CSS löschen ·
 `#24` Textkorrekturen

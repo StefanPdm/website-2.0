@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Impressum | NLP Coaching',
-  description: 'Anbieterkennzeichnung und rechtliche Hinweise fuer den Bereich NLP Coaching.',
+  description: 'Anbieterkennzeichnung und rechtliche Hinweise für den Bereich NLP Coaching.',
 };
 
 export default function ImpressumPage() {
@@ -14,7 +14,7 @@ export default function ImpressumPage() {
           Impressum
         </h1>
         <p className='mt-3 text-[var(--muted)] max-w-2xl'>
-          Anbieterkennzeichnung, Kontaktangaben und rechtlich erforderliche Hinweise fuer den
+          Anbieterkennzeichnung, Kontaktangaben und rechtlich erforderliche Hinweise für den
           Bereich NLP Coaching.
         </p>
       </header>
@@ -45,7 +45,7 @@ export default function ImpressumPage() {
 
       <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
-          Verantwortlich fuer den Inhalt (§ 18 Abs. 2 MStV)
+          Verantwortlich für den Inhalt (§ 18 Abs. 2 MStV)
         </h2>
         <p className='text-[var(--muted)]'>Stefan Heinemann, Anschrift wie oben.</p>
       </section>
@@ -61,9 +61,9 @@ export default function ImpressumPage() {
       </section>
 
       <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
-        <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Haftung fuer Inhalte</h2>
+        <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Haftung für Inhalte</h2>
         <p className='text-[var(--muted)]'>
-          Als Diensteanbieter sind wir nach § 7 Abs. 1 DDG fuer eigene Inhalte auf diesen Seiten
+          Als Diensteanbieter sind wir nach § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten
           nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als
           Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
           Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
@@ -76,7 +76,7 @@ export default function ImpressumPage() {
       </section>
 
       <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
-        <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Haftung fuer Links</h2>
+        <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Haftung für Links</h2>
         <p className='text-[var(--muted)]'>
           Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
           Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.

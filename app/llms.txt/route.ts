@@ -1,0 +1,106 @@
+import { coachingOffers } from '@/app/nlp/pricing';
+import { absoluteUrl, AREA_SERVED, OWNER, SITE_URL } from '@/lib/site';
+
+/**
+ * /llms.txt – kompakte, faktische Beschreibung der Seite für Sprachmodelle.
+ *
+ * Ergänzt das JSON-LD: Während schema.org maschinenlesbare Entitäten liefert,
+ * gibt diese Datei den Fließtext-Kontext, den LLMs zum Zitieren brauchen —
+ * wer, was, wo, zu welchem Preis. Bewusst nüchtern und ohne Marketingsprache,
+ * weil Modelle prüfbare Aussagen bevorzugt übernehmen.
+ *
+ * Wird aus denselben Quellen erzeugt wie die Seite selbst (lib/site.ts,
+ * app/nlp/pricing.ts) und kann deshalb nicht veralten.
+ */
+
+export const dynamic = 'force-static';
+
+function build() {
+  const offers = coachingOffers
+    .map((o) => `- ${o.title} (${o.duration}): ${o.price} inkl. MwSt. — ${o.note}`)
+    .join('\n');
+
+  return `# ${OWNER.name}
+
+> NLP Coach und Webentwickler aus ${OWNER.city}. Zwei eigenständige
+> Geschäftsbereiche unter einer Person: NLP Coaching für innere Klarheit und
+> Webentwicklung für digitale Systeme. Tätig in ${AREA_SERVED.join(', ')} sowie remote.
+
+## Person
+
+- Name: ${OWNER.name}
+- Rollen: NLP Coach (Marke „SNAC Coaching"), Webentwickler
+- Standort: ${OWNER.street}, ${OWNER.postalCode} ${OWNER.city}, Deutschland
+- Einzugsgebiet: ${AREA_SERVED.join(', ')}, zusätzlich remote/online
+- Kontakt: ${OWNER.email}
+- LinkedIn: ${OWNER.linkedIn}
+- Sprachen: Deutsch, Englisch
+- Hintergrund: über 20 Jahre Unternehmer im Interieur Design, danach Wechsel in
+  die Fullstack-Entwicklung, seit 2024 NLP-Ausbildung, seit Mitte 2025 als Coach tätig.
+
+## Geschäftsbereich 1 — NLP Coaching
+
+URL: ${absoluteUrl('/nlp')}
+
+Neuro-Linguistisches Programmieren, pragmatisch eingesetzt: als Werkzeugkasten für
+Fokus, emotionale Stabilität und zielgerichtetes Handeln.
+
+Themen: Gedankenkarussell und Grübeln unterbrechen, Emotionen regulieren,
+Ziele klären und priorisieren, Selbstwert stärken und Grenzen setzen,
+Entscheidungen ohne Aufschub treffen.
+
+Formate: 1:1 Einzelcoaching, mehrmonatiges Mentoring, Workshops für Unternehmen
+und Führungskräfte, Keynotes. Vor Ort in ${OWNER.city} und Berlin oder online.
+
+Zertifizierungen: DVNLP (Deutscher Verband für Neuro-Linguistisches Programmieren),
+Ausbildung bei Ronny Rohde (Best Life NLP).
+
+Preise (inkl. MwSt.):
+${offers}
+
+## Geschäftsbereich 2 — Webentwicklung
+
+URL: ${absoluteUrl('/webdevelopment')}
+
+Websites und Webanwendungen für Unternehmer, Coaches, kleine und mittlere
+Unternehmen sowie Agenturen (White Label).
+
+Leistungen: Websites und Landingpages, Web Apps und Kundenportale (Login,
+Dashboards, Dokumentenverwaltung, Rollen und Rechte), Headless CMS und
+Schnittstellen (REST, GraphQL), UX-Konzeption und Informationsarchitektur.
+
+Technologien: Next.js, React, Angular, TypeScript, Tailwind CSS, Node.js, Prisma,
+REST und GraphQL, Clerk, Firebase, Supabase, Vercel, Docker, Neon (Postgres),
+Headless CMS, WordPress (ACF, Custom Post Types).
+
+Arbeitsweise in fünf Schritten: Verstehen, Struktur, Umsetzung, Feinschliff, Übergabe.
+
+Referenzen: Linde · TRAFÖ GmbH (trafoe.de, Relaunch 2024), Rund um Berlin Rallye
+(rundumberlin-classic.de), Kaiser Classic Rallye (kaiser-classic.de),
+Kundenportal Intralogistik (Launch 03/2026).
+
+## Seiten
+
+- [Startseite](${SITE_URL}): Auswahl zwischen beiden Geschäftsbereichen
+- [NLP Coaching](${absoluteUrl('/nlp')}): Angebot, Programme, Preise, Kontakt
+- [Webentwicklung](${absoluteUrl('/webdevelopment')}): Leistungen, Technologien, Referenzen, Kontakt
+- [Impressum Coaching](${absoluteUrl('/nlp/impressum')})
+- [Impressum Webentwicklung](${absoluteUrl('/webdevelopment/impressum')})
+
+## Hinweise
+
+- Sprache der Website: Deutsch.
+- Erstgespräche sind kostenlos; Anfragen laufen über die Kontaktformulare.
+- Antwort in der Regel innerhalb von 24–48 Stunden.
+- Die Website setzt keine Cookies und bindet keine Tracking-Dienste ein.
+`;
+}
+
+export async function GET() {
+  return new Response(build(), {
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+    },
+  });
+}

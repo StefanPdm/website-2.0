@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ContactForm from '@/components/ContactForm';
 import InfoOrb from '@/components/InfoOrb';
+import { RootStructuredData } from '@/components/StructuredData';
 
 export default function Home() {
   const useWarmPills = true;
@@ -62,6 +63,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
 
   return (
     <div className='landing-shell'>
+      <RootStructuredData />
       <main className='landing-main'>
         {/* Header */}
         <header className='pt-4 w-full max-w-7xl sticky top-0 z-50 mx-auto flex items-center justify-between'>
@@ -69,7 +71,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
             <div className='w-12 h-12'>
               <Image
                 src='/Global-Logo-SH-1.webp'
-                alt='Studio Fokus Logo'
+                alt='Stefan Heinemann – NLP Coaching und Webentwicklung, Logo'
                 width={120}
                 height={120}
               />
@@ -122,7 +124,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                     <div className='orbit-item__content'>
                       <Image
                         src='/logos/nlp-logo.svg'
-                        alt='NLP'
+                        alt='NLP Coaching'
                         width={40}
                         height={40}
                       />
@@ -138,7 +140,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                     <div className='orbit-item__content'>
                       <Image
                         src='/webdesign-logo.png'
-                        alt='Webdesign'
+                        alt='Webdesign und Webentwicklung'
                         width={40}
                         height={40}
                       />
@@ -189,7 +191,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
               <span className='absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00E5FF]/20 blur-3xl' />
               <Image
                 src='/images-startseite/portrait-balance-free.webp'
-                alt='Stefan Heinemann'
+                alt='Stefan Heinemann – NLP Coach und Webentwickler aus Potsdam'
                 width={800}
                 height={800}
                 priority
@@ -295,7 +297,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                   </div>
                 </Link>
               </div>
-              <div className='choice-footer'>Minimal. Premium. Klar. © Stefan Heinemann</div>
+              <div className='choice-footer'>Klar. Sauber. Wirksam. © Stefan Heinemann</div>
             </div>
           </div>
         </section>

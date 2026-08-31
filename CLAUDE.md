@@ -446,20 +446,82 @@ Dateinamen: kebab-case, beschreibend, ASCII, **ohne Leerzeichen und ohne Datum**
 
 ---
 
-## 13. SEO & Metadata
+## 13. SEO & KI-Auffindbarkeit
 
-- `metadataBase` und **alle** URLs verwenden kanonisch **`https://www.heinemann.berlin`**.
-  Eine Schreibweise, überall — Layout, `robots.ts`, `sitemap.ts`, API-Routen.
-  *(aktuell uneinheitlich — `AUDIT.md` #2)*
-- Jede Route exportiert `metadata` mit `title`, `description`, `alternates.canonical`,
-  `openGraph`, `twitter`.
+### Grundregeln
+
+- Die kanonische Domain steht **nur** in `lib/site.ts` (`SITE_URL`).
+  Nirgends erneut hartkodieren — genau das hatte zu zwei Schreibweisen geführt.
+  Absolute Links über `absoluteUrl('/pfad')`.
+- Jede Route exportiert `metadata` mit `title`, `description`,
+  `alternates.canonical`, `openGraph`, `twitter`, `keywords`.
 - Titel-Template: `'%s | Stefan Heinemann'`.
-- **OG-Bild pro Welt**, echte **1200×630**. Kein Logo als OG-Bild.
-- Neue Route → **immer** Eintrag in `app/sitemap.ts`. Seiten ohne Einstiegs-Link
-  gehören *nicht* in die Sitemap, sondern entfernt oder verlinkt.
-- JSON-LD ist Pflicht für neue Angebotsseiten:
-  `Person`/`ProfessionalService` auf `/`, `Service` auf `/nlp` und `/webdevelopment`,
-  `Offer` bei Preisen. *(fehlt komplett — `AUDIT.md` #4)*
+- **Title und Description tragen immer Leistung + Ort.** Nicht „NLP Coaching",
+  sondern „NLP Coaching in Potsdam & Berlin – Klarheit, Fokus, Entscheidungen".
+  Das ist der Hebel für lokale Suche.
+- Neue Route → Eintrag in `app/sitemap.ts` **und** ein interner Link.
+  Eine Seite ohne Einstiegs-Link gehört nicht in die Sitemap, sondern entfernt.
+- Seiten, die niemand suchen soll (Token-Landingpages), bekommen
+  `X-Robots-Tag: noindex` über `next.config.ts`.
+
+### Suchbegriffe
+
+Gepflegt in `lib/site.ts` als `KEYWORDS_ROOT`, `KEYWORDS_NLP`, `KEYWORDS_WEB`.
+Drei Achsen, jeweils kombiniert:
+
+| Achse | Welt A | Welt B |
+|---|---|---|
+| **Ort** | Potsdam, Berlin, Brandenburg | Potsdam, Berlin, Brandenburg |
+| **Leistung** | NLP Coaching, Business Coaching, Mentaltraining, Kommunikationstraining, Führungskräfte-Coaching | Webentwicklung, Webdesign, Web App, Kundenportal, Headless CMS, API |
+| **Technologie / Methode** | NLP, Reframing, Timeline, DVNLP | Next.js, React, Angular, TypeScript, WordPress |
+| **Anliegen** (stärkster Long-Tail) | Gedankenkarussell stoppen, Grenzen setzen, Klarheit im Kopf, Coaching nach Burnout | Website Relaunch, Performance-Optimierung, Landingpage erstellen lassen |
+
+> **Regel:** Ein Keyword kommt nur in die Liste, wenn die Seite es inhaltlich
+> auch einlöst. Begriffe ohne passenden Abschnitt schaden dem Ranking.
+> Neue Sektion → prüfen, ob sie ein Keyword neu rechtfertigt, und erst dann ergänzen.
+
+### Strukturierte Daten
+
+`components/StructuredData.tsx` liefert das JSON-LD, gerendert aus Server
+Components (damit es auch ohne JavaScript im HTML steht):
+
+| Route | Schema |
+|---|---|
+| `/` | `Person` + `WebSite` + `ProfessionalService` |
+| `/nlp` | `Service` + `OfferCatalog` (aus `app/nlp/pricing.ts`) + `BreadcrumbList` |
+| `/webdevelopment` | `Service` + `OfferCatalog` + `ItemList` (Referenzen) + `BreadcrumbList` |
+
+Alle Graphen verweisen über `@id` auf **dieselbe** Person — das ist die
+Voraussetzung dafür, dass Google beide Geschäftsbereiche einer Entität zuordnet
+statt zwei unabhängige Anbieter zu sehen.
+
+**Preise stehen ausschließlich in `app/nlp/pricing.ts`.** Preistabelle und
+`Offer`-Schema lesen dieselbe Quelle — sonst driftet das Markup von der Anzeige weg.
+
+### KI-Lesbarkeit
+
+- `app/llms.txt/route.ts` erzeugt `/llms.txt`: eine nüchterne, faktische
+  Beschreibung für Sprachmodelle, generiert aus `lib/site.ts` und
+  `app/nlp/pricing.ts` — kann deshalb nicht veralten.
+  **Bei neuen Leistungen oder Preisen dort mitpflegen.**
+- `app/robots.ts` erlaubt KI-Crawler ausdrücklich (GPTBot, ClaudeBot,
+  PerplexityBot, Google-Extended u. a.). Ein Ausschluss würde zugleich die
+  Sichtbarkeit in KI-Antworten beenden.
+- LLMs zitieren, was sie eindeutig zuordnen können: **prüfbare Aussagen** mit
+  Ort, Zahl und Nachweis schlagen Marketingprosa. „DVNLP-zertifiziert, Sessions
+  in Potsdam und Berlin, ab 339 € inkl. MwSt." ist zitierbar — „einzigartige
+  Transformation" nicht.
+- Semantik zählt doppelt: saubere H-Hierarchie, echte Listen, beschreibende
+  Alt-Texte (`alt='Stefan Heinemann, NLP Coach aus Potsdam'`, nicht `alt='Portrait'`).
+
+### Open Graph
+
+Die OG-Bilder werden zur Build-Zeit generiert — `app/opengraph-image.tsx`,
+`app/nlp/opengraph-image.tsx`, `app/webdevelopment/opengraph-image.tsx`,
+gemeinsames Layout in `components/OgCard.tsx`. Echte 1200×630, ein eigenes Motiv
+pro Welt. **Keine `images` mehr in `metadata.openGraph` eintragen** — das würde
+die generierten überschreiben. Beim Bearbeiten beachten: `next/og` versteht nur
+eine CSS-Teilmenge, jedes Element mit mehreren Kindern braucht `display: 'flex'`.
 
 ---
 
@@ -525,13 +587,22 @@ Teil des Tickets, nicht ein Nachtrag.
 Der vollständige, priorisierte Audit steht in **`AUDIT.md`**.
 Kurzfassung dessen, was beim Anfassen der jeweiligen Datei mitzureparieren ist:
 
-- `text-accent`, `text-accent-web`, `border-border`, `bg-accent` sowie `border-[--border]`
-  erzeugen **keine CSS-Regel** — es fehlt der `@theme`-Block. Nicht kopieren.
-- `/about` und `/contact` sind verwaiste Altseiten mit falscher Marke („Studio Fokus");
-  das Formular auf `/contact` sendet nichts.
-- Rund 900 Zeilen toter CSS in `app/globals.css` (Block `.teaser-*` bis `.cta-*`).
-- `app/nlp/components/WorkshopsSection.tsx` und `components/ContactRevealButton.tsx`
-  werden nirgends gerendert.
-- Der NLP-Leitfaden liegt trotz Token-Gate dreifach frei in `public/`.
-- Das Theme-Umschalten in Welt A überschreibt Tailwind-Klassen per `!important` —
-  neue Komponenten müssen über die CSS-Variablen laufen, damit dieser Block sterben kann.
+**Erledigt (Sprint 0 + 1):** `@theme`-Block ergänzt — `text-accent`, `border-border`
+& Co. wirken jetzt · Nav-Breakpoints 768–1023 px repariert · Domain vereinheitlicht ·
+`/about` und `/contact` gelöscht (301 auf `/`) · Leitfaden-Kopien aus `public/`
+entfernt · totes CSS raus (2095 → 982 Zeilen) · toter Code raus · Bot-Schutz ·
+OG-Bilder, JSON-LD, `llms.txt`.
+
+**Noch offen — hier gilt weiterhin Vorsicht:**
+
+- Das Theme-Umschalten in Welt A überschreibt Tailwind-Klassen per `!important`
+  (`.theme-warm .text-white/70` u. a.). Neue Komponenten müssen über die
+  CSS-Variablen laufen, damit dieser Block irgendwann sterben kann.
+- `public/` ist weiterhin ~150 MB groß, inklusive `.psd`-Dateien und 9-MB-PNGs
+  für 48px-Avatare (`AUDIT.md` #1).
+- `/webdevelopment` betreibt zwei WebGL-Kontexte plus 9 Canvas-Instanzen
+  gleichzeitig, alle statisch importiert (`AUDIT.md` #8).
+- Formular-Labels ohne `htmlFor`, Modals ohne Fokus-Falle (`AUDIT.md` #5, #6).
+- Der Kontaktbereich auf `/` ist per `display:none` versteckt (`AUDIT.md` #19).
+- Vendor-Komponenten (`LaserFlow`, `LightPillar`) verursachen 11 ESLint-Fehler;
+  eigener Code ist sauber (`AUDIT.md` #18).

@@ -56,7 +56,7 @@ function GuideDownloadContent() {
 
           {status === 'missing' && (
             <div className='mt-6 rounded-2xl border border-rose-400/40 bg-rose-500/10 p-4 text-sm text-[var(--text)]'>
-              Der Download-Link ist unvollstaendig. Bitte fordere den Link erneut an.
+              Der Download-Link ist unvollständig. Bitte fordere den Link erneut an.
             </div>
           )}
 

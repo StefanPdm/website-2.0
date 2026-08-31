@@ -105,7 +105,7 @@ export default function AboutSection() {
                 {['NLP Coach', 'Identität & Entscheidungen', 'Potsdam'].map((item) => (
                   <span
                     key={item}
-                    className='rounded-full border border-[--border] bg-white/5 px-4 py-2 text-xs text-white/80'>
+                    className='rounded-full border border-(--border) bg-white/5 px-4 py-2 text-xs text-white/80'>
                     {item}
                   </span>
                 ))}
@@ -144,12 +144,12 @@ export default function AboutSection() {
                     <span className='group/tooltip relative inline-flex items-center'>
                       <Image
                         src='/logos/Logo-DVNLP-black.svg'
-                        alt='Certification 1'
+                        alt='DVNLP – Deutscher Verband für NLP, Zertifizierung von Stefan Heinemann'
                         height={30}
                         width={120}
                       />
-                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[--border] bg-white/70 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-black/90 opacity-0 shadow-[0_10px_30px_rgba(11,27,43,0.25)] transition-opacity group-hover/tooltip:opacity-100'>
-                        DVNLP - Deutscher Verband fur NLP
+                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-white/70 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-black/90 opacity-0 shadow-[0_10px_30px_rgba(11,27,43,0.25)] transition-opacity group-hover/tooltip:opacity-100'>
+                        DVNLP – Deutscher Verband für Neuro-Linguistisches Programmieren
                       </span>
                     </span>
                   </a>
@@ -162,11 +162,11 @@ export default function AboutSection() {
                     <span className='group/tooltip relative inline-flex items-center'>
                       <Image
                         src='/logos/Logo-RR-black.webp'
-                        alt='Certification 2'
+                        alt='Ronny Rohde – Best Life NLP, Ausbildung von Stefan Heinemann'
                         height={30}
                         width={120}
                       />
-                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[--border] bg-white/70 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-black/90 opacity-0 shadow-[0_10px_30px_rgba(11,27,43,0.25)] transition-opacity group-hover/tooltip:opacity-100'>
+                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-white/70 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-black/90 opacity-0 shadow-[0_10px_30px_rgba(11,27,43,0.25)] transition-opacity group-hover/tooltip:opacity-100'>
                         Ronny Rohde - Best Life NLP
                       </span>
                     </span>
@@ -227,10 +227,10 @@ export default function AboutSection() {
                   NLP Ausbildung. Dort begriff ich das Wichtigste: Ich muss nicht die Welt um mich
                   herum ändern, sondern mich selbst. Inspiriert von meinem Mentor{' '}
                   <a
-                    href='https://ronyrhode.com'
+                    href='https://www.ronnyrohde.com/'
                     target='_blank'
                     rel='noopener noreferrer'>
-                    <strong>Rony Rhode </strong>
+                    <strong>Ronny Rohde</strong>
                   </a>
                   und dem unglaublichen{' '}
                   <a
@@ -252,7 +252,7 @@ export default function AboutSection() {
                     { icon: '💼', title: '20+ Jahre', text: 'Unternehmer in Berlin & Hamburg' },
                     {
                       icon: '🧭',
-                      title: 'Spannenstes Projekt',
+                      title: 'Spannendstes Projekt',
                       text: (
                         <>
                           Luxus Sportclub Berlin Ku´Damm ·{' '}

@@ -173,7 +173,7 @@ export async function POST(req: Request) {
     const guideUrl = `${siteUrl}/nlp/guide-download?token=${encodeURIComponent(downloadToken)}`;
     const logoUrl = `${siteUrl}/logos/nlp-logo.png`;
 
-    const signaturePlain = '\n\nMit lieben Gruessen\nStefan\n\nwww.heinemann.berlin\n\n';
+    const signaturePlain = '\n\nMit lieben Grüßen\nStefan\n\nwww.heinemann.berlin\n\n';
 
     const subject = 'Dein kostenloser NLP-Leitfaden';
 
@@ -199,12 +199,12 @@ export async function POST(req: Request) {
             <p style="margin:0;color:#64748b;font-size:14px">Falls der Button nicht funktioniert, nutze diesen Link:<br/>
               <a href="${guideUrl}" style="color:#0ea5e9">${guideUrl}</a>
             </p>
-            <p style="margin:12px 0 0;color:#64748b;font-size:12px">Der Link ist 7 Tage gueltig.</p>
+            <p style="margin:12px 0 0;color:#64748b;font-size:12px">Der Link ist 7 Tage gültig.</p>
             <p style="margin:18px 0 0">Viel Freude damit und bis vielleicht bald!${signaturePlain.replace(/\n/g, '<br/>')}</p>
           </div>
           <div style="padding:18px 26px;border-top:1px solid #eef2f7;background:#fafcff;text-align:center;font-family:Helvetica,Arial,sans-serif">
             <img src="${logoUrl}" alt="SNAC Coaching" style="height:48px;width:48px;display:inline-block" />
-            <p style="margin:8px 0 0;color:#94a3b8;font-size:12px">SNAC Coaching · NLP fuer klare Entscheidungen</p>
+            <p style="margin:8px 0 0;color:#94a3b8;font-size:12px">SNAC Coaching · NLP für klare Entscheidungen</p>
           </div>
         </div>
         <p style="max-width:640px;margin:16px auto 0;color:#94a3b8;font-size:12px;font-family:Helvetica,Arial,sans-serif">Diese E-Mail wurde automatisch gesendet.</p>
@@ -264,7 +264,7 @@ export async function POST(req: Request) {
       to: String(email),
       replyTo: OWNER_EMAIL || SMTP_FROM,
       subject,
-      text: `Hallo ${name},\n\nhier ist dein kostenloser NLP-Leitfaden:\n${guideUrl}\n\nDer Link ist 7 Tage gueltig.${signaturePlain}`,
+      text: `Hallo ${name},\n\nhier ist dein kostenloser NLP-Leitfaden:\n${guideUrl}\n\nDer Link ist 7 Tage gültig.${signaturePlain}`,
       html: htmlCustomer,
     });
 

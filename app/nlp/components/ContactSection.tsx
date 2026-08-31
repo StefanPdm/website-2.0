@@ -26,13 +26,13 @@ export default function ContactSection() {
               ].map((item) => (
                 <div
                   key={item}
-                  className='rounded-2xl border border-[--border] bg-white/5 p-4'>
+                  className='rounded-2xl border border-(--border) bg-white/5 p-4'>
                   {item}
                 </div>
               ))}
             </div>
           </div>
-          <div className='rounded-3xl border border-[--border] bg-white/5 p-6 shadow-[0_30px_80px_rgba(0,229,255,0.25)]'>
+          <div className='rounded-3xl border border-(--border) bg-white/5 p-6 shadow-[0_30px_80px_rgba(0,229,255,0.25)]'>
             <ContactFormNlp />
           </div>
         </div>

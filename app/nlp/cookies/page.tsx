@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Cookies | NLP Coaching',
-  description: 'Hinweise zu eingesetzten Cookies und Ihren Einstellungsmoeglichkeiten.',
+  description: 'Hinweise zu eingesetzten Cookies und Ihren Einstellungsmöglichkeiten.',
 };
 
 export default function CookiesPage() {

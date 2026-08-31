@@ -44,7 +44,7 @@ export default function NlpFooter() {
         </div>
       </div>
       <div className='container mx-auto mt-6 px-4 text-xs text-white/40'>
-        © 2026 NLP Coaching. Alle Rechte vorbehalten.
+        © {new Date().getFullYear()} SNAC Coaching · NLP Coaching Potsdam & Berlin. Alle Rechte vorbehalten.
       </div>
     </footer>
   );

@@ -189,7 +189,7 @@ export default function ProgrammeSection() {
                 <div className='flex items-center justify-between'>
                   <h3 className='text-lg font-semibold text-white'>{program.title}</h3>
                   {program.featured && (
-                    <span className='rounded-full bg-(--accent)/15 px-3 py-1 text-xs text-accent border border-[--border]'>
+                    <span className='rounded-full bg-(--accent)/15 px-3 py-1 text-xs text-accent border border-(--border)'>
                       Premium
                     </span>
                   )}

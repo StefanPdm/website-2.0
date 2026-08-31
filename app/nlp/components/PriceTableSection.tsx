@@ -2,71 +2,14 @@
 
 import GlassCard from '@/components/GlassCard';
 import { PrimaryButton, SecondaryButton } from '@/app/nlp/components/Buttons';
+import { coachingOffers } from '@/app/nlp/pricing';
 
-const prices = [
-  {
-    title: 'Startersession',
-    duration: 'ca. 150 min',
-    price: '339,15 €',
-    icon: '🚀',
-    mentoring: false,
-    highlight: false,
-    bullets: [
-      'Tiefen-Check: Standort, Ziele, innere Blockaden.',
-      'Erste NLP-Interventionen für sofortige Klarheit.',
-      'Konkreter Umsetzungsplan für die nächsten 14 Tage.',
-    ],
-    note: 'Ideal als intensiver Einstieg und Orientierung.',
-  },
-  {
-    title: 'Folgesession',
-    duration: 'ca. 90 min',
-    price: '226,10 €',
-    icon: '⚡',
-    mentoring: false,
-    highlight: false,
-    bullets: [
-      'Vertiefung & Feintuning deiner Ziele.',
-      'Arbeit an Mustern, Entscheidungen, innerer Ruhe.',
-      'Stabilisierung und Fortschrittskontrolle.',
-    ],
-    note: 'Perfekt für nachhaltige Umsetzung im Alltag.',
-  },
-  {
-    title: 'Mentoring 3 Monate',
-    duration: '3 Monate Begleitung',
-    price: '2.990,00 €',
-    icon: '⭐',
-    mentoring: true,
-    highlight: true,
-    bullets: [
-      'Strategische Zielarbeit & Identitäts-Alignment.',
-      'Regelmäßige Sessions + WhatsApp-Support.',
-      'Schnelle Interventionen bei Stress & Blockaden.',
-      'Messbare Fortschritte mit klarer Roadmap.',
-    ],
-    note: 'Beliebt für Fokus, Klarheit und schnelle Ergebnisse.',
-  },
-  {
-    title: 'Mentoring 6 Monate',
-    duration: '6 Monate Begleitung',
-    price: '4.990,00 €',
-    icon: '🏆',
-    mentoring: true,
-    highlight: false,
-    bullets: [
-      'Tiefe Transformation mit stabiler Umsetzung.',
-      'Langfristige Routinen und mentale Stärke.',
-      'Verankerung neuer Gewohnheiten & Entscheidungen.',
-    ],
-    note: 'Für nachhaltige Veränderung und dauerhafte Wirkung.',
-  },
-];
+const prices = coachingOffers;
 
 export default function PriceTableSection() {
   return (
     <section
-      id='workshops'
+      id='preise'
       className='relative py-20 flex flex-col justify-center items-center min-h-[80dvh] backdrop-blur-2xl bg-(--section-bg-accent)'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>

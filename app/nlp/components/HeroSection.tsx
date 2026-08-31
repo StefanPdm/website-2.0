@@ -56,10 +56,12 @@ export default function HeroSection({ isWarmTheme }: HeroSectionProps) {
                   <div className='aspect-square w-full rounded-3xl bg-[radial-gradient(circle_at_top,var(--hero-glow),var(--hero-fade))] p-6'>
                     <div className='relative flex h-full w-full items-end justify-center rounded-3xl border border-white/15 bg-white/5 text-sm text-white/70 overflow-hidden'>
                       <Image
-                        src='/images-nlp/nlp-portrait.webp'
-                        alt='NLP Coaching'
-                        width={990}
-                        height={990}
+                        src='/images-nlp/Stefan_01.webp'
+                        alt='Stefan Heinemann, NLP Coach aus Potsdam'
+                        width={500}
+                        height={500}
+                        sizes='(min-width: 1024px) 40vw, 90vw'
+                        priority
                       />
                     </div>
                     <div className='absolute right-8 top-8 h-24 w-24 rounded-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.45),rgba(0,0,0,0))] blur-xl' />
