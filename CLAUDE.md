@@ -308,10 +308,14 @@ Feldnamen sind der Vertrag zur Route — beim Hinzufügen eines Feldes **immer**
 
 **Verbindliche Formular-Regeln**
 
-1. Jedes `<label>` braucht `htmlFor`, jedes Feld eine `id`. *(aktuell verletzt — `AUDIT.md` #5)*
+1. Jedes `<label>` braucht `htmlFor`, jedes Feld eine `id`.
+   Präfix nach Formular: `root-`, `web-`, `nlp-`, `lead-`.
 2. Pflichtfelder mit `*` **und** `required`.
-3. Consent-Checkbox `name="privacy"`, `required`, mit **verlinktem** Text
-   auf die Datenschutzerklärung der jeweiligen Welt.
+3. Consent-Checkbox `name="privacy"`, `required`. Der Hinweistext ist das
+   `<label>`, der Link auf die Datenschutzerklärung steht **daneben** — im
+   Label würde ein Klick darauf zusätzlich das Häkchen umschalten.
+   Die Einwilligung muss auch **an den Server übertragen** und dort geprüft
+   werden; eine reine Client-Checkbox belegt nichts.
 4. Drei Zustände: `idle` → `loading` (Button `disabled` + `aria-busy` + „Wird gesendet…")
    → `success` | `error`. Erfolgs-/Fehlerkarte ersetzt das Formular und bietet
    einen Rückweg („Neue Nachricht schreiben").
@@ -439,9 +443,18 @@ Das ist die Scanner-Story des Betreibers und ein bewusstes Alleinstellungsmerkma
 - Fokus sichtbar auf **jedem** interaktiven Element.
 - Klickbare Karten: `role='button'` + `tabIndex={0}` + `onKeyDown` (Enter/Space)
   — oder besser gleich ein echtes `<button>`/`<a>`.
-- Modals: `role='dialog'`, `aria-modal='true'`, `aria-label`, Escape schließt,
-  Body-Scroll gesperrt, **Fokus-Falle** und **Fokus-Rückgabe** an den Auslöser.
-  *(Fokus-Handling fehlt derzeit — `AUDIT.md` #6)*
+- **Modals laufen ausnahmslos über `components/useModal.ts`.** Der Hook liefert
+  Fokus-Falle, Fokus-Rückgabe an den Auslöser, Escape und Scroll-Sperre in einem.
+  Am Dialog-Container `ref={dialogRef}` und `tabIndex={-1}` setzen, dazu
+  `role='dialog'`, `aria-modal='true'` und ein `aria-label`:
+
+  ```tsx
+  const dialogRef = useModal<HTMLDivElement>(Boolean(offen), () => setOffen(null));
+  <div ref={dialogRef} tabIndex={-1} role='dialog' aria-modal='true' aria-label={titel}>
+  ```
+
+  Kein eigenes Escape- oder Scroll-Handling danebenbauen — das war der Zustand,
+  der die Fokus-Falle vergessen ließ.
 - Dekorative Bilder `alt=''`; inhaltliche Bilder mit beschreibendem Alt.
 - Icon-only-Buttons brauchen `aria-label`.
 - Toggles: `aria-pressed`. Aufklappbares: `aria-expanded`.

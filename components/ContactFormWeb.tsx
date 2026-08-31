@@ -97,16 +97,22 @@ export default function ContactFormWeb() {
       <div className='grid gap-4'>
         {shield.fields}
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Name *</label>
+          <label
+            htmlFor='web-name'
+            className='text-sm font-medium text-slate-200'>Name *</label>
           <input
+            id='web-name'
             name='name'
             required
             className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
           />
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>E-Mail *</label>
+          <label
+            htmlFor='web-email'
+            className='text-sm font-medium text-slate-200'>E-Mail *</label>
           <input
+            id='web-email'
             name='email'
             type='email'
             required
@@ -114,15 +120,21 @@ export default function ContactFormWeb() {
           />
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Firma (optional)</label>
+          <label
+            htmlFor='web-company'
+            className='text-sm font-medium text-slate-200'>Firma (optional)</label>
           <input
+            id='web-company'
             name='company'
             className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
           />
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Website (optional)</label>
+          <label
+            htmlFor='web-website'
+            className='text-sm font-medium text-slate-200'>Website (optional)</label>
           <input
+            id='web-website'
             name='website'
             type='url'
             placeholder='https://…'
@@ -130,8 +142,11 @@ export default function ContactFormWeb() {
           />
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Projektart *</label>
+          <label
+            htmlFor='web-projectType'
+            className='text-sm font-medium text-slate-200'>Projektart *</label>
           <select
+            id='web-projectType'
             name='projectType'
             required
             className='select-caret h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
@@ -142,8 +157,11 @@ export default function ContactFormWeb() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Umfang *</label>
+          <label
+            htmlFor='web-scope'
+            className='text-sm font-medium text-slate-200'>Umfang *</label>
           <select
+            id='web-scope'
             name='scope'
             required
             className='select-caret h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
@@ -154,8 +172,11 @@ export default function ContactFormWeb() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Budget (optional)</label>
+          <label
+            htmlFor='web-budget'
+            className='text-sm font-medium text-slate-200'>Budget (optional)</label>
           <select
+            id='web-budget'
             name='budget'
             className='select-caret h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
             <option value=''>Budgetrahmen</option>
@@ -166,8 +187,11 @@ export default function ContactFormWeb() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Zeitrahmen *</label>
+          <label
+            htmlFor='web-timeline'
+            className='text-sm font-medium text-slate-200'>Zeitrahmen *</label>
           <select
+            id='web-timeline'
             name='timeline'
             required
             className='select-caret h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
@@ -179,22 +203,38 @@ export default function ContactFormWeb() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Nachricht *</label>
+          <label
+            htmlFor='web-message'
+            className='text-sm font-medium text-slate-200'>Nachricht *</label>
           <textarea
+            id='web-message'
             name='message'
             rows={5}
             required
             className='rounded-xl border border-white/20 bg-white/40 px-3 py-2 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'></textarea>
         </div>
-        <label className='flex items-start gap-2 text-xs text-slate-300'>
+        {/* Hinweistext als Label, Link daneben – siehe ContactFormNlp. */}
+        <div className='flex items-start gap-2 text-xs text-slate-300'>
           <input
+            id='web-privacy'
             type='checkbox'
             name='privacy'
             required
-            className='mt-1 accent-[#2dd4bf]'
+            className='mt-1 shrink-0 accent-[#2dd4bf]'
           />
-          Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zu.
-        </label>
+          <p>
+            <label htmlFor='web-privacy'>
+              Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zu.
+            </label>{' '}
+            <a
+              href='/webdevelopment/datenschutz'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='underline underline-offset-2 transition hover:text-white'>
+              Datenschutz ansehen
+            </a>
+          </p>
+        </div>
         <button
           type='submit'
           disabled={loading}

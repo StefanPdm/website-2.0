@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import GlassCard from '@/components/GlassCard';
+import { useModal } from '@/components/useModal';
 import { PrimaryButton, SecondaryButton } from '@/app/nlp/components/Buttons';
 
 export default function AboutSection() {
   const [aboutModal, setAboutModal] = useState<null | 'before' | 'education'>(null);
+  const dialogRef = useModal<HTMLDivElement>(Boolean(aboutModal), () => setAboutModal(null));
   const [activeImage, setActiveImage] = useState(0);
   const images = [
     '/images-nlp/portrait-workshop.webp',
@@ -187,7 +189,10 @@ export default function AboutSection() {
             className='absolute inset-0 bg-[#050B12]/60 backdrop-blur-sm'
             aria-label='Modal schließen'
           />
-          <div className='relative w-full max-w-3xl max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-3xl border border-white/60 bg-[linear-gradient(140deg,rgba(255,255,255,0.95),rgba(230,247,255,0.86))] p-6 text-[#0B1B2B] shadow-[0_30px_90px_rgba(0,229,255,0.25)] backdrop-blur-xl'>
+          <div
+            ref={dialogRef}
+            tabIndex={-1}
+            className='relative w-full max-w-3xl max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-3xl border border-white/60 bg-[linear-gradient(140deg,rgba(255,255,255,0.95),rgba(230,247,255,0.86))] p-6 text-[#0B1B2B] shadow-[0_30px_90px_rgba(0,229,255,0.25)] backdrop-blur-xl'>
             <div className='flex items-start justify-between gap-4'>
               <div>
                 <p className='text-xs uppercase tracking-[0.3em] text-[#0B1B2B]/70'>
@@ -319,7 +324,7 @@ export default function AboutSection() {
                   <ol className='mt-4 space-y-4 border-l border-[#0B1B2B]/15 pl-5'>
                     {[
                       {
-                        year: 'Best Life NLP - Ronny Rhode',
+                        year: 'Best Life NLP - Ronny Rohde',
                         title: 'NLP Practitioner',
                         text: 'Grundlagen, Sprache, Wahrnehmung & Reframing.',
                       },
@@ -329,12 +334,12 @@ export default function AboutSection() {
                         text: 'Vertiefung: Identität, Wertearbeit & Change-Strategien.',
                       },
                       {
-                        year: 'Best Life NLP - Ronny Rhode',
+                        year: 'Best Life NLP - Ronny Rohde',
                         title: 'NLP Master',
                         text: 'Zielarbeit, Ressourcenaktivierung, Umsetzungspläne.',
                       },
                       {
-                        year: 'Best Life NLP - Ronny Rhode',
+                        year: 'Best Life NLP - Ronny Rohde',
                         title: 'NLP Coach',
                         text: 'Kontext, Muster, Dynamiken in Teams & Beziehungen.',
                       },
@@ -344,14 +349,19 @@ export default function AboutSection() {
                         text: 'Einweihung zur Selbst- & Fremdheilung. Energiearbeit & Achtsamkeit.',
                       },
                       {
-                        year: 'Tony Robbins - Greator',
-                        title: 'Unleash the Power Within',
+                        year: 'Greator',
+                        title: 'Tony Robbins — Unleash the Power Within',
                         text: 'Firewalk und intensive Persönlichkeitsentwicklung. Fokus auf Durchbruchsmomente.',
                       },
                       {
-                        year: 'Best Life NLP - Ronny Rhode',
-                        title: 'NLP Trainer',
-                        text: 'Ausbildung angefangen. Abschluß Ende 2026',
+                        year: 'Greator',
+                        title: 'Dieter Lange — Lebensschule',
+                        text: 'Haltung statt Technik: Sinn, Werte und der Unterschied zwischen Erfolg und Erfüllung.',
+                      },
+                      {
+                        year: 'younity',
+                        title: 'Dr. Joe Dispenza — Progressive Retreat, Basel',
+                        text: 'Mehrtägiges Retreat zu Neuroplastizität, Meditation und der Veränderung eingefahrener Muster.',
                       },
                     ].map((item) => (
                       <li

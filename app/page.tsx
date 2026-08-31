@@ -302,10 +302,19 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
           </div>
         </section>
 
-        {/* Hidden contact section, revealed on click and scrolled into view */}
+        {/*
+          Kontakt steht dauerhaft sichtbar unter der Entscheidung.
+
+          Zuvor war der Abschnitt per `display:none` versteckt und nur über
+          `#root-contact:target` erreichbar — damit war der einzige direkte
+          Kontaktweg der meistbesuchten Seite für Screenreader und
+          Suchmaschinen gar nicht vorhanden, und einmal geöffnet ließ er sich
+          nicht wieder schließen. Er lenkt hier auch nicht ab: Wer bis hierher
+          gescrollt hat, hat die Wahl zwischen den Welten bereits gesehen.
+        */}
         <section
           id='root-contact'
-          className='landing-grid contact-grid contact-grid--hidden pt-8'>
+          className='landing-grid contact-grid pt-8'>
           <div className='landing-left'>
             <span className='landing-badge'>Kontakt</span>
             <h2 className='landing-title'>Lass uns sprechen.</h2>

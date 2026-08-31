@@ -103,16 +103,22 @@ export default function ContactForm() {
       <div className='grid gap-4'>
         {shield.fields}
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Name *</label>
+          <label
+            htmlFor='root-name'
+            className='text-sm font-medium text-slate-200'>Name *</label>
           <input
+            id='root-name'
             required
             name='name'
             className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
           />
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>E-Mail *</label>
+          <label
+            htmlFor='root-email'
+            className='text-sm font-medium text-slate-200'>E-Mail *</label>
           <input
+            id='root-email'
             required
             name='email'
             type='email'
@@ -120,8 +126,11 @@ export default function ContactForm() {
           />
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Projektart *</label>
+          <label
+            htmlFor='root-projectType'
+            className='text-sm font-medium text-slate-200'>Projektart *</label>
           <select
+            id='root-projectType'
             required
             name='projectType'
             className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
@@ -135,8 +144,11 @@ export default function ContactForm() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Budget (optional)</label>
+          <label
+            htmlFor='root-budget'
+            className='text-sm font-medium text-slate-200'>Budget (optional)</label>
           <select
+            id='root-budget'
             name='budget'
             className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
             <option value=''>Budgetrahmen (nur Web)</option>
@@ -147,8 +159,11 @@ export default function ContactForm() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Zeitrahmen *</label>
+          <label
+            htmlFor='root-timeline'
+            className='text-sm font-medium text-slate-200'>Zeitrahmen *</label>
           <select
+            id='root-timeline'
             required
             name='timeline'
             className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
@@ -160,23 +175,54 @@ export default function ContactForm() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-slate-200'>Nachricht *</label>
+          <label
+            htmlFor='root-message'
+            className='text-sm font-medium text-slate-200'>Nachricht *</label>
           <textarea
+            id='root-message'
             required
             name='message'
             rows={5}
             className='rounded-xl border border-white/20 bg-white/40 px-3 py-2 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'></textarea>
         </div>
-        <label className='flex items-start gap-2 text-xs text-slate-300'>
+        {/*
+          Einwilligung: Hinweistext als Label, Links daneben – ein Link im Label
+          würde beim Klick zusätzlich das Häkchen umschalten.
+
+          Dieses Formular liegt auf der Startseite und nimmt Anfragen für beide
+          Geschäftsbereiche entgegen. Deshalb sind beide Datenschutzerklärungen
+          verlinkt; eine gemeinsame Fassung unter /datenschutz wäre sauberer.
+        */}
+        <div className='flex items-start gap-2 text-xs text-slate-300'>
           <input
+            id='root-privacy'
             required
             type='checkbox'
             name='privacy'
-            className='mt-1 accent-[#2dd4bf]'
+            className='mt-1 shrink-0 accent-[#2dd4bf]'
           />
-          Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zur
-          Kontaktaufnahme zu.
-        </label>
+          <p>
+            <label htmlFor='root-privacy'>
+              Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zur
+              Kontaktaufnahme zu.
+            </label>{' '}
+            <a
+              href='/nlp/datenschutz'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='underline underline-offset-2 transition hover:text-white'>
+              Datenschutz Coaching
+            </a>
+            <span aria-hidden='true'> · </span>
+            <a
+              href='/webdevelopment/datenschutz'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='underline underline-offset-2 transition hover:text-white'>
+              Datenschutz Webentwicklung
+            </a>
+          </p>
+        </div>
         <button
           type='submit'
           disabled={loading}

@@ -20,9 +20,9 @@ Die Probleme liegen in drei Bereichen:
 3. **Konversion & Vertrauen** — Kontakt auf `/` versteckt, Preissprung ohne Brücke, Testimonials ohne Beleg.
 
 Insgesamt **24 Befunde**: 7× P0, 10× P1, 7× P2.
-**Erledigt:** #7 (Sprint 0) · #2 #3 #4 #9 #10 #11 #12 #13 #16 #17 (Sprint 1) · #1 #8 #15 (Sprint 2)
-**Teilweise:** #6 (InfoOrb-Ladeverhalten behoben, Fokus-Falle offen)
-**Offen:** #5 #6 #18 #19 #20 #22 #23 #24 (#14 und #21 zwischenzeitlich erledigt)
+**Erledigt:** #7 (Sprint 0) · #2 #3 #4 #9 #10 #11 #12 #13 #16 #17 (Sprint 1) ·
+#1 #6 #8 #15 (Sprint 2) · #5 #14 #21 (Sprint 3 und laufende Arbeiten)
+**Offen:** #18 #19 #20 #22 #23 #24
 
 ---
 
@@ -155,7 +155,24 @@ Danach visuell gegenprüfen: Die Seite ändert sich sichtbar.
 
 ---
 
-### #5 · P0 · Drei Kontaktformulare ohne Label-Verknüpfung
+### #5 · ✅ ERLEDIGT (01.09.2026) · Drei Kontaktformulare ohne Label-Verknüpfung
+
+> **Behoben.** 25 Label/Feld-Paare über alle vier Formulare verknüpft
+> (`root-`, `web-`, `nlp-`, `lead-` als Präfix). Verifiziert: kein
+> verwaistes Label, kein Feld ohne Label.
+>
+> Die Consent-Checkboxen verlinken jetzt die Datenschutzerklärung der jeweiligen
+> Welt — der Hinweistext ist das Label, der Link steht daneben. Läge er im
+> Label, würde ein Klick darauf zusätzlich das Häkchen umschalten.
+>
+> **Zusatzbefund:** Die GuideSection erhebt eine E-Mail-Adresse und versendet
+> eine Nachricht, hatte aber **gar keine Einwilligung**. Checkbox ergänzt; der
+> Wert wird jetzt auch übertragen und von `/api/nlp-guide` erzwungen — vorher
+> hätte eine reine Client-Checkbox nichts belegt.
+>
+> **Offen und juristisch zu klären:** Die Startseite hat keine eigene
+> Datenschutzerklärung. Ihr Formular verlinkt deshalb beide Welten. Eine
+> gemeinsame Fassung unter `/datenschutz` wäre sauberer.
 
 **Belegt** in `components/ContactForm.tsx`, `ContactFormWeb.tsx`, `ContactFormNlp.tsx`:
 alle `<label>` stehen als Geschwister neben dem Feld, ohne `htmlFor`, und die
@@ -178,14 +195,19 @@ nicht**. Für eine wirksame DSGVO-Einwilligung muss der Text erreichbar sein.
 
 ---
 
-### #6 · ⚠️ TEILWEISE (01.09.2026) · Modals ohne Fokus-Management
+### #6 · ✅ ERLEDIGT (01.09.2026) · Modals ohne Fokus-Management
 
 > **Erledigt:** InfoOrb mountet das Modal nur noch bei `isOpen`, die beiden
 > `priority`-Bilder sind entfernt – sie konkurrierten mit dem echten LCP-Bild
 > der Startseite, obwohl das Modal geschlossen war.
 >
-> **Weiterhin offen:** die Fokus-Falle und die Fokus-Rückgabe in allen fünf
-> Modals. Bleibt P0.
+> **Ebenfalls behoben:** `components/useModal.ts` bündelt Fokus-Falle,
+> Fokus-Rückgabe an den Auslöser, Escape und Scroll-Sperre. Eingesetzt in allen
+> vier Dialogen (NLP-Grundlagen, Programme, Werdegang, InfoOrb). InfoOrb hatte
+> Escape und Scroll-Sperre schon einzeln — die sind jetzt durch die gemeinsame
+> Implementierung ersetzt.
+>
+> Korrektur zur ursprünglichen Formulierung: Es sind **vier** Dialoge, nicht fünf.
 
 **Belegt:** Fünf Modals — `NlpIntroSection`, `ProgrammeSection`, `AboutSection`,
 `InfoOrb` — setzen korrekt `role='dialog'`, `aria-modal='true'` und schließen per
@@ -729,7 +751,7 @@ Sie sehen aber klickbar aus. Entweder verlinken oder visuell entschärfen.
 **Sprint 2 — „Gewicht runter"** ✅ erledigt 01.09.2026
 `#1` Assets · `#8` Effekt-Budget + Video-Lazy-Loading · `#6` InfoOrb-Priority
 
-**Sprint 3 — „Zugänglichkeit & Sicherheit" (~1 Tag)**
+**Sprint 3 — „Zugänglichkeit & Sicherheit"** ✅ erledigt 01.09.2026
 `#5` Labels + Consent-Links · `#6` Fokus-Falle ·
 `#14` Smooth Scroll · `#15` reduced-motion · `#17` Security-Header
 

@@ -34,6 +34,10 @@ export default function GuideSection() {
     setTouched({ name: true, email: true });
     setStatus(null);
 
+    // Einwilligung aus dem DOM lesen: Das Formular haelt seinen State
+    // kontrolliert, die Checkbox gehoert aber nicht in den Formularzustand.
+    const privacy = new FormData(event.currentTarget).get('privacy') === 'on';
+
     if (errors.name || errors.email) return;
 
     setLoading(true);
@@ -42,7 +46,7 @@ export default function GuideSection() {
       const res = await fetch('/api/nlp-guide', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formState, ...shield.payload() }),
+        body: JSON.stringify({ ...formState, privacy, ...shield.payload() }),
       });
       if (!res.ok) throw new Error('failed');
       setSubmittedName(formState.name.trim());
@@ -176,6 +180,33 @@ export default function GuideSection() {
                     placeholder='dein.name@email.de'
                   />
                   {hasError('email') && <p className='mt-2 text-xs text-red-300'>{errors.email}</p>}
+                </div>
+                {/*
+                  Der Leitfaden ist ein Lead-Magnet: Es wird eine E-Mail-Adresse
+                  erhoben und eine Nachricht versendet. Ohne ausdrückliche
+                  Einwilligung ist das nicht zulässig – die fehlte hier bisher.
+                */}
+                <div className='flex items-start gap-2 text-xs text-white/60'>
+                  <input
+                    id='lead-privacy'
+                    type='checkbox'
+                    name='privacy'
+                    required
+                    className='mt-1 h-4 w-4 shrink-0 rounded border border-white/20 bg-[#050B12]/40 accent-[#00E5FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF]'
+                  />
+                  <p>
+                    <label htmlFor='lead-privacy'>
+                      Ich stimme zu, dass meine E-Mail-Adresse zum Versand des Leitfadens
+                      verarbeitet wird.
+                    </label>{' '}
+                    <a
+                      href='/nlp/datenschutz'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='underline underline-offset-2 transition hover:text-white'>
+                      Datenschutz ansehen
+                    </a>
+                  </p>
                 </div>
                 <PrimaryButton
                   className='w-full'

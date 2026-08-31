@@ -888,13 +888,11 @@
   align-items: start;
 }
 
-.contact-grid--hidden {
-  display: none;
-}
-
-#root-contact:target {
-  display: grid;
-}
+/*
+ * Hinweis: Hier standen `.contact-grid--hidden { display: none }` und
+ * `#root-contact:target { display: grid }`. Der Kontaktbereich ist jetzt
+ * dauerhaft sichtbar — siehe Kommentar in app/page.tsx.
+ */
 
 .contact-points {
   display: grid;

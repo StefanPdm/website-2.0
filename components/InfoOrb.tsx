@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
 
+import { useModal } from '@/components/useModal';
+
 type InfoOrbProps = {
   headline: string;
   text: string;
@@ -54,28 +56,10 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const canUseDom = typeof document !== 'undefined';
 
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      window.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen]);
+  // Escape und Scroll-Sperre gab es hier schon einzeln; Fokus-Falle und
+  // Fokus-Rückgabe fehlten. useModal deckt jetzt alle vier Aspekte ab –
+  // dieselbe Implementierung wie in den drei Modals von Welt A.
+  const dialogRef = useModal<HTMLDivElement>(isOpen, () => setIsOpen(false));
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -122,6 +106,8 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
       />
       <div className='relative w-[min(92vw,1280px)] md:mt-48'>
         <div
+          ref={dialogRef}
+          tabIndex={-1}
           role='dialog'
           aria-modal='true'
           aria-label={headline}

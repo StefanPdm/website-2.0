@@ -52,6 +52,8 @@ function extractErrorMessage(e: unknown): string {
 type GuidePayload = {
   name: string;
   email: string;
+  /** Einwilligung in die Verarbeitung der E-Mail-Adresse (DSGVO Art. 6 Abs. 1 a). */
+  privacy?: boolean;
   // Bot-Schutz (siehe lib/anti-spam.ts) – wird nie in die Mail übernommen
   [HONEYPOT_FIELD]?: string;
   [ELAPSED_FIELD]?: number | null;
@@ -85,7 +87,14 @@ export async function POST(req: Request) {
       });
     }
 
-    const { name, email } = data as GuidePayload;
+    const { name, email, privacy } = data as GuidePayload;
+
+    if (!privacy) {
+      return NextResponse.json(
+        { error: 'Bitte stimme der Verarbeitung deiner Daten zu.' },
+        { status: 400 },
+      );
+    }
 
     if (!name || !email) {
       return NextResponse.json(

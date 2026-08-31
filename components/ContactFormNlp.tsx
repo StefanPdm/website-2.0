@@ -96,16 +96,22 @@ export default function ContactFormNlp() {
       <div className='grid gap-4'>
         {shield.fields}
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-[var(--muted)]'>Name *</label>
+          <label
+            htmlFor='nlp-name'
+            className='text-sm font-medium text-[var(--muted)]'>Name *</label>
           <input
+            id='nlp-name'
             name='name'
             required
             className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
           />
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-[var(--muted)]'>E-Mail *</label>
+          <label
+            htmlFor='nlp-email'
+            className='text-sm font-medium text-[var(--muted)]'>E-Mail *</label>
           <input
+            id='nlp-email'
             name='email'
             type='email'
             required
@@ -113,16 +119,22 @@ export default function ContactFormNlp() {
           />
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-[var(--muted)]'>Telefon (optional)</label>
+          <label
+            htmlFor='nlp-phone'
+            className='text-sm font-medium text-[var(--muted)]'>Telefon (optional)</label>
           <input
+            id='nlp-phone'
             name='phone'
             type='tel'
             className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
           />
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-[var(--muted)]'>Thema *</label>
+          <label
+            htmlFor='nlp-topic'
+            className='text-sm font-medium text-[var(--muted)]'>Thema *</label>
           <select
+            id='nlp-topic'
             name='topic'
             required
             className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
@@ -136,8 +148,11 @@ export default function ContactFormNlp() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-[var(--muted)]'>Format *</label>
+          <label
+            htmlFor='nlp-sessionType'
+            className='text-sm font-medium text-[var(--muted)]'>Format *</label>
           <select
+            id='nlp-sessionType'
             name='sessionType'
             required
             className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
@@ -151,8 +166,11 @@ export default function ContactFormNlp() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-[var(--muted)]'>Bevorzugte Zeit *</label>
+          <label
+            htmlFor='nlp-preferredTime'
+            className='text-sm font-medium text-[var(--muted)]'>Bevorzugte Zeit *</label>
           <select
+            id='nlp-preferredTime'
             name='preferredTime'
             required
             className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
@@ -164,22 +182,43 @@ export default function ContactFormNlp() {
           </select>
         </div>
         <div className='grid gap-1'>
-          <label className='text-sm font-medium text-[var(--muted)]'>Nachricht *</label>
+          <label
+            htmlFor='nlp-message'
+            className='text-sm font-medium text-[var(--muted)]'>Nachricht *</label>
           <textarea
+            id='nlp-message'
             name='message'
             rows={5}
             required
             className='rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'></textarea>
         </div>
-        <label className='flex items-start gap-2 text-xs text-[var(--muted)]'>
+        {/*
+          Einwilligung: Der Hinweistext ist das Label, der Link steht daneben.
+          Läge er im Label, würde ein Klick darauf zusätzlich das Häkchen
+          umschalten — und eine Einwilligung ist nur wirksam, wenn der Text
+          auch erreichbar ist.
+        */}
+        <div className='flex items-start gap-2 text-xs text-[var(--muted)]'>
           <input
+            id='nlp-privacy'
             type='checkbox'
             name='privacy'
             required
-            className='mt-1 h-4 w-4 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
+            className='mt-1 h-4 w-4 shrink-0 rounded border border-[var(--border)] bg-[var(--surface)] text-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
           />
-          Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zu.
-        </label>
+          <p>
+            <label htmlFor='nlp-privacy'>
+              Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zu.
+            </label>{' '}
+            <a
+              href='/nlp/datenschutz'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='underline underline-offset-2 transition hover:text-[var(--text)]'>
+              Datenschutz ansehen
+            </a>
+          </p>
+        </div>
         <button
           type='submit'
           disabled={loading}

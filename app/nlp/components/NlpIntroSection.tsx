@@ -3,9 +3,11 @@
 import { useState } from 'react';
 
 import GlassCard from '@/components/GlassCard';
+import { useModal } from '@/components/useModal';
 
 export default function NlpIntroSection() {
   const [nlpModal, setNlpModal] = useState<null | 'mastery' | 'change' | 'goals'>(null);
+  const dialogRef = useModal<HTMLDivElement>(Boolean(nlpModal), () => setNlpModal(null));
 
   return (
     <>
@@ -139,7 +141,10 @@ export default function NlpIntroSection() {
             className='absolute inset-0 bg-black/40 backdrop-blur-sm'
             aria-label='Modal schließen'
           />
-          <div className='relative w-full max-w-3xl max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-3xl border border-slate-200 bg-white/90 p-6 text-[#1b1410] shadow-[0_30px_90px_rgba(0,0,0,0.25)]'>
+          <div
+            ref={dialogRef}
+            tabIndex={-1}
+            className='relative w-full max-w-3xl max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-3xl border border-slate-200 bg-white/90 p-6 text-[#1b1410] shadow-[0_30px_90px_rgba(0,0,0,0.25)]'>
             <div className='flex items-start justify-between gap-4'>
               <div>
                 <p className='text-xs uppercase tracking-[0.3em] text-[#5a4637]'>
