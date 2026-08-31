@@ -27,6 +27,16 @@
 
   /* Welt B hat kein Variablen-System – Technik-Akzent fest verdrahtet. */
   --color-accent-web: #2dd4bf;
+
+  /**
+   * Eigener Breakpoint für die Kopfzeile von Welt A.
+   *
+   * Marke, sechs Navigationspunkte, Theme-Umschalter und CTA brauchen
+   * zusammen rund 960 px. Bei `lg` (1024 px) blieben davon nur ~38 px
+   * Reserve — zu wenig, sobald eine Schrift breiter rendert. Ab 1120 px
+   * sind es ~134 px. Nutzbar als `hdr:`-Variante.
+   */
+  --breakpoint-hdr: 70rem;
 }
 
 :root {

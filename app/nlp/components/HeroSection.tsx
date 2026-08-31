@@ -71,7 +71,7 @@ export default function HeroSection({ isWarmTheme }: HeroSectionProps) {
             </GlassCard>
             <div className='flex flex-wrap gap-3'>
               <span className='rounded-full border border-white/10 bg-white/20 px-4 py-2 text-xs text-white/75'>
-                Ø 90 Min / Session
+                Ø 120 Min / Session
               </span>
               <span className='rounded-full border border-white/10 bg-white/20 px-4 py-2 text-xs text-white/75'>
                 Fokus: Identität & Entscheidungen
