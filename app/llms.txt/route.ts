@@ -56,6 +56,17 @@ und Führungskräfte, Keynotes. Vor Ort in ${OWNER.city} und Berlin oder online.
 Zertifizierungen: DVNLP (Deutscher Verband für Neuro-Linguistisches Programmieren),
 Ausbildung bei Ronny Rohde (Best Life NLP).
 
+Haltung (eigene Aussage von ${OWNER.name}): NLP ist für ihn weit mehr als eine
+Sammlung von Techniken, sondern eine positive Haltung zum Leben — bewusst
+wahrnehmen statt vorschnell urteilen, wählen statt nur reagieren, Verantwortung
+für das eigene Leben übernehmen. Dazu gehört, den Angst- und Überlebensmodus zu
+verlassen und aus Freiheit, Akzeptanz und Liebe zu gestalten, im Wissen, dass
+Glück und Erfüllung nicht im Außen entstehen, sondern in einem selbst.
+Veränderung und Unsicherheit sind dabei keine Ausnahme, sondern Wesen des Lebens:
+Es geht nicht um Kontrolle und trügerische Sicherheit, sondern um Vertrauen in
+die eigene Fähigkeit, mit dem Unbekannten umzugehen. Veränderung wird so zur
+Einladung zu wachsen statt zu etwas, das man fürchten oder vermeiden muss.
+
 Preise (inkl. MwSt.):
 ${offers}
 

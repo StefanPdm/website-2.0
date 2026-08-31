@@ -83,6 +83,49 @@ export default function NlpIntroSection() {
               </GlassCard>
             ))}
           </div>
+
+          {/*
+            Persönliche Haltung – bewusst anders gesetzt als die drei
+            Methoden-Karten darüber: keine Hover-Interaktion, mehr Leseraum,
+            Akzentkante statt Icon. Der Abschnitt beantwortet das „Warum",
+            nicht das „Was".
+          */}
+          <div className='mx-auto mt-16 w-full max-w-3xl'>
+            <GlassCard className='relative overflow-hidden p-7 sm:p-9'>
+              <span
+                aria-hidden='true'
+                className='absolute inset-y-0 left-0 w-1 bg-linear-to-b from-accent to-accent-2'
+              />
+              <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Persönlich</p>
+              <h3 className='mt-4 text-2xl font-semibold text-(--text) sm:text-3xl'>
+                Was NLP für mich ganz persönlich bedeutet
+              </h3>
+              <div className='mt-6 space-y-5 text-(--muted)'>
+                <p className='text-base leading-relaxed sm:text-lg'>
+                  NLP ist für mich weit mehr als eine Sammlung von Techniken – es ist eine positive
+                  Haltung zum Leben.
+                </p>
+                <p className='text-sm leading-relaxed sm:text-base'>
+                  Es bedeutet, bewusst wahrzunehmen, statt vorschnell zu urteilen; zu wählen, statt
+                  nur zu reagieren, und Verantwortung für das eigene Leben zu übernehmen. Für mich
+                  heißt das, den Angst- und Überlebensmodus zu verlassen und mein Leben aus
+                  Freiheit, Akzeptanz und Liebe heraus zu gestalten – mit dem Wissen, dass mein
+                  Glück und meine Erfüllung nicht im Außen entstehen, sondern in mir selbst.
+                </p>
+                <p className='text-sm leading-relaxed sm:text-base'>
+                  NLP bedeutet für mich auch anzuerkennen, dass Veränderung und Unsicherheit keine
+                  Ausnahme sind, sondern zum Wesen des Lebens gehören. Es geht nicht darum, durch
+                  Kontrolle eine trügerische Sicherheit zu erschaffen, sondern Vertrauen in mich
+                  selbst und in meine Fähigkeit zu entwickeln, mit dem Unbekannten umzugehen.
+                </p>
+                <p className='text-sm leading-relaxed sm:text-base'>
+                  So wird Veränderung nicht länger zu etwas, das ich fürchten oder vermeiden muss,
+                  sondern zu einer Einladung, zu wachsen, neue Möglichkeiten zu entdecken und mein
+                  Leben selbstbestimmt zu gestalten.
+                </p>
+              </div>
+            </GlassCard>
+          </div>
         </div>
       </section>
       {nlpModal && (

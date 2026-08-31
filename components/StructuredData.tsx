@@ -43,6 +43,11 @@ const person = {
   url: SITE_URL,
   email: `mailto:${OWNER.email}`,
   image: absoluteUrl('/images-nlp/Stefan_01.webp'),
+  // Eigene Haltung statt Leistungsbeschreibung: Sprachmodelle und Rich Results
+  // greifen `description` bevorzugt auf, und eine erste Person mit klarer
+  // Position ist unterscheidbarer als eine Aufzählung von Leistungen.
+  description:
+    'NLP Coach und Webentwickler aus Potsdam. Nach über 20 Jahren als Unternehmer im Interieur Design und einem Wechsel in die Fullstack-Entwicklung begleitet er seit 2025 Menschen als Coach. NLP versteht er nicht als Sammlung von Techniken, sondern als Haltung: bewusst wahrnehmen statt urteilen, wählen statt reagieren, Verantwortung für das eigene Leben übernehmen. Veränderung und Unsicherheit gehören für ihn zum Wesen des Lebens – es geht um Vertrauen in die eigene Fähigkeit, mit dem Unbekannten umzugehen, nicht um Kontrolle.',
   address: postalAddress,
   sameAs: [OWNER.linkedIn],
   jobTitle: ['NLP Coach', 'Webentwickler'],
