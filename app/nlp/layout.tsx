@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import NlpLayoutClient from '@/app/nlp/NlpLayoutClient';
-import { NlpStructuredData } from '@/components/StructuredData';
-import { coachingOffersForSchema } from '@/app/nlp/pricing';
 import { KEYWORDS_NLP } from '@/lib/site';
 
 const title = 'NLP Coaching in Potsdam & Berlin – Klarheit, Fokus, Entscheidungen';
@@ -31,10 +29,5 @@ export const metadata: Metadata = {
 };
 
 export default function NlpLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <NlpStructuredData offers={coachingOffersForSchema} />
-      <NlpLayoutClient>{children}</NlpLayoutClient>
-    </>
-  );
+  return <NlpLayoutClient>{children}</NlpLayoutClient>;
 }

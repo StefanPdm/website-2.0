@@ -1,32 +1,18 @@
-'use client';
+import NlpSections from '@/app/nlp/NlpSections';
+import { NlpStructuredData } from '@/components/StructuredData';
+import { coachingOffersForSchema } from '@/app/nlp/pricing';
 
-import AboutSection from '@/app/nlp/components/AboutSection';
-import ContactSection from '@/app/nlp/components/ContactSection';
-import GuideSection from '@/app/nlp/components/GuideSection';
-import HeroSection from '@/app/nlp/components/HeroSection';
-import NlpIntroSection from '@/app/nlp/components/NlpIntroSection';
-import ProgrammeSection from '@/app/nlp/components/ProgrammeSection';
-import TestimonialsSection from '@/app/nlp/components/TestimonialsSection';
-import TransformationSection from '@/app/nlp/components/TransformationSection';
-import WorkSection from '@/app/nlp/components/WorkSection';
-import PriceTableSection from '@/app/nlp/components/PriceTableSection';
-import { useNlpTheme } from '@/app/nlp/NlpLayoutClient';
-
-export default function NLP() {
-  const { isWarmTheme } = useNlpTheme();
-
+/**
+ * Das Service-Schema beschreibt das Coaching-Angebot – also genau diese Seite.
+ * Es stand zuvor im Layout und wurde dadurch auch auf Impressum, Datenschutz
+ * und den Regel-Unterseiten ausgeliefert, dort jeweils mit einer Breadcrumb,
+ * die auf /nlp zeigte. Auf den Regelseiten kollidierte das mit deren eigener.
+ */
+export default function NlpPage() {
   return (
     <>
-      <HeroSection isWarmTheme={isWarmTheme} />
-      <NlpIntroSection />
-      <WorkSection />
-      <TransformationSection isWarmTheme={isWarmTheme} />
-      <ProgrammeSection />
-      <TestimonialsSection />
-      <PriceTableSection />
-      <GuideSection />
-      <AboutSection />
-      <ContactSection />
+      <NlpStructuredData offers={coachingOffersForSchema} />
+      <NlpSections />
     </>
   );
 }

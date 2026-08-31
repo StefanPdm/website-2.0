@@ -66,6 +66,11 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
             Über mich
           </Link>
           <Link
+            href='/nlp/regeln/gluecklichsein'
+            className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
+            20 Regeln
+          </Link>
+          <Link
             href={sectionHref('programme')}
             className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
             Programme
@@ -135,6 +140,12 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
               onClick={() => setIsMenuOpen(false)}
               className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
               Über mich
+            </Link>
+            <Link
+              href='/nlp/regeln/gluecklichsein'
+              onClick={() => setIsMenuOpen(false)}
+              className='rounded-full border border-transparent px-3 py-2 transition hover:border-border hover:bg-(--surface)'>
+              20 Regeln
             </Link>
             <Link
               href={sectionHref('programme')}

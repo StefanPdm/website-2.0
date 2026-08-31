@@ -166,6 +166,77 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
 
 // ---------------------------------------------------------------------------
 
+type RuleSetInput = {
+  href: string;
+  title: string;
+  metaDescription: string;
+  shortTitle: string;
+  rules: string[];
+};
+
+/**
+ * Welt A, Regel-Unterseiten: Artikel + nummerierte Liste.
+ *
+ * Die `ItemList` macht die zwanzig Sätze einzeln maschinenlesbar — genau die
+ * Form, die Sprachmodelle zitieren und aus der Suchmaschinen Listen-Snippets
+ * bauen. Die `description` trägt bei den Anti-Regeln die Ironie-Einordnung mit,
+ * damit die Punkte nicht als Empfehlung missverstanden werden.
+ */
+export function RulesStructuredData({ ruleSet }: { ruleSet: RuleSetInput }) {
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Article',
+            '@id': `${absoluteUrl(ruleSet.href)}#article`,
+            headline: ruleSet.title,
+            description: ruleSet.metaDescription,
+            url: absoluteUrl(ruleSet.href),
+            inLanguage: 'de-DE',
+            author: { '@id': PERSON_ID },
+            publisher: { '@id': PERSON_ID },
+            isAccessibleForFree: true,
+            about: { '@type': 'Thing', name: 'Persönlichkeitsentwicklung' },
+          },
+          {
+            '@type': 'ItemList',
+            name: ruleSet.title,
+            numberOfItems: ruleSet.rules.length,
+            itemListOrder: 'https://schema.org/ItemListOrderAscending',
+            itemListElement: ruleSet.rules.map((rule, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: rule,
+            })),
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'NLP Coaching',
+                item: absoluteUrl('/nlp'),
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: ruleSet.shortTitle,
+                item: absoluteUrl(ruleSet.href),
+              },
+            ],
+          },
+        ],
+      }}
+    />
+  );
+}
+
+// ---------------------------------------------------------------------------
+
 type CaseInput = { name: string; url?: string; description: string };
 
 /** Welt B: Entwicklungsleistung + Referenzen. */

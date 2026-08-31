@@ -22,7 +22,7 @@ Die Probleme liegen in drei Bereichen:
 Insgesamt **24 Befunde**: 7× P0, 10× P1, 7× P2.
 **Erledigt:** #7 (Sprint 0) · #2 #3 #4 #9 #10 #11 #12 #13 #16 #17 (Sprint 1) · #1 #8 #15 (Sprint 2)
 **Teilweise:** #6 (InfoOrb-Ladeverhalten behoben, Fokus-Falle offen)
-**Offen:** #5 #6 #14 #18 #19 #20 #21 #22 #23 #24
+**Offen:** #5 #6 #18 #19 #20 #22 #23 #24 (#14 und #21 zwischenzeitlich erledigt)
 
 ---
 
@@ -605,7 +605,13 @@ Erstgespräch" (überall die CTA) und 339 € gibt es nichts.
 
 ---
 
-### #21 · P1 · Testimonials ohne jeden Vertrauensanker
+### #21 · ✅ ERLEDIGT (01.09.2026) · Testimonials ohne jeden Vertrauensanker
+
+> **Gelöst durch Ersetzen statt Reparieren.** Die Sektion wurde durch
+> `FulfilmentSection` abgelöst: die Frage "Beruflich erfolgreich – und trotzdem
+> nicht erfüllt?" mit Stefans eigener Geschichte als Beleg. Damit entfällt das
+> § 5 UWG-Risiko der vermutlich generierten Kundenportraits vollständig.
+> Die sechs Avatar-Dateien liegen in `design-source/`.
 
 **Belegt** in `TestimonialsSection.tsx`: sechs Stimmen, jeweils Vorname +
 Initiale, jeweils 5 Sterne (`StarRow` ist hartcodiert, immer fünf), Portraits aus

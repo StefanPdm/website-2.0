@@ -96,6 +96,8 @@ Kundenportal Intralogistik (Launch 03/2026).
 - [Startseite](${SITE_URL}): Auswahl zwischen beiden Geschäftsbereichen
 - [NLP Coaching](${absoluteUrl('/nlp')}): Angebot, Programme, Preise, Kontakt
 - [Webentwicklung](${absoluteUrl('/webdevelopment')}): Leistungen, Technologien, Referenzen, Kontakt
+- [20 Regeln für erfolgreiches Glücklichsein](${absoluteUrl('/nlp/regeln/gluecklichsein')})
+- [20 Regeln für erfolgreiches Unglücklichsein](${absoluteUrl('/nlp/regeln/ungluecklichsein')}) – ironische Umkehrung, keine Empfehlung
 - [Impressum Coaching](${absoluteUrl('/nlp/impressum')})
 - [Impressum Webentwicklung](${absoluteUrl('/webdevelopment/impressum')})
 

@@ -14,6 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/', priority: 1, changeFrequency: 'monthly' },
     { path: '/nlp', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/webdevelopment', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/nlp/regeln/gluecklichsein', priority: 0.7, changeFrequency: 'monthly' },
+    { path: '/nlp/regeln/ungluecklichsein', priority: 0.7, changeFrequency: 'monthly' },
     { path: '/nlp/impressum', priority: 0.2, changeFrequency: 'yearly' },
     { path: '/nlp/datenschutz', priority: 0.2, changeFrequency: 'yearly' },
     { path: '/nlp/agb', priority: 0.2, changeFrequency: 'yearly' },
