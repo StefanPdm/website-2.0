@@ -7,8 +7,8 @@ export default function NlpFooter() {
     <footer className='border-t border-white/10 bg-black/20 py-8 text-white/60'>
       <div className='container mx-auto flex flex-col gap-4 px-4 md:flex-row md:items-center md:justify-between'>
         <div>
-          <p className='text-sm font-semibold text-white'>SNAC Coaching</p>
-          <p className='mt-1 text-xs text-white/60'>NLP für klare Entscheidungen</p>
+          <p className='text-sm font-semibold text-white'>NLP Coaching</p>
+          <p className='mt-1 text-xs text-white/60'>Wir lieben dein Problem</p>
         </div>
         <div className='flex flex-wrap items-center gap-6 text-xs'>
           <Link
@@ -44,7 +44,7 @@ export default function NlpFooter() {
         </div>
       </div>
       <div className='container mx-auto mt-6 px-4 text-xs text-white/40'>
-        © {new Date().getFullYear()} SNAC Coaching · NLP Coaching Potsdam & Berlin. Alle Rechte vorbehalten.
+        © {new Date().getFullYear()} Stefan Heinemann · NLP Coaching Potsdam & Berlin. Alle Rechte vorbehalten.
       </div>
     </footer>
   );

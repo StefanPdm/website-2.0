@@ -174,7 +174,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
         {/* Marke */}
         <Link
           href='/nlp'
-          aria-label='SNAC Coaching – zur Startseite'
+          aria-label='NLP Coaching – zur Startseite'
           className='flex shrink-0 items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
           <span
             className={`relative block shrink-0 transition-all duration-300 ${
@@ -191,11 +191,11 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
           </span>
           <span className='hidden flex-col leading-tight sm:flex'>
             <span className='whitespace-nowrap text-sm font-extrabold uppercase tracking-[0.12em] text-accent-soft xl:text-base xl:tracking-[0.18em]'>
-              SNAC Coaching
+              NLP Coaching
             </span>
             {/* Untertitel kostet ~150px – erst ab xl, wo der Platz da ist. */}
             <span className='hidden whitespace-nowrap text-xs tracking-wide text-(--muted) xl:block'>
-              NLP für klare Entscheidungen
+              Wir lieben dein Problem
             </span>
           </span>
         </Link>

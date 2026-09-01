@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     url: ungluecklichsein.href,
     type: 'article',
     locale: 'de_DE',
-    siteName: 'SNAC Coaching',
+    siteName: 'NLP Coaching',
   },
   twitter: {
     card: 'summary_large_image',

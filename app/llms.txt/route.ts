@@ -29,7 +29,7 @@ function build() {
 ## Person
 
 - Name: ${OWNER.name}
-- Rollen: NLP Coach (Marke „SNAC Coaching"), Webentwickler
+- Rollen: NLP Coach, Webentwickler
 - Standort: ${OWNER.street}, ${OWNER.postalCode} ${OWNER.city}, Deutschland
 - Einzugsgebiet: ${AREA_SERVED.join(', ')}, zusätzlich remote/online
 - Kontakt Coaching: ${OWNER.emailCoaching}

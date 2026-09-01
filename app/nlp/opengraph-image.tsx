@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 import { OgCard, OG_CONTENT_TYPE, OG_SIZE } from '@/components/OgCard';
 
-export const alt = 'NLP Coaching in Potsdam und Berlin – Stefan Heinemann, SNAC Coaching';
+export const alt = 'NLP Coaching in Potsdam und Berlin – Stefan Heinemann, NLP Coaching';
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
@@ -10,7 +10,7 @@ export default function Image() {
   return new ImageResponse(
     (
       <OgCard
-        eyebrow='SNAC Coaching'
+        eyebrow='NLP Coaching'
         title={'NLP Coaching für\nklare Entscheidungen'}
         subtitle='Kopf. Körper. Fokus. Ohne esoterischen Nebel.'
         footer='Potsdam · Berlin · Online'

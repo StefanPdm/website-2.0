@@ -41,13 +41,13 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: 'Token ungueltig oder abgelaufen.' }, { status: 403 });
   }
 
-  const filePath = path.join(process.cwd(), 'private-documents', 'NLP-Leitfaden_SNAC.pdf');
+  const filePath = path.join(process.cwd(), 'private-documents', 'NLP-Leitfaden.pdf');
   const fileBuffer = await readFile(filePath);
 
   return new NextResponse(fileBuffer, {
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': 'attachment; filename="NLP-Leitfaden_SNAC.pdf"',
+      'Content-Disposition': 'attachment; filename="NLP-Leitfaden.pdf"',
       'Cache-Control': 'private, max-age=0, no-store',
     },
   });

@@ -14,7 +14,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
 /                          Welt 0 — Entscheidungs-Hub ("Zwei Welten. Eine Entscheidung.")
 ├── /webdevelopment        Welt B — Webdevelopment            (Marke: Stefan Heinemann)
 │   └── /impressum  /datenschutz  /cookies
-└── /nlp                   Welt A — NLP Coaching              (Marke: SNAC Coaching)
+└── /nlp                   Welt A — NLP Coaching              (Marke: NLP Coaching)
     ├── /impressum  /datenschutz  /cookies  /agb
     └── /guide-download    Token-Landing für Lead-Magnet
 /widerruf                  Widerrufsbelehrung (B2C)
