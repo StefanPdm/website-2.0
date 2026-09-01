@@ -103,7 +103,7 @@ export default function ContactFormNlp() {
             id='nlp-name'
             name='name'
             required
-            className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
+            className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
           />
         </div>
         <div className='grid gap-1'>
@@ -115,7 +115,7 @@ export default function ContactFormNlp() {
             name='email'
             type='email'
             required
-            className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
+            className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
           />
         </div>
         <div className='grid gap-1'>
@@ -126,7 +126,7 @@ export default function ContactFormNlp() {
             id='nlp-phone'
             name='phone'
             type='tel'
-            className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
+            className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
           />
         </div>
         <div className='grid gap-1'>
@@ -137,7 +137,7 @@ export default function ContactFormNlp() {
             id='nlp-topic'
             name='topic'
             required
-            className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
+            className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
             <option value=''>Bitte wählen</option>
             <option>Klarheit / Fokus</option>
             <option>Beziehung</option>
@@ -155,11 +155,11 @@ export default function ContactFormNlp() {
             id='nlp-sessionType'
             name='sessionType'
             required
-            className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
+            className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
             {/* Reihenfolge folgt der Preisübersicht: erst Einstieg, dann Umfang. */}
             <option value=''>Bitte wählen</option>
-            <option>Kennenlernen (15 Min., kostenlos)</option>
-            <option>Klarheits-Session (60 Min., Telefon oder Video)</option>
+            <option>Kennenlernen (15 Min., gratis)</option>
+            <option>Klarheits-Session (60 Min., online)</option>
             <option>Startersession (150 Min.)</option>
             <option>Folgesession (120 Min.)</option>
             <option>5er-Paket</option>
@@ -179,7 +179,7 @@ export default function ContactFormNlp() {
             id='nlp-preferredTime'
             name='preferredTime'
             required
-            className='h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
+            className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
             <option value=''>Bitte wählen</option>
             <option>Vormittags</option>
             <option>Nachmittags</option>
@@ -196,7 +196,7 @@ export default function ContactFormNlp() {
             name='message'
             rows={5}
             required
-            className='rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'></textarea>
+            className='w-full min-w-0 rounded-xl border border-$1 bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'></textarea>
         </div>
         {/*
           Einwilligung: Der Hinweistext ist das Label, der Link steht daneben.

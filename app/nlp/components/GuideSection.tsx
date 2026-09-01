@@ -65,7 +65,7 @@ export default function GuideSection() {
       id='leitfaden'
       className='relative py-20 border-y border-border'>
       <div className='container mx-auto px-4 min-h-[60dvh] flex flex-col justify-center items-center '>
-        <div className='grid gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
+        <div className='grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'>
           <div>
             <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
               Sichere dir deinen kostenlosen NLP-Leitfaden

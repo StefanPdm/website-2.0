@@ -42,7 +42,7 @@ export default function AboutSection() {
         id='ueber'
         className='py-40 relative min-h-[60dvh] flex flex-col justify-center items-center bg-(--section-bg-accent)'>
         <div className='container px-4 mx-auto'>
-          <div className='grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]'>
+          <div className='grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'>
             {/* left side */}
             <GlassCard className='p-6 order-2 md:order-1'>
               <div className='relative overflow-hidden rounded-2xl bg-white/5'>

@@ -110,7 +110,7 @@ export default function ContactForm() {
             id='root-name'
             required
             name='name'
-            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
           />
         </div>
         <div className='grid gap-1'>
@@ -122,7 +122,7 @@ export default function ContactForm() {
             required
             name='email'
             type='email'
-            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
           />
         </div>
         <div className='grid gap-1'>
@@ -133,7 +133,7 @@ export default function ContactForm() {
             id='root-projectType'
             required
             name='projectType'
-            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
+            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
             <option value=''>Bitte wählen</option>
             <option>NLP - Coaching 1:1</option>
             <option>NLP - Coaching Gruppe</option>
@@ -150,7 +150,7 @@ export default function ContactForm() {
           <select
             id='root-budget'
             name='budget'
-            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
+            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
             <option value=''>Budgetrahmen (nur Web)</option>
             <option>Unter 2.500 €</option>
             <option>2.500 – 7.500 €</option>
@@ -166,7 +166,7 @@ export default function ContactForm() {
             id='root-timeline'
             required
             name='timeline'
-            className='h-11 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
+            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black font-bold outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90 select-caret'>
             <option value=''>Bitte wählen</option>
             <option>2–4 Wochen</option>
             <option>1–2 Monate</option>
@@ -183,7 +183,7 @@ export default function ContactForm() {
             required
             name='message'
             rows={5}
-            className='rounded-xl border border-white/20 bg-white/40 px-3 py-2 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'></textarea>
+            className='w-full min-w-0 rounded-xl border border-$1 bg-white/40 px-3 py-2 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'></textarea>
         </div>
         {/*
           Einwilligung: Hinweistext als Label, Links daneben – ein Link im Label

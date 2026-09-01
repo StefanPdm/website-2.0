@@ -252,7 +252,7 @@ export default function ProgrammeSection() {
                   ✕
                 </button>
               </div>
-              <div className='mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]'>
+              <div className='mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'>
                 <div className='space-y-6'>
                   <div className='rounded-2xl border border-white/60 bg-white/70 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.08)]'>
                     <p className='text-xs uppercase tracking-[0.3em] text-[#0B1B2B]/60'>
