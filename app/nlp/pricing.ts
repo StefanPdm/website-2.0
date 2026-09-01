@@ -23,6 +23,8 @@ export type CoachingOffer = {
   icon: string;
   group: OfferGroup;
   highlight: boolean;
+  /** Text der Auszeichnung auf hervorgehobenen Karten. Default: 'Beliebt'. */
+  badge?: string;
   /** Nur bei Paketen: Preis je Session, macht die Ersparnis nachvollziehbar. */
   perSession?: string;
   bullets: string[];
@@ -69,7 +71,7 @@ export const coachingOffers: CoachingOffer[] = [
   },
   {
     title: 'Folgesession',
-    duration: 'ca. 90 min',
+    duration: 'ca. 120 min',
     price: '226,10 €',
     amount: '226.10',
     icon: '⚡',
@@ -84,7 +86,7 @@ export const coachingOffers: CoachingOffer[] = [
   },
   {
     title: '5er-Paket',
-    duration: '5 Sessions à ca. 90 min',
+    duration: '5 Sessions à ca. 120 min',
     price: '1.011,50 €',
     amount: '1011.50',
     perSession: '202,30 € pro Session',
@@ -100,13 +102,17 @@ export const coachingOffers: CoachingOffer[] = [
   },
   {
     title: '10er-Paket',
-    duration: '10 Sessions à ca. 90 min',
+    duration: '10 Sessions à ca. 120 min',
     price: '1.785,00 €',
     amount: '1785.00',
     perSession: '178,50 € pro Session',
     icon: '🎒',
     group: 'session',
-    highlight: false,
+    highlight: true,
+    // Eigene Auszeichnung statt „Beliebt": Zwei identische Badges auf einer
+    // Seite relativieren sich gegenseitig. „Bester Preis" greift zudem den
+    // Bullet unten auf, „Beliebt" bleibt dem Mentoring vorbehalten.
+    badge: 'Bester Preis',
     bullets: [
       'Zehn Sessions über einen längeren Zeitraum.',
       'Raum für mehrere Themen und tiefere Musterarbeit.',

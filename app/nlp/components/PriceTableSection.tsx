@@ -43,8 +43,8 @@ function OfferCard({ offer }: { offer: CoachingOffer }) {
             <span aria-hidden='true'>{offer.icon}</span>
           </span>
           {offer.highlight && (
-            <span className='absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-(--border-strong) bg-(--accent) px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-black/90'>
-              Beliebt
+            <span className='absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border-2 border-border-strong bg-accent px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-black/90'>
+              {offer.badge ?? 'Beliebt'}
             </span>
           )}
         </div>

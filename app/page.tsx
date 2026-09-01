@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import ContactForm from '@/components/ContactForm';
+import {
+  HomeContactProvider,
+  HomeContactSection,
+  HomeContactTrigger,
+} from '@/components/HomeContact';
 import InfoOrb from '@/components/InfoOrb';
 import { RootStructuredData } from '@/components/StructuredData';
 
@@ -64,6 +68,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
   return (
     <div className='landing-shell'>
       <RootStructuredData />
+      <HomeContactProvider>
       <main className='landing-main'>
         {/* Header */}
         <header className='pt-4 w-full max-w-7xl sticky top-0 z-50 mx-auto flex items-center justify-between'>
@@ -108,11 +113,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                 href='#choose'>
                 Jetzt wählen
               </a>
-              <a
-                className='landing-cta landing-cta--ghost w-full sm:w-auto'
-                href='#root-contact'>
-                Kontakt
-              </a>
+              <HomeContactTrigger className='landing-cta landing-cta--ghost w-full cursor-pointer sm:w-auto' />
             </div>
             {/* orbits */}
             <div className='orbit-system'>
@@ -303,43 +304,20 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
         </section>
 
         {/*
-          Kontakt steht dauerhaft sichtbar unter der Entscheidung.
+          Kontakt bleibt standardmäßig zu, damit die Startseite am Desktop auf
+          eine Bildschirmhöhe passt und die Entscheidung zwischen den Welten
+          nicht verwässert wird.
 
-          Zuvor war der Abschnitt per `display:none` versteckt und nur über
-          `#root-contact:target` erreichbar — damit war der einzige direkte
-          Kontaktweg der meistbesuchten Seite für Screenreader und
-          Suchmaschinen gar nicht vorhanden, und einmal geöffnet ließ er sich
-          nicht wieder schließen. Er lenkt hier auch nicht ab: Wer bis hierher
-          gescrollt hat, hat die Wahl zwischen den Welten bereits gesehen.
+          Der Zustand liegt in React, nicht im URL-Anker — Begründung im
+          Kommentar in components/HomeContact.tsx.
         */}
-        <section
-          id='root-contact'
-          className='landing-grid contact-grid pt-8'>
-          <div className='landing-left'>
-            <span className='landing-badge'>Kontakt</span>
-            <h2 className='landing-title'>Lass uns sprechen.</h2>
-            <p className='landing-subtitle'>
-              Kurze Beschreibung reicht. Ich melde mich ehrlich zurück.
-            </p>
-            <div className='contact-points'>
-              <div>Antwort i. d. R. innerhalb von 24–48 Stunden.</div>
-              <div>Vertraulich. Persönlich. Ohne Umwege.</div>
-            </div>
-          </div>
-
-          <div className='contact-card mt-16 md:mt-0 px-4! md:px-unset'>
-            <h3 className='contact-title'>Nachricht senden</h3>
-            <p className='contact-subtitle'>
-              Erzähl mir kurz, worum es geht – Website, Coaching oder etwas anderes.
-            </p>
-            <ContactForm />
-          </div>
-        </section>
+        <HomeContactSection />
 
         <div className='landing-tip'>
           Tipp: Bei mir kannst du jederzeit wechseln. Oder beides machen. 😁
         </div>
       </main>
+      </HomeContactProvider>
     </div>
   );
 }

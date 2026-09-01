@@ -161,7 +161,7 @@ export default function ContactFormNlp() {
             <option>Kennenlernen (15 Min., kostenlos)</option>
             <option>Klarheits-Session (60 Min., Telefon oder Video)</option>
             <option>Startersession (150 Min.)</option>
-            <option>Folgesession (90 Min.)</option>
+            <option>Folgesession (120 Min.)</option>
             <option>5er-Paket</option>
             <option>10er-Paket</option>
             <option>Mentoring (3 Monate)</option>

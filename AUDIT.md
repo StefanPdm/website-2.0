@@ -20,9 +20,12 @@ Die Probleme liegen in drei Bereichen:
 3. **Konversion & Vertrauen** — Kontakt auf `/` versteckt, Preissprung ohne Brücke, Testimonials ohne Beleg.
 
 Insgesamt **24 Befunde**: 7× P0, 10× P1, 7× P2.
-**Erledigt:** #7 (Sprint 0) · #2 #3 #4 #9 #10 #11 #12 #13 #16 #17 (Sprint 1) ·
-#1 #6 #8 #15 (Sprint 2) · #5 #14 #21 (Sprint 3 und laufende Arbeiten)
-**Offen:** #18 #19 #20 #22 #23 #24
+**Erledigt: 20 von 24.** Alle P0 und alle P1 sind geschlossen.
+**#19 zurückgenommen** — kein Befund, sondern gestalterische Absicht.
+Sprint 0 Bot-Schutz · Sprint 1 stille Defekte · Sprint 2 Gewicht ·
+Sprint 3 Zugänglichkeit · Sprint 4 Konversion.
+
+**Offen:** #18 (Vendor-Lint) · #23 (Orbit-Magic-Numbers) · #24 (Resttexte)
 
 ---
 
@@ -559,7 +562,23 @@ Lazy-Init im State), sie erzeugen bei jedem Mount einen Doppel-Render.
 
 # B. UI / UX
 
-### #19 · P0 · Der Kontakt auf der Startseite ist per CSS versteckt
+### #19 · ⛔ KEIN BEFUND — gestalterische Absicht
+
+> **Zurückgenommen (01.09.2026).** Das Ausblenden ist gewollt: Die Startseite
+> soll am Desktop auf eine Bildschirmhöhe passen, und die Entscheidung zwischen
+> den beiden Welten soll nicht durch ein Formular verwässert werden.
+>
+> Meine ursprüngliche Bewertung hat den Zweck der Seite verkannt — sie sortiert,
+> sie verkauft nicht. Der Zustand ist wiederhergestellt und in `app/page.tsx`
+> sowie `app/globals.css` als Absicht dokumentiert, damit er beim nächsten
+> Durchgang nicht erneut als Defekt eingestuft wird.
+>
+> Bewusst in Kauf genommen: Ein per `display:none` ausgeblendeter Abschnitt
+> steht nicht im Accessibility-Tree. Der Kontaktweg bleibt über den
+> Kontakt-Button, die Kontaktbereiche beider Welten und die Impressen erreichbar.
+
+<details>
+<summary>Ursprüngliche Befundbeschreibung</summary>
 
 **Belegt:** `app/page.tsx:294` gibt der Kontakt-Sektion die Klasse
 `contact-grid--hidden`, in `globals.css:1908` definiert als `display: none`.
@@ -585,9 +604,11 @@ sekundären Ghost-Button.
 Entscheidung — sie lenkt dort nicht ab, sondern fängt die auf, die sich nicht
 entscheiden wollen. Genau das ist die dritte Zielgruppe der Scanner-Story.
 
+</details>
+
 ---
 
-### #20 · P1 · Der Preis-Einstieg in Welt A ist zu steil
+### #20 · ✅ ERLEDIGT (01.09.2026) · Der Preis-Einstieg in Welt A ist zu steil
 
 **Belegt** aus `PriceTableSection.tsx` und `ProgrammeSection.tsx`:
 
@@ -664,7 +685,7 @@ weiter nach oben, idealerweise in den Hero-Bereich.
 
 ---
 
-### #22 · P1 · Welt B hat keine Preisorientierung
+### #22 · ✅ ERLEDIGT (01.09.2026) · Welt B hat keine Preisorientierung
 
 **Belegt:** `/webdevelopment` nennt im gesamten Seiteninhalt keinerlei Preise oder
 Größenordnungen. Die einzige Zahlenangabe steckt **im Formular** — das
@@ -755,7 +776,7 @@ Sie sehen aber klickbar aus. Entweder verlinken oder visuell entschärfen.
 `#5` Labels + Consent-Links · `#6` Fokus-Falle ·
 `#14` Smooth Scroll · `#15` reduced-motion · `#17` Security-Header
 
-**Sprint 4 — „Konversion" (~1–2 Tage)**
+**Sprint 4 — „Konversion"** ✅ erledigt 01.09.2026
 `#19` Kontakt sichtbar · `#20` Preisarchitektur · `#21` Testimonials ·
 `#22` Budgetrahmen Welt B · `#11` OG-Bilder · `#16` JSON-LD
 

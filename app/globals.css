@@ -889,9 +889,11 @@
 }
 
 /*
- * Hinweis: Hier standen `.contact-grid--hidden { display: none }` und
- * `#root-contact:target { display: grid }`. Der Kontaktbereich ist jetzt
- * dauerhaft sichtbar — siehe Kommentar in app/page.tsx.
+ * Hier standen `.contact-grid--hidden` und `#root-contact:target`. Der
+ * Kontaktbereich der Startseite wird jetzt über React-State ein- und
+ * ausgeblendet (components/HomeContact.tsx) — der :target-Ansatz hinterließ
+ * den Anker in der Adresszeile und blendete den Bereich dadurch bei jedem
+ * weiteren Seitenaufruf dauerhaft ein.
  */
 
 .contact-points {
