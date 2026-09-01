@@ -2,6 +2,7 @@
 
 import AboutSection from '@/app/nlp/components/AboutSection';
 import ContactSection from '@/app/nlp/components/ContactSection';
+import FaqSection from '@/app/nlp/components/FaqSection';
 import GuideSection from '@/app/nlp/components/GuideSection';
 import HeroSection from '@/app/nlp/components/HeroSection';
 import NlpIntroSection from '@/app/nlp/components/NlpIntroSection';
@@ -26,6 +27,7 @@ export default function NlpSections() {
       <PriceTableSection />
       <GuideSection />
       <AboutSection />
+      <FaqSection />
       <ContactSection />
     </>
   );

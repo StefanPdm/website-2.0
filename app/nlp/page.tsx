@@ -1,6 +1,7 @@
 import NlpSections from '@/app/nlp/NlpSections';
-import { NlpStructuredData } from '@/components/StructuredData';
+import { FaqStructuredData, NlpStructuredData } from '@/components/StructuredData';
 import { coachingOffersForSchema } from '@/app/nlp/pricing';
+import { faqBoth, faqNlp } from '@/app/nlp/faq';
 
 /**
  * Das Service-Schema beschreibt das Coaching-Angebot – also genau diese Seite.
@@ -12,6 +13,7 @@ export default function NlpPage() {
   return (
     <>
       <NlpStructuredData offers={coachingOffersForSchema} />
+      <FaqStructuredData entries={[...faqNlp, ...faqBoth]} />
       <NlpSections />
     </>
   );

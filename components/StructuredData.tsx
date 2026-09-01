@@ -166,6 +166,36 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
 
 // ---------------------------------------------------------------------------
 
+type FaqInput = { question: string; answer: string };
+
+/**
+ * FAQPage-Schema.
+ *
+ * Voraussetzung für Rich Results: Frage und Antwort müssen **auf der Seite
+ * sichtbar** sein. Ein Akkordeon erfüllt das, solange der Antworttext auch
+ * zugeklappt im HTML steht — deshalb `<details>` und kein bedingtes Rendern.
+ *
+ * Zweiter Nutzen: Sprachmodelle zitieren bevorzugt sauber ausgezeichnete
+ * Frage-Antwort-Paare, weil die Zuordnung eindeutig ist.
+ */
+export function FaqStructuredData({ entries }: { entries: FaqInput[] }) {
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: entries.map((entry) => ({
+          '@type': 'Question',
+          name: entry.question,
+          acceptedAnswer: { '@type': 'Answer', text: entry.answer },
+        })),
+      }}
+    />
+  );
+}
+
+// ---------------------------------------------------------------------------
+
 type RuleSetInput = {
   href: string;
   title: string;

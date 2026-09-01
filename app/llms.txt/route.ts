@@ -101,6 +101,18 @@ Kundenportal Intralogistik (Launch 03/2026).
 - [Impressum Coaching](${absoluteUrl('/nlp/impressum')})
 - [Impressum Webentwicklung](${absoluteUrl('/webdevelopment/impressum')})
 
+## Häufige Fragen
+
+Beide Angebotsseiten tragen einen FAQ-Abschnitt mit ausformulierten Antworten
+(FAQPage-Schema): ${absoluteUrl('/nlp')}#faq und
+${absoluteUrl('/webdevelopment')}#faq — unter anderem zu Preisen, Ablauf,
+Terminen, Nutzungsrechten und zur Abgrenzung zwischen Coaching und Therapie.
+
+Fachliche Einordnung: NLP wird als praktisches Kommunikations- und
+Veränderungsmodell verstanden. Umfassende Wirksamkeitsbehauptungen sind
+wissenschaftlich nicht hinreichend belegt. Coaching ist keine Heilkunde und
+ersetzt weder Psychotherapie noch ärztliche Behandlung.
+
 ## Hinweise
 
 - Sprache der Website: Deutsch.

@@ -558,6 +558,27 @@ Drei Achsen, jeweils kombiniert:
 > auch einlöst. Begriffe ohne passenden Abschnitt schaden dem Ranking.
 > Neue Sektion → prüfen, ob sie ein Keyword neu rechtfertigt, und erst dann ergänzen.
 
+### FAQ
+
+Fragen und Antworten stehen als Daten in `app/nlp/faq.ts` und
+`app/webdevelopment/faq.ts`. Beide werden von der jeweiligen Sektion **und**
+vom `FAQPage`-Schema gelesen — eine Antwort ändern heißt, sie überall zu
+ändern. `faqBoth` (die welten-übergreifenden Fragen) hängt bewusst an beiden
+Sektionen: Das ist zugleich die interne Verlinkung zwischen den Welten.
+
+Drei Regeln für neue Einträge:
+
+1. **Der erste Satz beantwortet die Frage vollständig.** Genau diesen Satz
+   ziehen Google-Snippets und Sprachmodelle heraus.
+2. **Zahlen, Orte, Zeiträume nennen.** Prüfbare Angaben werden zitiert, vage
+   Formulierungen nicht.
+3. **Aufklappen über natives `<details>`.** Der Antworttext muss auch
+   zugeklappt im HTML stehen — nur dann akzeptiert Google das Akkordeon fürs
+   FAQPage-Schema. Kein bedingtes Rendern.
+
+Preise in FAQ-Antworten müssen zu `app/nlp/pricing.ts` passen. Das ist die
+wahrscheinlichste Stelle, an der die Seite auseinanderläuft.
+
 ### Strukturierte Daten
 
 `components/StructuredData.tsx` liefert das JSON-LD, gerendert aus Server
@@ -591,6 +612,31 @@ statt zwei unabhängige Anbieter zu sehen.
   Transformation" nicht.
 - Semantik zählt doppelt: saubere H-Hierarchie, echte Listen, beschreibende
   Alt-Texte (`alt='Stefan Heinemann, NLP Coach aus Potsdam'`, nicht `alt='Portrait'`).
+
+### Sitemap und Indexierung
+
+`app/sitemap.ts` führt **echte Änderungsdaten je Seite**, nicht `new Date()`.
+Mit der Build-Zeit meldet jeder Deploy alle Seiten als geändert; Google stuft
+die lastmod-Angaben dann als wertlos ein und ignoriert sie künftig.
+
+**Bei inhaltlicher Änderung das Datum mitziehen.** Refactorings, Styling und
+Tippfehler zählen nicht — das Feld beschreibt, wann sich für den Leser etwas
+geändert hat. Ausgangswerte: `git log -1 --format=%as -- <datei>`.
+
+**Nach einem Deploy mit Inhaltsänderungen:**
+
+```bash
+pnpm indexnow
+```
+
+Meldet alle Sitemap-URLs an IndexNow (Bing, Yandex, Seznam, Naver). Für die
+Sichtbarkeit in KI-Antworten überproportional wertvoll, weil ChatGPTs Websuche
+sich neben dem eigenen Crawler wesentlich auf Bings Index stützt. Google
+unterstützt IndexNow nicht — dort bleibt es bei Sitemap und Search Console.
+
+Der Schlüssel liegt als `public/<32-Hex>.txt`; Inhalt = Dateiname ohne
+Endung. Wird die Datei gelöscht oder umbenannt, lehnt IndexNow jede Meldung
+mit HTTP 403 ab.
 
 ### Open Graph
 

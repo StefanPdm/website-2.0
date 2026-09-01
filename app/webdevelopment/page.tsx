@@ -34,7 +34,10 @@ import CaseCard from '../../components/CaseCard';
 import ScrollToTop from '@/components/ScrollToTop';
 import WebBackdrop from '@/components/WebBackdrop';
 import HyperspeedBand from '@/components/HyperspeedBand';
-import { WebStructuredData } from '@/components/StructuredData';
+import { FaqStructuredData, WebStructuredData } from '@/components/StructuredData';
+import FaqSection from '@/app/webdevelopment/FaqSection';
+import { faqBoth } from '@/app/nlp/faq';
+import { faqWeb } from '@/app/webdevelopment/faq';
 
 const cases = [
   {
@@ -207,6 +210,7 @@ export default function WebdevelopmentPage() {
   return (
     <div className='relative min-h-screen overflow-x-clip bg-[#0B1B2B] text-slate-100'>
       <WebStructuredData cases={cases} />
+      <FaqStructuredData entries={[...faqWeb, ...faqBoth]} />
       {/* Page Background */}
       <div className='pointer-events-none fixed inset-0 z-0'>
         <WebBackdrop />
@@ -556,6 +560,7 @@ export default function WebdevelopmentPage() {
             />
           </div>
         </section>
+        <FaqSection />
         {/* Kontakt */}
         <section
           id='kontakt'
