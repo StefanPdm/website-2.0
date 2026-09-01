@@ -20,12 +20,17 @@ Die Probleme liegen in drei Bereichen:
 3. **Konversion & Vertrauen** — Kontakt auf `/` versteckt, Preissprung ohne Brücke, Testimonials ohne Beleg.
 
 Insgesamt **24 Befunde**: 7× P0, 10× P1, 7× P2.
-**Erledigt: 20 von 24.** Alle P0 und alle P1 sind geschlossen.
+**Erledigt: 22 von 24.** Alle P0, alle P1 und die P2 bis auf einen Rest.
 **#19 zurückgenommen** — kein Befund, sondern gestalterische Absicht.
+**#23 teilweise** — Magic Numbers benannt und dokumentiert; der Layout-Umbau
+selbst braucht eine Sichtprüfung und wurde deshalb nicht blind gemacht.
+
+Offen bleibt außerdem die anwaltliche Prüfung der Datenschutzerklärungen
+(siehe #24) — das ist keine Codefrage.
 Sprint 0 Bot-Schutz · Sprint 1 stille Defekte · Sprint 2 Gewicht ·
 Sprint 3 Zugänglichkeit · Sprint 4 Konversion.
 
-**Offen:** #18 (Vendor-Lint) · #23 (Orbit-Magic-Numbers) · #24 (Resttexte)
+**Offen:** #23 (Layout-Umbau des Orbit-Systems, braucht Sichtprüfung)
 
 ---
 
@@ -541,7 +546,19 @@ zunächst im `Report-Only`-Modus testen.
 
 ---
 
-### #18 · P2 · ESLint: 11 Fehler, 2 Warnungen
+### #18 · ✅ ERLEDIGT (01.09.2026) · ESLint: 11 Fehler, 2 Warnungen
+
+> **Behoben.** `npx eslint .` läuft jetzt mit **Exit 0** durch.
+>
+> Bewusst **kein** pauschales Ignorieren der Vendor-Dateien: In
+> `eslint.config.mjs` sind für die neun react-bits-Komponenten nur die vier
+> Regeln abgeschaltet, die dort systematisch anschlagen
+> (`no-explicit-any`, `set-state-in-effect`, `no-img-element`,
+> `no-unused-vars`). Echte Fehler in diesen Dateien bleiben sichtbar.
+>
+> Gegenprobe gemacht: Eine Datei mit `any` außerhalb der Vendor-Liste wird
+> weiterhin angemeckert. Die Liste gehört gepflegt, sobald eine dieser
+> Komponenten durch eine eigene ersetzt wird.
 
 **Belegt** (`npx eslint .`):
 - `components/LaserFlow.tsx` — 9× `@typescript-eslint/no-explicit-any`
@@ -707,7 +724,23 @@ falschen Stelle.
 
 ---
 
-### #23 · P2 · Startseite: Orbit-Positionierung ist mit Magic Numbers gebaut
+### #23 · ⚠️ TEILWEISE (01.09.2026) · Startseite: Orbit-Positionierung ist mit Magic Numbers gebaut
+
+> **Erledigt:** Die zehn Zahlen sind benannt (`--orbit-x` / `--orbit-y`) und
+> dokumentiert. Pro Breakpoint sind jetzt zwei Variablen anzufassen statt eines
+> Transform-Strings, und beim Lesen ist erkennbar, dass es sich um Kompensation
+> handelt und nicht um Gestaltung. Die berechneten Werte sind unverändert —
+> im gebauten CSS gegengeprüft, das Rendering ist identisch.
+>
+> **Offen:** Der eigentliche Layout-Umbau — Positionierung relativ zum
+> Elternelement statt per Pixel-Versatz, plus Entfernen der `!important` an
+> `.orbit-center` und `.choice-card`.
+>
+> **Bewusst nicht blind gemacht:** Das ist ein Layout-Umbau an der
+> meistbesuchten Seite, dessen Ergebnis sich nur visuell beurteilen lässt —
+> über fünf Breakpoints inklusive Landscape-Phone. Ohne Sichtprüfung wäre das
+> ein Glücksspiel mit der Startseite. Sollte gemeinsam gemacht werden, mit
+> laufendem Dev-Server und Blick auf 360 / 640 / 900 / 1200 / 1440 px.
 
 **Belegt** in `globals.css` — die `.orbit-system` wird über vier Breakpoints mit
 fest verdrahteten Pixelwerten verschoben:
@@ -738,7 +771,21 @@ Sie sehen aber klickbar aus. Entweder verlinken oder visuell entschärfen.
 
 ---
 
-### #24 · P2 · Inhaltliche Fehler und Inkonsistenzen
+### #24 · ✅ ERLEDIGT (01.09.2026) · Inhaltliche Fehler und Inkonsistenzen
+
+> **Abgearbeitet.** Mentor-Name auf „Ronny Rohde" vereinheitlicht (es gab drei
+> Schreibweisen), Tippfehler, 13 fehlende Umlaute in den Rechtstexten,
+> Alt-Texte, „Kompetenz 1/42" → 1/3, hartkodiertes Copyright-Jahr,
+> Anker `#workshops` → `#preise`, Widerruf-Links in beiden Footern,
+> „Nur für Firmenkunden !!!" → „Ausschließlich für Firmenkunden.",
+> drei identische Slider-Alt-Texte durch beschreibende ersetzt.
+>
+> **Nicht abgeschlossen und bewusst offen gelassen — braucht anwaltliche
+> Prüfung, keine Codeänderung:** Beide Datenschutzerklärungen decken nicht ab,
+> dass das Kontaktformular IP, Geodaten, User-Agent und Referer per E-Mail an
+> den Betreiber sendet; ebenso wenig den Leitfaden-Versand und Vercel als
+> Auftragsverarbeiter. Zudem fehlt der Startseite eine eigene
+> Datenschutzerklärung — ihr Formular verlinkt derzeit beide Welten.
 
 | Fund | Ort | Korrektur |
 |---|---|---|

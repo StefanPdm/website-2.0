@@ -445,13 +445,31 @@
   background: rgba(255, 255, 255, 0.12);
 }
 
+/*
+ * Orbit-System der Startseite.
+ *
+ * --orbit-x / --orbit-y sind Ausgleichswerte, keine Gestaltungsgrößen: Das
+ * System wird per translate über den darüberliegenden Text gezogen, statt
+ * unter ihm zu fließen. Die Werte wurden je Breakpoint per Augenmaß gesetzt
+ * und müssen nachgezogen werden, sobald sich Hero-Text oder -Bild ändern.
+ *
+ * Als Variablen statt als Transform-String, damit pro Breakpoint nur zwei
+ * Zahlen anzufassen sind und beim Lesen erkennbar bleibt, dass es sich um
+ * Kompensation handelt und nicht um Gestaltung.
+ *
+ * Sauberer wäre eine Positionierung relativ zum Elternelement (AUDIT.md #23).
+ * Das ist ein Layout-Umbau und braucht eine Sichtprüfung über alle fünf
+ * Breakpoints.
+ */
 .orbit-system {
   position: relative;
   width: 320px;
   height: 320px;
   display: grid;
   place-items: center;
-  transform: translate(0px, -190px);
+  --orbit-x: 0px;
+  --orbit-y: -190px;
+  transform: translate(var(--orbit-x), var(--orbit-y));
   pointer-events: none;
 }
 
@@ -793,7 +811,8 @@
   .orbit-system {
     width: 260px;
     height: 260px;
-    transform: translate(-137px, -36px);
+    --orbit-x: -137px;
+    --orbit-y: -36px;
     margin: 0 auto -0.25rem auto;
   }
   .orbit-ring--one {
@@ -830,7 +849,8 @@
   .orbit-system {
     width: 320px;
     height: 320px;
-    transform: translate(-176px, -140px);
+    --orbit-x: -176px;
+    --orbit-y: -140px;
   }
   .orbit-ring--one {
     --orbit-size: 220px;
@@ -850,7 +870,8 @@
   .orbit-system {
     width: 320px;
     height: 320px;
-    transform: translate(-70px, -165px);
+    --orbit-x: -70px;
+    --orbit-y: -165px;
   }
 }
 
@@ -868,7 +889,8 @@
   .orbit-system {
     width: 300px;
     height: 300px;
-    transform: translate(50px, -131px);
+    --orbit-x: 50px;
+    --orbit-y: -131px;
   }
   .orbit-ring--one {
     --orbit-size: 160px;

@@ -33,7 +33,7 @@ const programs = [
       'Transfer in Job & Alltag',
       'Kommunikationskompetenz und Motivation',
       'Schritt-für-Schritt-Lösungen',
-      'Nur für Firmenkunden !!!',
+      'Ausschließlich für Firmenkunden.',
     ],
     price: 'ab € 1.200,00 pro Tag (zzgl. MwSt.)',
   },

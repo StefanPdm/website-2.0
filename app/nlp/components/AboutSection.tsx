@@ -11,10 +11,21 @@ export default function AboutSection() {
   const [aboutModal, setAboutModal] = useState<null | 'before' | 'education'>(null);
   const dialogRef = useModal<HTMLDivElement>(Boolean(aboutModal), () => setAboutModal(null));
   const [activeImage, setActiveImage] = useState(0);
+  // Beschreibende Alt-Texte statt dreimal „Stefan Heinemann": Screenreader
+  // lasen sonst denselben Text und konnten die Bilder nicht unterscheiden.
   const images = [
-    '/images-nlp/portrait-workshop.webp',
-    '/images-nlp/portrait-treppe.webp',
-    '/images-nlp/portrait-firewalk.webp',
+    {
+      src: '/images-nlp/portrait-workshop.webp',
+      alt: 'Stefan Heinemann bei einem NLP-Workshop vor einer Gruppe',
+    },
+    {
+      src: '/images-nlp/portrait-treppe.webp',
+      alt: 'Portrait von Stefan Heinemann, NLP Coach aus Potsdam',
+    },
+    {
+      src: '/images-nlp/portrait-firewalk.webp',
+      alt: 'Stefan Heinemann beim Firewalk – Unleash the Power Within',
+    },
   ];
 
   useEffect(() => {
@@ -39,13 +50,13 @@ export default function AboutSection() {
                   <div
                     className='flex h-full w-full transition-transform duration-700 ease-out'
                     style={{ transform: `translateX(-${activeImage * 100}%)` }}>
-                    {images.map((src, index) => (
+                    {images.map((image) => (
                       <div
-                        key={`${src}-${index}`}
+                        key={image.src}
                         className='relative h-full w-full shrink-0'>
                         <Image
-                          src={src}
-                          alt='Stefan Heinemann'
+                          src={image.src}
+                          alt={image.alt}
                           fill
                           className='object-cover object-top'
                           sizes='(min-width: 1024px) 40vw, 80vw'
