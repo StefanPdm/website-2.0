@@ -154,7 +154,7 @@ export default function RulesPage({ ruleSet }: { ruleSet: RuleSet }) {
           </p>
           <div className='mt-7 flex flex-wrap gap-3'>
             <PrimaryButton href='/nlp#kontakt'>Kostenloses Erstgespräch</PrimaryButton>
-            <SecondaryButton href='/nlp#programme'>Programme ansehen</SecondaryButton>
+            <SecondaryButton href='/nlp#preise'>Programme ansehen</SecondaryButton>
           </div>
 
           <p className='mt-12 border-t border-(--border) pt-6 text-xs leading-relaxed text-(--muted)'>

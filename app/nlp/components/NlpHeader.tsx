@@ -41,13 +41,13 @@ const navItems: NavItem[] = [
   { label: 'Über mich', section: 'ueber' },
   { label: 'Wissenschaft', href: '/nlp/wissenschaft' },
   { label: '20 Regeln', href: '/nlp/regeln/gluecklichsein' },
-  { label: 'Programme', section: 'programme' },
+  { label: 'Typentest', href: '/nlp/persoenlichkeitstest' },
   { label: 'Preise', section: 'preise' },
   { label: 'Kontakt', section: 'kontakt' },
 ];
 
 /** Abschnitte, die für die aktive Markierung beobachtet werden. */
-const spySections = ['start', 'nlp', 'erfuellung', 'programme', 'preise', 'leitfaden', 'ueber', 'kontakt'];
+const spySections = ['start', 'nlp', 'erfuellung', 'preise', 'leitfaden', 'ueber', 'kontakt'];
 
 /** Abonnement für useSyncExternalStore – außerhalb der Komponente, damit die
  *  Referenz stabil bleibt und React nicht bei jedem Render neu abonniert. */

@@ -104,11 +104,14 @@ Kundenportal Intralogistik (Launch 03/2026).
 ## Seiten
 
 - [Startseite](${SITE_URL}): Auswahl zwischen beiden Geschäftsbereichen
-- [NLP Coaching](${absoluteUrl('/nlp')}): Angebot, Programme, Preise, Kontakt
+- [NLP Coaching](${absoluteUrl('/nlp')}): Angebot, Persönlichkeitstest, Preise, Kontakt
 - [Webentwicklung](${absoluteUrl('/webdevelopment')}): Leistungen, Technologien, Referenzen, Kontakt
 - [Warum NLP wirkt – Forschungsstand](${absoluteUrl('/nlp/wissenschaft')}): Zusammenfassung des
   DVNLP-Whitepapers 2026 zur empirischen Evidenz, inklusive der Annahmen, die die Forschung
   nicht stützt
+- [Persönlichkeitstest (Psychografie)](${absoluteUrl('/nlp/persoenlichkeitstest')}): kostenloser
+  Selbsttest mit 18 Fragen nach Dietmar Friedmann — Beziehungstyp, Sachtyp oder Handlungstyp.
+  Kein validiertes Testverfahren, ausdrücklich zur Selbstreflexion
 - [20 Regeln für erfolgreiches Glücklichsein](${absoluteUrl('/nlp/regeln/gluecklichsein')})
 - [20 Regeln für erfolgreiches Unglücklichsein](${absoluteUrl('/nlp/regeln/ungluecklichsein')}) – ironische Umkehrung, keine Empfehlung
 - [Impressum Coaching](${absoluteUrl('/nlp/impressum')})
