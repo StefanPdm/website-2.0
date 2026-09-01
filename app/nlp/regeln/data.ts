@@ -23,6 +23,12 @@ export type RuleSet = {
   rules: string[];
   metaTitle: string;
   metaDescription: string;
+  /**
+   * Original-PDF unter public/. Die Seite prüft beim Bauen, ob die Datei
+   * existiert, und zeigt den Download-Button nur dann — so entsteht kein
+   * toter Link, falls eine Datei fehlt.
+   */
+  pdfPath: string;
   /** Text des Verweises auf die jeweils andere Seite. */
   crossLinkLabel: string;
   crossLinkText: string;
@@ -64,6 +70,7 @@ export const gluecklichsein: RuleSet = {
   metaTitle: '20 Regeln für erfolgreiches Glücklichsein',
   metaDescription:
     '20 Regeln für ein erfülltes Leben von NLP Coach Stefan Heinemann aus Potsdam: Verantwortung übernehmen, im Jetzt leben, Sprache bewusst nutzen, Wahlfreiheit zwischen Reiz und Reaktion erkennen.',
+  pdfPath: '/dokumente/regeln-erfolgreiches-gluecklichsein.pdf',
   crossLinkLabel: 'Die Umkehrung lesen',
   crossLinkText:
     'Manchmal erkennt man den eigenen Weg leichter, wenn man sieht, wie man ihn zuverlässig verfehlt.',
@@ -105,6 +112,7 @@ export const ungluecklichsein: RuleSet = {
   metaTitle: '20 Regeln für erfolgreiches Unglücklichsein (ironisch)',
   metaDescription:
     'Eine ironische Umkehrung von NLP Coach Stefan Heinemann aus Potsdam: 20 Muster, mit denen Unglücklichsein zuverlässig gelingt – und die man an sich selbst leichter erkennt als jeden guten Rat.',
+  pdfPath: '/dokumente/regeln-erfolgreiches-ungluecklichsein.pdf',
   crossLinkLabel: 'Jetzt die Gegenrichtung',
   crossLinkText:
     'Wenn du weißt, wie es schiefgeht, kennst du auch die Richtung, in die es gehen kann.',

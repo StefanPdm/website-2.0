@@ -27,7 +27,7 @@ export const WHITEPAPER = {
    * Datei existiert, und blendet den Download-Button nur dann ein – so
    * entsteht kein toter Link, wenn sie fehlt.
    */
-  pdfPath: '/dokumente/Whitepaper_30_Jahre_DVNLP_NLP_Forschung.pdf',
+  pdfPath: '/dokumente/dvnlp-whitepaper-nlp-forschung.pdf',
 } as const;
 
 export type Mechanism = {

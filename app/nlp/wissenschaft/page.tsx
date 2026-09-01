@@ -234,7 +234,9 @@ export default function WissenschaftPage() {
 
               <div className='mt-8 flex flex-wrap gap-3'>
                 {pdfAvailable && (
-                  <PrimaryButton href={WHITEPAPER.pdfPath}>
+                  <PrimaryButton
+                    href={WHITEPAPER.pdfPath}
+                    download>
                     <Download
                       className='h-4 w-4'
                       aria-hidden='true'

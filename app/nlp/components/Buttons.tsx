@@ -11,6 +11,14 @@ type ButtonProps = {
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   'aria-busy'?: boolean;
+  /**
+   * Setzt `href` auf eine Datei statt auf eine Route.
+   *
+   * Rendert dann ein natives `<a download>` statt `next/link`: Der Router
+   * würde sonst eine Client-Navigation versuchen, ins Leere prefetchen und
+   * erst danach auf einen harten Seitenwechsel zurückfallen.
+   */
+  download?: boolean;
 };
 
 export function PrimaryButton({
@@ -21,9 +29,21 @@ export function PrimaryButton({
   disabled,
   type = 'button',
   'aria-busy': ariaBusy,
+  download,
 }: ButtonProps) {
   const base =
     'nlp-primary-button inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[var(--button-text)] bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] shadow-[0_0_30px_var(--glow)] ring-1 ring-[var(--border)] transition duration-200 hover:shadow-[0_0_40px_var(--glow-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60';
+  if (href && download) {
+    return (
+      <a
+        href={href}
+        download
+        onClick={onClick}
+        className={`${base} ${className ?? ''}`}>
+        {children}
+      </a>
+    );
+  }
   if (href) {
     return (
       <Link
@@ -54,9 +74,21 @@ export function SecondaryButton({
   disabled,
   type = 'button',
   'aria-busy': ariaBusy,
+  download,
 }: ButtonProps) {
   const base =
     'cursor-pointer inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-[var(--text)] bg-[var(--surface)] ring-1 ring-[var(--border)] shadow-[0_0_20px_var(--glow)] transition duration-200 hover:bg-[var(--surface-strong)] hover:ring-[var(--border-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-soft)] active:translate-y-px';
+  if (href && download) {
+    return (
+      <a
+        href={href}
+        download
+        onClick={onClick}
+        className={`${base} ${className ?? ''}`}>
+        {children}
+      </a>
+    );
+  }
   if (href) {
     return (
       <Link

@@ -1,4 +1,8 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
 import Link from 'next/link';
+import { Download } from 'lucide-react';
 
 import GlassCard from '@/components/GlassCard';
 import { PrimaryButton, SecondaryButton } from '@/app/nlp/components/Buttons';
@@ -18,9 +22,24 @@ import { otherRuleSet, type RuleSet } from '@/app/nlp/regeln/data';
  * Warm-Theme stimmig bleibt.
  */
 
+/**
+ * Prüft zur Bauzeit, ob die Original-PDF hinterlegt ist.
+ *
+ * So entsteht kein toter Download-Link, falls eine Datei fehlt — der Button
+ * erscheint automatisch, sobald sie unter public/dokumente/ liegt.
+ */
+function hasPdf(pdfPath: string) {
+  try {
+    return fs.existsSync(path.join(process.cwd(), 'public', pdfPath));
+  } catch {
+    return false;
+  }
+}
+
 export default function RulesPage({ ruleSet }: { ruleSet: RuleSet }) {
   const other = otherRuleSet(ruleSet);
   const total = ruleSet.rules.length;
+  const pdfAvailable = hasPdf(ruleSet.pdfPath);
 
   return (
     <main className='relative z-10'>
@@ -80,6 +99,24 @@ export default function RulesPage({ ruleSet }: { ruleSet: RuleSet }) {
               );
             })}
           </ol>
+
+          {pdfAvailable && (
+            <div className='mt-12 flex flex-col gap-5 border-t border-(--border) pt-8 sm:flex-row sm:items-center sm:justify-between'>
+              <p className='max-w-md text-sm leading-relaxed text-(--muted)'>
+                Die {total} Regeln zum Mitnehmen. Ausgedruckt neben dem Schreibtisch wirken
+                sie zuverlässiger als in einem Browser-Tab.
+              </p>
+              <PrimaryButton
+                href={ruleSet.pdfPath}
+                download>
+                <Download
+                  className='h-4 w-4'
+                  aria-hidden='true'
+                />
+                Als PDF laden
+              </PrimaryButton>
+            </div>
+          )}
         </div>
       </section>
 
