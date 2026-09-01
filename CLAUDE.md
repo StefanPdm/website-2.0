@@ -483,6 +483,32 @@ Das ist die Scanner-Story des Betreibers und ein bewusstes Alleinstellungsmerkma
 - **`public/` ist öffentlich.** Nichts dort ablegen, was gated sein soll —
   gated Dateien gehören nach `private-documents/` und werden über eine Route ausgeliefert.
 
+### Logos
+
+Drei Marken-SVGs in `public/logos/`, alle mit **unterschiedlichem
+Seitenverhältnis** — das ist die häufigste Fehlerquelle beim Einbinden:
+
+| Datei | Größe | Verhältnis | Verwendung |
+|---|---|---|---|
+| `logo-sh.svg` | 520×500 | 1,04:1 | Welt 0, Favicon, Apple-Touch-Icon |
+| `logo-nlp.svg` | 550×500 | 1,10:1 | Welt A (Kopfzeile, Wahlkachel, Orbit) |
+| `logo-web.svg` | 850×500 | **1,70:1** | Welt B (CardNav), Wahlkachel, Orbit |
+
+**Nie quadratische `width`/`height` angeben.** `next/image` verzerrt sonst,
+besonders das breite Web-Logo. Immer die echten Proportionen als
+`width`/`height` setzen und die Darstellung per CSS begrenzen —
+`object-contain` plus `h-*` und `w-auto` passt ein breites Logo unverzerrt
+in einen quadratischen Slot ein.
+
+**Raster-Ableitungen** (mit `sharp` aus den SVGs erzeugt, quadratisch mit
+transparentem Rand): `logo-sh-180.png` (Apple-Touch-Icon),
+`logo-sh-192.png` / `logo-sh-512.png` (Web-App-Manifest),
+`logo-nlp-256.png` (E-Mail-Template des Leitfadens).
+
+Warum PNG und nicht SVG: Safari rendert im Apple-Touch-Icon kein SVG, das
+Manifest verlangt echte Pixelgrößen, und viele E-Mail-Clients zeigen SVG gar
+nicht an. Ändert sich ein Logo, müssen diese vier PNG neu erzeugt werden.
+
 ### Namenskonvention
 
 ```

@@ -75,10 +75,12 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
           <div className='landing-brand'>
             <div className='w-12 h-12'>
               <Image
-                src='/Global-Logo-SH-1.webp'
+                src='/logos/logo-sh.svg'
                 alt='Stefan Heinemann – NLP Coaching und Webentwicklung, Logo'
-                width={120}
+                width={125}
                 height={120}
+                className='h-full w-full object-contain'
+                priority
               />
             </div>
             <div>
@@ -124,10 +126,11 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                   <div className='orbit-item__shell'>
                     <div className='orbit-item__content'>
                       <Image
-                        src='/logos/nlp-logo.svg'
+                        src='/logos/logo-nlp.svg'
                         alt='NLP Coaching'
-                        width={40}
+                        width={44}
                         height={40}
+                        className='h-9 w-9 object-contain'
                       />
                     </div>
                     <span className='orbit-badge'>NLP</span>
@@ -140,10 +143,11 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                   <div className='orbit-item__shell'>
                     <div className='orbit-item__content'>
                       <Image
-                        src='/webdesign-logo.png'
+                        src='/logos/logo-web.svg'
                         alt='Webdesign und Webentwicklung'
-                        width={40}
+                        width={68}
                         height={40}
+                        className='h-8 w-auto max-w-9 object-contain'
                       />
                     </div>
                     <span className='orbit-badge'>Webdesign</span>
@@ -226,10 +230,11 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                   }>
                   <div className='choice-logo-big'>
                     <Image
-                      src='/webdesign-logo.svg'
+                      src='/logos/logo-web.svg'
                       alt='Webdevelopment Logo'
-                      width={64}
+                      width={109}
                       height={64}
+                      className='h-11 w-auto max-w-[60px] object-contain'
                     />
                   </div>
                   <div className='choice-pill-slot'>
@@ -272,10 +277,11 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                   }>
                   <div className='choice-logo-big'>
                     <Image
-                      src='/logos/nlp-logo.svg'
-                      alt='NLP Logo'
-                      width={64}
+                      src='/logos/logo-nlp.svg'
+                      alt='NLP Coaching Logo'
+                      width={70}
                       height={64}
+                      className='h-14 w-auto max-w-[60px] object-contain'
                     />
                   </div>
                   <div className='choice-pill-slot'>

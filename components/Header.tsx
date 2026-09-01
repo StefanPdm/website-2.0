@@ -51,7 +51,7 @@ export default function Header() {
   return (
     <header className='fixed top-0 z-50 w-full bg-transparent'>
       <CardNav
-        logo='/Global-logo-W.webp'
+        logo='/logos/logo-web.svg'
         logoAlt='Logo'
         items={items}
         baseColor='transparent'

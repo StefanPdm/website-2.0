@@ -180,7 +180,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
               isScrolled ? 'h-10 w-10' : 'h-11 w-11 hdr:h-12 hdr:w-12'
             }`}>
             <Image
-              src='/logos/nlp-logo.svg'
+              src='/logos/logo-nlp.svg'
               alt=''
               fill
               sizes='48px'

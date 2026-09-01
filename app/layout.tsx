@@ -47,17 +47,22 @@ export const metadata: Metadata = {
     title: 'NLP Coaching & Webentwicklung in Potsdam und Berlin',
     description:
       'Zwei Geschäftsbereiche, eine Person: NLP Coaching für innere Klarheit und Webentwicklung für digitale Systeme. Potsdam, Berlin, Brandenburg und remote.',
-    siteName: OWNER.name,
+    siteName: OWNER.name,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'NLP Coaching & Webentwicklung in Potsdam und Berlin',
     description:
-      'Zwei Geschäftsbereiche, eine Person: NLP Coaching für innere Klarheit und Webentwicklung für digitale Systeme. Potsdam, Berlin, Brandenburg und remote.',
+      'Zwei Geschäftsbereiche, eine Person: NLP Coaching für innere Klarheit und Webentwicklung für digitale Systeme. Potsdam, Berlin, Brandenburg und remote.',
   },
   icons: {
-    icon: [{ url: '/favicon.ico' }, { url: '/Global-Logo-SH-1.webp', type: 'image/webp' }],
-    apple: [{ url: '/Global-Logo-SH-1.webp', type: 'image/webp' }],
+    // SVG für moderne Browser, .ico als Rückfall für ältere.
+    // Apple-Touch-Icon muss PNG sein – Safari rendert dort kein SVG.
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/logos/logo-sh.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/logos/logo-sh-180.png', type: 'image/png', sizes: '180x180' }],
   },
   manifest: '/manifest.webmanifest',
 };

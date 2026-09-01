@@ -180,7 +180,7 @@ export async function POST(req: Request) {
 
     const siteUrl = resolveSiteUrl(req);
     const guideUrl = `${siteUrl}/nlp/guide-download?token=${encodeURIComponent(downloadToken)}`;
-    const logoUrl = `${siteUrl}/logos/nlp-logo.png`;
+    const logoUrl = `${siteUrl}/logos/logo-nlp-256.png`;
 
     const signaturePlain = '\n\nMit lieben Grüßen\nStefan\n\nwww.heinemann.berlin\n\n';
 
