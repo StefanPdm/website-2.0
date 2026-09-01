@@ -1046,3 +1046,29 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
 }
+
+/*
+ * Puls des schwebenden Weltenwechsels (app/nlp/components/WorldSwitch.tsx).
+ *
+ * Nur `transform` und `opacity` – kein Layout pro Frame (CLAUDE.md §9).
+ * Die Dauer liegt mit 2.8 s im Rahmen für Ambient-Schleifen. Die globale
+ * `prefers-reduced-motion`-Regel weiter oben schaltet sie mit ab.
+ */
+@keyframes world-switch-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+.world-switch-pulse {
+  animation: world-switch-pulse 2.8s ease-out infinite;
+}

@@ -5,6 +5,7 @@ import { Public_Sans } from 'next/font/google';
 
 import NlpFooter from '@/app/nlp/components/NlpFooter';
 import NlpHeader from '@/app/nlp/components/NlpHeader';
+import WorldSwitch from '@/app/nlp/components/WorldSwitch';
 
 type NlpThemeContextValue = {
   isWarmTheme: boolean;
@@ -45,6 +46,7 @@ export default function NlpLayoutClient({ children }: { children: React.ReactNod
             isWarmTheme={isWarmTheme}
             onToggleTheme={contextValue.toggleTheme}
           />
+          <WorldSwitch />
           <main>{children}</main>
           <NlpFooter />
         </div>

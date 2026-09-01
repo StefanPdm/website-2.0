@@ -11,6 +11,16 @@ export default function NlpFooter() {
           <p className='mt-1 text-xs text-white/60'>Wir lieben dein Problem</p>
         </div>
         <div className='flex flex-wrap items-center gap-6 text-xs'>
+          {/*
+            Textlicher Weg zurück in die andere Welt. Der schwebende Schalter
+            oben links ist der auffällige Weg — dieser hier ist der, den
+            Suchmaschinen und jemand ohne Maus zuverlässig finden (§10).
+          */}
+          <Link
+            href='/'
+            className='transition hover:text-white'>
+            Auswahlseite
+          </Link>
           <Link
             href='/nlp/datenschutz'
             className='transition hover:text-white'>

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Menu, Moon, Sun, X } from 'lucide-react';
+import { ChevronDown, Menu, Moon, Sun, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { PrimaryButton } from '@/app/nlp/components/Buttons';
@@ -36,14 +36,43 @@ type NlpHeaderProps = {
 
 type NavItem = { label: string; section?: string; href?: string };
 
-const navItems: NavItem[] = [
-  { label: 'Hauptseite', href: '/' },
-  { label: 'Über mich', section: 'ueber' },
-  { label: 'Wissenschaft', href: '/nlp/wissenschaft' },
-  { label: '20 Regeln', href: '/nlp/regeln/gluecklichsein' },
-  { label: 'Typentest', href: '/nlp/persoenlichkeitstest' },
+/**
+ * Anker vor dem Aufklapp-Menü.
+ *
+ * Die Leiste trennt jetzt zwei Arten von Zielen, die vorher vermischt waren:
+ * Anker scrollen auf der NLP-Startseite, eigene Seiten liegen im Menü
+ * „Entdecken". Ein Klick tut dadurch immer das, was der Nutzer erwartet.
+ */
+const navBefore: NavItem[] = [{ label: 'Über mich', section: 'ueber' }];
+
+/** Anker nach dem Aufklapp-Menü. */
+const navAfter: NavItem[] = [
   { label: 'Preise', section: 'preise' },
   { label: 'Kontakt', section: 'kontakt' },
+];
+
+/**
+ * Eigene Seiten, gebündelt hinter einem Punkt.
+ *
+ * Flach waren es zuletzt sieben Punkte — genau die Menge, an der die Leiste
+ * schon einmal umgebrochen ist. Jede weitere Inhaltsseite kommt hier dazu,
+ * nicht in die Hauptleiste.
+ */
+const discoverItems: { label: string; href: string; hint: string; match?: string }[] = [
+  {
+    label: 'Persönlichkeitstest',
+    href: '/nlp/persoenlichkeitstest',
+    hint: '18 Fragen, Auswertung sofort',
+  },
+  { label: 'Warum NLP wirkt', href: '/nlp/wissenschaft', hint: 'Der Forschungsstand 2026' },
+  {
+    label: '20 Regeln fürs Glücklichsein',
+    href: '/nlp/regeln/gluecklichsein',
+    // Beide Regelseiten zählen als dasselbe Ziel – sonst gilt das Menü auf
+    // der Umkehrung als inaktiv, obwohl man mitten darin steht.
+    match: '/nlp/regeln',
+    hint: 'Und die ironische Umkehrung',
+  },
 ];
 
 /** Abschnitte, die für die aktive Markierung beobachtet werden. */
@@ -62,8 +91,11 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
   // Browser, ohne beim Mounten einen zusätzlichen Render auszulösen.
   const isScrolled = useSyncExternalStore(subscribeToScroll, () => window.scrollY > 24, () => false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const discoverRef = useRef<HTMLDivElement>(null);
+  const discoverButtonRef = useRef<HTMLButtonElement>(null);
 
   const pathname = usePathname();
   const router = useRouter();
@@ -127,6 +159,31 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
     };
   }, [isMenuOpen]);
 
+  // --- Aufklapp-Menü: Escape mit Fokus-Rückgabe, Klick nach außen ----------
+  // Bewusst kein useModal: Das ist kein Dialog, sondern ein Menü. Eine
+  // Fokus-Falle wäre hier falsch — Tab muss aus der Liste heraus in den Rest
+  // der Kopfzeile führen können.
+  useEffect(() => {
+    if (!isDiscoverOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsDiscoverOpen(false);
+        discoverButtonRef.current?.focus();
+      }
+    };
+    const onPointerDown = (event: MouseEvent) => {
+      if (!discoverRef.current?.contains(event.target as Node)) setIsDiscoverOpen(false);
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('mousedown', onPointerDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('mousedown', onPointerDown);
+    };
+  }, [isDiscoverOpen]);
+
   // Menü beim Routenwechsel schließen. Bewusst während des Renders statt im
   // Effekt – das ist Reacts empfohlenes Muster zum Zurücksetzen von State bei
   // geänderten Eingaben und erspart einen zusätzlichen Renderdurchlauf.
@@ -134,6 +191,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
   if (lastPath !== pathname) {
     setLastPath(pathname);
     setIsMenuOpen(false);
+    setIsDiscoverOpen(false);
   }
 
   const handleContactClick = () => {
@@ -159,6 +217,41 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
         ? 'text-(--text) bg-surface-strong'
         : 'text-(--muted) hover:text-(--text) hover:bg-surface',
     ].join(' ');
+
+  const isDiscoverActive = discoverItems.some((item) =>
+    pathname.startsWith(item.match ?? item.href),
+  );
+
+  const renderMobileLink = (item: NavItem) => (
+    <Link
+      key={item.label}
+      href={item.href ?? sectionHref(item.section as string)}
+      onClick={() => setIsMenuOpen(false)}
+      aria-current={isActive(item) ? 'page' : undefined}
+      className={`rounded-xl px-4 py-3 text-sm font-semibold transition ${
+        isActive(item)
+          ? 'bg-surface text-(--text)'
+          : 'text-(--muted) hover:bg-surface hover:text-(--text)'
+      }`}>
+      {item.label}
+    </Link>
+  );
+
+  const renderNavLink = (item: NavItem) => (
+    <Link
+      key={item.label}
+      href={item.href ?? sectionHref(item.section as string)}
+      aria-current={isActive(item) ? 'page' : undefined}
+      className={linkClass(item)}>
+      {item.label}
+      {isActive(item) && (
+        <span
+          aria-hidden='true'
+          className='absolute inset-x-3 -bottom-0.5 h-px bg-linear-to-r from-accent to-accent-2'
+        />
+      )}
+    </Link>
+  );
 
   return (
     <header
@@ -204,21 +297,80 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
         <nav
           aria-label='Hauptnavigation'
           className='mx-auto hidden items-center text-sm font-semibold hdr:flex hdr:gap-0.5 xl:gap-2'>
-          {navItems.map((item) => (
+          {/*
+            „Start" nur auf Unterseiten. Auf /nlp selbst wäre es ein Link auf
+            die Seite, auf der man bereits steht — und nie als aktiv markiert,
+            weil es ein Weg zurück ist, kein Ort.
+          */}
+          {!isNlpLanding && (
             <Link
-              key={item.label}
-              href={item.href ?? sectionHref(item.section as string)}
-              aria-current={isActive(item) ? 'page' : undefined}
-              className={linkClass(item)}>
-              {item.label}
-              {isActive(item) && (
+              href='/nlp'
+              className={linkClass({ label: 'Start' })}>
+              Start
+            </Link>
+          )}
+
+          {navBefore.map(renderNavLink)}
+
+          {/* Aufklapp-Menü für die eigenen Seiten */}
+          <div
+            ref={discoverRef}
+            className='relative'>
+            <button
+              ref={discoverButtonRef}
+              type='button'
+              onClick={() => setIsDiscoverOpen((prev) => !prev)}
+              aria-expanded={isDiscoverOpen}
+              aria-controls='nlp-discover'
+              className={`${linkClass({ label: 'Entdecken' })} inline-flex cursor-pointer items-center gap-1 ${
+                isDiscoverActive ? 'text-(--text) bg-surface-strong' : ''
+              }`}>
+              Entdecken
+              <ChevronDown
+                aria-hidden='true'
+                className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                  isDiscoverOpen ? 'rotate-180' : ''
+                }`}
+              />
+              {isDiscoverActive && (
                 <span
                   aria-hidden='true'
                   className='absolute inset-x-3 -bottom-0.5 h-px bg-linear-to-r from-accent to-accent-2'
                 />
               )}
-            </Link>
-          ))}
+            </button>
+
+            <div
+              id='nlp-discover'
+              hidden={!isDiscoverOpen}
+              className='absolute left-1/2 top-full z-50 mt-3 w-80 -translate-x-1/2 rounded-2xl border border-border bg-surface-strong p-2 shadow-[0_24px_70px_var(--glow)] backdrop-blur-xl'>
+              <ul>
+                {discoverItems.map((item) => {
+                  const active = pathname.startsWith(item.match ?? item.href);
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsDiscoverOpen(false)}
+                        aria-current={active ? 'page' : undefined}
+                        className={`block rounded-xl px-4 py-3 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                          active ? 'bg-surface text-(--text)' : 'hover:bg-surface'
+                        }`}>
+                        <span className='block text-sm font-semibold text-(--text)'>
+                          {item.label}
+                        </span>
+                        <span className='mt-0.5 block text-xs font-normal text-(--muted)'>
+                          {item.hint}
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+
+          {navAfter.map(renderNavLink)}
         </nav>
 
         {/* Aktionen */}
@@ -262,23 +414,51 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
         hidden={!isMenuOpen}
         className='hdr:hidden'>
         <div className='mx-4 mb-4 rounded-2xl border border-border bg-surface-strong p-3 shadow-[0_20px_60px_var(--glow)] backdrop-blur-xl'>
+          {/*
+            Mobil bleibt „Entdecken" aufgeklappt: Platz ist hier kein Problem,
+            und ein zweites Aufklappen innerhalb eines Aufklapp-Panels wäre
+            eine Ebene zu viel.
+          */}
           <nav
             aria-label='Hauptnavigation (mobil)'
             className='flex flex-col'>
-            {navItems.map((item) => (
+            {!isNlpLanding && (
               <Link
-                key={item.label}
-                href={item.href ?? sectionHref(item.section as string)}
+                href='/nlp'
                 onClick={() => setIsMenuOpen(false)}
-                aria-current={isActive(item) ? 'page' : undefined}
-                className={`rounded-xl px-4 py-3 text-sm font-semibold transition ${
-                  isActive(item)
-                    ? 'bg-surface text-(--text)'
-                    : 'text-(--muted) hover:bg-surface hover:text-(--text)'
-                }`}>
-                {item.label}
+                className='rounded-xl px-4 py-3 text-sm font-semibold text-(--muted) transition hover:bg-surface hover:text-(--text)'>
+                Start
               </Link>
-            ))}
+            )}
+
+            {navBefore.map(renderMobileLink)}
+
+            <p className='px-4 pt-4 pb-1 text-xs uppercase tracking-[0.2em] text-(--muted)'>
+              Entdecken
+            </p>
+            {discoverItems.map((item) => {
+              const active = pathname.startsWith(item.match ?? item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-current={active ? 'page' : undefined}
+                  className={`rounded-xl px-4 py-3 transition ${
+                    active ? 'bg-surface' : 'hover:bg-surface'
+                  }`}>
+                  <span className='block text-sm font-semibold text-(--text)'>{item.label}</span>
+                  <span className='mt-0.5 block text-xs text-(--muted)'>{item.hint}</span>
+                </Link>
+              );
+            })}
+
+            <span
+              aria-hidden='true'
+              className='my-2 h-px bg-border'
+            />
+
+            {navAfter.map(renderMobileLink)}
           </nav>
 
           <div className='mt-3 border-t border-border pt-3'>
