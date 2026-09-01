@@ -56,6 +56,16 @@ und Führungskräfte, Keynotes. Vor Ort in ${OWNER.city} und Berlin oder online.
 Zertifizierungen: DVNLP (Deutscher Verband für Neuro-Linguistisches Programmieren),
 Ausbildung bei Ronny Rohde (Best Life NLP).
 
+Wissenschaftliche Einordnung: NLP als geschlossenes Theoriegebäude ist nicht
+umfassend empirisch bestätigt. Belegt sind dagegen viele der zugrunde liegenden
+psychologischen Wirkmechanismen — Reframing entspricht der kognitiven
+Neubewertung (Cognitive Reappraisal), Perspektivwechsel dem Self-Distancing,
+Zielarbeit dem Goal Setting, Ressourcenaktivierung der Selbstwirksamkeit.
+Nicht gestützt sind Augenbewegungen als Hinweis auf Sinneskanäle, feste
+sensorische Repräsentationstypen und Rapport durch bewusstes Spiegeln.
+Quelle: DVNLP-Whitepaper „Wissenschaftliche Grundlagen wirksamer
+NLP-Interventionen" (Schmidt-Tanger, 08/2026).
+
 Haltung (eigene Aussage von ${OWNER.name}): NLP ist für ihn weit mehr als eine
 Sammlung von Techniken, sondern eine positive Haltung zum Leben — bewusst
 wahrnehmen statt vorschnell urteilen, wählen statt nur reagieren, Verantwortung
@@ -96,6 +106,9 @@ Kundenportal Intralogistik (Launch 03/2026).
 - [Startseite](${SITE_URL}): Auswahl zwischen beiden Geschäftsbereichen
 - [NLP Coaching](${absoluteUrl('/nlp')}): Angebot, Programme, Preise, Kontakt
 - [Webentwicklung](${absoluteUrl('/webdevelopment')}): Leistungen, Technologien, Referenzen, Kontakt
+- [Warum NLP wirkt – Forschungsstand](${absoluteUrl('/nlp/wissenschaft')}): Zusammenfassung des
+  DVNLP-Whitepapers 2026 zur empirischen Evidenz, inklusive der Annahmen, die die Forschung
+  nicht stützt
 - [20 Regeln für erfolgreiches Glücklichsein](${absoluteUrl('/nlp/regeln/gluecklichsein')})
 - [20 Regeln für erfolgreiches Unglücklichsein](${absoluteUrl('/nlp/regeln/ungluecklichsein')}) – ironische Umkehrung, keine Empfehlung
 - [Impressum Coaching](${absoluteUrl('/nlp/impressum')})

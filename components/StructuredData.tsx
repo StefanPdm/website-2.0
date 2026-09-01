@@ -166,6 +166,68 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
 
 // ---------------------------------------------------------------------------
 
+/**
+ * Forschungsstand-Seite.
+ *
+ * `Article` mit `citation` auf das DVNLP-Whitepaper: Für Sprachmodelle ist
+ * eine benannte, verlinkte Quelle der Unterschied zwischen einer Behauptung
+ * und einer zitierfähigen Aussage. `about` grenzt das Thema ein, damit die
+ * Seite bei Fragen nach der Wissenschaftlichkeit von NLP gefunden wird.
+ */
+export function WhitepaperStructuredData() {
+  const url = absoluteUrl('/nlp/wissenschaft');
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Article',
+            '@id': `${url}#article`,
+            headline: 'Warum NLP wirkt — und wo die Belege enden',
+            description:
+              'Zusammenfassung des DVNLP-Whitepapers zur empirischen Evidenz psychologischer Wirkmechanismen im NLP (2016–2026), inklusive der Annahmen, die die Forschung nicht stützt.',
+            url,
+            inLanguage: 'de-DE',
+            author: { '@id': PERSON_ID },
+            publisher: { '@id': PERSON_ID },
+            isAccessibleForFree: true,
+            about: [
+              { '@type': 'Thing', name: 'Neuro-Linguistisches Programmieren' },
+              { '@type': 'Thing', name: 'Wirksamkeitsforschung' },
+            ],
+            citation: {
+              '@type': 'ScholarlyArticle',
+              name: 'Wissenschaftliche Grundlagen wirksamer NLP-Interventionen',
+              author: {
+                '@type': 'Person',
+                name: 'Martina Schmidt-Tanger',
+              },
+              publisher: {
+                '@type': 'Organization',
+                name: 'DVNLP – Deutscher Verband für Neuro-Linguistisches Programmieren e. V.',
+                url: 'https://www.dvnlp.de/',
+              },
+              datePublished: '2026-08',
+              url: 'https://www.dvnlp.de/ueber-nlp/nlp',
+            },
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
+              { '@type': 'ListItem', position: 2, name: 'NLP Coaching', item: absoluteUrl('/nlp') },
+              { '@type': 'ListItem', position: 3, name: 'Forschungsstand', item: url },
+            ],
+          },
+        ],
+      }}
+    />
+  );
+}
+
+// ---------------------------------------------------------------------------
+
 type FaqInput = { question: string; answer: string };
 
 /**

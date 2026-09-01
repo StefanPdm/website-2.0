@@ -4,6 +4,12 @@ import { useState } from 'react';
 
 import GlassCard from '@/components/GlassCard';
 import { useModal } from '@/components/useModal';
+import { MotifClarity, MotifEvidence } from '@/app/nlp/components/Motifs';
+import { PrimaryButton } from '@/app/nlp/components/Buttons';
+import { mechanisms } from '@/app/nlp/wissenschaft/data';
+
+/** Die fünf am besten belegten Mechanismen – als Beleg statt bloßer Behauptung. */
+const topMechanisms = mechanisms.filter((m) => m.rating === 5).slice(0, 5);
 
 export default function NlpIntroSection() {
   const [nlpModal, setNlpModal] = useState<null | 'mastery' | 'change' | 'goals'>(null);
@@ -92,13 +98,20 @@ export default function NlpIntroSection() {
             Akzentkante statt Icon. Der Abschnitt beantwortet das „Warum",
             nicht das „Was".
           */}
-          <div className='mx-auto mt-16 w-full max-w-3xl'>
-            <GlassCard className='relative overflow-hidden p-7 sm:p-9'>
+          <div className='mx-auto mt-16 grid w-full max-w-6xl gap-6 lg:grid-cols-2'>
+            <GlassCard className='relative flex h-full flex-col overflow-hidden p-7 sm:p-9'>
               <span
                 aria-hidden='true'
                 className='absolute inset-y-0 left-0 w-1 bg-linear-to-b from-accent to-accent-2'
               />
-              <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Persönlich</p>
+              {/*
+                Motiv als Hintergrund, angeschnitten und sehr zurückgenommen.
+                Es soll die Karte tragen, nicht mit dem Text konkurrieren.
+              */}
+              <MotifClarity className='pointer-events-none absolute -right-16 -top-16 h-64 w-64 opacity-[0.13]' />
+              <p className='relative text-xs uppercase tracking-[0.3em] text-accent-soft'>
+                Persönlich
+              </p>
               <h3 className='mt-4 text-2xl font-semibold text-(--text) sm:text-3xl'>
                 Was NLP für mich ganz persönlich bedeutet
               </h3>
@@ -125,6 +138,71 @@ export default function NlpIntroSection() {
                   sondern zu einer Einladung, zu wachsen, neue Möglichkeiten zu entdecken und mein
                   Leben selbstbestimmt zu gestalten.
                 </p>
+              </div>
+            </GlassCard>
+
+            {/*
+              Gegenstück zur persönlichen Haltung: die belegbare Seite.
+              Zusammen beantworten die beiden Karten „Warum ich?" und
+              „Warum überhaupt?" — Haltung und Evidenz nebeneinander, ohne
+              dass eines das andere ersetzen muss.
+            */}
+            <GlassCard className='relative flex h-full flex-col overflow-hidden p-7 sm:p-9'>
+              <span
+                aria-hidden='true'
+                className='absolute inset-y-0 left-0 w-1 bg-linear-to-b from-accent-2 to-accent'
+              />
+              <MotifEvidence className='pointer-events-none absolute -right-14 -top-14 h-64 w-64 opacity-[0.15]' />
+              <p className='relative text-xs uppercase tracking-[0.3em] text-accent-soft'>
+                Wissenschaft
+              </p>
+              <h3 className='mt-4 text-2xl font-semibold text-(--text) sm:text-3xl'>
+                Warum NLP wirkt
+              </h3>
+              <div className='mt-6 space-y-5 text-(--muted)'>
+                <p className='text-base leading-relaxed sm:text-lg'>
+                  NLP als geschlossenes Theoriegebäude ist wissenschaftlich nicht bestätigt. Die
+                  psychologischen Mechanismen dahinter sind es weitgehend schon.
+                </p>
+                <p className='text-sm leading-relaxed sm:text-base'>
+                  Der DVNLP hat 2026 den Forschungsstand von 2016 bis 2026 ausgewertet. Das
+                  Ergebnis: Was im NLP Reframing heißt, erforscht die Psychologie als kognitive
+                  Neubewertung — einer der am besten replizierten Befunde der affektiven
+                  Neurowissenschaft. Perspektivwechsel, Zielarbeit und Ressourcenaktivierung stehen
+                  ähnlich solide da.
+                </p>
+                <p className='text-sm leading-relaxed sm:text-base'>
+                  Ebenso klar ist, was die Forschung <em>nicht</em> stützt: Augenbewegungen als
+                  Hinweis auf Sinneskanäle, feste „Wahrnehmungstypen“, Rapport durch bewusstes
+                  Spiegeln. Diese Annahmen gehören überarbeitet, nicht verteidigt.
+                </p>
+                <p className='text-sm leading-relaxed sm:text-base'>
+                  Genau deshalb arbeite ich mit dem, was trägt — und sage offen, wo die Belege
+                  enden.
+                </p>
+              </div>
+
+              {/* Evidenzleiste als kompakter Beleg statt bloßer Behauptung */}
+              <ul className='relative mt-7 space-y-2 border-t border-border pt-5'>
+                {topMechanisms.map((item) => (
+                  <li
+                    key={item.nlp}
+                    className='flex items-baseline justify-between gap-3 text-xs'>
+                    <span className='text-(--text)'>{item.nlp}</span>
+                    <span
+                      className='shrink-0 tracking-[0.2em] text-accent'
+                      aria-label={`Evidenz ${item.rating} von 5`}>
+                      <span aria-hidden='true'>
+                        {'★'.repeat(item.rating)}
+                        {'☆'.repeat(5 - item.rating)}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className='relative mt-auto flex flex-wrap gap-3 pt-7'>
+                <PrimaryButton href='/nlp/wissenschaft'>Forschungsstand ansehen</PrimaryButton>
               </div>
             </GlassCard>
           </div>

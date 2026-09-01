@@ -37,6 +37,12 @@ const pages: Page[] = [
 
   // Inhaltsseiten
   {
+    path: '/nlp/wissenschaft',
+    lastModified: '2026-09-01',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+  },
+  {
     path: '/nlp/regeln/gluecklichsein',
     lastModified: '2026-09-01',
     priority: 0.7,

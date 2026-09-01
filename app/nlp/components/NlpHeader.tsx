@@ -39,6 +39,7 @@ type NavItem = { label: string; section?: string; href?: string };
 const navItems: NavItem[] = [
   { label: 'Hauptseite', href: '/' },
   { label: 'Über mich', section: 'ueber' },
+  { label: 'Wissenschaft', href: '/nlp/wissenschaft' },
   { label: '20 Regeln', href: '/nlp/regeln/gluecklichsein' },
   { label: 'Programme', section: 'programme' },
   { label: 'Preise', section: 'preise' },
