@@ -10,6 +10,11 @@ type Props = {
   video?: string; // optional: show a video instead of image
   href?: string;
   cta?: string;
+  /** Ein Satz: was gebaut wurde. Sichtbar und identisch mit dem Schema. */
+  description?: string;
+  tech?: string[];
+  /** Messbares Ergebnis, im Beweis-Grün hervorgehoben. */
+  result?: string;
 };
 
 export default function CaseCard({
@@ -19,6 +24,9 @@ export default function CaseCard({
   video,
   href,
   cta = 'Nicht öffentlich',
+  description,
+  tech,
+  result,
 }: Props) {
   const isExternal = typeof href === 'string' && /^https?:\/\//i.test(href);
   const isRemoteImage = typeof image === 'string' && /^https?:\/\//i.test(image);
@@ -163,6 +171,33 @@ export default function CaseCard({
           </div>
         )}
       </div>
+      {description ? (
+        <p className='mx-auto mt-4 w-full text-sm leading-relaxed text-slate-300 md:w-[80%]'>
+          {description}
+        </p>
+      ) : null}
+      {result ? (
+        <p className='mx-auto mt-3 flex w-full items-start gap-2 text-sm font-medium text-white md:w-[80%]'>
+          <span
+            aria-hidden='true'
+            className='mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#86C243]'
+          />
+          {result}
+        </p>
+      ) : null}
+      {tech?.length ? (
+        <ul
+          aria-label='Eingesetzte Technik'
+          className='mx-auto mt-3 flex w-full flex-wrap gap-2 md:w-[80%]'>
+          {tech.map((item) => (
+            <li
+              key={item}
+              className='rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300 ring-1 ring-white/10'>
+              {item}
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 }

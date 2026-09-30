@@ -1,11 +1,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { ComponentType, HTMLAttributes, PropsWithChildren, ReactElement } from 'react';
-import { Boxes, ClipboardCheck, Code2, Search, ShieldCheck, Sparkles } from 'lucide-react';
+import {
+  Boxes,
+  ClipboardCheck,
+  Code2,
+  LayoutTemplate,
+  Search,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-react';
 import {
   SiAngular,
   SiContentful,
   SiDocker,
+  SiElementor,
   SiFirebase,
   SiGraphql,
   SiNodedotjs,
@@ -16,6 +25,7 @@ import {
   SiSupabase,
   SiTailwindcss,
   SiVercel,
+  SiWoocommerce,
   SiWordpress,
 } from 'react-icons/si';
 import {
@@ -39,31 +49,7 @@ import FaqSection from '@/app/webdevelopment/FaqSection';
 import { faqBoth } from '@/app/nlp/faq';
 import { faqWeb } from '@/app/webdevelopment/faq';
 import { VAT_NOTE, webServices } from '@/app/webdevelopment/pricing';
-
-const cases = [
-  {
-    name: 'Linde · TRAFÖ GmbH',
-    url: 'https://trafoe.de',
-    description:
-      'Relaunch 2024 der Website für einen Anbieter aus der Intralogistik – Struktur, Performance und Pflegbarkeit.',
-  },
-  {
-    name: 'Rund um Berlin Rallye',
-    url: 'https://rundumberlin-classic.de',
-    description:
-      'Website für eine Oldtimer-Rallye in Berlin: Termine, Anmeldung und Ergebnisse in klarer Struktur.',
-  },
-  {
-    name: 'Zahnarzt Groß & Groß',
-    url: 'https://www.zahnmedizin-potsdam.de/',
-    description: 'Relaunch der Website einer Zahnarztpraxis in Potsdam, Oktober 2026.',
-  },
-  {
-    name: 'Kundenportal Intralogistik',
-    description:
-      'Web App mit Login-Bereich, Rollen und Dokumentenverwaltung für einen Intralogistik-Kunden. Launch 03/2026.',
-  },
-];
+import { webCases } from '@/app/webdevelopment/cases';
 
 const trustItems = ['Persönlich & direkt', 'Sauberer Code', 'Wartbar & skalierbar'];
 
@@ -92,7 +78,13 @@ const techStack = {
   Frontend: ['Next.js', 'Angular', 'React', 'Tailwind CSS'],
   'Backend & Daten': ['Node.js', 'Prisma', 'REST', 'GraphQL'],
   'Auth & Infrastruktur': ['Clerk', 'Firebase', 'Supabase', 'Vercel', 'Docker', 'Neon (Postgres)'],
-  'CMS & Inhalte': ['Headless CMS', 'WordPress (ACF, CPTs)'],
+  'CMS & Inhalte': [
+    'Headless CMS',
+    'WordPress (ACF, CPTs)',
+    'WooCommerce',
+    'Elementor',
+    'Divi Builder',
+  ],
   Qualität: ['Performance-Optimierung', 'SEO-Basics', 'Wartbarkeit', 'Saubere Übergabe'],
 };
 
@@ -159,6 +151,10 @@ const techIconMap: Record<string, ReactElement> = {
   ),
   'Headless CMS': <SiContentful className='h-4 w-4' />,
   'WordPress (ACF, CPTs)': <SiWordpress className='h-4 w-4' />,
+  WooCommerce: <SiWoocommerce className='h-4 w-4' />,
+  Elementor: <SiElementor className='h-4 w-4' />,
+  // Kein Divi-Logo in react-icons – neutrales Page-Builder-Symbol.
+  'Divi Builder': <LayoutTemplate className='h-4 w-4' />,
   'Performance-Optimierung': <FaGaugeHigh className='h-4 w-4' />,
   'SEO-Basics': <FaMagnifyingGlass className='h-4 w-4' />,
   Wartbarkeit: <FaScrewdriverWrench className='h-4 w-4' />,
@@ -169,7 +165,10 @@ export default function WebdevelopmentPage() {
   return (
     <div className='relative min-h-screen overflow-x-clip bg-[#0B1B2B] text-slate-100'>
       <WebStructuredData
-        cases={cases}
+        cases={webCases.map((entry) => ({
+          ...entry,
+          description: entry.result ? `${entry.description} ${entry.result}.` : entry.description,
+        }))}
         services={webServices}
       />
       <FaqStructuredData entries={[...faqWeb, ...faqBoth]} />
@@ -479,50 +478,32 @@ export default function WebdevelopmentPage() {
             </div>
           </div>
         </section>
-        {/* Cases */}
+        {/* Referenzen */}
         <section
-          id='cases'
+          id='referenzen'
           className='mx-auto max-w-6xl px-4 py-32 min-h-[90vh] flex flex-col justify-center gap-6'>
           <div className='max-w-2xl'>
-            <h2 className='text-3xl font-bold tracking-tight text-white'>Cases</h2>
+            <h2 className='text-3xl font-bold tracking-tight text-white'>Referenzen</h2>
             <p className='mt-3 text-slate-300'>
               Projekte, die (teilweise) nicht öffentlich sind – aber Struktur, Wirkung und Klarheit
               beweisen.
             </p>
           </div>
           <div className='mt-10 grid gap-x-8 gap-y-21 md:grid-cols-2'>
-            <CaseCard
-              title='Linde · TRAFÖ GmbH'
-              status='Relaunch 2024'
-              // image='/case-images-videos/project-trafoe.webp'
-              video='/case-images-videos/trafoe.webm'
-              href='https://trafoe.de'
-              cta='Case ansehen'
-            />
-            <CaseCard
-              title='Rund um Berlin Rallye'
-              status='Abgeschlossen 2026'
-              // image='/case-images-videos/project-rund-um-berlin.webp'
-              video='/case-images-videos/rub.webm'
-              href='https://rundumberlin-classic.de'
-              cta='Case ansehen'
-            />
-            <CaseCard
-              title='Zahnarzt Groß & Groß'
-              status='Relaunch Oktober 2026'
-              image='/case-images-videos/zahnarzt-gross-gross.webp'
-              video='/case-images-videos/zahnarzt-gross-gross.webm'
-              href='https://www.zahnmedizin-potsdam.de/'
-              cta='Case ansehen'
-            />
-            <CaseCard
-              title='Kundenportal Intralogistik'
-              status='Launch 03/2026'
-              video='/case-images-videos/kundenportal.webm'
-              // image='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=900&auto=format&fit=crop'
-              // href='#'
-              // cta='Case ansehen'
-            />
+            {webCases.map((entry) => (
+              <CaseCard
+                key={entry.name}
+                title={entry.name}
+                status={entry.status}
+                description={entry.description}
+                tech={entry.tech}
+                result={entry.result}
+                video={entry.video}
+                image={entry.image}
+                href={entry.url}
+                cta={entry.url ? 'Case ansehen' : undefined}
+              />
+            ))}
           </div>
         </section>
         <FaqSection />

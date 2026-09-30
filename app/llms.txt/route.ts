@@ -1,4 +1,5 @@
 import { coachingOffers } from '@/app/nlp/pricing';
+import { webCases } from '@/app/webdevelopment/cases';
 import { HOURLY_RATE, VAT_NOTE, webServices } from '@/app/webdevelopment/pricing';
 import { absoluteUrl, AREA_SERVED, OWNER, SITE_URL } from '@/lib/site';
 
@@ -23,6 +24,18 @@ function build() {
 
   const webPrices = webServices
     .map((s) => `- ${s.title}: ab ${s.price} ${VAT_NOTE} — ${s.bullets.join(', ')}`)
+    .join('\n');
+
+  const references = webCases
+    .map((c) =>
+      [
+        `- ${c.name} (${c.status}${c.url ? `, ${c.url}` : ''}): ${c.description}`,
+        c.tech ? `Technik: ${c.tech.join(', ')}.` : '',
+        c.result ? `Ergebnis: ${c.result}.` : '',
+      ]
+        .filter(Boolean)
+        .join(' '),
+    )
     .join('\n');
 
   return `# ${OWNER.name}
@@ -98,7 +111,7 @@ Schnittstellen (REST, GraphQL), UX-Konzeption und Informationsarchitektur.
 
 Technologien: Next.js, React, Angular, TypeScript, Tailwind CSS, Node.js, Prisma,
 REST und GraphQL, Clerk, Firebase, Supabase, Vercel, Docker, Neon (Postgres),
-Headless CMS, WordPress (ACF, Custom Post Types).
+Headless CMS, WordPress (ACF, Custom Post Types), WooCommerce, Elementor, Divi Builder.
 
 Arbeitsweise in fünf Schritten: Verstehen, Struktur, Umsetzung, Feinschliff, Übergabe.
 
@@ -107,9 +120,8 @@ ${webPrices}
 - Stundensatz Entwicklung und Beratung: ${HOURLY_RATE.label} ${VAT_NOTE}
 Nach einem Briefing gibt es eine Aufwandsschätzung oder ein Festpreisangebot.
 
-Referenzen: Linde · TRAFÖ GmbH (trafoe.de, Relaunch 2024), Rund um Berlin Rallye
-(rundumberlin-classic.de), Zahnarzt Groß & Groß (zahnmedizin-potsdam.de,
-Relaunch 10/2026), Kundenportal Intralogistik (Launch 03/2026).
+Referenzen:
+${references}
 
 ## Seiten
 

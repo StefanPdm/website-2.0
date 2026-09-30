@@ -816,8 +816,8 @@ OG-Bilder, JSON-LD, `llms.txt`.
 - Das Theme-Umschalten in Welt A überschreibt Tailwind-Klassen per `!important`
   (`.theme-warm .text-white/70` u. a.). Neue Komponenten müssen über die
   CSS-Variablen laufen, damit dieser Block irgendwann sterben kann.
-- `public/` ist weiterhin ~150 MB groß, inklusive `.psd`-Dateien und 9-MB-PNGs
-  für 48px-Avatare (`AUDIT.md` #1).
+- `public/` ist aufgeräumt (Stand 2026-10-01: 8,8 MB, keine Datei außer
+  Case-Videos über 500 KB). Neue Assets weiter nach §12 prüfen.
 - `/webdevelopment` betreibt zwei WebGL-Kontexte plus 9 Canvas-Instanzen
   gleichzeitig, alle statisch importiert (`AUDIT.md` #8).
 - Formular-Labels ohne `htmlFor`, Modals ohne Fokus-Falle (`AUDIT.md` #5, #6).

@@ -22,8 +22,8 @@ const items = [
     bgColor: '#ffffff0d',
     textColor: '#fff',
     links: [
-      { label: 'Cases', ariaLabel: 'Zu Cases', href: '#cases' },
-      { label: 'Kontaktformular', ariaLabel: 'Zum Kontakt', href: '#kontakt' },
+      { label: 'Referenzen', ariaLabel: 'Zu den Referenzen', href: '/webdevelopment#referenzen' },
+      { label: 'Kontaktformular', ariaLabel: 'Zum Kontakt', href: '/webdevelopment#kontakt' },
       { label: 'Zurück zur Hauptseite', ariaLabel: 'Zurück zur Hauptseite', href: '/' },
     ],
   },
