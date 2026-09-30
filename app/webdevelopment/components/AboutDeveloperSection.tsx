@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 /**
  * „Wer baut das?" – die Person hinter Welt B.
@@ -173,6 +174,21 @@ export default function AboutDeveloperSection() {
           </span>
         </p>
       </blockquote>
+
+      {/*
+        Brücke in Welt A (CLAUDE.md §10: Weltenwechsel ist Alleinstellungsmerkmal).
+        Bewusst nur eine Textzeile – die Primäraktion der Seite bleibt
+        „Projekt anfragen". Der Linktext trägt Leistung + Ort für die Suche.
+      */}
+      <p className='mx-auto mt-12 max-w-2xl text-center text-sm leading-relaxed text-slate-300'>
+        Übrigens: Ich bin auch NLP Coach. Für Unternehmer, die vor lauter Projekten den Kopf nicht
+        frei bekommen.{' '}
+        <Link
+          href='/nlp'
+          className='inline-flex min-h-11 items-center gap-1 rounded-lg font-semibold text-accent-web underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
+          → NLP Coaching in Potsdam
+        </Link>
+      </p>
     </section>
   );
 }

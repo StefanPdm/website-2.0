@@ -699,6 +699,11 @@ sonst Zwischenablage) und verlinkt auf die öffentliche Typseite — Punktwerte
 verlassen nie den Browser. Slugs stehen allein in `typeSlugs` (`data.ts`); die
 Typbeschreibung rendert `TypeProfile.tsx` für Ergebnis und Typseite gemeinsam.
 
+**Testmodus:** `/nlp/persoenlichkeitstest?testmodus` (Parameter von Hand an die
+Adresse hängen). Zeigt in der Testkarte drei Knöpfe „Beziehung/Erkennen/Handeln → Frage 18", die
+Fragen 1–17 vorbelegen – zum Prüfen von Ergebnis und Teilen-Link. Bewusst auch
+live aktiv, weil die Web Share API auf dem Handy nur über HTTPS läuft.
+
 Alle Graphen verweisen über `@id` auf **dieselbe** Person — das ist die
 Voraussetzung dafür, dass Google beide Geschäftsbereiche einer Entität zuordnet
 statt zwei unabhängige Anbieter zu sehen.

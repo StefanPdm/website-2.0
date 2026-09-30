@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import GlassCard from '@/components/GlassCard';
 import { useModal } from '@/components/useModal';
@@ -122,6 +123,16 @@ export default function AboutSection() {
                   </span>
                 ))}
               </div>
+
+              {/* Brücke in Welt B – Gegenstück zum Hinweis auf /webdevelopment (§10) */}
+              <p className='mt-6 text-sm leading-relaxed text-(--muted)'>
+                Übrigens: Ich entwickle auch Websites, Online-Shops und Kundenportale.{' '}
+                <Link
+                  href='/webdevelopment'
+                  className='inline-flex min-h-11 items-center gap-1 rounded-lg font-semibold text-accent-soft underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+                  → Webentwicklung in Potsdam
+                </Link>
+              </p>
 
               <div className='mt-8 grid gap-4 sm:grid-cols-2'>
                 {[
