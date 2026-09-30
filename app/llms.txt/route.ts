@@ -143,6 +143,9 @@ ${references}
   Selbsttest mit 18 Fragen nach Dietmar Friedmann — Beziehungstyp, Sachtyp oder Handlungstyp.
   Kein validiertes Testverfahren, ausdrücklich zur Selbstreflexion
 ${typePages}
+- [Deine Formel zum Glück – S² + L + A + C³](${absoluteUrl('/nlp/formel-zum-glueck')}): die
+  S-L-A-C-Formel aus dem Coaching in sieben Schritten – Stop, Smile, Look, Accept, Challenge,
+  Choices (mindestens drei Wahlmöglichkeiten), Choose
 - [20 Regeln für erfolgreiches Glücklichsein](${absoluteUrl('/nlp/regeln/gluecklichsein')})
 - [20 Regeln für erfolgreiches Unglücklichsein](${absoluteUrl('/nlp/regeln/ungluecklichsein')}) – ironische Umkehrung, keine Empfehlung
 - [Impressum Coaching](${absoluteUrl('/nlp/impressum')})

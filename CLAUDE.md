@@ -16,6 +16,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
 │   └── /impressum  /datenschutz  /cookies
 └── /nlp                   Welt A — NLP Coaching              (Marke: NLP Coaching)
     ├── /wissenschaft      Inhaltsseite: Forschungsstand (DVNLP-Whitepaper)  → Article + citation
+    ├── /formel-zum-glueck Inhaltsseite: S-L-A-C-Formel (S² + L + A + C³)    → HowTo
     ├── /persoenlichkeitstest  Selbsttest Psychografie (18 Fragen, Client-Auswertung)
     │   └── /beziehungstyp  /sachtyp  /handlungstyp   Typseiten = Ziel des Teilen-Links
     ├── /regeln/gluecklichsein  /regeln/ungluecklichsein   20-Regeln-Listen → ItemList
@@ -287,7 +288,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `NlpFooter` | Rechtslinks + Weltenwechsel |
 | `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
 | `Motifs` | Dekor-SVGs (§3.2) |
-| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx`: Hero → Intro („Was ist NLP?") → Work → Transformation → Persönlichkeitstest → Fulfilment → Preise → Leitfaden → Über mich → FAQ → Kontakt |
+| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx`: Hero → Intro („Was ist NLP?") → Work → Transformation → Persönlichkeitstest → Fulfilment → **Formel** (Teaser, `FormulaSection`) → Preise → Leitfaden → Über mich → FAQ → Kontakt |
 
 Hinweis: `NlpSections.tsx` ist `'use client'` (wegen `useNlpTheme`). Alles, was es
 importiert, wird damit ebenfalls Client-Code — auch Sektionen ohne `'use client'`.
@@ -483,6 +484,18 @@ Drei Punkte, die dabei nicht verhandelbar sind:
    Nutzer sonst ein Loch. Ein CSS-Verlauf in denselben Markenfarben genügt.
 3. **Ein aktiver WebGL-Kontext pro Viewport.** Zwei Effekte dürfen sich nicht
    überlappen — das war der Zustand, der `/webdevelopment` mobil ausgebremst hat.
+4. **Kein WebGL ohne `LazyEffect`.** Die Hülle prüft, ob der Browser überhaupt
+   einen WebGL-Kontext erzeugen kann, und fängt Abstürze des Effekts per
+   Fehlergrenze ab. Ohne sie warf three.js „Error creating WebGL context" und
+   React räumte die ganze Seite ab (weißer Bildschirm auf `/nlp`, gefunden
+   2026-10-01). Soll ein Effekt auch mobil laufen: `minWidth={0}`.
+   Reine Canvas-2D-Effekte: `requiresWebGL={false}`.
+
+**Animationen ohne WebGL:** Scroll-Einblendungen per CSS (`animation-timeline: view()`
+unter `@supports` und `prefers-reduced-motion: no-preference`) statt
+IntersectionObserver-JavaScript — Vorlage `.formel-reveal` in `globals.css`.
+Ohne Unterstützung ist der Inhalt einfach sofort sichtbar. SVG-Teile, die
+skaliert oder verschoben werden, brauchen `transform-box: fill-box`.
 
 **Videos** (Muster: `components/CaseCard.tsx`): kein `src` im Markup, `preload='none'`,
 `poster` gesetzt. Quelle und `play()` erst über einen `IntersectionObserver`,
@@ -691,6 +704,7 @@ Components (damit es auch ohne JavaScript im HTML steht):
 | `/nlp` + `/webdevelopment` | zusätzlich `FAQPage` (aus `faq.ts` + `faqBoth`) |
 | `/nlp/wissenschaft` | `Article` mit `citation` (DVNLP-Whitepaper) + `BreadcrumbList` |
 | `/nlp/regeln/*` | `Article` + `ItemList` (20 Regeln) + `BreadcrumbList` |
+| `/nlp/formel-zum-glueck` | `HowTo` (7 Schritte aus `data.ts`) + `BreadcrumbList` |
 | `/nlp/persoenlichkeitstest` | `WebApplication` (kostenlos, Disclaimer in `description`) + `BreadcrumbList` |
 | `/nlp/persoenlichkeitstest/<typ>` | `Article` (`isPartOf` → Test) + `BreadcrumbList`, eigenes OG-Bild je Typ |
 

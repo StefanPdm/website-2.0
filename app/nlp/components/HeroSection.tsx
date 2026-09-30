@@ -4,6 +4,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 import GlassCard from '@/components/GlassCard';
+import LazyEffect from '@/components/LazyEffect';
 import { PrimaryButton, SecondaryButton } from '@/app/nlp/components/Buttons';
 
 const FloatingLines = dynamic(() => import('@/components/FloatingLines'), { ssr: false });
@@ -82,33 +83,43 @@ export default function HeroSection({ isWarmTheme }: HeroSectionProps) {
       </div>
       {isWarmTheme ? (
         <div className='absolute inset-0 -z-10 bg-[#ff9e13c7]'>
-          <FloatingLines
-            linesGradient={['#f1c38a', '#fff']}
-            animationSpeed={0.4}
-            interactive
-            bendRadius={15}
-            bendStrength={1.2}
-            mouseDamping={0.01}
-            topWavePosition={{ x: 10, y: 0.6, rotate: -0.35 }}
-            middleWavePosition={{ x: 5, y: 0.0, rotate: 0.2 }}
-            parallax={false}
-            parallaxStrength={0}
-          />
+          {/* LazyEffect: WebGL-Prüfung + Fehlergrenze. minWidth 0 – läuft wie bisher auch mobil. */}
+          <LazyEffect
+            className='h-full w-full'
+            minWidth={0}>
+            <FloatingLines
+              linesGradient={['#f1c38a', '#fff']}
+              animationSpeed={0.4}
+              interactive
+              bendRadius={15}
+              bendStrength={1.2}
+              mouseDamping={0.01}
+              topWavePosition={{ x: 10, y: 0.6, rotate: -0.35 }}
+              middleWavePosition={{ x: 5, y: 0.0, rotate: 0.2 }}
+              parallax={false}
+              parallaxStrength={0}
+            />
+          </LazyEffect>
         </div>
       ) : (
         <div className='absolute inset-0 -z-10'>
-          <FloatingLines
-            linesGradient={['#050b12', '#47f5d8']}
-            animationSpeed={0.4}
-            interactive
-            bendRadius={15}
-            bendStrength={1.2}
-            mouseDamping={0.01}
-            topWavePosition={{ x: 10, y: 0.6, rotate: -0.35 }}
-            middleWavePosition={{ x: 5, y: 0.0, rotate: 0.2 }}
-            parallax={false}
-            parallaxStrength={0}
-          />
+          {/* LazyEffect: WebGL-Prüfung + Fehlergrenze. minWidth 0 – läuft wie bisher auch mobil. */}
+          <LazyEffect
+            className='h-full w-full'
+            minWidth={0}>
+            <FloatingLines
+              linesGradient={['#050b12', '#47f5d8']}
+              animationSpeed={0.4}
+              interactive
+              bendRadius={15}
+              bendStrength={1.2}
+              mouseDamping={0.01}
+              topWavePosition={{ x: 10, y: 0.6, rotate: -0.35 }}
+              middleWavePosition={{ x: 5, y: 0.0, rotate: 0.2 }}
+              parallax={false}
+              parallaxStrength={0}
+            />
+          </LazyEffect>
         </div>
       )}
     </section>

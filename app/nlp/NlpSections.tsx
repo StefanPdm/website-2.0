@@ -8,6 +8,7 @@ import HeroSection from '@/app/nlp/components/HeroSection';
 import NlpIntroSection from '@/app/nlp/components/NlpIntroSection';
 import PersonalityTestSection from '@/app/nlp/components/PersonalityTestSection';
 import FulfilmentSection from '@/app/nlp/components/FulfilmentSection';
+import FormulaSection from '@/app/nlp/components/FormulaSection';
 import TransformationSection from '@/app/nlp/components/TransformationSection';
 import WorkSection from '@/app/nlp/components/WorkSection';
 import PriceTableSection from '@/app/nlp/components/PriceTableSection';
@@ -24,6 +25,7 @@ export default function NlpSections() {
       <TransformationSection isWarmTheme={isWarmTheme} />
       <PersonalityTestSection />
       <FulfilmentSection />
+      <FormulaSection />
       <PriceTableSection />
       <GuideSection />
       <AboutSection />

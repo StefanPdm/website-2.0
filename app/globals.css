@@ -1112,3 +1112,128 @@ html {
 .world-switch-pulse {
   animation: world-switch-pulse 2.8s ease-out infinite;
 }
+
+/*
+ * S-L-A-C-Formel (app/nlp/formel-zum-glueck).
+ *
+ * Nur `transform` und `opacity` (CLAUDE.md §9), alles dekorativ und
+ * `aria-hidden`. SVG-Teile brauchen `transform-box: fill-box`, sonst dreht
+ * und skaliert der Browser um den Ursprung des gesamten SVGs.
+ * Die globale `prefers-reduced-motion`-Regel oben schaltet die Schleifen ab.
+ */
+.formel-svg * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes formel-ripple {
+  0% {
+    transform: scale(0.35);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes formel-rise {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes formel-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes formel-look {
+  0%,
+  100% {
+    transform: translateX(-9px);
+  }
+  45%,
+  55% {
+    transform: translateX(9px);
+  }
+}
+
+@keyframes formel-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes formel-glow {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  30%,
+  60% {
+    opacity: 1;
+  }
+}
+
+@keyframes formel-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.formel-ripple {
+  animation: formel-ripple 6s linear infinite;
+}
+.formel-rise {
+  animation: formel-rise 900ms cubic-bezier(0.22, 0.8, 0.2, 1) both;
+}
+.formel-breathe {
+  animation: formel-breathe 4.5s ease-in-out infinite;
+}
+.formel-look {
+  animation: formel-look 6s ease-in-out infinite;
+}
+.formel-blink {
+  animation: formel-blink 6s ease-in-out infinite;
+}
+.formel-glow {
+  animation: formel-glow 4.5s ease-in-out infinite;
+}
+.formel-float {
+  animation: formel-float 5s ease-in-out infinite;
+}
+
+/*
+ * Einblenden beim Scrollen – reines CSS über scroll-gesteuerte Animationen.
+ * Browser ohne Unterstützung zeigen den Inhalt sofort (kein verstecktes
+ * Element ohne JS). Bei reduzierter Bewegung greift die Regel gar nicht.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .formel-reveal {
+      animation: formel-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}

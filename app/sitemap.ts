@@ -74,6 +74,13 @@ const pages: Page[] = [
     changeFrequency: 'monthly',
   },
   {
+    path: '/nlp/formel-zum-glueck',
+    lastModified: '2026-10-01',
+    published: '2026-10-01',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+  },
+  {
     path: '/nlp/regeln/gluecklichsein',
     lastModified: '2026-09-01',
     published: '2026-09-01',

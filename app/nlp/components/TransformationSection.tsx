@@ -1,7 +1,12 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+
 import GlassCard from '@/components/GlassCard';
-import LaserFlow from '@/components/LaserFlow';
+import LazyEffect from '@/components/LazyEffect';
+
+// Dynamisch statt statisch (CLAUDE.md §9): three.js lädt erst, wenn LazyEffect es freigibt.
+const LaserFlow = dynamic(() => import('@/components/LaserFlow'), { ssr: false });
 
 type TransformationSectionProps = {
   isWarmTheme: boolean;
@@ -20,22 +25,26 @@ export default function TransformationSection({ isWarmTheme }: TransformationSec
       <div className='container mx-auto px-4'>
         <div className='pointer-events-none absolute inset-0 -z-10 top-0 rotate-180 md:rotate-0 md:bottom-0'>
           <div className='absolute inset-0 opacity-90'>
-            <LaserFlow
-              color={isWarmTheme ? '#b97029' : '#79d9f5'}
-              wispDensity={1}
-              flowSpeed={0.35}
-              verticalSizing={1.2}
-              horizontalSizing={0.5}
-              fogIntensity={0.45}
-              fogScale={0.3}
-              wispSpeed={15}
-              wispIntensity={5}
-              flowStrength={0.25}
-              decay={1.1}
-              horizontalBeamOffset={0}
-              verticalBeamOffset={-0.5}
-              falloffStart={0.85}
-            />
+            <LazyEffect
+              className='h-full w-full'
+              minWidth={0}>
+              <LaserFlow
+                color={isWarmTheme ? '#b97029' : '#79d9f5'}
+                wispDensity={1}
+                flowSpeed={0.35}
+                verticalSizing={1.2}
+                horizontalSizing={0.5}
+                fogIntensity={0.45}
+                fogScale={0.3}
+                wispSpeed={15}
+                wispIntensity={5}
+                flowStrength={0.25}
+                decay={1.1}
+                horizontalBeamOffset={0}
+                verticalBeamOffset={-0.5}
+                falloffStart={0.85}
+              />
+            </LazyEffect>
           </div>
         </div>
         <div className='mx-auto max-w-3xl text-center'>

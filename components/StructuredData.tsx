@@ -1,5 +1,12 @@
 import { pageDates } from '@/app/sitemap';
 import {
+  FORMULA_LEAD,
+  FORMULA_PATH,
+  FORMULA_PLAIN,
+  FORMULA_TITLE,
+  howToSteps,
+} from '@/app/nlp/formel-zum-glueck/data';
+import {
   dimensions,
   results,
   typeHref,
@@ -350,6 +357,55 @@ export function PersonalityTypeStructuredData({ dimension }: { dimension: Dimens
                 item: absoluteUrl('/nlp/persoenlichkeitstest'),
               },
               { '@type': 'ListItem', position: 4, name: type, item: url },
+            ],
+          },
+        ],
+      }}
+    />
+  );
+}
+
+// ---------------------------------------------------------------------------
+
+/**
+ * S-L-A-C-Formel: HowTo + Breadcrumb.
+ *
+ * Google zeigt für HowTo keine Rich Results mehr – für Sprachmodelle ist eine
+ * sauber nummerierte Anleitung aber genau die Form, die sie zitieren.
+ */
+export function FormulaStructuredData() {
+  const url = absoluteUrl(FORMULA_PATH);
+  const dates = pageDates(FORMULA_PATH);
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'HowTo',
+            '@id': `${url}#howto`,
+            name: `${FORMULA_TITLE}: ${FORMULA_PLAIN} (S-L-A-C-Formel)`,
+            description: FORMULA_LEAD,
+            url,
+            inLanguage: 'de-DE',
+            datePublished: dates.published,
+            dateModified: dates.modified,
+            author: { '@id': PERSON_ID },
+            publisher: { '@id': PERSON_ID },
+            isAccessibleForFree: true,
+            step: howToSteps.map((step, index) => ({
+              '@type': 'HowToStep',
+              position: index + 1,
+              name: step.name,
+              text: step.text,
+            })),
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
+              { '@type': 'ListItem', position: 2, name: 'NLP Coaching', item: absoluteUrl('/nlp') },
+              { '@type': 'ListItem', position: 3, name: 'Formel zum Glück', item: url },
             ],
           },
         ],

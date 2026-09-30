@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { Component, useEffect, useRef, useState, type ReactNode } from 'react';
 
 /**
  * Rendert einen dekorativen Effekt erst, wenn er sich wirklich lohnt.
@@ -15,6 +15,12 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
  *  2. Das Display ist breit genug – Effekte sind auf Mobil kaum sichtbar,
  *     kosten dort aber am meisten.
  *  3. Der Nutzer hat keine reduzierte Bewegung angefordert.
+ *  4. Der Browser kann überhaupt einen WebGL-Kontext erzeugen.
+ *
+ * Zusätzlich fängt eine Fehlergrenze jeden Absturz des Effekts ab. Vorher
+ * warf three.js ohne WebGL (Firmenrechner mit gesperrter GPU, ältere Geräte,
+ * manche Datenschutz-Browser) „Error creating WebGL context" – und React
+ * hat daraufhin die komplette Seite abgeräumt: weißer Bildschirm statt /nlp.
  *
  * Ist eine Bedingung verletzt, wird `fallback` gerendert (Standard: nichts).
  * Der Effekt selbst kommt als Render-Prop, damit sein Modul erst dann
@@ -32,7 +38,40 @@ type LazyEffectProps = {
   /** Einmal aktiviert, aktiviert lassen (verhindert Flackern beim Scrollen). */
   once?: boolean;
   className?: string;
+  /** Effekt braucht WebGL (Standard). Für reine Canvas-2D-Effekte auf false setzen. */
+  requiresWebGL?: boolean;
 };
+
+let webglSupport: boolean | undefined;
+
+/** Einmal pro Seitenaufruf prüfen, ob ein WebGL-Kontext erzeugt werden kann. */
+function supportsWebGL() {
+  if (webglSupport === undefined) {
+    try {
+      const canvas = document.createElement('canvas');
+      webglSupport = Boolean(canvas.getContext('webgl2') ?? canvas.getContext('webgl'));
+    } catch {
+      webglSupport = false;
+    }
+  }
+  return webglSupport;
+}
+
+/** Fängt Abstürze des Effekts ab und zeigt stattdessen den Fallback. */
+class EffectBoundary extends Component<
+  { children: ReactNode; fallback: ReactNode },
+  { failed: boolean }
+> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render() {
+    return this.state.failed ? this.props.fallback : this.props.children;
+  }
+}
 
 export default function LazyEffect({
   children,
@@ -41,6 +80,7 @@ export default function LazyEffect({
   rootMargin = '300px',
   once = true,
   className,
+  requiresWebGL = true,
 }: LazyEffectProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
@@ -55,7 +95,7 @@ export default function LazyEffect({
     let observer: IntersectionObserver | null = null;
 
     const evaluate = () => {
-      if (reducedMotion.matches || !wideEnough.matches) {
+      if (reducedMotion.matches || !wideEnough.matches || (requiresWebGL && !supportsWebGL())) {
         setActive(false);
         observer?.disconnect();
         observer = null;
@@ -91,13 +131,13 @@ export default function LazyEffect({
       reducedMotion.removeEventListener('change', evaluate);
       wideEnough.removeEventListener('change', evaluate);
     };
-  }, [minWidth, rootMargin, once]);
+  }, [minWidth, rootMargin, once, requiresWebGL]);
 
   return (
     <div
       ref={ref}
       className={className}>
-      {active ? children : fallback}
+      {active ? <EffectBoundary fallback={fallback}>{children}</EffectBoundary> : fallback}
     </div>
   );
 }

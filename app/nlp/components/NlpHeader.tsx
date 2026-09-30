@@ -66,6 +66,11 @@ const discoverItems: { label: string; href: string; hint: string; match?: string
   },
   { label: 'Warum NLP wirkt', href: '/nlp/wissenschaft', hint: 'Der Forschungsstand 2026' },
   {
+    label: 'Formel zum Glück',
+    href: '/nlp/formel-zum-glueck',
+    hint: 'Die S-L-A-C-Formel',
+  },
+  {
     label: '20 Regeln fürs Glücklichsein',
     href: '/nlp/regeln/gluecklichsein',
     // Beide Regelseiten zählen als dasselbe Ziel – sonst gilt das Menü auf
