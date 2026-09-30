@@ -340,10 +340,16 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
               )}
             </button>
 
+            {/*
+              Fast deckender Hintergrund statt bg-surface-strong + backdrop-blur:
+              Die Kopfzeile hat selbst schon backdrop-filter, ein verschachtelter
+              wird vom Browser ignoriert. Mit 10 % Weiß schien die Hero-Headline
+              ungefiltert durch – das Menü wirkte, als läge es dahinter.
+            */}
             <div
               id='nlp-discover'
               hidden={!isDiscoverOpen}
-              className='absolute left-1/2 top-full z-50 mt-3 w-80 -translate-x-1/2 rounded-2xl border border-border bg-surface-strong p-2 shadow-[0_24px_70px_var(--glow)] backdrop-blur-xl'>
+              className='absolute left-1/2 top-full z-60 mt-3 w-80 -translate-x-1/2 rounded-2xl border border-border-strong bg-(--bg)/94 p-2 shadow-[0_24px_70px_var(--glow)]'>
               <ul>
                 {discoverItems.map((item) => {
                   const active = pathname.startsWith(item.match ?? item.href);
@@ -413,7 +419,8 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
         ref={panelRef}
         hidden={!isMenuOpen}
         className='hdr:hidden'>
-        <div className='mx-4 mb-4 rounded-2xl border border-border bg-surface-strong p-3 shadow-[0_20px_60px_var(--glow)] backdrop-blur-xl'>
+        {/* Deckender Hintergrund – Begründung siehe Entdecken-Dropdown oben */}
+        <div className='mx-4 mb-4 rounded-2xl border border-border-strong bg-(--bg)/94 p-3 shadow-[0_20px_60px_var(--glow)]'>
           {/*
             Mobil bleibt „Entdecken" aufgeklappt: Platz ist hier kein Problem,
             und ein zweites Aufklappen innerhalb eines Aufklapp-Panels wäre

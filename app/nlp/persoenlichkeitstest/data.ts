@@ -54,6 +54,24 @@ export const dimensions: Record<
 /** Reihenfolge für jede Anzeige — konstant, damit Balken nicht springen. */
 export const dimensionOrder: Dimension[] = ['beziehung', 'erkennen', 'handeln'];
 
+/**
+ * URL-Segment der Typseiten (/nlp/persoenlichkeitstest/<slug>). Einzige Stelle,
+ * an der die Slugs stehen – Route, Teilen-Link, Sitemap und llms.txt lesen hier.
+ */
+export const typeSlugs: Record<Dimension, string> = {
+  beziehung: 'beziehungstyp',
+  erkennen: 'sachtyp',
+  handeln: 'handlungstyp',
+};
+
+export function typeHref(dimension: Dimension) {
+  return `/nlp/persoenlichkeitstest/${typeSlugs[dimension]}`;
+}
+
+export function dimensionFromSlug(slug: string): Dimension | undefined {
+  return dimensionOrder.find((dimension) => typeSlugs[dimension] === slug);
+}
+
 export const questions: Question[] = [
   {
     text: 'Du kommst in eine Gruppe, in der du noch niemanden kennst. Was machst du zuerst?',

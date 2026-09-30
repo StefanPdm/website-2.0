@@ -17,6 +17,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
 └── /nlp                   Welt A — NLP Coaching              (Marke: NLP Coaching)
     ├── /wissenschaft      Inhaltsseite: Forschungsstand (DVNLP-Whitepaper)  → Article + citation
     ├── /persoenlichkeitstest  Selbsttest Psychografie (18 Fragen, Client-Auswertung)
+    │   └── /beziehungstyp  /sachtyp  /handlungstyp   Typseiten = Ziel des Teilen-Links
     ├── /regeln/gluecklichsein  /regeln/ungluecklichsein   20-Regeln-Listen → ItemList
     ├── /impressum  /datenschutz  /cookies  /agb
     └── /guide-download    Token-Landing für Lead-Magnet (noindex)
@@ -691,6 +692,12 @@ Components (damit es auch ohne JavaScript im HTML steht):
 | `/nlp/wissenschaft` | `Article` mit `citation` (DVNLP-Whitepaper) + `BreadcrumbList` |
 | `/nlp/regeln/*` | `Article` + `ItemList` (20 Regeln) + `BreadcrumbList` |
 | `/nlp/persoenlichkeitstest` | `WebApplication` (kostenlos, Disclaimer in `description`) + `BreadcrumbList` |
+| `/nlp/persoenlichkeitstest/<typ>` | `Article` (`isPartOf` → Test) + `BreadcrumbList`, eigenes OG-Bild je Typ |
+
+**Persönlichkeitstest teilen:** `ShareResult` teilt nur den **Typ** (Web Share API,
+sonst Zwischenablage) und verlinkt auf die öffentliche Typseite — Punktwerte
+verlassen nie den Browser. Slugs stehen allein in `typeSlugs` (`data.ts`); die
+Typbeschreibung rendert `TypeProfile.tsx` für Ergebnis und Typseite gemeinsam.
 
 Alle Graphen verweisen über `@id` auf **dieselbe** Person — das ist die
 Voraussetzung dafür, dass Google beide Geschäftsbereiche einer Entität zuordnet

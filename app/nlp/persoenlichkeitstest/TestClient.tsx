@@ -1,20 +1,20 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import GlassCard from '@/components/GlassCard';
 import { PrimaryButton, SecondaryButton } from '@/app/nlp/components/Buttons';
-import { MotifAction, MotifInsight, MotifRelation } from '@/app/nlp/components/Motifs';
 import {
   DISCLAIMER,
   dimensionOrder,
   dimensions,
   mixedProfileQuestions,
   questions,
-  results,
   type Dimension,
 } from '@/app/nlp/persoenlichkeitstest/data';
 import { evaluate, percentage, verdictLabel } from '@/app/nlp/persoenlichkeitstest/scoring';
+import ShareResult from '@/app/nlp/persoenlichkeitstest/ShareResult';
+import TypeProfile, { MOTIFS } from '@/app/nlp/persoenlichkeitstest/TypeProfile';
 
 /**
  * Der Test als Client-Komponente — alles andere auf der Seite bleibt Server.
@@ -37,13 +37,33 @@ import { evaluate, percentage, verdictLabel } from '@/app/nlp/persoenlichkeitste
 
 const LETTERS = ['A', 'B', 'C'];
 
-const MOTIFS: Record<Dimension, (props: { className?: string }) => React.ReactElement> = {
-  beziehung: MotifRelation,
-  erkennen: MotifInsight,
-  handeln: MotifAction,
-};
+/**
+ * Testmodus über `?testmodus` in der Adresse – für die eigene Prüfung des
+ * Ergebnisses und des Teilen-Links, ohne 17 Fragen durchzuklicken.
+ *
+ * Absichtlich auch in Produktion verfügbar: Die Web Share API gibt es auf dem
+ * Handy nur über HTTPS, also nur auf Vercel. Für Besucher ohne den Parameter
+ * ist nichts sichtbar. `useSyncExternalStore` statt useEffect+setState, damit
+ * Server (immer false) und Client ohne Hydration-Konflikt auseinandergehen.
+ */
+const noSubscribe = () => () => {};
+function useTestMode() {
+  return useSyncExternalStore(
+    noSubscribe,
+    () => new URLSearchParams(window.location.search).has('testmodus'),
+    () => false,
+  );
+}
 
 export default function TestClient() {
+  const testMode = useTestMode();
+  const testModeRef = useRef<HTMLDivElement>(null);
+
+  // Im Testmodus direkt zum Test scrollen – sonst landet man zuerst bei den
+  // Bereichskarten oben, die auf die Typseiten verlinken.
+  useEffect(() => {
+    if (testMode) testModeRef.current?.scrollIntoView({ block: 'center' });
+  }, [testMode]);
   const [answers, setAnswers] = useState<(Dimension | null)[]>(() =>
     Array<Dimension | null>(questions.length).fill(null),
   );
@@ -86,6 +106,13 @@ export default function TestClient() {
   function goBack() {
     if (showResult) setShowResult(false);
     else if (index > 0) setIndex((value) => value - 1);
+  }
+
+  /** Testmodus: Fragen 1–17 mit einem Bereich vorbelegen, zur letzten springen. */
+  function jumpToLast(dimension: Dimension) {
+    setAnswers(questions.map((_, i) => (i < questions.length - 1 ? dimension : null)));
+    setIndex(questions.length - 1);
+    setShowResult(false);
   }
 
   function restart() {
@@ -131,6 +158,26 @@ export default function TestClient() {
           style={{ transform: `scaleX(${progress})` }}
         />
       </div>
+
+      {testMode && (
+        <div
+          ref={testModeRef}
+          className='mt-4 flex flex-wrap items-center gap-2 rounded-xl border border-dashed border-border-strong p-3 text-xs text-(--muted)'>
+          <span>
+            Testmodus – Fragen 1–{questions.length - 1} vorbelegen, weiter zu Frage{' '}
+            {questions.length}:
+          </span>
+          {dimensionOrder.map((dimension) => (
+            <button
+              key={dimension}
+              type='button'
+              onClick={() => jumpToLast(dimension)}
+              className='min-h-11 cursor-pointer rounded-full bg-surface px-4 font-semibold text-(--text) ring-1 ring-border transition hover:bg-surface-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+              {dimensions[dimension].area} → Frage {questions.length}
+            </button>
+          ))}
+        </div>
+      )}
 
       <fieldset className='mt-8 border-0 p-0'>
         <legend className='sr-only'>
@@ -330,74 +377,12 @@ function Result({
         </p>
       )}
 
-      {shown.map((dimension) => {
-        const result = results[dimension];
-        const Motif = MOTIFS[dimension];
-        return (
-          <GlassCard
-            key={dimension}
-            className='relative mt-6 overflow-hidden p-6 sm:p-9'>
-            <Motif className='pointer-events-none absolute -right-12 -top-12 h-56 w-56 opacity-[0.10]' />
-            <p className='relative text-xs uppercase tracking-[0.25em] text-accent-soft'>
-              {dimensions[dimension].type}
-            </p>
-            <h3 className='relative mt-4 text-xl font-semibold text-(--text) sm:text-2xl'>
-              {result.headline}
-            </h3>
-            <p className='relative mt-4 max-w-2xl text-sm leading-relaxed text-(--muted) sm:text-base'>
-              {result.lead}
-            </p>
-
-            <div className='relative mt-8 grid gap-8 lg:grid-cols-2'>
-              <div>
-                <h4 className='text-xs uppercase tracking-[0.2em] text-(--muted)'>
-                  Mögliche Stärken
-                </h4>
-                <ul className='mt-4 space-y-2'>
-                  {result.strengths.map((item) => (
-                    <li
-                      key={item}
-                      className='flex items-start gap-3 text-sm text-(--text)'>
-                      <span
-                        aria-hidden='true'
-                        className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-linear-to-r from-accent to-accent-2'
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h4 className='text-xs uppercase tracking-[0.2em] text-(--muted)'>
-                  Mögliche Herausforderungen
-                </h4>
-                <ul className='mt-4 space-y-2'>
-                  {result.challenges.map((item) => (
-                    <li
-                      key={item}
-                      className='flex items-start gap-3 text-sm text-(--muted)'>
-                      <span
-                        aria-hidden='true'
-                        className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400/70'
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className='relative mt-8 rounded-2xl border-l-2 border-(--accent) bg-(--surface) p-5'>
-              <p className='text-xs uppercase tracking-[0.2em] text-accent-soft'>
-                Entwicklungsimpuls
-              </p>
-              <p className='mt-3 text-sm leading-relaxed text-(--text) sm:text-base'>
-                {result.impulse}
-              </p>
-            </div>
-          </GlassCard>
-        );
-      })}
+      {shown.map((dimension) => (
+        <TypeProfile
+          key={dimension}
+          dimension={dimension}
+        />
+      ))}
 
       <GlassCard className='mt-6 p-6 sm:p-9'>
         <h3 className='text-lg font-semibold text-(--text) sm:text-xl'>
@@ -413,6 +398,9 @@ function Result({
           <PrimaryButton href='/nlp#kontakt'>Kostenloses Erstgespräch</PrimaryButton>
           <SecondaryButton onClick={onRestart}>Test wiederholen</SecondaryButton>
           <SecondaryButton onClick={onBack}>Letzte Frage ansehen</SecondaryButton>
+        </div>
+        <div className='mt-6 border-t border-(--border) pt-6'>
+          <ShareResult dimension={ranked[0]} />
         </div>
       </GlassCard>
 

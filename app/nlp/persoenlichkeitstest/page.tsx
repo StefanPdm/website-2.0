@@ -11,6 +11,7 @@ import {
   dimensions,
   questions,
   SOURCES,
+  typeHref,
 } from '@/app/nlp/persoenlichkeitstest/data';
 
 const title = 'Persönlichkeitstest: Beziehungstyp, Sachtyp oder Handlungstyp';
@@ -91,16 +92,21 @@ export default function PersoenlichkeitstestPage() {
 
           {/* Die drei Bereiche */}
           <div className='mt-12 grid gap-4 sm:grid-cols-3'>
+            {/* Jede Karte führt auf die Typseite – interner Einstieg für Sitemap & Suche */}
             {areas.map(({ key, Motif }) => (
-              <div
+              <Link
                 key={key}
-                className='rounded-2xl border border-(--border) bg-(--surface) p-5'>
+                href={typeHref(key)}
+                className='group rounded-2xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-1 hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
                 <Motif className='h-11 w-11' />
                 <p className='mt-4 text-sm font-semibold text-(--text)'>
                   {dimensions[key].area}
                 </p>
                 <p className='mt-1 text-xs text-(--muted)'>{dimensions[key].short}</p>
-              </div>
+                <p className='mt-3 text-xs font-semibold text-accent-soft'>
+                  Der {dimensions[key].type} →
+                </p>
+              </Link>
             ))}
           </div>
 

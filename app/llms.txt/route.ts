@@ -1,4 +1,5 @@
 import { coachingOffers } from '@/app/nlp/pricing';
+import { dimensionOrder, dimensions, typeHref } from '@/app/nlp/persoenlichkeitstest/data';
 import { webCases } from '@/app/webdevelopment/cases';
 import { HOURLY_RATE, VAT_NOTE, webServices } from '@/app/webdevelopment/pricing';
 import { absoluteUrl, AREA_SERVED, OWNER, SITE_URL } from '@/lib/site';
@@ -24,6 +25,13 @@ function build() {
 
   const webPrices = webServices
     .map((s) => `- ${s.title}: ab ${s.price} ${VAT_NOTE} — ${s.bullets.join(', ')}`)
+    .join('\n');
+
+  const typePages = dimensionOrder
+    .map(
+      (d) =>
+        `  - [Der ${dimensions[d].type}](${absoluteUrl(typeHref(d))}): ${dimensions[d].short} – Stärken, Herausforderungen, Entwicklungsimpuls`,
+    )
     .join('\n');
 
   const references = webCases
@@ -134,6 +142,7 @@ ${references}
 - [Persönlichkeitstest (Psychografie)](${absoluteUrl('/nlp/persoenlichkeitstest')}): kostenloser
   Selbsttest mit 18 Fragen nach Dietmar Friedmann — Beziehungstyp, Sachtyp oder Handlungstyp.
   Kein validiertes Testverfahren, ausdrücklich zur Selbstreflexion
+${typePages}
 - [20 Regeln für erfolgreiches Glücklichsein](${absoluteUrl('/nlp/regeln/gluecklichsein')})
 - [20 Regeln für erfolgreiches Unglücklichsein](${absoluteUrl('/nlp/regeln/ungluecklichsein')}) – ironische Umkehrung, keine Empfehlung
 - [Impressum Coaching](${absoluteUrl('/nlp/impressum')})

@@ -1,4 +1,10 @@
 import { pageDates } from '@/app/sitemap';
+import {
+  dimensions,
+  results,
+  typeHref,
+  type Dimension,
+} from '@/app/nlp/persoenlichkeitstest/data';
 import { absoluteUrl, AREA_SERVED, OWNER, SITE_URL } from '@/lib/site';
 
 /**
@@ -287,6 +293,63 @@ export function PersonalityTestStructuredData({ test }: { test: PersonalityTestI
               { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
               { '@type': 'ListItem', position: 2, name: 'NLP Coaching', item: absoluteUrl('/nlp') },
               { '@type': 'ListItem', position: 3, name: 'Persönlichkeitstest', item: url },
+            ],
+          },
+        ],
+      }}
+    />
+  );
+}
+
+// ---------------------------------------------------------------------------
+
+/**
+ * Typseite des Persönlichkeitstests: Article + Breadcrumb.
+ *
+ * `isPartOf` verbindet die Seite mit dem Test (WebApplication) – so ordnen
+ * Suchmaschinen die drei Typseiten als Teil desselben Angebots ein.
+ */
+export function PersonalityTypeStructuredData({ dimension }: { dimension: Dimension }) {
+  const path = typeHref(dimension);
+  const url = absoluteUrl(path);
+  const dates = pageDates(path);
+  const { type } = dimensions[dimension];
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Article',
+            '@id': `${url}#article`,
+            headline: `Der ${type}: Stärken, Herausforderungen und Entwicklung`,
+            description: results[dimension].lead,
+            url,
+            inLanguage: 'de-DE',
+            datePublished: dates.published,
+            dateModified: dates.modified,
+            author: { '@id': PERSON_ID },
+            publisher: { '@id': PERSON_ID },
+            isAccessibleForFree: true,
+            isPartOf: { '@id': `${absoluteUrl('/nlp/persoenlichkeitstest')}#test` },
+            about: [
+              { '@type': 'Thing', name: type },
+              { '@type': 'Thing', name: 'Psychografie' },
+              { '@type': 'Person', name: 'Dietmar Friedmann' },
+            ],
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
+              { '@type': 'ListItem', position: 2, name: 'NLP Coaching', item: absoluteUrl('/nlp') },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: 'Persönlichkeitstest',
+                item: absoluteUrl('/nlp/persoenlichkeitstest'),
+              },
+              { '@type': 'ListItem', position: 4, name: type, item: url },
             ],
           },
         ],

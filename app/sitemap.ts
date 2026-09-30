@@ -53,6 +53,27 @@ const pages: Page[] = [
     changeFrequency: 'monthly',
   },
   {
+    path: '/nlp/persoenlichkeitstest/beziehungstyp',
+    lastModified: '2026-10-01',
+    published: '2026-10-01',
+    priority: 0.7,
+    changeFrequency: 'monthly',
+  },
+  {
+    path: '/nlp/persoenlichkeitstest/sachtyp',
+    lastModified: '2026-10-01',
+    published: '2026-10-01',
+    priority: 0.7,
+    changeFrequency: 'monthly',
+  },
+  {
+    path: '/nlp/persoenlichkeitstest/handlungstyp',
+    lastModified: '2026-10-01',
+    published: '2026-10-01',
+    priority: 0.7,
+    changeFrequency: 'monthly',
+  },
+  {
     path: '/nlp/regeln/gluecklichsein',
     lastModified: '2026-09-01',
     published: '2026-09-01',
