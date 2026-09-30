@@ -185,7 +185,7 @@ export default function WebdevelopmentPage() {
             {/* Left: All content left-aligned */}
             <div className='flex-1 flex flex-col justify-center items-start'>
               <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 mb-6 max-w-105'>
-                Technischer Möglichmacher · Klarheit & Struktur
+                Webentwicklung in Potsdam · Technischer Möglichmacher
               </p>
               <h1 className='text-4xl font-extrabold tracking-tight text-white md:text-5xl mb-8 max-w-130'>
                 Klare Websites.
@@ -195,8 +195,9 @@ export default function WebdevelopmentPage() {
                 Entwicklung, die trägt.
               </h1>
               <p className='text-lg text-slate-300 mb-8 max-w-130'>
-                Webentwicklung für Unternehmer, Coaches und Teams, die keine Bastellösungen wollen –
-                sondern Struktur, Performance und Zukunftssicherheit.
+                Webentwicklung aus Potsdam für Unternehmer, Coaches und Teams in Berlin und
+                Brandenburg, die keine Bastellösungen wollen – sondern Struktur, Performance und
+                Zukunftssicherheit.
               </p>
               <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 w-full sm:w-auto'>
                 <a

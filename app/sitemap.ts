@@ -28,7 +28,7 @@ type Page = {
 
 const pages: Page[] = [
   // Kernseiten
-  { path: '/', lastModified: '2026-09-30', priority: 1, changeFrequency: 'monthly' },
+  { path: '/', lastModified: '2026-10-01', priority: 1, changeFrequency: 'monthly' },
   { path: '/nlp', lastModified: '2026-10-01', priority: 0.9, changeFrequency: 'monthly' },
   {
     path: '/webdevelopment',

@@ -95,7 +95,8 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
             </div>
             <div>
               <div className='landing-name'>Stefan Heinemann</div>
-              <div className='landing-role'>Coaching & Webdevelopment</div>
+              {/* Leistung + Ort sichtbar im ersten Bildschirm – H1 bleibt die Marke (§13) */}
+              <div className='landing-role'>NLP Coach & Webentwickler · Potsdam</div>
             </div>
           </div>
           <div className='landing-tags hidden md:flex'>
@@ -118,7 +119,9 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
               <li>⋙ innere Klarheit &nbsp; → &nbsp; NLP Coaching</li>
               <li>⋙ digitale Systeme &nbsp; → &nbsp; Webdevelopment</li>
             </ul>
-            <span className='landing-subtitle'>Beides sauber. Beides persönlich. Ohne Blabla.</span>
+            <span className='landing-subtitle'>
+              Beides sauber. Beides persönlich. Ohne Blabla. In Potsdam, Berlin und online.
+            </span>
             <div className='landing-actions'>
               <a
                 className='landing-cta landing-cta--primary inline-flex md:hidden'
