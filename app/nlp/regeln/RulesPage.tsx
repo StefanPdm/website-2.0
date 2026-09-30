@@ -42,7 +42,7 @@ export default function RulesPage({ ruleSet }: { ruleSet: RuleSet }) {
   const pdfAvailable = hasPdf(ruleSet.pdfPath);
 
   return (
-    <main className='relative z-10'>
+    <article className='relative z-10'>
       {/* Kopfbereich */}
       <section className='border-b border-(--border) px-4 pt-40 pb-16 md:pt-48'>
         <div className='container mx-auto max-w-4xl'>
@@ -176,6 +176,6 @@ export default function RulesPage({ ruleSet }: { ruleSet: RuleSet }) {
           </p>
         </div>
       </section>
-    </main>
+    </article>
   );
 }

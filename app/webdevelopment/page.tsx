@@ -38,6 +38,7 @@ import { FaqStructuredData, WebStructuredData } from '@/components/StructuredDat
 import FaqSection from '@/app/webdevelopment/FaqSection';
 import { faqBoth } from '@/app/nlp/faq';
 import { faqWeb } from '@/app/webdevelopment/faq';
+import { VAT_NOTE, webServices } from '@/app/webdevelopment/pricing';
 
 const cases = [
   {
@@ -53,9 +54,9 @@ const cases = [
       'Website für eine Oldtimer-Rallye in Berlin: Termine, Anmeldung und Ergebnisse in klarer Struktur.',
   },
   {
-    name: 'Kaiser Classic Rallye',
-    url: 'https://kaiser-classic.de',
-    description: 'Website für die Kaiser Classic Rallye, abgeschlossen 2025.',
+    name: 'Zahnarzt Groß & Groß',
+    url: 'https://www.zahnmedizin-potsdam.de/',
+    description: 'Relaunch der Website einer Zahnarztpraxis in Potsdam, Oktober 2026.',
   },
   {
     name: 'Kundenportal Intralogistik',
@@ -86,48 +87,6 @@ const CardView = Card as ComponentType<
   PropsWithChildren<HTMLAttributes<HTMLDivElement> & { customClass?: string }>
 >;
 
-
-const services = [
-  {
-    title: 'Websites & Landingpages',
-    intro: 'Websites, die führen – nicht verwirren.',
-    from: 'ab 2.500 €',
-    bullets: [
-      'SEO-ready',
-      'Mobile-first',
-      'Saubere Informationsarchitektur',
-      'Schnelle Ladezeiten',
-    ],
-  },
-  {
-    title: 'Web Apps & Kundenportale',
-    intro: 'Individuelle Anwendungen statt Insellösungen.',
-    from: 'ab 7.500 €',
-    bullets: ['Login-Bereiche', 'Dashboards', 'Dokumentenverwaltung', 'Rollen & Rechte'],
-  },
-  {
-    title: 'Headless & Schnittstellen',
-    intro: 'Systeme, die miteinander sprechen.',
-    from: 'ab 4.000 €',
-    bullets: [
-      'Headless CMS',
-      'REST & GraphQL APIs',
-      'Automatisierungen',
-      'Entkoppelte Architekturen',
-    ],
-  },
-  {
-    title: 'UX & Struktur',
-    intro: 'Technik folgt Klarheit.',
-    from: 'ab 1.500 €',
-    bullets: [
-      'UX-Konzeption',
-      'Seiten- & Datenstruktur',
-      'Klare Nutzerflüsse',
-      'Verständliche Logik',
-    ],
-  },
-];
 
 const techStack = {
   Frontend: ['Next.js', 'Angular', 'React', 'Tailwind CSS'],
@@ -209,14 +168,17 @@ const techIconMap: Record<string, ReactElement> = {
 export default function WebdevelopmentPage() {
   return (
     <div className='relative min-h-screen overflow-x-clip bg-[#0B1B2B] text-slate-100'>
-      <WebStructuredData cases={cases} />
+      <WebStructuredData
+        cases={cases}
+        services={webServices}
+      />
       <FaqStructuredData entries={[...faqWeb, ...faqBoth]} />
       {/* Page Background */}
       <div className='pointer-events-none fixed inset-0 z-0'>
         <WebBackdrop />
       </div>
       {/* content */}
-      <div className='relative z-10'>
+      <main className='relative z-10'>
         {/* Hero Section */}
         <section className='relative min-h-svh overflow-hidden flex items-center pt-32 md:pt-0'>
           <div className='relative z-10 mx-auto max-w-6xl w-full flex flex-col md:flex-row items-start md:items-center gap-10 md:gap-12 px-4 sm:px-6 md:px-8 py-12 md:py-24'>
@@ -377,7 +339,7 @@ export default function WebdevelopmentPage() {
             </p>
           </div>
           <div className='my-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 z-10 justify-self-center'>
-            {services.map((service) => (
+            {webServices.map((service) => (
               <PixelCardView
                 key={service.title}
                 variant='blue'
@@ -385,7 +347,10 @@ export default function WebdevelopmentPage() {
                 <div className='relative z-10 w-full rounded-[22px] border border-white/20 bg-white/5 p-5 text-slate-100 h-full'>
                   <h3 className='text-lg font-semibold text-white'>{service.title}</h3>
                   <p className='mt-2 text-sm text-slate-300'>{service.intro}</p>
-                  <p className='mt-3 text-sm font-semibold text-accent-web'>{service.from}</p>
+                  <p className='mt-3 text-sm font-semibold text-accent-web'>
+                    ab {service.price}{' '}
+                    <span className='text-xs font-normal text-slate-300'>{VAT_NOTE}</span>
+                  </p>
                   <ul className='mt-4 space-y-2 text-sm text-slate-300'>
                     {service.bullets.map((bullet) => (
                       <li
@@ -543,11 +508,11 @@ export default function WebdevelopmentPage() {
               cta='Case ansehen'
             />
             <CaseCard
-              title='Kaiser Classic Rallye'
-              status='Abgeschlossen 2025'
-              // image='https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=900&auto=format&fit=crop'
-              video='/case-images-videos/kaiserclassic.webm'
-              href='https://kaiser-classic.de'
+              title='Zahnarzt Groß & Groß'
+              status='Relaunch Oktober 2026'
+              image='/case-images-videos/zahnarzt-gross-gross.webp'
+              video='/case-images-videos/zahnarzt-gross-gross.webm'
+              href='https://www.zahnmedizin-potsdam.de/'
               cta='Case ansehen'
             />
             <CaseCard
@@ -601,7 +566,7 @@ export default function WebdevelopmentPage() {
             </ElectricBorder>
           </div>
         </section>
-      </div>
+      </main>
       {/* Footer */}
       <footer className='relative z-20 border-t border-white/10 bg-transparent'>
         <div className='mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between'>

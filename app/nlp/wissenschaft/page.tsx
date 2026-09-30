@@ -72,7 +72,7 @@ export default function WissenschaftPage() {
   return (
     <>
       <WhitepaperStructuredData />
-      <main className='relative z-10'>
+      <article className='relative z-10'>
         {/* Kopfbereich */}
         <section className='relative overflow-hidden border-b border-(--border) px-4 pt-40 pb-16 md:pt-48'>
           <MotifEvidence className='pointer-events-none absolute -right-20 top-24 h-96 w-96 opacity-[0.09]' />
@@ -291,7 +291,7 @@ export default function WissenschaftPage() {
             </p>
           </div>
         </section>
-      </main>
+      </article>
     </>
   );
 }

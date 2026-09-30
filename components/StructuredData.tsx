@@ -228,6 +228,68 @@ export function WhitepaperStructuredData() {
 
 // ---------------------------------------------------------------------------
 
+type PersonalityTestInput = {
+  title: string;
+  description: string;
+  questionCount: number;
+  types: string[];
+  disclaimer: string;
+  sources: string[];
+};
+
+/**
+ * Persönlichkeitstest als kostenlose Web-Anwendung.
+ *
+ * `WebApplication` statt `Quiz`: `Quiz` ist bei schema.org für Lernkontrollen
+ * gedacht, hier wird nichts abgefragt, sondern ausgewertet. `offers` mit
+ * Preis 0 und `isAccessibleForFree` beantworten die häufigste Suchfrage
+ * („kostenlos? ohne Anmeldung?") maschinenlesbar. Der Disclaimer steht in
+ * `description`, damit Sprachmodelle das Ergebnis nicht als Diagnostik zitieren.
+ */
+export function PersonalityTestStructuredData({ test }: { test: PersonalityTestInput }) {
+  const url = absoluteUrl('/nlp/persoenlichkeitstest');
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebApplication',
+            '@id': `${url}#test`,
+            name: test.title,
+            description: `${test.description} ${test.disclaimer}`,
+            url,
+            inLanguage: 'de-DE',
+            applicationCategory: 'LifestyleApplication',
+            operatingSystem: 'Web',
+            isAccessibleForFree: true,
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+            author: { '@id': PERSON_ID },
+            publisher: { '@id': PERSON_ID },
+            about: [
+              { '@type': 'Thing', name: 'Psychografie' },
+              { '@type': 'Person', name: 'Dietmar Friedmann' },
+              ...test.types.map((name) => ({ '@type': 'Thing', name })),
+            ],
+            featureList: `${test.questionCount} Fragen, sofortige Auswertung, ohne Anmeldung`,
+            citation: test.sources,
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
+              { '@type': 'ListItem', position: 2, name: 'NLP Coaching', item: absoluteUrl('/nlp') },
+              { '@type': 'ListItem', position: 3, name: 'Persönlichkeitstest', item: url },
+            ],
+          },
+        ],
+      }}
+    />
+  );
+}
+
+// ---------------------------------------------------------------------------
+
 type FaqInput = { question: string; answer: string };
 
 /**
@@ -330,9 +392,21 @@ export function RulesStructuredData({ ruleSet }: { ruleSet: RuleSetInput }) {
 // ---------------------------------------------------------------------------
 
 type CaseInput = { name: string; url?: string; description: string };
+type WebServiceInput = { title: string; intro: string; amount: number; bullets: string[] };
 
-/** Welt B: Entwicklungsleistung + Referenzen. */
-export function WebStructuredData({ cases }: { cases: CaseInput[] }) {
+/**
+ * Welt B: Entwicklungsleistung + Referenzen.
+ *
+ * Preise als `minPrice` mit `valueAddedTaxIncluded: false`: Die Seite nennt
+ * „ab"-Beträge netto. Ein fester `price` würde einen Festpreis behaupten.
+ */
+export function WebStructuredData({
+  cases,
+  services,
+}: {
+  cases: CaseInput[];
+  services: WebServiceInput[];
+}) {
   return (
     <JsonLd
       data={{
@@ -357,12 +431,23 @@ export function WebStructuredData({ cases }: { cases: CaseInput[] }) {
             hasOfferCatalog: {
               '@type': 'OfferCatalog',
               name: 'Leistungen',
-              itemListElement: [
-                'Websites & Landingpages',
-                'Web Apps & Kundenportale',
-                'Headless CMS & Schnittstellen',
-                'UX & Struktur',
-              ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
+              itemListElement: services.map((service) => ({
+                '@type': 'Offer',
+                url: absoluteUrl('/webdevelopment#leistungen'),
+                priceCurrency: 'EUR',
+                priceSpecification: {
+                  '@type': 'PriceSpecification',
+                  minPrice: service.amount,
+                  priceCurrency: 'EUR',
+                  valueAddedTaxIncluded: false,
+                },
+                itemOffered: {
+                  '@type': 'Service',
+                  name: service.title,
+                  description: `${service.intro} ${service.bullets.join(', ')}.`,
+                  provider: { '@id': PERSON_ID },
+                },
+              })),
             },
           },
           {

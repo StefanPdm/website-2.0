@@ -1,11 +1,23 @@
-export const metadata = {
-  title: 'Cookies | NLP Coaching',
-  description: 'Hinweise zu eingesetzten Cookies und Ihren Einstellungsmöglichkeiten.',
+import type { Metadata } from 'next';
+
+// canonical + openGraph.url explizit: sonst erbt die Seite beides vom Layout
+// und erklärt sich zum Duplikat der Welt-Startseite (CLAUDE.md §13).
+export const metadata: Metadata = {
+  title: 'Cookies – NLP Coaching',
+  description:
+    'Hinweise zu Cookies im Bereich NLP Coaching: Diese Website setzt keine Cookies.',
+  alternates: { canonical: '/nlp/cookies' },
+  openGraph: {
+    title: 'Cookies – NLP Coaching',
+    description:
+      'Hinweise zu Cookies im Bereich NLP Coaching: Diese Website setzt keine Cookies.',
+    url: '/nlp/cookies',
+  },
 };
 
 export default function CookiesPage() {
   return (
-    <main className='relative z-10 mx-auto max-w-4xl px-4 py-48 min-h-[calc(100vh-145px)]'>
+    <div className='relative z-10 mx-auto max-w-4xl px-4 py-48 min-h-[calc(100vh-145px)]'>
       <header className='mb-10'>
         <p className='inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-medium text-[var(--text)] ring-1 ring-[var(--border)]'>
           Rechtliches · Cookies
@@ -29,6 +41,6 @@ export default function CookiesPage() {
       <p className='mt-8 text-xs text-[var(--muted)]'>
         Letzte Aktualisierung: {new Date().toLocaleDateString('de-DE')}
       </p>
-    </main>
+    </div>
   );
 }

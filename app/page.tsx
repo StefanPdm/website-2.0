@@ -8,6 +8,16 @@ import {
 import InfoOrb from '@/components/InfoOrb';
 import { RootStructuredData } from '@/components/StructuredData';
 
+// § 5 DDG: Impressum muss von jeder Seite aus erreichbar sein – auch vom Hub.
+// Beide Welten haben eigene Rechtstexte, deshalb beide verlinkt.
+const legalLinks = [
+  { label: 'Impressum Coaching', href: '/nlp/impressum' },
+  { label: 'Impressum Web', href: '/webdevelopment/impressum' },
+  { label: 'Datenschutz Coaching', href: '/nlp/datenschutz' },
+  { label: 'Datenschutz Web', href: '/webdevelopment/datenschutz' },
+  { label: 'Widerruf', href: '/widerruf' },
+];
+
 export default function Home() {
   const useWarmPills = true;
   const InfoOrbTitel = `"Stefan, du musst dich entscheiden! Entweder du bist Entwickler oder NLP Coach!"`;
@@ -322,6 +332,20 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
         <div className='landing-tip'>
           Tipp: Bei mir kannst du jederzeit wechseln. Oder beides machen. 😁
         </div>
+
+        <footer className='landing-footer'>
+          <nav
+            aria-label='Rechtliches'
+            className='landing-legal'>
+            {legalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </footer>
       </main>
       </HomeContactProvider>
     </div>

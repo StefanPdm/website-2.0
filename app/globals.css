@@ -325,13 +325,23 @@
   pointer-events: none;
 }
 
+/* Flex-Spalte mit Mindesthöhe: Die Rechtsleiste (.landing-footer) sitzt per
+   margin-top:auto am unteren Bildschirmrand, auch wenn der Inhalt kürzer ist. */
 .landing-main {
   position: relative;
   z-index: 1;
   width: min(1280px, 100%);
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0 auto;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+}
+
+.landing-footer {
+  margin-top: auto;
+  padding-bottom: 0.5rem;
 }
 
 .landing-brand {
@@ -778,6 +788,34 @@
   color: rgba(226, 232, 240, 0.6);
 }
 
+/* Rechtslinks auf / – sekundäre Textfarbe statt tertiärer wegen Kontrast (§11). */
+.landing-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.25rem;
+  font-size: 0.75rem;
+}
+
+.landing-legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.6rem;
+  border-radius: 999px;
+  color: rgba(226, 232, 240, 0.7);
+  transition: color 200ms ease;
+}
+
+.landing-legal a:hover {
+  color: #f8fafc;
+}
+
+.landing-legal a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #9bc7ff;
+}
+
 /* Responsive enhancements for landing page */
 @media (max-width: 640px) {
   .landing-main {
@@ -882,6 +920,8 @@
   }
   .landing-main {
     gap: 1.5rem;
+    /* Shell-Padding oben/unten abziehen, sonst entsteht ein Scrollbalken. */
+    min-height: calc(100dvh - 2.5rem);
   }
   .landing-actions {
     padding-top: 1rem;

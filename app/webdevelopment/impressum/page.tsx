@@ -1,6 +1,18 @@
-export const metadata = {
-  title: 'Impressum | Web Development',
-  description: 'Anbieterkennzeichnung und rechtliche Hinweise für den Bereich Web Development.',
+import type { Metadata } from 'next';
+
+// canonical + openGraph.url explizit: sonst erbt die Seite beides vom Layout
+// und erklärt sich zum Duplikat der Welt-Startseite (CLAUDE.md §13).
+export const metadata: Metadata = {
+  title: 'Impressum – Webentwicklung Potsdam',
+  description:
+    'Anbieterkennzeichnung nach § 5 DDG und rechtliche Hinweise für Webentwicklung von Stefan Heinemann, Potsdam.',
+  alternates: { canonical: '/webdevelopment/impressum' },
+  openGraph: {
+    title: 'Impressum – Webentwicklung Potsdam',
+    description:
+      'Anbieterkennzeichnung nach § 5 DDG und rechtliche Hinweise für Webentwicklung von Stefan Heinemann, Potsdam.',
+    url: '/webdevelopment/impressum',
+  },
 };
 
 export default function ImpressumPage() {
@@ -8,7 +20,7 @@ export default function ImpressumPage() {
     <main className='relative z-10 mx-auto max-w-4xl px-4 py-48'>
       <header className='mb-10'>
         <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10'>
-          Rechtliches · Informationen nach § 5 TMG
+          Rechtliches · Informationen nach § 5 DDG
         </p>
         <h1 className='mt-5 text-3xl md:text-4xl font-extrabold tracking-tight text-white'>
           Impressum
@@ -70,8 +82,8 @@ export default function ImpressumPage() {
       <section className='rounded-2xl border border-white/15 bg-white/5 p-6 ring-1 ring-white/10 mb-6'>
         <h2 className='text-xl font-semibold text-white mb-3'>Haftung für Inhalte</h2>
         <p className='text-slate-300'>
-          Als Diensteanbieter sind wir nach § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach
-          den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter
+          Als Diensteanbieter sind wir nach § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach
+          den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter
           jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu
           überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
           hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach

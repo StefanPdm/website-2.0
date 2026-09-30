@@ -1,11 +1,23 @@
-export const metadata = {
-  title: 'Datenschutzerklaerung | NLP Coaching',
-  description: 'Informationen zur Verarbeitung personenbezogener Daten im Bereich NLP Coaching.',
+import type { Metadata } from 'next';
+
+// canonical + openGraph.url explizit: sonst erbt die Seite beides vom Layout
+// und erklärt sich zum Duplikat der Welt-Startseite (CLAUDE.md §13).
+export const metadata: Metadata = {
+  title: 'Datenschutzerklärung – NLP Coaching',
+  description:
+    'Informationen zur Verarbeitung personenbezogener Daten im Bereich NLP Coaching von Stefan Heinemann, Potsdam.',
+  alternates: { canonical: '/nlp/datenschutz' },
+  openGraph: {
+    title: 'Datenschutzerklärung – NLP Coaching',
+    description:
+      'Informationen zur Verarbeitung personenbezogener Daten im Bereich NLP Coaching von Stefan Heinemann, Potsdam.',
+    url: '/nlp/datenschutz',
+  },
 };
 
 export default function DatenschutzPage() {
   return (
-    <main className='relative z-10 mx-auto max-w-4xl px-4 py-48'>
+    <div className='relative z-10 mx-auto max-w-4xl px-4 py-48'>
       <header className='mb-10'>
         <p className='inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-medium text-[var(--text)] ring-1 ring-[var(--border)]'>
           Rechtliches · DSGVO
@@ -110,6 +122,6 @@ export default function DatenschutzPage() {
       <p className='mt-8 text-xs text-[var(--muted)]'>
         Letzte Aktualisierung: {new Date().toLocaleDateString('de-DE')}
       </p>
-    </main>
+    </div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import GlassCard from '@/components/GlassCard';
+import { PersonalityTestStructuredData } from '@/components/StructuredData';
 import { MotifAction, MotifInsight, MotifRelation } from '@/app/nlp/components/Motifs';
 import TestClient from '@/app/nlp/persoenlichkeitstest/TestClient';
 import {
@@ -40,6 +41,15 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title, description },
 };
 
+const testSchema = {
+  title,
+  description,
+  questionCount: questions.length,
+  types: Object.values(dimensions).map((entry) => entry.type),
+  disclaimer: DISCLAIMER,
+  sources: SOURCES.map((source) => source.label),
+};
+
 /** Die drei Bereiche für den Erklärblock über dem Test. */
 const areas = [
   { key: 'beziehung', Motif: MotifRelation },
@@ -49,7 +59,8 @@ const areas = [
 
 export default function PersoenlichkeitstestPage() {
   return (
-    <main className='relative z-10'>
+    <div className='relative z-10'>
+      <PersonalityTestStructuredData test={testSchema} />
       {/* Kopfbereich */}
       <section className='relative overflow-hidden border-b border-(--border) px-4 pt-40 pb-16 md:pt-48'>
         <MotifRelation className='pointer-events-none absolute -right-20 top-28 h-96 w-96 opacity-[0.07]' />
@@ -178,6 +189,6 @@ export default function PersoenlichkeitstestPage() {
           </p>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

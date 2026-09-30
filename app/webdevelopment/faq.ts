@@ -1,4 +1,5 @@
 import type { FaqEntry } from '@/app/nlp/faq';
+import { HOURLY_RATE, VAT_NOTE, priceOf } from '@/app/webdevelopment/pricing';
 
 /**
  * FAQ von Welt B.
@@ -12,7 +13,7 @@ export const faqWeb: FaqEntry[] = [
   {
     question: 'Was kostet eine Website bei dir?',
     answer:
-      'Der Preis einer Website richtet sich nach Ziel, Umfang und technischer Komplexität; nach einem Briefing erhältst du eine klare Aufwandsschätzung oder ein Festpreisangebot. Mein regulärer Entwicklungs- und Beratungssatz beträgt 190 € pro Stunde zzgl. MwSt., sofern wir nichts anderes vereinbaren. So bezahlst du nicht nur Seiten und Funktionen, sondern eine Lösung, die Strategie, Nutzerführung, Technik und Sichtbarkeit zusammenführt.',
+      `Eine Website oder Landingpage beginnt bei ${priceOf('website')} ${VAT_NOTE}, eine Web App oder ein Kundenportal bei ${priceOf('webapp')} ${VAT_NOTE}. Der genaue Preis richtet sich nach Ziel, Umfang und technischer Komplexität; nach einem Briefing erhältst du eine klare Aufwandsschätzung oder ein Festpreisangebot. Mein regulärer Entwicklungs- und Beratungssatz beträgt ${HOURLY_RATE.label} ${VAT_NOTE}, sofern wir nichts anderes vereinbaren. So bezahlst du nicht nur Seiten und Funktionen, sondern eine Lösung, die Strategie, Nutzerführung, Technik und Sichtbarkeit zusammenführt.`,
   },
   {
     question: 'Wie lange dauert ein Projekt?',

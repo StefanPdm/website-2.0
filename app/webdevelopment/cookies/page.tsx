@@ -1,6 +1,18 @@
-export const metadata = {
-  title: 'Cookies | Web Development',
-  description: 'Hinweise zu eingesetzten Cookies und Ihren Einstellungsmöglichkeiten.',
+import type { Metadata } from 'next';
+
+// canonical + openGraph.url explizit: sonst erbt die Seite beides vom Layout
+// und erklärt sich zum Duplikat der Welt-Startseite (CLAUDE.md §13).
+export const metadata: Metadata = {
+  title: 'Cookies – Webentwicklung',
+  description:
+    'Hinweise zu Cookies im Bereich Webentwicklung: Diese Website setzt keine Cookies.',
+  alternates: { canonical: '/webdevelopment/cookies' },
+  openGraph: {
+    title: 'Cookies – Webentwicklung',
+    description:
+      'Hinweise zu Cookies im Bereich Webentwicklung: Diese Website setzt keine Cookies.',
+    url: '/webdevelopment/cookies',
+  },
 };
 
 export default function CookiesPage() {

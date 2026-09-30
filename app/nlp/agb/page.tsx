@@ -1,11 +1,23 @@
-export const metadata = {
-  title: 'AGB | NLP Coaching',
-  description: 'Allgemeine Geschäftsbedingungen für den Bereich NLP Coaching.',
+import type { Metadata } from 'next';
+
+// canonical + openGraph.url explizit: sonst erbt die Seite beides vom Layout
+// und erklärt sich zum Duplikat der Welt-Startseite (CLAUDE.md §13).
+export const metadata: Metadata = {
+  title: 'AGB – NLP Coaching',
+  description:
+    'Allgemeine Geschäftsbedingungen für NLP Coaching von Stefan Heinemann, Potsdam.',
+  alternates: { canonical: '/nlp/agb' },
+  openGraph: {
+    title: 'AGB – NLP Coaching',
+    description:
+      'Allgemeine Geschäftsbedingungen für NLP Coaching von Stefan Heinemann, Potsdam.',
+    url: '/nlp/agb',
+  },
 };
 
 export default function AgbPage() {
   return (
-    <main className='relative z-10 mx-auto max-w-4xl px-4 py-48'>
+    <div className='relative z-10 mx-auto max-w-4xl px-4 py-48'>
       <header className='mb-10'>
         <p className='inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-medium text-[var(--text)] ring-1 ring-[var(--border)]'>
           Rechtliches · AGB
@@ -102,6 +114,6 @@ export default function AgbPage() {
       <p className='mt-8 text-xs text-[var(--muted)]'>
         Letzte Aktualisierung: {new Date().toLocaleDateString('de-DE')}
       </p>
-    </main>
+    </div>
   );
 }

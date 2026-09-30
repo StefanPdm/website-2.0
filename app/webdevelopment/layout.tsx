@@ -7,7 +7,10 @@ const description =
   'Freelance Webentwicklung aus Potsdam für Berlin und Brandenburg: Websites und Landingpages, Web Apps und Kundenportale, Headless CMS und Schnittstellen. Umgesetzt mit Next.js, React, Angular und TypeScript – sauber, wartbar, dokumentiert.';
 
 export const metadata: Metadata = {
-  title,
+  // Eigenes Template: Ein String-Titel im Layout würde das Template aus dem
+  // Root-Layout für alle Unterseiten unterbrechen – sie liefen dann ohne Namen.
+  // `default` bleibt ohne Namen: Den hängt dort schon das Root-Template an.
+  title: { default: title, template: `%s | ${OWNER.name}` },
   description,
   keywords: [...KEYWORDS_WEB],
   alternates: {

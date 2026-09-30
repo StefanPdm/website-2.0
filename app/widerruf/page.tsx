@@ -1,4 +1,19 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+// Ohne eigenes metadata erbte die Seite Titel und Canonical der Startseite.
+export const metadata: Metadata = {
+  title: 'Widerrufsbelehrung für Verbraucher',
+  description:
+    'Widerrufsbelehrung für Verbraucherverträge (B2C) mit Stefan Heinemann, Potsdam – gilt für NLP Coaching und Webentwicklung.',
+  alternates: { canonical: '/widerruf' },
+  openGraph: {
+    title: 'Widerrufsbelehrung für Verbraucher',
+    description:
+      'Widerrufsbelehrung für Verbraucherverträge (B2C) mit Stefan Heinemann, Potsdam – gilt für NLP Coaching und Webentwicklung.',
+    url: '/widerruf',
+  },
+};
 
 export default function WiderrufPage() {
   return (

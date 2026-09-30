@@ -1,4 +1,5 @@
 import { coachingOffers } from '@/app/nlp/pricing';
+import { HOURLY_RATE, VAT_NOTE, webServices } from '@/app/webdevelopment/pricing';
 import { absoluteUrl, AREA_SERVED, OWNER, SITE_URL } from '@/lib/site';
 
 /**
@@ -18,6 +19,10 @@ export const dynamic = 'force-static';
 function build() {
   const offers = coachingOffers
     .map((o) => `- ${o.title} (${o.duration}): ${o.price} inkl. MwSt. — ${o.note}`)
+    .join('\n');
+
+  const webPrices = webServices
+    .map((s) => `- ${s.title}: ab ${s.price} ${VAT_NOTE} — ${s.bullets.join(', ')}`)
     .join('\n');
 
   return `# ${OWNER.name}
@@ -97,9 +102,14 @@ Headless CMS, WordPress (ACF, Custom Post Types).
 
 Arbeitsweise in fünf Schritten: Verstehen, Struktur, Umsetzung, Feinschliff, Übergabe.
 
+Preise (Einstiegspreise, netto, ${VAT_NOTE}):
+${webPrices}
+- Stundensatz Entwicklung und Beratung: ${HOURLY_RATE.label} ${VAT_NOTE}
+Nach einem Briefing gibt es eine Aufwandsschätzung oder ein Festpreisangebot.
+
 Referenzen: Linde · TRAFÖ GmbH (trafoe.de, Relaunch 2024), Rund um Berlin Rallye
-(rundumberlin-classic.de), Kaiser Classic Rallye (kaiser-classic.de),
-Kundenportal Intralogistik (Launch 03/2026).
+(rundumberlin-classic.de), Zahnarzt Groß & Groß (zahnmedizin-potsdam.de,
+Relaunch 10/2026), Kundenportal Intralogistik (Launch 03/2026).
 
 ## Seiten
 

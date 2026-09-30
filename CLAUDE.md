@@ -15,13 +15,29 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
 ├── /webdevelopment        Welt B — Webdevelopment            (Marke: Stefan Heinemann)
 │   └── /impressum  /datenschutz  /cookies
 └── /nlp                   Welt A — NLP Coaching              (Marke: NLP Coaching)
+    ├── /wissenschaft      Inhaltsseite: Forschungsstand (DVNLP-Whitepaper)  → Article + citation
+    ├── /persoenlichkeitstest  Selbsttest Psychografie (18 Fragen, Client-Auswertung)
+    ├── /regeln/gluecklichsein  /regeln/ungluecklichsein   20-Regeln-Listen → ItemList
     ├── /impressum  /datenschutz  /cookies  /agb
-    └── /guide-download    Token-Landing für Lead-Magnet
+    └── /guide-download    Token-Landing für Lead-Magnet (noindex)
 /widerruf                  Widerrufsbelehrung (B2C)
 /api/contact               Kontaktformular → SMTP (nodemailer)
 /api/nlp-guide             Lead-Magnet: HMAC-Token erzeugen + Mail
 /api/nlp-guide/download    Token prüfen → PDF ausliefern
+/llms.txt  /sitemap.xml  /robots.txt  /manifest.webmanifest   generiert (§13)
 ```
+
+**Seitentypen in Welt A:**
+
+- **Onepager** `/nlp` — Sektionen in fester Reihenfolge aus `NlpSections.tsx`, verkauft.
+- **Inhaltsseiten** (`/nlp/wissenschaft`, `/persoenlichkeitstest`, `/regeln/*`) — beantworten
+  eine Suchfrage vollständig und führen dann ins Angebot. Sie sind der **SEO- und
+  KI-Hebel** von Welt A: Jede bekommt eigenes `metadata` (inkl. `canonical` und
+  `openGraph.url`), eigenes JSON-LD mit `BreadcrumbList`, einen Eintrag in `sitemap.ts`,
+  in `llms.txt` und im „Entdecken"-Menü von `NlpHeader`.
+- **Rechtsseiten** — nüchtern, „Sie"-Form.
+
+Welt B hat bisher **nur** den Onepager plus Rechtsseiten (siehe Ideen in `AUDIT.md`).
 
 **Kernregel der IA:** Die Startseite verkauft nicht — sie **sortiert**. Sie hat genau
 eine Aufgabe: den Besucher in Welt A oder Welt B zu führen. Jede neue Sektion auf `/`
@@ -133,6 +149,23 @@ gleichwertig, erzeugt aber eine Lint-Warnung. **Nicht** verwenden:
 Feste Hex-Werte oder `text-white/70` funktionieren im Warm-Theme nur, weil `globals.css`
 sie per `!important` überschreibt — das ist eine Altlast und für neue Klassen **nicht** vorgesehen.
 
+**Utility-Kurzformen** (`@theme inline` in `app/globals.css`, Sprint 1): Für die
+häufigsten Tokens gibt es echte Tailwind-Farben — `text-accent`, `text-accent-soft`,
+`bg-surface`, `bg-surface-strong`, `border-border`, `border-border-strong`,
+`ring-accent`, `shadow-(--glow)`. Sie sind **gleichwertig** zur Klammerform und in
+neuem Code bevorzugt, wo es sie gibt. `--text`, `--muted`, `--bg`, `--section-bg-accent`
+haben keine Kurzform → Klammerform (`text-(--text)`, `bg-(--section-bg-accent)`).
+
+**Theme-Zustand:** `isWarmTheme` liegt in React-State (`useNlpTheme()`), nicht in
+`localStorage` — jeder Seitenaufruf startet in `.theme-cool`. Komponenten, die das
+Theme brauchen (WebGL-Farben), lesen es über `useNlpTheme()`, nie über das DOM.
+
+**Dekor-Motive:** `app/nlp/components/Motifs.tsx` — Inline-SVGs (`MotifClarity`,
+`MotifRelation`, `MotifInsight`, `MotifAction` …), eingefärbt über
+`--accent → --accent-2`, immer `aria-hidden`. Als Wasserzeichen mit
+`opacity-[0.07]` hinter Karten/Kopfbereichen, als Inhalt nur in der
+Persönlichkeitstest-Sektion. Neue Illustrationen in Welt A: **als Motif, nicht als Bild.**
+
 Font Welt A: `Public_Sans` (in `NlpLayoutClient` geladen).
 
 ### 3.3 Welt B — Webdevelopment
@@ -146,7 +179,7 @@ Font Welt A: `Public_Sans` (in `NlpLayoutClient` geladen).
 | Flächen | `bg-white/5`, Rahmen `border-white/15` bzw. `/20` |
 | Brand-Gradient (CTA) | `from-[#1D6FA8] to-[#7A2C8E]` |
 | Akzent „Beweis/Check" | `#86C243` (Trust-Punkte, Listen-Bullets) |
-| Akzent „Technik" | `#2dd4bf` (ElectricBorder, Case-Hover-Glow) |
+| Akzent „Technik" | `#2dd4bf` = Utility `text-accent-web` (Preise, ElectricBorder, Case-Hover-Glow) |
 | Hintergrund-Licht | `LightPillar` top `#1D6FA8` → bottom `#7A2C8E`, `mix-blend-mode: screen` |
 | Radius | Karten `rounded-2xl` (16px) / innen `rounded-[22px]`, CTA `rounded-xl` |
 | Schatten | `0 30px 70px -60px rgba(0,0,0,.6)` |
@@ -200,13 +233,30 @@ Font Welt B: global (`--font-body` = Plus Jakarta Sans).
 - Welt B: `border-y border-white/20` + `backdrop-blur-md` + `ring-1 ring-white/10`.
 - **Rhythmus-Regel:** nie zwei akzentuierte Sektionen hintereinander. Muster A–B–A–B.
 
-**Breakpoints** — Tailwind-Default (`sm 640 / md 768 / lg 1024 / xl 1280`).
-Custom-CSS auf `/` nutzt zusätzlich `≤640`, `641–900`, `901–1200` und
-`max-height:700px and (orientation:landscape)`.
+**Breakpoints** — Tailwind-Default (`sm 640 / md 768 / lg 1024 / xl 1280`) plus
+**`hdr` = 70rem (1120 px)** — nur für die Kopfzeile von Welt A (Desktop-Nav,
+Theme-Toggle, Burger schalten dort gemeinsam). Custom-CSS auf `/` nutzt zusätzlich
+`≤640`, `641–900`, `901–1200` und `max-height:700px and (orientation:landscape)`.
 
 > ⚠️ **Zwingend:** Jede Sichtbarkeitsregel muss über **alle** Breakpoints hinweg
 > vollständig sein. Nav-Trigger und Nav-Panel **immer** am selben Breakpoint schalten
-> (aktuell verletzt, siehe `AUDIT.md` #3).
+> (`hdr:flex` ↔ `hdr:hidden` — nie `lg:` und `hdr:` mischen).
+
+**Muster Inhaltsseite Welt A** (`/nlp/wissenschaft`, `/persoenlichkeitstest`, `/regeln/*`):
+
+```
+<main className='relative z-10'>
+  <section  Kopfbereich: border-b border-(--border) px-4 pt-40 pb-16 md:pt-48
+            + Motif als Wasserzeichen (absolute, opacity-[0.07])
+    <div container mx-auto max-w-4xl>
+      <nav aria-label='Brotkrumen'>  Start / NLP Coaching / <Seite>   text-xs text-(--muted)
+      Eyebrow → <h1> (text-3xl sm:text-4xl lg:text-5xl) → Lead → Meta (Dauer, Quelle)
+  <section> … Inhalt in GlassCards, <h2> text-2xl sm:text-3xl …
+  <section> Abschluss-CTA → /nlp#kontakt bzw. /nlp#preise (PrimaryButton)
+```
+
+Das Pt-40 gleicht die fixierte Kopfzeile aus. Die sichtbare Brotkrumen-Navigation
+und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 
 ---
 
@@ -221,7 +271,26 @@ Custom-CSS auf `/` nutzt zusätzlich `≤640`, `641–900`, `901–1200` und
 | `ScrollToTop` | Fixed Button ab `scrollY > 240` | Welt B |
 | `CaseCard` | Referenzkarte mit Tilt-Effekt + Video/Bild + Info-Leiste | Welt B |
 | `ContactForm` / `ContactFormNlp` / `ContactFormWeb` | drei Varianten desselben Endpunkts | `/` / Welt A / Welt B |
-| `ContactRevealButton` | blendet `.contact-grid--hidden` ein | ⚠️ derzeit ungenutzt |
+| `HomeContact` (`Provider`/`Trigger`/`Section`) | Kontakt auf `/` — auf/zu per React-State | Welt 0 |
+| `FormShield` / `useModal` / `LazyEffect` | Bot-Schutz (§8), Modal-Verhalten (§11), Effekt-Hülle (§9) | alle |
+| `WebBackdrop` / `HyperspeedBand` | Client-Wrapper für die WebGL-Effekte von Welt B | Welt B |
+| `Header` | Welt-B-Kopfzeile (baut `CardNav`) | Welt B |
+| `StructuredData` / `OgCard` | JSON-LD je Route, OG-Bild-Layout (§13) | alle |
+
+### Welt A (`app/nlp/components/`)
+
+| Komponente | Zweck |
+|---|---|
+| `NlpHeader` | Fixe Kopfzeile, Scroll-Spy auf Sektions-IDs, „Entdecken"-Dropdown für die Inhaltsseiten (`discoverItems`), Theme-Toggle, Burger < `hdr` |
+| `WorldSwitch` | Schwebender Rundbutton (`logo-sh.svg`, 44 px, Puls-Ring) oben links → `/`. **Der** Weltenwechsel in Welt A — nicht zurück in die Nav legen |
+| `NlpFooter` | Rechtslinks + Weltenwechsel |
+| `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
+| `Motifs` | Dekor-SVGs (§3.2) |
+| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx`: Hero → Intro („Was ist NLP?") → Work → Transformation → Persönlichkeitstest → Fulfilment → Preise → Leitfaden → Über mich → FAQ → Kontakt |
+
+Hinweis: `NlpSections.tsx` ist `'use client'` (wegen `useNlpTheme`). Alles, was es
+importiert, wird damit ebenfalls Client-Code — auch Sektionen ohne `'use client'`.
+Das HTML wird trotzdem serverseitig gerendert (SEO unkritisch), nur das JS-Bundle wächst.
 
 ### Effekt-Komponenten (react-bits, `.jsx`)
 
@@ -430,7 +499,8 @@ Dreiklänge als Stilmittel („Kopf. Körper. Fokus." / „klar. sauber. wirksam
   Ergebnisse als Ziel formulieren, nicht als Zusage.
 
 **Cross-Selling:** Der Wechsel zwischen den Welten muss immer möglich sein
-(NLP-Header → „Hauptseite", Web-Nav → „Zurück zur Hauptseite", Landing-Tipp).
+(Welt A → schwebender `WorldSwitch` + Footer, Web-Nav → „Zurück zur Hauptseite",
+Landing-Tipp, `faqBoth` in beiden FAQ-Sektionen).
 Das ist die Scanner-Story des Betreibers und ein bewusstes Alleinstellungsmerkmal.
 
 ---
@@ -438,6 +508,9 @@ Das ist die Scanner-Story des Betreibers und ein bewusstes Alleinstellungsmerkma
 ## 11. Accessibility-Baseline (nicht verhandelbar)
 
 - `<html lang="de">`, semantische Landmarks (`header`/`nav`/`main`/`footer`).
+- **Genau ein `<main>` pro Route.** In Welt A setzt es `NlpLayoutClient` — Seiten
+  darunter beginnen mit `<article>` (Inhaltsseiten mit `Article`-Schema) oder `<div>`,
+  nie mit einem zweiten `<main>`. In Welt B und auf `/` bringt die Seite es selbst mit.
 - Kontrast **≥ 4.5:1** für Text. Kritisch: `text-white/50` und `text-white/60`
   auf `#050b12` sowie das gesamte `.theme-warm` — **vor Merge messen**.
 - Fokus sichtbar auf **jedem** interaktiven Element.
@@ -533,6 +606,19 @@ Dateinamen: kebab-case, beschreibend, ASCII, **ohne Leerzeichen und ohne Datum**
   Absolute Links über `absoluteUrl('/pfad')`.
 - Jede Route exportiert `metadata` mit `title`, `description`,
   `alternates.canonical`, `openGraph`, `twitter`, `keywords`.
+- ⚠️ **Metadata wird vererbt.** Next.js übernimmt `alternates` und `openGraph`
+  aus dem nächsthöheren Layout, wenn die Seite sie nicht selbst setzt.
+  `app/nlp/layout.tsx` setzt `canonical: '/nlp'`, `app/webdevelopment/layout.tsx`
+  `'/webdevelopment'`, `app/layout.tsx` die Startseite. Eine Unterseite ohne
+  eigenes `alternates.canonical` **erklärt sich damit selbst zum Duplikat der
+  Elternseite.** Deshalb: `canonical` **und** `openGraph.url` auf **jeder** Seite
+  setzen, auch auf Rechtsseiten.
+- Titel in `metadata` **ohne** „| Stefan Heinemann" schreiben — den hängen die
+  Templates an. Ein Template gilt nur eine Ebene tief, deshalb setzen
+  `app/nlp/layout.tsx` und `app/webdevelopment/layout.tsx` jeweils ein eigenes
+  `title: { default: title, template: '%s | ${OWNER.name}' }`. `default` bleibt
+  ohne Namen, sonst hängt das Root-Template ihn ein zweites Mal an.
+  Ein neues Layout mit eigenem `title` braucht dasselbe Muster.
 - Titel-Template: `'%s | Stefan Heinemann'`.
 - **Title und Description tragen immer Leistung + Ort.** Nicht „NLP Coaching",
   sondern „NLP Coaching in Potsdam & Berlin – Klarheit, Fokus, Entscheidungen".
@@ -589,6 +675,10 @@ Components (damit es auch ohne JavaScript im HTML steht):
 | `/` | `Person` + `WebSite` + `ProfessionalService` |
 | `/nlp` | `Service` + `OfferCatalog` (aus `app/nlp/pricing.ts`) + `BreadcrumbList` |
 | `/webdevelopment` | `Service` + `OfferCatalog` + `ItemList` (Referenzen) + `BreadcrumbList` |
+| `/nlp` + `/webdevelopment` | zusätzlich `FAQPage` (aus `faq.ts` + `faqBoth`) |
+| `/nlp/wissenschaft` | `Article` mit `citation` (DVNLP-Whitepaper) + `BreadcrumbList` |
+| `/nlp/regeln/*` | `Article` + `ItemList` (20 Regeln) + `BreadcrumbList` |
+| `/nlp/persoenlichkeitstest` | `WebApplication` (kostenlos, Disclaimer in `description`) + `BreadcrumbList` |
 
 Alle Graphen verweisen über `@id` auf **dieselbe** Person — das ist die
 Voraussetzung dafür, dass Google beide Geschäftsbereiche einer Entität zuordnet
@@ -596,6 +686,10 @@ statt zwei unabhängige Anbieter zu sehen.
 
 **Preise stehen ausschließlich in `app/nlp/pricing.ts`.** Preistabelle und
 `Offer`-Schema lesen dieselbe Quelle — sonst driftet das Markup von der Anzeige weg.
+Für Welt B gilt dasselbe in **`app/webdevelopment/pricing.ts`** (`webServices`,
+`HOURLY_RATE`, `VAT_NOTE`). Gelesen von der Leistungs-Sektion, `WebStructuredData`
+(`priceSpecification.minPrice`, `valueAddedTaxIncluded: false`), der Preis-FAQ
+(`priceOf('website')`) und `llms.txt`. Web-Preise sind B2B → immer mit „zzgl. MwSt.".
 
 ### KI-Lesbarkeit
 
@@ -730,3 +824,20 @@ OG-Bilder, JSON-LD, `llms.txt`.
 - Der Kontaktbereich auf `/` ist per `display:none` versteckt (`AUDIT.md` #19).
 - Vendor-Komponenten (`LaserFlow`, `LightPillar`) verursachen 11 ESLint-Fehler;
   eigener Code ist sauber (`AUDIT.md` #18).
+
+**SEO-Analyse 2026-09-30 — erledigt:** eigenes `metadata` + Canonical für `/widerruf`
+und alle Rechtsseiten · Rechtslinks auf `/` (`.landing-legal`) · TMG → DDG im
+Web-Impressum · Web-Preise zentral, mit MwSt.-Hinweis, in Schema/FAQ/`llms.txt` ·
+Schema für den Persönlichkeitstest.
+
+**SEO-Analyse 2026-09-30 — offen:**
+
+- `/` zeigt im Orbit Bild und Namen von Tony Robbins (`/tony-robbins.png`) —
+  Bildrecht/Persönlichkeitsrecht ungeklärt, und für Suchmaschinen eine falsche
+  Entitäts-Verknüpfung. Durch eigenes Motiv (z. B. „DVNLP") ersetzen.
+- Emoji im Fließtext auf `/` („😁" im Landing-Tipp) — verstößt gegen §10.
+
+**Case-Videos:** Rohaufnahmen (`.mp4`) liegen in `design-source/case-videos/`,
+ausgeliefert wird `.webm` (VP9, ohne Ton, 30 fps, 640 px breit) plus `.webp`-Poster
+mit demselben Namen. Vorlage: `zahnarzt-gross-gross.*` (34 s → 610 KB).
+Bildschirmaufnahmen vor dem Export auf eingeblendete Recorder-Leisten prüfen.
