@@ -22,6 +22,7 @@ const items = [
     bgColor: '#ffffff0d',
     textColor: '#fff',
     links: [
+      { label: 'Über mich', ariaLabel: 'Zu Über mich', href: '/webdevelopment#ueber-mich' },
       { label: 'Referenzen', ariaLabel: 'Zu den Referenzen', href: '/webdevelopment#referenzen' },
       { label: 'Kontaktformular', ariaLabel: 'Zum Kontakt', href: '/webdevelopment#kontakt' },
       { label: 'Zurück zur Hauptseite', ariaLabel: 'Zurück zur Hauptseite', href: '/' },

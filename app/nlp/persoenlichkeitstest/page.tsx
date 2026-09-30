@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import GlassCard from '@/components/GlassCard';
 import { PersonalityTestStructuredData } from '@/components/StructuredData';
+import ContentDate from '@/app/nlp/components/ContentDate';
 import { MotifAction, MotifInsight, MotifRelation } from '@/app/nlp/components/Motifs';
 import TestClient from '@/app/nlp/persoenlichkeitstest/TestClient';
 import {
@@ -86,6 +87,7 @@ export default function PersoenlichkeitstestPage() {
             Trotzdem gibt es meist einen Bereich, den wir besonders selbstverständlich nutzen — und
             genau der prägt, wie wir entscheiden, streiten und uns entwickeln.
           </p>
+          <ContentDate path='/nlp/persoenlichkeitstest' />
 
           {/* Die drei Bereiche */}
           <div className='mt-12 grid gap-4 sm:grid-cols-3'>

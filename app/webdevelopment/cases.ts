@@ -34,7 +34,7 @@ export type WebCase = {
 export const webCases: WebCase[] = [
   {
     name: 'Zahnarzt Groß & Groß',
-    status: 'Relaunch Oktober 2026',
+    status: 'Relaunch 10/2026',
     description:
       'Kompletter Relaunch für eine Zahnarztpraxis in Potsdam: neues Webdesign und neues Logo, passend zum hochwertigen Anspruch der Praxis – gebaut für Sichtbarkeit bei Google und in KI-Suchen.',
     url: 'https://www.zahnmedizin-potsdam.de/',

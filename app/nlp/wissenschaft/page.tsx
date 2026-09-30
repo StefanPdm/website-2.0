@@ -8,6 +8,7 @@ import GlassCard from '@/components/GlassCard';
 import { PrimaryButton, SecondaryButton } from '@/app/nlp/components/Buttons';
 import { MotifEvidence } from '@/app/nlp/components/Motifs';
 import { WhitepaperStructuredData } from '@/components/StructuredData';
+import ContentDate from '@/app/nlp/components/ContentDate';
 import { limitations, mechanisms, WHITEPAPER } from '@/app/nlp/wissenschaft/data';
 
 const title = 'Warum NLP wirkt – der Forschungsstand 2026';
@@ -98,6 +99,7 @@ export default function WissenschaftPage() {
               eine ehrliche Antwort statt einer Verteidigungsrede — und die fällt differenzierter
               aus, als beide Lager es gern hätten.
             </p>
+            <ContentDate path='/nlp/wissenschaft' />
 
             <div className='mt-8 max-w-2xl rounded-2xl border border-(--border) bg-(--surface) p-5'>
               <p className='text-sm leading-relaxed text-(--muted)'>

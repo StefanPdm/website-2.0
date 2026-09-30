@@ -4,6 +4,7 @@ import path from 'node:path';
 import Link from 'next/link';
 import { Download } from 'lucide-react';
 
+import ContentDate from '@/app/nlp/components/ContentDate';
 import GlassCard from '@/components/GlassCard';
 import { PrimaryButton, SecondaryButton } from '@/app/nlp/components/Buttons';
 import { otherRuleSet, type RuleSet } from '@/app/nlp/regeln/data';
@@ -65,6 +66,7 @@ export default function RulesPage({ ruleSet }: { ruleSet: RuleSet }) {
           <p className='mt-6 max-w-2xl text-base leading-relaxed text-(--muted) sm:text-lg'>
             {ruleSet.lead}
           </p>
+          <ContentDate path={ruleSet.href} />
 
           {/* Einordnung – bei den Anti-Regeln die wichtigste Zeile der Seite */}
           <div className='mt-8 max-w-2xl rounded-2xl border border-(--border) bg-(--surface) p-5'>

@@ -292,6 +292,17 @@ Hinweis: `NlpSections.tsx` ist `'use client'` (wegen `useNlpTheme`). Alles, was 
 importiert, wird damit ebenfalls Client-Code — auch Sektionen ohne `'use client'`.
 Das HTML wird trotzdem serverseitig gerendert (SEO unkritisch), nur das JS-Bundle wächst.
 
+### Welt B (`app/webdevelopment/`)
+
+| Datei | Zweck |
+|---|---|
+| `pricing.ts` | Einzige Quelle der Web-Preise (§13) |
+| `cases.ts` | Einzige Quelle der Referenzen: Karten, `ItemList`-Schema, `llms.txt`. Felder `tech` (Chips) und `result` (messbarer Beleg in `#86C243`). Reihenfolge = Anzeige |
+| `components/AboutDeveloperSection.tsx` | „Wer baut das?" direkt vor den Referenzen. Portrait mit Design-Tool-Auswahlrahmen (dekorativ, `aria-hidden`), Kennzahlen, Schnittstelle Mensch · Unternehmen · Technik, Leitsatz |
+
+Reihenfolge `/webdevelopment`: Hero → Leistungen → Technologien → Prozess →
+Zielgruppe → **Über mich** → Referenzen → FAQ → Kontakt.
+
 ### Effekt-Komponenten (react-bits, `.jsx`)
 
 `CardNav`, `CardSwap`, `DomeGallery`, `ElectricBorder`, `FloatingLines`,
@@ -587,6 +598,7 @@ nicht an. Ändert sich ein Logo, müssen diese vier PNG neu erzeugt werden.
 ```
 public/images-startseite/   Welt 0
 public/images-nlp/          Welt A
+public/images-webdevelopment/  Welt B (Portraits – nicht aus images-nlp übernehmen, §1)
 public/case-images-videos/  Welt B (Referenzen)
 public/logos/               Marken- & Zertifikatslogos
 public/icons/               UI-Icons
@@ -712,6 +724,11 @@ Für Welt B gilt dasselbe in **`app/webdevelopment/pricing.ts`** (`webServices`,
 `app/sitemap.ts` führt **echte Änderungsdaten je Seite**, nicht `new Date()`.
 Mit der Build-Zeit meldet jeder Deploy alle Seiten als geändert; Google stuft
 die lastmod-Angaben dann als wertlos ein und ignoriert sie künftig.
+
+Inhaltsseiten tragen zusätzlich `published`. Über `pageDates(path)` lesen die
+sichtbare Datumszeile (`app/nlp/components/ContentDate.tsx`, unter dem Lead) und
+`datePublished`/`dateModified` im JSON-LD dieselben Werte. Eine neue Inhaltsseite
+bekommt beides — datierte Inhalte werden von Google und Sprachmodellen bevorzugt.
 
 **Bei inhaltlicher Änderung das Datum mitziehen.** Refactorings, Styling und
 Tippfehler zählen nicht — das Feld beschreibt, wann sich für den Leser etwas

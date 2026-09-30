@@ -1,3 +1,4 @@
+import { pageDates } from '@/app/sitemap';
 import { absoluteUrl, AREA_SERVED, OWNER, SITE_URL } from '@/lib/site';
 
 /**
@@ -176,6 +177,7 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
  */
 export function WhitepaperStructuredData() {
   const url = absoluteUrl('/nlp/wissenschaft');
+  const dates = pageDates('/nlp/wissenschaft');
   return (
     <JsonLd
       data={{
@@ -189,6 +191,8 @@ export function WhitepaperStructuredData() {
               'Zusammenfassung des DVNLP-Whitepapers zur empirischen Evidenz psychologischer Wirkmechanismen im NLP (2016–2026), inklusive der Annahmen, die die Forschung nicht stützt.',
             url,
             inLanguage: 'de-DE',
+            datePublished: dates.published,
+            dateModified: dates.modified,
             author: { '@id': PERSON_ID },
             publisher: { '@id': PERSON_ID },
             isAccessibleForFree: true,
@@ -248,6 +252,7 @@ type PersonalityTestInput = {
  */
 export function PersonalityTestStructuredData({ test }: { test: PersonalityTestInput }) {
   const url = absoluteUrl('/nlp/persoenlichkeitstest');
+  const dates = pageDates('/nlp/persoenlichkeitstest');
   return (
     <JsonLd
       data={{
@@ -260,6 +265,8 @@ export function PersonalityTestStructuredData({ test }: { test: PersonalityTestI
             description: `${test.description} ${test.disclaimer}`,
             url,
             inLanguage: 'de-DE',
+            datePublished: dates.published,
+            dateModified: dates.modified,
             applicationCategory: 'LifestyleApplication',
             operatingSystem: 'Web',
             isAccessibleForFree: true,
@@ -337,6 +344,7 @@ type RuleSetInput = {
  * damit die Punkte nicht als Empfehlung missverstanden werden.
  */
 export function RulesStructuredData({ ruleSet }: { ruleSet: RuleSetInput }) {
+  const dates = pageDates(ruleSet.href);
   return (
     <JsonLd
       data={{
@@ -349,6 +357,8 @@ export function RulesStructuredData({ ruleSet }: { ruleSet: RuleSetInput }) {
             description: ruleSet.metaDescription,
             url: absoluteUrl(ruleSet.href),
             inLanguage: 'de-DE',
+            datePublished: dates.published,
+            dateModified: dates.modified,
             author: { '@id': PERSON_ID },
             publisher: { '@id': PERSON_ID },
             isAccessibleForFree: true,

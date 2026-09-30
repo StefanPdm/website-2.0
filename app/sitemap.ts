@@ -20,6 +20,8 @@ type Page = {
   path: string;
   /** Letzte inhaltliche Änderung, ISO-Datum. */
   lastModified: string;
+  /** Erstveröffentlichung, ISO-Datum – nur bei Inhaltsseiten (Article-Schema). */
+  published?: string;
   priority: number;
   changeFrequency: 'monthly' | 'yearly';
 };
@@ -39,24 +41,28 @@ const pages: Page[] = [
   {
     path: '/nlp/wissenschaft',
     lastModified: '2026-09-01',
+    published: '2026-09-01',
     priority: 0.8,
     changeFrequency: 'monthly',
   },
   {
     path: '/nlp/persoenlichkeitstest',
     lastModified: '2026-09-01',
+    published: '2026-09-01',
     priority: 0.8,
     changeFrequency: 'monthly',
   },
   {
     path: '/nlp/regeln/gluecklichsein',
     lastModified: '2026-09-01',
+    published: '2026-09-01',
     priority: 0.7,
     changeFrequency: 'monthly',
   },
   {
     path: '/nlp/regeln/ungluecklichsein',
     lastModified: '2026-09-01',
+    published: '2026-09-01',
     priority: 0.7,
     changeFrequency: 'monthly',
   },
@@ -96,6 +102,16 @@ const pages: Page[] = [
   },
   { path: '/widerruf', lastModified: '2026-02-08', priority: 0.2, changeFrequency: 'yearly' },
 ];
+
+/**
+ * Datumsangaben einer Seite – für die sichtbare „Stand"-Zeile und das
+ * Article-Schema. So zeigen Seite, JSON-LD und Sitemap immer dasselbe Datum.
+ */
+export function pageDates(path: string) {
+  const page = pages.find((entry) => entry.path === path);
+  if (!page) throw new Error(`Seite fehlt in app/sitemap.ts: ${path}`);
+  return { published: page.published ?? page.lastModified, modified: page.lastModified };
+}
 
 /** Wird auch von scripts/indexnow.mjs gelesen. */
 export const sitemapPaths = pages.map((page) => page.path);
