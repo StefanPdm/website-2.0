@@ -3,7 +3,8 @@ import { FORMULA_PLAIN, formulaTerms } from '@/app/nlp/formel-zum-glueck/data';
 /**
  * Die Formel als Schriftbild: S² + L + A + C³ im Akzentverlauf.
  *
- * Optisch mit echten Hochzahlen, für Screenreader als lesbarer Text
+ * Optisch mit echten Hochzahlen (höher gesetzt als Tailwinds Standard-`sup`,
+ * damit sie wie in einer Gleichung an der Oberkante des Buchstabens sitzen), für Screenreader als lesbarer Text
  * (`sr-only`) – „S hoch zwei" per Vorlesefunktion wäre unverständlich.
  * `animate` lässt die Terme nacheinander aufsteigen (nur im Hero).
  */
@@ -30,7 +31,7 @@ export default function FormulaMark({
             {index > 0 && <span className='text-(--muted) font-light'>+</span>}
             <span className='bg-linear-to-br from-accent to-accent-2 bg-clip-text text-transparent'>
               {term.base}
-              {'power' in term && <sup className='ml-[0.04em] text-[0.5em]'>{term.power}</sup>}
+              {'power' in term && <sup className='-top-[1.1em] ml-[0.04em] text-[0.5em]'>{term.power}</sup>}
             </span>
           </span>
         ))}

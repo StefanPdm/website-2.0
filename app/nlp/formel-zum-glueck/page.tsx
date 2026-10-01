@@ -99,7 +99,7 @@ export default function FormulaPage() {
           </h1>
           <FormulaMark
             animate
-            className='mt-8 text-6xl sm:text-8xl lg:text-9xl'
+            className='mt-8 text-[clamp(2.25rem,11vw,3.75rem)] sm:text-8xl lg:text-9xl'
           />
           <p className='mt-6 text-sm font-semibold uppercase tracking-[0.25em] text-(--muted)'>
             Die S-L-A-C-Formel
@@ -158,7 +158,7 @@ export default function FormulaPage() {
                       aria-hidden='true'
                       className='pointer-events-none absolute -top-10 left-0 select-none bg-linear-to-br from-accent/25 to-transparent bg-clip-text text-[9rem] font-bold leading-none text-transparent sm:text-[12rem]'>
                       {step.symbol}
-                      {step.power && <sup className='text-[0.45em]'>{step.power}</sup>}
+                      {step.power && <sup className='-top-[1.2em] text-[0.45em]'>{step.power}</sup>}
                     </span>
                     <div className='relative'>
                       <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
@@ -166,7 +166,7 @@ export default function FormulaPage() {
                       </p>
                       <h3 className='mt-4 text-2xl font-semibold text-(--text) sm:text-3xl'>
                         {step.symbol}
-                        {step.power && <sup className='text-[0.55em]'>{step.power}</sup>}
+                        {step.power && <sup className='-top-[1em] text-[0.55em]'>{step.power}</sup>}
                         <span className='text-(--muted)'> · </span>
                         {step.title}
                       </h3>
@@ -200,7 +200,7 @@ export default function FormulaPage() {
                 Schritt {steps.length} von {steps.length}
               </p>
               <h2 className='mt-4 text-3xl font-semibold text-(--text) sm:text-4xl'>
-                C<sup className='text-[0.55em]'>3</sup>
+                C<sup className='-top-[1em] text-[0.55em]'>3</sup>
                 <span className='text-(--muted)'> · </span>
                 {cStep.title}
               </h2>

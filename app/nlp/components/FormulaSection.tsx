@@ -30,7 +30,7 @@ export default function FormulaSection() {
           <h2 className='mt-5 text-3xl font-semibold text-(--text) sm:text-4xl'>
             {FORMULA_TITLE}
           </h2>
-          <FormulaMark className='mt-6 text-5xl sm:text-7xl' />
+          <FormulaMark className='mt-6 text-[clamp(2.25rem,11vw,3rem)] sm:text-7xl' />
           <p className='mt-6 text-base leading-relaxed text-(--muted) sm:text-lg'>{FORMULA_LEAD}</p>
         </div>
 
@@ -43,7 +43,7 @@ export default function FormulaSection() {
                 aria-hidden='true'
                 className='bg-linear-to-br from-accent to-accent-2 bg-clip-text text-3xl font-bold text-transparent'>
                 {step.symbol}
-                {step.power && <sup className='text-[0.5em]'>{step.power}</sup>}
+                {step.power && <sup className='-top-[1.1em] text-[0.5em]'>{step.power}</sup>}
               </p>
               <h3 className='mt-3 text-sm font-semibold text-(--text)'>{step.title}</h3>
               <p className='mt-1 text-xs leading-relaxed text-(--muted)'>{step.short}</p>
