@@ -1,4 +1,9 @@
-import { dimensionOrder, questions, type Dimension } from '@/app/nlp/persoenlichkeitstest/data';
+import {
+  dimensionOrder,
+  questions,
+  typeHref,
+  type Dimension,
+} from '@/app/nlp/persoenlichkeitstest/data';
 
 /**
  * Auswertung getrennt von den Testdaten.
@@ -48,6 +53,11 @@ export function evaluate(answers: (Dimension | null)[]): Evaluation {
     }
   }
 
+  return { scores, answered, ...rank(scores) };
+}
+
+/** Rangfolge und Einordnung aus fertigen Punktwerten – auch für geteilte Ergebnisse. */
+export function rank(scores: Scores): Pick<Evaluation, 'ranked' | 'gap' | 'verdict'> {
   // Bei Punktgleichstand entscheidet `dimensionOrder`. Das ist willkürlich,
   // aber stabil — die Anzeige darf zwischen zwei Renderings nicht springen.
   const ranked = [...dimensionOrder].sort((a, b) => scores[b] - scores[a]);
@@ -61,7 +71,7 @@ export function evaluate(answers: (Dimension | null)[]): Evaluation {
   else if (gap <= 3) verdict = 'tendenz';
   else verdict = 'deutlich';
 
-  return { scores, ranked, gap, verdict, answered };
+  return { ranked, gap, verdict };
 }
 
 /** Anteil an allen Fragen, gerundet. Keine wissenschaftliche Kennzahl. */
@@ -76,3 +86,45 @@ export const verdictLabel: Record<Verdict, string> = {
   mischprofil: 'Mischprofil aus zwei Bereichen',
   ausgeglichen: 'Ausgeglichenes Profil',
 };
+
+/**
+ * Teilen-Link mit Ergebnis: /nlp/persoenlichkeitstest/<typ>?beziehung=22&erkennen=28&handeln=50
+ *
+ * Im Link stehen nur die drei Prozentwerte – keine einzelnen Antworten. Die
+ * Typseite bleibt statisch; die Parameter liest erst der Browser
+ * (`SharedResult`), der Canonical zeigt weiter auf die Seite ohne Parameter.
+ */
+export function shareHref(scores: Scores): string {
+  const { ranked } = rank(scores);
+  const params = new URLSearchParams(
+    dimensionOrder.map((dimension) => [dimension, String(percentage(scores[dimension]))]),
+  );
+  return `${typeHref(ranked[0])}?${params}`;
+}
+
+/**
+ * Gegenstück zu `shareHref`. Liefert `null`, wenn die Parameter fehlen oder
+ * nicht zu einem echten Ergebnis passen – dann zeigt die Typseite einfach
+ * keine Ergebniskarte. Geprüft wird:
+ * - jeder Wert ist ein Prozentwert, der aus ganzen Punkten entstehen kann,
+ * - die Summe ergibt alle Fragen (der Test lässt keine Frage offen),
+ * - der Typ der Seite ist auch der stärkste Bereich (Gleichstand erlaubt).
+ */
+export function parseShared(search: string, dimension: Dimension): Scores | null {
+  const params = new URLSearchParams(search);
+  const scores = emptyScores();
+
+  for (const entry of dimensionOrder) {
+    const raw = params.get(entry);
+    if (raw === null || !/^\d{1,3}$/.test(raw)) return null;
+    const points = Math.round((Number(raw) / 100) * questions.length);
+    if (percentage(points) !== Number(raw)) return null;
+    scores[entry] = points;
+  }
+
+  const total = dimensionOrder.reduce((sum, entry) => sum + scores[entry], 0);
+  if (total !== questions.length) return null;
+  if (dimensionOrder.some((entry) => scores[entry] > scores[dimension])) return null;
+
+  return scores;
+}

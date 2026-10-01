@@ -124,7 +124,8 @@ export default function PersoenlichkeitstestPage() {
           <p className='mt-5 max-w-2xl text-xs leading-relaxed text-(--muted)'>
             Deine Antworten bleiben in deinem Browser. Sie werden nicht gespeichert, nicht
             übertragen und nicht ausgewertet — ich sehe dein Ergebnis nur, wenn du es mir selbst
-            erzählst.
+            erzählst. Teilst du dein Ergebnis, stehen nur die drei Prozentwerte im Link, keine
+            einzelnen Antworten.
           </p>
         </div>
       </section>

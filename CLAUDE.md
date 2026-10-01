@@ -708,10 +708,15 @@ Components (damit es auch ohne JavaScript im HTML steht):
 | `/nlp/persoenlichkeitstest` | `WebApplication` (kostenlos, Disclaimer in `description`) + `BreadcrumbList` |
 | `/nlp/persoenlichkeitstest/<typ>` | `Article` (`isPartOf` → Test) + `BreadcrumbList`, eigenes OG-Bild je Typ |
 
-**Persönlichkeitstest teilen:** `ShareResult` teilt nur den **Typ** (Web Share API,
-sonst Zwischenablage) und verlinkt auf die öffentliche Typseite — Punktwerte
-verlassen nie den Browser. Slugs stehen allein in `typeSlugs` (`data.ts`); die
-Typbeschreibung rendert `TypeProfile.tsx` für Ergebnis und Typseite gemeinsam.
+**Persönlichkeitstest teilen:** `ShareResult` teilt Typ **und** die drei Prozentwerte
+(Web Share API, sonst Zwischenablage) als Link auf die öffentliche Typseite:
+`/nlp/persoenlichkeitstest/<typ>?beziehung=22&erkennen=28&handeln=50` (`shareHref`
+in `scoring.ts`). Die Typseite bleibt statisch; erst im Browser liest `SharedResult`
+die Parameter, prüft sie (`parseShared`: ganze Punkte, Summe = alle Fragen, Seitentyp
+= stärkster Bereich) und zeigt die Ergebnisbalken über der Beschreibung — bei
+ungültigen Parametern nichts. Einzelne Antworten verlassen nie den Browser.
+Slugs stehen allein in `typeSlugs` (`data.ts`); Typbeschreibung (`TypeProfile.tsx`)
+und Balken (`ScoreBars.tsx`) nutzen Ergebnis und Typseite gemeinsam.
 
 **Testmodus:** `/nlp/persoenlichkeitstest?testmodus` (Parameter von Hand an die
 Adresse hängen). Zeigt in der Testkarte drei Knöpfe „Beziehung/Erkennen/Handeln → Frage 18", die

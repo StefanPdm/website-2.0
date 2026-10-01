@@ -4,27 +4,36 @@ import { useState } from 'react';
 import { Share2 } from 'lucide-react';
 
 import { SecondaryButton } from '@/app/nlp/components/Buttons';
-import { dimensions, typeHref, type Dimension } from '@/app/nlp/persoenlichkeitstest/data';
+import { dimensionOrder, dimensions } from '@/app/nlp/persoenlichkeitstest/data';
+import {
+  percentage,
+  rank,
+  shareHref,
+  type Scores,
+} from '@/app/nlp/persoenlichkeitstest/scoring';
 import { absoluteUrl } from '@/lib/site';
 
 /**
- * Ergebnis teilen – geteilt wird nur der **Typ**, nie die Punktwerte.
+ * Ergebnis teilen – geteilt werden der **Typ** und die drei Prozentwerte,
+ * keine einzelnen Antworten.
  *
- * Der Link führt auf die öffentliche Typseite, nicht auf ein persönliches
- * Ergebnis. So verlässt nichts aus den Antworten den Browser (siehe Hinweis
- * auf der Testseite), und jeder geteilte Link landet auf einer indexierbaren
- * Seite mit eigenem Vorschaubild.
+ * Der Link führt auf die öffentliche Typseite; die Prozentwerte hängen als
+ * Parameter daran (`shareHref`), und die Typseite zeigt sie als Ergebniskarte
+ * über der Typbeschreibung. Der Canonical der Typseite bleibt ohne Parameter.
  *
  * Web Share API, wo vorhanden (Handy: WhatsApp, Mail …), sonst Zwischenablage.
  * Die Rückmeldung läuft über `aria-live`, damit Screenreader sie ansagen.
  */
-export default function ShareResult({ dimension }: { dimension: Dimension }) {
+export default function ShareResult({ scores }: { scores: Scores }) {
   const [status, setStatus] = useState<'idle' | 'copied' | 'error'>('idle');
-  const type = dimensions[dimension].type;
-  const url = absoluteUrl(typeHref(dimension));
+  const type = dimensions[rank(scores).ranked[0]].type;
+  const url = absoluteUrl(shareHref(scores));
+  const summary = dimensionOrder
+    .map((dimension) => `${dimensions[dimension].area} ${percentage(scores[dimension])} %`)
+    .join(', ');
 
   async function share() {
-    const text = `Mein Ergebnis im Persönlichkeitstest: ${type}. Welcher Typ bist du?`;
+    const text = `Mein Ergebnis im Persönlichkeitstest: ${type} (${summary}). Welcher Typ bist du?`;
     try {
       if (navigator.share) {
         await navigator.share({ title: `Persönlichkeitstest: ${type}`, text, url });

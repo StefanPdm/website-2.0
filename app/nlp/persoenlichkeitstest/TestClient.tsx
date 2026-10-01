@@ -12,9 +12,10 @@ import {
   questions,
   type Dimension,
 } from '@/app/nlp/persoenlichkeitstest/data';
-import { evaluate, percentage, verdictLabel } from '@/app/nlp/persoenlichkeitstest/scoring';
+import { evaluate, verdictLabel } from '@/app/nlp/persoenlichkeitstest/scoring';
 import ShareResult from '@/app/nlp/persoenlichkeitstest/ShareResult';
-import TypeProfile, { MOTIFS } from '@/app/nlp/persoenlichkeitstest/TypeProfile';
+import ScoreBars from '@/app/nlp/persoenlichkeitstest/ScoreBars';
+import TypeProfile from '@/app/nlp/persoenlichkeitstest/TypeProfile';
 
 /**
  * Der Test als Client-Komponente — alles andere auf der Seite bleibt Server.
@@ -245,50 +246,6 @@ export default function TestClient() {
   );
 }
 
-/** Balken für einen Bereich — ebenfalls über `scaleX` statt `width`. */
-function ScoreBar({
-  dimension,
-  points,
-  isTop,
-}: {
-  dimension: Dimension;
-  points: number;
-  isTop: boolean;
-}) {
-  const percent = percentage(points);
-  const Motif = MOTIFS[dimension];
-
-  return (
-    <div
-      className={`rounded-2xl border p-5 transition ${
-        isTop
-          ? 'border-(--accent) bg-(--surface-strong) shadow-[0_0_40px_var(--glow)]'
-          : 'border-(--border) bg-(--surface)'
-      }`}>
-      <div className='flex items-center gap-3'>
-        <Motif className='h-9 w-9 shrink-0' />
-        <div className='min-w-0'>
-          <p className='truncate text-sm font-semibold text-(--text)'>
-            {dimensions[dimension].area}
-          </p>
-          <p className='truncate text-xs text-(--muted)'>{dimensions[dimension].type}</p>
-        </div>
-      </div>
-      <div className='mt-4 h-1.5 w-full overflow-hidden rounded-full bg-(--surface-strong)'>
-        <div
-          aria-hidden='true'
-          className='h-full w-full origin-left rounded-full bg-linear-to-r from-accent to-accent-2 transition-transform duration-700 ease-out'
-          style={{ transform: `scaleX(${percent / 100})` }}
-        />
-      </div>
-      <p className='mt-3 text-xs tabular-nums text-(--muted)'>
-        <span className='font-semibold text-(--text)'>{points}</span> von {questions.length}{' '}
-        Punkten · {percent} %
-      </p>
-    </div>
-  );
-}
-
 function Result({
   answers,
   onRestart,
@@ -325,16 +282,10 @@ function Result({
           selbstverständlichsten gewählt hast.
         </p>
 
-        <div className='mt-8 grid gap-4 sm:grid-cols-3'>
-          {dimensionOrder.map((dimension) => (
-            <ScoreBar
-              key={dimension}
-              dimension={dimension}
-              points={scores[dimension]}
-              isTop={!isAmbiguous && dimension === ranked[0]}
-            />
-          ))}
-        </div>
+        <ScoreBars
+          scores={scores}
+          top={isAmbiguous ? undefined : ranked[0]}
+        />
       </GlassCard>
 
       {isAmbiguous && (
@@ -400,7 +351,7 @@ function Result({
           <SecondaryButton onClick={onBack}>Letzte Frage ansehen</SecondaryButton>
         </div>
         <div className='mt-6 border-t border-(--border) pt-6'>
-          <ShareResult dimension={ranked[0]} />
+          <ShareResult scores={scores} />
         </div>
       </GlassCard>
 

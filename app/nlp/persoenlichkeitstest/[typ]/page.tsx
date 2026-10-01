@@ -15,6 +15,7 @@ import {
   typeHref,
   typeSlugs,
 } from '@/app/nlp/persoenlichkeitstest/data';
+import SharedResult from '@/app/nlp/persoenlichkeitstest/SharedResult';
 import TypeProfile, { MOTIFS } from '@/app/nlp/persoenlichkeitstest/TypeProfile';
 
 /**
@@ -22,7 +23,9 @@ import TypeProfile, { MOTIFS } from '@/app/nlp/persoenlichkeitstest/TypeProfile'
  *
  * Zwei Aufgaben:
  * 1. **Ziel des Teilen-Links.** Wer sein Ergebnis teilt, teilt diese Seite –
- *    mit eigenem Vorschaubild und dem Weg zurück in den Test.
+ *    mit eigenem Vorschaubild und dem Weg zurück in den Test. Trägt der Link
+ *    die Prozentwerte (`?beziehung=…&erkennen=…&handeln=…`), zeigt
+ *    `SharedResult` das Ergebnis über der Beschreibung.
  * 2. **Eigenständige Inhaltsseite** für Suchen wie „Handlungstyp Eigenschaften".
  *    Der Text stammt aus derselben Quelle wie das Testergebnis (data.ts).
  *
@@ -130,6 +133,7 @@ export default async function TypePage({ params }: Params) {
       {/* Beschreibung */}
       <section className='px-4 py-16 sm:py-20'>
         <div className='container mx-auto max-w-3xl'>
+          <SharedResult dimension={dimension} />
           <TypeProfile
             dimension={dimension}
             heading={`Was den ${type} auszeichnet`}
