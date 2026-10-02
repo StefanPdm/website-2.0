@@ -32,7 +32,7 @@ const pages: Page[] = [
   { path: '/nlp', lastModified: '2026-10-01', priority: 0.9, changeFrequency: 'monthly' },
   {
     path: '/webdevelopment',
-    lastModified: '2026-10-01',
+    lastModified: '2026-10-02',
     priority: 0.9,
     changeFrequency: 'monthly',
   },

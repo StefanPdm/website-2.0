@@ -10,7 +10,8 @@
  * `description`: ein Satz, was gebaut wurde und wofür. Nur belegbare Angaben.
  *
  * Reihenfolge = Anzeigereihenfolge: stärkster Beleg zuerst (Lighthouse 100),
- * dann die drei TRAFÖ-Projekte zusammen – ein Kunde, drei Aufträge.
+ * dann der zweite aktuelle Relaunch, dann die drei TRAFÖ-Projekte zusammen –
+ * ein Kunde, drei Aufträge.
  */
 
 export type WebCase = {
@@ -43,6 +44,16 @@ export const webCases: WebCase[] = [
       'Google Lighthouse: 100/100 in Performance, Accessibility, Best Practices, SEO und Agentic Browsing',
     video: '/case-images-videos/zahnarzt-gross-gross.webm',
     image: '/case-images-videos/zahnarzt-gross-gross.webp',
+  },
+  {
+    name: 'Hochzeitsauto · Ford Mustang 1968',
+    status: 'Relaunch 10/2026',
+    description:
+      'Relaunch der Website für die Vermietung eines Ford Mustang Cabrio von 1968 mit Fahrer – als Hochzeitsauto in Berlin, Potsdam und Brandenburg, mit Galerie, Terminanfrage und zweisprachig (DE/EN).',
+    url: 'https://www.mustang-mieten.berlin/',
+    tech: ['PHP'],
+    video: '/case-images-videos/mustang-mieten.webm',
+    image: '/case-images-videos/mustang-mieten.webp',
   },
   {
     name: 'Linde · TRAFÖ GmbH',
