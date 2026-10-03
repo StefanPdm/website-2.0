@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
+import WorldSwitchWeb from '@/components/WorldSwitchWeb';
 import { KEYWORDS_WEB, OWNER } from '@/lib/site';
 
 const title = 'Webentwicklung Potsdam & Berlin – Websites, Web Apps, Kundenportale';
@@ -39,6 +40,7 @@ export default function WebdevelopmentLayout({
   return (
     <div className='min-h-screen bg-[#0B1B2B] text-slate-100'>
       <Header />
+      <WorldSwitchWeb />
       <div className=''>{children}</div>
     </div>
   );

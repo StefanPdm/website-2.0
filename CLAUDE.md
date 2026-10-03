@@ -282,6 +282,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `FormShield` / `useContactSubmit` / `useModal` / `LazyEffect` | Bot-Schutz und Formular-Ablauf (§8), Modal-Verhalten (§11), Effekt-Hülle (§9) | alle |
 | `WebBackdrop` / `HyperspeedBand` | Client-Wrapper für die WebGL-Effekte von Welt B | Welt B |
 | `Header` | Welt-B-Kopfzeile (baut `CardNav`) | Welt B |
+| `WorldSwitchWeb` | Schwebender Rundbutton → `/`, Welt-B-Fassung von `WorldSwitch` (Farben aus §3.3, Puls in `accent-web`). Im Layout, also auf allen Welt-B-Seiten | Welt B |
 | `StructuredData` / `OgCard` | JSON-LD je Route, OG-Bild-Layout (§13) | alle |
 
 ### Welt A (`app/nlp/components/`)
@@ -538,7 +539,7 @@ Dreiklänge als Stilmittel („Kopf. Körper. Fokus." / „klar. sauber. wirksam
   Ergebnisse als Ziel formulieren, nicht als Zusage.
 
 **Cross-Selling:** Der Wechsel zwischen den Welten muss immer möglich sein
-(Welt A → schwebender `WorldSwitch` + Footer, Web-Nav → „Zurück zur Hauptseite",
+(Welt A → schwebender `WorldSwitch` + Footer, Welt B → schwebender `WorldSwitchWeb` + Web-Nav „Zurück zur Hauptseite",
 Landing-Tipp, `faqBoth` in beiden FAQ-Sektionen).
 Das ist die Scanner-Story des Betreibers und ein bewusstes Alleinstellungsmerkmal.
 
