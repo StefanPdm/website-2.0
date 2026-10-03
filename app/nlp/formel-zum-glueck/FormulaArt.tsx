@@ -190,36 +190,73 @@ export function AcceptArt({ className }: ArtProps) {
 }
 
 /** C³: ein Punkt, drei Wege – einer leuchtet nach dem anderen auf. */
+/**
+ * C³: vom Ausgangspunkt (Challenge) zu drei Möglichkeiten (Choices), von
+ * denen eine gewählt wird (Choose). Die Möglichkeiten sind selbst „C“ –
+ * nach rechts offene Bögen, an deren Rücken die Äste ankommen.
+ *
+ * Verlauf in Nutzerkoordinaten (`userSpaceOnUse`): Mit dem Standard
+ * `objectBoundingBox` wird ein Verlauf auf einer exakt waagerechten Linie
+ * ungültig (Höhe 0) – der mittlere Ast wurde deshalb nie gezeichnet.
+ *
+ * Animation `formel-branch-*` / `formel-chosen` (globals.css, 8 s):
+ * Äste gedimmt → leuchten nacheinander auf → der mittlere wird gewählt.
+ * Ruhezustand ohne Animation (reduzierte Bewegung): alles voll sichtbar.
+ */
+const C_RADIUS = 10;
+// Öffnung nach rechts: Bogen von oben rechts über links nach unten rechts.
+const cShape = (cx: number, cy: number) => {
+  const dx = Math.round(C_RADIUS * Math.cos(Math.PI / 3.6) * 10) / 10;
+  const dy = Math.round(C_RADIUS * Math.sin(Math.PI / 3.6) * 10) / 10;
+  return `M${cx + dx} ${cy - dy} A${C_RADIUS} ${C_RADIUS} 0 1 0 ${cx + dx} ${cy + dy}`;
+};
+const choiceBranches = [
+  { d: 'M40 100 C90 100 100 48 152 48', c: [162, 48] },
+  { d: 'M40 100 L152 100', c: [162, 100], chosen: true },
+  { d: 'M40 100 C90 100 100 152 152 152', c: [162, 152] },
+];
+
 export function ChoicesArt({ className }: ArtProps) {
-  const paths = [
-    { d: 'M40 100 C90 100 100 48 162 48', end: [162, 48] },
-    { d: 'M40 100 C90 100 110 100 162 100', end: [162, 100] },
-    { d: 'M40 100 C90 100 100 152 162 152', end: [162, 152] },
-  ];
   return (
     <svg
       viewBox='0 0 200 200'
       fill='none'
       aria-hidden='true'
       className={`formel-svg ${className ?? ''}`}>
-      <Gradient id='formel-g-c' />
-      {paths.map((path, index) => (
+      <defs>
+        <linearGradient
+          id='formel-g-c'
+          gradientUnits='userSpaceOnUse'
+          x1='40'
+          y1='40'
+          x2='175'
+          y2='160'>
+          <stop
+            offset='0%'
+            stopColor='var(--accent)'
+          />
+          <stop
+            offset='100%'
+            stopColor='var(--accent-2)'
+          />
+        </linearGradient>
+      </defs>
+      {choiceBranches.map((branch, index) => (
         <g
-          key={path.d}
-          className='formel-glow'
-          style={{ animationDelay: `${index * 1.5}s` }}>
+          key={branch.d}
+          className={`formel-branch-${index + 1}`}>
           <path
-            d={path.d}
+            d={branch.d}
             stroke='url(#formel-g-c)'
             strokeWidth='4'
             strokeLinecap='round'
           />
-          <circle
-            cx={path.end[0]}
-            cy={path.end[1]}
-            r='10'
+          <path
+            d={cShape(branch.c[0], branch.c[1])}
             stroke='url(#formel-g-c)'
-            strokeWidth='4'
+            strokeWidth='4.5'
+            strokeLinecap='round'
+            className={branch.chosen ? 'formel-chosen' : undefined}
           />
         </g>
       ))}

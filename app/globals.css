@@ -1130,17 +1130,6 @@ html {
   }
 }
 
-@keyframes formel-glow {
-  0%,
-  100% {
-    opacity: 0.25;
-  }
-  30%,
-  60% {
-    opacity: 1;
-  }
-}
-
 @keyframes formel-float {
   0%,
   100% {
@@ -1166,8 +1155,102 @@ html {
 .formel-blink {
   animation: formel-blink 6s ease-in-out infinite;
 }
-.formel-glow {
-  animation: formel-glow 4.5s ease-in-out infinite;
+
+/*
+ * C³-Grafik (ChoicesArt): Challenge → Choices → Choose in einem 8-s-Zyklus.
+ *  0–15 %  alle Äste gedimmt, nur der Ausgangspunkt atmet (Challenge)
+ * 15–50 %  die drei C leuchten nacheinander auf (Choices)
+ * 55–88 %  der mittlere ist gewählt, die anderen treten zurück (Choose)
+ */
+@keyframes formel-branch-1 {
+  0%,
+  15% {
+    opacity: 0.25;
+  }
+  22%,
+  26% {
+    opacity: 1;
+  }
+  33%,
+  50% {
+    opacity: 0.45;
+  }
+  58%,
+  88% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0.25;
+  }
+}
+@keyframes formel-branch-2 {
+  0%,
+  26% {
+    opacity: 0.25;
+  }
+  33%,
+  37% {
+    opacity: 1;
+  }
+  44%,
+  50% {
+    opacity: 0.45;
+  }
+  58%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.25;
+  }
+}
+@keyframes formel-branch-3 {
+  0%,
+  37% {
+    opacity: 0.25;
+  }
+  44%,
+  48% {
+    opacity: 1;
+  }
+  54% {
+    opacity: 0.45;
+  }
+  58%,
+  88% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0.25;
+  }
+}
+@keyframes formel-chosen {
+  0%,
+  55% {
+    transform: scale(1);
+  }
+  62%,
+  85% {
+    transform: scale(1.18);
+  }
+  92%,
+  100% {
+    transform: scale(1);
+  }
+}
+.formel-branch-1 {
+  animation: formel-branch-1 8s ease-in-out infinite;
+}
+.formel-branch-2 {
+  animation: formel-branch-2 8s ease-in-out infinite;
+}
+.formel-branch-3 {
+  animation: formel-branch-3 8s ease-in-out infinite;
+}
+.formel-chosen {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: formel-chosen 8s ease-in-out infinite;
 }
 .formel-float {
   animation: formel-float 5s ease-in-out infinite;
