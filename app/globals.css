@@ -972,6 +972,26 @@
   background: #ffffff;
 }
 
+/*
+ * Welt A: Aufklappliste nativer Selects.
+ *
+ * Optionen erben sonst die Theme-Textfarbe, das Betriebssystem zeichnet die
+ * Liste aber weiß – im Cool-Theme stand #e6f7ff auf Weiß (unlesbar).
+ * color-scheme schaltet die native Liste passend um, die Option-Farben sind
+ * der Rückfall für Browser, die color-scheme dort ignorieren.
+ */
+.theme-cool select {
+  color-scheme: dark;
+}
+.theme-warm select {
+  color-scheme: light;
+}
+.theme-cool select option,
+.theme-warm select option {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
 @layer base {
   * {
     border-color: var(--border);
