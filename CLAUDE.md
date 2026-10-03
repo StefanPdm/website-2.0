@@ -64,7 +64,7 @@ und die A11y-Baseline (§11).
 | Icons | `lucide-react` (UI-Icons), `react-icons/si` + `/fa6` (Tech-Logos, nur Welt B) |
 | Motion | GSAP (`CardNav`, `CardSwap`), CSS-Keyframes (Rest) |
 | 3D/WebGL | three.js + postprocessing — **nur Welt A/B-Hintergründe**, nie auf `/` |
-| Mail | nodemailer über SMTP (ENV). `resend` ist installiert, aber **ungenutzt** |
+| Mail | nodemailer über SMTP (ENV). Kein externer Mail-Dienst (`resend` 2026-10-03 entfernt) |
 | Paketmanager | **pnpm** (`packageManager: pnpm@9.15.0`) — kein npm/yarn |
 | Hosting | **Vercel** |
 | Sprache der UI | Deutsch, Duzen (du/dir), außer in Rechtstexten (dort „Sie") |
@@ -186,12 +186,17 @@ Font Welt A: `Public_Sans` (in `NlpLayoutClient` geladen).
 | Radius | Karten `rounded-2xl` (16px) / innen `rounded-[22px]`, CTA `rounded-xl` |
 | Schatten | `0 30px 70px -60px rgba(0,0,0,.6)` |
 
-Font Welt B: global (`--font-body` = Plus Jakarta Sans).
+Font Welt B: global (Plus Jakarta Sans über `--font-sans`, siehe §3.4).
 
 ### 3.4 Global (Root-Layout)
 
-- `--font-body`: **Plus Jakarta Sans** (300/400/500/600/700)
-- `--font-display`: **Syne** (500/600/700/800)
+- **Plus Jakarta Sans** (300/400/500/600/700) — next/font-Variable `--font-jakarta`,
+  im `@theme` als `--font-sans` → Standardschrift (`font-sans`, greift automatisch)
+- Eine Schrift für `/` und Welt B, keine separate Display-Schrift. Syne war geladen,
+  aber nie verwendet, und wurde 2026-10-03 entfernt (zu breit für lange deutsche
+  Wörter auf Mobil, passt nicht zur ruhigen Tonalität von Welt B).
+- next/font-Variable und Theme-Name **nie gleich benennen** (`--font-sans: var(--font-sans)`
+  ist ein Zirkelbezug). Welt A setzt Public Sans per Klasse und ist davon unberührt.
 - `themeColor`: `#0b1118`, `colorScheme: 'dark light'`, `<html lang="de">`
 
 ---
@@ -307,8 +312,8 @@ Zielgruppe → **Über mich** → Referenzen → FAQ → Kontakt.
 
 ### Effekt-Komponenten (react-bits, `.jsx`)
 
-`CardNav`, `CardSwap`, `DomeGallery`, `ElectricBorder`, `FloatingLines`,
-`Hyperspeed`, `LaserFlow`, `LightPillar`, `PixelCard`, `ProfileCard.css`
+`CardNav`, `CardSwap`, `ElectricBorder`, `FloatingLines`,
+`Hyperspeed`, `LaserFlow` (`.tsx`), `LightPillar`, `PixelCard`
 
 **Regeln für Effekt-Komponenten**
 

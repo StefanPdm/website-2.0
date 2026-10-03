@@ -457,6 +457,7 @@ was aktiv ist. Genau das erschwert konsistente Weiterentwicklung.
 doppeldeutig.
 
 **Fix:** Löschen. `pnpm remove resend @use-gesture/react` nach Entfernen von DomeGallery.
+(Die beiden Pakete standen trotz Häkchen noch in `package.json` — entfernt am 03.10.2026.)
 
 ---
 

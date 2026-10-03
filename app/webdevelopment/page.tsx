@@ -143,7 +143,7 @@ const techIconMap: Record<string, ReactElement> = {
   Docker: <SiDocker className='h-4 w-4' />,
   'Neon (Postgres)': (
     <Image
-      src='https://neon.com/brand/neon-logomark-light-color.svg?updated=2026-01-21'
+      src='/logos/neon-logomark.svg'
       alt='Neon'
       width={16}
       height={16}
