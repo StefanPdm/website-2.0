@@ -9,6 +9,8 @@ import {
   logVerdict,
   scoreSubmission,
 } from '@/lib/anti-spam';
+import { guideCustomerMail, guideOwnerMail, formatTimestamp, type Row } from '@/lib/mail-templates';
+import { SITE_URL } from '@/lib/site';
 
 const SMTP_HOST = process.env.SMTP_HOST;
 const SMTP_PORT = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined;
@@ -20,7 +22,7 @@ const OWNER_EMAIL = process.env.OWNER_EMAIL;
 const DOWNLOAD_TOKEN_SECRET = process.env.DOWNLOAD_TOKEN_SECRET;
 function resolveSiteUrl(req: Request) {
   if (process.env.NODE_ENV === 'production') {
-    return 'https://heinemann.berlin';
+    return SITE_URL;
   }
 
   const envUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
@@ -121,7 +123,6 @@ export async function POST(req: Request) {
       );
     }
 
-    const ts = new Date().toISOString();
     const headers = req.headers;
     const userAgent = headers.get('user-agent') || undefined;
     const acceptLanguage = headers.get('accept-language') || undefined;
@@ -143,19 +144,17 @@ export async function POST(req: Request) {
     const locationCoords = latitude && longitude ? `${latitude}, ${longitude}` : undefined;
     const location = [locationParts, locationCoords].filter(Boolean).join(' • ');
 
-    const clientInfoLines = [
-      ip ? `IP: ${ip}` : null,
-      location ? `Standort: ${location}` : null,
-      userAgent ? `Browser: ${userAgent}` : null,
-      secChUa ? `Sec-CH-UA: ${secChUa}` : null,
-      secChUaPlatform ? `Plattform: ${secChUaPlatform}` : null,
-      secChUaMobile ? `Mobil: ${secChUaMobile}` : null,
-      acceptLanguage ? `Sprache: ${acceptLanguage}` : null,
-      referer ? `Referer: ${referer}` : null,
-      origin ? `Origin: ${origin}` : null,
-    ]
-      .filter(Boolean)
-      .join('\n');
+    const clientInfo: Row[] = [
+      ['IP', ip],
+      ['Standort', location],
+      ['Browser', userAgent],
+      ['Sec-CH-UA', secChUa],
+      ['Plattform', secChUaPlatform],
+      ['Mobil', secChUaMobile],
+      ['Sprache', acceptLanguage],
+      ['Referer', referer],
+      ['Origin', origin],
+    ];
 
     // --- Bot-Schutz: vor jedem Mailversand -----------------------------------
     // Die Leitfaden-Mail geht an eine frei waehlbare Adresse. Ungefiltert
@@ -180,56 +179,15 @@ export async function POST(req: Request) {
 
     const siteUrl = resolveSiteUrl(req);
     const guideUrl = `${siteUrl}/nlp/guide-download?token=${encodeURIComponent(downloadToken)}`;
-    const logoUrl = `${siteUrl}/logos/logo-nlp-256.png`;
 
-    const signaturePlain = '\n\nMit lieben Grüßen\nStefan\n\nwww.heinemann.berlin\n\n';
-
-    const subject = 'Dein kostenloser NLP-Leitfaden';
-
-    const htmlCustomer = `
-      <div style="font-family:Helvetica,Arial,sans-serif;line-height:1.6;color:#0B1B2B;background:#f6f9fc;padding:28px">
-        <div style="max-width:640px;margin:0 auto;background:white;border-radius:20px;overflow:hidden;box-shadow:0 12px 30px rgba(15,23,42,0.08);font-family:Helvetica,Arial,sans-serif">
-          <div style="padding:24px 26px;border-bottom:1px solid #e5e7eb;background:linear-gradient(135deg,#f5fbff,#eafaf1)">
-            <img src="${logoUrl}" alt="NLP Coaching" style="height:48px;width:48px;display:block" />
-            <h1 style="margin:14px 0 6px;font-size:24px;letter-spacing:0.2px">Hallo ${name},</h1>
-            <p style="margin:0;color:#475569">hier ist dein kostenloser NLP-Leitfaden.</p>
-          </div>
-          <div style="padding:24px 26px">
-            <p style="margin:0 0 14px;color:#0f172a">Klicke auf den Button, um den Leitfaden herunterzuladen:</p>
-            <div style="margin:18px 0">
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="border-collapse:separate;font-family:Helvetica,Arial,sans-serif">
-                <tr>
-                  <td style="border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#00e5ff,#22c55e);box-shadow:0 10px 24px rgba(0,229,255,0.25)">
-                    <a href="${guideUrl}" style="display:inline-block;padding:14px 22px;color:#001018;text-decoration:none;font-weight:700;letter-spacing:0.2px;font-family:Helvetica,Arial,sans-serif">Leitfaden herunterladen</a>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <p style="margin:0;color:#64748b;font-size:14px">Falls der Button nicht funktioniert, nutze diesen Link:<br/>
-              <a href="${guideUrl}" style="color:#0ea5e9">${guideUrl}</a>
-            </p>
-            <p style="margin:12px 0 0;color:#64748b;font-size:12px">Der Link ist 7 Tage gültig.</p>
-            <p style="margin:18px 0 0">Viel Freude damit und bis vielleicht bald!${signaturePlain.replace(/\n/g, '<br/>')}</p>
-          </div>
-          <div style="padding:18px 26px;border-top:1px solid #eef2f7;background:#fafcff;text-align:center;font-family:Helvetica,Arial,sans-serif">
-            <img src="${logoUrl}" alt="NLP Coaching" style="height:48px;width:48px;display:inline-block" />
-            <p style="margin:8px 0 0;color:#94a3b8;font-size:12px">NLP Coaching · Wir lieben dein Problem</p>
-          </div>
-        </div>
-        <p style="max-width:640px;margin:16px auto 0;color:#94a3b8;font-size:12px;font-family:Helvetica,Arial,sans-serif">Diese E-Mail wurde automatisch gesendet.</p>
-      </div>
-    `;
-
-    const htmlOwner = `
-      <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.6;color:#0B1B2B">
-        <h2>Neuer NLP-Leitfaden Download</h2>
-        <p><strong>Zeitpunkt:</strong> ${ts}</p>
-        <p><strong>Name:</strong> ${name}<br/>
-        <strong>E-Mail:</strong> ${email}</p>
-        ${clientInfoLines ? `<p><strong>Nutzerinfos</strong><br/>${clientInfoLines.replace(/\n/g, '<br/>')}</p>` : ''}
-        <p><strong>Download-Link</strong><br/><a href="${guideUrl}">${guideUrl}</a></p>
-      </div>
-    `;
+    const customerMail = guideCustomerMail({ name: String(name), guideUrl });
+    const ownerMail = guideOwnerMail({
+      name: String(name),
+      email: String(email),
+      guideUrl,
+      timestamp: formatTimestamp(),
+      clientInfo,
+    });
 
     const transporter = nodemailer.createTransport({
       host: SMTP_HOST,
@@ -262,9 +220,9 @@ export async function POST(req: Request) {
         from: SMTP_FROM,
         to: OWNER_EMAIL,
         replyTo: String(email),
-        subject: `NLP-Leitfaden Download – ${name}`,
-        text: `Neuer NLP-Leitfaden Download\n\nZeitpunkt: ${ts}\nName: ${name}\nE-Mail: ${email}\n${clientInfoLines ? `\nNutzerinfos:\n${clientInfoLines}\n` : ''}\nDownload-Link: ${guideUrl}\n`,
-        html: htmlOwner,
+        subject: ownerMail.subject,
+        text: ownerMail.text,
+        html: ownerMail.html,
       });
     }
 
@@ -272,9 +230,9 @@ export async function POST(req: Request) {
       from: SMTP_FROM,
       to: String(email),
       replyTo: OWNER_EMAIL || SMTP_FROM,
-      subject,
-      text: `Hallo ${name},\n\nhier ist dein kostenloser NLP-Leitfaden:\n${guideUrl}\n\nDer Link ist 7 Tage gültig.${signaturePlain}`,
-      html: htmlCustomer,
+      subject: customerMail.subject,
+      text: customerMail.text,
+      html: customerMail.html,
     });
 
     return NextResponse.json({ ok: true });

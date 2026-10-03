@@ -8,6 +8,13 @@ import {
   logVerdict,
   scoreSubmission,
 } from '@/lib/anti-spam';
+import {
+  contactCustomerMail,
+  contactOwnerMail,
+  contactWorld,
+  formatTimestamp,
+  type Row,
+} from '@/lib/mail-templates';
 
 // SMTP configuration from environment
 const SMTP_HOST = process.env.SMTP_HOST;
@@ -114,7 +121,6 @@ export async function POST(req: Request) {
       );
     }
 
-    const ts = new Date().toISOString();
     const headers = req.headers;
     const userAgent = headers.get('user-agent') || undefined;
     const acceptLanguage = headers.get('accept-language') || undefined;
@@ -136,19 +142,17 @@ export async function POST(req: Request) {
     const locationCoords = latitude && longitude ? `${latitude}, ${longitude}` : undefined;
     const location = [locationParts, locationCoords].filter(Boolean).join(' • ');
 
-    const clientInfoLines = [
-      ip ? `IP: ${ip}` : null,
-      location ? `Standort: ${location}` : null,
-      userAgent ? `Browser: ${userAgent}` : null,
-      secChUa ? `Sec-CH-UA: ${secChUa}` : null,
-      secChUaPlatform ? `Plattform: ${secChUaPlatform}` : null,
-      secChUaMobile ? `Mobil: ${secChUaMobile}` : null,
-      acceptLanguage ? `Sprache: ${acceptLanguage}` : null,
-      referer ? `Referer: ${referer}` : null,
-      origin ? `Origin: ${origin}` : null,
-    ]
-      .filter(Boolean)
-      .join('\n');
+    const clientInfo: Row[] = [
+      ['IP', ip],
+      ['Standort', location],
+      ['Browser', userAgent],
+      ['Sec-CH-UA', secChUa],
+      ['Plattform', secChUaPlatform],
+      ['Mobil', secChUaMobile],
+      ['Sprache', acceptLanguage],
+      ['Referer', referer],
+      ['Origin', origin],
+    ];
 
     // --- Bot-Schutz: greift, bevor irgendeine Mail das System verlässt -------
     // Wichtig, weil die Bestätigungsmail an eine frei wählbare (und damit
@@ -170,74 +174,43 @@ export async function POST(req: Request) {
     }
 
     const isSuspect = verdict.action === 'suspect';
-    const suspectPlain = isSuspect
-      ? `\n\n--- SPAM-VERDACHT (Score ${verdict.score}) ---\n${verdict.reasons.join('\n')}\nKeine Bestaetigungsmail an den Absender versendet.\n---\n`
-      : '';
-    const suspectHtml = isSuspect
-      ? `<div style="border:2px solid #f59e0b;background:#fffbeb;padding:12px;border-radius:8px;margin-bottom:16px">
-           <strong>⚠️ Spam-Verdacht (Score ${verdict.score})</strong>
-           <ul style="margin:8px 0 0;padding-left:18px">${verdict.reasons.map((r) => `<li>${r}</li>`).join('')}</ul>
-           <p style="margin:8px 0 0;font-size:12px">Es wurde <strong>keine</strong> Bestätigungsmail an den Absender versendet.</p>
-         </div>`
-      : '';
     // ------------------------------------------------------------------------
 
-    const signaturePlain = '\n\nMit lieben Grüßen\nStefan';
-    const signatureHtml = '<p style="margin-top:16px">Mit lieben Grüßen<br/>Stefan</p>';
-
+    const world = contactWorld(data as Record<string, unknown>);
     const subjectHint = sessionType || topic || projectType || 'Kontakt';
 
-    const extraLines = [
-      company ? `Firma: ${company}` : null,
-      website ? `Website: ${website}` : null,
-      scope ? `Umfang: ${scope}` : null,
-      phone ? `Telefon: ${phone}` : null,
-      preferredTime ? `Bevorzugte Zeit: ${preferredTime}` : null,
-    ]
-      .filter(Boolean)
-      .join('\n');
+    // Reihenfolge = Anzeige in beiden Mails. Leere Felder fallen weg.
+    const rows: Row[] = [
+      ['Projektart', projectType],
+      ['Format', sessionType],
+      ['Thema', topic],
+      ['Firma', company],
+      ['Website', website],
+      ['Umfang', scope],
+      ['Budget', budget],
+      ['Zeitrahmen', timeline],
+      ['Telefon', phone],
+      ['Bevorzugte Zeit', preferredTime],
+    ];
 
-    const plain = `Neue Anfrage über Webseite\n${suspectPlain}\nZeitpunkt: ${ts}\n\nName: ${name}\nE-Mail: ${email}\n${projectType ? `Projektart: ${projectType}\n` : ''}${sessionType ? `Format: ${sessionType}\n` : ''}${topic ? `Thema: ${topic}\n` : ''}${budget ? `Budget: ${budget}\n` : ''}${timeline ? `Zeitrahmen: ${timeline}\n` : ''}${extraLines ? `\nZusatz:\n${extraLines}\n` : ''}${clientInfoLines ? `\nNutzerinfos:\n${clientInfoLines}\n` : ''}\nNachricht:\n${message}${signaturePlain}\n`;
+    const ownerMail = contactOwnerMail({
+      world,
+      name: String(name),
+      email: String(email),
+      rows,
+      message: String(message),
+      subjectHint: String(subjectHint),
+      timestamp: formatTimestamp(),
+      clientInfo,
+      suspect: isSuspect ? { score: verdict.score, reasons: verdict.reasons } : undefined,
+    });
 
-    const htmlOwner = `
-      <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.6;color:#0B1B2B">
-        ${suspectHtml}
-        <h2>Neue Anfrage über Webseite</h2>
-        <p><strong>Zeitpunkt:</strong> ${ts}</p>
-        <p><strong>Name:</strong> ${name}<br/>
-        <strong>E-Mail:</strong> ${email}<br/>
-        ${projectType ? `<strong>Projektart:</strong> ${projectType}<br/>` : ''}
-        ${sessionType ? `<strong>Format:</strong> ${sessionType}<br/>` : ''}
-        ${topic ? `<strong>Thema:</strong> ${topic}<br/>` : ''}
-        ${company ? `<strong>Firma:</strong> ${company}<br/>` : ''}
-        ${website ? `<strong>Website:</strong> ${website}<br/>` : ''}
-        ${scope ? `<strong>Umfang:</strong> ${scope}<br/>` : ''}
-        ${budget ? `<strong>Budget:</strong> ${budget}<br/>` : ''}
-        ${timeline ? `<strong>Zeitrahmen:</strong> ${timeline}` : ''}</p>
-        ${clientInfoLines ? `<p><strong>Nutzerinfos</strong><br/>${clientInfoLines.replace(/\n/g, '<br/>')}</p>` : ''}
-        <p><strong>Nachricht</strong><br/>${String(message).replace(/\n/g, '<br/>')}</p>
-        ${signatureHtml}
-      </div>
-    `;
-
-    const htmlCustomer = `
-      <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.6;color:#0B1B2B">
-        <h2>Danke für Deine Anfrage, ${name}!</h2>
-        <p>Ich habe Deine Nachricht erhalten und melde mich in der Regel innerhalb von 24–48 Stunden zurück.</p>
-        <hr style="border:none;height:1px;background:#e5e7eb;margin:16px 0" />
-        <p><strong>Zusammenfassung</strong></p>
-        <p>
-        ${projectType ? `<strong>Projektart:</strong> ${projectType}<br/>` : ''}
-        ${sessionType ? `<strong>Format:</strong> ${sessionType}<br/>` : ''}
-        ${topic ? `<strong>Thema:</strong> ${topic}<br/>` : ''}
-        ${budget ? `<strong>Budget:</strong> ${budget}<br/>` : ''}
-        ${timeline ? `<strong>Zeitrahmen:</strong> ${timeline}<br/>` : ''}
-        </p>
-        <p><strong>Deine Nachricht</strong><br/>${String(message).replace(/\n/g, '<br/>')}</p>
-        ${signatureHtml}
-        <p style="color:#475569;font-size:12px;margin-top:16px">Diese E-Mail wurde automatisch gesendet. Antworte gerne direkt auf diese Nachricht.</p>
-      </div>
-    `;
+    const customerMail = contactCustomerMail({
+      world,
+      name: String(name),
+      rows,
+      message: String(message),
+    });
 
     const transporter = nodemailer.createTransport({
       host: SMTP_HOST,
@@ -272,9 +245,9 @@ export async function POST(req: Request) {
       from: SMTP_FROM,
       to: OWNER_EMAIL,
       replyTo: String(email),
-      subject: `${isSuspect ? '[SPAM?] ' : ''}Neue Anfrage: ${subjectHint} – ${name}`,
-      text: plain,
-      html: htmlOwner,
+      subject: ownerMail.subject,
+      text: ownerMail.text,
+      html: ownerMail.html,
     });
 
     // Bestätigung an den Absender – nur bei unverdächtigen Anfragen.
@@ -285,9 +258,9 @@ export async function POST(req: Request) {
         from: SMTP_FROM,
         to: String(email),
         replyTo: OWNER_EMAIL,
-        subject: 'Danke für Deine Anfrage – ich melde mich',
-        text: `Hallo ${name},\n\nDanke für Deine Anfrage! Ich melde mich in der Regel innerhalb von 24–48 Stunden mit einer Einschätzung zurück.${signaturePlain}`,
-        html: htmlCustomer,
+        subject: customerMail.subject,
+        text: customerMail.text,
+        html: customerMail.html,
       });
     }
 

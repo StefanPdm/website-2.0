@@ -279,7 +279,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `CaseCard` | Referenzkarte mit Tilt-Effekt + Video/Bild + Info-Leiste | Welt B |
 | `ContactForm` / `ContactFormNlp` / `ContactFormWeb` | drei Varianten desselben Endpunkts | `/` / Welt A / Welt B |
 | `HomeContact` (`Provider`/`Trigger`/`Section`) | Kontakt auf `/` — auf/zu per React-State | Welt 0 |
-| `FormShield` / `useModal` / `LazyEffect` | Bot-Schutz (§8), Modal-Verhalten (§11), Effekt-Hülle (§9) | alle |
+| `FormShield` / `useContactSubmit` / `useModal` / `LazyEffect` | Bot-Schutz und Formular-Ablauf (§8), Modal-Verhalten (§11), Effekt-Hülle (§9) | alle |
 | `WebBackdrop` / `HyperspeedBand` | Client-Wrapper für die WebGL-Effekte von Welt B | Welt B |
 | `Header` | Welt-B-Kopfzeile (baut `CardNav`) | Welt B |
 | `StructuredData` / `OgCard` | JSON-LD je Route, OG-Bild-Layout (§13) | alle |
@@ -410,20 +410,29 @@ Feldnamen sind der Vertrag zur Route — beim Hinzufügen eines Feldes **immer**
 6. Feldhöhe `h-11`, Radius `rounded-xl`, Abstand `gap-4`.
 7. Selects in Welt 0/B nutzen `.select-caret` (eigener Pfeil, `appearance:none`).
 8. **Jedes** Formular bindet den Bot-Schutz ein — ohne Ausnahme, sonst ist die
-   Route über dieses eine Formular wieder offen:
+   Route über dieses eine Formular wieder offen. Kontaktformulare nutzen dafür
+   `useContactSubmit` (Ablauf, Zustände und Bot-Schutz in einem):
 
 ```tsx
-import { useFormShield } from '@/components/FormShield';
+import { useContactSubmit } from '@/components/useContactSubmit';
 
-const shield = useFormShield();
-// im Submit-Handler:
-const data: Record<string, unknown> = {
-  ...Object.fromEntries(new FormData(form).entries()),
-  ...shield.payload(),          // Honeypot-Wert + Ausfüllzeit
-};
-// im JSX, direkt im <form>:
-{shield.fields}
+const { status, loading, submitted, shieldFields, onSubmit, reset } = useContactSubmit();
+// status: 'idle' | 'loading' | 'success' | 'error'
+<form onSubmit={onSubmit}>
+  {shieldFields}
+  …
+  <button type='submit' disabled={loading} aria-busy={loading}>…</button>
+</form>
 ```
+
+   Andere Formulare (z. B. Leitfaden) binden `useFormShield()` direkt ein:
+   `{shield.fields}` ins `<form>`, `...shield.payload()` ins Payload.
+9. **E-Mails** kommen ausschließlich aus `lib/mail-templates.ts`
+   (`contactCustomerMail`, `contactOwnerMail`, `guide…Mail`). Jede Nutzereingabe
+   läuft dort durch `esc()` — **nie** Formularwerte direkt in HTML-Strings
+   einsetzen: Die Bestätigungsmail geht an eine frei wählbare Adresse, ungefiltert
+   wäre sie ein Phishing-Werkzeug mit deinem Absender. Tabellen-Layout und
+   Inline-Styles, weil Mail-Programme kein externes CSS und kaum Flexbox kennen.
 
 Serverseitig entscheidet `lib/anti-spam.ts` (`scoreSubmission`, `isRateLimited`).
 Die Prüfung läuft **vor jedem `sendMail`** — nie danach. Drei Ausgänge:
@@ -606,11 +615,12 @@ in einen quadratischen Slot ein.
 **Raster-Ableitungen** (mit `sharp` aus den SVGs erzeugt, quadratisch mit
 transparentem Rand): `logo-sh-180.png` (Apple-Touch-Icon),
 `logo-sh-192.png` / `logo-sh-512.png` (Web-App-Manifest),
-`logo-nlp-256.png` (E-Mail-Template des Leitfadens).
+`logo-nlp-256.png` (E-Mails Welt A), `logo-web-340.png` (E-Mails Welt B, 340×200,
+nicht quadratisch).
 
 Warum PNG und nicht SVG: Safari rendert im Apple-Touch-Icon kein SVG, das
 Manifest verlangt echte Pixelgrößen, und viele E-Mail-Clients zeigen SVG gar
-nicht an. Ändert sich ein Logo, müssen diese vier PNG neu erzeugt werden.
+nicht an. Ändert sich ein Logo, müssen diese fünf PNG neu erzeugt werden.
 
 ### Namenskonvention
 
