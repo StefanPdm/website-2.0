@@ -29,6 +29,16 @@
   --color-accent-web: #2dd4bf;
 
   /**
+   * Schrift aus app/layout.tsx (next/font setzt --font-jakarta am <body>).
+   * `--font-sans` ist Tailwinds Standardschrift – ohne diese Zeile lief die
+   * ganze Seite in der System-UI-Schrift. Welt A überschreibt mit Public Sans
+   * per Klasse in NlpLayoutClient.
+   * Theme-Name und next/font-Variable nie gleich benennen
+   * (`--font-sans: var(--font-sans)` wäre ein Zirkelbezug).
+   */
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  /**
    * Eigener Breakpoint für die Kopfzeile von Welt A.
    *
    * Marke, sechs Navigationspunkte, Theme-Umschalter und CTA brauchen
@@ -46,6 +56,11 @@
   --border: oklch(0.922 0 0);
   --muted: oklch(0.97 0 0);
   --shadow: 0 40px 80px -60px rgba(10, 12, 16, 0.7);
+
+  /* Nur für <body> – jede Welt malt ihre eigene Fläche darüber. Sichtbar beim
+     Überscrollen und vor dem ersten Paint, deshalb = themeColor. */
+  --background: #0b1118;
+  --foreground: #f8fafc;
 }
 
 @keyframes info-orb-float {
@@ -733,24 +748,6 @@
   transform: translateY(-4px);
 }
 
-.choice-tile--nlp {
-  --choice-border: rgba(248, 113, 113, 0.25);
-  --choice-border-strong: rgba(248, 113, 113, 0.6);
-  --choice-shadow: rgba(239, 68, 68, 0.18);
-  --choice-shadow-strong: rgba(239, 68, 68, 0.35);
-  --choice-glow: rgba(239, 68, 68, 0.35);
-  --choice-pill-glow: rgba(248, 113, 113, 0.45);
-}
-
-.choice-tile--dev {
-  --choice-border: rgba(99, 179, 237, 0.25);
-  --choice-border-strong: rgba(99, 179, 237, 0.6);
-  --choice-shadow: rgba(29, 111, 168, 0.18);
-  --choice-shadow-strong: rgba(29, 111, 168, 0.35);
-  --choice-glow: rgba(29, 111, 168, 0.35);
-  --choice-pill-glow: rgba(99, 179, 237, 0.45);
-}
-
 .choice-tile:hover::after {
   opacity: 0.7;
 }
@@ -821,11 +818,6 @@
   .landing-main {
     gap: 2.25rem;
   }
-  .landing-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.9rem;
-  }
   .landing-tags {
     margin-top: 0.25rem;
   }
@@ -842,9 +834,6 @@
   }
   .landing-cta {
     width: 100%;
-  }
-  .landing-right {
-    justify-items: center;
   }
   .orbit-system {
     width: 260px;
@@ -1007,44 +996,9 @@
   background: #ffffff;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
 @layer base {
   * {
     border-color: var(--border);
-    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
   }
   body {
     background-color: var(--background);

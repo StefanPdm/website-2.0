@@ -55,8 +55,8 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
         },
       }
     : {
-        devPill: '/blue-pill.webp',
-        nlpPill: '/red-pill.webp',
+        devPill: '/images-startseite/blue-pill.webp',
+        nlpPill: '/images-startseite/red-pill.webp',
         devColors: {
           border: 'rgba(99, 179, 237, 0.25)',
           borderStrong: 'rgba(99, 179, 237, 0.6)',
@@ -229,7 +229,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
               <div className='choice-grid'>
                 {/* left card */}
                 <Link
-                  className='choice-tile choice-tile--dev relative'
+                  className='choice-tile relative'
                   href='/webdevelopment/'
                   style={
                     {
@@ -276,7 +276,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
 
                 {/* right card */}
                 <Link
-                  className='choice-tile choice-tile--nlp relative'
+                  className='choice-tile relative'
                   href='/nlp'
                   style={
                     {

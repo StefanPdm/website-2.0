@@ -1,18 +1,12 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Syne } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { KEYWORDS_ROOT, OWNER, SITE_URL } from '@/lib/site';
 
 const bodyFont = Plus_Jakarta_Sans({
-  variable: '--font-body',
+  variable: '--font-jakarta',
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
-});
-
-const displayFont = Syne({
-  variable: '--font-display',
-  subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -79,7 +73,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='de'>
-      <body className={`${bodyFont.variable} ${displayFont.variable} antialiased`}>{children}</body>
+      <body className={`${bodyFont.variable} antialiased`}>{children}</body>
     </html>
   );
 }
