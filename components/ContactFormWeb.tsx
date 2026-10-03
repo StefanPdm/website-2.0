@@ -1,43 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
 
-import { useFormShield } from '@/components/FormShield';
+import { useContactSubmit } from '@/components/useContactSubmit';
 
 export default function ContactFormWeb() {
-  const shield = useFormShield();
-  const [status, setStatus] = useState<null | 'success' | 'error'>(null);
-  const [loading, setLoading] = useState(false);
-  const [submittedName, setSubmittedName] = useState<string | null>(null);
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus(null);
-    setLoading(true);
-
-    const form = e.currentTarget as HTMLFormElement;
-    const data: Record<string, unknown> = {
-      ...Object.fromEntries(new FormData(form).entries()),
-      ...shield.payload(),
-    };
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error('failed');
-      setSubmittedName(String(data.name || ''));
-      setStatus('success');
-      form.reset();
-    } catch {
-      setStatus('error');
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { status, loading, submitted, shieldFields, onSubmit, reset } = useContactSubmit();
 
   if (status === 'success') {
     return (
@@ -48,7 +16,7 @@ export default function ContactFormWeb() {
           </span>
           <div className='flex-1'>
             <h3 className='text-lg font-semibold text-white'>
-              Danke{submittedName ? `, ${submittedName}` : ''}! 🚀
+              Danke{submitted?.name ? `, ${submitted.name}` : ''}!
             </h3>
             <p className='mt-1 text-sm text-slate-300'>
               Ich melde mich innerhalb von 24–48 Stunden, um die nächsten sinnvollen Schritte zu
@@ -56,7 +24,7 @@ export default function ContactFormWeb() {
             </p>
             <button
               type='button'
-              onClick={() => setStatus(null)}
+              onClick={reset}
               className='mt-4 h-10 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white hover:bg-white/15'>
               Neue Anfrage
             </button>
@@ -80,7 +48,7 @@ export default function ContactFormWeb() {
             </p>
             <button
               type='button'
-              onClick={() => setStatus(null)}
+              onClick={reset}
               className='mt-4 h-10 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white hover:bg-white/15'>
               Erneut versuchen
             </button>
@@ -95,7 +63,7 @@ export default function ContactFormWeb() {
       onSubmit={onSubmit}
       className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
       <div className='grid gap-4'>
-        {shield.fields}
+        {shieldFields}
         <div className='grid gap-1'>
           <label
             htmlFor='web-name'
@@ -211,7 +179,7 @@ export default function ContactFormWeb() {
             name='message'
             rows={5}
             required
-            className='w-full min-w-0 rounded-xl border border-$1 bg-white/40 px-3 py-2 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'></textarea>
+            className='w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 py-2 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'></textarea>
         </div>
         {/* Hinweistext als Label, Link daneben – siehe ContactFormNlp. */}
         <div className='flex items-start gap-2 text-xs text-slate-300'>
@@ -238,6 +206,7 @@ export default function ContactFormWeb() {
         <button
           type='submit'
           disabled={loading}
+          aria-busy={loading}
           className='h-11 rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60'>
           {loading ? 'Wird gesendet…' : 'Anfrage senden'}
         </button>

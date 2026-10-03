@@ -1,45 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
 
-import { useFormShield } from '@/components/FormShield';
+import { useContactSubmit } from '@/components/useContactSubmit';
 
 export default function ContactForm() {
-  const shield = useFormShield();
-  const [status, setStatus] = useState<null | 'success' | 'error'>(null);
-  const [loading, setLoading] = useState(false);
-  const [submittedName, setSubmittedName] = useState<string | null>(null);
-  const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus(null);
-    setLoading(true);
-
-    const form = e.currentTarget;
-    const data: Record<string, unknown> = {
-      ...Object.fromEntries(new FormData(form).entries()),
-      ...shield.payload(),
-    };
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error('Request failed');
-      setSubmittedName(String(data.name || ''));
-      setSubmittedEmail(String(data.email || ''));
-      setStatus('success');
-      form.reset();
-    } catch {
-      setStatus('error');
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { status, loading, submitted, shieldFields, onSubmit, reset } = useContactSubmit();
 
   const SuccessView = (
     <div className='rounded-2xl border border-emerald-300/30 bg-emerald-400/10 p-6 text-slate-100 mt-8 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
@@ -49,17 +15,17 @@ export default function ContactForm() {
         </span>
         <div className='flex-1'>
           <h3 className='text-lg font-semibold text-white'>
-            Danke{submittedName ? `, ${submittedName}` : ''}!
+            Danke{submitted?.name ? `, ${submitted.name}` : ''}!
           </h3>
           <p className='mt-1 text-sm text-slate-300'>
             Deine Nachricht ist eingegangen. Ich melde mich in der Regel innerhalb von 24–48 Stunden
             mit einer Einschätzung zurück.
-            {submittedEmail ? ` Eine Bestätigung wurde an ${submittedEmail} gesendet.` : ''}
+            {submitted?.email ? ` Eine Bestätigung wurde an ${submitted.email} gesendet.` : ''}
           </p>
           <div className='mt-4 flex flex-wrap gap-3'>
             <button
               type='button'
-              onClick={() => setStatus(null)}
+              onClick={reset}
               className='h-10 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white hover:bg-white/15'>
               Neue Nachricht schreiben
             </button>
@@ -83,7 +49,7 @@ export default function ContactForm() {
           <div className='mt-4 flex flex-wrap gap-3'>
             <button
               type='button'
-              onClick={() => setStatus(null)}
+              onClick={reset}
               className='h-10 rounded-xl border border-white/20 bg-white/10 px-4 text-sm font-semibold text-white hover:bg-white/15'>
               Erneut versuchen
             </button>
@@ -101,7 +67,7 @@ export default function ContactForm() {
       onSubmit={onSubmit}
       className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
       <div className='grid gap-4'>
-        {shield.fields}
+        {shieldFields}
         <div className='grid gap-1'>
           <label
             htmlFor='root-name'
@@ -183,7 +149,7 @@ export default function ContactForm() {
             required
             name='message'
             rows={5}
-            className='w-full min-w-0 rounded-xl border border-$1 bg-white/40 px-3 py-2 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'></textarea>
+            className='w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 py-2 text-black font-bold placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'></textarea>
         </div>
         {/*
           Einwilligung: Hinweistext als Label, Links daneben – ein Link im Label
@@ -226,6 +192,7 @@ export default function ContactForm() {
         <button
           type='submit'
           disabled={loading}
+          aria-busy={loading}
           className='h-11 rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60'>
           {loading ? 'Wird gesendet…' : 'Anfrage senden'}
         </button>

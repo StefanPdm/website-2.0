@@ -1,43 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
 
-import { useFormShield } from '@/components/FormShield';
+import { useContactSubmit } from '@/components/useContactSubmit';
 
 export default function ContactFormNlp() {
-  const shield = useFormShield();
-  const [status, setStatus] = useState<null | 'success' | 'error'>(null);
-  const [loading, setLoading] = useState(false);
-  const [submittedName, setSubmittedName] = useState<string | null>(null);
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus(null);
-    setLoading(true);
-
-    const form = e.currentTarget as HTMLFormElement;
-    const data: Record<string, unknown> = {
-      ...Object.fromEntries(new FormData(form).entries()),
-      ...shield.payload(),
-    };
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error('failed');
-      setSubmittedName(String(data.name || ''));
-      setStatus('success');
-      form.reset();
-    } catch {
-      setStatus('error');
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { status, loading, submitted, shieldFields, onSubmit, reset } = useContactSubmit();
 
   if (status === 'success') {
     return (
@@ -48,14 +16,14 @@ export default function ContactFormNlp() {
           </span>
           <div className='flex-1'>
             <h3 className='text-lg font-semibold text-[var(--text)]'>
-              Danke{submittedName ? `, ${submittedName}` : ''}!
+              Danke{submitted?.name ? `, ${submitted.name}` : ''}!
             </h3>
             <p className='mt-1 text-sm text-[var(--muted)]'>
               Ich melde mich in der Regel innerhalb von 24–48 Stunden für ein kurzes Kennenlernen.
             </p>
             <button
               type='button'
-              onClick={() => setStatus(null)}
+              onClick={reset}
               className='mt-4 h-10 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 text-sm font-semibold text-[var(--text)] transition hover:bg-[var(--surface-strong)]'>
               Weitere Nachricht schreiben
             </button>
@@ -79,7 +47,7 @@ export default function ContactFormNlp() {
             </p>
             <button
               type='button'
-              onClick={() => setStatus(null)}
+              onClick={reset}
               className='mt-4 h-10 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 text-sm font-semibold text-[var(--text)] transition hover:bg-[var(--surface-strong)]'>
               Erneut versuchen
             </button>
@@ -94,7 +62,7 @@ export default function ContactFormNlp() {
       onSubmit={onSubmit}
       className='rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] p-6 text-[var(--text)] shadow-[0_20px_60px_var(--glow)] backdrop-blur-xl'>
       <div className='grid gap-4'>
-        {shield.fields}
+        {shieldFields}
         <div className='grid gap-1'>
           <label
             htmlFor='nlp-name'
@@ -196,7 +164,7 @@ export default function ContactFormNlp() {
             name='message'
             rows={5}
             required
-            className='w-full min-w-0 rounded-xl border border-$1 bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'></textarea>
+            className='w-full min-w-0 rounded-xl border border-white/20 bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'></textarea>
         </div>
         {/*
           Einwilligung: Der Hinweistext ist das Label, der Link steht daneben.
@@ -228,6 +196,7 @@ export default function ContactFormNlp() {
         <button
           type='submit'
           disabled={loading}
+          aria-busy={loading}
           className='h-11 rounded-xl bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] text-sm font-semibold text-[var(--button-text)] shadow-[0_0_24px_var(--glow)] transition hover:shadow-[0_0_32px_var(--glow-strong)] disabled:opacity-60'>
           {loading ? 'Wird gesendet…' : 'Anfrage senden'}
         </button>
