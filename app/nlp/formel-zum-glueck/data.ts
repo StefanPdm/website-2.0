@@ -103,7 +103,7 @@ export const cSteps = [
   {
     word: 'Choose',
     title: 'Entscheide dich – und tu es',
-    text: 'Nimm die Möglichkeit, die dir am attraktivsten erscheint – beziehungsweise die, deren Preis du bereit bist zu zahlen. Dann entscheide dich und setze sie um.',
+    text: 'Nimm die Möglichkeit, die dir am attraktivsten erscheint – beziehungsweise die, deren Preis du bereit bist zu zahlen. Dann entscheide dich und setze sie SOFORT um.',
   },
 ];
 
