@@ -29,7 +29,9 @@ import FormulaMark from '@/app/nlp/formel-zum-glueck/FormulaMark';
  * Server Component; alle Bewegung ist CSS (Klassen `formel-*`), das
  * Einblenden beim Scrollen läuft ohne JavaScript über `animation-timeline`.
  *
- * Rhythmus: Kopf (Rand) → Wann → Schritte → C³ (Akzent) → Merkkarte → Coaching (Akzent).
+ * Rhythmus: Kopf (Rand) → Wann → Schritte 1–4 → Merkkarte → Coaching (Akzent).
+ * C³ (Schritt 4) steht bewusst ohne eigenen Hintergrund: Für den Leser gehört
+ * er zur Reihe „Schritt 1 von 4 … 4 von 4“ und trägt dasselbe Wasserzeichen.
  */
 
 const title = 'Deine Formel zum Glück: S² + L + A + C³';
@@ -62,6 +64,27 @@ export const metadata: Metadata = {
 };
 
 const [cStep] = steps.filter((step) => step.key === 'c');
+
+/**
+ * Großer Buchstabe hinter der Schritt-Überschrift (dekorativ).
+ * Die Hochzahl bekommt einen eigenen Verlauf: Sie ragt über die Box des
+ * Buchstabens hinaus, dort reicht dessen bg-clip-text nicht hin – ihre
+ * Oberkante war sonst abgeschnitten (gleiches Problem wie in FormulaMark).
+ */
+function StepWatermark({ symbol, power }: { symbol: string; power?: string }) {
+  return (
+    <span
+      aria-hidden='true'
+      className='pointer-events-none absolute -top-10 left-0 select-none bg-linear-to-br from-accent/25 to-transparent bg-clip-text text-[9rem] font-bold leading-none text-transparent sm:text-[12rem]'>
+      {symbol}
+      {power && (
+        <sup className='-top-[1.2em] bg-linear-to-br from-accent/15 to-accent/5 bg-clip-text text-[0.45em]'>
+          {power}
+        </sup>
+      )}
+    </span>
+  );
+}
 const letterSteps = steps.filter((step) => step.key !== 'c');
 
 export default function FormulaPage() {
@@ -154,12 +177,10 @@ export default function FormulaPage() {
                   key={step.key}
                   className='formel-reveal grid items-center gap-10 lg:grid-cols-2 lg:gap-16'>
                   <div className={`relative ${reversed ? 'lg:order-2' : ''}`}>
-                    <span
-                      aria-hidden='true'
-                      className='pointer-events-none absolute -top-10 left-0 select-none bg-linear-to-br from-accent/25 to-transparent bg-clip-text text-[9rem] font-bold leading-none text-transparent sm:text-[12rem]'>
-                      {step.symbol}
-                      {step.power && <sup className='-top-[1.2em] text-[0.45em]'>{step.power}</sup>}
-                    </span>
+                    <StepWatermark
+                      symbol={step.symbol}
+                      power={step.power}
+                    />
                     <div className='relative'>
                       <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
                         Schritt {index + 1} von {steps.length}
@@ -191,20 +212,24 @@ export default function FormulaPage() {
         </div>
       </section>
 
-      {/* C³ */}
-      <section className='relative overflow-hidden border-y border-border bg-(--section-bg-accent) px-4 py-24'>
+      {/* C³ – Schritt 4, optisch Teil der Schrittfolge darüber */}
+      <section className='relative overflow-x-clip px-4 pb-24'>
         <div className='container mx-auto max-w-6xl'>
           <div className='grid items-center gap-12 lg:grid-cols-[1fr_0.8fr]'>
-            <div className='formel-reveal'>
-              <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
+            <div className='formel-reveal relative'>
+              <StepWatermark
+                symbol={cStep.symbol}
+                power={cStep.power}
+              />
+              <p className='relative text-xs uppercase tracking-[0.3em] text-accent-soft'>
                 Schritt {steps.length} von {steps.length}
               </p>
-              <h2 className='mt-4 text-3xl font-semibold text-(--text) sm:text-4xl'>
+              <h2 className='relative mt-4 text-3xl font-semibold text-(--text) sm:text-4xl'>
                 C<sup className='-top-[1em] text-[0.55em]'>3</sup>
                 <span className='text-(--muted)'> · </span>
                 {cStep.title}
               </h2>
-              <p className='mt-5 max-w-xl text-base leading-relaxed text-(--muted) sm:text-lg'>
+              <p className='relative mt-5 max-w-xl text-base leading-relaxed text-(--muted) sm:text-lg'>
                 Jetzt bist du wieder bei dir – und erst jetzt wird entschieden. Das dritte C hat
                 es in sich: Hier wird aus Nachdenken ein Schritt.
               </p>
