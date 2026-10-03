@@ -123,11 +123,14 @@ export const howToSteps = [
   { name: 'Smile', text: 'Lächle kurz – auch wenn es sich albern anfühlt.' },
   { name: 'Look', text: 'Sieh dir das Gefühl an, das in dir hochkommt.' },
   { name: 'Accept', text: 'Akzeptiere das Gefühl und lass es da sein, statt es zu bekämpfen.' },
-  { name: 'Challenge', text: 'Nimm die Situation als Herausforderung an, an der du wachsen kannst.' },
+  {
+    name: 'Challenge',
+    text: 'Nimm die Situation als Herausforderung an, an der du wachsen kannst.',
+  },
   { name: 'Choices', text: 'Finde mindestens drei Wahlmöglichkeiten.' },
   {
     name: 'Choose',
-    text: 'Wähle die Möglichkeit, deren Preis du bereit bist zu zahlen – und setze sie um.',
+    text: 'Wähle die Möglichkeit, deren Preis du bereit bist zu zahlen – und setze sie SOFORT um.',
   },
 ];
 
