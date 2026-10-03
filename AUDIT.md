@@ -725,7 +725,16 @@ falschen Stelle.
 
 ---
 
-### #23 · ⚠️ TEILWEISE (01.09.2026) · Startseite: Orbit-Positionierung ist mit Magic Numbers gebaut
+### #23 · ✅ ERLEDIGT (03.10.2026) · Startseite: Orbit-Positionierung ist mit Magic Numbers gebaut
+
+> **Ursache gefunden (03.10.2026):** Die Dreh-Animation der Ringe setzte
+> `transform: rotate()` und überschrieb damit die Zentrierung
+> `translate(-50%, -50%)`. Die Ringe lagen dadurch versetzt; `--orbit-x/-y`
+> und `translate(100px, 100px) !important` an der Sonne glichen das per
+> Augenmaß aus (auf 360/768 px ragte der Orbit links aus dem Bild).
+> Fix: Zentrierung in die Keyframes, Orbit im normalen Fluss zentriert,
+> alle Ausgleichswerte entfernt. Sichtprüfung 360/768/1024/1280/1920 + Querformat.
+
 
 > **Erledigt:** Die zehn Zahlen sind benannt (`--orbit-x` / `--orbit-y`) und
 > dokumentiert. Pro Breakpoint sind jetzt zwei Variablen anzufassen statt eines
