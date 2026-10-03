@@ -31,7 +31,13 @@ export default function FormulaMark({
             {index > 0 && <span className='text-(--muted) font-light'>+</span>}
             <span className='bg-linear-to-br from-accent to-accent-2 bg-clip-text text-transparent'>
               {term.base}
-              {'power' in term && <sup className='-top-[1.1em] ml-[0.04em] text-[0.5em]'>{term.power}</sup>}
+              {'power' in term && (
+                // Eigener Verlauf: Die Hochzahl ragt über die Box des Buchstabens hinaus,
+                // dort reicht dessen bg-clip-text nicht hin – die Oberkante wäre transparent.
+                <sup className='-top-[1.1em] ml-[0.04em] bg-linear-to-br from-accent to-accent-2 bg-clip-text text-[0.5em]'>
+                  {term.power}
+                </sup>
+              )}
             </span>
           </span>
         ))}
