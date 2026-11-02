@@ -178,7 +178,7 @@ export async function POST(req: Request) {
     const downloadToken = createDownloadToken(String(email), expiresAt);
 
     const siteUrl = resolveSiteUrl(req);
-    const guideUrl = `${siteUrl}/nlp/guide-download?token=${encodeURIComponent(downloadToken)}`;
+    const guideUrl = `${siteUrl}/coaching/guide-download?token=${encodeURIComponent(downloadToken)}`;
 
     const customerMail = guideCustomerMail({ name: String(name), guideUrl });
     const ownerMail = guideOwnerMail({

@@ -2,10 +2,10 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Stefan Heinemann – Webdevelopment & NLP Coaching',
+    name: 'Stefan Heinemann – Webdevelopment & Coaching',
     short_name: 'Stefan H.',
     description:
-      'Moderne Webentwicklung und NLP Coaching – wähle den Service, der dich weiterbringt.',
+      'Moderne Webentwicklung und Life Coaching für Unternehmer – wähle den Service, der dich weiterbringt.',
     start_url: '/',
     display: 'standalone',
     background_color: '#0b1118',

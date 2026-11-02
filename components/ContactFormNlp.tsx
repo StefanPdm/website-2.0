@@ -185,7 +185,7 @@ export default function ContactFormNlp() {
               Ich habe die Datenschutzhinweise gelesen und stimme der Verarbeitung meiner Daten zu.
             </label>{' '}
             <a
-              href='/nlp/datenschutz'
+              href='/coaching/datenschutz'
               target='_blank'
               rel='noopener noreferrer'
               className='underline underline-offset-2 transition hover:text-[var(--text)]'>

@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 import { OgCard, OG_CONTENT_TYPE, OG_SIZE } from '@/components/OgCard';
 
-export const alt = 'Stefan Heinemann – NLP Coaching und Webentwicklung in Potsdam und Berlin';
+export const alt = 'Stefan Heinemann – Life Coaching für Unternehmer und Webentwicklung in Potsdam und Berlin';
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
@@ -11,7 +11,7 @@ export default function Image() {
     (
       <OgCard
         eyebrow='Stefan Heinemann'
-        title={'NLP Coaching &\nWebentwicklung'}
+        title={'Life Coaching &\nWebentwicklung'}
         subtitle='Innere Klarheit und digitale Systeme – von einer Person.'
         footer='Potsdam · Berlin · Brandenburg'
         background='linear-gradient(135deg, #070b12 0%, #0d1a2b 55%, #1a1220 100%)'

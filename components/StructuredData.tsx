@@ -5,13 +5,13 @@ import {
   FORMULA_PLAIN,
   FORMULA_TITLE,
   howToSteps,
-} from '@/app/nlp/formel-zum-glueck/data';
+} from '@/app/coaching/formel-zum-glueck/data';
 import {
   dimensions,
   results,
   typeHref,
   type Dimension,
-} from '@/app/nlp/persoenlichkeitstest/data';
+} from '@/app/coaching/persoenlichkeitstest/data';
 import { absoluteUrl, AREA_SERVED, OWNER, SITE_URL } from '@/lib/site';
 
 /**
@@ -61,11 +61,13 @@ const person = {
   // greifen `description` bevorzugt auf, und eine erste Person mit klarer
   // Position ist unterscheidbarer als eine Aufzählung von Leistungen.
   description:
-    'NLP Coach und Webentwickler aus Potsdam. Nach über 20 Jahren als Unternehmer im Interieur Design und einem Wechsel in die Fullstack-Entwicklung begleitet er seit 2025 Menschen als Coach. NLP versteht er nicht als Sammlung von Techniken, sondern als Haltung: bewusst wahrnehmen statt urteilen, wählen statt reagieren, Verantwortung für das eigene Leben übernehmen. Veränderung und Unsicherheit gehören für ihn zum Wesen des Lebens – es geht um Vertrauen in die eigene Fähigkeit, mit dem Unbekannten umzugehen, nicht um Kontrolle.',
+    'Life Coach für Unternehmer und Webentwickler aus Potsdam. Nach über 20 Jahren als Unternehmer im Interieur Design und einem Wechsel in die Fullstack-Entwicklung begleitet er seit 2025 Menschen als Coach. NLP versteht er nicht als Sammlung von Techniken, sondern als Haltung: bewusst wahrnehmen statt urteilen, wählen statt reagieren, Verantwortung für das eigene Leben übernehmen. Veränderung und Unsicherheit gehören für ihn zum Wesen des Lebens – es geht um Vertrauen in die eigene Fähigkeit, mit dem Unbekannten umzugehen, nicht um Kontrolle.',
   address: postalAddress,
   sameAs: [OWNER.linkedIn],
-  jobTitle: ['NLP Coach', 'Webentwickler'],
+  jobTitle: ['Life Coach', 'NLP Coach', 'Webentwickler'],
   knowsAbout: [
+    'Life Coaching',
+    'Coaching für Unternehmer',
     'Neuro-Linguistisches Programmieren',
     'Business Coaching',
     'Persönlichkeitsentwicklung',
@@ -94,23 +96,23 @@ export function RootStructuredData() {
             '@type': 'WebSite',
             '@id': `${SITE_URL}/#website`,
             url: SITE_URL,
-            name: `${OWNER.name} – NLP Coaching & Webentwicklung`,
+            name: `${OWNER.name} – Coaching & Webentwicklung`,
             inLanguage: 'de-DE',
             publisher: { '@id': PERSON_ID },
           },
           {
             '@type': 'ProfessionalService',
             '@id': `${SITE_URL}/#business`,
-            name: `${OWNER.name} – NLP Coaching & Webentwicklung`,
+            name: `${OWNER.name} – Coaching & Webentwicklung`,
             description:
-              'NLP Coaching und Webentwicklung aus Potsdam. Coaching für Klarheit, Entscheidungen und Selbstführung sowie Websites, Web Apps und Kundenportale für Unternehmen in Potsdam, Berlin und Brandenburg.',
+              'Life Coaching für Unternehmer und Webentwicklung aus Potsdam. Coaching für Klarheit, Entscheidungen und Selbstführung sowie Websites, Web Apps und Kundenportale für Unternehmen in Potsdam, Berlin und Brandenburg.',
             url: SITE_URL,
             email: `mailto:${OWNER.email}`,
             address: postalAddress,
             founder: { '@id': PERSON_ID },
             areaServed: AREA_SERVED.map((name) => ({ '@type': 'Place', name })),
             availableLanguage: ['Deutsch', 'Englisch'],
-            knowsAbout: ['NLP Coaching', 'Webentwicklung', 'Kommunikationstraining'],
+            knowsAbout: ['Life Coaching', 'NLP Coaching', 'Webentwicklung', 'Kommunikationstraining'],
           },
         ],
       }}
@@ -131,12 +133,12 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
         '@graph': [
           {
             '@type': 'Service',
-            '@id': `${SITE_URL}/nlp#service`,
-            name: 'NLP Coaching',
-            serviceType: 'NLP Coaching, Business Coaching, Kommunikationstraining',
+            '@id': `${SITE_URL}/coaching#service`,
+            name: 'Stefan Heinemann Coaching – Life Coaching für Unternehmer',
+            serviceType: 'Life Coaching, Coaching für Unternehmer, Personal Coaching, Business Coaching, NLP Coaching',
             description:
-              'NLP Coaching in Potsdam, Berlin und online: Klarheit im Kopf, Entscheidungen ohne Grübeln, Selbstwert und Grenzen, Emotionsregulation. Einzelcoaching, Mentoring und Workshops für Unternehmen.',
-            url: absoluteUrl('/nlp'),
+              'Life Coaching für Unternehmer in Potsdam, Berlin und online: Klarheit im Kopf, Entscheidungen ohne Grübeln, Selbstwert und Grenzen, Emotionsregulation. Sessions in Potsdam, beim Klienten vor Ort oder per Video. Einzelcoaching, Mentoring und Workshops für Unternehmen.',
+            url: absoluteUrl('/coaching'),
             provider: { '@id': PERSON_ID },
             // Welt A hat eine eigene Kontaktadresse.
             email: `mailto:${OWNER.emailCoaching}`,
@@ -144,7 +146,7 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
             audience: {
               '@type': 'Audience',
               audienceType:
-                'Unternehmer, Führungskräfte, Selbstständige und Privatpersonen mit Veränderungsabsicht',
+                'Unternehmer, Selbstständige und Führungskräfte mit persönlichen Themen',
             },
             hasOfferCatalog: {
               '@type': 'OfferCatalog',
@@ -156,7 +158,7 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
                 price: offer.price,
                 priceCurrency: 'EUR',
                 availability: 'https://schema.org/InStock',
-                url: absoluteUrl('/nlp#preise'),
+                url: absoluteUrl('/coaching#preise'),
               })),
             },
           },
@@ -167,8 +169,8 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
               {
                 '@type': 'ListItem',
                 position: 2,
-                name: 'NLP Coaching',
-                item: absoluteUrl('/nlp'),
+                name: 'Coaching',
+                item: absoluteUrl('/coaching'),
               },
             ],
           },
@@ -189,8 +191,8 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
  * Seite bei Fragen nach der Wissenschaftlichkeit von NLP gefunden wird.
  */
 export function WhitepaperStructuredData() {
-  const url = absoluteUrl('/nlp/wissenschaft');
-  const dates = pageDates('/nlp/wissenschaft');
+  const url = absoluteUrl('/coaching/wissenschaft');
+  const dates = pageDates('/coaching/wissenschaft');
   return (
     <JsonLd
       data={{
@@ -233,7 +235,7 @@ export function WhitepaperStructuredData() {
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
-              { '@type': 'ListItem', position: 2, name: 'NLP Coaching', item: absoluteUrl('/nlp') },
+              { '@type': 'ListItem', position: 2, name: 'Coaching', item: absoluteUrl('/coaching') },
               { '@type': 'ListItem', position: 3, name: 'Forschungsstand', item: url },
             ],
           },
@@ -264,8 +266,8 @@ type PersonalityTestInput = {
  * `description`, damit Sprachmodelle das Ergebnis nicht als Diagnostik zitieren.
  */
 export function PersonalityTestStructuredData({ test }: { test: PersonalityTestInput }) {
-  const url = absoluteUrl('/nlp/persoenlichkeitstest');
-  const dates = pageDates('/nlp/persoenlichkeitstest');
+  const url = absoluteUrl('/coaching/persoenlichkeitstest');
+  const dates = pageDates('/coaching/persoenlichkeitstest');
   return (
     <JsonLd
       data={{
@@ -298,7 +300,7 @@ export function PersonalityTestStructuredData({ test }: { test: PersonalityTestI
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
-              { '@type': 'ListItem', position: 2, name: 'NLP Coaching', item: absoluteUrl('/nlp') },
+              { '@type': 'ListItem', position: 2, name: 'Coaching', item: absoluteUrl('/coaching') },
               { '@type': 'ListItem', position: 3, name: 'Persönlichkeitstest', item: url },
             ],
           },
@@ -338,7 +340,7 @@ export function PersonalityTypeStructuredData({ dimension }: { dimension: Dimens
             author: { '@id': PERSON_ID },
             publisher: { '@id': PERSON_ID },
             isAccessibleForFree: true,
-            isPartOf: { '@id': `${absoluteUrl('/nlp/persoenlichkeitstest')}#test` },
+            isPartOf: { '@id': `${absoluteUrl('/coaching/persoenlichkeitstest')}#test` },
             about: [
               { '@type': 'Thing', name: type },
               { '@type': 'Thing', name: 'Psychografie' },
@@ -349,12 +351,12 @@ export function PersonalityTypeStructuredData({ dimension }: { dimension: Dimens
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
-              { '@type': 'ListItem', position: 2, name: 'NLP Coaching', item: absoluteUrl('/nlp') },
+              { '@type': 'ListItem', position: 2, name: 'Coaching', item: absoluteUrl('/coaching') },
               {
                 '@type': 'ListItem',
                 position: 3,
                 name: 'Persönlichkeitstest',
-                item: absoluteUrl('/nlp/persoenlichkeitstest'),
+                item: absoluteUrl('/coaching/persoenlichkeitstest'),
               },
               { '@type': 'ListItem', position: 4, name: type, item: url },
             ],
@@ -404,7 +406,7 @@ export function FormulaStructuredData() {
             '@type': 'BreadcrumbList',
             itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
-              { '@type': 'ListItem', position: 2, name: 'NLP Coaching', item: absoluteUrl('/nlp') },
+              { '@type': 'ListItem', position: 2, name: 'Coaching', item: absoluteUrl('/coaching') },
               { '@type': 'ListItem', position: 3, name: 'Formel zum Glück', item: url },
             ],
           },
@@ -501,8 +503,8 @@ export function RulesStructuredData({ ruleSet }: { ruleSet: RuleSetInput }) {
               {
                 '@type': 'ListItem',
                 position: 2,
-                name: 'NLP Coaching',
-                item: absoluteUrl('/nlp'),
+                name: 'Coaching',
+                item: absoluteUrl('/coaching'),
               },
               {
                 '@type': 'ListItem',

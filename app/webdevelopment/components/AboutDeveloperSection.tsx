@@ -181,12 +181,12 @@ export default function AboutDeveloperSection() {
         „Projekt anfragen". Der Linktext trägt Leistung + Ort für die Suche.
       */}
       <p className='mx-auto mt-12 max-w-2xl text-center text-sm leading-relaxed text-slate-300'>
-        Übrigens: Ich bin auch NLP Coach. Für Unternehmer, die vor lauter Projekten den Kopf nicht
+        Übrigens: Ich bin auch Life Coach. Für Unternehmer, die vor lauter Projekten den Kopf nicht
         frei bekommen.{' '}
         <Link
-          href='/nlp'
+          href='/coaching'
           className='inline-flex min-h-11 items-center gap-1 rounded-lg font-semibold text-accent-web underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
-          → NLP Coaching in Potsdam
+          → Life Coaching für Unternehmer in Potsdam
         </Link>
       </p>
     </section>

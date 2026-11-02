@@ -1038,7 +1038,7 @@ html {
 }
 
 /*
- * Puls des schwebenden Weltenwechsels (app/nlp/components/WorldSwitch.tsx).
+ * Puls des schwebenden Weltenwechsels (app/coaching/components/WorldSwitch.tsx).
  *
  * Nur `transform` und `opacity` – kein Layout pro Frame (CLAUDE.md §9).
  * Die Dauer liegt mit 2.8 s im Rahmen für Ambient-Schleifen. Die globale
@@ -1064,7 +1064,7 @@ html {
 }
 
 /*
- * S-L-A-C-Formel (app/nlp/formel-zum-glueck).
+ * S-L-A-C-Formel (app/coaching/formel-zum-glueck).
  *
  * Nur `transform` und `opacity` (CLAUDE.md §9), alles dekorativ und
  * `aria-hidden`. SVG-Teile brauchen `transform-box: fill-box`, sonst dreht

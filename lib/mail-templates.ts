@@ -36,19 +36,19 @@ type Brand = {
 
 const BRANDS: Record<MailWorld, Brand> = {
   nlp: {
-    name: 'NLP Coaching',
+    name: 'Stefan Heinemann Coaching',
     tagline: 'Stefan Heinemann · Potsdam & Berlin',
-    logo: { src: '/logos/logo-nlp-256.png', width: 48, height: 48, alt: 'NLP Coaching' },
+    logo: { src: '/logos/logo-nlp-256.png', width: 48, height: 48, alt: 'Stefan Heinemann Coaching' },
     dark: '#050b12',
     accent: '#00b8cc',
     accent2: '#22c55e',
     buttonText: '#001018',
     link: '#0e7490',
-    role: 'NLP Coach · Potsdam & Berlin',
+    role: 'Life Coach für Unternehmer · Potsdam & Berlin',
     replyTo: OWNER.emailCoaching,
-    home: '/nlp',
-    imprint: '/nlp/impressum',
-    privacy: '/nlp/datenschutz',
+    home: '/coaching',
+    imprint: '/coaching/impressum',
+    privacy: '/coaching/datenschutz',
   },
   web: {
     name: 'Stefan Heinemann',
@@ -67,14 +67,14 @@ const BRANDS: Record<MailWorld, Brand> = {
   },
   root: {
     name: 'Stefan Heinemann',
-    tagline: 'NLP Coach & Webentwickler · Potsdam',
+    tagline: 'Coach & Webentwickler · Potsdam',
     logo: { src: '/logos/logo-sh-192.png', width: 48, height: 48, alt: 'Stefan Heinemann' },
     dark: '#070b12',
     accent: '#1d6fa8',
     accent2: '#f6b35a',
     buttonText: '#ffffff',
     link: '#1d6fa8',
-    role: 'NLP Coach & Webentwickler · Potsdam',
+    role: 'Coach & Webentwickler · Potsdam',
     replyTo: OWNER.email,
     home: '/',
     imprint: '/webdevelopment/impressum',
@@ -352,7 +352,7 @@ export function contactCustomerMail(opts: { world: MailWorld; name: string; rows
 }
 
 const WORLD_LABEL: Record<MailWorld, string> = {
-  nlp: 'NLP Coaching',
+  nlp: 'Coaching',
   web: 'Webentwicklung',
   root: 'Startseite',
 };

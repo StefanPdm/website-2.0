@@ -12,11 +12,11 @@ const bodyFont = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'NLP Coaching & Webentwicklung in Potsdam und Berlin',
+    default: 'Life Coaching & Webentwicklung in Potsdam und Berlin',
     template: '%s | Stefan Heinemann',
   },
   description:
-    'Stefan Heinemann aus Potsdam: NLP Coaching für Klarheit und Entscheidungen sowie Webentwicklung für Websites, Web Apps und Kundenportale. Für Potsdam, Berlin, Brandenburg und remote.',
+    'Stefan Heinemann aus Potsdam: Life Coaching für Unternehmer mit persönlichen Themen sowie Webentwicklung für Websites, Web Apps und Kundenportale. Für Potsdam, Berlin, Brandenburg und remote.',
   keywords: [...KEYWORDS_ROOT],
   authors: [{ name: OWNER.name, url: SITE_URL }],
   creator: OWNER.name,
@@ -38,16 +38,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: SITE_URL,
-    title: 'NLP Coaching & Webentwicklung in Potsdam und Berlin',
+    title: 'Life Coaching & Webentwicklung in Potsdam und Berlin',
     description:
-      'Zwei Geschäftsbereiche, eine Person: NLP Coaching für innere Klarheit und Webentwicklung für digitale Systeme. Potsdam, Berlin, Brandenburg und remote.',
+      'Zwei Geschäftsbereiche, eine Person: Life Coaching für Unternehmer und Webentwicklung für digitale Systeme. Potsdam, Berlin, Brandenburg und remote.',
     siteName: OWNER.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NLP Coaching & Webentwicklung in Potsdam und Berlin',
+    title: 'Life Coaching & Webentwicklung in Potsdam und Berlin',
     description:
-      'Zwei Geschäftsbereiche, eine Person: NLP Coaching für innere Klarheit und Webentwicklung für digitale Systeme. Potsdam, Berlin, Brandenburg und remote.',
+      'Zwei Geschäftsbereiche, eine Person: Life Coaching für Unternehmer und Webentwicklung für digitale Systeme. Potsdam, Berlin, Brandenburg und remote.',
   },
   icons: {
     // SVG für moderne Browser, .ico als Rückfall für ältere.

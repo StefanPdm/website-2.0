@@ -11,16 +11,16 @@ import { RootStructuredData } from '@/components/StructuredData';
 // § 5 DDG: Impressum muss von jeder Seite aus erreichbar sein – auch vom Hub.
 // Beide Welten haben eigene Rechtstexte, deshalb beide verlinkt.
 const legalLinks = [
-  { label: 'Impressum Coaching', href: '/nlp/impressum' },
+  { label: 'Impressum Coaching', href: '/coaching/impressum' },
   { label: 'Impressum Web', href: '/webdevelopment/impressum' },
-  { label: 'Datenschutz Coaching', href: '/nlp/datenschutz' },
+  { label: 'Datenschutz Coaching', href: '/coaching/datenschutz' },
   { label: 'Datenschutz Web', href: '/webdevelopment/datenschutz' },
   { label: 'Widerruf', href: '/widerruf' },
 ];
 
 export default function Home() {
   const useWarmPills = true;
-  const InfoOrbTitel = `"Stefan, du musst dich entscheiden! Entweder du bist Entwickler oder NLP Coach!"`;
+  const InfoOrbTitel = `"Stefan, du musst dich entscheiden! Entweder du bist Entwickler oder Coach!"`;
   const InfoOrbText = `Das hörte ich beim Launch von einem Marketing-Profi. "Konzentriere dich auf eine Sache! - Alles andere versteht niemand."
   Meine Antwort: **„Warum? Genau das macht mich aus. Ich bin beides.“**
 
@@ -29,7 +29,7 @@ In der Psychologie gibt es den Persönlichkeitstyp **Scanner**. Das sind Mensche
 Seit dem berühmten Buch von Barbara Sher über Scanner wissen wir: **Du musst dich nicht entscheiden.**
 
 **Scanner** können viele Dinge parallel tun. Dabei vermischen sich ihre Leidenschaften oft — und genau daraus entstehen einzigartige Ergebnisse.
-Das ist auch mein Ansatz: Webentwicklung und NLP-Coaching sind für mich zwei Seiten derselben Medaille. Beide Bereiche profitieren voneinander und machen mich zu einem vielseitigen Dienstleister.
+Das ist auch mein Ansatz: Webentwicklung und Coaching sind für mich zwei Seiten derselben Medaille. Beide Bereiche profitieren voneinander und machen mich zu einem vielseitigen Dienstleister.
 
 Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden Wegen zu begleiten — egal, ob du eine Website brauchst oder Klarheit in deinem Kopf willst.`;
 
@@ -86,7 +86,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
             <div className='w-12 h-12'>
               <Image
                 src='/logos/logo-sh.svg'
-                alt='Stefan Heinemann – NLP Coaching und Webentwicklung, Logo'
+                alt='Stefan Heinemann – Coaching und Webentwicklung, Logo'
                 width={125}
                 height={120}
                 className='h-full w-full object-contain'
@@ -96,7 +96,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
             <div>
               <div className='landing-name'>Stefan Heinemann</div>
               {/* Leistung + Ort sichtbar im ersten Bildschirm – H1 bleibt die Marke (§13) */}
-              <div className='landing-role'>NLP Coach & Webentwickler · Potsdam</div>
+              <div className='landing-role'>Life Coach & Webentwickler · Potsdam</div>
             </div>
           </div>
           <div className='landing-tags hidden md:flex'>
@@ -116,7 +116,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
             </h1>
             <span className='landing-subtitle'>Du bekommst entweder: </span>
             <ul className='landing-subtitle'>
-              <li>⋙ innere Klarheit &nbsp; → &nbsp; NLP Coaching</li>
+              <li>⋙ innere Klarheit &nbsp; → &nbsp; Life Coaching</li>
               <li>⋙ digitale Systeme &nbsp; → &nbsp; Webdevelopment</li>
             </ul>
             <span className='landing-subtitle'>
@@ -140,13 +140,13 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                     <div className='orbit-item__content'>
                       <Image
                         src='/logos/logo-nlp.svg'
-                        alt='NLP Coaching'
+                        alt='Stefan Heinemann Coaching'
                         width={44}
                         height={40}
                         className='h-9 w-9 object-contain'
                       />
                     </div>
-                    <span className='orbit-badge'>NLP</span>
+                    <span className='orbit-badge'>Coaching</span>
                   </div>
                 </div>
               </div>
@@ -209,7 +209,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
               <span className='absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00E5FF]/20 blur-3xl' />
               <Image
                 src='/images-startseite/portrait-balance-free.webp'
-                alt='Stefan Heinemann – NLP Coach und Webentwickler aus Potsdam'
+                alt='Stefan Heinemann – Life Coach für Unternehmer und Webentwickler aus Potsdam'
                 width={800}
                 height={800}
                 priority
@@ -277,7 +277,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                 {/* right card */}
                 <Link
                   className='choice-tile relative'
-                  href='/nlp'
+                  href='/coaching'
                   style={
                     {
                       '--choice-border': pillScheme.nlpColors.border,
@@ -291,7 +291,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                   <div className='choice-logo-big'>
                     <Image
                       src='/logos/logo-nlp.svg'
-                      alt='NLP Coaching Logo'
+                      alt='Stefan Heinemann Coaching Logo'
                       width={70}
                       height={64}
                       className='h-14 w-auto max-w-[60px] object-contain'
@@ -308,7 +308,7 @@ Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden
                     />
                   </div>
                   <div className='choice-meta'>
-                    <div className='choice-heading'>NLP Coaching</div>
+                    <div className='choice-heading'>Life Coaching</div>
                     <div className='choice-text'>Kopf. Körper. Fokus.</div>
                     <br />
                     <span className='choice-link'>

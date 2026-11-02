@@ -173,7 +173,7 @@ export default function ContactForm() {
               Kontaktaufnahme zu.
             </label>{' '}
             <a
-              href='/nlp/datenschutz'
+              href='/coaching/datenschutz'
               target='_blank'
               rel='noopener noreferrer'
               className='underline underline-offset-2 transition hover:text-white'>

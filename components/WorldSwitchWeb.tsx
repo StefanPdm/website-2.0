@@ -4,7 +4,7 @@ import Link from 'next/link';
 /**
  * Schwebender Weg zurück zur Auswahlseite – Fassung für Welt B.
  *
- * Gegenstück zu `app/nlp/components/WorldSwitch.tsx`: gleiches Verhalten,
+ * Gegenstück zu `app/coaching/components/WorldSwitch.tsx`: gleiches Verhalten,
  * gleiche Position, aber in der Formsprache von Welt B (CLAUDE.md §1 – kein
  * Bauteil wandert unverändert zwischen den Welten). Welt B hat keine
  * Theme-Variablen, daher die festen Werte aus §3.3: Fläche `#0B1B2B`,
@@ -18,7 +18,7 @@ export default function WorldSwitchWeb() {
   return (
     <Link
       href='/'
-      aria-label='Zur Auswahlseite: NLP Coaching oder Webentwicklung'
+      aria-label='Zur Auswahlseite: Coaching oder Webentwicklung'
       title='Zwei Welten. Eine Entscheidung.'
       className='group fixed left-3 top-24 z-40 grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-[#0B1B2B]/80 shadow-[0_10px_30px_rgba(45,212,191,0.22)] backdrop-blur-md transition duration-200 hover:scale-105 hover:border-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web sm:left-5 sm:h-12 sm:w-12'>
       {/* Puls – Radarwelle nach außen, ohne Layout anzufassen */}

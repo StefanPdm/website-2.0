@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { faqBoth } from '@/app/nlp/faq';
+import { faqBoth } from '@/app/coaching/faq';
 import { faqWeb } from '@/app/webdevelopment/faq';
 
 /**

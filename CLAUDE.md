@@ -14,7 +14,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
 /                          Welt 0 — Entscheidungs-Hub ("Zwei Welten. Eine Entscheidung.")
 ├── /webdevelopment        Welt B — Webdevelopment            (Marke: Stefan Heinemann)
 │   └── /impressum  /datenschutz  /cookies
-└── /nlp                   Welt A — NLP Coaching              (Marke: NLP Coaching)
+└── /coaching              Welt A — Coaching                  (Marke: Stefan Heinemann Coaching)
     ├── /wissenschaft      Inhaltsseite: Forschungsstand (DVNLP-Whitepaper)  → Article + citation
     ├── /formel-zum-glueck Inhaltsseite: S-L-A-C-Formel (S² + L + A + C³)    → HowTo
     ├── /persoenlichkeitstest  Selbsttest Psychografie (18 Fragen, Client-Auswertung)
@@ -31,8 +31,8 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
 
 **Seitentypen in Welt A:**
 
-- **Onepager** `/nlp` — Sektionen in fester Reihenfolge aus `NlpSections.tsx`, verkauft.
-- **Inhaltsseiten** (`/nlp/wissenschaft`, `/persoenlichkeitstest`, `/regeln/*`) — beantworten
+- **Onepager** `/coaching` — Sektionen in fester Reihenfolge aus `NlpSections.tsx`, verkauft.
+- **Inhaltsseiten** (`/coaching/wissenschaft`, `/persoenlichkeitstest`, `/regeln/*`) — beantworten
   eine Suchfrage vollständig und führen dann ins Angebot. Sie sind der **SEO- und
   KI-Hebel** von Welt A: Jede bekommt eigenes `metadata` (inkl. `canonical` und
   `openGraph.url`), eigenes JSON-LD mit `BreadcrumbList`, einen Eintrag in `sitemap.ts`,
@@ -77,7 +77,7 @@ und die A11y-Baseline (§11).
   Kein Inline-Array direkt im JSX (Ausnahme: unter drei triviale Strings).
 - `'use client'` nur wenn wirklich nötig (State, Effekt, Event, WebGL).
   Sektionen ohne Interaktion bleiben Server Components.
-- Sektions-Komponenten von `/nlp` liegen in `app/nlp/components/`,
+- Sektions-Komponenten von `/coaching` liegen in `app/coaching/components/`,
   welten-übergreifend Wiederverwendbares in `components/`.
 
 ### Ordnerkonvention für neue Sektionen
@@ -120,7 +120,7 @@ Definiert in `app/globals.css` unter `.landing-*` / `.choice-*` / `.orbit-*`.
 > daneben. **Nicht löschen**, aber auch nicht mischen — es ist ein vollständiger,
 > umschaltbarer Zweitzustand.
 
-### 3.2 Welt A — NLP Coaching
+### 3.2 Welt A — Coaching (Stefan Heinemann Coaching)
 
 Zwei umschaltbare Themes auf demselben Layout (`NlpLayoutClient`, Toggle im Header).
 Alle Werte als CSS-Variablen auf `.theme-cool` / `.theme-warm`.
@@ -162,7 +162,7 @@ haben keine Kurzform → Klammerform (`text-(--text)`, `bg-(--section-bg-accent)
 `localStorage` — jeder Seitenaufruf startet in `.theme-cool`. Komponenten, die das
 Theme brauchen (WebGL-Farben), lesen es über `useNlpTheme()`, nie über das DOM.
 
-**Dekor-Motive:** `app/nlp/components/Motifs.tsx` — Inline-SVGs (`MotifClarity`,
+**Dekor-Motive:** `app/coaching/components/Motifs.tsx` — Inline-SVGs (`MotifClarity`,
 `MotifRelation`, `MotifInsight`, `MotifAction` …), eingefärbt über
 `--accent → --accent-2`, immer `aria-hidden`. Als Wasserzeichen mit
 `opacity-[0.07]` hinter Karten/Kopfbereichen, als Inhalt nur in der
@@ -249,17 +249,17 @@ Theme-Toggle, Burger schalten dort gemeinsam). Custom-CSS auf `/` nutzt zusätzl
 > vollständig sein. Nav-Trigger und Nav-Panel **immer** am selben Breakpoint schalten
 > (`hdr:flex` ↔ `hdr:hidden` — nie `lg:` und `hdr:` mischen).
 
-**Muster Inhaltsseite Welt A** (`/nlp/wissenschaft`, `/persoenlichkeitstest`, `/regeln/*`):
+**Muster Inhaltsseite Welt A** (`/coaching/wissenschaft`, `/persoenlichkeitstest`, `/regeln/*`):
 
 ```
 <main className='relative z-10'>
   <section  Kopfbereich: border-b border-(--border) px-4 pt-40 pb-16 md:pt-48
             + Motif als Wasserzeichen (absolute, opacity-[0.07])
     <div container mx-auto max-w-4xl>
-      <nav aria-label='Brotkrumen'>  Start / NLP Coaching / <Seite>   text-xs text-(--muted)
+      <nav aria-label='Brotkrumen'>  Start / Coaching / <Seite>   text-xs text-(--muted)
       Eyebrow → <h1> (text-3xl sm:text-4xl lg:text-5xl) → Lead → Meta (Dauer, Quelle)
   <section> … Inhalt in GlassCards, <h2> text-2xl sm:text-3xl …
-  <section> Abschluss-CTA → /nlp#kontakt bzw. /nlp#preise (PrimaryButton)
+  <section> Abschluss-CTA → /coaching#kontakt bzw. /coaching#preise (PrimaryButton)
 ```
 
 Das Pt-40 gleicht die fixierte Kopfzeile aus. Die sichtbare Brotkrumen-Navigation
@@ -285,7 +285,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `WorldSwitchWeb` | Schwebender Rundbutton → `/`, Welt-B-Fassung von `WorldSwitch` (Farben aus §3.3, Puls in `accent-web`). Im Layout, also auf allen Welt-B-Seiten | Welt B |
 | `StructuredData` / `OgCard` | JSON-LD je Route, OG-Bild-Layout (§13) | alle |
 
-### Welt A (`app/nlp/components/`)
+### Welt A (`app/coaching/components/`)
 
 | Komponente | Zweck |
 |---|---|
@@ -294,7 +294,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `NlpFooter` | Rechtslinks + Weltenwechsel |
 | `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
 | `Motifs` | Dekor-SVGs (§3.2) |
-| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx`: Hero → Intro („Was ist NLP?") → Work → Transformation → Persönlichkeitstest → Fulfilment → **Formel** (Teaser, `FormulaSection`) → Preise → Leitfaden → Über mich → FAQ → Kontakt |
+| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort) → Themen (`WorkSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
 
 Hinweis: `NlpSections.tsx` ist `'use client'` (wegen `useNlpTheme`). Alles, was es
 importiert, wird damit ebenfalls Client-Code — auch Sektionen ohne `'use client'`.
@@ -353,7 +353,7 @@ Zielgruppe → **Über mich** → Referenzen → FAQ → Kontakt.
 .choice-link            Textlink mit "→"                              → in den Wahlkacheln
 ```
 
-### Welt A — `app/nlp/components/Buttons.tsx`
+### Welt A — `app/coaching/components/Buttons.tsx`
 
 ```
 <PrimaryButton>    Gradient --accent → --accent-2, Text --button-text,
@@ -502,7 +502,7 @@ Drei Punkte, die dabei nicht verhandelbar sind:
 4. **Kein WebGL ohne `LazyEffect`.** Die Hülle prüft, ob der Browser überhaupt
    einen WebGL-Kontext erzeugen kann, und fängt Abstürze des Effekts per
    Fehlergrenze ab. Ohne sie warf three.js „Error creating WebGL context" und
-   React räumte die ganze Seite ab (weißer Bildschirm auf `/nlp`, gefunden
+   React räumte die ganze Seite ab (weißer Bildschirm auf `/coaching`, gefunden
    2026-10-01). Soll ein Effekt auch mobil laufen: `minWidth={0}`.
    Reine Canvas-2D-Effekte: `requiresWebGL={false}`.
 
@@ -650,20 +650,31 @@ Dateinamen: kebab-case, beschreibend, ASCII, **ohne Leerzeichen und ohne Datum**
   `alternates.canonical`, `openGraph`, `twitter`, `keywords`.
 - ⚠️ **Metadata wird vererbt.** Next.js übernimmt `alternates` und `openGraph`
   aus dem nächsthöheren Layout, wenn die Seite sie nicht selbst setzt.
-  `app/nlp/layout.tsx` setzt `canonical: '/nlp'`, `app/webdevelopment/layout.tsx`
+  `app/coaching/layout.tsx` setzt `canonical: '/coaching'`, `app/webdevelopment/layout.tsx`
   `'/webdevelopment'`, `app/layout.tsx` die Startseite. Eine Unterseite ohne
   eigenes `alternates.canonical` **erklärt sich damit selbst zum Duplikat der
   Elternseite.** Deshalb: `canonical` **und** `openGraph.url` auf **jeder** Seite
   setzen, auch auf Rechtsseiten.
 - Titel in `metadata` **ohne** „| Stefan Heinemann" schreiben — den hängen die
   Templates an. Ein Template gilt nur eine Ebene tief, deshalb setzen
-  `app/nlp/layout.tsx` und `app/webdevelopment/layout.tsx` jeweils ein eigenes
+  `app/coaching/layout.tsx` und `app/webdevelopment/layout.tsx` jeweils ein eigenes
   `title: { default: title, template: '%s | ${OWNER.name}' }`. `default` bleibt
   ohne Namen, sonst hängt das Root-Template ihn ein zweites Mal an.
   Ein neues Layout mit eigenem `title` braucht dasselbe Muster.
 - Titel-Template: `'%s | Stefan Heinemann'`.
-- **Title und Description tragen immer Leistung + Ort.** Nicht „NLP Coaching",
-  sondern „NLP Coaching in Potsdam & Berlin – Klarheit, Fokus, Entscheidungen".
+- **Welt A lag bis 2026-11 unter `/nlp`.** `next.config.ts` leitet `/nlp` und
+  `/nlp/*` dauerhaft auf `/coaching` um (inkl. Query-Parametern) — alte Links aus
+  Anzeigen, LinkedIn und Leitfaden-Mails hängen daran. **Nie entfernen.**
+  „Coaching“ steht vorn, NLP ist die Methode: Klienten suchen „Coaching Potsdam“.
+- PDFs in `public/dokumente/` bekommen per `Link`-Header ein Canonical auf ihre
+  Inhaltsseite (`pdfCanonicals` in `next.config.ts`) — neues PDF dort eintragen.
+- **Title und Description tragen immer Leistung + Ort.** Nicht „Coaching",
+  sondern „Life Coaching für Unternehmer in Potsdam & Berlin".
+- **Benennung Welt A (seit 2026-11):** Marke **„Stefan Heinemann Coaching“**,
+  Oberbegriff **„Life Coaching für Unternehmer“**, Zielgruppe Unternehmer mit
+  persönlichen Themen. NLP ist eine Methode unter mehreren (plus Nachweis
+  DVNLP) — nie mehr Marke oder Titelanfang. Zertifikatsnamen („NLP Coach“,
+  „NLP Master“) bleiben, wie sie ausgestellt sind.
   Das ist der Hebel für lokale Suche.
 - Neue Route → Eintrag in `app/sitemap.ts` **und** ein interner Link.
   Eine Seite ohne Einstiegs-Link gehört nicht in die Sitemap, sondern entfernt.
@@ -678,7 +689,7 @@ Drei Achsen, jeweils kombiniert:
 | Achse | Welt A | Welt B |
 |---|---|---|
 | **Ort** | Potsdam, Berlin, Brandenburg | Potsdam, Berlin, Brandenburg |
-| **Leistung** | NLP Coaching, Business Coaching, Mentaltraining, Kommunikationstraining, Führungskräfte-Coaching | Webentwicklung, Webdesign, Web App, Kundenportal, Headless CMS, API |
+| **Leistung** | Life Coaching für Unternehmer, NLP Coaching, Business Coaching, Mentaltraining, Kommunikationstraining, Führungskräfte-Coaching | Webentwicklung, Webdesign, Web App, Kundenportal, Headless CMS, API |
 | **Technologie / Methode** | NLP, Reframing, Timeline, DVNLP | Next.js, React, Angular, TypeScript, WordPress |
 | **Anliegen** (stärkster Long-Tail) | Gedankenkarussell stoppen, Grenzen setzen, Klarheit im Kopf, Coaching nach Burnout | Website Relaunch, Performance-Optimierung, Landingpage erstellen lassen |
 
@@ -688,7 +699,7 @@ Drei Achsen, jeweils kombiniert:
 
 ### FAQ
 
-Fragen und Antworten stehen als Daten in `app/nlp/faq.ts` und
+Fragen und Antworten stehen als Daten in `app/coaching/faq.ts` und
 `app/webdevelopment/faq.ts`. Beide werden von der jeweiligen Sektion **und**
 vom `FAQPage`-Schema gelesen — eine Antwort ändern heißt, sie überall zu
 ändern. `faqBoth` (die welten-übergreifenden Fragen) hängt bewusst an beiden
@@ -704,7 +715,7 @@ Drei Regeln für neue Einträge:
    zugeklappt im HTML stehen — nur dann akzeptiert Google das Akkordeon fürs
    FAQPage-Schema. Kein bedingtes Rendern.
 
-Preise in FAQ-Antworten müssen zu `app/nlp/pricing.ts` passen. Das ist die
+Preise in FAQ-Antworten müssen zu `app/coaching/pricing.ts` passen. Das ist die
 wahrscheinlichste Stelle, an der die Seite auseinanderläuft.
 
 ### Strukturierte Daten
@@ -715,18 +726,18 @@ Components (damit es auch ohne JavaScript im HTML steht):
 | Route | Schema |
 |---|---|
 | `/` | `Person` + `WebSite` + `ProfessionalService` |
-| `/nlp` | `Service` + `OfferCatalog` (aus `app/nlp/pricing.ts`) + `BreadcrumbList` |
+| `/coaching` | `Service` + `OfferCatalog` (aus `app/coaching/pricing.ts`) + `BreadcrumbList` |
 | `/webdevelopment` | `Service` + `OfferCatalog` + `ItemList` (Referenzen) + `BreadcrumbList` |
-| `/nlp` + `/webdevelopment` | zusätzlich `FAQPage` (aus `faq.ts` + `faqBoth`) |
-| `/nlp/wissenschaft` | `Article` mit `citation` (DVNLP-Whitepaper) + `BreadcrumbList` |
-| `/nlp/regeln/*` | `Article` + `ItemList` (20 Regeln) + `BreadcrumbList` |
-| `/nlp/formel-zum-glueck` | `HowTo` (7 Schritte aus `data.ts`) + `BreadcrumbList` |
-| `/nlp/persoenlichkeitstest` | `WebApplication` (kostenlos, Disclaimer in `description`) + `BreadcrumbList` |
-| `/nlp/persoenlichkeitstest/<typ>` | `Article` (`isPartOf` → Test) + `BreadcrumbList`, eigenes OG-Bild je Typ |
+| `/coaching` + `/webdevelopment` | zusätzlich `FAQPage` (aus `faq.ts` + `faqBoth`) |
+| `/coaching/wissenschaft` | `Article` mit `citation` (DVNLP-Whitepaper) + `BreadcrumbList` |
+| `/coaching/regeln/*` | `Article` + `ItemList` (20 Regeln) + `BreadcrumbList` |
+| `/coaching/formel-zum-glueck` | `HowTo` (7 Schritte aus `data.ts`) + `BreadcrumbList` |
+| `/coaching/persoenlichkeitstest` | `WebApplication` (kostenlos, Disclaimer in `description`) + `BreadcrumbList` |
+| `/coaching/persoenlichkeitstest/<typ>` | `Article` (`isPartOf` → Test) + `BreadcrumbList`, eigenes OG-Bild je Typ |
 
 **Persönlichkeitstest teilen:** `ShareResult` teilt Typ **und** die drei Prozentwerte
 (Web Share API, sonst Zwischenablage) als Link auf die öffentliche Typseite:
-`/nlp/persoenlichkeitstest/<typ>?beziehung=22&erkennen=28&handeln=50` (`shareHref`
+`/coaching/persoenlichkeitstest/<typ>?beziehung=22&erkennen=28&handeln=50` (`shareHref`
 in `scoring.ts`). Die Typseite bleibt statisch; erst im Browser liest `SharedResult`
 die Parameter, prüft sie (`parseShared`: ganze Punkte, Summe = alle Fragen, Seitentyp
 = stärkster Bereich) und zeigt die Ergebnisbalken über der Beschreibung — bei
@@ -734,7 +745,7 @@ ungültigen Parametern nichts. Einzelne Antworten verlassen nie den Browser.
 Slugs stehen allein in `typeSlugs` (`data.ts`); Typbeschreibung (`TypeProfile.tsx`)
 und Balken (`ScoreBars.tsx`) nutzen Ergebnis und Typseite gemeinsam.
 
-**Testmodus:** `/nlp/persoenlichkeitstest?testmodus` (Parameter von Hand an die
+**Testmodus:** `/coaching/persoenlichkeitstest?testmodus` (Parameter von Hand an die
 Adresse hängen). Zeigt in der Testkarte drei Knöpfe „Beziehung/Erkennen/Handeln → Frage 18", die
 Fragen 1–17 vorbelegen – zum Prüfen von Ergebnis und Teilen-Link. Bewusst auch
 live aktiv, weil die Web Share API auf dem Handy nur über HTTPS läuft.
@@ -743,7 +754,7 @@ Alle Graphen verweisen über `@id` auf **dieselbe** Person — das ist die
 Voraussetzung dafür, dass Google beide Geschäftsbereiche einer Entität zuordnet
 statt zwei unabhängige Anbieter zu sehen.
 
-**Preise stehen ausschließlich in `app/nlp/pricing.ts`.** Preistabelle und
+**Preise stehen ausschließlich in `app/coaching/pricing.ts`.** Preistabelle und
 `Offer`-Schema lesen dieselbe Quelle — sonst driftet das Markup von der Anzeige weg.
 Für Welt B gilt dasselbe in **`app/webdevelopment/pricing.ts`** (`webServices`,
 `HOURLY_RATE`, `VAT_NOTE`). Gelesen von der Leistungs-Sektion, `WebStructuredData`
@@ -754,7 +765,7 @@ Für Welt B gilt dasselbe in **`app/webdevelopment/pricing.ts`** (`webServices`,
 
 - `app/llms.txt/route.ts` erzeugt `/llms.txt`: eine nüchterne, faktische
   Beschreibung für Sprachmodelle, generiert aus `lib/site.ts` und
-  `app/nlp/pricing.ts` — kann deshalb nicht veralten.
+  `app/coaching/pricing.ts` — kann deshalb nicht veralten.
   **Bei neuen Leistungen oder Preisen dort mitpflegen.**
 - `app/robots.ts` erlaubt KI-Crawler ausdrücklich (GPTBot, ClaudeBot,
   PerplexityBot, Google-Extended u. a.). Ein Ausschluss würde zugleich die
@@ -773,7 +784,7 @@ Mit der Build-Zeit meldet jeder Deploy alle Seiten als geändert; Google stuft
 die lastmod-Angaben dann als wertlos ein und ignoriert sie künftig.
 
 Inhaltsseiten tragen zusätzlich `published`. Über `pageDates(path)` lesen die
-sichtbare Datumszeile (`app/nlp/components/ContentDate.tsx`, unter dem Lead) und
+sichtbare Datumszeile (`app/coaching/components/ContentDate.tsx`, unter dem Lead) und
 `datePublished`/`dateModified` im JSON-LD dieselben Werte. Eine neue Inhaltsseite
 bekommt beides — datierte Inhalte werden von Google und Sprachmodellen bevorzugt.
 
@@ -799,7 +810,7 @@ mit HTTP 403 ab.
 ### Open Graph
 
 Die OG-Bilder werden zur Build-Zeit generiert — `app/opengraph-image.tsx`,
-`app/nlp/opengraph-image.tsx`, `app/webdevelopment/opengraph-image.tsx`,
+`app/coaching/opengraph-image.tsx`, `app/webdevelopment/opengraph-image.tsx`,
 gemeinsames Layout in `components/OgCard.tsx`. Echte 1200×630, ein eigenes Motiv
 pro Welt. **Keine `images` mehr in `metadata.openGraph` eintragen** — das würde
 die generierten überschreiben. Beim Bearbeiten beachten: `next/og` versteht nur

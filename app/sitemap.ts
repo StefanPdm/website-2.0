@@ -28,8 +28,8 @@ type Page = {
 
 const pages: Page[] = [
   // Kernseiten
-  { path: '/', lastModified: '2026-10-01', priority: 1, changeFrequency: 'monthly' },
-  { path: '/nlp', lastModified: '2026-10-01', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/', lastModified: '2026-11-02', priority: 1, changeFrequency: 'monthly' },
+  { path: '/coaching', lastModified: '2026-11-02', priority: 0.9, changeFrequency: 'monthly' },
   {
     path: '/webdevelopment',
     lastModified: '2026-10-02',
@@ -39,56 +39,56 @@ const pages: Page[] = [
 
   // Inhaltsseiten
   {
-    path: '/nlp/wissenschaft',
+    path: '/coaching/wissenschaft',
     lastModified: '2026-09-01',
     published: '2026-09-01',
     priority: 0.8,
     changeFrequency: 'monthly',
   },
   {
-    path: '/nlp/persoenlichkeitstest',
+    path: '/coaching/persoenlichkeitstest',
     lastModified: '2026-09-01',
     published: '2026-09-01',
     priority: 0.8,
     changeFrequency: 'monthly',
   },
   {
-    path: '/nlp/persoenlichkeitstest/beziehungstyp',
+    path: '/coaching/persoenlichkeitstest/beziehungstyp',
     lastModified: '2026-10-01',
     published: '2026-10-01',
     priority: 0.7,
     changeFrequency: 'monthly',
   },
   {
-    path: '/nlp/persoenlichkeitstest/sachtyp',
+    path: '/coaching/persoenlichkeitstest/sachtyp',
     lastModified: '2026-10-01',
     published: '2026-10-01',
     priority: 0.7,
     changeFrequency: 'monthly',
   },
   {
-    path: '/nlp/persoenlichkeitstest/handlungstyp',
+    path: '/coaching/persoenlichkeitstest/handlungstyp',
     lastModified: '2026-10-01',
     published: '2026-10-01',
     priority: 0.7,
     changeFrequency: 'monthly',
   },
   {
-    path: '/nlp/formel-zum-glueck',
+    path: '/coaching/formel-zum-glueck',
     lastModified: '2026-10-01',
     published: '2026-10-01',
     priority: 0.8,
     changeFrequency: 'monthly',
   },
   {
-    path: '/nlp/regeln/gluecklichsein',
+    path: '/coaching/regeln/gluecklichsein',
     lastModified: '2026-09-01',
     published: '2026-09-01',
     priority: 0.7,
     changeFrequency: 'monthly',
   },
   {
-    path: '/nlp/regeln/ungluecklichsein',
+    path: '/coaching/regeln/ungluecklichsein',
     lastModified: '2026-09-01',
     published: '2026-09-01',
     priority: 0.7,
@@ -97,19 +97,19 @@ const pages: Page[] = [
 
   // Rechtliches – ändert sich selten, Datum entsprechend alt
   {
-    path: '/nlp/impressum',
+    path: '/coaching/impressum',
     lastModified: '2026-09-01',
     priority: 0.2,
     changeFrequency: 'yearly',
   },
   {
-    path: '/nlp/datenschutz',
+    path: '/coaching/datenschutz',
     lastModified: '2026-09-01',
     priority: 0.2,
     changeFrequency: 'yearly',
   },
-  { path: '/nlp/agb', lastModified: '2026-09-01', priority: 0.2, changeFrequency: 'yearly' },
-  { path: '/nlp/cookies', lastModified: '2026-09-01', priority: 0.1, changeFrequency: 'yearly' },
+  { path: '/coaching/agb', lastModified: '2026-09-01', priority: 0.2, changeFrequency: 'yearly' },
+  { path: '/coaching/cookies', lastModified: '2026-09-01', priority: 0.1, changeFrequency: 'yearly' },
   {
     path: '/webdevelopment/impressum',
     lastModified: '2026-02-12',

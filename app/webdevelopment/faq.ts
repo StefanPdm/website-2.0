@@ -1,4 +1,4 @@
-import type { FaqEntry } from '@/app/nlp/faq';
+import type { FaqEntry } from '@/app/coaching/faq';
 import { HOURLY_RATE, VAT_NOTE, priceOf } from '@/app/webdevelopment/pricing';
 
 /**

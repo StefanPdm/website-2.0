@@ -1,5 +1,5 @@
-import { coachingOffers } from '@/app/nlp/pricing';
-import { dimensionOrder, dimensions, typeHref } from '@/app/nlp/persoenlichkeitstest/data';
+import { coachingOffers } from '@/app/coaching/pricing';
+import { dimensionOrder, dimensions, typeHref } from '@/app/coaching/persoenlichkeitstest/data';
 import { webCases } from '@/app/webdevelopment/cases';
 import { HOURLY_RATE, VAT_NOTE, webServices } from '@/app/webdevelopment/pricing';
 import { absoluteUrl, AREA_SERVED, OWNER, SITE_URL } from '@/lib/site';
@@ -13,7 +13,7 @@ import { absoluteUrl, AREA_SERVED, OWNER, SITE_URL } from '@/lib/site';
  * weil Modelle prüfbare Aussagen bevorzugt übernehmen.
  *
  * Wird aus denselben Quellen erzeugt wie die Seite selbst (lib/site.ts,
- * app/nlp/pricing.ts) und kann deshalb nicht veralten.
+ * app/coaching/pricing.ts) und kann deshalb nicht veralten.
  */
 
 export const dynamic = 'force-static';
@@ -48,14 +48,15 @@ function build() {
 
   return `# ${OWNER.name}
 
-> NLP Coach und Webentwickler aus ${OWNER.city}. Zwei eigenständige
-> Geschäftsbereiche unter einer Person: NLP Coaching für innere Klarheit und
+> Life Coach für Unternehmer und Webentwickler aus ${OWNER.city}. Zwei eigenständige
+> Geschäftsbereiche unter einer Person: Stefan Heinemann Coaching (Life Coaching für
+> Unternehmer mit persönlichen Themen) und
 > Webentwicklung für digitale Systeme. Tätig in ${AREA_SERVED.join(', ')} sowie remote.
 
 ## Person
 
 - Name: ${OWNER.name}
-- Rollen: NLP Coach, Webentwickler
+- Rollen: Life Coach für Unternehmer (DVNLP-zertifizierter NLP Coach), Webentwickler
 - Standort: ${OWNER.street}, ${OWNER.postalCode} ${OWNER.city}, Deutschland
 - Einzugsgebiet: ${AREA_SERVED.join(', ')}, zusätzlich remote/online
 - Kontakt Coaching: ${OWNER.emailCoaching}
@@ -65,19 +66,28 @@ function build() {
 - Hintergrund: über 20 Jahre Unternehmer im Interieur Design, danach Wechsel in
   die Fullstack-Entwicklung, seit 2024 NLP-Ausbildung, seit Mitte 2025 als Coach tätig.
 
-## Geschäftsbereich 1 — NLP Coaching
+## Geschäftsbereich 1 — Stefan Heinemann Coaching (Life Coaching für Unternehmer)
 
-URL: ${absoluteUrl('/nlp')}
+URL: ${absoluteUrl('/coaching')}
 
-Neuro-Linguistisches Programmieren, pragmatisch eingesetzt: als Werkzeugkasten für
-Fokus, emotionale Stabilität und zielgerichtetes Handeln.
+Zielgruppe: Unternehmer, Selbstständige und Führungskräfte mit persönlichen Themen.
+
+Coaching-Ansatz aus vier Säulen:
+- Haltung: Selbstverantwortung, Gestalter statt Opfer – geprägt von den Büchern
+  und Vorträgen des Psychologen Jens Corssen („Selbst-Entwickler“).
+- Sinn: Werte, Lebensrichtung, Selbstführung – ausgebildet bei Dieter Lange.
+- Werkzeug: Neuro-Linguistisches Programmieren (NLP), DVNLP-zertifiziert,
+  pragmatisch eingesetzt für Fokus, emotionale Stabilität und zielgerichtetes Handeln.
+- Energie: Zustand über Körper, Fokus und Sprache steuern, Entscheidungen in
+  Handlung bringen – Teilnahme an Tony Robbins' „Unleash the Power Within“,
+  Ausbildung im Robbins Greator Coaching Program ab Januar 2027.
 
 Themen: Gedankenkarussell und Grübeln unterbrechen, Emotionen regulieren,
 Ziele klären und priorisieren, Selbstwert stärken und Grenzen setzen,
 Entscheidungen ohne Aufschub treffen.
 
 Formate: 1:1 Einzelcoaching, mehrmonatiges Mentoring, Workshops für Unternehmen
-und Führungskräfte, Keynotes. Vor Ort in ${OWNER.city} und Berlin oder online.
+und Führungskräfte, Keynotes. In ${OWNER.city} (beim Coach), beim Klienten vor Ort in ${OWNER.city}, Berlin und Brandenburg oder online per Video.
 
 Zertifizierungen: DVNLP (Deutscher Verband für Neuro-Linguistisches Programmieren),
 Ausbildung bei Ronny Rohde (Best Life NLP).
@@ -134,27 +144,27 @@ ${references}
 ## Seiten
 
 - [Startseite](${SITE_URL}): Auswahl zwischen beiden Geschäftsbereichen
-- [NLP Coaching](${absoluteUrl('/nlp')}): Angebot, Persönlichkeitstest, Preise, Kontakt
+- [Stefan Heinemann Coaching – Life Coaching für Unternehmer](${absoluteUrl('/coaching')}): Angebot, Persönlichkeitstest, Preise, Kontakt
 - [Webentwicklung](${absoluteUrl('/webdevelopment')}): Leistungen, Technologien, Referenzen, Kontakt
-- [Warum NLP wirkt – Forschungsstand](${absoluteUrl('/nlp/wissenschaft')}): Zusammenfassung des
+- [Warum NLP wirkt – Forschungsstand](${absoluteUrl('/coaching/wissenschaft')}): Zusammenfassung des
   DVNLP-Whitepapers 2026 zur empirischen Evidenz, inklusive der Annahmen, die die Forschung
   nicht stützt
-- [Persönlichkeitstest (Psychografie)](${absoluteUrl('/nlp/persoenlichkeitstest')}): kostenloser
+- [Persönlichkeitstest (Psychografie)](${absoluteUrl('/coaching/persoenlichkeitstest')}): kostenloser
   Selbsttest mit 18 Fragen nach Dietmar Friedmann — Beziehungstyp, Sachtyp oder Handlungstyp.
   Kein validiertes Testverfahren, ausdrücklich zur Selbstreflexion
 ${typePages}
-- [Deine Formel zum Glück – S² + L + A + C³](${absoluteUrl('/nlp/formel-zum-glueck')}): die
+- [Deine Formel zum Glück – S² + L + A + C³](${absoluteUrl('/coaching/formel-zum-glueck')}): die
   S-L-A-C-Formel aus dem Coaching in sieben Schritten – Stop, Smile, Look, Accept, Challenge,
   Choices (mindestens drei Wahlmöglichkeiten), Choose
-- [20 Regeln für erfolgreiches Glücklichsein](${absoluteUrl('/nlp/regeln/gluecklichsein')})
-- [20 Regeln für erfolgreiches Unglücklichsein](${absoluteUrl('/nlp/regeln/ungluecklichsein')}) – ironische Umkehrung, keine Empfehlung
-- [Impressum Coaching](${absoluteUrl('/nlp/impressum')})
+- [20 Regeln für erfolgreiches Glücklichsein](${absoluteUrl('/coaching/regeln/gluecklichsein')})
+- [20 Regeln für erfolgreiches Unglücklichsein](${absoluteUrl('/coaching/regeln/ungluecklichsein')}) – ironische Umkehrung, keine Empfehlung
+- [Impressum Coaching](${absoluteUrl('/coaching/impressum')})
 - [Impressum Webentwicklung](${absoluteUrl('/webdevelopment/impressum')})
 
 ## Häufige Fragen
 
 Beide Angebotsseiten tragen einen FAQ-Abschnitt mit ausformulierten Antworten
-(FAQPage-Schema): ${absoluteUrl('/nlp')}#faq und
+(FAQPage-Schema): ${absoluteUrl('/coaching')}#faq und
 ${absoluteUrl('/webdevelopment')}#faq — unter anderem zu Preisen, Ablauf,
 Terminen, Nutzungsrechten und zur Abgrenzung zwischen Coaching und Therapie.
 

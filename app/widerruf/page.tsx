@@ -5,12 +5,12 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Widerrufsbelehrung für Verbraucher',
   description:
-    'Widerrufsbelehrung für Verbraucherverträge (B2C) mit Stefan Heinemann, Potsdam – gilt für NLP Coaching und Webentwicklung.',
+    'Widerrufsbelehrung für Verbraucherverträge (B2C) mit Stefan Heinemann, Potsdam – gilt für Coaching und Webentwicklung.',
   alternates: { canonical: '/widerruf' },
   openGraph: {
     title: 'Widerrufsbelehrung für Verbraucher',
     description:
-      'Widerrufsbelehrung für Verbraucherverträge (B2C) mit Stefan Heinemann, Potsdam – gilt für NLP Coaching und Webentwicklung.',
+      'Widerrufsbelehrung für Verbraucherverträge (B2C) mit Stefan Heinemann, Potsdam – gilt für Coaching und Webentwicklung.',
     url: '/widerruf',
   },
 };

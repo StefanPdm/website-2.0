@@ -1,5 +1,14 @@
 import type { NextConfig } from 'next';
 
+import { absoluteUrl } from './lib/site';
+
+/** PDF in public/ → Inhaltsseite, die Google stattdessen zeigen soll. */
+const pdfCanonicals: [string, string][] = [
+  ['/dokumente/dvnlp-whitepaper-nlp-forschung.pdf', '/coaching/wissenschaft'],
+  ['/dokumente/regeln-erfolgreiches-gluecklichsein.pdf', '/coaching/regeln/gluecklichsein'],
+  ['/dokumente/regeln-erfolgreiches-ungluecklichsein.pdf', '/coaching/regeln/ungluecklichsein'],
+];
+
 const isDev = process.env.NODE_ENV !== 'production';
 
 /**
@@ -78,6 +87,21 @@ const nextConfig: NextConfig = {
         destination: '/webdevelopment/impressum',
         permanent: true,
       },
+      // Welt A ist 2026-11 von /nlp nach /coaching umgezogen: Klienten suchen
+      // „Coaching Potsdam“, nicht „NLP“. Diese beiden Regeln halten alte Links
+      // aus Anzeigen, LinkedIn, Lesezeichen und Leitfaden-Mails am Leben.
+      // Query-Parameter (utm_…, token) reicht Next.js automatisch durch,
+      // Sprungmarken (#kontakt) übernimmt der Browser. Nie entfernen.
+      {
+        source: '/nlp',
+        destination: '/coaching',
+        permanent: true,
+      },
+      {
+        source: '/nlp/:path*',
+        destination: '/coaching/:path*',
+        permanent: true,
+      },
     ];
   },
 
@@ -87,9 +111,16 @@ const nextConfig: NextConfig = {
         // Token-Landingpage des Lead-Magneten gehört nicht in den Index.
         // Sie ist eine Client Component und kann deshalb kein `metadata`
         // exportieren – der Header erledigt es zuverlässiger.
-        source: '/nlp/guide-download',
+        source: '/coaching/guide-download',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
       },
+      // PDFs verweisen per Canonical-Header auf ihre Inhaltsseite. Sonst zeigt
+      // Google das PDF – ohne Navigation und ohne Kontaktweg – statt der Seite
+      // (Search Console 2026-11: Whitepaper-PDF 32 Einblendungen, Seite 6).
+      ...pdfCanonicals.map(([pdf, page]) => ({
+        source: pdf,
+        headers: [{ key: 'Link', value: `<${absoluteUrl(page)}>; rel="canonical"` }],
+      })),
       {
         source: '/:path*',
         headers: [

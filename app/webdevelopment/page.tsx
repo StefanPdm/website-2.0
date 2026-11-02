@@ -47,7 +47,7 @@ import HyperspeedBand from '@/components/HyperspeedBand';
 import { FaqStructuredData, WebStructuredData } from '@/components/StructuredData';
 import FaqSection from '@/app/webdevelopment/FaqSection';
 import AboutDeveloperSection from '@/app/webdevelopment/components/AboutDeveloperSection';
-import { faqBoth } from '@/app/nlp/faq';
+import { faqBoth } from '@/app/coaching/faq';
 import { faqWeb } from '@/app/webdevelopment/faq';
 import { VAT_NOTE, webServices } from '@/app/webdevelopment/pricing';
 import { webCases } from '@/app/webdevelopment/cases';

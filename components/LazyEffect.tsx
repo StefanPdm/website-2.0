@@ -20,7 +20,7 @@ import { Component, useEffect, useRef, useState, type ReactNode } from 'react';
  * Zusätzlich fängt eine Fehlergrenze jeden Absturz des Effekts ab. Vorher
  * warf three.js ohne WebGL (Firmenrechner mit gesperrter GPU, ältere Geräte,
  * manche Datenschutz-Browser) „Error creating WebGL context" – und React
- * hat daraufhin die komplette Seite abgeräumt: weißer Bildschirm statt /nlp.
+ * hat daraufhin die komplette Seite abgeräumt: weißer Bildschirm statt /coaching.
  *
  * Ist eine Bedingung verletzt, wird `fallback` gerendert (Standard: nichts).
  * Der Effekt selbst kommt als Render-Prop, damit sein Modul erst dann
