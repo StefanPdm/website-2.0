@@ -60,12 +60,19 @@ export default function ContactSection() {
               ))}
             </ul>
             <p className='mt-6 text-sm text-(--muted)'>
-              Aus der Region?{' '}
+              Aus der Region? So läuft Coaching in{' '}
               <Link
                 href='/coaching/potsdam'
                 className='rounded text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
-                So läuft Coaching in Potsdam
+                Potsdam
+              </Link>{' '}
+              und in{' '}
+              <Link
+                href='/coaching/berlin'
+                className='rounded text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+                Berlin
               </Link>
+              .
             </p>
           </div>
           <div className='min-w-0 rounded-3xl border border-border bg-surface p-4 shadow-[0_30px_80px_var(--glow)]'>

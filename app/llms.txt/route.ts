@@ -154,6 +154,8 @@ ${references}
   aus der Metaperspektive reflektiert.
 - [Coaching in Potsdam](${absoluteUrl('/coaching/potsdam')}): Formate vor Ort (bei Stefan in Potsdam,
   im Gehen, beim Klienten in Potsdam, Berlin oder Brandenburg) und online, typische Anliegen, Preise.
+- [Coaching in Berlin](${absoluteUrl('/coaching/berlin')}): Termine beim Klienten in Berlin, online oder
+  bei Stefan in Potsdam, typische Anliegen, Preise.
 - [Buchempfehlungen](${absoluteUrl('/coaching/buecher')}): 24 Bücher zu Haltung, Sinn, Menschenkenntnis,
   Energie, Beziehung und zeitloser Weisheit, jeweils mit Begründung.
 - [Warum NLP wirkt – Forschungsstand](${absoluteUrl('/coaching/wissenschaft')}): Zusammenfassung des
