@@ -3,14 +3,20 @@ import path from 'node:path';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, ExternalLink } from 'lucide-react';
 
 import GlassCard from '@/components/GlassCard';
 import { ContentPageStructuredData } from '@/components/StructuredData';
 import { PrimaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
 import { MotifClarity } from '@/app/coaching/components/Motifs';
-import { allBooks, bookGroups, coverPath, type Book } from '@/app/coaching/buecher/data';
+import {
+  allBooks,
+  authorLine,
+  bookGroups,
+  coverPath,
+  type Book,
+} from '@/app/coaching/buecher/data';
 
 const PATH = '/coaching/buecher';
 
@@ -23,8 +29,8 @@ function hasCover(book: Book) {
   }
 }
 
-const title = 'Buchempfehlungen für Unternehmer – Haltung, Sinn, Entscheidungen';
-const description = `${allBooks.length} Bücher, die Life Coach Stefan Heinemann aus Potsdam selbst geprägt haben – von Jens Corssen, Dieter Lange, Tony Robbins, Viktor Frankl und anderen. Jeweils mit einem Satz, warum es sich lohnt.`;
+const title = 'Buchempfehlungen – Haltung, Sinn und Beziehung für Unternehmer';
+const description = `${allBooks.length} Bücher, die Life Coach Stefan Heinemann aus Potsdam selbst geprägt haben – von Jens Corssen, Dieter Lange, Tony Robbins, Viktor Frankl, Hermann Hesse und anderen. Jeweils mit ein, zwei Sätzen, warum es sich lohnt.`;
 
 export const metadata: Metadata = {
   title,
@@ -35,6 +41,8 @@ export const metadata: Metadata = {
     'Jens Corssen Buch',
     'Dieter Lange Buch',
     'Tony Robbins Buch',
+    'John Strelecky',
+    'Bücher Sinn des Lebens',
     'Life Coaching Potsdam',
   ],
   alternates: { canonical: PATH },
@@ -84,7 +92,7 @@ export default function BuecherPage() {
             </h1>
             <p className='mt-6 max-w-2xl text-base leading-relaxed text-(--muted) sm:text-lg'>
               Kein Ersatz für Veränderung – aber oft der Anstoß dazu. {allBooks.length} Bücher,
-              sortiert nach den Säulen meines Coachings, jeweils mit einem Satz, warum ich sie
+              sortiert nach Themen meines Coachings, jeweils mit ein, zwei Sätzen, warum ich sie
               empfehle.
             </p>
             <ContentDate path={PATH} />
@@ -106,7 +114,7 @@ export default function BuecherPage() {
                         <div className='relative aspect-2/3 w-20 shrink-0 overflow-hidden rounded-md shadow-[0_10px_30px_rgba(0,0,0,0.35)] sm:w-24'>
                           <Image
                             src={coverPath(book)}
-                            alt={`Buchcover „${book.title}“ von ${book.author}`}
+                            alt={`Buchcover „${book.title}“ von ${authorLine(book)}`}
                             fill
                             sizes='96px'
                             className='object-cover'
@@ -121,11 +129,41 @@ export default function BuecherPage() {
                       <div>
                         <h3 className='text-lg font-semibold leading-snug text-(--text)'>
                           {book.title}
+                          {book.subtitle && (
+                            <span className='block text-sm font-normal text-(--muted)'>
+                              {book.subtitle}
+                            </span>
+                          )}
                         </h3>
                         <p className='mt-1 text-xs uppercase tracking-[0.2em] text-accent-soft'>
-                          {book.author}
+                          {authorLine(book)}
+                        </p>
+                        <p className='mt-1 text-xs text-(--muted)'>
+                          {book.publisherUrl ? (
+                            <a
+                              href={book.publisherUrl}
+                              target='_blank'
+                              rel='noopener'
+                              className='inline-flex items-center gap-1 rounded underline-offset-4 hover:text-(--text) hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+                              Verlag: {book.publisher}
+                              <ExternalLink
+                                aria-hidden='true'
+                                className='h-3 w-3'
+                              />
+                              <span className='sr-only'>(öffnet die Verlagsseite in neuem Tab)</span>
+                            </a>
+                          ) : (
+                            <>Verlag: {book.publisher}</>
+                          )}
                         </p>
                         <p className='mt-3 text-sm leading-relaxed text-(--muted)'>{book.why}</p>
+                        {book.related && (
+                          <Link
+                            href={book.related.href}
+                            className='mt-3 inline-block rounded text-sm text-accent underline underline-offset-4 hover:text-(--text) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+                            {book.related.label} →
+                          </Link>
+                        )}
                       </div>
                     </GlassCard>
                   </li>

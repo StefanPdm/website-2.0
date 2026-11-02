@@ -149,8 +149,8 @@ ${references}
 - [Session-Podcast](${absoluteUrl('/coaching/session-podcast')}): Auf Wunsch zu jeder Session inklusive –
   ein KI-Podcast (Google NotebookLM, aus einem lokal pseudonymisierten Transkript der Session), der die Session
   aus der Metaperspektive reflektiert.
-- [Buchempfehlungen](${absoluteUrl('/coaching/buecher')}): Bücher zu Haltung, Sinn, Werkzeug, Energie
-  und Entscheiden, jeweils mit Begründung.
+- [Buchempfehlungen](${absoluteUrl('/coaching/buecher')}): 24 Bücher zu Haltung, Sinn, Menschenkenntnis,
+  Energie, Beziehung und zeitloser Weisheit, jeweils mit Begründung.
 - [Warum NLP wirkt – Forschungsstand](${absoluteUrl('/coaching/wissenschaft')}): Zusammenfassung des
   DVNLP-Whitepapers 2026 zur empirischen Evidenz, inklusive der Annahmen, die die Forschung
   nicht stützt

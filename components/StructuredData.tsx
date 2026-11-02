@@ -624,7 +624,7 @@ type ContentPageInput = {
   shortTitle: string;
   about: string;
   /** Optional: Bücherliste als ItemList aus `Book`-Einträgen. */
-  books?: { title: string; author: string }[];
+  books?: { title: string; subtitle?: string; authors: string[]; publisher: string }[];
 };
 
 /**
@@ -668,8 +668,10 @@ export function ContentPageStructuredData({ page }: { page: ContentPageInput }) 
         position: index + 1,
         item: {
           '@type': 'Book',
-          name: book.title,
-          author: { '@type': 'Person', name: book.author },
+          name: book.subtitle ? `${book.title}. ${book.subtitle}` : book.title,
+          author: book.authors.map((name) => ({ '@type': 'Person', name })),
+          publisher: { '@type': 'Organization', name: book.publisher },
+          inLanguage: 'de',
         },
       })),
     });
