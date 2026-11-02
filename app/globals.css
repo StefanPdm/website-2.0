@@ -291,20 +291,24 @@
 /* Die Zentrierung (translate) gehört in die Keyframes: Eine Animation auf
    `transform` ersetzt den Ruhewert komplett. Ohne sie lagen die Ringe
    versetzt und mussten je Breakpoint per Hand zurückgeschoben werden. */
+/* `--orbit-start` verteilt die Elemente auf verschiedene Startwinkel – sonst
+   stehen beim Laden (und bei reduzierter Bewegung dauerhaft) alle vier oben
+   übereinander. Das Element dreht gegenläufig um denselben Winkel und bleibt
+   dadurch aufrecht. */
 @keyframes orbitSpin {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(var(--orbit-start, 0deg));
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg);
+    transform: translate(-50%, -50%) rotate(calc(var(--orbit-start, 0deg) + 360deg));
   }
 }
 @keyframes orbitSpinReverse {
   0% {
-    transform: rotate(var(--orbit-tilt, -6deg));
+    transform: rotate(calc(var(--orbit-tilt, -6deg) - var(--orbit-start, 0deg)));
   }
   100% {
-    transform: rotate(calc(var(--orbit-tilt, -6deg) - 360deg));
+    transform: rotate(calc(var(--orbit-tilt, -6deg) - var(--orbit-start, 0deg) - 360deg));
   }
 }
 
@@ -482,8 +486,8 @@
  */
 .orbit-system {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: 380px;
+  height: 380px;
   display: grid;
   place-items: center;
   margin: 1.5rem auto 0;
@@ -507,7 +511,7 @@
   inset: 50% auto auto 50%;
   width: var(--orbit-size);
   height: var(--orbit-size);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) rotate(var(--orbit-start, 0deg));
   border-radius: 999px;
   border: 1px dashed rgba(255, 255, 255, 0.15);
   display: grid;
@@ -518,16 +522,18 @@
 }
 
 .orbit-ring--one {
-  --orbit-size: 220px;
+  --orbit-size: 180px;
   --orbit-speed: 14s;
   --orbit-tilt: -6deg;
+  --orbit-start: 135deg;
   z-index: 2;
 }
 
 .orbit-ring--two {
-  --orbit-size: 260px;
+  --orbit-size: 240px;
   --orbit-speed: 18s;
   --orbit-tilt: -6deg;
+  --orbit-start: 315deg;
   z-index: 4;
 }
 
@@ -535,23 +541,28 @@
   --orbit-size: 300px;
   --orbit-speed: 22s;
   --orbit-tilt: -6deg;
+  --orbit-start: 225deg;
   z-index: 3;
 }
 
 .orbit-ring--four {
-  --orbit-size: 340px;
+  --orbit-size: 360px;
   --orbit-speed: 12s;
   --orbit-tilt: -6deg;
+  --orbit-start: 45deg;
   z-index: 1;
 }
 
+/* Das Element sitzt mit seiner Mitte genau auf der Bahnlinie (top: 0 +
+   translate -50 %). Vorher lag es 19 px innerhalb – bei 20 px Bahnabstand
+   wirkte jedes Element, als kreise es auf der nächstinneren Bahn. */
 .orbit-item {
   position: absolute;
   width: 54px;
   height: 54px;
-  top: -8px;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 }
 
 .orbit-item__shell {
@@ -567,6 +578,7 @@
   font-size: 1rem;
   backdrop-filter: blur(10px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  transform: rotate(calc(var(--orbit-tilt, -6deg) - var(--orbit-start, 0deg)));
   animation: orbitSpinReverse var(--orbit-speed) linear infinite;
   z-index: 2;
 }
@@ -827,18 +839,18 @@
     width: 100%;
   }
   .orbit-system {
-    width: 260px;
-    height: 260px;
+    width: 290px;
+    height: 290px;
     margin: 1rem auto 0;
   }
   .orbit-ring--one {
-    --orbit-size: 180px;
+    --orbit-size: 140px;
   }
   .orbit-ring--two {
-    --orbit-size: 210px;
+    --orbit-size: 180px;
   }
   .orbit-ring--three {
-    --orbit-size: 240px;
+    --orbit-size: 220px;
   }
   .orbit-ring--four {
     --orbit-size: 260px;
@@ -863,20 +875,20 @@
     gap: 2.5rem;
   }
   .orbit-system {
-    width: 320px;
-    height: 320px;
+    width: 380px;
+    height: 380px;
   }
   .orbit-ring--one {
-    --orbit-size: 220px;
+    --orbit-size: 180px;
   }
   .orbit-ring--two {
-    --orbit-size: 260px;
+    --orbit-size: 240px;
   }
   .orbit-ring--three {
     --orbit-size: 300px;
   }
   .orbit-ring--four {
-    --orbit-size: 340px;
+    --orbit-size: 360px;
   }
 }
 
@@ -898,16 +910,16 @@
     height: 300px;
   }
   .orbit-ring--one {
-    --orbit-size: 160px;
+    --orbit-size: 140px;
   }
   .orbit-ring--two {
-    --orbit-size: 190px;
+    --orbit-size: 170px;
   }
   .orbit-ring--three {
-    --orbit-size: 210px;
+    --orbit-size: 200px;
   }
   .orbit-ring--four {
-    --orbit-size: 220px;
+    --orbit-size: 230px;
   }
 }
 
