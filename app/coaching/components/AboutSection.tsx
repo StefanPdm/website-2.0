@@ -25,7 +25,7 @@ export default function AboutSection() {
   const [activeImage, setActiveImage] = useState(0);
   // Beschreibende Alt-Texte statt dreimal „Stefan Heinemann": Screenreader
   // lasen sonst denselben Text und konnten die Bilder nicht unterscheiden.
-  const images = [
+  const images: { src: string; alt: string; position?: string }[] = [
     {
       src: '/images-nlp/portrait-workshop.webp',
       alt: 'Stefan Heinemann bei einem NLP-Workshop vor einer Gruppe',
@@ -37,6 +37,28 @@ export default function AboutSection() {
     {
       src: '/images-nlp/portrait-firewalk.webp',
       alt: 'Stefan Heinemann beim Firewalk – Unleash the Power Within',
+    },
+    // Neue Fotos 2026-11 (echt, KI-verbessert). `position` steuert den
+    // Ausschnitt im 5:4-Rahmen – die Quellen sind 3:2.
+    {
+      src: '/images-nlp/portrait-hund.webp',
+      alt: 'Stefan Heinemann entspannt mit seinem Hund auf einer Gartenbank',
+      position: 'object-[40%_center]',
+    },
+    {
+      src: '/images-nlp/coaching-spaziergang-potsdam.webp',
+      alt: 'Stefan Heinemann im Gespräch bei einem Spaziergang durch einen Potsdamer Schlosspark',
+      position: 'object-[65%_center]',
+    },
+    {
+      src: '/images-nlp/portrait-schlosstreppe.webp',
+      alt: 'Stefan Heinemann lehnt am Geländer einer historischen Schlosstreppe',
+      position: 'object-[55%_center]',
+    },
+    {
+      src: '/images-nlp/portrait-flipchart.webp',
+      alt: 'Stefan Heinemann am Flipchart in einem Workshopraum',
+      position: 'object-[50%_center]',
     },
   ];
 
@@ -70,9 +92,8 @@ export default function AboutSection() {
                           src={image.src}
                           alt={image.alt}
                           fill
-                          className='object-cover object-top'
+                          className={`object-cover ${image.position ?? 'object-top'}`}
                           sizes='(min-width: 1024px) 40vw, 80vw'
-                          quality={100}
                         />
                       </div>
                     ))}

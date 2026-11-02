@@ -613,3 +613,66 @@ export function WebStructuredData({
     />
   );
 }
+
+// ---------------------------------------------------------------------------
+
+type ContentPageInput = {
+  path: string;
+  headline: string;
+  description: string;
+  /** Name der dritten Brotkrumen-Stufe – wie in der sichtbaren Navigation. */
+  shortTitle: string;
+  about: string;
+  /** Optional: Bücherliste als ItemList aus `Book`-Einträgen. */
+  books?: { title: string; author: string }[];
+};
+
+/**
+ * Welt A, einfache Inhaltsseiten (Session-Podcast, Bücher): Article +
+ * BreadcrumbList, bei Büchern zusätzlich eine ItemList aus `Book`.
+ */
+export function ContentPageStructuredData({ page }: { page: ContentPageInput }) {
+  const dates = pageDates(page.path);
+  const url = absoluteUrl(page.path);
+  const graph: Json[] = [
+    {
+      '@type': 'Article',
+      '@id': `${url}#article`,
+      headline: page.headline,
+      description: page.description,
+      url,
+      inLanguage: 'de-DE',
+      datePublished: dates.published,
+      dateModified: dates.modified,
+      author: { '@id': PERSON_ID },
+      publisher: { '@id': PERSON_ID },
+      isAccessibleForFree: true,
+      about: { '@type': 'Thing', name: page.about },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Coaching', item: absoluteUrl('/coaching') },
+        { '@type': 'ListItem', position: 3, name: page.shortTitle, item: url },
+      ],
+    },
+  ];
+  if (page.books?.length) {
+    graph.push({
+      '@type': 'ItemList',
+      name: page.headline,
+      numberOfItems: page.books.length,
+      itemListElement: page.books.map((book, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Book',
+          name: book.title,
+          author: { '@type': 'Person', name: book.author },
+        },
+      })),
+    });
+  }
+  return <JsonLd data={{ '@context': 'https://schema.org', '@graph': graph }} />;
+}

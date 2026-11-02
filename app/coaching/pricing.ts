@@ -34,6 +34,13 @@ export type CoachingOffer = {
   note: string;
 };
 
+/**
+ * Session-Podcast: auf Wunsch zu jeder Session inklusive (seit 2026-11).
+ * Erklärt in PodcastSection und auf /coaching/session-podcast; Datenschutz
+ * (Einwilligung, NotebookLM) in /coaching/datenschutz.
+ */
+const PODCAST_BULLET = 'Inklusive: dein persönlicher Session-Podcast (auf Wunsch).';
+
 export const coachingOffers: CoachingOffer[] = [
   // --- Einstieg -------------------------------------------------------------
   // Schließt die Lücke zwischen kostenlosem Erstgespräch und der Startersession (449 €).
@@ -52,6 +59,7 @@ export const coachingOffers: CoachingOffer[] = [
       'Ein Thema, eine Session, ein konkreter nächster Schritt.',
       'Wir sortieren, was gerade im Weg steht – ohne langen Vorlauf.',
       'Ortsunabhängig: Telefon oder Videocall, Termin auch kurzfristig.',
+      PODCAST_BULLET,
     ],
     note: 'Der einfachste Einstieg, wenn du erst einmal ausprobieren willst.',
   },
@@ -69,6 +77,7 @@ export const coachingOffers: CoachingOffer[] = [
       'Tiefen-Check: Standort, Ziele, innere Blockaden.',
       'Erste Interventionen für sofortige Klarheit.',
       'Konkreter Umsetzungsplan für die nächsten 14 Tage.',
+      PODCAST_BULLET,
     ],
     note: 'Ideal als intensiver Einstieg und Orientierung.',
   },
@@ -84,6 +93,7 @@ export const coachingOffers: CoachingOffer[] = [
       'Vertiefung & Feintuning deiner Ziele.',
       'Arbeit an Mustern, Entscheidungen, innerer Ruhe.',
       'Stabilisierung und Fortschrittskontrolle.',
+      PODCAST_BULLET,
     ],
     note: 'Perfekt für nachhaltige Umsetzung im Alltag.',
   },
@@ -100,6 +110,7 @@ export const coachingOffers: CoachingOffer[] = [
       'Fünf Sessions, flexibel abrufbar.',
       'Zusammenhängender Prozess statt Einzelterminen.',
       'Rund 11 % günstiger als einzeln gebucht.',
+      PODCAST_BULLET,
     ],
     note: 'Für alle, die ein Thema wirklich zu Ende bringen wollen.',
   },
@@ -120,6 +131,7 @@ export const coachingOffers: CoachingOffer[] = [
       'Zehn Sessions über einen längeren Zeitraum.',
       'Raum für mehrere Themen und tiefere Musterarbeit.',
       'Bester Sessionpreis – rund 21 % günstiger als einzeln.',
+      PODCAST_BULLET,
     ],
     note: 'Die wirtschaftlichste Variante, wenn du ohne feste Taktung arbeiten willst.',
   },
@@ -148,6 +160,7 @@ export const coachingOffers: CoachingOffer[] = [
       'Zwischen den Sessions erreichbar per WhatsApp oder Telefon – täglich von 8 bis 20 Uhr, auch am Wochenende.',
       'Strategische Zielarbeit & Identitäts-Alignment.',
       'Messbare Fortschritte mit klarer Roadmap.',
+      PODCAST_BULLET,
     ],
     note: 'Beliebt für Fokus, Klarheit und schnelle Ergebnisse.',
   },
@@ -164,6 +177,7 @@ export const coachingOffers: CoachingOffer[] = [
       'Alles aus dem 3-Monats-Mentoring, doppelte Laufzeit.',
       'Langfristige Routinen und mentale Stärke.',
       'Verankerung neuer Gewohnheiten & Entscheidungen.',
+      PODCAST_BULLET,
     ],
     note: 'Für nachhaltige Veränderung und dauerhafte Wirkung.',
   },

@@ -69,6 +69,50 @@ export default function DatenschutzPage() {
         </p>
       </section>
 
+      {/* Session-Podcast: nur mit ausdrücklicher Einwilligung (Art. 9 DSGVO), siehe PodcastSection. */}
+      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+        <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
+          Session-Podcast (KI-gestützte Zusammenfassung)
+        </h2>
+        <div className='space-y-3 text-[var(--muted)]'>
+          <p>
+            Auf ausdrücklichen Wunsch erstelle ich nach einer Coaching-Session einen Audio-Podcast,
+            der die Session zusammenfasst und reflektiert. Dazu zeichne ich die Session – nur mit Ihrer
+            vorherigen Zustimmung – auf und lasse daraus ein Transkript und eine Zusammenfassung
+            erstellen. Aus dem Transkript entferne ich auf meinem eigenen Rechner Namen und
+            Angaben, die eine Identifizierung ermöglichen (Pseudonymisierung). Erst dieses
+            bereinigte Transkript wird weiterverarbeitet.
+          </p>
+          <p>
+            Für Aufnahme, Transkript und Zusammenfassung nutze ich den Dienst Plaud der Plaud Inc., 8 The
+            Green, Ste A, Dover, Delaware 19901, USA, als Auftragsverarbeiter. Plaud speichert die
+            Daten nach eigenen Angaben für Konten in der EU in einem Rechenzentrum in Frankfurt am
+            Main. Da Plaud ein US-Unternehmen ist und für Transkription und Zusammenfassung
+            KI-Dienste weiterer Anbieter einsetzt, kann eine Übermittlung in die USA nicht
+            ausgeschlossen werden; sie erfolgt auf Grundlage der EU-Standardvertragsklauseln
+            (Art. 46 Abs. 2 lit. c DSGVO). Aufnahme, ungekürztes Transkript und Zusammenfassung bleiben
+            sechs Monate bei Plaud gespeichert und werden danach gelöscht. Plaud verwendet die Daten nicht zum Training von
+            KI-Modellen.
+          </p>
+          <p>
+            Den Podcast selbst erstelle ich mit dem Dienst NotebookLM der Google Ireland Limited, Gordon House,
+            Barrow Street, Dublin 4, Irland. Dabei wird das pseudonymisierte Transkript an Google
+            übermittelt und dort verarbeitet. Eine Verarbeitung durch die Google LLC in den USA kann
+            nicht ausgeschlossen werden; die Google LLC ist nach dem EU-US Data Privacy Framework
+            zertifiziert.
+          </p>
+          <p>
+            Da Coaching-Inhalte Angaben zur Gesundheit enthalten können, erfolgt die Verarbeitung
+            ausschließlich auf Grundlage Ihrer ausdrücklichen Einwilligung (Art. 6 Abs. 1 lit. a
+            und Art. 9 Abs. 2 lit. a DSGVO). Die Einwilligung ist freiwillig – das Coaching findet
+            ohne sie ebenso statt – und kann jederzeit mit Wirkung für die Zukunft widerrufen
+            werden. Den fertigen Podcast erhalten ausschließlich Sie. Pseudonymisiertes Transkript und
+            Podcast bleiben in meinem NotebookLM-Konto gespeichert, damit Sie den Podcast auch später
+            noch erhalten können. Auf Ihren Wunsch lösche ich sie jederzeit.
+          </p>
+        </div>
+      </section>
+
       <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Cookies</h2>
         <p className='text-[var(--muted)]'>Wir verwenden keine Cookies.</p>

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import GlassCard from '@/components/GlassCard';
 import {
   MotifAction,
@@ -151,6 +153,23 @@ export default function ApproachSection() {
         <p className='mx-auto mt-10 max-w-3xl text-center text-base text-(--text) sm:text-lg'>
           {interplay.join(' ')}
         </p>
+
+        {/* Die Säulen in Aktion – echtes Foto (KI-verbessert), §12: WebP < 500 KB. */}
+        <figure className='mx-auto mt-14 w-full max-w-6xl'>
+          <div className='relative aspect-3/2 overflow-hidden rounded-3xl border border-border sm:aspect-21/9'>
+            <Image
+              src='/images-nlp/coaching-workshop.webp'
+              alt='Stefan Heinemann erklärt in einem Workshop vor einer kleinen Gruppe am Flipchart'
+              fill
+              sizes='(min-width: 1152px) 1152px, 100vw'
+              className='object-cover object-[50%_30%]'
+            />
+          </div>
+          <figcaption className='mt-3 text-center text-xs text-(--muted)'>
+            Im Workshop: Haltung, Sinn, Werkzeug und Energie – nicht als Theorie, sondern im
+            Gespräch.
+          </figcaption>
+        </figure>
 
         {/*
           Persönliche Haltung und Evidenz nebeneinander: Die linke Karte

@@ -8,6 +8,7 @@ import FulfilmentSection from '@/app/coaching/components/FulfilmentSection';
 import GuideSection from '@/app/coaching/components/GuideSection';
 import HeroSection from '@/app/coaching/components/HeroSection';
 import ImpulseSection from '@/app/coaching/components/ImpulseSection';
+import PodcastSection from '@/app/coaching/components/PodcastSection';
 import PriceTableSection from '@/app/coaching/components/PriceTableSection';
 import TransformationSection from '@/app/coaching/components/TransformationSection';
 import WorkSection from '@/app/coaching/components/WorkSection';
@@ -15,7 +16,7 @@ import { useNlpTheme } from '@/app/coaching/NlpLayoutClient';
 
 /**
  * Reihenfolge entlang der Entscheidung des Besuchers (2026-11):
- * Ansprache → Wiedererkennung → Ansatz → Themen → Ablauf → Preis → Person →
+ * Ansprache → Wiedererkennung → Ansatz → Themen → Ablauf → Session-Podcast → Preis → Person →
  * Impulse zum Ausprobieren → Leitfaden → Fragen → Kontakt.
  */
 export default function NlpSections() {
@@ -28,6 +29,7 @@ export default function NlpSections() {
       <ApproachSection />
       <WorkSection />
       <TransformationSection isWarmTheme={isWarmTheme} />
+      <PodcastSection />
       <PriceTableSection />
       <AboutSection />
       <ImpulseSection />

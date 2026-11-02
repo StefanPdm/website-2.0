@@ -146,6 +146,11 @@ ${references}
 - [Startseite](${SITE_URL}): Auswahl zwischen beiden Geschäftsbereichen
 - [Stefan Heinemann Coaching – Life Coaching für Unternehmer](${absoluteUrl('/coaching')}): Angebot, Persönlichkeitstest, Preise, Kontakt
 - [Webentwicklung](${absoluteUrl('/webdevelopment')}): Leistungen, Technologien, Referenzen, Kontakt
+- [Session-Podcast](${absoluteUrl('/coaching/session-podcast')}): Auf Wunsch zu jeder Session inklusive –
+  ein KI-Podcast (Google NotebookLM, aus einem lokal pseudonymisierten Transkript der Session), der die Session
+  aus der Metaperspektive reflektiert.
+- [Buchempfehlungen](${absoluteUrl('/coaching/buecher')}): Bücher zu Haltung, Sinn, Werkzeug, Energie
+  und Entscheiden, jeweils mit Begründung.
 - [Warum NLP wirkt – Forschungsstand](${absoluteUrl('/coaching/wissenschaft')}): Zusammenfassung des
   DVNLP-Whitepapers 2026 zur empirischen Evidenz, inklusive der Annahmen, die die Forschung
   nicht stützt

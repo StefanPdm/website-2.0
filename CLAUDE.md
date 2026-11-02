@@ -21,6 +21,8 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
     │   └── /beziehungstyp  /sachtyp  /handlungstyp   Typseiten = Ziel des Teilen-Links
     ├── /regeln/gluecklichsein  /regeln/ungluecklichsein   20-Regeln-Listen → ItemList
     ├── /impressum  /datenschutz  /cookies  /agb
+    ├── /session-podcast   KI-Podcast zur Session (inklusive) + Hörbeispiel   → Article
+    ├── /buecher           Buchempfehlungen nach den vier Säulen              → Article + ItemList(Book)
     └── /guide-download    Token-Landing für Lead-Magnet (noindex)
 /widerruf                  Widerrufsbelehrung (B2C)
 /api/contact               Kontaktformular → SMTP (nodemailer)
@@ -580,7 +582,9 @@ Das ist die Scanner-Story des Betreibers und ein bewusstes Alleinstellungsmerkma
 
 - **Immer `next/image`.** `<img>` nur in Vendor-Code.
 - Format: **WebP** für Fotos, **SVG** für Logos. Keine PSD, keine unkomprimierten PNG in `public/`.
-- **Obergrenze pro Datei in `public/`: 500 KB.** Ausnahme sind die Case-Videos.
+- **Obergrenze pro Datei in `public/`: 500 KB.** Ausnahmen: die Case-Videos und
+  Audio in `public/audio/` (Session-Podcast-Beispiel: `.m4a`, AAC 64 kbit/s mono,
+  `preload='none'`; nur mit schriftlicher Freigabe des Klienten).
 - **`public/` enthält nur ausgelieferte Dateien.** Quelldateien (PSD,
   hochauflösende Originale, verworfene Varianten) gehören nach `design-source/`
   — das Verzeichnis ist gitignored und landet nicht im Vercel-Deployment.

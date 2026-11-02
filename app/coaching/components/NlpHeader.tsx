@@ -64,6 +64,12 @@ const discoverItems: { label: string; href: string; hint: string; match?: string
     href: '/coaching/persoenlichkeitstest',
     hint: '18 Fragen, Auswertung sofort',
   },
+  {
+    label: 'Session-Podcast',
+    href: '/coaching/session-podcast',
+    hint: 'Dein Coaching zum Nachhören',
+  },
+  { label: 'Bücher', href: '/coaching/buecher', hint: 'Was mich geprägt hat' },
   { label: 'Warum NLP wirkt', href: '/coaching/wissenschaft', hint: 'Der Forschungsstand 2026' },
   {
     label: 'Formel zum Glück',
@@ -81,7 +87,7 @@ const discoverItems: { label: string; href: string; hint: string; match?: string
 ];
 
 /** Abschnitte, die für die aktive Markierung beobachtet werden. */
-const spySections = ['start', 'erfuellung', 'ansatz', 'ablauf', 'preise', 'ueber', 'impulse', 'leitfaden', 'kontakt'];
+const spySections = ['start', 'erfuellung', 'ansatz', 'ablauf', 'podcast', 'preise', 'ueber', 'impulse', 'leitfaden', 'kontakt'];
 
 /** Abonnement für useSyncExternalStore – außerhalb der Komponente, damit die
  *  Referenz stabil bleibt und React nicht bei jedem Render neu abonniert. */
