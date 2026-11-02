@@ -36,8 +36,8 @@ export type CoachingOffer = {
 
 export const coachingOffers: CoachingOffer[] = [
   // --- Einstieg -------------------------------------------------------------
-  // Schließt die Lücke zwischen kostenlosem Erstgespräch und der 339-€-
-  // Startersession. Bewusst nur per Telefon oder Video: kein Raum, keine
+  // Schließt die Lücke zwischen kostenlosem Erstgespräch und der Startersession (449 €).
+  // Bewusst nur per Telefon oder Video: kein Raum, keine
   // Anfahrt, kürzere Einheit – deshalb der niedrigere Absolutbetrag, ohne den
   // Stundensatz zu unterbieten.
   {
@@ -59,24 +59,24 @@ export const coachingOffers: CoachingOffer[] = [
   // --- Einzelsessions und Pakete -------------------------------------------
   {
     title: 'Startersession',
-    duration: 'ca. 150 min',
-    price: '339,15 €',
-    amount: '339.15',
+    duration: 'ca. 240 min',
+    price: '449,00 €',
+    amount: '449.00',
     icon: 'rocket',
     group: 'session',
     highlight: false,
     bullets: [
       'Tiefen-Check: Standort, Ziele, innere Blockaden.',
-      'Erste NLP-Interventionen für sofortige Klarheit.',
+      'Erste Interventionen für sofortige Klarheit.',
       'Konkreter Umsetzungsplan für die nächsten 14 Tage.',
     ],
     note: 'Ideal als intensiver Einstieg und Orientierung.',
   },
   {
     title: 'Folgesession',
-    duration: 'ca. 120 min',
-    price: '226,10 €',
-    amount: '226.10',
+    duration: 'ca. 180 min',
+    price: '380,00 €',
+    amount: '380.00',
     icon: 'zap',
     group: 'session',
     highlight: false,
@@ -89,10 +89,10 @@ export const coachingOffers: CoachingOffer[] = [
   },
   {
     title: '5er-Paket',
-    duration: '5 Sessions à ca. 120 min',
-    price: '1.011,50 €',
-    amount: '1011.50',
-    perSession: '202,30 € pro Session',
+    duration: '5 Sessions à ca. 180 min',
+    price: '1.690,00 €',
+    amount: '1690.00',
+    perSession: '338,00 € pro Session',
     icon: 'package',
     group: 'session',
     highlight: false,
@@ -105,10 +105,10 @@ export const coachingOffers: CoachingOffer[] = [
   },
   {
     title: '10er-Paket',
-    duration: '10 Sessions à ca. 120 min',
-    price: '1.785,00 €',
-    amount: '1785.00',
-    perSession: '178,50 € pro Session',
+    duration: '10 Sessions à ca. 180 min',
+    price: '2.990,00 €',
+    amount: '2990.00',
+    perSession: '299,00 € pro Session',
     icon: 'backpack',
     group: 'session',
     highlight: true,
@@ -126,26 +126,26 @@ export const coachingOffers: CoachingOffer[] = [
 
   // --- Mentoring: Begleitung, kein Sessionpaket ----------------------------
   //
-  // Preislogik (bewusst durchgängig, damit sie in einem Satz erklärbar ist):
-  //   Sessions zum besten Satz (178,50 €) + 116 € pro Monat Begleitung.
-  //     3 Monate: 12 × 178,50 = 2.142 € + 3 × 116 € =  348 €  → 2.490 €
-  //     6 Monate: 24 × 178,50 = 4.284 € + 6 × 116 € =  696 €  → 4.980 €
-  //
-  // Vorher lagen hier 2.990 € und 4.990 €. Das implizierte für dieselbe
-  // Leistung 283 €/Monat Begleitung im 3-Monats- und 118 €/Monat im
-  // 6-Monats-Paket — und machte das 3-Monats-Mentoring pro Session teurer
-  // als eine einzeln gebuchte Folgesession.
+  // Preislogik (Stand 2026-11, bewusst in einem Satz erklärbar):
+  //   Sessions zum besten Satz (299 € = 10er-Paket) im Zwei-Wochen-Rhythmus
+  //   + Begleitung pro Monat; die längere Laufzeit ist pro Monat günstiger.
+  //     3 Monate:  6 × 299 = 1.794 € + ca. 165 €/Monat → 2.290 €
+  //     6 Monate: 12 × 299 = 3.588 € + ca. 150 €/Monat → 4.490 €
+  //   Zwei-Wochen-Rhythmus statt wöchentlich: Bei 180-min-Sessions wären
+  //   wöchentliche Termine für Unternehmer neben der Firma kaum machbar.
+  //   Referenz für alles: Folgesession 380 € / 3 h. Startersession bewusst
+  //   günstiger pro Stunde (Einstieg). Pakete: rund 11 % bzw. 21 % Rabatt.
   {
     title: 'Mentoring 3 Monate',
     duration: '3 Monate Begleitung',
-    price: '2.490,00 €',
-    amount: '2490.00',
+    price: '2.290,00 €',
+    amount: '2290.00',
     icon: 'star',
     group: 'mentoring',
     highlight: true,
     bullets: [
-      '12 Sessions zum besten Sessionpreis.',
-      '12/7 Support per WhatsApp oder Telefon – auch zwischen den Terminen.',
+      '6 Sessions à ca. 180 min im Zwei-Wochen-Rhythmus – zum besten Sessionpreis.',
+      'Zwischen den Sessions erreichbar per WhatsApp oder Telefon – täglich von 8 bis 20 Uhr, auch am Wochenende.',
       'Strategische Zielarbeit & Identitäts-Alignment.',
       'Messbare Fortschritte mit klarer Roadmap.',
     ],
@@ -154,13 +154,13 @@ export const coachingOffers: CoachingOffer[] = [
   {
     title: 'Mentoring 6 Monate',
     duration: '6 Monate Begleitung',
-    price: '4.980,00 €',
-    amount: '4980.00',
+    price: '4.490,00 €',
+    amount: '4490.00',
     icon: 'trophy',
     group: 'mentoring',
     highlight: false,
     bullets: [
-      '24 Sessions zum besten Sessionpreis.',
+      '12 Sessions à ca. 180 min im Zwei-Wochen-Rhythmus – zum besten Sessionpreis.',
       'Alles aus dem 3-Monats-Mentoring, doppelte Laufzeit.',
       'Langfristige Routinen und mentale Stärke.',
       'Verankerung neuer Gewohnheiten & Entscheidungen.',
@@ -180,3 +180,10 @@ export const coachingOffersForSchema = coachingOffers.map((offer) => ({
   price: offer.amount,
   description: `${offer.duration}. ${offer.bullets[0]} ${offer.note}`,
 }));
+
+/** Angebot per Titel – für Texte (FAQ), die Preise zitieren, statt sie abzuschreiben. */
+export function offerByTitle(title: string): CoachingOffer {
+  const offer = coachingOffers.find((o) => o.title === title);
+  if (!offer) throw new Error(`Unbekanntes Angebot: ${title}`);
+  return offer;
+}

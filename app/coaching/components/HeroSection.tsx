@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 
-const heroChips = ['Erstgespräch kostenlos', 'Bei mir, bei dir oder online', 'Ø 120 Min pro Session'];
+const heroChips = ['Erstgespräch kostenlos', 'Bei mir, bei dir oder online', 'Ø 180 Min pro Session'];
 
 /**
  * Hero mit echtem Foto als Bühne (2026-11). Ersetzt Portraitrahmen und
