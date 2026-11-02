@@ -70,6 +70,7 @@ const discoverItems: { label: string; href: string; hint: string; match?: string
     hint: 'Dein Coaching zum Nachhören',
   },
   { label: 'Bücher', href: '/coaching/buecher', hint: 'Was mich geprägt hat' },
+  { label: 'Coaching in Potsdam', href: '/coaching/potsdam', hint: 'Vor Ort, im Gehen, online' },
   { label: 'Warum NLP wirkt', href: '/coaching/wissenschaft', hint: 'Der Forschungsstand 2026' },
   {
     label: 'Formel zum Glück',

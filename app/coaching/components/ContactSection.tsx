@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import ContactFormNlp from '@/components/ContactFormNlp';
 
@@ -58,6 +59,14 @@ export default function ContactSection() {
                 </li>
               ))}
             </ul>
+            <p className='mt-6 text-sm text-(--muted)'>
+              Aus der Region?{' '}
+              <Link
+                href='/coaching/potsdam'
+                className='rounded text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+                So läuft Coaching in Potsdam
+              </Link>
+            </p>
           </div>
           <div className='min-w-0 rounded-3xl border border-border bg-surface p-4 shadow-[0_30px_80px_var(--glow)]'>
             <ContactFormNlp />

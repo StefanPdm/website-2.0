@@ -116,6 +116,13 @@ const pages: Page[] = [
     changeFrequency: 'monthly',
   },
   {
+    path: '/coaching/potsdam',
+    lastModified: '2026-11-02',
+    published: '2026-11-02',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+  },
+  {
     path: '/coaching/buecher',
     lastModified: '2026-11-02',
     published: '2026-11-02',

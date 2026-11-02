@@ -23,6 +23,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
     ├── /impressum  /datenschutz  /cookies  /agb
     ├── /session-podcast   KI-Podcast zur Session (inklusive) + Hörbeispiel   → Article
     ├── /buecher           Buchempfehlungen nach den vier Säulen              → Article + ItemList(Book)
+    ├── /potsdam           Standortseite „Coaching Potsdam“ (Formate, Anliegen, Preise) → Article
     └── /guide-download    Token-Landing für Lead-Magnet (noindex)
 /widerruf                  Widerrufsbelehrung (B2C)
 /api/contact               Kontaktformular → SMTP (nodemailer)
