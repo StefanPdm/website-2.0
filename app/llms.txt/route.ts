@@ -20,7 +20,10 @@ export const dynamic = 'force-static';
 
 function build() {
   const offers = coachingOffers
-    .map((o) => `- ${o.title} (${o.duration}): ${o.price} inkl. MwSt. — ${o.note}`)
+    .map((o) => {
+      const price = Number(o.amount) === 0 ? 'kostenlos' : `${o.price} inkl. MwSt.`;
+      return `- ${o.title} (${o.duration}): ${price} — ${o.note}`;
+    })
     .join('\n');
 
   const webPrices = webServices

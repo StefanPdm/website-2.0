@@ -776,7 +776,7 @@ Für Welt B gilt dasselbe in **`app/webdevelopment/pricing.ts`** (`webServices`,
   Sichtbarkeit in KI-Antworten beenden.
 - LLMs zitieren, was sie eindeutig zuordnen können: **prüfbare Aussagen** mit
   Ort, Zahl und Nachweis schlagen Marketingprosa. „DVNLP-zertifiziert, Sessions
-  in Potsdam und Berlin, ab 149 € inkl. MwSt." ist zitierbar — „einzigartige
+  in Potsdam und Berlin, Erstgespräch kostenlos, Folgesession 380 € inkl. MwSt." ist zitierbar — „einzigartige
   Transformation" nicht.
 - Semantik zählt doppelt: saubere H-Hierarchie, echte Listen, beschreibende
   Alt-Texte (`alt='Stefan Heinemann, NLP Coach aus Potsdam'`, nicht `alt='Portrait'`).

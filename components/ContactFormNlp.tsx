@@ -126,10 +126,9 @@ export default function ContactFormNlp() {
             className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'>
             {/* Reihenfolge folgt der Preisübersicht: erst Einstieg, dann Umfang. */}
             <option value=''>Bitte wählen</option>
-            <option>Kennenlernen (15 Min., gratis)</option>
-            <option>Klarheits-Session (60 Min., online)</option>
-            <option>Startersession (150 Min.)</option>
-            <option>Folgesession (120 Min.)</option>
+            <option>Klarheits-Session / Erstgespräch (30 Min., kostenlos)</option>
+            <option>Startersession (240 Min.)</option>
+            <option>Folgesession (180 Min.)</option>
             <option>5er-Paket</option>
             <option>10er-Paket</option>
             <option>Mentoring (3 Monate)</option>

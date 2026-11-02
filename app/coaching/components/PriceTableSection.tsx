@@ -175,8 +175,18 @@ export default function PriceTableSection() {
                 </ul>
               </div>
               <div className='shrink-0 md:text-right'>
-                <div className='text-4xl font-semibold text-white'>{entryOffer.price}</div>
-                <p className='mt-2 text-xs text-white/60'>inkl. MwSt.</p>
+                <div className='flex items-baseline gap-3 md:justify-end'>
+                  {entryOffer.regularPrice && (
+                    <s className='text-xl text-white/50'>
+                      <span className='sr-only'>statt </span>
+                      {entryOffer.regularPrice}
+                    </s>
+                  )}
+                  <span className='text-4xl font-semibold text-white'>{entryOffer.price}</span>
+                </div>
+                <p className='mt-2 text-xs text-white/60'>
+                  {entryOffer.regularPrice ? 'Kostenloses Erstgespräch' : 'inkl. MwSt.'}
+                </p>
                 <PrimaryButton
                   href='#kontakt'
                   className='mt-5 w-full md:w-auto'>
@@ -184,10 +194,6 @@ export default function PriceTableSection() {
                 </PrimaryButton>
               </div>
             </div>
-            <p className='mt-6 border-t border-border pt-4 text-xs text-white/60'>
-              {entryOffer.note} Das kostenlose Erstgespräch (ca. 15 Min.) bleibt davon unberührt —
-              dort klären wir nur, ob wir zusammenpassen.
-            </p>
           </GlassCard>
         </div>
 
@@ -230,7 +236,7 @@ export default function PriceTableSection() {
         </div>
 
         <p className='mx-auto mt-12 max-w-3xl text-center text-xs text-white/50'>
-          Welche Variante zu dir passt, klären wir im kostenlosen Erstgespräch — auch, ob Coaching
+          Welche Variante zu dir passt, klären wir in der kostenlosen Klarheits-Session — auch, ob Coaching
           überhaupt das richtige Mittel für dein Anliegen ist.
         </p>
       </div>

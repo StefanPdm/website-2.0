@@ -21,7 +21,7 @@ export const faqNlp: FaqEntry[] = [
     question: 'Was kostet Coaching bei dir?',
     answer:
       // Preise aus pricing.ts – so kann die Antwort nicht mehr von der Preistabelle abweichen.
-      `Eine Coaching-Session kostet ${offerByTitle('Folgesession').price} und dauert etwa 180 Minuten; die erste Session (Startersession) kostet ${offerByTitle('Startersession').price} und dauert rund vier Stunden. Alle Preise inkl. MwSt. Für einen kurzen Einstieg gibt es die Klarheits-Session für ${offerByTitle('Klarheits-Session').price} (ca. 60 Minuten, per Telefon oder Video). Wenn dein Anliegen eine intensivere Begleitung sinnvoll macht, vereinbaren wir nach dem Erstgespräch transparent einen passenden Rahmen – ohne dir mehr Termine zu verkaufen, als du tatsächlich brauchst.`,
+      `Eine Coaching-Session kostet ${offerByTitle('Folgesession').price} und dauert etwa 180 Minuten; die erste Session (Startersession) kostet ${offerByTitle('Startersession').price} und dauert rund vier Stunden. Alle Preise inkl. MwSt. Der Einstieg ist kostenlos: die Klarheits-Session (ca. 30 Minuten, per Telefon oder Video) ist zugleich das Erstgespräch. Wenn dein Anliegen eine intensivere Begleitung sinnvoll macht, vereinbaren wir nach dem Erstgespräch transparent einen passenden Rahmen – ohne dir mehr Termine zu verkaufen, als du tatsächlich brauchst.`,
   },
   {
     question: 'Wie viele Sessions brauche ich, bis sich etwas verändert?',

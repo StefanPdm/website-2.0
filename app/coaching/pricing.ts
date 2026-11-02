@@ -22,6 +22,8 @@ export type CoachingOffer = {
   duration: string;
   price: string;
   amount: string;
+  /** Optional: durchgestrichener Normalpreis neben `price` (Anzeige, nicht im Schema). */
+  regularPrice?: string;
   /** Icon-Name – die Zuordnung zum Icon liegt in PriceTableSection (Daten bleiben JSX-frei). */
   icon: OfferIcon;
   group: OfferGroup;
@@ -43,15 +45,15 @@ const PODCAST_BULLET = 'Inklusive: dein persönlicher Session-Podcast (auf Wunsc
 
 export const coachingOffers: CoachingOffer[] = [
   // --- Einstieg -------------------------------------------------------------
-  // Schließt die Lücke zwischen kostenlosem Erstgespräch und der Startersession (449 €).
-  // Bewusst nur per Telefon oder Video: kein Raum, keine
-  // Anfahrt, kürzere Einheit – deshalb der niedrigere Absolutbetrag, ohne den
-  // Stundensatz zu unterbieten.
+  // Seit 2026-11 zugleich das kostenlose Erstgespräch: 30 Minuten, Telefon oder
+  // Video. Der Streichpreis zeigt den Wert – ohne Podcast, weil es keine
+  // Coaching-Session im engeren Sinn ist.
   {
     title: 'Klarheits-Session',
-    duration: 'ca. 60 min · Telefon oder Video',
-    price: '149,00 €',
-    amount: '149.00',
+    duration: 'ca. 30 min · Telefon oder Video',
+    price: '0 €',
+    amount: '0.00',
+    regularPrice: '149 €',
     icon: 'phone',
     group: 'einstieg',
     highlight: false,
@@ -59,9 +61,9 @@ export const coachingOffers: CoachingOffer[] = [
       'Ein Thema, eine Session, ein konkreter nächster Schritt.',
       'Wir sortieren, was gerade im Weg steht – ohne langen Vorlauf.',
       'Ortsunabhängig: Telefon oder Videocall, Termin auch kurzfristig.',
-      PODCAST_BULLET,
+      'Und wir klären, ob wir zusammenpassen – kostenlos und unverbindlich.',
     ],
-    note: 'Der einfachste Einstieg, wenn du erst einmal ausprobieren willst.',
+    note: 'Kostenloses Erstgespräch – der einfachste Einstieg, wenn du erst einmal ausprobieren willst.',
   },
 
   // --- Einzelsessions und Pakete -------------------------------------------

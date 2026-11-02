@@ -60,6 +60,17 @@ export default function AboutSection() {
       alt: 'Stefan Heinemann am Flipchart in einem Workshopraum',
       position: 'object-[50%_center]',
     },
+    {
+      src: '/images-nlp/portrait-see-abend.webp',
+      alt: 'Stefan Heinemann sitzt in der Abenddämmerung auf einer Treppe am See',
+      position: 'object-[60%_center]',
+    },
+    // Hochformat: Ausschnitt oben ansetzen, sonst fällt der Kopf heraus.
+    {
+      src: '/images-nlp/workshop-flipchart-hoch.webp',
+      alt: 'Stefan Heinemann erklärt einer kleinen Gruppe etwas am Flipchart',
+      position: 'object-[center_5%]',
+    },
   ];
 
   useEffect(() => {

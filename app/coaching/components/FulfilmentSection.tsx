@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { SecondaryButton } from '@/app/coaching/components/Buttons';
 
 /**
@@ -56,16 +58,28 @@ export default function FulfilmentSection() {
           ))}
         </div>
 
-        <div className='mx-auto mt-14 max-w-3xl space-y-5 text-center'>
-          <p className='text-base leading-relaxed text-(--muted) sm:text-lg'>
-            Ich kenne das nicht aus Büchern. Über zwanzig Jahre habe ich ein Unternehmen aufgebaut,
-            das nach jedem messbaren Maßstab erfolgreich war – und bin trotzdem in Erschöpfung und
-            Depression gelandet. Weil ich mein Glück im Außen gesucht habe.
-          </p>
-          <p className='text-base leading-relaxed text-(--text) sm:text-lg'>
-            Erfüllung entsteht nicht durch das nächste Ziel. Sie entsteht durch eine Haltung, die
-            man täglich neu wählt.
-          </p>
+        {/* Die eigene Geschichte mit Gesicht – Hochformat-Foto, Potsdam. */}
+        <div className='mx-auto mt-16 grid max-w-4xl items-center gap-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12'>
+          <div className='relative mx-auto aspect-2/3 w-full max-w-xs overflow-hidden rounded-3xl border border-border md:max-w-none'>
+            <Image
+              src='/images-nlp/portrait-park-potsdam.webp'
+              alt='Stefan Heinemann im Abendlicht in einem Potsdamer Schlosspark'
+              fill
+              sizes='(min-width: 768px) 320px, 320px'
+              className='object-cover object-top'
+            />
+          </div>
+          <div className='space-y-5 text-center md:text-left'>
+            <p className='text-base leading-relaxed text-(--muted) sm:text-lg'>
+              Ich kenne das nicht aus Büchern. Über zwanzig Jahre habe ich ein Unternehmen
+              aufgebaut, das nach jedem messbaren Maßstab erfolgreich war – und bin trotzdem in
+              Erschöpfung und Depression gelandet. Weil ich mein Glück im Außen gesucht habe.
+            </p>
+            <p className='text-base leading-relaxed text-(--text) sm:text-lg'>
+              Erfüllung entsteht nicht durch das nächste Ziel. Sie entsteht durch eine Haltung, die
+              man täglich neu wählt.
+            </p>
+          </div>
         </div>
 
         <div className='mt-10 flex justify-center'>
