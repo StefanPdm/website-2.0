@@ -48,18 +48,17 @@ export default function AboutDeveloperSection() {
               className='absolute -inset-10 -z-10 rounded-[48px] bg-linear-to-br from-[#1D6FA8]/45 via-transparent to-[#7A2C8E]/45 blur-3xl'
             />
 
-            <div className='relative overflow-hidden rounded-[28px] ring-1 ring-white/15 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
+            <div className='relative aspect-4/5 overflow-hidden rounded-[28px] ring-1 ring-white/15 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
               <Image
-                src='/images-webdevelopment/stefan-heinemann-webentwickler.webp'
-                alt='Stefan Heinemann, Webentwickler aus Potsdam, mit verschränkten Armen und orangefarbener Brille'
-                width={800}
-                height={1000}
+                src='/images-webdevelopment/stefan-heinemann-schreibtisch.webp'
+                alt='Stefan Heinemann, Webentwickler aus Potsdam, lehnt entspannt an seinem Schreibtisch vor zwei Monitoren'
+                fill
                 sizes='(min-width: 768px) 38vw, 90vw'
-                className='h-auto w-full'
+                className='object-cover object-[center_25%]'
               />
               <div
                 aria-hidden='true'
-                className='pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-[#0B1B2B] via-[#0B1B2B]/60 to-transparent'
+                className='pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-[#06101c] via-[#06101c]/60 to-transparent'
               />
               <figcaption className='absolute inset-x-0 bottom-0 p-6'>
                 <span className='block text-lg font-semibold text-white'>Stefan Heinemann</span>

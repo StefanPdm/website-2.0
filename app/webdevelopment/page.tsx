@@ -640,6 +640,18 @@ export default function WebdevelopmentPage() {
                   </p>
                 </div>
               </ElectricBorder>
+              <figure className='relative hidden aspect-4/5 overflow-hidden rounded-[28px] ring-1 ring-white/15 md:block'>
+                <Image
+                  src='/images-webdevelopment/stefan-heinemann-projekt-zeigen.webp'
+                  alt='Stefan Heinemann zeigt auf einen Monitor mit einem Website-Entwurf'
+                  fill
+                  sizes='(min-width: 1152px) 560px, 45vw'
+                  className='object-cover object-[center_30%]'
+                />
+                <figcaption className='absolute inset-x-0 bottom-0 bg-linear-to-t from-[#06101c] via-[#06101c]/80 to-transparent p-6 pt-16 text-sm text-slate-200'>
+                  Lass uns dein Projekt anschauen – im Erstgespräch, kostenlos und unverbindlich.
+                </figcaption>
+              </figure>
             </div>
 
             <ElectricBorder

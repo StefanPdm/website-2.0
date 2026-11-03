@@ -346,7 +346,7 @@ Das HTML wird trotzdem serverseitig gerendert (SEO unkritisch), nur das JS-Bundl
 | `components/LiveMetrics.tsx` | „Live gemessen“ im Hero: LCP, übertragene KB, CLS aus der Performance-API des Besuchers – nichts wird gesendet |
 | `ki-check/` + `lib/ki-check.ts` | KI-Sichtbarkeits-Check: 11 Prüfpunkte, Punktzahl, drei größte Hebel. **Sicherheit:** jede Adresse und jedes Weiterleitungsziel per DNS geprüft, private/lokale IPs abgelehnt, nur Port 80/443, max. 4 Redirects, 8 s, 1,5 MB; eigenes Rate-Limit (8 / 10 min) in der Route; nichts wird gespeichert (Datenschutz Welt B, Abschnitt „KI-Sichtbarkeits-Check“) |
 | `components/XRaySection.tsx` | „Unter die Haube schauen“: Röntgenblick markiert H1–H3 und Bilder (`html[data-xray]` in `globals.css`) und listet live JSON-LD-Typen, KI-Crawler aus `robots.txt`, `llms.txt`-Auszug und Security-Header. Deckt das Keyword „KI-Suchoptimierung“ |
-| `components/AboutDeveloperSection.tsx` | „Wer baut das?" direkt vor den Referenzen. Portrait mit Design-Tool-Auswahlrahmen (dekorativ, `aria-hidden`), Kennzahlen, Schnittstelle Mensch · Unternehmen · Technik, Leitsatz |
+| `components/AboutDeveloperSection.tsx` | „Wer baut das?" direkt vor den Referenzen. Portrait `stefan-heinemann-schreibtisch.webp` (seit 2026-11; Kontaktbereich: `…-projekt-zeigen.webp`) mit Design-Tool-Auswahlrahmen (dekorativ, `aria-hidden`), Kennzahlen, Schnittstelle Mensch · Unternehmen · Technik, Leitsatz |
 
 Reihenfolge `/webdevelopment`: Hero → Leistungen → Technologien → Prozess →
 Zielgruppe → **Über mich** → Referenzen → FAQ → Kontakt.
