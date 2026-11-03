@@ -50,7 +50,9 @@ import WebBackdrop from '@/components/WebBackdrop';
 import HyperspeedBand from '@/components/HyperspeedBand';
 import { FaqStructuredData, WebStructuredData } from '@/components/StructuredData';
 import FaqSection from '@/app/webdevelopment/FaqSection';
+import LiveMetrics from '@/app/webdevelopment/components/LiveMetrics';
 import PriceCompass from '@/app/webdevelopment/components/PriceCompass';
+import XRaySection from '@/app/webdevelopment/components/XRaySection';
 import AboutDeveloperSection from '@/app/webdevelopment/components/AboutDeveloperSection';
 import { faqBoth } from '@/app/coaching/faq';
 import { faqWeb } from '@/app/webdevelopment/faq';
@@ -291,6 +293,7 @@ export default function WebdevelopmentPage() {
                   </span>
                 ))}
               </div>
+              <LiveMetrics />
             </div>
             {/* Right: Hero cards */}
             <div className='flex-1 relative items-center justify-end '>
@@ -475,6 +478,7 @@ export default function WebdevelopmentPage() {
             </div>
           </div>
         </section>
+        <XRaySection />
         {/* Prozess */}
         <section
           id='prozess'

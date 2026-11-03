@@ -2328,3 +2328,41 @@ html {
   opacity: 0.6;
   transform: none;
 }
+
+/* Röntgenblick (app/webdevelopment/components/XRaySection.tsx):
+   Überschriften und Bilder auf der Seite markieren, solange er an ist. */
+html[data-xray] main :is(h1, h2, h3) {
+  position: relative;
+  outline: 1px dashed rgba(45, 212, 191, 0.75);
+  outline-offset: 6px;
+}
+
+html[data-xray] main :is(h1, h2, h3)::before {
+  position: absolute;
+  top: -1.55rem;
+  left: -6px;
+  padding: 0.05rem 0.4rem;
+  border-radius: 0.3rem;
+  font: 600 0.65rem/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.04em;
+  color: #031018;
+  background: #2dd4bf;
+  pointer-events: none;
+}
+
+html[data-xray] main h1::before {
+  content: 'H1';
+}
+
+html[data-xray] main h2::before {
+  content: 'H2';
+}
+
+html[data-xray] main h3::before {
+  content: 'H3';
+}
+
+html[data-xray] main img {
+  outline: 2px dashed rgba(134, 194, 67, 0.8);
+  outline-offset: -2px;
+}

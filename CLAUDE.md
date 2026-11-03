@@ -339,6 +339,9 @@ Das HTML wird trotzdem serverseitig gerendert (SEO unkritisch), nur das JS-Bundl
 |---|---|
 | `pricing.ts` | Einzige Quelle der Web-Preise (§13) |
 | `cases.ts` | Einzige Quelle der Referenzen: Karten, `ItemList`-Schema, `llms.txt`. Felder `tech` (Chips) und `result` (messbarer Beleg in `#86C243`). Reihenfolge = Anzeige |
+| `components/PriceCompass.tsx` | Preis-Kompass unter den Preiskarten: Leistung, Website-Umfang, Inhalte, Sprachen → Richtwert. Staffeln und Aufschläge in `pricing.ts` (`websiteScopes`, `contentSurcharges`, `languageSurcharges`, `estimatePrice`) |
+| `components/LiveMetrics.tsx` | „Live gemessen“ im Hero: LCP, übertragene KB, CLS aus der Performance-API des Besuchers – nichts wird gesendet |
+| `components/XRaySection.tsx` | „Unter die Haube schauen“: Röntgenblick markiert H1–H3 und Bilder (`html[data-xray]` in `globals.css`) und listet live JSON-LD-Typen, KI-Crawler aus `robots.txt`, `llms.txt`-Auszug und Security-Header. Deckt das Keyword „KI-Suchoptimierung“ |
 | `components/AboutDeveloperSection.tsx` | „Wer baut das?" direkt vor den Referenzen. Portrait mit Design-Tool-Auswahlrahmen (dekorativ, `aria-hidden`), Kennzahlen, Schnittstelle Mensch · Unternehmen · Technik, Leitsatz |
 
 Reihenfolge `/webdevelopment`: Hero → Leistungen → Technologien → Prozess →

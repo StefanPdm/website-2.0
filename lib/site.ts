@@ -111,6 +111,9 @@ export const KEYWORDS_WEB = [
   'Website Relaunch Berlin',
   'Schnittstellen und APIs',
   'Performance Optimierung Website',
+  // Seit 2026-11 durch den Röntgenblick auf /webdevelopment inhaltlich gedeckt (§13)
+  'KI-Suchoptimierung',
+  'SEO für ChatGPT und KI-Suche',
 ] as const;
 
 /** Welt 0 – die Klammer über beides. */
