@@ -24,11 +24,12 @@ const isDev = process.env.NODE_ENV !== 'production';
  * Direktiven: keine fremden Skriptquellen, kein <object>, kein <base>-Kapern,
  * Formulare nur an die eigene Domain, kein Einbetten in fremde Seiten.
  *
- * Läuft zunächst als Report-Only: Der Browser blockiert nichts, meldet
- * Verstöße aber in der Konsole. Wenn dort im Live-Betrieb nichts auftaucht,
- * CSP_ENFORCE auf true setzen.
+ * Seit 2026-11 scharf geschaltet: Vorher alle Sitemap-Seiten mit Podcast,
+ * Röntgenblick, KI-Check und WebGL-Effekten geprüft – kein Verstoß. Kommt
+ * ein fremder Dienst dazu (Analytics, Karte, Video), hier die Quelle ergänzen,
+ * sonst blockiert der Browser ihn. Notfall: auf false = nur melden.
  */
-const CSP_ENFORCE = false;
+const CSP_ENFORCE = true;
 
 const csp = [
   "default-src 'self'",

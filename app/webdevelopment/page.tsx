@@ -294,6 +294,12 @@ export default function WebdevelopmentPage() {
                 ))}
               </div>
               <LiveMetrics />
+              <a
+                href='/webdevelopment/ki-check'
+                className='mt-4 inline-flex min-h-11 items-center gap-2 rounded-full border border-accent-web/40 bg-accent-web/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent-web/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
+                Findet ChatGPT deine Website? Kostenloser KI-Check
+                <span aria-hidden='true'>→</span>
+              </a>
             </div>
             {/* Right: Hero cards */}
             <div className='flex-1 relative items-center justify-end '>

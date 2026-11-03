@@ -2366,3 +2366,45 @@ html[data-xray] main img {
   outline: 2px dashed rgba(134, 194, 67, 0.8);
   outline-offset: -2px;
 }
+
+/* Startseite: Link zum KI-Check unter der Entscheidung (Welt-B-Farben) */
+.hub-kicheck {
+  align-self: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  color: #f8fafc;
+  background: rgba(45, 212, 191, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.4);
+  transition:
+    background 200ms ease,
+    border-color 200ms ease;
+}
+
+.hub-kicheck:hover {
+  background: rgba(45, 212, 191, 0.16);
+  border-color: rgba(45, 212, 191, 0.7);
+}
+
+.hub-kicheck:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #2dd4bf;
+}
+
+.hub-kicheck__badge {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #031018;
+  background: #2dd4bf;
+}

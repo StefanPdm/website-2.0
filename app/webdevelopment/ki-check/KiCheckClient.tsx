@@ -12,7 +12,11 @@ type State =
   | { status: 'error'; message: string }
   | { status: 'done'; result: CheckResult };
 
+/** Ab hier gibt es ehrlich nichts Nennenswertes mehr zu verbessern. */
+const TOP_SCORE = 98;
+
 function verdict(score: number) {
+  if (score >= TOP_SCORE) return 'Hervorragend – nichts Wesentliches zu tun';
   if (score >= 85) return 'Sehr gut sichtbar';
   if (score >= 65) return 'Solide – mit Luft nach oben';
   if (score >= 40) return 'Deutliche Lücken';
@@ -113,7 +117,9 @@ export default function KiCheckClient() {
             <div>
               {state.result.weaknesses.length > 0 && (
                 <>
-                  <h2 className='text-xl font-semibold text-white'>Die drei größten Hebel</h2>
+                  <h2 className='text-xl font-semibold text-white'>
+                    {state.result.score >= TOP_SCORE ? 'Was noch fehlt' : 'Die drei größten Hebel'}
+                  </h2>
                   <ol className='mt-4 grid gap-3'>
                     {state.result.weaknesses.map((item, index) => (
                       <li
@@ -158,17 +164,36 @@ export default function KiCheckClient() {
                 ))}
               </ul>
 
-              <div className='mt-8 rounded-2xl border border-accent-web/30 bg-[#030a13]/70 p-6'>
-                <p className='text-lg font-semibold text-white'>Soll ich das für dich lösen?</p>
-                <p className='mt-2 text-sm text-slate-300'>
-                  Schick mir die Adresse – ich sage dir ehrlich, was sich lohnt und was es kostet.
-                </p>
-                <a
-                  href='/webdevelopment#kontakt'
-                  className='web-cta mt-4 w-full px-5 py-3 text-sm font-semibold sm:w-auto'>
-                  Projekt anfragen
-                </a>
-              </div>
+              {state.result.score >= TOP_SCORE ? (
+                <div className='mt-8 rounded-2xl border border-[#86C243]/40 bg-[#030a13]/70 p-6'>
+                  <p className='text-lg font-semibold text-white'>
+                    Glückwunsch – technisch ist hier alles sauber.
+                  </p>
+                  <p className='mt-2 text-sm text-slate-300'>
+                    Für Suchmaschinen und KI gibt es an dieser Seite nichts Nennenswertes mehr zu
+                    verbessern. Ob Inhalte, Angebot und Nutzerführung genauso gut funktionieren,
+                    prüft dieser Check nicht – wenn du dazu eine ehrliche zweite Meinung willst,
+                    schreib mir gern.
+                  </p>
+                  <a
+                    href='/webdevelopment#kontakt'
+                    className='mt-4 inline-flex min-h-11 items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
+                    Zweite Meinung anfragen
+                  </a>
+                </div>
+              ) : (
+                <div className='mt-8 rounded-2xl border border-accent-web/30 bg-[#030a13]/70 p-6'>
+                  <p className='text-lg font-semibold text-white'>Soll ich das für dich lösen?</p>
+                  <p className='mt-2 text-sm text-slate-300'>
+                    Schick mir die Adresse – ich sage dir ehrlich, was sich lohnt und was es kostet.
+                  </p>
+                  <a
+                    href='/webdevelopment#kontakt'
+                    className='web-cta mt-4 w-full px-5 py-3 text-sm font-semibold sm:w-auto'>
+                    Projekt anfragen
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         )}
