@@ -50,6 +50,7 @@ import WebBackdrop from '@/components/WebBackdrop';
 import HyperspeedBand from '@/components/HyperspeedBand';
 import { FaqStructuredData, WebStructuredData } from '@/components/StructuredData';
 import FaqSection from '@/app/webdevelopment/FaqSection';
+import HeroPortrait from '@/app/webdevelopment/components/HeroPortrait';
 import LiveMetrics from '@/app/webdevelopment/components/LiveMetrics';
 import PriceCompass from '@/app/webdevelopment/components/PriceCompass';
 import XRaySection from '@/app/webdevelopment/components/XRaySection';
@@ -253,7 +254,7 @@ export default function WebdevelopmentPage() {
       <main className='relative z-10'>
         {/* Hero Section */}
         <section className='relative min-h-svh overflow-hidden flex items-center pt-32 md:pt-0'>
-          <div className='relative z-10 mx-auto max-w-6xl w-full flex flex-col md:flex-row items-start md:items-center gap-10 md:gap-12 px-4 sm:px-6 md:px-8 py-12 md:py-24'>
+          <div className='relative z-10 mx-auto max-w-6xl w-full flex flex-col lg:flex-row items-start lg:items-center gap-14 lg:gap-12 px-4 sm:px-6 md:px-8 py-12 md:py-24'>
             {/* Left: All content left-aligned */}
             <div className='flex-1 flex flex-col justify-center items-start'>
               <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 mb-6 max-w-105'>
@@ -301,47 +302,10 @@ export default function WebdevelopmentPage() {
                 <span aria-hidden='true'>→</span>
               </a>
             </div>
-            {/* Right: Hero cards */}
-            <div className='flex-1 relative items-center justify-end '>
-              <div className='relative h-105 w-95'>
-                <CardSwapView
-                  width={380}
-                  height={260}
-                  cardDistance={80}
-                  verticalDistance={85}
-                  delay={3500}
-                  pauseOnHover>
-                  {heroCases.map((entry) => (
-                    <CardView
-                      key={entry.name}
-                      style={{
-                        borderRadius: 28,
-                        background: '#06101c',
-                        border: '1px solid rgba(255, 255, 255, 0.14)',
-                        boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
-                        overflow: 'hidden',
-                      }}
-                      className='text-slate-100'>
-                      <div className='relative h-full w-full'>
-                        <Image
-                          src={entry.image as string}
-                          alt={`Website ${entry.name}`}
-                          fill
-                          sizes='380px'
-                          className='object-cover object-top'
-                        />
-                        <div className='absolute inset-x-0 bottom-0 bg-linear-to-t from-[#06101c] via-[#06101c]/90 to-transparent p-5 pt-12'>
-                          <div className='text-xs font-semibold uppercase tracking-[0.2em] text-accent-web'>
-                            {entry.status}
-                          </div>
-                          <div className='mt-1 text-sm font-semibold text-white'>{entry.name}</div>
-                        </div>
-                      </div>
-                    </CardView>
-                  ))}
-                </CardSwapView>
-              </div>
-              <div className='pointer-events-none absolute -bottom-6 right-0 hidden h-24 w-24 rounded-3xl bg-[#1D6FA8]/30 blur-xl md:block'></div>
+            {/* Right: Porträt mit Röntgen-Scan */}
+            {/* Mobil zuerst: Das Foto macht die Seite persönlich, bevor der Text kommt */}
+            <div className='order-first w-full flex-1 lg:order-none lg:max-w-[640px]'>
+              <HeroPortrait />
             </div>
           </div>
         </section>
@@ -580,12 +544,55 @@ export default function WebdevelopmentPage() {
         <section
           id='referenzen'
           className='mx-auto max-w-6xl px-4 py-32 min-h-[90vh] flex flex-col justify-center gap-6'>
-          <div className='max-w-2xl'>
-            <h2 className='text-3xl font-bold tracking-tight text-white'>Referenzen</h2>
-            <p className='mt-3 text-slate-300'>
-              Projekte, die (teilweise) nicht öffentlich sind – aber Struktur, Wirkung und Klarheit
-              beweisen.
-            </p>
+          <div className='grid items-center gap-10 lg:grid-cols-[1fr_auto]'>
+            <div className='max-w-2xl'>
+              <h2 className='text-3xl font-bold tracking-tight text-white'>Referenzen</h2>
+              <p className='mt-3 text-slate-300'>
+                Projekte, die (teilweise) nicht öffentlich sind – aber Struktur, Wirkung und
+                Klarheit beweisen.
+              </p>
+            </div>
+            {/* Kartenstapel (früher im Hero): die drei neuesten Referenzen */}
+            <div className='hidden lg:block lg:pb-52'>
+                <div className='relative h-105 w-95'>
+                  <CardSwapView
+                    width={380}
+                    height={260}
+                    cardDistance={80}
+                    verticalDistance={85}
+                    delay={3500}
+                    pauseOnHover>
+                    {heroCases.map((entry) => (
+                      <CardView
+                        key={entry.name}
+                        style={{
+                          borderRadius: 28,
+                          background: '#06101c',
+                          border: '1px solid rgba(255, 255, 255, 0.14)',
+                          boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
+                          overflow: 'hidden',
+                        }}
+                        className='text-slate-100'>
+                        <div className='relative h-full w-full'>
+                          <Image
+                            src={entry.image as string}
+                            alt={`Website ${entry.name}`}
+                            fill
+                            sizes='380px'
+                            className='object-cover object-top'
+                          />
+                          <div className='absolute inset-x-0 bottom-0 bg-linear-to-t from-[#06101c] via-[#06101c]/90 to-transparent p-5 pt-12'>
+                            <div className='text-xs font-semibold uppercase tracking-[0.2em] text-accent-web'>
+                              {entry.status}
+                            </div>
+                            <div className='mt-1 text-sm font-semibold text-white'>{entry.name}</div>
+                          </div>
+                        </div>
+                      </CardView>
+                    ))}
+                  </CardSwapView>
+                </div>
+            </div>
           </div>
           <div className='mt-10 grid gap-x-8 gap-y-21 md:grid-cols-2'>
             {webCases.map((entry) => (

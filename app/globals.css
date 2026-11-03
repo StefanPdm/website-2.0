@@ -2408,3 +2408,75 @@ html[data-xray] main img {
   color: #031018;
   background: #2dd4bf;
 }
+
+/* ==========================================================================
+ * Welt B Hero: Röntgen-Porträt (app/webdevelopment/components/HeroPortrait.tsx)
+ * Ein Scan-Band läuft von oben nach unten; nur darin ist der Bauplan sichtbar.
+ * Maske und Balken teilen sich die Variable --scan (per @property animiert).
+ * ========================================================================== */
+
+@property --scan {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: -20%;
+}
+
+.hero-xray {
+  --scan: -20%;
+}
+
+.hero-xray__blueprint {
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+
+.hero-xray__grid {
+  background-image:
+    linear-gradient(rgba(45, 212, 191, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.hero-xray__beam {
+  top: var(--scan);
+  height: 2px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, #2dd4bf 20%, #9bc7ff 50%, #2dd4bf 80%, transparent);
+  box-shadow:
+    0 0 18px 4px rgba(45, 212, 191, 0.55),
+    0 0 60px 10px rgba(29, 111, 168, 0.35);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-xray {
+    animation: hero-scan 7s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite;
+  }
+
+  .hero-xray__blueprint {
+    opacity: 1;
+    /* Sichtbar nur im Band um --scan, weich ausgeblendet */
+    mask-image: linear-gradient(
+      to bottom,
+      transparent calc(var(--scan) - 22%),
+      #000 calc(var(--scan) - 6%),
+      #000 var(--scan),
+      transparent calc(var(--scan) + 2%)
+    );
+  }
+
+  .hero-xray__beam {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-scan {
+  0% {
+    --scan: -20%;
+  }
+  55% {
+    --scan: 122%;
+  }
+  100% {
+    --scan: 122%;
+  }
+}
