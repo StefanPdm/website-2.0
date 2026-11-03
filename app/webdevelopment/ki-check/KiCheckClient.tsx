@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Check, Loader2, Share2, X } from 'lucide-react';
 
 import { useFormShield } from '@/components/FormShield';
+import { KI_CHECK_EVENT } from '@/app/webdevelopment/components/HeroCheckForm';
 import type { CheckResult } from '@/lib/ki-check';
 
 type State =
@@ -66,8 +67,10 @@ type KiCheckClientProps = {
   idPrefix?: string;
   /** Überschriften-Ebene der Ergebnis-Abschnitte (h2 auf der eigenen Seite, h3 eingebettet). */
   headingLevel?: 'h2' | 'h3';
-  /** Adresse aus ?url= übernehmen und sofort prüfen (Hero-Formular auf /webdevelopment). */
+  /** Adresse aus ?url= übernehmen und sofort prüfen (Fallback ohne JavaScript). */
   readUrlParam?: boolean;
+  /** Auf das Hero-Formular hören (KI_CHECK_EVENT) – eingebettet auf /webdevelopment. */
+  listenHero?: boolean;
 };
 
 /**
@@ -78,6 +81,7 @@ export default function KiCheckClient({
   idPrefix = 'web-ki-check',
   headingLevel = 'h2',
   readUrlParam = false,
+  listenHero = false,
 }: KiCheckClientProps) {
   const [url, setUrl] = useState('');
   const [state, setState] = useState<State>({ status: 'idle' });
@@ -122,6 +126,20 @@ export default function KiCheckClient({
     return () => window.clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [readUrlParam]);
+
+  // Hero-Formular: Adresse übernehmen und prüfen (das Scrollen macht das Formular).
+  useEffect(() => {
+    if (!listenHero) return;
+    const onRun = (event: Event) => {
+      const target = String((event as CustomEvent<string>).detail ?? '').trim();
+      if (!target) return;
+      setUrl(target);
+      void runCheck(target);
+    };
+    window.addEventListener(KI_CHECK_EVENT, onRun);
+    return () => window.removeEventListener(KI_CHECK_EVENT, onRun);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listenHero]);
 
   return (
     <div>

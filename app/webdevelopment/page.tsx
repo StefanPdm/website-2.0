@@ -49,6 +49,7 @@ import WebBackdrop from '@/components/WebBackdrop';
 import HyperspeedBand from '@/components/HyperspeedBand';
 import { FaqStructuredData, WebStructuredData } from '@/components/StructuredData';
 import FaqSection from '@/app/webdevelopment/FaqSection';
+import HeroCheckForm from '@/app/webdevelopment/components/HeroCheckForm';
 import HeroPortrait from '@/app/webdevelopment/components/HeroPortrait';
 import LiveMetrics from '@/app/webdevelopment/components/LiveMetrics';
 import PriceCompass from '@/app/webdevelopment/components/PriceCompass';
@@ -273,35 +274,8 @@ export default function WebdevelopmentPage() {
                   </span>
                 ))}
               </div>
-              {/* B: Adresse direkt hier eingeben → KI-Check-Seite prüft sofort (?url=) */}
-              <form
-                action='/webdevelopment/ki-check'
-                method='get'
-                className='mt-10 w-full max-w-130'>
-                <label
-                  htmlFor='web-hero-check-url'
-                  className='text-sm font-semibold text-white'>
-                  Findet ChatGPT deine Website?{' '}
-                  <span className='font-normal text-slate-300'>Kostenlos prüfen:</span>
-                </label>
-                <div className='mt-2 flex gap-2'>
-                  <input
-                    id='web-hero-check-url'
-                    name='url'
-                    type='text'
-                    inputMode='url'
-                    autoComplete='url'
-                    required
-                    placeholder='deine-website.de'
-                    className='h-11 w-full min-w-0 flex-1 rounded-xl border border-accent-web/40 bg-[#030a13]/80 px-4 text-sm text-white placeholder-slate-400 outline-none transition focus:border-accent-web focus-visible:ring-2 focus-visible:ring-accent-web/40'
-                  />
-                  <button
-                    type='submit'
-                    className='h-11 shrink-0 cursor-pointer rounded-xl border border-accent-web/50 bg-accent-web/15 px-4 text-sm font-semibold text-white transition hover:bg-accent-web/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
-                    KI-Check →
-                  </button>
-                </div>
-              </form>
+              {/* Adresse eingeben → scrollt zum Check im Röntgenblick-Abschnitt und prüft */}
+              <HeroCheckForm />
               <LiveMetrics />
             </div>
             {/* Right: Porträt mit Röntgen-Scan */}
