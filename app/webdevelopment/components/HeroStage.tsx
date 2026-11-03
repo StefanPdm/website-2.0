@@ -43,12 +43,14 @@ export default function HeroStage({ trustItems }: { trustItems: string[] }) {
           aria-hidden='true'
           className='pointer-events-none absolute inset-0 bg-linear-to-t from-[#06101c] via-[#06101c]/10 to-[#06101c]/40 lg:bg-[linear-gradient(90deg,#06101c_0%,#06101c_18%,rgba(6,16,28,0.8)_38%,rgba(6,16,28,0)_65%),linear-gradient(0deg,#06101c_0%,rgba(6,16,28,0)_35%),linear-gradient(180deg,rgba(6,16,28,0.6)_0%,rgba(6,16,28,0)_25%)]'
         />
-        <span
-          aria-hidden='true'
-          className='absolute right-6 bottom-6 hidden font-mono text-[11px] text-accent-web/80 lg:block'>
-          stefan.heinemann · Entwickler × Unternehmer
-        </span>
       </div>
+
+      {/* Signatur außerhalb des Foto-Containers – dessen Ausblend-Maske würde sie verschlucken */}
+      <span
+        aria-hidden='true'
+        className='absolute right-6 bottom-6 z-10 hidden font-mono text-[11px] text-accent-web lg:block'>
+        stefan.heinemann · Entwickler × Unternehmer
+      </span>
 
       {/* Raster über dem Auslauf links – wie im Seitenhintergrund, damit links keine
           Leerfläche entsteht */}
