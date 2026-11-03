@@ -3,12 +3,14 @@ import Link from 'next/link';
 import type { ComponentType, HTMLAttributes, PropsWithChildren, ReactElement } from 'react';
 import {
   Boxes,
+  Check,
   ClipboardCheck,
   Code2,
   LayoutTemplate,
   Search,
   ShieldCheck,
   Sparkles,
+  X,
 } from 'lucide-react';
 import {
   SiAngular,
@@ -48,6 +50,7 @@ import WebBackdrop from '@/components/WebBackdrop';
 import HyperspeedBand from '@/components/HyperspeedBand';
 import { FaqStructuredData, WebStructuredData } from '@/components/StructuredData';
 import FaqSection from '@/app/webdevelopment/FaqSection';
+import PriceCompass from '@/app/webdevelopment/components/PriceCompass';
 import AboutDeveloperSection from '@/app/webdevelopment/components/AboutDeveloperSection';
 import { faqBoth } from '@/app/coaching/faq';
 import { faqWeb } from '@/app/webdevelopment/faq';
@@ -129,6 +132,59 @@ const audiences = [
   'Coaches & Berater',
   'Kleine bis mittlere Unternehmen',
   'Agenturen (White Label)',
+];
+
+/** Ehrliche Abgrenzung statt Zielgruppen-Kacheln (Entwurf 2026-11, von Stefan geprüft). */
+const fitYes = [
+  'Du willst etwas, das in fünf Jahren noch läuft – nicht nur bis zum Launch.',
+  'Du willst verstehen, was gebaut wird, und die Inhalte danach selbst pflegen.',
+  'Du suchst einen festen Ansprechpartner statt wechselnder Zuständigkeiten.',
+  'Ladezeit, Auffindbarkeit und Sicherheit sind dir wichtiger als der nächste Trend.',
+];
+
+const fitNo = [
+  'Du suchst den günstigsten Baukasten.',
+  'Die Seite soll morgen online sein – das Konzept kommt später.',
+  'Für jeden Wunsch soll ein weiteres Plugin her.',
+  'Du brauchst ein Team, das rund um die Uhr erreichbar ist.',
+];
+
+/**
+ * Entscheidungsmatrix: Wann welche Technik. Jede Spalte ist durch eine
+ * Referenz gedeckt (cases.ts) – Grundlage für Google- und KI-Antworten auf
+ * „WordPress oder Next.js?“.
+ */
+const techChoices = [
+  {
+    title: 'WordPress',
+    when: 'wenn …',
+    points: [
+      'du Inhalte selbst und ohne Entwickler pflegen willst',
+      'ein Shop mit WooCommerce reicht',
+      'Budget und Zeitrahmen überschaubar sind',
+    ],
+    example: 'TRAFÖ-Shop, Rund um Berlin Rallye',
+  },
+  {
+    title: 'Next.js',
+    when: 'wenn …',
+    points: [
+      'Ladezeit und Sichtbarkeit bei Google und KI entscheiden',
+      'Logins, Rollen oder Dashboards dazugehören',
+      'das System mit dem Unternehmen wachsen soll',
+    ],
+    example: 'Zahnarzt Groß & Groß, Kundenportal TRAFÖ',
+  },
+  {
+    title: 'Headless',
+    when: 'wenn …',
+    points: [
+      'Inhalte an mehreren Stellen erscheinen – Website, App, Portal',
+      'bestehende Systeme angebunden werden sollen',
+      'Redaktion und Technik getrennt arbeiten',
+    ],
+    example: 'Schnittstellen im Kundenportal TRAFÖ',
+  },
 ];
 
 const processIconMap: Record<string, ReactElement> = {
@@ -313,13 +369,20 @@ export default function WebdevelopmentPage() {
                 variant='blue'
                 className='w-full bg-[#0B1B2B]/70 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
                 <div className='relative z-10 w-full rounded-[22px] border border-white/20 bg-white/5 p-5 text-slate-100 h-full'>
-                  <h3 className='text-lg font-semibold text-white'>{service.title}</h3>
-                  <p className='mt-2 text-sm text-slate-300'>{service.intro}</p>
-                  <p className='mt-3 text-sm font-semibold text-accent-web'>
-                    ab {service.price}{' '}
-                    <span className='text-xs font-normal text-slate-300'>{VAT_NOTE}</span>
+                  {/* Feste Mindesthöhen für Titel und Intro (je zwei Zeilen):
+                      so stehen die Preise in allen vier Karten auf einer Höhe. */}
+                  <h3 className='text-lg font-semibold leading-7 text-white lg:min-h-14'>
+                    {service.title}
+                  </h3>
+                  <p className='mt-2 text-sm leading-5 text-slate-300 lg:min-h-10'>
+                    {service.intro}
                   </p>
-                  <ul className='mt-4 space-y-2 text-sm text-slate-300'>
+                  <p className='mt-6 text-sm text-slate-300'>ab</p>
+                  <p className='text-3xl font-bold tracking-tight text-accent-web'>
+                    {service.price}
+                  </p>
+                  <p className='mt-1 text-xs text-slate-300'>{VAT_NOTE}</p>
+                  <ul className='mt-6 space-y-2 border-t border-white/10 pt-5 text-sm text-slate-300'>
                     {service.bullets.map((bullet) => (
                       <li
                         key={bullet}
@@ -332,6 +395,10 @@ export default function WebdevelopmentPage() {
                 </div>
               </PixelCardView>
             ))}
+          </div>
+
+          <div className='relative z-10 mb-16 w-full max-w-3xl self-center'>
+            <PriceCompass />
           </div>
 
           <div className='z-0 pointer-events-none absolute bottom-0 left-1/2 h-1/2 w-screen -translate-x-1/2 opacity-100'>
@@ -349,10 +416,35 @@ export default function WebdevelopmentPage() {
               </h2>
               <p className='mt-3 text-slate-300'>
                 Ich arbeite mit modernen, stabilen Technologien – nicht, um zu beeindrucken, sondern
-                um nachhaltige Lösungen zu bauen.
+                um nachhaltige Lösungen zu bauen. Welche passt, hängt von deinem Vorhaben ab:
               </p>
             </div>
-            <div className='mt-8 grid gap-6 md:grid-cols-2'>
+            <div className='mt-8 grid gap-4 md:grid-cols-3'>
+              {techChoices.map((choice) => (
+                <div
+                  key={choice.title}
+                  className='rounded-2xl border border-white/15 bg-[#030a13]/70 p-6'>
+                  <h3 className='text-lg font-semibold text-white'>
+                    {choice.title}, <span className='font-normal text-slate-300'>{choice.when}</span>
+                  </h3>
+                  <ul className='mt-4 space-y-2 text-sm text-slate-300'>
+                    {choice.points.map((point) => (
+                      <li
+                        key={point}
+                        className='flex gap-2'>
+                        <span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#86C243]' />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className='mt-4 text-xs text-slate-400'>Beispiel: {choice.example}</p>
+                </div>
+              ))}
+            </div>
+            <p className='mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300'>
+              Womit ich arbeite
+            </p>
+            <div className='mt-4 grid gap-6 md:grid-cols-2'>
               {Object.entries(techStack).map(([title, items]) => (
                 <ElectricBorder
                   key={title}
@@ -430,21 +522,47 @@ export default function WebdevelopmentPage() {
                 wir gut zusammen.
               </p>
             </div>
-            <div className='mt-8 grid gap-4 sm:grid-cols-2 '>
-              {audiences.map((audience) => (
-                <ElectricBorder
-                  key={audience}
-                  color='#2dd4bf'
-                  speed={0.5}
-                  chaos={0.04}
-                  className=''
-                  style={{ borderRadius: 18 }}>
-                  <div className='rounded-2xl border border-white/15 bg-white/5 p-5 text-slate-100 h-full text-center'>
-                    <div className='text-sm font-semibold text-white'>{audience}</div>
-                  </div>
-                </ElectricBorder>
-              ))}
+            <div className='mt-8 grid gap-6 md:grid-cols-2'>
+              <div className='rounded-2xl border border-[#86C243]/40 bg-[#030a13]/70 p-6'>
+                <h3 className='text-lg font-semibold text-white'>Passt, wenn …</h3>
+                <ul className='mt-4 space-y-3 text-sm text-slate-200'>
+                  {fitYes.map((item) => (
+                    <li
+                      key={item}
+                      className='flex gap-3'>
+                      <Check
+                        aria-hidden='true'
+                        className='mt-0.5 h-4 w-4 shrink-0 text-[#86C243]'
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className='rounded-2xl border border-white/15 bg-[#030a13]/70 p-6'>
+                <h3 className='text-lg font-semibold text-white'>Passt nicht, wenn …</h3>
+                <ul className='mt-4 space-y-3 text-sm text-slate-300'>
+                  {fitNo.map((item) => (
+                    <li
+                      key={item}
+                      className='flex gap-3'>
+                      <X
+                        aria-hidden='true'
+                        className='mt-0.5 h-4 w-4 shrink-0 text-slate-500'
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className='mt-4 text-xs text-slate-400'>
+                  Dann sage ich dir das ehrlich – und nenne dir, wenn ich kann, jemanden, der besser
+                  passt.
+                </p>
+              </div>
             </div>
+            <p className='mt-6 text-sm text-slate-300'>
+              Typische Kunden: {audiences.join(' · ')}
+            </p>
           </div>
         </section>
         <AboutDeveloperSection />

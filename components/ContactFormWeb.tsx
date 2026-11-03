@@ -148,8 +148,8 @@ export default function ContactFormWeb() {
             name='budget'
             className='select-caret h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'>
             <option value=''>Budgetrahmen</option>
-            <option>Unter 2.500 €</option>
-            <option>2.500 – 7.500 €</option>
+            <option>Unter 2.900 €</option>
+            <option>2.900 – 7.500 €</option>
             <option>7.500 – 15.000 €</option>
             <option>15.000 €+</option>
           </select>
