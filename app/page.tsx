@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  HomeContactProvider,
-  HomeContactSection,
-  HomeContactTrigger,
-} from '@/components/HomeContact';
+import type { CSSProperties } from 'react';
+import HubLink from '@/components/HubLink';
+import HubTilt from '@/components/HubTilt';
 import InfoOrb from '@/components/InfoOrb';
 import { RootStructuredData } from '@/components/StructuredData';
 
@@ -18,13 +16,30 @@ const legalLinks = [
   { label: 'Widerruf', href: '/widerruf' },
 ];
 
-export default function Home() {
-  const useWarmPills = true;
-  const InfoOrbTitel = `"Stefan, du musst dich entscheiden! Entweder du bist Entwickler oder Coach!"`;
-  const InfoOrbText = `Das hörte ich beim Launch von einem Marketing-Profi. "Konzentriere dich auf eine Sache! - Alles andere versteht niemand."
+/**
+ * Prüfbare Belege, die um das Foto kreisen (§10 Beweispflicht).
+ * `angle` = Startwinkel auf der Bahn: 0° hinten (oben), 180° vorn (unten).
+ */
+const facts = [
+  { label: 'DVNLP-zertifiziert', angle: 45 },
+  { label: '20+ Jahre Unternehmer', angle: 135 },
+  { label: 'Next.js · React · WordPress', angle: 225 },
+  { label: 'Potsdam · Berlin · online', angle: 315 },
+];
+
+/** Vorne liegt die untere Bahnhälfte – dort laufen die Belege vor dem Foto. */
+function isFront(angle: number) {
+  return angle > 90 && angle < 270;
+}
+
+/** Echte Zeile aus components/HubLink.tsx – Dekor der Web-Hälfte. */
+const codeLines = ['// components/HubLink.tsx', 'hub.dataset.chosen = side;'];
+
+const InfoOrbTitel = `"Stefan, du musst dich entscheiden! Entweder du bist Entwickler oder Coach!"`;
+const InfoOrbText = `Das hörte ich beim Launch von einem Marketing-Profi. "Konzentriere dich auf eine Sache! - Alles andere versteht niemand."
   Meine Antwort: **„Warum? Genau das macht mich aus. Ich bin beides.“**
 
-In der Psychologie gibt es den Persönlichkeitstyp **Scanner**. Das sind Menschen, die viele Interessen und Talente haben, aber oft das Gefühl, sich entscheiden zu müssen, weil die Gesellschaft das erwartet. 
+In der Psychologie gibt es den Persönlichkeitstyp **Scanner**. Das sind Menschen, die viele Interessen und Talente haben, aber oft das Gefühl, sich entscheiden zu müssen, weil die Gesellschaft das erwartet.
 
 Seit dem berühmten Buch von Barbara Sher über Scanner wissen wir: **Du musst dich nicht entscheiden.**
 
@@ -33,324 +48,217 @@ Das ist auch mein Ansatz: Webentwicklung und Coaching sind für mich zwei Seiten
 
 Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden Wegen zu begleiten — egal, ob du eine Website brauchst oder Klarheit in deinem Kopf willst.`;
 
-  const pillScheme = useWarmPills
-    ? {
-        devPill: '/images-startseite/green-pill.webp',
-        nlpPill: '/images-startseite/orange-pill.webp',
-        devColors: {
-          border: 'rgba(34, 197, 94, 0.25)',
-          borderStrong: 'rgba(34, 197, 94, 0.6)',
-          shadow: 'rgba(16, 122, 60, 0.18)',
-          shadowStrong: 'rgba(16, 122, 60, 0.35)',
-          glow: 'rgba(34, 197, 94, 0.35)',
-          pillGlow: 'rgba(34, 197, 94, 0.45)',
-        },
-        nlpColors: {
-          border: 'rgba(245, 158, 11, 0.25)',
-          borderStrong: 'rgba(245, 158, 11, 0.6)',
-          shadow: 'rgba(180, 83, 9, 0.18)',
-          shadowStrong: 'rgba(180, 83, 9, 0.35)',
-          glow: 'rgba(245, 158, 11, 0.35)',
-          pillGlow: 'rgba(245, 158, 11, 0.45)',
-        },
-      }
-    : {
-        devPill: '/images-startseite/blue-pill.webp',
-        nlpPill: '/images-startseite/red-pill.webp',
-        devColors: {
-          border: 'rgba(99, 179, 237, 0.25)',
-          borderStrong: 'rgba(99, 179, 237, 0.6)',
-          shadow: 'rgba(29, 111, 168, 0.18)',
-          shadowStrong: 'rgba(29, 111, 168, 0.35)',
-          glow: 'rgba(29, 111, 168, 0.35)',
-          pillGlow: 'rgba(99, 179, 237, 0.45)',
-        },
-        nlpColors: {
-          border: 'rgba(248, 113, 113, 0.25)',
-          borderStrong: 'rgba(248, 113, 113, 0.6)',
-          shadow: 'rgba(239, 68, 68, 0.18)',
-          shadowStrong: 'rgba(239, 68, 68, 0.35)',
-          glow: 'rgba(239, 68, 68, 0.35)',
-          pillGlow: 'rgba(248, 113, 113, 0.45)',
-        },
-      };
-
+function FactOrbit({ layer }: { layer: 'back' | 'front' }) {
   return (
-    <div className='landing-shell'>
+    <div
+      aria-hidden='true'
+      className={`hub-orbit hub-orbit--${layer}`}>
+      <div className='hub-orbit__plane'>
+        <span className='hub-orbit__ring' />
+        {facts.map((fact) => (
+          <span
+            key={fact.label}
+            className='hub-orbit__pos'
+            style={
+              {
+                '--a': `${fact.angle}deg`,
+                '--delay': `${-(fact.angle / 360) * 36}s`,
+                '--visible': (layer === 'front') === isFront(fact.angle) ? 1 : 0,
+              } as CSSProperties
+            }>
+            <span className='hub-orbit__fact'>{fact.label}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <div className='hub-page'>
       <RootStructuredData />
-      <HomeContactProvider>
-      <main className='landing-main'>
-        {/* Header */}
-        <header className='pt-4 w-full max-w-7xl sticky top-0 z-50 mx-auto flex items-center justify-between'>
-          <div className='landing-brand'>
-            <div className='w-12 h-12'>
-              <Image
-                src='/logos/logo-sh.svg'
-                alt='Stefan Heinemann – Coaching und Webentwicklung, Logo'
-                width={125}
-                height={120}
-                className='h-full w-full object-contain'
-                priority
+      <main className='hub-main'>
+          {/*
+            Zwei Welten an einer Naht. Jede Hälfte ist ein Link über die volle
+            Fläche; Hover/Fokus verschiebt die Naht (CSS :has), ein Klick lässt
+            die Welt den Bildschirm füllen (HubLink). Das Foto steht auf der Naht.
+          */}
+          <section
+            className='hub'
+            aria-labelledby='hub-title'>
+            <HubLink
+              side='web'
+              href='/webdevelopment'
+              className='hub-half hub-half--web'>
+              <div
+                aria-hidden='true'
+                className='hub-bg hub-bg--web'>
+                <span className='hub-scan' />
+                <pre className='hub-code'>
+                  {codeLines.map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
+                </pre>
+              </div>
+              <div className='hub-copy hub-copy--web'>
+                <span className='hub-eyebrow'>Webdevelopment</span>
+                <h2 className='hub-claim'>
+                  Ordnung <br className='hidden lg:inline' />
+                  im System.
+                </h2>
+                <span className='hub-text'>
+                  Websites, Shops und Kundenportale, die tragen – gebaut mit 20 Jahren
+                  Unternehmerblick.
+                </span>
+                <span className='hub-cta hub-cta--web'>
+                  <span className='hub-cta-label'>Zur Webentwicklung</span>
+                  <span aria-hidden='true'>→</span>
+                </span>
+              </div>
+            </HubLink>
+
+            <HubLink
+              side='coach'
+              href='/coaching'
+              className='hub-half hub-half--coach'>
+              <div
+                aria-hidden='true'
+                className='hub-bg hub-bg--coach'>
+                <span className='hub-breath' />
+              </div>
+              <div className='hub-copy hub-copy--coach'>
+                <span className='hub-eyebrow'>Life Coaching</span>
+                <h2 className='hub-claim'>
+                  Ruhe <br className='hidden lg:inline' />
+                  im Kopf.
+                </h2>
+                <span className='hub-text'>
+                  Für Unternehmer, die nach außen funktionieren – und innen wieder Klarheit
+                  brauchen.
+                </span>
+                <span className='hub-cta hub-cta--coach'>
+                  <span className='hub-cta-label'>Zum Coaching</span>
+                  <span aria-hidden='true'>→</span>
+                </span>
+              </div>
+            </HubLink>
+
+            {/* Mobil: Struktur der Welten auch oben hinter Kopf und Foto,
+                an der Naht zugeschnitten (am Desktop übernehmen das die Hälften) */}
+            <div
+              aria-hidden='true'
+              className='hub-top-bg hub-top-bg--web hub-bg hub-bg--web'>
+              <span className='hub-scan' />
+            </div>
+            <div
+              aria-hidden='true'
+              className='hub-top-bg hub-top-bg--coach hub-bg hub-bg--coach'>
+              <span className='hub-breath' />
+            </div>
+
+            <span
+              aria-hidden='true'
+              className='hub-seam'
+            />
+
+            <header className='hub-top'>
+              <Link
+                href='/'
+                className='landing-brand hub-brand'>
+                <Image
+                  src='/logos/logo-sh.svg'
+                  alt=''
+                  width={52}
+                  height={50}
+                  className='h-11 w-auto'
+                />
+                <span>
+                  <span className='landing-name block'>Stefan Heinemann</span>
+                  <span className='landing-role block'>Life Coach & Webentwickler · Potsdam</span>
+                </span>
+              </Link>
+            </header>
+
+            <div className='hub-head'>
+              <h1
+                id='hub-title'
+                className='hub-title'>
+                Zwei Welten. <br className='sm:hidden' />
+                Eine Entscheidung.
+              </h1>
+              <p className='hub-sub'>
+                Beides persönlich. Beides von mir.
+                <br />
+                In Potsdam, Berlin und online.
+              </p>
+              <p className='hub-facts'>
+                {facts.map((fact) => fact.label).join(' · ')}
+              </p>
+            </div>
+
+            <div className='hub-stage'>
+              <span
+                aria-hidden='true'
+                className='hub-rim hub-rim--web'
               />
-            </div>
-            <div>
-              <div className='landing-name'>Stefan Heinemann</div>
-              {/* Leistung + Ort sichtbar im ersten Bildschirm – H1 bleibt die Marke (§13) */}
-              <div className='landing-role'>Life Coach & Webentwickler · Potsdam</div>
-            </div>
-          </div>
-          <div className='landing-tags hidden md:flex'>
-            <span>klar</span>
-            <span>sauber</span>
-            <span>wirksam</span>
-          </div>
-        </header>
-        {/* Entscheidung */}
-        <section className='landing-grid pt-10 md:pt-20 '>
-          <div className='landing-left'>
-            <span className='landing-badge'>Wähle deinen Weg</span>
-            <h1 className='landing-title'>
-              Zwei Welten.
-              <br />
-              Eine Entscheidung.
-            </h1>
-            <span className='landing-subtitle'>Du bekommst entweder: </span>
-            <ul className='landing-subtitle'>
-              <li>⋙ innere Klarheit &nbsp; → &nbsp; Life Coaching</li>
-              <li>⋙ digitale Systeme &nbsp; → &nbsp; Webdevelopment</li>
-            </ul>
-            <span className='landing-subtitle'>
-              Beides sauber. Beides persönlich. Ohne Blabla. In Potsdam, Berlin und online.
-            </span>
-            <div className='landing-actions'>
-              <a
-                className='landing-cta landing-cta--primary inline-flex md:hidden'
-                href='#choose'>
-                Jetzt wählen
-              </a>
-              <HomeContactTrigger className='landing-cta landing-cta--ghost w-full cursor-pointer sm:w-auto' />
-            </div>
-            {/* orbits */}
-            <div className='orbit-system'>
-              <div className='orbit-center' />
-
-              <div className='orbit-ring orbit-ring--four'>
-                <div className='orbit-item'>
-                  <div className='orbit-item__shell'>
-                    <div className='orbit-item__content'>
-                      <Image
-                        src='/logos/logo-nlp.svg'
-                        alt='Stefan Heinemann Coaching'
-                        width={44}
-                        height={40}
-                        className='h-9 w-9 object-contain'
-                      />
-                    </div>
-                    <span className='orbit-badge'>Coaching</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className='orbit-ring orbit-ring--two'>
-                <div className='orbit-item'>
-                  <div className='orbit-item__shell'>
-                    <div className='orbit-item__content'>
-                      <Image
-                        src='/logos/logo-web.svg'
-                        alt='Webdesign und Webentwicklung'
-                        width={68}
-                        height={40}
-                        className='h-8 w-auto max-w-9 object-contain'
-                      />
-                    </div>
-                    <span className='orbit-badge'>Webdesign</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className='orbit-ring orbit-ring--three'>
-                <div className='orbit-item'>
-                  <div className='orbit-item__shell'>
-                    <div className='orbit-item__content'>
-                      <Image
-                        src='/tony-robbins.png'
-                        alt='Tony Robbins'
-                        width={40}
-                        height={40}
-                      />
-                    </div>
-                    <span className='orbit-badge'>Tony Robbins</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className='orbit-ring orbit-ring--one'>
-                <div className='orbit-item'>
-                  <div className='orbit-item__shell'>
-                    <div className='orbit-item__content'>
-                      <Image
-                        src='/Nextjs_Symbol.svg'
-                        alt='Next.js'
-                        width={40}
-                        height={40}
-                      />
-                    </div>
-                    <span className='orbit-badge'>Next.js</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* right side */}
-          {/* Balance Image */}
-          <div className='flex flex-col items-center justify-star mt-20 md:-mt-28'>
-            <div className='pointer-events-none relative isolate  md:w-96'>
-              <span className='absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00E5FF]/20 blur-3xl' />
+              <span
+                aria-hidden='true'
+                className='hub-rim hub-rim--coach'
+              />
+              <FactOrbit layer='back' />
               <Image
                 src='/images-startseite/portrait-balance-free.webp'
-                alt='Stefan Heinemann – Life Coach für Unternehmer und Webentwickler aus Potsdam'
-                width={800}
-                height={800}
+                alt='Stefan Heinemann hält in der linken Hand das Logo für Webentwicklung, in der rechten das Logo für Life Coaching'
+                width={1136}
+                height={1137}
+                sizes='(min-width: 1024px) 640px, 90vw'
                 priority
+                className='hub-photo'
               />
-            </div>
-            {/* Choise your path cards */}
-            <div
-              className='choice-card relative'
-              id='choose'>
-              <div className='choice-title mb-8'>Wähle deinen Weg</div>
+              {/* Mobil: deckender Auslauf in den Hintergrundfarben – eine Maske
+                  am Foto würde die hinteren Belege durch den Körper scheinen lassen */}
+              <span
+                aria-hidden='true'
+                className='hub-photo-fade'
+              />
+              <span
+                aria-hidden='true'
+                className='hub-logo-glow hub-logo-glow--web'
+              />
+              <span
+                aria-hidden='true'
+                className='hub-logo-glow hub-logo-glow--coach'
+              />
+              <FactOrbit layer='front' />
               <InfoOrb
                 headline={InfoOrbTitel}
                 text={InfoOrbText}
-                buttonClassName='absolute -top-4 right-2 xl:right-4 z-20 cursor-pointer'
+                buttonClassName='hub-info orb-3d cursor-pointer'
               />
-
-              <div className='choice-grid'>
-                {/* left card */}
-                <Link
-                  className='choice-tile relative'
-                  href='/webdevelopment/'
-                  style={
-                    {
-                      '--choice-border': pillScheme.devColors.border,
-                      '--choice-border-strong': pillScheme.devColors.borderStrong,
-                      '--choice-shadow': pillScheme.devColors.shadow,
-                      '--choice-shadow-strong': pillScheme.devColors.shadowStrong,
-                      '--choice-glow': pillScheme.devColors.glow,
-                      '--choice-pill-glow': pillScheme.devColors.pillGlow,
-                    } as React.CSSProperties
-                  }>
-                  <div className='choice-logo-big'>
-                    <Image
-                      src='/logos/logo-web.svg'
-                      alt='Webdevelopment Logo'
-                      width={109}
-                      height={64}
-                      className='h-11 w-auto max-w-[60px] object-contain'
-                    />
-                  </div>
-                  <div className='choice-pill-slot'>
-                    <Image
-                      className='choice-pill-image'
-                      src={pillScheme.devPill}
-                      alt={useWarmPills ? 'Grüne Pille' : 'Blaue Pille'}
-                      width={64}
-                      height={64}
-                      quality={100}
-                    />
-                  </div>
-                  <div className='choice-meta'>
-                    <div className='choice-heading'>Webdevelopment</div>
-                    <div className='choice-text'>
-                      Websites. Shops.
-                      <br />
-                      Systeme.
-                    </div>
-                    <br />
-                    <span className='choice-link'>
-                      {useWarmPills ? 'Grüne Pille wählen →' : 'Blaue Pille wählen →'}
-                    </span>
-                  </div>
-                </Link>
-
-                {/* right card */}
-                <Link
-                  className='choice-tile relative'
-                  href='/coaching'
-                  style={
-                    {
-                      '--choice-border': pillScheme.nlpColors.border,
-                      '--choice-border-strong': pillScheme.nlpColors.borderStrong,
-                      '--choice-shadow': pillScheme.nlpColors.shadow,
-                      '--choice-shadow-strong': pillScheme.nlpColors.shadowStrong,
-                      '--choice-glow': pillScheme.nlpColors.glow,
-                      '--choice-pill-glow': pillScheme.nlpColors.pillGlow,
-                    } as React.CSSProperties
-                  }>
-                  <div className='choice-logo-big'>
-                    <Image
-                      src='/logos/logo-nlp.svg'
-                      alt='Stefan Heinemann Coaching Logo'
-                      width={70}
-                      height={64}
-                      className='h-14 w-auto max-w-[60px] object-contain'
-                    />
-                  </div>
-                  <div className='choice-pill-slot'>
-                    <Image
-                      className='choice-pill-image'
-                      src={pillScheme.nlpPill}
-                      alt={useWarmPills ? 'Orange Pille' : 'Rote Pille'}
-                      width={64}
-                      height={64}
-                      quality={100}
-                    />
-                  </div>
-                  <div className='choice-meta'>
-                    <div className='choice-heading'>Life Coaching</div>
-                    <div className='choice-text'>Kopf. Körper. Fokus.</div>
-                    <br />
-                    <span className='choice-link'>
-                      {useWarmPills ? 'Orange Pille wählen →' : 'Rote Pille wählen →'}
-                    </span>
-                  </div>
-                </Link>
-              </div>
-              <div className='choice-footer'>Klar. Sauber. Wirksam. © Stefan Heinemann</div>
+              <HubTilt />
             </div>
+          </section>
+
+          {/* Kein Kontakt auf der Startseite: Jede Welt hat ihr eigenes Formular. */}
+          <div className='hub-below'>
+            <p className='landing-tip'>Tipp: Bei mir kannst du jederzeit wechseln. Oder beides machen.</p>
+
+            <footer className='landing-footer'>
+              <nav
+                aria-label='Rechtliches'
+                className='landing-legal'>
+                {legalLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}>
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </footer>
           </div>
-        </section>
-
-        {/*
-          Kontakt bleibt standardmäßig zu, damit die Startseite am Desktop auf
-          eine Bildschirmhöhe passt und die Entscheidung zwischen den Welten
-          nicht verwässert wird.
-
-          Der Zustand liegt in React, nicht im URL-Anker — Begründung im
-          Kommentar in components/HomeContact.tsx.
-        */}
-        <HomeContactSection />
-
-        <div className='landing-tip'>
-          Tipp: Bei mir kannst du jederzeit wechseln. Oder beides machen. 😁
-        </div>
-
-        <footer className='landing-footer'>
-          <nav
-            aria-label='Rechtliches'
-            className='landing-legal'>
-            {legalLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </footer>
       </main>
-      </HomeContactProvider>
     </div>
   );
 }

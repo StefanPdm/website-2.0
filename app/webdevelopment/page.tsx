@@ -32,6 +32,8 @@ import {
   FaClipboardCheck,
   FaGaugeHigh,
   FaMagnifyingGlass,
+  FaRobot,
+  FaShieldHalved,
   FaScrewdriverWrench,
 } from 'react-icons/fa6';
 import CardSwap, { Card } from '@/components/CardSwap';
@@ -86,7 +88,14 @@ const techStack = {
     'Elementor',
     'Divi Builder',
   ],
-  Qualität: ['Performance-Optimierung', 'SEO-Basics', 'Wartbarkeit', 'Saubere Übergabe'],
+  Qualität: [
+    'Performance-Optimierung',
+    'SEO',
+    'KI-Suchoptimierung',
+    'Security',
+    'Wartbarkeit',
+    'Saubere Übergabe',
+  ],
 };
 
 const processSteps = [
@@ -157,7 +166,9 @@ const techIconMap: Record<string, ReactElement> = {
   // Kein Divi-Logo in react-icons – neutrales Page-Builder-Symbol.
   'Divi Builder': <LayoutTemplate className='h-4 w-4' />,
   'Performance-Optimierung': <FaGaugeHigh className='h-4 w-4' />,
-  'SEO-Basics': <FaMagnifyingGlass className='h-4 w-4' />,
+  SEO: <FaMagnifyingGlass className='h-4 w-4' />,
+  'KI-Suchoptimierung': <FaRobot className='h-4 w-4' />,
+  Security: <FaShieldHalved className='h-4 w-4' />,
   Wartbarkeit: <FaScrewdriverWrench className='h-4 w-4' />,
   'Saubere Übergabe': <FaClipboardCheck className='h-4 w-4' />,
 };

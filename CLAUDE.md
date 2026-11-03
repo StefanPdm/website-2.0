@@ -95,7 +95,30 @@ app/<welt>/components/<Name>Section.tsx   # eine Sektion = eine Datei
 
 ### 3.1 Welt 0 — Startseite (Entscheidungs-Hub)
 
-Definiert in `app/globals.css` unter `.landing-*` / `.choice-*` / `.orbit-*`.
+Seit 2026-11 als **„Naht + Foto“** (`app/page.tsx`, CSS-Block `.hub-*` in `app/globals.css`):
+Zwei Hälften an einer senkrechten Naht `--split` (per `@property` animiert), links Welt B,
+rechts Welt A, das Freisteller-Foto `portrait-balance-free.webp` steht auf der Naht – die
+Logos in seinen Händen entsprechen den Seiten. Hover/Fokus verschiebt die Naht (CSS `:has`),
+lässt das Logo in der Hand leuchten und dimmt die andere Hand. Klick → `components/HubLink.tsx`
+setzt `data-chosen`, die Welt füllt den Schirm (650 ms), dann Navigation. Um das Foto
+kreist ein geneigter **Belege-Orbit** (`facts` in `app/page.tsx`, zwei Ebenen vor/hinter
+dem Foto) – dort nur prüfbare Aussagen (§10). Mobil < 1024 px hochkant: eigenes
+Stapel-Layout (Grid) – Kopf, H1, Foto mit Orbit (flacher gekippt, `--tilt`) vor geteiltem
+Grund, darunter beide Welten als volle Zeilen mit rundem Pfeil; Antippen lässt die Welt als
+Kreis vom Finger aus wachsen (`--tap-x/--tap-y`). Unter 360 px Belege als Textzeile. Kein WebGL.
+Mobil verschiebt außerdem **seitliches Kippen** die Naht (`components/HubTilt.tsx`,
+`deviceorientation` → `--split` 40–60 %, `data-tilt` für das Leuchten). iOS verlangt eine
+Freigabe per Tippen → Chip „Kippen“ links neben dem Kopf; er verschwindet beim ersten echten
+Sensorwert. Die Neigung bleibt im Browser (keine Speicherung, kein Cookie). Raster und Ringe
+liegen mobil zusätzlich als `.hub-top-bg` hinter Kopf und Foto.
+
+| Rolle | Welt B (links) | Welt A (rechts) |
+|---|---|---|
+| Grund | `#06101c` + Glows `#1D6FA8` / `#7A2C8E`, 32px-Raster, Scan-Balken | `#140c06` + Glows `rgba(245,158,11,.28)`, Atem-Ringe, Körnung |
+| Eyebrow | `#2dd4bf` | `#f6b35a` |
+| CTA | `#1D6FA8 → #7A2C8E`, Text weiß | `#f6b35a → #d98a3a`, Text `#1a0f06` |
+
+`.landing-*` bleibt für Kopf-Marke und Rechtsleiste in Gebrauch. Die Startseite hat kein Kontaktformular (seit 2026-11).
 
 | Rolle | Wert |
 |---|---|
@@ -111,7 +134,7 @@ Definiert in `app/globals.css` unter `.landing-*` / `.choice-*` / `.orbit-*`.
 | Radius | Karten `28px`, Kacheln `20px`, Chips/Buttons `999px` |
 | Schatten | `0 40px 80px -60px rgba(0,0,0,.8)` |
 
-**Farbcodierung der Entscheidung** (per Inline-CSS-Variable in `app/page.tsx`, Schema `useWarmPills`):
+**Früheres Pillen-Schema** (nicht mehr angezeigt, aufbewahrt in `app/pill-scheme.ts` + `.choice-*` in `globals.css`):
 
 | | Webdevelopment („grüne Pille") | NLP („orange Pille") |
 |---|---|---|
@@ -119,40 +142,42 @@ Definiert in `app/globals.css` unter `.landing-*` / `.choice-*` / `.orbit-*`.
 | Glow | `rgba(34,197,94,.35)` | `rgba(245,158,11,.35)` |
 | Schatten | `rgba(16,122,60,.18)` → hover `.35` | `rgba(180,83,9,.18)` → hover `.35` |
 
-> Das kalte Alt-Schema (blau/rot, Matrix-Referenz) liegt als `useWarmPills = false`
+> Das kalte Alt-Schema (blau/rot, Matrix-Referenz) liegt als `pillSchemes.cold`
 > daneben. **Nicht löschen**, aber auch nicht mischen — es ist ein vollständiger,
 > umschaltbarer Zweitzustand.
 
 ### 3.2 Welt A — Coaching (Stefan Heinemann Coaching)
 
-Zwei umschaltbare Themes auf demselben Layout (`NlpLayoutClient`, Toggle im Header).
-Alle Werte als CSS-Variablen auf `.theme-cool` / `.theme-warm`.
+Ein festes Farbkonzept **„Espresso & Bernstein“** (seit 2026-11), dieselbe Farbe wie die
+Coaching-Hälfte der Startseite: Man erkennt an der Farbe, in welcher Welt man ist. Es gibt
+**keinen Theme-Umschalter** mehr. Alle Werte als CSS-Variablen auf `.theme-coaching`
+(gesetzt in `NlpLayoutClient`).
 
-| Token | `.theme-cool` (Default) | `.theme-warm` |
+| Token | Wert | Kontrast auf `--bg` |
 |---|---|---|
-| `--bg` | `#050b12` | `#fff6ea` |
-| `--text` | `#e6f7ff` | `#2b1a0f` |
-| `--muted` | `rgba(230,247,255,.75)` | `rgba(43,26,15,.75)` |
-| `--accent` | `#00e5ff` | `#eaa765` |
-| `--accent-2` | `#22c55e` | `#b97029` |
-| `--accent-soft` | `#7de3ff` | `rgba(0,0,0,.8)` |
-| `--surface` | `rgba(255,255,255,.05)` | `rgba(255,255,255,.26)` |
-| `--surface-strong` | `rgba(255,255,255,.10)` | `rgba(255,255,255,.45)` |
-| `--border` | `rgba(255,255,255,.20)` | `rgba(0,0,0,.55)` |
-| `--border-strong` | `rgba(255,255,255,.45)` | `rgba(0,0,0,.75)` |
-| `--button-text` | `#001018` | `#2b1a0f` |
-| `--glow` / `--glow-strong` | `rgba(0,229,255,.24)` / `.36` | `rgba(232,160,90,.25)` / `.40` |
-| `--hero-glow` / `--hero-fade` | `rgba(0,229,255,.35)` / `rgba(5,11,18,.6)` | `rgba(241,195,138,.45)` / `rgba(255,246,234,.85)` |
-| `--section-bg-accent` | `rgba(255,255,255,.05)` | `#ff9e001f` |
-| Textur | Radial-Glows + 26px-Gitter, `background-attachment: fixed` | dito, 28px-Gitter |
+| `--bg` | `#140c06` (Espresso) | – |
+| `--text` | `#f6e9d7` (Creme) | 16,2 : 1 |
+| `--muted` | `rgba(246,233,215,.74)` | 9,0 : 1 |
+| `--accent` | `#f6b35a` (Bernstein) | 10,6 : 1 |
+| `--accent-2` | `#d9853a` (Kupfer) | 6,8 : 1 |
+| `--accent-soft` | `#ffcf8a` | 13,4 : 1 |
+| `--surface` / `--surface-strong` | `rgba(255,214,170,.05)` / `.09` | – |
+| `--border` / `--border-strong` | `rgba(255,214,170,.18)` / `.38` | – |
+| `--button-text` | `#1a0f06` (auf Bernstein 10,3 : 1) | – |
+| `--glow` / `--glow-strong` | `rgba(246,179,90,.22)` / `.36` | – |
+| `--hero-glow` / `--hero-fade` | `rgba(246,179,90,.32)` / `rgba(20,12,6,.62)` | – |
+| `--section-bg-accent` | `rgba(255,200,140,.045)` | – |
+| Textur | Bernstein-/Kupfer-Glows + feine Körnung (SVG-Rauschen), `background-attachment: fixed` | – |
+
+Text mit Deckkraft: `text-(--text)/50` ist die Untergrenze (4,6 : 1), darunter nur Dekor.
 
 **Regel Welt A:** In neuen Komponenten **ausschließlich** diese Variablen benutzen.
 Kanonische Tailwind-v4-Schreibweise ist die Klammerform `text-(--text)`,
 `bg-(--surface)`, `border-(--border)` — die Langform `text-[var(--text)]` ist
 gleichwertig, erzeugt aber eine Lint-Warnung. **Nicht** verwenden:
 `border-[--border]` (v3-Syntax, in v4 wirkungslos).
-Feste Hex-Werte oder `text-white/70` funktionieren im Warm-Theme nur, weil `globals.css`
-sie per `!important` überschreibt — das ist eine Altlast und für neue Klassen **nicht** vorgesehen.
+Keine festen Hex-Werte und kein `text-white/…` in Welt A — der frühere
+`!important`-Block, der das fürs Warm-Theme gerade bog, ist mit dem Umschalter entfallen.
 
 **Utility-Kurzformen** (`@theme inline` in `app/globals.css`, Sprint 1): Für die
 häufigsten Tokens gibt es echte Tailwind-Farben — `text-accent`, `text-accent-soft`,
@@ -161,9 +186,8 @@ häufigsten Tokens gibt es echte Tailwind-Farben — `text-accent`, `text-accent
 neuem Code bevorzugt, wo es sie gibt. `--text`, `--muted`, `--bg`, `--section-bg-accent`
 haben keine Kurzform → Klammerform (`text-(--text)`, `bg-(--section-bg-accent)`).
 
-**Theme-Zustand:** `isWarmTheme` liegt in React-State (`useNlpTheme()`), nicht in
-`localStorage` — jeder Seitenaufruf startet in `.theme-cool`. Komponenten, die das
-Theme brauchen (WebGL-Farben), lesen es über `useNlpTheme()`, nie über das DOM.
+**WebGL-Farben** (z. B. `LaserFlow` in `TransformationSection`) stehen fest als Bernstein
+`#f6b35a` im Aufruf — es gibt keinen Theme-State mehr, den sie lesen müssten.
 
 **Dekor-Motive:** `app/coaching/components/Motifs.tsx` — Inline-SVGs (`MotifClarity`,
 `MotifRelation`, `MotifInsight`, `MotifAction` …), eingefärbt über
@@ -280,8 +304,9 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `InfoOrb` | Schwebender Info-Button + Portal-Modal mit Mini-Markdown (`**fett**`) | `/` (Scanner-Story) |
 | `ScrollToTop` | Fixed Button ab `scrollY > 240` | Welt B |
 | `CaseCard` | Referenzkarte mit Tilt-Effekt + Video/Bild + Info-Leiste | Welt B |
-| `ContactForm` / `ContactFormNlp` / `ContactFormWeb` | drei Varianten desselben Endpunkts | `/` / Welt A / Welt B |
-| `HomeContact` (`Provider`/`Trigger`/`Section`) | Kontakt auf `/` — auf/zu per React-State | Welt 0 |
+| `ContactFormNlp` / `ContactFormWeb` | zwei Varianten desselben Endpunkts (die Startseite hat seit 2026-11 kein Formular mehr) | Welt A / Welt B |
+| `HubTilt` | Mobil: Handy-Neigung verschiebt die Naht der Startseite; iOS-Freigabe-Chip | Welt 0 |
+| `HubLink` | Hälfte der Startseite: Klick → Welt füllt den Schirm, dann `router.push` (ohne Verzögerung bei Modifier-Taste und reduzierter Bewegung) | Welt 0 |
 | `FormShield` / `useContactSubmit` / `useModal` / `LazyEffect` | Bot-Schutz und Formular-Ablauf (§8), Modal-Verhalten (§11), Effekt-Hülle (§9) | alle |
 | `WebBackdrop` / `HyperspeedBand` | Client-Wrapper für die WebGL-Effekte von Welt B | Welt B |
 | `Header` | Welt-B-Kopfzeile (baut `CardNav`) | Welt B |
@@ -292,7 +317,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 
 | Komponente | Zweck |
 |---|---|
-| `NlpHeader` | Fixe Kopfzeile, Scroll-Spy auf Sektions-IDs, „Entdecken"-Dropdown für die Inhaltsseiten (`discoverItems`), Theme-Toggle, Burger < `hdr` |
+| `NlpHeader` | Fixe Kopfzeile, Scroll-Spy auf Sektions-IDs, „Entdecken"-Dropdown für die Inhaltsseiten (`discoverItems`), Burger < `hdr` |
 | `WorldSwitch` | Schwebender Rundbutton (`logo-sh.svg`, 44 px, Puls-Ring) oben links → `/`. **Der** Weltenwechsel in Welt A — nicht zurück in die Nav legen |
 | `NlpFooter` | Rechtslinks + Weltenwechsel |
 | `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
@@ -300,7 +325,8 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `PodcastPlayer` | Audio-Player für `/coaching/session-podcast`: Equalizer-Balken = Fortschritt (CSS `.podcast-eq*` in `globals.css`, pausiert eingefroren), unsichtbarer Range-Regler darüber, ±15 s, Geschwindigkeit, Media-Session-Titel. Länge als Prop, weil `preload='none'` |
 | `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort) → Themen (`WorkSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
 
-Hinweis: `NlpSections.tsx` ist `'use client'` (wegen `useNlpTheme`). Alles, was es
+Hinweis: `NlpSections.tsx` ist seit dem Wegfall des Theme-Umschalters eine Server
+Component. Früher galt: Weil es `'use client'` war, wurde alles, was es
 importiert, wird damit ebenfalls Client-Code — auch Sektionen ohne `'use client'`.
 Das HTML wird trotzdem serverseitig gerendert (SEO unkritisch), nur das JS-Bundle wächst.
 
@@ -333,7 +359,7 @@ Zielgruppe → **Über mich** → Referenzen → FAQ → Kontakt.
 
 | Effekt | Welt | Rolle |
 |---|---|---|
-| `FloatingLines` | A | Hero-Hintergrund (Themefarben) |
+| `FloatingLines` | A | derzeit nicht eingebunden (Hero ist ein Foto) |
 | `LaserFlow` | A | Transformation-Sektion |
 | `LightPillar` | B | globaler Seitenhintergrund (`fixed inset-0`) |
 | `Hyperspeed` | B | Streifen unter „Digitale Lösungen" |
@@ -341,7 +367,7 @@ Zielgruppe → **Über mich** → Referenzen → FAQ → Kontakt.
 | `PixelCard` | B | Service- und Prozesskarten |
 | `CardSwap` | B | Hero-Kompetenzstapel |
 | `CardNav` | B | Header-Navigation |
-| Orbit-System (CSS) | 0 | Kompetenz-Umlaufbahnen |
+| Naht + Belege-Orbit (CSS) | 0 | Entscheidung, prüfbare Belege um das Foto |
 
 ---
 
@@ -391,17 +417,17 @@ Alle Formulare posten JSON an **`POST /api/contact`**.
 Feldnamen sind der Vertrag zur Route — beim Hinzufügen eines Feldes **immer**
 `ContactPayload` in `app/api/contact/route.ts` **und** Plain-/HTML-Mail mitpflegen.
 
-| Feld | Typ | `/` | Welt A | Welt B |
-|---|---|---|---|---|
-| `name`, `email`, `message`, `privacy` | Pflicht | ✓ | ✓ | ✓ |
-| `projectType`, `budget`, `timeline` | Select | ✓ | – | ✓ |
-| `company`, `website`, `scope` | – | – | – | ✓ |
-| `phone`, `topic`, `sessionType`, `preferredTime` | – | – | ✓ | – |
+| Feld | Typ | Welt A | Welt B |
+|---|---|---|---|
+| `name`, `email`, `message`, `privacy` | Pflicht | ✓ | ✓ |
+| `projectType`, `budget`, `timeline` | Select | – | ✓ |
+| `company`, `website`, `scope` | – | – | ✓ |
+| `phone`, `topic`, `sessionType`, `preferredTime` | – | ✓ | – |
 
 **Verbindliche Formular-Regeln**
 
 1. Jedes `<label>` braucht `htmlFor`, jedes Feld eine `id`.
-   Präfix nach Formular: `root-`, `web-`, `nlp-`, `lead-`.
+   Präfix nach Formular: `web-`, `nlp-`, `lead-`.
 2. Pflichtfelder mit `*` **und** `required`.
 3. Consent-Checkbox `name="privacy"`, `required`. Der Hinweistext ist das
    `<label>`, der Link auf die Datenschutzerklärung steht **daneben** — im
@@ -556,7 +582,7 @@ Das ist die Scanner-Story des Betreibers und ein bewusstes Alleinstellungsmerkma
   darunter beginnen mit `<article>` (Inhaltsseiten mit `Article`-Schema) oder `<div>`,
   nie mit einem zweiten `<main>`. In Welt B und auf `/` bringt die Seite es selbst mit.
 - Kontrast **≥ 4.5:1** für Text. Kritisch: `text-white/50` und `text-white/60`
-  auf `#050b12` sowie das gesamte `.theme-warm` — **vor Merge messen**.
+  auf dunklem Grund — **vor Merge messen**. In Welt A ist `text-(--text)/50` die Untergrenze.
 - Fokus sichtbar auf **jedem** interaktiven Element.
 - Klickbare Karten: `role='button'` + `tabIndex={0}` + `onKeyDown` (Enter/Space)
   — oder besser gleich ein echtes `<button>`/`<a>`.
@@ -870,7 +896,7 @@ Teil des Tickets, nicht ein Nachtrag.
    — inklusive des Bereichs 768–1023, in dem sich Nav-Bugs verstecken.
 4. Landscape-Phone (`max-height: 700px`) geprüft.
 5. Tastaturbedienung vollständig, Fokus sichtbar, Modals mit Escape + Fokus-Rückgabe.
-6. Kontraste gemessen — auch im **Warm-Theme** von Welt A.
+6. Kontraste gemessen (Welt A: Tabelle in §3.2).
 7. Bilder als WebP < 500 KB, `sizes` gesetzt, höchstens ein `priority`.
 8. Kein zweiter WebGL-Kontext im selben Viewport.
 9. `prefers-reduced-motion` berücksichtigt.
@@ -894,15 +920,14 @@ OG-Bilder, JSON-LD, `llms.txt`.
 
 **Noch offen — hier gilt weiterhin Vorsicht:**
 
-- Das Theme-Umschalten in Welt A überschreibt Tailwind-Klassen per `!important`
-  (`.theme-warm .text-white/70` u. a.). Neue Komponenten müssen über die
-  CSS-Variablen laufen, damit dieser Block irgendwann sterben kann.
+- *(erledigt 2026-11)* Theme-Umschalter in Welt A und der `!important`-Block in
+  `globals.css` sind entfernt – ein festes Farbkonzept (§3.2).
 - `public/` ist aufgeräumt (Stand 2026-10-01: 8,8 MB, keine Datei außer
   Case-Videos über 500 KB). Neue Assets weiter nach §12 prüfen.
 - `/webdevelopment` betreibt zwei WebGL-Kontexte plus 9 Canvas-Instanzen
   gleichzeitig, alle statisch importiert (`AUDIT.md` #8).
 - Formular-Labels ohne `htmlFor`, Modals ohne Fokus-Falle (`AUDIT.md` #5, #6).
-- Der Kontaktbereich auf `/` ist per `display:none` versteckt (`AUDIT.md` #19).
+- *(erledigt 2026-11)* Der Kontaktbereich auf `/` ist entfernt – Kontakt läuft über die Welten.
 - Vendor-Komponenten (`LaserFlow`, `LightPillar`) verursachen 11 ESLint-Fehler;
   eigener Code ist sauber (`AUDIT.md` #18).
 
@@ -913,10 +938,8 @@ Schema für den Persönlichkeitstest.
 
 **SEO-Analyse 2026-09-30 — offen:**
 
-- `/` zeigt im Orbit Bild und Namen von Tony Robbins (`/tony-robbins.png`) —
-  Bildrecht/Persönlichkeitsrecht ungeklärt, und für Suchmaschinen eine falsche
-  Entitäts-Verknüpfung. Durch eigenes Motiv (z. B. „DVNLP") ersetzen.
-- Emoji im Fließtext auf `/` („😁" im Landing-Tipp) — verstößt gegen §10.
+- *(erledigt 2026-11)* Tony Robbins aus dem Orbit entfernt, Bild gelöscht;
+  Emoji im Landing-Tipp entfernt.
 
 **Case-Videos:** Rohaufnahmen (`.mp4`) liegen in `design-source/case-videos/`,
 ausgeliefert wird `.webm` (VP9, ohne Ton, 30 fps, 640 px breit) plus `.webp`-Poster

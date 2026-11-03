@@ -13,7 +13,7 @@
  * im Code verstreut und blieben still wirkungslos.
  *
  * `inline` ist wichtig: Die Werte sollen zur Laufzeit auf die --accent-Variablen
- * von .theme-cool / .theme-warm zeigen, damit der Theme-Wechsel in Welt A greift.
+ * von .theme-coaching (Welt A) zeigen.
  */
 @theme inline {
   --color-accent: var(--accent);
@@ -127,143 +127,53 @@
   }
 }
 
-/* NLP theme tokens */
-.theme-cool {
-  --bg: #050b12;
-  --text: #e6f7ff;
-  --muted: rgba(230, 247, 255, 0.75);
-  --accent: #00e5ff;
-  --accent-2: #22c55e;
-  --accent-soft: #7de3ff;
-  --surface: rgba(255, 255, 255, 0.05);
-  --surface-strong: rgba(255, 255, 255, 0.1);
-  --border: rgba(255, 255, 255, 0.2);
-  --border-strong: rgba(255, 255, 255, 0.45);
-  --button-text: #001018;
-  --glow: rgba(0, 229, 255, 0.24);
-  --glow-strong: rgba(0, 229, 255, 0.36);
-  --hero-glow: rgba(0, 229, 255, 0.35);
-  --hero-fade: rgba(5, 11, 18, 0.6);
-  --section-bg-accent: rgba(255, 255, 255, 0.05);
+/*
+ * Welt A – „Espresso & Bernstein“ (seit 2026-11, ein festes Farbkonzept).
+ * Dieselbe Farbe wie die Coaching-Hälfte der Startseite: Man erkennt an der
+ * Farbe, in welcher Welt man ist. Kein Umschalter mehr – damit entfällt auch
+ * der frühere !important-Block, der Tailwind-Klassen fürs Warm-Theme überschrieb.
+ */
+.theme-coaching {
+  --bg: #140c06;
+  --text: #f6e9d7;
+  --muted: rgba(246, 233, 215, 0.74);
+  --accent: #f6b35a;
+  --accent-2: #d9853a;
+  --accent-soft: #ffcf8a;
+  --surface: rgba(255, 214, 170, 0.05);
+  --surface-strong: rgba(255, 214, 170, 0.09);
+  --border: rgba(255, 214, 170, 0.18);
+  --border-strong: rgba(255, 214, 170, 0.38);
+  --button-text: #1a0f06;
+  --glow: rgba(246, 179, 90, 0.22);
+  --glow-strong: rgba(246, 179, 90, 0.36);
+  --hero-glow: rgba(246, 179, 90, 0.32);
+  --hero-fade: rgba(20, 12, 6, 0.62);
+  --section-bg-accent: rgba(255, 200, 140, 0.045);
   background-color: var(--bg);
   color: var(--text);
+  /* Bernstein- und Kupferlicht, 28px-Gitter + feine Körnung */
   background-image:
-    radial-gradient(circle at 12% 18%, rgba(0, 229, 255, 0.08), transparent 45%),
-    radial-gradient(circle at 86% 22%, rgba(34, 197, 94, 0.08), transparent 40%),
-    radial-gradient(circle at 20% 78%, rgba(125, 227, 255, 0.08), transparent 45%),
+    radial-gradient(circle at 12% 18%, rgba(246, 179, 90, 0.12), transparent 45%),
+    radial-gradient(circle at 86% 24%, rgba(217, 133, 58, 0.11), transparent 42%),
+    radial-gradient(circle at 22% 80%, rgba(255, 207, 138, 0.08), transparent 45%),
     repeating-linear-gradient(
       90deg,
-      rgba(125, 227, 255, 0.06) 0,
-      rgba(125, 227, 255, 0.06) 1px,
-      transparent 1px,
-      transparent 26px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(125, 227, 255, 0.04) 0,
-      rgba(125, 227, 255, 0.04) 1px,
-      transparent 1px,
-      transparent 26px
-    ),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
-  background-attachment: fixed;
-}
-
-.theme-warm {
-  --bg: #fff6ea;
-  --text: #2b1a0f;
-  --muted: rgba(43, 26, 15, 0.75);
-  --accent: #eaa765;
-  --accent-2: #b97029;
-  --accent-soft: rgba(0, 0, 0, 0.8);
-  --surface: rgba(255, 255, 255, 0.26);
-  --surface-strong: rgba(255, 255, 255, 0.45);
-  --border: rgba(0, 0, 0, 0.55);
-  --border-strong: rgba(0, 0, 0, 0.75);
-  --button-text: #2b1a0f;
-  --glow: rgba(232, 160, 90, 0.25);
-  --glow-strong: rgba(232, 160, 90, 0.4);
-  --hero-glow: rgba(241, 195, 138, 0.45);
-  --hero-fade: rgba(255, 246, 234, 0.85);
-  --section-bg-accent: #ff9e001f;
-  background-color: var(--bg);
-  color: var(--text);
-  background-image:
-    radial-gradient(circle at 14% 16%, rgba(232, 160, 90, 0.18), transparent 50%),
-    radial-gradient(circle at 82% 24%, rgba(215, 115, 75, 0.16), transparent 45%),
-    radial-gradient(circle at 18% 82%, rgba(241, 195, 138, 0.2), transparent 55%),
-    repeating-linear-gradient(
-      90deg,
-      rgba(232, 160, 90, 0.08) 0,
-      rgba(232, 160, 90, 0.08) 1px,
+      rgba(246, 179, 90, 0.07) 0,
+      rgba(246, 179, 90, 0.07) 1px,
       transparent 1px,
       transparent 28px
     ),
     repeating-linear-gradient(
       0deg,
-      rgba(215, 115, 75, 0.06) 0,
-      rgba(215, 115, 75, 0.06) 1px,
+      rgba(217, 133, 58, 0.05) 0,
+      rgba(217, 133, 58, 0.05) 1px,
       transparent 1px,
       transparent 28px
     ),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.25), transparent 40%);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, rgba(255, 220, 180, 0.025), transparent 40%);
   background-attachment: fixed;
-}
-
-.theme-warm .text-white {
-  color: var(--text) !important;
-}
-
-.theme-warm .text-white\/80 {
-  color: rgba(43, 26, 15, 0.85) !important;
-}
-
-.theme-warm .text-white\/75 {
-  color: rgba(43, 26, 15, 0.78) !important;
-}
-
-.theme-warm .text-white\/70 {
-  color: rgba(43, 26, 15, 0.72) !important;
-}
-
-.theme-warm .text-white\/60 {
-  color: rgba(43, 26, 15, 0.62) !important;
-}
-
-.theme-warm .text-white\/50 {
-  color: rgba(43, 26, 15, 0.55) !important;
-}
-
-.theme-warm .text-white\/40 {
-  color: rgba(43, 26, 15, 0.48) !important;
-}
-
-.theme-warm .text-\[\#7DE3FF\],
-.theme-warm .text-\[\#00E5FF\] {
-  color: var(--accent) !important;
-}
-
-.theme-warm .bg-\[\#7DE3FF\],
-.theme-warm .bg-\[\#00E5FF\] {
-  background-color: var(--accent) !important;
-}
-
-.theme-warm .border-\[\#7DE3FF\],
-.theme-warm .border-\[\#00E5FF\] {
-  border-color: var(--accent) !important;
-}
-
-.theme-warm .ring-\[\#7DE3FF\],
-.theme-warm .ring-\[\#00E5FF\] {
-  --tw-ring-color: var(--accent) !important;
-}
-
-.theme-warm .nlp-primary-button:hover {
-  box-shadow:
-    0 0 45px rgba(255, 255, 255, 0.95),
-    0 0 90px rgba(255, 255, 255, 0.7),
-    0 0 140px rgba(255, 255, 255, 0.45);
-  filter: drop-shadow(0 0 26px rgba(255, 255, 255, 0.85));
 }
 
 .light-pillar-fallback {
@@ -286,30 +196,6 @@
   position: absolute;
   top: 0;
   left: 0;
-}
-
-/* Die Zentrierung (translate) gehört in die Keyframes: Eine Animation auf
-   `transform` ersetzt den Ruhewert komplett. Ohne sie lagen die Ringe
-   versetzt und mussten je Breakpoint per Hand zurückgeschoben werden. */
-/* `--orbit-start` verteilt die Elemente auf verschiedene Startwinkel – sonst
-   stehen beim Laden (und bei reduzierter Bewegung dauerhaft) alle vier oben
-   übereinander. Das Element dreht gegenläufig um denselben Winkel und bleibt
-   dadurch aufrecht. */
-@keyframes orbitSpin {
-  0% {
-    transform: translate(-50%, -50%) rotate(var(--orbit-start, 0deg));
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(calc(var(--orbit-start, 0deg) + 360deg));
-  }
-}
-@keyframes orbitSpinReverse {
-  0% {
-    transform: rotate(calc(var(--orbit-tilt, -6deg) - var(--orbit-start, 0deg)));
-  }
-  100% {
-    transform: rotate(calc(var(--orbit-tilt, -6deg) - var(--orbit-start, 0deg) - 360deg));
-  }
 }
 
 @keyframes pillPulse {
@@ -475,139 +361,6 @@
 
 .landing-cta--ghost:hover {
   background: rgba(255, 255, 255, 0.12);
-}
-
-/*
- * Orbit-System der Startseite.
- *
- * Steht im normalen Fluss unter den CTAs und ist in der linken Spalte
- * zentriert. Alle Ringe teilen sich den Mittelpunkt des Systems; pro
- * Breakpoint ändern sich nur Systemgröße und Ringdurchmesser.
- */
-.orbit-system {
-  position: relative;
-  width: 380px;
-  height: 380px;
-  display: grid;
-  place-items: center;
-  margin: 1.5rem auto 0;
-  pointer-events: none;
-}
-
-.orbit-center {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #ffe58a 0%, #ffb703 60%, rgba(255, 183, 3, 0.2) 100%);
-  box-shadow:
-    0 0 18px rgba(255, 214, 102, 0.9),
-    0 0 48px rgba(255, 183, 3, 0.6),
-    0 0 90px rgba(255, 183, 3, 0.45);
-  z-index: 3;
-}
-
-.orbit-ring {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: var(--orbit-size);
-  height: var(--orbit-size);
-  transform: translate(-50%, -50%) rotate(var(--orbit-start, 0deg));
-  border-radius: 999px;
-  border: 1px dashed rgba(255, 255, 255, 0.15);
-  display: grid;
-  place-items: center;
-  animation: orbitSpin var(--orbit-speed) linear infinite;
-  overflow: visible;
-  z-index: 1;
-}
-
-.orbit-ring--one {
-  --orbit-size: 180px;
-  --orbit-speed: 14s;
-  --orbit-tilt: -6deg;
-  --orbit-start: 135deg;
-  z-index: 2;
-}
-
-.orbit-ring--two {
-  --orbit-size: 240px;
-  --orbit-speed: 18s;
-  --orbit-tilt: -6deg;
-  --orbit-start: 315deg;
-  z-index: 4;
-}
-
-.orbit-ring--three {
-  --orbit-size: 300px;
-  --orbit-speed: 22s;
-  --orbit-tilt: -6deg;
-  --orbit-start: 225deg;
-  z-index: 3;
-}
-
-.orbit-ring--four {
-  --orbit-size: 360px;
-  --orbit-speed: 12s;
-  --orbit-tilt: -6deg;
-  --orbit-start: 45deg;
-  z-index: 1;
-}
-
-/* Das Element sitzt mit seiner Mitte genau auf der Bahnlinie (top: 0 +
-   translate -50 %). Vorher lag es 19 px innerhalb – bei 20 px Bahnabstand
-   wirkte jedes Element, als kreise es auf der nächstinneren Bahn. */
-.orbit-item {
-  position: absolute;
-  width: 54px;
-  height: 54px;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.orbit-item__shell {
-  width: 54px;
-  height: 54px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  position: relative;
-  display: grid;
-  place-items: center;
-  /* color: rgba(248, 250, 252, 0.8); */
-  font-size: 1rem;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-  transform: rotate(calc(var(--orbit-tilt, -6deg) - var(--orbit-start, 0deg)));
-  animation: orbitSpinReverse var(--orbit-speed) linear infinite;
-  z-index: 2;
-}
-
-.orbit-badge {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translate(-50%, 0px);
-  padding: 0.25rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.65rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: rgba(10, 12, 16, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(248, 250, 252, 0.9);
-  opacity: 1;
-  pointer-events: none;
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
-  white-space: nowrap;
-  z-index: 3;
-}
-
-.orbit-item__content {
-  display: grid;
-  place-items: center;
 }
 
 .choice-card {
@@ -838,23 +591,6 @@
   .landing-cta {
     width: 100%;
   }
-  .orbit-system {
-    width: 290px;
-    height: 290px;
-    margin: 1rem auto 0;
-  }
-  .orbit-ring--one {
-    --orbit-size: 140px;
-  }
-  .orbit-ring--two {
-    --orbit-size: 180px;
-  }
-  .orbit-ring--three {
-    --orbit-size: 220px;
-  }
-  .orbit-ring--four {
-    --orbit-size: 260px;
-  }
 
   .choice-card {
     width: 100% !important;
@@ -874,22 +610,6 @@
   .landing-grid {
     gap: 2.5rem;
   }
-  .orbit-system {
-    width: 380px;
-    height: 380px;
-  }
-  .orbit-ring--one {
-    --orbit-size: 180px;
-  }
-  .orbit-ring--two {
-    --orbit-size: 240px;
-  }
-  .orbit-ring--three {
-    --orbit-size: 300px;
-  }
-  .orbit-ring--four {
-    --orbit-size: 360px;
-  }
 }
 
 /* Landscape phones: tighten vertical rhythm but keep spacing readable */
@@ -904,22 +624,6 @@
   }
   .landing-actions {
     padding-top: 1rem;
-  }
-  .orbit-system {
-    width: 300px;
-    height: 300px;
-  }
-  .orbit-ring--one {
-    --orbit-size: 140px;
-  }
-  .orbit-ring--two {
-    --orbit-size: 170px;
-  }
-  .orbit-ring--three {
-    --orbit-size: 200px;
-  }
-  .orbit-ring--four {
-    --orbit-size: 230px;
   }
 }
 
@@ -988,18 +692,14 @@
  * Welt A: Aufklappliste nativer Selects.
  *
  * Optionen erben sonst die Theme-Textfarbe, das Betriebssystem zeichnet die
- * Liste aber weiß – im Cool-Theme stand #e6f7ff auf Weiß (unlesbar).
+ * Liste aber weiß – Creme auf Weiß wäre unlesbar.
  * color-scheme schaltet die native Liste passend um, die Option-Farben sind
  * der Rückfall für Browser, die color-scheme dort ignorieren.
  */
-.theme-cool select {
+.theme-coaching select {
   color-scheme: dark;
 }
-.theme-warm select {
-  color-scheme: light;
-}
-.theme-cool select option,
-.theme-warm select option {
+.theme-coaching select option {
   background-color: var(--bg);
   color: var(--text);
 }
@@ -1315,10 +1015,6 @@ html {
   box-shadow: 0 0 14px color-mix(in oklab, var(--c) 55%, transparent);
 }
 
-.theme-warm .podcast-eq-bar[data-played='false'] {
-  opacity: 0.3;
-}
-
 .podcast-eq[data-playing='true'] .podcast-eq-bar {
   animation-play-state: running;
 }
@@ -1337,4 +1033,1231 @@ html {
 
 .podcast-play-ring {
   animation: world-switch-pulse 2.6s ease-out infinite;
+}
+
+/* ==========================================================================
+ * Startseite – „Naht + Foto“ (app/page.tsx, seit 2026-11)
+ *
+ * Zwei Layouts mit denselben Elementen:
+ *
+ *  Mobil (Standard, < 1024 px hochkant): Stapel von oben nach unten –
+ *    Kopf, H1, Foto mit Belege-Orbit vor geteiltem Hintergrund, darunter
+ *    beide Welten als volle, tippbare Zeilen. Antippen: Die gewählte Welt
+ *    wächst als Kreis vom Finger aus über den Schirm (`--tap-x/--tap-y`).
+ *
+ *  Seitlich (≥ 1024 px und Landscape-Phones): Beide Hälften liegen
+ *    vollflächig übereinander, per clip-path an der Naht `--split`
+ *    zugeschnitten. Hover/Fokus verschiebt die Naht (CSS :has), ein Klick
+ *    zieht die Welt über den ganzen Schirm.
+ *
+ * Den Klick steuert components/HubLink.tsx (setzt `data-chosen`).
+ * ========================================================================== */
+
+@property --split {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 50%;
+}
+
+.hub-page {
+  min-height: 100dvh;
+  background: #070b12;
+  color: #e2e8f0;
+  overflow-x: clip;
+}
+
+.hub-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.hub-below {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 1rem clamp(1.5rem, 6vw, 4.5rem) 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* --- Grundgerüst (mobil) -------------------------------------------------- */
+
+.hub {
+  --gutter: clamp(1rem, 5vw, 4.5rem);
+  --split: 50%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  /* Freie Höhe geht an die Foto-Zeile, die Welten-Zeilen sitzen unten */
+  grid-template-rows: auto auto 1fr auto auto;
+  min-height: 100svh;
+  /* Geteilter Grund hinter Kopf und Foto – die Zeilen unten bringen ihren eigenen mit */
+  background:
+    radial-gradient(70% 40% at 0% 38%, rgba(29, 111, 168, 0.5), transparent 70%),
+    radial-gradient(70% 40% at 100% 38%, rgba(245, 158, 11, 0.3), transparent 70%),
+    linear-gradient(90deg, #06101c 50%, #140c06 50%);
+  transition: --split 700ms cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+
+.hub-top {
+  grid-row: 1;
+  grid-column: 1;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem var(--gutter);
+}
+
+.hub-head {
+  grid-row: 2;
+  grid-column: 1;
+  position: relative;
+  z-index: 3;
+  padding: 0.25rem var(--gutter) 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hub-stage {
+  grid-row: 3;
+  grid-column: 1;
+  justify-self: center;
+  align-self: center;
+  position: relative;
+  z-index: 3;
+  width: min(84vw, 44svh, 560px);
+  aspect-ratio: 1;
+  margin-top: 0.5rem;
+  pointer-events: none;
+  transition: opacity 350ms ease;
+}
+
+/* Senkrechte Naht nur über Kopf und Foto */
+.hub-seam {
+  grid-row: 1 / 4;
+  grid-column: 1;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hub-half {
+  position: relative;
+  z-index: 1;
+  display: block;
+  overflow: hidden;
+  padding: 1rem var(--gutter);
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.hub-half--web {
+  grid-row: 4;
+  grid-column: 1;
+}
+
+.hub-half--coach {
+  grid-row: 5;
+  grid-column: 1;
+}
+
+/* Waagerechte Naht über jeder Zeile – die senkrechte mündet in die obere */
+.hub-half::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  z-index: 3;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28) 20%, rgba(255, 255, 255, 0.28) 80%, transparent);
+  box-shadow: 0 0 14px rgba(155, 199, 255, 0.18);
+}
+
+.hub-half--coach::before {
+  opacity: 0.4;
+}
+
+/* Zeile: Eyebrow + Claim links, runder Pfeil rechts, Text darunter */
+.hub-copy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'eyebrow cta'
+    'claim cta'
+    'text text';
+  column-gap: 1rem;
+  row-gap: 0.3rem;
+  align-items: center;
+  transition: opacity 300ms ease;
+}
+
+.hub-eyebrow {
+  grid-area: eyebrow;
+}
+
+.hub-claim {
+  grid-area: claim;
+}
+
+.hub-text {
+  grid-area: text;
+}
+
+.hub-cta {
+  grid-area: cta;
+}
+
+.hub-cta-label {
+  display: none;
+}
+
+/* Antippen: Welt wächst als Kreis vom Finger aus */
+.hub::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  clip-path: circle(0 at var(--tap-x, 50%) var(--tap-y, 50%));
+  transition: clip-path 850ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.hub[data-chosen='web']::after {
+  background:
+    radial-gradient(60% 50% at 28% 38%, rgba(29, 111, 168, 0.45), transparent 70%),
+    #06101c;
+  clip-path: circle(150vmax at var(--tap-x, 50%) var(--tap-y, 50%));
+}
+
+.hub[data-chosen='coach']::after {
+  background:
+    radial-gradient(55% 50% at 72% 40%, rgba(245, 158, 11, 0.28), transparent 70%),
+    #140c06;
+  clip-path: circle(150vmax at var(--tap-x, 50%) var(--tap-y, 50%));
+}
+
+/* --- Hover / Fokus / Wahl (beide Layouts) ---------------------------------- */
+
+.hub:has(.hub-half--web:is(:hover, :focus-visible)) {
+  --split: 57%;
+}
+
+.hub:has(.hub-half--coach:is(:hover, :focus-visible)) {
+  --split: 43%;
+}
+
+.hub[data-chosen] {
+  transition-duration: 850ms;
+  transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Doppelte Klasse: muss die Hover-Regel (.hub:has(… :hover), Spezifität 0,3,0)
+   schlagen – beim Klick liegt die Maus ja noch über der Hälfte. */
+.hub.hub[data-chosen='web'] {
+  --split: 100%;
+}
+
+.hub.hub[data-chosen='coach'] {
+  --split: 0%;
+}
+
+.hub[data-chosen] :is(.hub-stage, .hub-head, .hub-top, .hub-copy, .hub-seam) {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-copy--coach,
+.hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-copy--web {
+  opacity: 0.55;
+}
+
+/* --- Hintergründe der Welten ---------------------------------------------- */
+
+.hub-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Welt B: Nacht, Raster, Brand-Licht #1D6FA8 → #7A2C8E */
+.hub-bg--web {
+  background:
+    radial-gradient(60% 50% at 28% 38%, rgba(29, 111, 168, 0.45), transparent 70%),
+    radial-gradient(45% 40% at 12% 88%, rgba(122, 44, 142, 0.38), transparent 70%),
+    #06101c;
+}
+
+.hub-bg--web::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(155, 199, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(155, 199, 255, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(70% 70% at 30% 50%, #000 30%, transparent 85%);
+}
+
+/* Langsamer Scan-Balken – dekorativ */
+.hub-scan {
+  position: absolute;
+  inset-inline: 0;
+  top: -30%;
+  height: 30%;
+  background: linear-gradient(to bottom, transparent, rgba(45, 212, 191, 0.07), transparent);
+  animation: hub-scan 9s linear infinite;
+}
+
+@keyframes hub-scan {
+  to {
+    transform: translateY(433%);
+  }
+}
+
+.hub-code {
+  display: none;
+  position: absolute;
+  left: var(--gutter);
+  bottom: 1.75rem;
+  margin: 0;
+  font: 0.72rem/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: rgba(155, 199, 255, 0.2);
+  white-space: pre;
+}
+
+.hub-code span {
+  display: block;
+}
+
+/* Welt A: Wärme, Atem-Ringe, Körnung */
+.hub-bg--coach {
+  background:
+    radial-gradient(55% 50% at 72% 40%, rgba(245, 158, 11, 0.28), transparent 70%),
+    radial-gradient(45% 40% at 88% 88%, rgba(234, 167, 101, 0.22), transparent 70%),
+    #140c06;
+}
+
+.hub-bg--coach::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hub-breath {
+  position: absolute;
+  left: 75%;
+  top: 50%;
+  width: 130vmax;
+  aspect-ratio: 1;
+  margin: -65vmax 0 0 -65vmax;
+  background: repeating-radial-gradient(circle, rgba(246, 179, 90, 0.08) 0 1px, transparent 1px 42px);
+  mask-image: radial-gradient(circle, #000 10%, transparent 55%);
+  animation: hub-breathe 7s ease-in-out infinite alternate;
+}
+
+@keyframes hub-breathe {
+  from {
+    transform: scale(0.94);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+/* --- Naht-Linie ------------------------------------------------------------ */
+
+.hub-seam::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Mobil folgt die Linie der Naht direkt, seitlich verschiebt sich das ganze Element */
+  left: var(--split);
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.26) 18%,
+    rgba(255, 255, 255, 0.26) 82%,
+    transparent
+  );
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.14),
+    0 0 36px rgba(155, 199, 255, 0.14);
+}
+
+/* --- Kopf ------------------------------------------------------------------ */
+
+.hub-top .landing-cta {
+  width: auto;
+}
+
+.hub-brand {
+  border-radius: 14px;
+  text-decoration: none;
+}
+
+.hub-brand:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #9bc7ff;
+}
+
+@media (max-width: 639px) {
+  .hub-top .landing-role {
+    display: none;
+  }
+}
+
+.hub-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 5vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #f8fafc;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+}
+
+.hub-sub {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(226, 232, 240, 0.72);
+}
+
+/* Belege als Textzeile – nur wo der Orbit fehlt (siehe unten) */
+.hub-facts {
+  display: none;
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: rgba(226, 232, 240, 0.72);
+}
+
+/* --- Texte der Welten --------------------------------------------------------- */
+
+.hub-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hub-copy--web .hub-eyebrow {
+  color: #2dd4bf;
+}
+
+.hub-copy--coach .hub-eyebrow {
+  color: #f6b35a;
+}
+
+.hub-claim {
+  margin: 0;
+  font-size: clamp(1.45rem, 6.2vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #f8fafc;
+}
+
+.hub-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(226, 232, 240, 0.78);
+}
+
+.hub-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-width: 52px;
+  min-height: 52px;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+/* 3D-Kugel wie die Infokugel: Glanzlicht oben links, Eigenschatten unten
+   rechts, Reflex am unteren Rand, Schwebe-Animation. Seitlich (Pille) wird
+   daraus ein Glanzstreifen – siehe Media-Query unten. */
+.hub-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  animation: info-orb-float 6s ease-in-out infinite;
+}
+
+.hub-cta--coach {
+  animation-delay: -3s;
+}
+
+.hub-cta::before,
+.hub-cta::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.hub-cta::before {
+  top: 9%;
+  left: 17%;
+  width: 42%;
+  height: 28%;
+  rotate: -28deg;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 70%);
+}
+
+.hub-cta::after {
+  bottom: 7%;
+  left: 24%;
+  width: 52%;
+  height: 20%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 70%);
+}
+
+.hub-cta--web {
+  color: #fff;
+  background:
+    radial-gradient(circle at 72% 82%, rgba(45, 212, 191, 0.55), transparent 55%),
+    radial-gradient(circle at 34% 30%, #4aa3e0, transparent 60%),
+    linear-gradient(140deg, #1d6fa8, #5a2a86 70%, #2a0f3d);
+  box-shadow:
+    inset -5px -8px 14px rgba(0, 0, 0, 0.45),
+    inset 3px 4px 10px rgba(255, 255, 255, 0.2),
+    0 0 0 1px rgba(155, 199, 255, 0.35),
+    0 14px 28px -10px rgba(29, 111, 168, 0.9),
+    0 0 26px rgba(122, 44, 142, 0.35);
+}
+
+.hub-cta--coach {
+  color: #1a0f06;
+  background:
+    radial-gradient(circle at 72% 82%, rgba(255, 236, 200, 0.5), transparent 55%),
+    radial-gradient(circle at 34% 30%, #ffd08a, transparent 60%),
+    linear-gradient(140deg, #f6b35a, #c97a2c 70%, #6b3a10);
+  box-shadow:
+    inset -5px -8px 14px rgba(70, 30, 0, 0.45),
+    inset 3px 4px 10px rgba(255, 255, 255, 0.28),
+    0 0 0 1px rgba(255, 214, 160, 0.4),
+    0 14px 28px -10px rgba(217, 138, 58, 0.9),
+    0 0 26px rgba(245, 158, 11, 0.3);
+}
+
+/* Infokugel (components/InfoOrb.tsx, auf / per buttonClassName) – feinere Kugel:
+   Eigenschatten, Glanzlicht, Bodenreflex. Überschreibt die Utility-Hintergründe. */
+.orb-3d {
+  background:
+    radial-gradient(circle at 70% 78%, rgba(34, 197, 94, 0.75), transparent 55%),
+    radial-gradient(circle at 34% 30%, rgba(125, 227, 255, 0.9), transparent 58%),
+    radial-gradient(circle at 50% 50%, #0b2a36, #03111a 72%);
+  box-shadow:
+    inset -6px -10px 18px rgba(0, 0, 0, 0.6),
+    inset 4px 6px 14px rgba(255, 255, 255, 0.18),
+    0 0 0 1px rgba(125, 227, 255, 0.35),
+    0 18px 34px -10px rgba(0, 229, 255, 0.45),
+    0 0 30px rgba(34, 197, 94, 0.25);
+}
+
+.orb-3d::before,
+.orb-3d::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.orb-3d::before {
+  top: 9%;
+  left: 17%;
+  width: 42%;
+  height: 28%;
+  rotate: -28deg;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 70%);
+}
+
+.orb-3d::after {
+  bottom: 7%;
+  left: 24%;
+  width: 52%;
+  height: 20%;
+  background: radial-gradient(ellipse at center, rgba(160, 255, 200, 0.45), rgba(255, 255, 255, 0) 70%);
+}
+
+.hub-half:hover .hub-cta {
+  transform: translateY(-2px);
+}
+
+.hub-half:focus-visible .hub-cta {
+  box-shadow:
+    0 0 0 3px #f8fafc,
+    0 0 0 6px rgba(155, 199, 255, 0.55);
+}
+
+/* --- Bühne: Foto, Licht, Belege ------------------------------------------ */
+
+.hub-photo {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.5));
+  transition: transform 700ms cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+
+/* Mobil endet das Foto mitten im Bild. Deckender Auslauf in den beiden
+   Grundfarben (Naht in der Mitte) statt Transparenz – sonst schienen die
+   hinteren Belege durch den Körper. */
+.hub-photo-fade {
+  position: absolute;
+  /* Nur über dem Körper (ca. 25–75 % der Bildbreite), seitlich weich auslaufend.
+     Breiter würde er die hinteren Belege an den Bahnenden schlagartig verdecken. */
+  left: 18%;
+  right: 18%;
+  bottom: -1px;
+  z-index: 2;
+  height: 36%;
+  pointer-events: none;
+  background: linear-gradient(90deg, #06101c 35%, #140c06 65%);
+  mask-image:
+    linear-gradient(to bottom, transparent, #000 70%),
+    linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-composite: intersect;
+}
+
+
+.hub-rim {
+  position: absolute;
+  top: 22%;
+  z-index: 0;
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.35;
+  transition: opacity 500ms ease;
+}
+
+.hub-rim--web {
+  left: 0;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.55), rgba(29, 111, 168, 0) 70%);
+}
+
+.hub-rim--coach {
+  right: 0;
+  background: radial-gradient(circle, rgba(246, 179, 90, 0.55), rgba(185, 112, 41, 0) 70%);
+}
+
+/* Licht auf dem Logo in der Hand (Positionen aus dem Foto, 1136 × 1137) */
+.hub-logo-glow {
+  position: absolute;
+  z-index: 3;
+  width: 32%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 400ms ease;
+}
+
+.hub-logo-glow--web {
+  left: 27%;
+  top: 47%;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.6), transparent 62%);
+}
+
+.hub-logo-glow--coach {
+  left: 70.5%;
+  top: 49%;
+  background: radial-gradient(circle, rgba(246, 179, 90, 0.6), transparent 62%);
+}
+
+.hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-logo-glow--web,
+.hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-logo-glow--coach {
+  opacity: 1;
+  animation: hub-glow 2.4s ease-in-out infinite;
+}
+
+/* Die andere Hand wird abgedunkelt */
+.hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-logo-glow--coach,
+.hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-logo-glow--web {
+  opacity: 1;
+  mix-blend-mode: multiply;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.6), transparent 60%);
+}
+
+@keyframes hub-glow {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-rim--web,
+.hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-rim--coach {
+  opacity: 1;
+}
+
+.hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-photo {
+  transform: rotate(-1.2deg) translateX(-1%);
+}
+
+.hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-photo {
+  transform: rotate(1.2deg) translateX(1%);
+}
+
+.hub-info {
+  position: absolute;
+  top: 14%;
+  right: 8%;
+  z-index: 5;
+  pointer-events: auto;
+}
+
+/* Belege-Orbit: geneigte Kreisbahn. Zwei Ebenen – die hintere liegt hinter
+   dem Foto, die vordere davor; jeder Beleg ist immer nur in einer sichtbar. */
+.hub-orbit {
+  position: absolute;
+  left: 50%;
+  top: 84%;
+  /* Schmal genug, dass auch der längste Beleg an den Bahnenden im Bild bleibt */
+  width: 66%;
+  aspect-ratio: 1;
+  /* Neigung der Bahn: mobil flacher gekippt, damit sich die Belege nicht stapeln */
+  --tilt: 60deg;
+  transform: translate(-50%, -50%) rotateX(var(--tilt));
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.hub-orbit--back {
+  z-index: 1;
+}
+
+.hub-orbit--front {
+  z-index: 4;
+}
+
+.hub-orbit__plane {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.hub-orbit__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+}
+
+.hub-orbit--front .hub-orbit__ring {
+  clip-path: inset(50% 0 0 0);
+}
+
+.hub-orbit__pos {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 0;
+  height: 50%;
+  transform-origin: 50% 100%;
+  transform: rotate(var(--a));
+  transform-style: preserve-3d;
+  animation: hub-orbit 36s linear var(--delay) infinite;
+}
+
+.hub-orbit__fact {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  transform: rotateZ(calc(-1 * var(--a))) rotateX(calc(-1 * var(--tilt))) translate(-50%, -50%);
+  opacity: var(--visible);
+  white-space: nowrap;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(248, 250, 252, 0.94);
+  /* Deckend: Belege vor dem Foto dürfen nichts durchscheinen lassen */
+  background: linear-gradient(to bottom, #182230, #0a0f17);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 10px 24px rgba(0, 0, 0, 0.45);
+  animation:
+    hub-orbit-counter 36s linear var(--delay) infinite,
+    hub-orbit-back 36s linear var(--delay) infinite;
+}
+
+.hub-orbit--front .hub-orbit__fact {
+  animation:
+    hub-orbit-counter 36s linear var(--delay) infinite,
+    hub-orbit-front 36s linear var(--delay) infinite;
+}
+
+@keyframes hub-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hub-orbit-counter {
+  from {
+    transform: rotateZ(0deg) rotateX(calc(-1 * var(--tilt))) translate(-50%, -50%);
+  }
+  to {
+    transform: rotateZ(-360deg) rotateX(calc(-1 * var(--tilt))) translate(-50%, -50%);
+  }
+}
+
+/* 0° = hinten (oben), 90°–270° = vorn (unten). Weicher Wechsel über ±18°
+   an den Bahnenden: Lange Belege ragen dort über den Arm – ein harter
+   Wechsel ließ sie sichtbar „wegspringen“. */
+@keyframes hub-orbit-front {
+  0%,
+  20% {
+    opacity: 0;
+  }
+  30%,
+  70% {
+    opacity: 1;
+  }
+  80%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hub-orbit-back {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  30%,
+  70% {
+    opacity: 0;
+  }
+  80%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* --- Mobil: Struktur oben + Kippen ---------------------------------------- */
+
+/* Raster/Scan links, Ringe/Körnung rechts – hinter Kopf und Foto, an der Naht
+   zugeschnitten. Etwas leiser als am Desktop. */
+.hub > .hub-top-bg {
+  position: relative;
+  inset: auto;
+  grid-row: 1 / 4;
+  grid-column: 1;
+  z-index: 0;
+}
+
+.hub > .hub-top-bg--web {
+  clip-path: inset(0 calc(100% - var(--split)) 0 0);
+}
+
+.hub > .hub-top-bg--coach {
+  clip-path: inset(0 0 0 var(--split));
+}
+
+.hub > .hub-top-bg::before,
+.hub > .hub-top-bg .hub-breath {
+  opacity: 0.7;
+}
+
+.hub > .hub-top-bg--coach .hub-breath {
+  left: 70%;
+}
+
+/* Während des Kippens folgt die Naht dem Sensor direkt (JS glättet selbst) */
+.hub[data-tilting] {
+  transition: none;
+}
+
+.hub[data-tilt='web'] .hub-logo-glow--web,
+.hub[data-tilt='coach'] .hub-logo-glow--coach {
+  opacity: 1;
+  animation: hub-glow 2.4s ease-in-out infinite;
+}
+
+.hub[data-tilt='web'] .hub-logo-glow--coach,
+.hub[data-tilt='coach'] .hub-logo-glow--web {
+  opacity: 1;
+  mix-blend-mode: multiply;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.6), transparent 60%);
+}
+
+.hub[data-tilt='web'] .hub-rim--web,
+.hub[data-tilt='coach'] .hub-rim--coach {
+  opacity: 1;
+}
+
+.hub[data-tilt='web'] .hub-photo {
+  transform: rotate(-1.2deg) translateX(-1%);
+}
+
+.hub[data-tilt='coach'] .hub-photo {
+  transform: rotate(1.2deg) translateX(1%);
+}
+
+.hub[data-tilt='web'] .hub-copy--coach,
+.hub[data-tilt='coach'] .hub-copy--web {
+  opacity: 0.55;
+}
+
+/* iOS: Freigabe des Bewegungssensors – links neben dem Kopf, Gegenstück zur Infokugel */
+.hub-tilt {
+  position: absolute;
+  top: 15%;
+  left: 2%;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(248, 250, 252, 0.88);
+  background: linear-gradient(to bottom, #182230, #0a0f17);
+  border: 1px solid rgba(155, 199, 255, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 10px 24px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.hub-tilt[hidden] {
+  display: none;
+}
+
+/* Maus-Geräte haben keinen Neigungssensor */
+@media (hover: hover) and (pointer: fine) {
+  .hub-tilt {
+    display: none;
+  }
+}
+
+.hub-tilt:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #9bc7ff;
+}
+
+.hub-tilt span {
+  display: inline-block;
+  animation: hub-tilt-hint 2.4s ease-in-out infinite;
+}
+
+@keyframes hub-tilt-hint {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-14deg);
+  }
+  75% {
+    transform: rotate(14deg);
+  }
+}
+
+/* --- Mobil: wenig Höhe → Fließtext weglassen ------------------------------ */
+
+@media (max-height: 760px) {
+  .hub-text {
+    display: none;
+  }
+}
+
+@media (max-height: 680px) {
+  .hub-sub {
+    display: none;
+  }
+}
+
+/* Sehr schmal: Orbit-Belege passen nicht mehr neben das Foto → Textzeile */
+@media (max-width: 359px) {
+  .hub-orbit {
+    display: none;
+  }
+
+  .hub-facts {
+    display: block;
+  }
+}
+
+/* --- Seitlich: ab 1024 px und auf Landscape-Phones ------------------------ */
+
+@media (min-width: 1024px), (orientation: landscape) and (max-height: 600px) {
+  .hub {
+    display: block;
+  }
+
+  .hub::after {
+    display: none;
+  }
+
+  .hub-top {
+    position: absolute;
+    inset: 0 0 auto;
+    padding: 1.25rem var(--gutter);
+    pointer-events: none;
+  }
+
+  .hub-top > * {
+    pointer-events: auto;
+  }
+
+  .hub-head {
+    position: absolute;
+    top: 5.25rem;
+    inset-inline: var(--gutter);
+    padding: 0;
+  }
+
+  .hub-stage {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    margin: 0;
+    translate: -50% 0;
+  }
+
+  .hub-photo {
+    mask-image: none;
+  }
+
+  .hub-orbit {
+    --tilt: 72deg;
+    top: 80%;
+    width: 104%;
+  }
+
+  .hub-seam {
+    position: absolute;
+    inset: 0;
+    transform: translateX(calc(var(--split) - 50%));
+  }
+
+  .hub-seam::before {
+    left: 50%;
+  }
+
+  .hub > .hub-top-bg,
+  .hub-tilt {
+    display: none;
+  }
+
+  .hub-half {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+  }
+
+  .hub-half::before {
+    display: none;
+  }
+
+  .hub-half--web {
+    clip-path: inset(0 calc(100% - var(--split)) 0 0);
+  }
+
+  .hub-half--coach {
+    clip-path: inset(0 0 0 var(--split));
+  }
+
+  .hub-copy {
+    position: absolute;
+    top: 52%;
+    translate: 0 -50%;
+    width: min(24vw, 380px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .hub-copy--web {
+    left: var(--gutter);
+    align-items: flex-start;
+  }
+
+  .hub-copy--coach {
+    right: var(--gutter);
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .hub-cta {
+    margin-top: 0.35rem;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+    animation: none;
+  }
+
+  /* Pille: Glanzstreifen oben statt Kugel-Glanzlicht */
+  .hub-cta::before {
+    top: 3px;
+    left: 8%;
+    width: 84%;
+    height: 45%;
+    rotate: none;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+  }
+
+  .hub-cta::after {
+    display: none;
+  }
+
+  .hub-cta-label {
+    display: inline;
+  }
+
+  .hub-photo-fade {
+    display: none;
+  }
+
+  /* Wahl als Vorhang: Die gewählte Welt hebt sich über Foto, Kopf und die
+     andere Hälfte und schiebt sich bis zum Rand; die Naht läuft als leuchtende
+     Vorderkante mit. Nichts blendet vorher aus – man sieht die Welt wachsen. */
+  .hub[data-chosen] :is(.hub-stage, .hub-head, .hub-top, .hub-copy, .hub-seam) {
+    opacity: 1;
+  }
+
+  .hub[data-chosen='web'] .hub-half--web,
+  .hub[data-chosen='coach'] .hub-half--coach {
+    z-index: 6;
+  }
+
+  .hub[data-chosen] .hub-seam {
+    z-index: 7;
+  }
+
+  .hub[data-chosen='web'] .hub-copy--web,
+  .hub[data-chosen='coach'] .hub-copy--coach {
+    scale: 1.04;
+    transition: scale 850ms cubic-bezier(0.22, 0.8, 0.2, 1);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hub {
+    min-height: max(calc(100dvh - 5.5rem), 640px);
+  }
+
+  .hub-stage {
+    width: min(640px, 50vw, calc(100dvh - 15rem));
+  }
+
+  .hub-title {
+    font-size: clamp(2.4rem, 3.4vw, 3.25rem);
+  }
+
+  .hub-sub {
+    font-size: 0.95rem;
+  }
+
+  .hub-claim {
+    font-size: clamp(2.2rem, 3.6vw, 3.6rem);
+  }
+
+  .hub-text {
+    display: block;
+    font-size: 0.95rem;
+    max-width: 32ch;
+  }
+
+  .hub-code {
+    display: block;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .hub {
+    min-height: max(100dvh, 340px);
+  }
+
+  .hub-top {
+    padding-block: 0.75rem;
+  }
+
+  .hub-head {
+    top: 3.75rem;
+  }
+
+  .hub-title {
+    font-size: 1.6rem;
+  }
+
+  .hub-sub {
+    display: none;
+  }
+
+  .hub-stage {
+    width: min(76vh, 42vw);
+  }
+
+  .hub-orbit {
+    display: none;
+  }
+
+  .hub-copy {
+    width: 26vw;
+  }
+
+  .hub-claim {
+    font-size: 1.5rem;
+  }
+
+  /* Wenig Platz: runde Kugel wie mobil */
+  .hub-cta {
+    padding: 0;
+    font-size: 1.1rem;
+    animation: info-orb-float 6s ease-in-out infinite;
+  }
+
+  .hub-cta::before {
+    top: 9%;
+    left: 17%;
+    width: 42%;
+    height: 28%;
+    rotate: -28deg;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 70%);
+  }
+
+  .hub-cta::after {
+    display: block;
+  }
+
+  .hub-cta-label {
+    display: none;
+  }
 }
