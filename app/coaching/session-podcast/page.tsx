@@ -9,6 +9,7 @@ import { ContentPageStructuredData } from '@/components/StructuredData';
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
 import { MotifInsight } from '@/app/coaching/components/Motifs';
+import PodcastPlayer from '@/app/coaching/components/PodcastPlayer';
 
 const PATH = '/coaching/session-podcast';
 
@@ -23,6 +24,10 @@ const PATH = '/coaching/session-podcast';
 const EXAMPLE = {
   src: '/audio/session-podcast-beispiel.m4a',
   type: 'audio/mp4',
+  title: 'Session-Podcast – Hörbeispiel',
+  /** Länge in Sekunden (ffprobe). Bei neuer Datei mitpflegen. */
+  duration: 2423,
+  meta: 'Session-Podcast · 40 Minuten · zwei KI-Stimmen',
   caption:
     'Ein echter Session-Podcast, veröffentlicht mit schriftlicher Zustimmung des Klienten. Namen und erkennbare Details sind entfernt.',
 };
@@ -137,41 +142,40 @@ export default function SessionPodcastPage() {
         <section className='px-4 py-16 sm:py-20'>
           <div className='container mx-auto max-w-4xl'>
             <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>Hörbeispiel</h2>
-            <GlassCard className='mt-8 p-6 sm:p-8'>
-              <div className='flex items-start gap-4'>
-                <span className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface text-accent ring-1 ring-border'>
+            {exampleAvailable ? (
+              <div className='mt-8'>
+                <p className='mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-(--muted)'>
                   <Headphones
                     aria-hidden='true'
-                    className='h-6 w-6'
+                    className='h-4 w-4 text-accent'
                   />
-                </span>
-                <div className='min-w-0 flex-1'>
-                  {exampleAvailable ? (
-                    <>
-                      <audio
-                        controls
-                        preload='none'
-                        className='w-full'>
-                        <source
-                          src={EXAMPLE.src}
-                          type={EXAMPLE.type}
-                        />
-                        Dein Browser kann dieses Audio nicht abspielen.
-                      </audio>
-                      <p className='mt-4 text-sm leading-relaxed text-(--muted)'>
-                        {EXAMPLE.caption}
-                      </p>
-                    </>
-                  ) : (
-                    <p className='text-sm leading-relaxed text-(--muted)'>
-                      Das Hörbeispiel wird gerade vorbereitet – ein echter Session-Podcast, den ein
-                      Klient zur Veröffentlichung freigegeben hat. Bis dahin: Frag im kostenlosen
-                      Erstgespräch danach, dann erzähle ich dir, wie er klingt.
-                    </p>
-                  )}
-                </div>
+                  {EXAMPLE.meta}
+                </p>
+                <PodcastPlayer
+                  src={EXAMPLE.src}
+                  type={EXAMPLE.type}
+                  title={EXAMPLE.title}
+                  duration={EXAMPLE.duration}
+                />
+                <p className='mt-4 text-sm leading-relaxed text-(--muted)'>{EXAMPLE.caption}</p>
               </div>
-            </GlassCard>
+            ) : (
+              <GlassCard className='mt-8 p-6 sm:p-8'>
+                <div className='flex items-start gap-4'>
+                  <span className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface text-accent ring-1 ring-border'>
+                    <Headphones
+                      aria-hidden='true'
+                      className='h-6 w-6'
+                    />
+                  </span>
+                  <p className='min-w-0 flex-1 text-sm leading-relaxed text-(--muted)'>
+                    Das Hörbeispiel wird gerade vorbereitet – ein echter Session-Podcast, den ein
+                    Klient zur Veröffentlichung freigegeben hat. Bis dahin: Frag im kostenlosen
+                    Erstgespräch danach, dann erzähle ich dir, wie er klingt.
+                  </p>
+                </div>
+              </GlassCard>
+            )}
           </div>
         </section>
 

@@ -1282,3 +1282,59 @@ html {
     }
   }
 }
+
+/*
+ * Session-Podcast-Player (app/coaching/components/PodcastPlayer.tsx).
+ * Jeder Balken pulsiert um seine Ruhehöhe --h. Pausiert friert die Schleife ein
+ * und bleibt als Wellenform stehen. Bei reduzierter Bewegung beendet die globale
+ * Regel oben die Animation – dann gilt die statische Höhe.
+ */
+.podcast-eq-bar {
+  /* Farbe je Balken: über die Reihe von --accent nach --accent-2 (--mix aus dem JSX) */
+  --c: color-mix(in oklab, var(--accent) var(--mix), var(--accent-2));
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--c) 15%, transparent),
+    color-mix(in oklab, var(--c) 85%, transparent) 35%,
+    var(--c) 50%,
+    color-mix(in oklab, var(--c) 85%, transparent) 65%,
+    color-mix(in oklab, var(--c) 15%, transparent)
+  );
+  opacity: 0.22;
+  transform: scaleY(var(--h));
+  transform-origin: center;
+  transition:
+    opacity 200ms ease,
+    box-shadow 200ms ease;
+  animation: podcast-eq var(--d) ease-in-out var(--delay) infinite alternate;
+  animation-play-state: paused;
+}
+
+.podcast-eq-bar[data-played='true'] {
+  opacity: 0.9;
+  box-shadow: 0 0 14px color-mix(in oklab, var(--c) 55%, transparent);
+}
+
+.theme-warm .podcast-eq-bar[data-played='false'] {
+  opacity: 0.3;
+}
+
+.podcast-eq[data-playing='true'] .podcast-eq-bar {
+  animation-play-state: running;
+}
+
+@keyframes podcast-eq {
+  0% {
+    transform: scaleY(calc(var(--h) * 0.3));
+  }
+  60% {
+    transform: scaleY(calc(var(--h) * 1.15));
+  }
+  100% {
+    transform: scaleY(min(1, calc(var(--h) * 0.75 + 0.25)));
+  }
+}
+
+.podcast-play-ring {
+  animation: world-switch-pulse 2.6s ease-out infinite;
+}

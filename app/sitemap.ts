@@ -110,7 +110,7 @@ const pages: Page[] = [
   },
   {
     path: '/coaching/session-podcast',
-    lastModified: '2026-11-02',
+    lastModified: '2026-11-03',
     published: '2026-11-02',
     priority: 0.7,
     changeFrequency: 'monthly',

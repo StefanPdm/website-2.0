@@ -42,5 +42,5 @@ next-env.d.ts
 design-source/
 
 
-# Rohfotos (Originale, nicht ausliefern – §12)
-/rohbilder/
+# Rohdaten (Fotos, Audio-Originale, nicht ausliefern – §12)
+/rohdaten/
