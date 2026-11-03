@@ -160,18 +160,35 @@ export default function AboutDeveloperSection() {
       </div>
 
       {/* Leitsatz */}
-      <blockquote className='relative mx-auto mt-24 max-w-4xl text-center'>
+      <figure className='relative mx-auto mt-24 max-w-4xl text-center'>
         <span
           aria-hidden='true'
-          className='mx-auto mb-10 block h-px w-24 bg-linear-to-r from-transparent via-accent-web to-transparent'
-        />
-        <p className='relative text-2xl font-semibold leading-snug tracking-tight text-white md:text-4xl'>
-          Eine Website ist kein Selbstzweck.{' '}
-          <span className='bg-linear-to-r from-accent-web via-[#9bd7ff] to-white bg-clip-text text-transparent'>
-            Sie soll dein Unternehmen tragen – verständlich für die, die sie nutzen.
-          </span>
-        </p>
-      </blockquote>
+          className='mx-auto mb-6 block font-serif text-7xl leading-none text-accent-web/60 md:text-8xl'>
+          „
+        </span>
+        <blockquote>
+          <p className='relative text-2xl font-semibold leading-snug tracking-tight text-white md:text-4xl'>
+            Eine Website, die nicht verkauft,{' '}
+            <span className='bg-linear-to-r from-accent-web via-[#9bd7ff] to-white bg-clip-text text-transparent'>
+              ist digitale Deko.
+            </span>
+          </p>
+        </blockquote>
+        <figcaption className='mt-8 flex items-center justify-center gap-3 text-sm text-slate-300'>
+          <span
+            aria-hidden='true'
+            className='block h-px w-10 bg-linear-to-r from-transparent to-accent-web'
+          />
+          <cite className='not-italic'>
+            <span className='font-semibold text-white'>Stefan Heinemann</span>
+            <span className='text-slate-400'> · Webentwickler &amp; Unternehmer</span>
+          </cite>
+          <span
+            aria-hidden='true'
+            className='block h-px w-10 bg-linear-to-l from-transparent to-accent-web'
+          />
+        </figcaption>
+      </figure>
 
       {/*
         Brücke in Welt A (CLAUDE.md §10: Weltenwechsel ist Alleinstellungsmerkmal).
