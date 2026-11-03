@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Check, Loader2, X } from 'lucide-react';
 
 import { useFormShield } from '@/components/FormShield';
@@ -23,20 +23,38 @@ function verdict(score: number) {
   return 'Für KI kaum sichtbar';
 }
 
-export default function KiCheckClient() {
+type KiCheckClientProps = {
+  /** Eindeutiges Präfix für Feld-IDs, wenn der Check mehrfach eingebunden ist. */
+  idPrefix?: string;
+  /** Überschriften-Ebene der Ergebnis-Abschnitte (h2 auf der eigenen Seite, h3 eingebettet). */
+  headingLevel?: 'h2' | 'h3';
+  /** Adresse aus ?url= übernehmen und sofort prüfen (Hero-Formular auf /webdevelopment). */
+  readUrlParam?: boolean;
+};
+
+/**
+ * Der KI-Check als wiederverwendbarer Baustein: auf /webdevelopment/ki-check
+ * und eingebettet im Röntgenblick-Abschnitt von /webdevelopment.
+ */
+export default function KiCheckClient({
+  idPrefix = 'web-ki-check',
+  headingLevel = 'h2',
+  readUrlParam = false,
+}: KiCheckClientProps) {
   const [url, setUrl] = useState('');
   const [state, setState] = useState<State>({ status: 'idle' });
   const shield = useFormShield();
   const loading = state.status === 'loading';
+  const Heading = headingLevel;
+  const resultRef = useRef<HTMLDivElement>(null);
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function runCheck(target: string) {
     setState({ status: 'loading' });
     try {
       const response = await fetch('/api/ki-check', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ url, ...shield.payload() }),
+        body: JSON.stringify({ url: target, ...shield.payload() }),
       });
       const data = await response.json();
       if (!response.ok) setState({ status: 'error', message: data.error ?? 'Die Prüfung ist fehlgeschlagen.' });
@@ -46,6 +64,27 @@ export default function KiCheckClient() {
     }
   }
 
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void runCheck(url);
+  }
+
+  // Vom Hero-Formular übergebene Adresse: übernehmen und direkt prüfen.
+  // Asynchron gestartet, damit kein setState synchron im Effekt läuft.
+  useEffect(() => {
+    if (!readUrlParam) return;
+    const fromQuery = new URLSearchParams(window.location.search).get('url')?.trim();
+    if (!fromQuery) return;
+    const timer = window.setTimeout(() => {
+      setUrl(fromQuery);
+      void runCheck(fromQuery).then(() =>
+        resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+      );
+    }, 0);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [readUrlParam]);
+
   return (
     <div>
       <form
@@ -53,12 +92,12 @@ export default function KiCheckClient() {
         className='relative flex flex-col gap-3 sm:flex-row'>
         {shield.fields}
         <label
-          htmlFor='web-ki-check-url'
+          htmlFor={`${idPrefix}-url`}
           className='sr-only'>
           Adresse deiner Website
         </label>
         <input
-          id='web-ki-check-url'
+          id={`${idPrefix}-url`}
           name='url'
           type='text'
           inputMode='url'
@@ -88,7 +127,10 @@ export default function KiCheckClient() {
         Ergebnis. Details in der Datenschutzerklärung.
       </p>
 
-      <div aria-live='polite'>
+      <div
+        ref={resultRef}
+        aria-live='polite'
+        className='scroll-mt-28'>
         {state.status === 'error' && (
           <p className='mt-6 rounded-xl border border-red-400/40 bg-red-500/10 p-4 text-sm text-red-100'>
             {state.message}
@@ -117,9 +159,9 @@ export default function KiCheckClient() {
             <div>
               {state.result.weaknesses.length > 0 && (
                 <>
-                  <h2 className='text-xl font-semibold text-white'>
+                  <Heading className='text-xl font-semibold text-white'>
                     {state.result.score >= TOP_SCORE ? 'Was noch fehlt' : 'Die drei größten Hebel'}
-                  </h2>
+                  </Heading>
                   <ol className='mt-4 grid gap-3'>
                     {state.result.weaknesses.map((item, index) => (
                       <li
@@ -136,7 +178,7 @@ export default function KiCheckClient() {
                 </>
               )}
 
-              <h2 className='mt-8 text-xl font-semibold text-white'>Alle Prüfpunkte</h2>
+              <Heading className='mt-8 text-xl font-semibold text-white'>Alle Prüfpunkte</Heading>
               <ul className='mt-4 divide-y divide-white/10 rounded-2xl border border-white/15 bg-[#030a13]/70'>
                 {state.result.items.map((item) => (
                   <li

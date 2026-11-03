@@ -273,13 +273,36 @@ export default function WebdevelopmentPage() {
                   </span>
                 ))}
               </div>
+              {/* B: Adresse direkt hier eingeben → KI-Check-Seite prüft sofort (?url=) */}
+              <form
+                action='/webdevelopment/ki-check'
+                method='get'
+                className='mt-10 w-full max-w-130'>
+                <label
+                  htmlFor='web-hero-check-url'
+                  className='text-sm font-semibold text-white'>
+                  Findet ChatGPT deine Website?{' '}
+                  <span className='font-normal text-slate-300'>Kostenlos prüfen:</span>
+                </label>
+                <div className='mt-2 flex gap-2'>
+                  <input
+                    id='web-hero-check-url'
+                    name='url'
+                    type='text'
+                    inputMode='url'
+                    autoComplete='url'
+                    required
+                    placeholder='deine-website.de'
+                    className='h-11 w-full min-w-0 flex-1 rounded-xl border border-accent-web/40 bg-[#030a13]/80 px-4 text-sm text-white placeholder-slate-400 outline-none transition focus:border-accent-web focus-visible:ring-2 focus-visible:ring-accent-web/40'
+                  />
+                  <button
+                    type='submit'
+                    className='h-11 shrink-0 cursor-pointer rounded-xl border border-accent-web/50 bg-accent-web/15 px-4 text-sm font-semibold text-white transition hover:bg-accent-web/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
+                    KI-Check →
+                  </button>
+                </div>
+              </form>
               <LiveMetrics />
-              <a
-                href='/webdevelopment/ki-check'
-                className='mt-4 inline-flex min-h-11 items-center gap-2 rounded-full border border-accent-web/40 bg-accent-web/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent-web/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
-                Findet ChatGPT deine Website? Kostenloser KI-Check
-                <span aria-hidden='true'>→</span>
-              </a>
             </div>
             {/* Right: Porträt mit Röntgen-Scan */}
             {/* Mobil zuerst: Das Foto macht die Seite persönlich, bevor der Text kommt */}

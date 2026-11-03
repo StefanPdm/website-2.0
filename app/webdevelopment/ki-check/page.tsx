@@ -79,7 +79,7 @@ export default function KiCheckPage() {
         </p>
 
         <div className='mt-10 rounded-2xl border border-white/15 bg-[#030a13]/70 p-6 md:p-8'>
-          <KiCheckClient />
+          <KiCheckClient readUrlParam />
         </div>
 
         <section className='mt-16'>

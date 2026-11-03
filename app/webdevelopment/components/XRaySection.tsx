@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Check, ScanEye, X } from 'lucide-react';
 
+import KiCheckClient from '@/app/webdevelopment/ki-check/KiCheckClient';
+
 /**
  * Röntgenblick: zeigt live, was Suchmaschinen und Sprachmodelle auf dieser
  * Seite lesen. Ein Schalter markiert die Überschriften-Hierarchie und Bilder
@@ -165,14 +167,6 @@ export default function XRaySection() {
             Sicherheits-Header. Schalte den Röntgenblick ein – dann siehst du live, was Google,
             ChatGPT &amp; Co. auf genau dieser Seite lesen.
           </p>
-          <p className='mt-3 text-sm text-slate-300'>
-            Und deine eigene Seite?{' '}
-            <a
-              href='/webdevelopment/ki-check'
-              className='rounded font-semibold text-accent-web underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
-              Zum kostenlosen KI-Sichtbarkeits-Check →
-            </a>
-          </p>
         </div>
         <div className='md:justify-self-end'>
           <button
@@ -189,6 +183,24 @@ export default function XRaySection() {
             {on ? 'Röntgenblick ausschalten' : 'Röntgenblick einschalten'}
           </button>
         </div>
+      </div>
+
+      {/* A: Der Check direkt hier – genau dort, wo sich die Frage „Und bei mir?“ stellt */}
+      <div className='mt-10 rounded-2xl border border-accent-web/30 bg-[#030a13]/70 p-6 md:p-8'>
+        <h3 className='text-xl font-semibold text-white'>Und deine Website?</h3>
+        <p className='mt-2 mb-5 text-sm text-slate-300'>
+          Kostenloser KI-Sichtbarkeits-Check: Adresse eingeben, in rund zehn Sekunden siehst du
+          Punktzahl und die drei größten Hebel.{' '}
+          <a
+            href='/webdevelopment/ki-check'
+            className='rounded text-accent-web underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
+            Mehr zum Check
+          </a>
+        </p>
+        <KiCheckClient
+          idPrefix='web-xray-check'
+          headingLevel='h3'
+        />
       </div>
 
       {on && (

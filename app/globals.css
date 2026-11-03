@@ -2480,3 +2480,64 @@ html[data-xray] main img {
     --scan: 122%;
   }
 }
+
+/* Live-Messung (app/webdevelopment/components/LiveMetrics.tsx):
+   umlaufender Lichtrand – ein konischer Verlauf dreht sich hinter einer
+   1,5px-Kante. Bei reduzierter Bewegung steht er still. */
+@property --live-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.live-metrics {
+  position: relative;
+  isolation: isolate;
+  border-radius: 1rem;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--live-angle),
+    rgba(45, 212, 191, 0.15),
+    #2dd4bf 12%,
+    rgba(155, 199, 255, 0.9) 18%,
+    rgba(122, 44, 142, 0.6) 30%,
+    rgba(45, 212, 191, 0.12) 45%,
+    rgba(29, 111, 168, 0.5) 70%,
+    rgba(45, 212, 191, 0.15)
+  );
+  animation: live-spin 6s linear infinite;
+  box-shadow: 0 0 40px -12px rgba(45, 212, 191, 0.45);
+}
+
+.live-metrics::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(14px);
+  opacity: 0.45;
+}
+
+.live-metrics__inner {
+  border-radius: calc(1rem - 1.5px);
+}
+
+.live-metrics__pulse {
+  animation: live-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes live-spin {
+  to {
+    --live-angle: 360deg;
+  }
+}
+
+@keyframes live-ping {
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}

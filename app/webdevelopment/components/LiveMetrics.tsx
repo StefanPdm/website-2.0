@@ -78,39 +78,59 @@ export default function LiveMetrics() {
     };
   }, []);
 
+  const tiles = [
+    {
+      label: metrics?.visibleLabel === 'bereit nach' ? 'bereit nach' : 'sichtbar nach',
+      value: metrics ? seconds(metrics.visible) : null,
+      accent: true,
+    },
+    { label: 'übertragen', value: metrics ? `${metrics.kb.toLocaleString('de-DE')} KB` : null },
+    {
+      label: 'Layout-Verschiebung',
+      value: metrics
+        ? metrics.cls == null
+          ? 'n. v.'
+          : metrics.cls.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        : null,
+    },
+  ];
+
+  // Das Layout steht von Anfang an (feste Kacheln, Platzhalter) – sonst würde
+  // ausgerechnet die Messung der Layout-Verschiebung selbst einen Sprung erzeugen.
   return (
-    <div
-      aria-live='polite'
-      className='mt-6 inline-flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-white/10 bg-[#030a13]/70 px-4 py-3 text-sm text-slate-300'>
-      <span className='flex items-center gap-2 font-semibold text-white'>
-        <Gauge
-          aria-hidden='true'
-          className='h-4 w-4 text-accent-web'
-        />
-        Live gemessen
-      </span>
-      {metrics ? (
-        <>
-          <span>
-            Diese Seite war bei dir {metrics.visibleLabel}{' '}
-            <strong className='text-accent-web'>{seconds(metrics.visible)}</strong>
+    <div className='live-metrics mt-8 w-full max-w-130'>
+      <div className='live-metrics__inner rounded-2xl bg-[#040b15] p-5'>
+        <p className='flex items-center gap-2 text-sm font-semibold text-white'>
+          <span className='relative flex h-2.5 w-2.5'>
+            <span className='live-metrics__pulse absolute inline-flex h-full w-full rounded-full bg-accent-web' />
+            <span className='relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-web' />
           </span>
-          <span>
-            übertragen <strong className='text-white'>{metrics.kb.toLocaleString('de-DE')} KB</strong>
-          </span>
-          {metrics.cls != null && (
-            <span>
-              Layout-Verschiebung{' '}
-              <strong className='text-white'>
-                {metrics.cls.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </strong>
-            </span>
-          )}
-          <span className='text-xs text-slate-400'>Gemessen in deinem Browser, nicht behauptet.</span>
-        </>
-      ) : (
-        <span>misst …</span>
-      )}
+          <Gauge
+            aria-hidden='true'
+            className='h-4 w-4 text-accent-web'
+          />
+          Live gemessen – diese Seite bei dir
+        </p>
+        <dl
+          aria-live='polite'
+          aria-busy={!metrics}
+          className='mt-4 grid grid-cols-3 gap-3'>
+          {tiles.map((tile) => (
+            <div
+              key={tile.label}
+              className='rounded-xl border border-white/10 bg-white/5 px-3 py-2.5'>
+              <dt className='text-[11px] leading-tight text-slate-400'>{tile.label}</dt>
+              <dd
+                className={`mt-1 text-xl font-bold tabular-nums leading-none ${
+                  tile.accent ? 'text-accent-web' : 'text-white'
+                } ${tile.value ? '' : 'animate-pulse text-slate-500'}`}>
+                {tile.value ?? '–'}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p className='mt-3 text-xs text-slate-400'>Gemessen in deinem Browser, nicht behauptet.</p>
+      </div>
     </div>
   );
 }
