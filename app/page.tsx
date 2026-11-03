@@ -32,8 +32,6 @@ function isFront(angle: number) {
   return angle > 90 && angle < 270;
 }
 
-/** Echte Zeile aus components/HubLink.tsx – Dekor der Web-Hälfte. */
-const codeLines = ['// components/HubLink.tsx', 'hub.dataset.chosen = side;'];
 
 const InfoOrbTitel = `"Stefan, du musst dich entscheiden! Entweder du bist Entwickler oder Coach!"`;
 const InfoOrbText = `Das hörte ich beim Launch von einem Marketing-Profi. "Konzentriere dich auf eine Sache! - Alles andere versteht niemand."
@@ -95,11 +93,6 @@ export default function Home() {
                 aria-hidden='true'
                 className='hub-bg hub-bg--web'>
                 <span className='hub-scan' />
-                <pre className='hub-code'>
-                  {codeLines.map((line) => (
-                    <span key={line}>{line}</span>
-                  ))}
-                </pre>
               </div>
               <div className='hub-copy hub-copy--web'>
                 <span className='hub-eyebrow'>Webdevelopment</span>
