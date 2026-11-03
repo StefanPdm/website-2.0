@@ -34,8 +34,8 @@ export default async function Image({ params }: { params: Promise<{ typ: string 
         title={`Der ${type}`}
         subtitle={`${short}. Welcher Typ bist du? ${questions.length} Fragen, kostenlos.`}
         footer='Stefan Heinemann Coaching · Potsdam · Berlin · Online'
-        background='linear-gradient(135deg, #050b12 0%, #062430 55%, #041a16 100%)'
-        accent='#7de3ff'
+        background='linear-gradient(135deg, #140c06 0%, #2e1a0b 55%, #1a0f06 100%)'
+        accent='#f6b35a'
         textColor='#e6f7ff'
         mutedColor='rgba(230,247,255,0.72)'
       />

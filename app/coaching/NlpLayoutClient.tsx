@@ -1,56 +1,25 @@
-'use client';
-
-import { createContext, useContext, useMemo, useState } from 'react';
 import { Public_Sans } from 'next/font/google';
 
 import NlpFooter from '@/app/coaching/components/NlpFooter';
 import NlpHeader from '@/app/coaching/components/NlpHeader';
 import WorldSwitch from '@/app/coaching/components/WorldSwitch';
 
-type NlpThemeContextValue = {
-  isWarmTheme: boolean;
-  toggleTheme: () => void;
-};
-
-const NlpThemeContext = createContext<NlpThemeContextValue | null>(null);
-
 const publicSans = Public_Sans({ subsets: ['latin'], display: 'swap' });
 
-export function useNlpTheme() {
-  const context = useContext(NlpThemeContext);
-  if (!context) {
-    throw new Error('useNlpTheme must be used within the NLP layout');
-  }
-  return context;
-}
-
+/**
+ * Rahmen von Welt A. Seit 2026-11 ein festes Farbkonzept (`.theme-coaching`,
+ * app/globals.css) – kein Umschalter, kein Theme-State mehr. Der Dateiname
+ * stammt aus der Zeit, als hier noch Client-State lag.
+ */
 export default function NlpLayoutClient({ children }: { children: React.ReactNode }) {
-  const [isWarmTheme, setIsWarmTheme] = useState(false);
-
-  const contextValue = useMemo(
-    () => ({
-      isWarmTheme,
-      toggleTheme: () => setIsWarmTheme((prev) => !prev),
-    }),
-    [isWarmTheme],
-  );
-
   return (
-    <NlpThemeContext.Provider value={contextValue}>
-      <div
-        className={`${publicSans.className} relative min-h-dvh ${
-          isWarmTheme ? 'theme-warm' : 'theme-cool'
-        }`}>
-        <div className='relative isolate overflow-hidden'>
-          <NlpHeader
-            isWarmTheme={isWarmTheme}
-            onToggleTheme={contextValue.toggleTheme}
-          />
-          <WorldSwitch />
-          <main>{children}</main>
-          <NlpFooter />
-        </div>
+    <div className={`${publicSans.className} theme-coaching relative min-h-dvh`}>
+      <div className='relative isolate overflow-hidden'>
+        <NlpHeader />
+        <WorldSwitch />
+        <main>{children}</main>
+        <NlpFooter />
       </div>
-    </NlpThemeContext.Provider>
+    </div>
   );
 }

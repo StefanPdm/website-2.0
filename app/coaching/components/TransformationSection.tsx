@@ -8,10 +8,6 @@ import LazyEffect from '@/components/LazyEffect';
 // Dynamisch statt statisch (CLAUDE.md §9): three.js lädt erst, wenn LazyEffect es freigibt.
 const LaserFlow = dynamic(() => import('@/components/LaserFlow'), { ssr: false });
 
-type TransformationSectionProps = {
-  isWarmTheme: boolean;
-};
-
 /** Ablauf aus Klientensicht – beginnt bewusst beim kostenlosen Erstgespräch. */
 const steps = [
   {
@@ -32,7 +28,7 @@ const steps = [
   },
 ];
 
-export default function TransformationSection({ isWarmTheme }: TransformationSectionProps) {
+export default function TransformationSection() {
   return (
     <section
       id='ablauf'
@@ -40,11 +36,14 @@ export default function TransformationSection({ isWarmTheme }: TransformationSec
       <div className='container mx-auto px-4'>
         <div className='pointer-events-none absolute inset-0 -z-10 top-0 rotate-180 md:rotate-0 md:bottom-0'>
           <div className='absolute inset-0 opacity-90'>
+            {/* Großer Vorlauf: three.js lädt und der Strahl blendet auf, bevor die
+                Sektion im Bild ist – mit 300 px stand er erst nach Sekunden. */}
             <LazyEffect
               className='h-full w-full'
-              minWidth={0}>
+              minWidth={0}
+              rootMargin='1400px 0px'>
               <LaserFlow
-                color={isWarmTheme ? '#b97029' : '#79d9f5'}
+                color='#f6b35a'
                 wispDensity={1}
                 flowSpeed={0.35}
                 verticalSizing={1.2}

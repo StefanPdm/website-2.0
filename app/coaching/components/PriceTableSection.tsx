@@ -60,15 +60,15 @@ function OfferCard({ offer }: { offer: CoachingOffer }) {
         <div>
           <span
             className={`inline-flex items-center rounded-full border border-(--accent)/40 px-3 py-1 text-[0.65rem] uppercase tracking-[0.25em] ${
-              isMentoring ? 'bg-(--accent)/10 font-semibold text-accent' : 'bg-white/5 text-white/70'
+              isMentoring ? 'bg-(--accent)/10 font-semibold text-accent' : 'bg-surface text-(--text)/70'
             }`}>
             {isMentoring ? 'Mentoring' : 'Session'}
           </span>
-          <p className='mt-3 text-xs uppercase tracking-[0.3em] text-white/60'>{offer.duration}</p>
-          <h4 className='mt-2 text-lg font-semibold text-white'>{offer.title}</h4>
+          <p className='mt-3 text-xs uppercase tracking-[0.3em] text-(--text)/60'>{offer.duration}</p>
+          <h4 className='mt-2 text-lg font-semibold text-(--text)'>{offer.title}</h4>
         </div>
         <div className='flex flex-col items-end gap-2'>
-          <span className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-lg'>
+          <span className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-strong text-lg'>
             <Icon
               aria-hidden='true'
               className='h-5 w-5 text-accent'
@@ -82,13 +82,13 @@ function OfferCard({ offer }: { offer: CoachingOffer }) {
         </div>
       </div>
 
-      <div className='mt-6 text-3xl font-semibold text-white'>{offer.price}</div>
-      <p className='mt-2 text-xs text-white/60'>
+      <div className='mt-6 text-3xl font-semibold text-(--text)'>{offer.price}</div>
+      <p className='mt-2 text-xs text-(--text)/60'>
         inkl. MwSt.
         {offer.perSession && <span className='text-accent'> · {offer.perSession}</span>}
       </p>
 
-      <ul className='mt-5 flex-1 space-y-3 text-sm text-white/75'>
+      <ul className='mt-5 flex-1 space-y-3 text-sm text-(--text)/75'>
         {offer.bullets.map((bullet) => (
           <li
             key={bullet}
@@ -103,7 +103,7 @@ function OfferCard({ offer }: { offer: CoachingOffer }) {
         ))}
       </ul>
 
-      <p className='mt-6 text-xs text-white/60'>{offer.note}</p>
+      <p className='mt-6 text-xs text-(--text)/60'>{offer.note}</p>
 
       {offer.highlight ? (
         <PrimaryButton
@@ -129,8 +129,8 @@ export default function PriceTableSection() {
       className='relative flex min-h-[80dvh] flex-col items-center justify-center bg-(--section-bg-accent) py-20 backdrop-blur-2xl'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Preisübersicht</h2>
-          <p className='mt-4 text-base text-white/70 sm:text-lg'>
+          <h2 className='text-3xl font-semibold text-(--text) sm:text-4xl'>Preisübersicht</h2>
+          <p className='mt-4 text-base text-(--text)/70 sm:text-lg'>
             Klar, transparent, ohne versteckte Kosten. Alle Preise inklusive Mehrwertsteuer.
           </p>
         </div>
@@ -153,13 +153,13 @@ export default function PriceTableSection() {
                 <span className='inline-flex items-center rounded-full border border-(--accent)/40 bg-(--accent)/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-accent'>
                   Einstieg
                 </span>
-                <h3 className='mt-4 text-xl font-semibold text-white sm:text-2xl'>
+                <h3 className='mt-4 text-xl font-semibold text-(--text) sm:text-2xl'>
                   {entryOffer.title}
                 </h3>
-                <p className='mt-2 text-xs uppercase tracking-[0.2em] text-white/60'>
+                <p className='mt-2 text-xs uppercase tracking-[0.2em] text-(--text)/60'>
                   {entryOffer.duration}
                 </p>
-                <ul className='mt-5 space-y-2 text-sm text-white/75'>
+                <ul className='mt-5 space-y-2 text-sm text-(--text)/75'>
                   {entryOffer.bullets.map((bullet) => (
                     <li
                       key={bullet}
@@ -177,14 +177,14 @@ export default function PriceTableSection() {
               <div className='shrink-0 md:text-right'>
                 <div className='flex items-baseline gap-3 md:justify-end'>
                   {entryOffer.regularPrice && (
-                    <s className='text-xl text-white/50'>
+                    <s className='text-xl text-(--text)/50'>
                       <span className='sr-only'>statt </span>
                       {entryOffer.regularPrice}
                     </s>
                   )}
-                  <span className='text-4xl font-semibold text-white'>{entryOffer.price}</span>
+                  <span className='text-4xl font-semibold text-(--text)'>{entryOffer.price}</span>
                 </div>
-                <p className='mt-2 text-xs text-white/60'>
+                <p className='mt-2 text-xs text-(--text)/60'>
                   {entryOffer.regularPrice ? 'Kostenloses Erstgespräch' : 'inkl. MwSt.'}
                 </p>
                 <PrimaryButton
@@ -200,8 +200,8 @@ export default function PriceTableSection() {
         {/* Ebene 1: Sessions und Kontingente */}
         <div className='mt-14'>
           <div className='mx-auto max-w-3xl text-center'>
-            <h3 className='text-xl font-semibold text-white'>Einzelsessions & Pakete</h3>
-            <p className='mt-3 text-sm text-white/70'>
+            <h3 className='text-xl font-semibold text-(--text)'>Einzelsessions & Pakete</h3>
+            <p className='mt-3 text-sm text-(--text)/70'>
               Du bestimmst das Tempo. Je größer das Kontingent, desto günstiger die einzelne
               Session.
             </p>
@@ -219,8 +219,8 @@ export default function PriceTableSection() {
         {/* Ebene 2: Begleitung */}
         <div className='mt-16'>
           <div className='mx-auto max-w-3xl text-center'>
-            <h3 className='text-xl font-semibold text-white'>Mentoring</h3>
-            <p className='mt-3 text-sm text-white/70'>
+            <h3 className='text-xl font-semibold text-(--text)'>Mentoring</h3>
+            <p className='mt-3 text-sm text-(--text)/70'>
               Kein Sessionpaket, sondern durchgehende Begleitung: feste Sessions, dazu Support
               zwischen den Terminen und eine Roadmap, an der wir gemeinsam entlangarbeiten.
             </p>
@@ -235,7 +235,7 @@ export default function PriceTableSection() {
           </div>
         </div>
 
-        <p className='mx-auto mt-12 max-w-3xl text-center text-xs text-white/50'>
+        <p className='mx-auto mt-12 max-w-3xl text-center text-xs text-(--text)/50'>
           Welche Variante zu dir passt, klären wir in der kostenlosen Klarheits-Session — auch, ob Coaching
           überhaupt das richtige Mittel für dein Anliegen ist.
         </p>

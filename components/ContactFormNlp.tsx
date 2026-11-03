@@ -11,7 +11,7 @@ export default function ContactFormNlp() {
     return (
       <div className='rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] p-6 text-[var(--text)] shadow-[0_20px_60px_var(--glow)] backdrop-blur-xl'>
         <div className='flex items-start gap-4'>
-          <span className='grid h-12 w-12 place-items-center rounded-full bg-emerald-500/15 text-emerald-700 ring-1 ring-emerald-400/30'>
+          <span className='grid h-12 w-12 place-items-center rounded-full bg-(--accent)/15 text-accent ring-1 ring-(--accent)/30'>
             <CheckCircle2 className='h-7 w-7' />
           </span>
           <div className='flex-1'>
@@ -163,7 +163,7 @@ export default function ContactFormNlp() {
             name='message'
             rows={5}
             required
-            className='w-full min-w-0 rounded-xl border border-white/20 bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'></textarea>
+            className='w-full min-w-0 rounded-xl border border-border bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'></textarea>
         </div>
         {/*
           Einwilligung: Der Hinweistext ist das Label, der Link steht daneben.

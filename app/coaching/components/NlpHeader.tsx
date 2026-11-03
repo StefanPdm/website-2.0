@@ -3,15 +3,10 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronDown, Menu, Moon, Sun, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { PrimaryButton } from '@/app/coaching/components/Buttons';
-
-type NlpHeaderProps = {
-  isWarmTheme: boolean;
-  onToggleTheme: () => void;
-};
 
 /**
  * Kopfzeile von Welt A.
@@ -100,7 +95,7 @@ function subscribeToScroll(onChange: () => void) {
   return () => window.removeEventListener('scroll', onChange);
 }
 
-export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps) {
+export default function NlpHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // useSyncExternalStore statt Effekt: liest den Scrollstand direkt aus dem
   // Browser, ohne beim Mounten einen zusätzlichen Render auszulösen.
@@ -398,16 +393,6 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
 
         {/* Aktionen */}
         <div className='ml-auto flex shrink-0 items-center gap-2 hdr:ml-0'>
-          <button
-            type='button'
-            onClick={onToggleTheme}
-            aria-pressed={isWarmTheme}
-            aria-label={isWarmTheme ? 'Zum kühlen Design wechseln' : 'Zum warmen Design wechseln'}
-            title={isWarmTheme ? 'Kühles Design' : 'Warmes Design'}
-            className='hidden h-10 w-10 cursor-pointer place-items-center rounded-full border border-border bg-surface text-(--text) transition hover:bg-surface-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent hdr:grid'>
-            {isWarmTheme ? <Moon className='h-4 w-4' /> : <Sun className='h-4 w-4' />}
-          </button>
-
           <PrimaryButton
             href={sectionHref('kontakt')}
             onClick={handleContactClick}
@@ -495,18 +480,10 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
           </nav>
 
           <div className='mt-3 border-t border-border pt-3'>
-            <button
-              type='button'
-              onClick={onToggleTheme}
-              aria-pressed={isWarmTheme}
-              className='flex w-full cursor-pointer items-center justify-between rounded-xl px-4 py-2.5 text-sm font-semibold text-(--muted) transition hover:bg-surface hover:text-(--text)'>
-              <span>{isWarmTheme ? 'Kühles Design' : 'Warmes Design'}</span>
-              {isWarmTheme ? <Moon className='h-4 w-4' /> : <Sun className='h-4 w-4' />}
-            </button>
             <PrimaryButton
               href={sectionHref('kontakt')}
               onClick={handleContactClick}
-              className='mt-2 w-full'>
+              className='w-full'>
               Gratis Erstgespräch
             </PrimaryButton>
           </div>

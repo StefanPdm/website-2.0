@@ -4,7 +4,7 @@
  * Bewusst **Inline-SVG statt Bilddateien**:
  *
  *  - Sie färben sich über `currentColor` und die Theme-Variablen selbst ein und
- *    funktionieren dadurch im Kühl- wie im Warm-Theme, ohne zwei Bildsätze.
+ *    folgen dadurch automatisch dem Farbkonzept von Welt A.
  *  - Zusammen unter 2 KB statt zweier Rasterbilder — bei einem rein
  *    dekorativen Element wäre alles andere Verschwendung.
  *  - Beliebig skalierbar, kein Nachschärfen auf Retina nötig.

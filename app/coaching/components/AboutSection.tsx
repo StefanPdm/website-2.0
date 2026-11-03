@@ -90,7 +90,7 @@ export default function AboutSection() {
           <div className='grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'>
             {/* left side */}
             <GlassCard className='p-6 order-2 md:order-1'>
-              <div className='relative overflow-hidden rounded-2xl bg-white/5'>
+              <div className='relative overflow-hidden rounded-2xl bg-surface'>
                 <div className='aspect-5/4 w-full overflow-hidden'>
                   <div
                     className='flex h-full w-full transition-transform duration-700 ease-out'
@@ -110,8 +110,8 @@ export default function AboutSection() {
                     ))}
                   </div>
                 </div>
-                <div className='absolute inset-0 ring-1 ring-white/10' />
-                <div className='absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-2 backdrop-blur'>
+                <div className='absolute inset-0 ring-1 ring-border' />
+                <div className='absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-border bg-surface-strong px-3 py-2 backdrop-blur'>
                   {images.map((_, index) => (
                     <button
                       key={index}
@@ -119,21 +119,21 @@ export default function AboutSection() {
                       onClick={() => setActiveImage(index)}
                       className={`h-2 w-2 rounded-full transition cursor-pointer ${
                         index === activeImage
-                          ? 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
-                          : 'bg-white/40 hover:bg-white/70'
+                          ? 'bg-(--accent) shadow-[0_0_8px_rgba(246,179,90,0.8)]'
+                          : 'bg-(--text)/40 hover:bg-(--text)/70'
                       }`}
                       aria-label={`Bild ${index + 1} anzeigen`}
                     />
                   ))}
                 </div>
               </div>
-              <div className='mt-5 space-y-2 text-sm text-white/70 '>
+              <div className='mt-5 space-y-2 text-sm text-(--text)/70 '>
                 <p>
-                  <span className='font-bold text-white'>Schwerpunkte:</span> Identität
+                  <span className='font-bold text-(--text)'>Schwerpunkte:</span> Identität
                   &nbsp;|&nbsp; Entscheidungen &nbsp;|&nbsp; innere Ausrichtung.
                 </p>
                 <p>
-                  <span className='font-bold text-white'>Formate:</span> 1:1 Sessions &nbsp;|&nbsp;
+                  <span className='font-bold text-(--text)'>Formate:</span> 1:1 Sessions &nbsp;|&nbsp;
                   Workshops &nbsp;|&nbsp; Keynotes.
                 </p>
               </div>
@@ -148,11 +148,11 @@ export default function AboutSection() {
             </GlassCard>
             {/* right side */}
             <div className='order-1 md:order-2'>
-              <p className='text-xs uppercase tracking-[0.3em] text-[#7DE3FF]'>Über mich</p>
-              <h2 className='mt-4 text-3xl font-semibold text-white sm:text-4xl'>
+              <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Über mich</p>
+              <h2 className='mt-4 text-3xl font-semibold text-(--text) sm:text-4xl'>
                 Stefan Heinemann
               </h2>
-              <p className='mt-4 text-base text-white/70 sm:text-lg'>
+              <p className='mt-4 text-base text-(--text)/70 sm:text-lg'>
                 Ich begleite vor allem Unternehmer dabei, aus innerem Chaos klare Entscheidungen zu formen. NLP
                 nutze ich pragmatisch: als Werkzeugkasten für Fokus, emotionale Stabilität und
                 zielgerichtetes Handeln – ohne leere Versprechen.
@@ -161,7 +161,7 @@ export default function AboutSection() {
                 {['Life Coach für Unternehmer', 'Identität & Entscheidungen', 'Potsdam'].map((item) => (
                   <span
                     key={item}
-                    className='rounded-full border border-(--border) bg-white/5 px-4 py-2 text-xs text-white/80'>
+                    className='rounded-full border border-(--border) bg-surface px-4 py-2 text-xs text-(--text)/80'>
                     {item}
                   </span>
                 ))}
@@ -191,13 +191,13 @@ export default function AboutSection() {
                   <GlassCard
                     key={item.title}
                     className='p-5'>
-                    <h3 className='text-base font-semibold text-white'>{item.title}</h3>
-                    <p className='mt-2 text-sm text-white/70'>{item.text}</p>
+                    <h3 className='text-base font-semibold text-(--text)'>{item.title}</h3>
+                    <p className='mt-2 text-sm text-(--text)/70'>{item.text}</p>
                   </GlassCard>
                 ))}
               </div>
               <GlassCard className='mt-8 p-5'>
-                <p className='text-xs uppercase tracking-[0.2em] text-white/60'>
+                <p className='text-xs uppercase tracking-[0.2em] text-(--text)/60'>
                   Zertifizierungen durch:
                 </p>
                 <div className='mt-2 flex items-center  gap-[10%] justify-start'>
@@ -214,7 +214,7 @@ export default function AboutSection() {
                         height={30}
                         width={120}
                       />
-                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-white/70 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-black/90 opacity-0 shadow-[0_10px_30px_rgba(11,27,43,0.25)] transition-opacity group-hover/tooltip:opacity-100'>
+                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-(--text)/90 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-(--bg) opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-opacity group-hover/tooltip:opacity-100'>
                         DVNLP – Deutscher Verband für Neuro-Linguistisches Programmieren
                       </span>
                     </span>
@@ -232,7 +232,7 @@ export default function AboutSection() {
                         height={30}
                         width={120}
                       />
-                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-white/70 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-black/90 opacity-0 shadow-[0_10px_30px_rgba(11,27,43,0.25)] transition-opacity group-hover/tooltip:opacity-100'>
+                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-(--text)/90 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-(--bg) opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-opacity group-hover/tooltip:opacity-100'>
                         Ronny Rohde - Best Life NLP
                       </span>
                     </span>
@@ -251,19 +251,19 @@ export default function AboutSection() {
           <button
             type='button'
             onClick={() => setAboutModal(null)}
-            className='absolute inset-0 bg-[#050B12]/60 backdrop-blur-sm'
+            className='absolute inset-0 bg-(--bg)/70 backdrop-blur-sm'
             aria-label='Modal schließen'
           />
           <div
             ref={dialogRef}
             tabIndex={-1}
-            className='relative w-full max-w-3xl max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-3xl border border-white/60 bg-[linear-gradient(140deg,rgba(255,255,255,0.95),rgba(230,247,255,0.86))] p-6 text-[#0B1B2B] shadow-[0_30px_90px_rgba(0,229,255,0.25)] backdrop-blur-xl'>
+            className='relative w-full max-w-3xl max-h-[calc(100dvh-5rem)] overflow-y-auto rounded-3xl border border-white/60 bg-[linear-gradient(140deg,rgba(255,248,238,0.97),rgba(246,228,205,0.92))] p-6 text-[#2b1a0f] shadow-[0_30px_90px_rgba(246,179,90,0.25)] backdrop-blur-xl'>
             <div className='flex items-start justify-between gap-4'>
               <div>
-                <p className='text-xs uppercase tracking-[0.3em] text-[#0B1B2B]/70'>
+                <p className='text-xs uppercase tracking-[0.3em] text-[#2b1a0f]/70'>
                   {aboutModal === 'before' ? 'Vor NLP' : 'Aus- & Weiterbildungen'}
                 </p>
-                <h3 className='mt-3 text-2xl font-semibold text-[#0B1B2B]'>
+                <h3 className='mt-3 text-2xl font-semibold text-[#2b1a0f]'>
                   {aboutModal === 'before'
                     ? 'Mein beruflicher Weg vor NLP'
                     : 'Meine Aus- & Weiterbildungen + Interessen'}
@@ -278,7 +278,7 @@ export default function AboutSection() {
               </button>
             </div>
             {aboutModal === 'before' ? (
-              <div className='mt-6 space-y-6 text-sm text-[#0B1B2B]/80'>
+              <div className='mt-6 space-y-6 text-sm text-[#2b1a0f]/80'>
                 <p>
                   Vor NLP lag mein Fokus auf Leistung und Funktionieren. Nach über 20 Jahren als
                   erfolgreicher Unternehmer im Interieur Design (mit 3 Filialen und großem Team)
@@ -329,7 +329,7 @@ export default function AboutSection() {
                             href='https://www.bodylife.com/body-life-club-des-monats-sportsaal-berlin/'
                             target='_blank'
                             rel='noopener noreferrer'
-                            className='text-[#0B1B2B] underline decoration-[#0B1B2B]/30 underline-offset-2 transition hover:decoration-[#0B1B2B]'>
+                            className='text-[#2b1a0f] underline decoration-[#2b1a0f]/30 underline-offset-2 transition hover:decoration-[#2b1a0f]'>
                             Sportsaal
                           </a>
                         </>
@@ -339,41 +339,41 @@ export default function AboutSection() {
                   ].map((fact) => (
                     <div
                       key={fact.title}
-                      className='rounded-2xl border border-white/60 bg-white/70 p-4 shadow-[0_10px_30px_rgba(0,229,255,0.12)]'>
+                      className='rounded-2xl border border-white/60 bg-white/70 p-4 shadow-[0_10px_30px_rgba(246,179,90,0.12)]'>
                       <fact.icon
                         aria-hidden='true'
-                        className='h-5 w-5 text-[#0B1B2B]'
+                        className='h-5 w-5 text-[#2b1a0f]'
                       />
-                      <p className='mt-2 text-sm font-semibold text-[#0B1B2B]'>{fact.title}</p>
-                      <p className='mt-1 text-xs text-[#0B1B2B]/70'>{fact.text}</p>
+                      <p className='mt-2 text-sm font-semibold text-[#2b1a0f]'>{fact.title}</p>
+                      <p className='mt-1 text-xs text-[#2b1a0f]/70'>{fact.text}</p>
                     </div>
                   ))}
                 </div>
                 <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
-                  <p className='flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
+                  <p className='flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#2b1a0f]/60'>
                     <Lightbulb aria-hidden='true' className='h-4 w-4' />
                     Erkenntnis 1
                   </p>
-                  <p className='mt-2 text-sm text-[#0B1B2B]/80'>
+                  <p className='mt-2 text-sm text-[#2b1a0f]/80'>
                     Die Tür zum Glück geht nach innen auf.
                   </p>
                 </div>
                 <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
-                  <p className='flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
+                  <p className='flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#2b1a0f]/60'>
                     <Lightbulb aria-hidden='true' className='h-4 w-4' />
                     Erkenntnis 2
                   </p>
-                  <p className='mt-2 text-sm text-[#0B1B2B]/80'>
+                  <p className='mt-2 text-sm text-[#2b1a0f]/80'>
                     Erfolg ohne Erfüllung ist der ultimative Fehlschlag. Erfüllung ist die neue
                     Währung.
                   </p>
                 </div>
                 <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
-                  <p className='flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
+                  <p className='flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#2b1a0f]/60'>
                     <Lightbulb aria-hidden='true' className='h-4 w-4' />
                     Erkenntnis 3
                   </p>
-                  <p className='mt-2 text-sm text-[#0B1B2B]/80'>
+                  <p className='mt-2 text-sm text-[#2b1a0f]/80'>
                     Es sind nicht die Umstände oder anderen Menschen, die dein Leben bestimmen. Es
                     sind deine Entscheidungen, die du triffst oder eben nicht triffst.
                   </p>
@@ -381,7 +381,7 @@ export default function AboutSection() {
               </div>
             ) : (
               <div className='mt-6 grid gap-6'>
-                <div className='space-y-3 text-sm text-[#0B1B2B]/80'>
+                <div className='space-y-3 text-sm text-[#2b1a0f]/80'>
                   <p>
                     Meine Aus- und Weiterbildungen bündeln NLP, Kommunikation und moderne
                     Coaching-Methoden. Ergänzend fließen Mentaltraining und systemische Werkzeuge
@@ -389,11 +389,11 @@ export default function AboutSection() {
                   </p>
                 </div>
                 <div className='rounded-2xl border border-white/60 bg-white/70 p-4'>
-                  <p className='flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#0B1B2B]/60'>
+                  <p className='flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#2b1a0f]/60'>
                     <GraduationCap aria-hidden='true' className='h-4 w-4' />
                     Ausbildungen
                   </p>
-                  <ol className='mt-4 space-y-4 border-l border-[#0B1B2B]/15 pl-5'>
+                  <ol className='mt-4 space-y-4 border-l border-[#2b1a0f]/15 pl-5'>
                     {[
                       {
                         year: 'Best Life NLP - Ronny Rohde',
@@ -444,15 +444,15 @@ export default function AboutSection() {
                       <li
                         key={item.text}
                         className='relative'>
-                        <span className='absolute -left-6.75 top-1.5 h-3 w-3 rounded-full bg-[#00E5FF] shadow-[0_0_10px_rgba(0,229,255,0.6)]' />
+                        <span className='absolute -left-6.75 top-1.5 h-3 w-3 rounded-full bg-(--accent) shadow-[0_0_10px_rgba(246,179,90,0.6)]' />
                         <div className='rounded-xl border border-white/60 bg-white/90 p-3'>
                           <div className='flex items-center justify-between gap-3'>
-                            <p className='text-sm font-semibold text-[#0B1B2B]'>{item.title}</p>
-                            <span className='text-xs font-semibold text-[#0B1B2B]/60'>
+                            <p className='text-sm font-semibold text-[#2b1a0f]'>{item.title}</p>
+                            <span className='text-xs font-semibold text-[#2b1a0f]/60'>
                               {item.year}
                             </span>
                           </div>
-                          <p className='mt-2 text-xs text-[#0B1B2B]/70'>{item.text}</p>
+                          <p className='mt-2 text-xs text-[#2b1a0f]/70'>{item.text}</p>
                         </div>
                       </li>
                     ))}
@@ -476,7 +476,7 @@ export default function AboutSection() {
                             href='https://www.mustang-mieten.berlin/'
                             target='_blank'
                             rel='noopener noreferrer'
-                            className='text-[#0B1B2B] underline decoration-[#0B1B2B]/30 underline-offset-2 transition hover:decoration-[#0B1B2B]'>
+                            className='text-[#2b1a0f] underline decoration-[#2b1a0f]/30 underline-offset-2 transition hover:decoration-[#2b1a0f]'>
                             mustang-mieten.berlin
                           </a>
                         </>
@@ -493,11 +493,11 @@ export default function AboutSection() {
                       className='flex items-start gap-3 rounded-2xl border border-white/60 bg-white/70 p-4'>
                       <item.icon
                         aria-hidden='true'
-                        className='mt-0.5 h-5 w-5 shrink-0 text-[#0B1B2B]'
+                        className='mt-0.5 h-5 w-5 shrink-0 text-[#2b1a0f]'
                       />
                       <div>
-                        <p className='text-sm font-semibold text-[#0B1B2B]'>{item.title}</p>
-                        <p className='mt-1 text-xs text-[#0B1B2B]/70'>{item.text}</p>
+                        <p className='text-sm font-semibold text-[#2b1a0f]'>{item.title}</p>
+                        <p className='mt-1 text-xs text-[#2b1a0f]/70'>{item.text}</p>
                       </div>
                     </div>
                   ))}

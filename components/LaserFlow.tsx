@@ -337,6 +337,12 @@ export const LaserFlow: React.FC<Props> = ({
     canvas.style.display = 'block';
     mount.appendChild(canvas);
 
+    // Patch (2026-11): Neuer Renderer = neue Leinwand (300×150). Die gemerkte
+    // Größe stammt vom vorherigen Durchlauf (StrictMode im Dev, dpr-Wechsel)
+    // und ließ setSizeNow sonst glauben, es sei nichts zu tun – der Effekt
+    // blieb unsichtbar, bis ein Resize ihn weckte.
+    lastSizeRef.current = { width: 0, height: 0, dpr: 0 };
+
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 

@@ -64,45 +64,46 @@ export default function WorkSection() {
     <section className='relative py-20 flex flex-col justify-center items-center min-h-[60dvh] overflow-hidden bg-[var(--section-bg-accent)]'>
       <div className='container mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='text-3xl font-semibold text-white sm:text-4xl'>Wobei dir Coaching hilft</h2>
-          <p className='mt-4 text-base text-white/70 sm:text-lg'>Ruhe im Körper. Fokus im Leben.</p>
+          <h2 className='text-3xl font-semibold text-(--text) sm:text-4xl'>Wobei dir Coaching hilft</h2>
+          <p className='mt-4 text-base text-(--text)/70 sm:text-lg'>Ruhe im Körper. Fokus im Leben.</p>
         </div>
         <div className='mt-12 grid gap-6 lg:grid-cols-4'>
           {workItems.map((item) => (
             <GlassCard
               key={item.title}
-              className='p-6'>
+              className='flex flex-col p-6'>
               <div className='flex items-center gap-3'>
-                <div className='flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/10 text-xl'>
+                <div className='flex h-11 w-11 items-center justify-center rounded-xl bg-surface-strong ring-1 ring-border text-xl'>
                   <item.icon
                     aria-hidden='true'
                     className='h-5 w-5 text-accent'
                   />
                 </div>
-                <h3 className='text-lg font-semibold text-white'>{item.title}</h3>
+                <h3 className='text-lg font-semibold text-(--text)'>{item.title}</h3>
               </div>
-              <p className='mt-4 text-sm text-white/70'>{item.text}</p>
-              <p className='mt-3 text-xs text-white/60 leading-relaxed'>{item.detail}</p>
-              <ul className='mt-4 space-y-2 text-xs text-white/60'>
+              <p className='mt-4 text-sm text-(--text)/70'>{item.text}</p>
+              <p className='mt-3 text-xs text-(--text)/60 leading-relaxed'>{item.detail}</p>
+              <ul className='mt-4 mb-4 space-y-2 text-xs text-(--text)/60'>
                 {item.points.map((point) => (
                   <li
                     key={point}
                     className='flex items-center gap-2'>
-                    <span className='h-1.5 w-1.5 rounded-full bg-[#7DE3FF]' />
+                    <span className='h-1.5 w-1.5 rounded-full bg-(--accent-soft)' />
                     <span>{point}</span>
                   </li>
                 ))}
               </ul>
-              <div className='mt-4 rounded-xl border border-white/10 bg-white/5 p-3'>
-                <p className='text-[11px] uppercase tracking-[0.2em] text-white/50'>
+              {/* mt-auto: „So erreichen wir das“ sitzt in allen vier Karten am unteren Rand */}
+              <div className='mt-auto rounded-xl border border-border bg-surface p-3'>
+                <p className='text-[11px] uppercase tracking-[0.2em] text-(--text)/50'>
                   So erreichen wir das
                 </p>
-                <ul className='mt-2 space-y-2 text-xs text-white/70'>
+                <ul className='mt-2 space-y-2 text-xs text-(--text)/70'>
                   {item.how.map((step) => (
                     <li
                       key={step}
                       className='flex items-start gap-2'>
-                      <span className='mt-1 h-1.5 w-1.5 rounded-full bg-[#7DE3FF]' />
+                      <span className='mt-1 h-1.5 w-1.5 rounded-full bg-(--accent-soft)' />
                       <span>{step}</span>
                     </li>
                   ))}

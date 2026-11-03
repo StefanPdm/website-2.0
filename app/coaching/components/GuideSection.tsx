@@ -67,22 +67,22 @@ export default function GuideSection() {
       <div className='container mx-auto px-4 min-h-[60dvh] flex flex-col justify-center items-center '>
         <div className='grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'>
           <div>
-            <h2 className='text-3xl font-semibold text-white sm:text-4xl'>
+            <h2 className='text-3xl font-semibold text-(--text) sm:text-4xl'>
               Sichere dir deinen kostenlosen NLP-Leitfaden
             </h2>
-            <p className='mt-4 max-w-xl text-base text-white/70 sm:text-lg'>
+            <p className='mt-4 max-w-xl text-base text-(--text)/70 sm:text-lg'>
               Praktische Übungen für Klarheit, Selbstführung und Gesprächsführung.
             </p>
             <div className='mt-8 grid gap-4 sm:grid-cols-2'>
               <GlassCard className='p-4'>
-                <p className='text-sm text-white/70'>Klarheit im Kopf</p>
-                <p className='mt-2 text-xs text-white/50'>
+                <p className='text-sm text-(--text)/70'>Klarheit im Kopf</p>
+                <p className='mt-2 text-xs text-(--text)/50'>
                   Erkenne Muster und fokussiere dich neu.
                 </p>
               </GlassCard>
               <GlassCard className='p-4'>
-                <p className='text-sm text-white/70'>Souveräne Gespräche</p>
-                <p className='mt-2 text-xs text-white/50'>
+                <p className='text-sm text-(--text)/70'>Souveräne Gespräche</p>
+                <p className='mt-2 text-xs text-(--text)/50'>
                   Sprache bewusst einsetzen und wirken lassen.
                 </p>
               </GlassCard>
@@ -92,7 +92,7 @@ export default function GuideSection() {
             {status === 'success' ? (
               <div className='rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] p-6 text-[var(--text)] shadow-[0_20px_60px_var(--glow)] backdrop-blur-xl'>
                 <div className='flex items-start gap-4'>
-                  <span className='grid h-12 w-12 place-items-center rounded-full bg-emerald-500/15 text-emerald-700 ring-1 ring-emerald-400/30'>
+                  <span className='grid h-12 w-12 place-items-center rounded-full bg-(--accent)/15 text-accent ring-1 ring-(--accent)/30'>
                     <CheckCircle2 className='h-7 w-7' />
                   </span>
                   <div className='flex-1'>
@@ -140,7 +140,7 @@ export default function GuideSection() {
                 <div>
                   <label
                     htmlFor='lead-name'
-                    className='text-sm text-white/80'>
+                    className='text-sm text-(--text)/80'>
                     Name
                   </label>
                   <input
@@ -152,8 +152,8 @@ export default function GuideSection() {
                       setFormState((prev) => ({ ...prev, name: event.target.value }))
                     }
                     onBlur={() => setTouched((prev) => ({ ...prev, name: true }))}
-                    className={`mt-2 w-full rounded-xl border bg-[#050B12]/40 px-4 py-3 text-sm text-white/90 placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF] ${
-                      hasError('name') ? 'border-red-400/70' : 'border-white/10'
+                    className={`mt-2 w-full rounded-xl border bg-(--bg)/40 px-4 py-3 text-sm text-(--text)/90 placeholder:text-(--text)/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                      hasError('name') ? 'border-red-400/70' : 'border-border'
                     }`}
                     placeholder='Dein Name'
                   />
@@ -162,7 +162,7 @@ export default function GuideSection() {
                 <div>
                   <label
                     htmlFor='lead-email'
-                    className='text-sm text-white/80'>
+                    className='text-sm text-(--text)/80'>
                     E-Mail
                   </label>
                   <input
@@ -174,8 +174,8 @@ export default function GuideSection() {
                       setFormState((prev) => ({ ...prev, email: event.target.value }))
                     }
                     onBlur={() => setTouched((prev) => ({ ...prev, email: true }))}
-                    className={`mt-2 w-full rounded-xl border bg-[#050B12]/40 px-4 py-3 text-sm text-white/90 placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF] ${
-                      hasError('email') ? 'border-red-400/70' : 'border-white/10'
+                    className={`mt-2 w-full rounded-xl border bg-(--bg)/40 px-4 py-3 text-sm text-(--text)/90 placeholder:text-(--text)/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                      hasError('email') ? 'border-red-400/70' : 'border-border'
                     }`}
                     placeholder='dein.name@email.de'
                   />
@@ -186,13 +186,13 @@ export default function GuideSection() {
                   erhoben und eine Nachricht versendet. Ohne ausdrückliche
                   Einwilligung ist das nicht zulässig – die fehlte hier bisher.
                 */}
-                <div className='flex items-start gap-2 text-xs text-white/60'>
+                <div className='flex items-start gap-2 text-xs text-(--text)/60'>
                   <input
                     id='lead-privacy'
                     type='checkbox'
                     name='privacy'
                     required
-                    className='mt-1 h-4 w-4 shrink-0 rounded border border-white/20 bg-[#050B12]/40 accent-[#00E5FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF]'
+                    className='mt-1 h-4 w-4 shrink-0 rounded border border-border bg-(--bg)/40 accent-(--accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'
                   />
                   <p>
                     <label htmlFor='lead-privacy'>
@@ -203,7 +203,7 @@ export default function GuideSection() {
                       href='/coaching/datenschutz'
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='underline underline-offset-2 transition hover:text-white'>
+                      className='underline underline-offset-2 transition hover:text-(--text)'>
                       Datenschutz ansehen
                     </a>
                   </p>
@@ -215,7 +215,7 @@ export default function GuideSection() {
                   aria-busy={loading}>
                   {loading ? 'Wird gesendet…' : 'Jetzt Link anfordern'}
                 </PrimaryButton>
-                <p className='text-xs text-white/50'>
+                <p className='text-xs text-(--text)/50'>
                   Kein Spam. Kein Verkauf. Keine weiteren Nachrichten.
                 </p>
               </form>
