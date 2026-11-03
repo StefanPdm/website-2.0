@@ -201,7 +201,7 @@ Font Welt A: `Public_Sans` (in `NlpLayoutClient` geladen).
 
 | Rolle | Wert |
 |---|---|
-| Grundfläche | `#0B1B2B` |
+| Grundfläche | `#06101c` (wie die Web-Hälfte der Startseite, seit 2026-11) |
 | Text primär | `text-white` |
 | Text sekundär | `text-slate-300` |
 | Text tertiär | `text-slate-400` / `-500` (Footer) |
@@ -209,7 +209,8 @@ Font Welt A: `Public_Sans` (in `NlpLayoutClient` geladen).
 | Brand-Gradient (CTA) | `from-[#1D6FA8] to-[#7A2C8E]` |
 | Akzent „Beweis/Check" | `#86C243` (Trust-Punkte, Listen-Bullets) |
 | Akzent „Technik" | `#2dd4bf` = Utility `text-accent-web` (Preise, ElectricBorder, Case-Hover-Glow) |
-| Hintergrund-Licht | `LightPillar` top `#1D6FA8` → bottom `#7A2C8E`, `mix-blend-mode: screen` |
+| Hintergrund | `WebBackdrop` (reines CSS, `.web-backdrop*`): Glows `#1D6FA8` / `#7A2C8E`, 32px-Raster, Scan-Balken – kein WebGL mehr |
+| CTA primär | `.web-cta` – Glanz-Pille (Gradient, Innenschatten, Glanzstreifen), wie die Web-Buttons der Startseite |
 | Radius | Karten `rounded-2xl` (16px) / innen `rounded-[22px]`, CTA `rounded-xl` |
 | Schatten | `0 30px 70px -60px rgba(0,0,0,.6)` |
 
@@ -245,7 +246,9 @@ Font Welt B: global (Plus Jakarta Sans über `--font-sans`, siehe §3.4).
 
 - Genau **ein `<h1>` pro Route**. Sektionen beginnen mit `<h2>`, Karten mit `<h3>`. Keine Ebene überspringen.
 - Zeilenumbrüche in Headlines mit `<br />` sind erlaubt und **Teil der Marke**
-  („Klare Websites. / Saubere Systeme. / Entwicklung, die trägt.") — Dreiklang beibehalten.
+  (Dreiklang „klar · sauber · wirksam“). Der Hero von Welt B erzählt seit 2026-11 die
+  Geschichte statt des Dreiklangs: „20 Jahre habe ich ein Unternehmen geführt. / Heute baue
+  ich die Systeme, die ich damals gebraucht hätte.“
 - Maximale Lesebreite: `max-w-2xl` (Welt B), `max-w-3xl` zentriert (Welt A), `max-w-xl` für Leads.
 - Kein `text-justify`, keine Silbentrennung.
 
@@ -361,7 +364,7 @@ Zielgruppe → **Über mich** → Referenzen → FAQ → Kontakt.
 |---|---|---|
 | `FloatingLines` | A | derzeit nicht eingebunden (Hero ist ein Foto) |
 | `LaserFlow` | A | Transformation-Sektion |
-| `LightPillar` | B | globaler Seitenhintergrund (`fixed inset-0`) |
+| `LightPillar` | B | derzeit nicht eingebunden (Hintergrund ist CSS, `WebBackdrop`) |
 | `Hyperspeed` | B | Streifen unter „Digitale Lösungen" |
 | `ElectricBorder` | B | Rahmen um Technologie-/Zielgruppen-/Kontaktkarten |
 | `PixelCard` | B | Service- und Prozesskarten |

@@ -38,7 +38,7 @@ export default function WebdevelopmentLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className='min-h-screen bg-[#0B1B2B] text-slate-100'>
+    <div className='min-h-screen bg-[#06101c] text-slate-100'>
       <Header />
       <WorldSwitchWeb />
       <div className=''>{children}</div>

@@ -41,7 +41,7 @@ In der Psychologie gibt es den Persönlichkeitstyp **Scanner**. Das sind Mensche
 
 Seit dem berühmten Buch von Barbara Sher über Scanner wissen wir: **Du musst dich nicht entscheiden.**
 
-**Scanner** können viele Dinge parallel tun. Dabei vermischen sich ihre Leidenschaften oft — und genau daraus entstehen einzigartige Ergebnisse.
+**Scanner** können viele Dinge parallel tun. Dabei vermischen sich ihre Leidenschaften oft — und genau daraus entsteht etwas Eigenes.
 Das ist auch mein Ansatz: Webentwicklung und Coaching sind für mich zwei Seiten derselben Medaille. Beide Bereiche profitieren voneinander und machen mich zu einem vielseitigen Dienstleister.
 
 Wenn du magst, probier doch einfach beides aus. Ich bin hier, um dich auf beiden Wegen zu begleiten — egal, ob du eine Website brauchst oder Klarheit in deinem Kopf willst.`;

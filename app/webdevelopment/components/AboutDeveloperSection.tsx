@@ -167,10 +167,9 @@ export default function AboutDeveloperSection() {
           className='mx-auto mb-10 block h-px w-24 bg-linear-to-r from-transparent via-accent-web to-transparent'
         />
         <p className='relative text-2xl font-semibold leading-snug tracking-tight text-white md:text-4xl'>
-          Ich entwickle nicht einfach Websites.{' '}
+          Eine Website ist kein Selbstzweck.{' '}
           <span className='bg-linear-to-r from-accent-web via-[#9bd7ff] to-white bg-clip-text text-transparent'>
-            Ich schaffe digitale Lösungen, die Menschen verstehen und Unternehmen wirklich
-            weiterbringen.
+            Sie soll dein Unternehmen tragen – verständlich für die, die sie nutzen.
           </span>
         </p>
       </blockquote>

@@ -56,6 +56,9 @@ import { webCases } from '@/app/webdevelopment/cases';
 
 const trustItems = ['Persönlich & direkt', 'Sauberer Code', 'Wartbar & skalierbar'];
 
+/** Hero-Kartenstapel: echte Referenzen mit Standbild (Reihenfolge aus cases.ts). */
+const heroCases = webCases.filter((entry) => entry.image).slice(0, 3);
+
 const PixelCardView = PixelCard as ComponentType<
   PropsWithChildren<{ variant?: string; className?: string }>
 >;
@@ -175,7 +178,7 @@ const techIconMap: Record<string, ReactElement> = {
 
 export default function WebdevelopmentPage() {
   return (
-    <div className='relative min-h-screen overflow-x-clip bg-[#0B1B2B] text-slate-100'>
+    <div className='relative min-h-screen overflow-x-clip bg-[#06101c] text-slate-100'>
       <WebStructuredData
         cases={webCases.map((entry) => ({
           ...entry,
@@ -196,24 +199,24 @@ export default function WebdevelopmentPage() {
             {/* Left: All content left-aligned */}
             <div className='flex-1 flex flex-col justify-center items-start'>
               <p className='inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 mb-6 max-w-105'>
-                Webentwicklung in Potsdam · Technischer Möglichmacher
+                Webentwicklung in Potsdam · 20 Jahre Unternehmer
               </p>
-              <h1 className='text-4xl font-extrabold tracking-tight text-white md:text-5xl mb-8 max-w-130'>
-                Klare Websites.
+              <h1 className='text-[2rem] leading-tight font-extrabold tracking-tight text-white md:text-[2.6rem] mb-8 max-w-150'>
+                20 Jahre habe ich ein Unternehmen geführt.
                 <br />
-                Saubere Systeme.
-                <br />
-                Entwicklung, die trägt.
+                <span className='bg-linear-to-r from-[#9bc7ff] via-accent-web to-white bg-clip-text text-transparent'>
+                  Heute baue ich die Systeme, die ich damals gebraucht hätte.
+                </span>
               </h1>
               <p className='text-lg text-slate-300 mb-8 max-w-130'>
                 Webentwicklung aus Potsdam für Unternehmer, Coaches und Teams in Berlin und
-                Brandenburg, die keine Bastellösungen wollen – sondern Struktur, Performance und
-                Zukunftssicherheit.
+                Brandenburg: Websites, Shops und Kundenportale mit Struktur, Performance und
+                Zukunftssicherheit – statt Bastellösungen.
               </p>
               <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 w-full sm:w-auto'>
                 <a
                   href='#kontakt'
-                  className='rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 text-center w-full sm:w-auto'>
+                  className='web-cta px-5 py-3 text-sm font-semibold text-center w-full sm:w-auto'>
                   Projekt anfragen
                 </a>
                 <a
@@ -243,81 +246,34 @@ export default function WebdevelopmentPage() {
                   verticalDistance={85}
                   delay={3500}
                   pauseOnHover>
-                  <CardView
-                    style={{
-                      borderRadius: 28,
-                      background: 'rgba(11, 27, 43, 0.82)',
-                      border: '1px solid rgba(255, 255, 255, 0.14)',
-                      boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
-                    }}
-                    className='text-slate-100'>
-                    <div className='flex h-full flex-col justify-between p-6'>
-                      <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                        Kompetenz 1/3
-                      </div>
-                      <div className='mt-5 flex items-start gap-3'>
-                        <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
-                          <Code2 className='h-6 w-6' />
-                        </span>
-                        <div>
-                          <div className='text-sm font-semibold'>UI Mockups / Code Snippets</div>
-                          <div className='mt-1 text-xs text-slate-300'>
-                            Saubere UI-Struktur, realistische Prototypen.
+                  {heroCases.map((entry) => (
+                    <CardView
+                      key={entry.name}
+                      style={{
+                        borderRadius: 28,
+                        background: '#06101c',
+                        border: '1px solid rgba(255, 255, 255, 0.14)',
+                        boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
+                        overflow: 'hidden',
+                      }}
+                      className='text-slate-100'>
+                      <div className='relative h-full w-full'>
+                        <Image
+                          src={entry.image as string}
+                          alt={`Website ${entry.name}`}
+                          fill
+                          sizes='380px'
+                          className='object-cover object-top'
+                        />
+                        <div className='absolute inset-x-0 bottom-0 bg-linear-to-t from-[#06101c] via-[#06101c]/90 to-transparent p-5 pt-12'>
+                          <div className='text-xs font-semibold uppercase tracking-[0.2em] text-accent-web'>
+                            {entry.status}
                           </div>
+                          <div className='mt-1 text-sm font-semibold text-white'>{entry.name}</div>
                         </div>
                       </div>
-                    </div>
-                  </CardView>
-                  <CardView
-                    style={{
-                      borderRadius: 28,
-                      background: 'rgba(11, 27, 43, 0.82)',
-                      border: '1px solid rgba(255, 255, 255, 0.14)',
-                      boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
-                    }}
-                    className='text-slate-100'>
-                    <div className='flex h-full flex-col justify-between p-6'>
-                      <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                        Kompetenz 2/3
-                      </div>
-                      <div className='mt-5 flex items-start gap-3'>
-                        <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
-                          <Boxes className='h-6 w-6' />
-                        </span>
-                        <div>
-                          <div className='text-sm font-semibold'>Architektur & Systeme</div>
-                          <div className='mt-1 text-xs text-slate-300'>
-                            Logik, Datenflüsse, skalierbare Struktur.
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardView>
-                  <CardView
-                    style={{
-                      borderRadius: 28,
-                      background: 'rgba(11, 27, 43, 0.82)',
-                      border: '1px solid rgba(255, 255, 255, 0.14)',
-                      boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
-                    }}
-                    className='text-slate-100'>
-                    <div className='flex h-full flex-col justify-between p-6'>
-                      <div className='text-xs font-semibold uppercase tracking-[0.3em] text-slate-300'>
-                        Kompetenz 3/3
-                      </div>
-                      <div className='mt-5 flex items-start gap-3'>
-                        <span className='mt-0.5 grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-white/80'>
-                          <Sparkles className='h-6 w-6' />
-                        </span>
-                        <div>
-                          <div className='text-sm font-semibold'>Skalierbare Prozesse</div>
-                          <div className='mt-1 text-xs text-slate-300'>
-                            Stabiler Betrieb, saubere Übergabe, Wartung.
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardView>
+                    </CardView>
+                  ))}
                 </CardSwapView>
               </div>
               <div className='pointer-events-none absolute -bottom-6 right-0 hidden h-24 w-24 rounded-3xl bg-[#1D6FA8]/30 blur-xl md:block'></div>
@@ -447,7 +403,7 @@ export default function WebdevelopmentPage() {
                 variant='blue'
                 className='w-full bg-[#0B1B2B]/70 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
                 <div className='relative z-10 w-full rounded-[22px] border border-white/20 bg-white/5 p-5 text-slate-100 h-full'>
-                  <div className='text-sm font-semibold text-accent-web'>Step {index + 1}</div>
+                  <div className='text-sm font-semibold text-accent-web'>Schritt {index + 1}</div>
                   <div className='mt-3 flex flex-col gap-2 text-sm font-semibold text-white items-center'>
                     <span className='my-6 grid h-16 w-16 place-items-center rounded-full bg-white/10 text-accent-web'>
                       {processIconMap[step.title]}

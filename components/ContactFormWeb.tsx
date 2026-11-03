@@ -72,7 +72,7 @@ export default function ContactFormWeb() {
             id='web-name'
             name='name'
             required
-            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'
           />
         </div>
         <div className='grid gap-1'>
@@ -84,7 +84,7 @@ export default function ContactFormWeb() {
             name='email'
             type='email'
             required
-            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'
           />
         </div>
         <div className='grid gap-1'>
@@ -94,7 +94,7 @@ export default function ContactFormWeb() {
           <input
             id='web-company'
             name='company'
-            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'
           />
         </div>
         <div className='grid gap-1'>
@@ -106,7 +106,7 @@ export default function ContactFormWeb() {
             name='website'
             type='url'
             placeholder='https://…'
-            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'
+            className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'
           />
         </div>
         <div className='grid gap-1'>
@@ -117,7 +117,7 @@ export default function ContactFormWeb() {
             id='web-projectType'
             name='projectType'
             required
-            className='select-caret h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
+            className='select-caret h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'>
             <option value=''>Bitte wählen</option>
             <option>Website / Landingpage</option>
             <option>Web App / Kundenportal</option>
@@ -132,7 +132,7 @@ export default function ContactFormWeb() {
             id='web-scope'
             name='scope'
             required
-            className='select-caret h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
+            className='select-caret h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'>
             <option value=''>Bitte wählen</option>
             <option>Design + Entwicklung</option>
             <option>Entwicklung (Design vorhanden)</option>
@@ -146,7 +146,7 @@ export default function ContactFormWeb() {
           <select
             id='web-budget'
             name='budget'
-            className='select-caret h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
+            className='select-caret h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'>
             <option value=''>Budgetrahmen</option>
             <option>Unter 2.500 €</option>
             <option>2.500 – 7.500 €</option>
@@ -162,7 +162,7 @@ export default function ContactFormWeb() {
             id='web-timeline'
             name='timeline'
             required
-            className='select-caret h-11 w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 text-black outline-none focus:border-white/40 focus:bg-white/15 focus:text-white/90'>
+            className='select-caret h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'>
             <option value=''>Bitte wählen</option>
             <option>2–4 Wochen</option>
             <option>1–2 Monate</option>
@@ -179,7 +179,7 @@ export default function ContactFormWeb() {
             name='message'
             rows={5}
             required
-            className='w-full min-w-0 rounded-xl border border-white/20 bg-white/40 px-3 py-2 text-black placeholder-white/40 outline-none focus:border-white/40 focus:bg-white/15'></textarea>
+            className='w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 py-2 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'></textarea>
         </div>
         {/* Hinweistext als Label, Link daneben – siehe ContactFormNlp. */}
         <div className='flex items-start gap-2 text-xs text-slate-300'>
@@ -207,7 +207,7 @@ export default function ContactFormWeb() {
           type='submit'
           disabled={loading}
           aria-busy={loading}
-          className='h-11 rounded-xl bg-linear-to-r from-[#1D6FA8] to-[#7A2C8E] text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60'>
+          className='web-cta h-11 text-sm font-semibold disabled:opacity-60'>
           {loading ? 'Wird gesendet…' : 'Anfrage senden'}
         </button>
         <p className='text-xs text-slate-400'>Kein Spam. Kein Weiterverkauf.</p>
