@@ -235,15 +235,27 @@ export default function Home() {
 
           {/* Kein Kontakt auf der Startseite: Jede Welt hat ihr eigenes Formular. */}
           <div className='hub-below'>
-            <Link
-              href='/webdevelopment/ki-check'
-              className='hub-kicheck'>
-              <span className='hub-kicheck__badge'>Kostenlos</span>
-              Findet ChatGPT deine Website?
-              <span className='whitespace-nowrap'>
-                KI-Check <span aria-hidden='true'>→</span>
-              </span>
-            </Link>
+            {/* Je ein kostenloser Einstieg pro Welt, in deren Farbe */}
+            <div className='hub-freebies'>
+              <Link
+                href='/webdevelopment/ki-check'
+                className='hub-kicheck'>
+                <span className='hub-kicheck__badge'>Kostenlos</span>
+                Findet ChatGPT deine Website?
+                <span className='whitespace-nowrap'>
+                  KI-Check <span aria-hidden='true'>→</span>
+                </span>
+              </Link>
+              <Link
+                href='/coaching/persoenlichkeitstest'
+                className='hub-kicheck hub-kicheck--coach'>
+                <span className='hub-kicheck__badge'>Kostenlos</span>
+                Wie tickst du?
+                <span className='whitespace-nowrap'>
+                  Persönlichkeitstest <span aria-hidden='true'>→</span>
+                </span>
+              </Link>
+            </div>
 
             <p className='landing-tip'>Tipp: Bei mir kannst du jederzeit wechseln. Oder beides machen.</p>
 

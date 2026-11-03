@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { Check, Loader2, X } from 'lucide-react';
+import { Check, Loader2, Share2, X } from 'lucide-react';
 
 import { useFormShield } from '@/components/FormShield';
 import type { CheckResult } from '@/lib/ki-check';
@@ -21,6 +21,44 @@ function verdict(score: number) {
   if (score >= 65) return 'Solide – mit Luft nach oben';
   if (score >= 40) return 'Deutliche Lücken';
   return 'Für KI kaum sichtbar';
+}
+
+/**
+ * Ergebnis teilen: Web Share API, sonst Zwischenablage. Geteilt wird nur die
+ * Punktzahl, die Domain und der Link zum Check – das Vorschaubild kommt aus
+ * ki-check/opengraph-image.tsx. Jede geteilte Punktzahl lädt zum Nachprüfen ein.
+ */
+function ShareScore({ score, host }: { score: number; host: string }) {
+  const [copied, setCopied] = useState(false);
+
+  async function share() {
+    const url = `${window.location.origin}/webdevelopment/ki-check`;
+    const text = `${host} hat im KI-Sichtbarkeits-Check ${score} von 100 Punkten. Wie sieht es bei deiner Website aus?`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: 'KI-Sichtbarkeits-Check', text, url });
+        return;
+      }
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2500);
+    } catch {
+      /* Teilen abgebrochen */
+    }
+  }
+
+  return (
+    <button
+      type='button'
+      onClick={share}
+      className='mt-5 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
+      <Share2
+        aria-hidden='true'
+        className='h-4 w-4 text-accent-web'
+      />
+      <span aria-live='polite'>{copied ? 'Link kopiert' : 'Ergebnis teilen'}</span>
+    </button>
+  );
 }
 
 type KiCheckClientProps = {
@@ -154,6 +192,10 @@ export default function KiCheckClient({
               </div>
               <p className='mt-4 text-lg font-semibold text-white'>{verdict(state.result.score)}</p>
               <p className='mt-1 break-all text-xs text-slate-400'>{state.result.url}</p>
+              <ShareScore
+                score={state.result.score}
+                host={new URL(state.result.url).hostname.replace(/^www\./, '')}
+              />
             </div>
 
             <div>
