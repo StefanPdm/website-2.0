@@ -13,7 +13,7 @@ export default function HeroStage({ trustItems }: { trustItems: string[] }) {
   return (
     <section className='relative overflow-hidden'>
       {/* Bühne: Foto randlos */}
-      <div className='hero-xray hero-stage__photo relative h-[58svh] w-full lg:absolute lg:inset-0 lg:h-auto'>
+      <div className='hero-xray hero-stage__photo absolute inset-x-0 top-0 h-[66svh] w-full lg:inset-0 lg:h-auto'>
         <Image
           src='/images-webdevelopment/stefan-heinemann-arbeitsplatz.webp'
           alt='Stefan Heinemann, Webentwickler aus Potsdam, an seinem Arbeitsplatz vor zwei Monitoren mit Code'
@@ -76,8 +76,9 @@ export default function HeroStage({ trustItems }: { trustItems: string[] }) {
       </div>
 
       {/* Text über der Bühne */}
-      <div className='relative z-10 mx-auto flex w-full max-w-6xl flex-col px-4 sm:px-6 md:px-8 lg:justify-center lg:pt-36 2xl:max-w-[86rem] 2xl:pl-40'>
-        <div className='-mt-24 max-w-xl lg:mt-0'>
+      {/* Mobil: genau ein Bildschirm (svh) – Foto oben, Text unten; KI-Check erst beim Scrollen */}
+      <div className='relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col justify-end px-4 pb-12 sm:px-6 md:px-8 lg:min-h-0 lg:justify-center lg:pb-0 lg:pt-36 2xl:max-w-[86rem] 2xl:pl-40'>
+        <div className='max-w-xl'>
           {/* Mobil reduziert: kein Etikett, kein zweiter Button, keine Trust-Zeile –
               Foto, Kernsatz, eine Aktion. Ab sm wieder vollständig. */}
           <p className='mb-6 hidden items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 backdrop-blur sm:inline-flex'>
