@@ -1,8 +1,11 @@
 import { getImageProps } from 'next/image';
+import Link from 'next/link';
+import { ArrowRight, Check, Compass } from 'lucide-react';
 
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 
-const heroChips = ['Erstgespräch kostenlos', 'Bei mir, bei dir oder online', 'Ø 180 Min pro Session'];
+/** Fakten als Textzeile mit Häkchen – bewusst nicht als Pillen, die wie Buttons wirken. */
+const heroFacts = ['DVNLP-zertifiziert', 'Bei mir, bei dir oder online', 'Ø 180 Min pro Session'];
 
 /*
  * Art Direction: Hochformat-Foto für hochkant gehaltene Displays, Querformat
@@ -89,15 +92,41 @@ export default function HeroSection() {
             </SecondaryButton>
           </div>
 
-          <ul className='mt-8 flex flex-wrap gap-2'>
-            {heroChips.map((item) => (
+          <ul className='mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-(--muted)'>
+            {heroFacts.map((item) => (
               <li
                 key={item}
-                className='rounded-full border border-border bg-surface px-4 py-2 text-xs text-(--text) backdrop-blur'>
+                className='flex items-center gap-1.5'>
+                <Check
+                  aria-hidden='true'
+                  className='h-4 w-4 text-accent'
+                />
                 {item}
               </li>
             ))}
           </ul>
+
+          {/* Kostenloser Einstieg – Gegenstück zum KI-Check in Welt B */}
+          <Link
+            href='/coaching/persoenlichkeitstest'
+            className='group mt-8 flex w-full max-w-md items-center gap-4 rounded-2xl border border-(--accent)/40 bg-(--bg)/70 p-4 backdrop-blur transition hover:border-(--accent)/80 hover:bg-(--accent)/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+            <span className='grid h-11 w-11 shrink-0 place-items-center rounded-full bg-(--accent)/15 text-accent ring-1 ring-(--accent)/40'>
+              <Compass
+                aria-hidden='true'
+                className='h-5 w-5'
+              />
+            </span>
+            <span className='min-w-0 flex-1'>
+              <span className='block text-sm font-semibold text-(--text)'>
+                Wie tickst du? Kostenloser Persönlichkeitstest
+              </span>
+              <span className='block text-xs text-(--muted)'>18 Fragen · Auswertung sofort</span>
+            </span>
+            <ArrowRight
+              aria-hidden='true'
+              className='h-5 w-5 shrink-0 text-accent transition group-hover:translate-x-1'
+            />
+          </Link>
         </div>
       </div>
     </section>
