@@ -67,7 +67,7 @@ und die A11y-Baseline (§11).
 | Styling | Tailwind CSS v4 (CSS-first, `@import 'tailwindcss'`), zusätzlich `app/globals.css` |
 | UI-Primitives | shadcn/ui (`new-york`, baseColor `neutral`), Radix, `lucide-react` |
 | Icons | `lucide-react` (UI-Icons), `react-icons/si` + `/fa6` (Tech-Logos, nur Welt B) |
-| Motion | GSAP (`CardNav`, `CardSwap`), CSS-Keyframes (Rest) |
+| Motion | GSAP (`CardNav`), CSS-Keyframes (Rest) |
 | 3D/WebGL | three.js + postprocessing — **nur Welt A/B-Hintergründe**, nie auf `/` |
 | Mail | nodemailer über SMTP (ENV). Kein externer Mail-Dienst (`resend` 2026-10-03 entfernt) |
 | Paketmanager | **pnpm** (`packageManager: pnpm@9.15.0`) — kein npm/yarn |
@@ -342,7 +342,7 @@ Das HTML wird trotzdem serverseitig gerendert (SEO unkritisch), nur das JS-Bundl
 | `pricing.ts` | Einzige Quelle der Web-Preise (§13) |
 | `cases.ts` | Einzige Quelle der Referenzen: Karten, `ItemList`-Schema, `llms.txt`. Felder `tech` (Chips) und `result` (messbarer Beleg in `#86C243`). Reihenfolge = Anzeige |
 | `components/PriceCompass.tsx` | Preis-Kompass unter den Preiskarten: Leistung, Website-Umfang, Inhalte, Sprachen → Richtwert. Staffeln und Aufschläge in `pricing.ts` (`websiteScopes`, `contentSurcharges`, `languageSurcharges`, `estimatePrice`) |
-| `components/HeroPortrait.tsx` | Hero-Foto `stefan-heinemann-arbeitsplatz.webp` mit Röntgen-Scan: Scan-Balken legt die Bauplan-Version (`…-bauplan.webp`, erzeugt mit `ffmpeg … edgedetect,lut,dilation,colorchannelmixer` – bei neuem Foto neu erzeugen) frei. CSS `.hero-xray*`, Variable `--scan`. Der Kartenstapel (CardSwap) sitzt seit 2026-11 neben der Überschrift „Referenzen“ |
+| `components/HeroPortrait.tsx` | Hero-Foto `stefan-heinemann-arbeitsplatz.webp` mit Röntgen-Scan: Scan-Balken legt die Bauplan-Version (`…-bauplan.webp`, erzeugt mit `ffmpeg … edgedetect,lut,dilation,colorchannelmixer` – bei neuem Foto neu erzeugen) frei. CSS `.hero-xray*`, Variable `--scan`. Den früheren Kartenstapel (CardSwap) gibt es seit 2026-11 nicht mehr – er wiederholte nur die Referenzen |
 | `components/LiveMetrics.tsx` | „Live gemessen“ im Hero: LCP, übertragene KB, CLS aus der Performance-API des Besuchers – nichts wird gesendet |
 | `ki-check/` + `lib/ki-check.ts` | KI-Sichtbarkeits-Check: 11 Prüfpunkte, Punktzahl, drei größte Hebel. **Sicherheit:** jede Adresse und jedes Weiterleitungsziel per DNS geprüft, private/lokale IPs abgelehnt, nur Port 80/443, max. 4 Redirects, 8 s, 1,5 MB; eigenes Rate-Limit (8 / 10 min) in der Route; nichts wird gespeichert (Datenschutz Welt B, Abschnitt „KI-Sichtbarkeits-Check“) |
 | `components/XRaySection.tsx` | „Unter die Haube schauen“: Röntgenblick markiert H1–H3 und Bilder (`html[data-xray]` in `globals.css`) und listet live JSON-LD-Typen, KI-Crawler aus `robots.txt`, `llms.txt`-Auszug und Security-Header. Deckt das Keyword „KI-Suchoptimierung“ |
@@ -353,7 +353,7 @@ Zielgruppe → **Über mich** → Referenzen → FAQ → Kontakt.
 
 ### Effekt-Komponenten (react-bits, `.jsx`)
 
-`CardNav`, `CardSwap`, `ElectricBorder`, `FloatingLines`,
+`CardNav`, `ElectricBorder`, `FloatingLines`,
 `Hyperspeed`, `LaserFlow` (`.tsx`), `LightPillar`, `PixelCard`
 
 **Regeln für Effekt-Komponenten**
@@ -375,7 +375,6 @@ Zielgruppe → **Über mich** → Referenzen → FAQ → Kontakt.
 | `Hyperspeed` | B | Streifen unter „Digitale Lösungen" |
 | `ElectricBorder` | B | Rahmen um Technologie-/Zielgruppen-/Kontaktkarten |
 | `PixelCard` | B | Service- und Prozesskarten |
-| `CardSwap` | B | Hero-Kompetenzstapel |
 | `CardNav` | B | Header-Navigation |
 | Naht + Belege-Orbit (CSS) | 0 | Entscheidung, prüfbare Belege um das Foto |
 
@@ -508,7 +507,7 @@ Alles Weitere ist ein CSS-Effekt oder existiert nicht.
 
 - Nur `transform` und `opacity` animieren. Kein `top`/`left`/`width`/`height`.
 - Ambient-Animationen sind **dekorativ** → immer `aria-hidden` bzw. `pointer-events-none`.
-- Auto-Rotationen (`CardSwap` 3500 ms, About-Slider 4500 ms) brauchen eine
+- Auto-Rotationen (About-Slider 4500 ms) brauchen eine
   manuelle Steuerung (Dots) oder `pauseOnHover`.
 - `prefers-reduced-motion` ist global in `app/globals.css` abgeschaltet.
   Effekte, die in JS starten, prüfen es zusätzlich selbst.

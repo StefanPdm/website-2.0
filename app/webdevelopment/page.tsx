@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { ComponentType, HTMLAttributes, PropsWithChildren, ReactElement } from 'react';
+import type { ComponentType, PropsWithChildren, ReactElement } from 'react';
 import {
   Boxes,
   Check,
@@ -38,7 +38,6 @@ import {
   FaShieldHalved,
   FaScrewdriverWrench,
 } from 'react-icons/fa6';
-import CardSwap, { Card } from '@/components/CardSwap';
 import ElectricBorder from '@/components/ElectricBorder';
 import ContactFormWeb from '@/components/ContactFormWeb';
 
@@ -62,29 +61,9 @@ import { webCases } from '@/app/webdevelopment/cases';
 
 const trustItems = ['Persönlich & direkt', 'Sauberer Code', 'Wartbar & skalierbar'];
 
-/** Hero-Kartenstapel: echte Referenzen mit Standbild (Reihenfolge aus cases.ts). */
-const heroCases = webCases.filter((entry) => entry.image).slice(0, 3);
-
 const PixelCardView = PixelCard as ComponentType<
   PropsWithChildren<{ variant?: string; className?: string }>
 >;
-const CardSwapView = CardSwap as ComponentType<
-  PropsWithChildren<{
-    width?: number;
-    height?: number;
-    cardDistance?: number;
-    verticalDistance?: number;
-    delay?: number;
-    pauseOnHover?: boolean;
-    onCardClick?: (index: number) => void;
-    skewAmount?: number;
-    easing?: string;
-  }>
->;
-const CardView = Card as ComponentType<
-  PropsWithChildren<HTMLAttributes<HTMLDivElement> & { customClass?: string }>
->;
-
 
 const techStack = {
   Frontend: ['Next.js', 'Angular', 'React', 'Tailwind CSS'],
@@ -544,55 +523,12 @@ export default function WebdevelopmentPage() {
         <section
           id='referenzen'
           className='mx-auto max-w-6xl px-4 py-32 min-h-[90vh] flex flex-col justify-center gap-6'>
-          <div className='grid items-center gap-10 lg:grid-cols-[1fr_auto]'>
-            <div className='max-w-2xl'>
-              <h2 className='text-3xl font-bold tracking-tight text-white'>Referenzen</h2>
-              <p className='mt-3 text-slate-300'>
-                Projekte, die (teilweise) nicht öffentlich sind – aber Struktur, Wirkung und
-                Klarheit beweisen.
-              </p>
-            </div>
-            {/* Kartenstapel (früher im Hero): die drei neuesten Referenzen */}
-            <div className='hidden lg:block lg:pb-52'>
-                <div className='relative h-105 w-95'>
-                  <CardSwapView
-                    width={380}
-                    height={260}
-                    cardDistance={80}
-                    verticalDistance={85}
-                    delay={3500}
-                    pauseOnHover>
-                    {heroCases.map((entry) => (
-                      <CardView
-                        key={entry.name}
-                        style={{
-                          borderRadius: 28,
-                          background: '#06101c',
-                          border: '1px solid rgba(255, 255, 255, 0.14)',
-                          boxShadow: '0 40px 80px -60px rgba(0,0,0,0.7)',
-                          overflow: 'hidden',
-                        }}
-                        className='text-slate-100'>
-                        <div className='relative h-full w-full'>
-                          <Image
-                            src={entry.image as string}
-                            alt={`Website ${entry.name}`}
-                            fill
-                            sizes='380px'
-                            className='object-cover object-top'
-                          />
-                          <div className='absolute inset-x-0 bottom-0 bg-linear-to-t from-[#06101c] via-[#06101c]/90 to-transparent p-5 pt-12'>
-                            <div className='text-xs font-semibold uppercase tracking-[0.2em] text-accent-web'>
-                              {entry.status}
-                            </div>
-                            <div className='mt-1 text-sm font-semibold text-white'>{entry.name}</div>
-                          </div>
-                        </div>
-                      </CardView>
-                    ))}
-                  </CardSwapView>
-                </div>
-            </div>
+          <div className='max-w-2xl'>
+            <h2 className='text-3xl font-bold tracking-tight text-white'>Referenzen</h2>
+            <p className='mt-3 text-slate-300'>
+              Projekte, die (teilweise) nicht öffentlich sind – aber Struktur, Wirkung und Klarheit
+              beweisen.
+            </p>
           </div>
           <div className='mt-10 grid gap-x-8 gap-y-21 md:grid-cols-2'>
             {webCases.map((entry) => (
