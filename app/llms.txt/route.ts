@@ -149,6 +149,8 @@ ${references}
 - [Startseite](${SITE_URL}): Auswahl zwischen beiden Geschäftsbereichen
 - [Stefan Heinemann Coaching – Life Coaching für Unternehmer](${absoluteUrl('/coaching')}): Angebot, Persönlichkeitstest, Preise, Kontakt
 - [Webentwicklung](${absoluteUrl('/webdevelopment')}): Leistungen, Technologien, Referenzen, Kontakt
+- [KI-Sichtbarkeits-Check](${absoluteUrl('/webdevelopment/ki-check')}): kostenloses Werkzeug – prüft eine Website auf
+  KI-Crawler in der robots.txt, llms.txt, strukturierte Daten, Meta-Angaben und Sicherheits-Header, mit Punktzahl.
 - [Session-Podcast](${absoluteUrl('/coaching/session-podcast')}): Auf Wunsch zu jeder Session inklusive –
   ein KI-Podcast (Google NotebookLM, aus einem lokal pseudonymisierten Transkript der Session), der die Session
   aus der Metaperspektive reflektiert.

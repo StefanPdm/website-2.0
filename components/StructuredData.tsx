@@ -678,3 +678,39 @@ export function ContentPageStructuredData({ page }: { page: ContentPageInput }) 
   }
   return <JsonLd data={{ '@context': 'https://schema.org', '@graph': graph }} />;
 }
+
+/** /webdevelopment/ki-check: kostenloses Web-Werkzeug + Brotkrumen. */
+export function KiCheckStructuredData({ path, name, description }: { path: string; name: string; description: string }) {
+  const url = absoluteUrl(path);
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebApplication',
+            '@id': `${url}#app`,
+            name,
+            description,
+            url,
+            applicationCategory: 'DeveloperApplication',
+            operatingSystem: 'Web',
+            inLanguage: 'de-DE',
+            isAccessibleForFree: true,
+            offers: { '@type': 'Offer', price: 0, priceCurrency: 'EUR' },
+            author: { '@id': PERSON_ID },
+            provider: { '@id': PERSON_ID },
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Start', item: SITE_URL },
+              { '@type': 'ListItem', position: 2, name: 'Webentwicklung', item: absoluteUrl('/webdevelopment') },
+              { '@type': 'ListItem', position: 3, name: 'KI-Check', item: url },
+            ],
+          },
+        ],
+      }}
+    />
+  );
+}

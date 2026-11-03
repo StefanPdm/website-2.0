@@ -15,6 +15,7 @@ const items = [
         href: '/webdevelopment#technologien',
       },
       { label: 'Arbeitsweise', ariaLabel: 'Zur Arbeitsweise', href: '/webdevelopment#prozess' },
+      { label: 'KI-Check', ariaLabel: 'Zum KI-Sichtbarkeits-Check', href: '/webdevelopment/ki-check' },
     ],
   },
   {

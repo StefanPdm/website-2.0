@@ -1,0 +1,178 @@
+'use client';
+
+import { useState, type FormEvent } from 'react';
+import { Check, Loader2, X } from 'lucide-react';
+
+import { useFormShield } from '@/components/FormShield';
+import type { CheckResult } from '@/lib/ki-check';
+
+type State =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'error'; message: string }
+  | { status: 'done'; result: CheckResult };
+
+function verdict(score: number) {
+  if (score >= 85) return 'Sehr gut sichtbar';
+  if (score >= 65) return 'Solide – mit Luft nach oben';
+  if (score >= 40) return 'Deutliche Lücken';
+  return 'Für KI kaum sichtbar';
+}
+
+export default function KiCheckClient() {
+  const [url, setUrl] = useState('');
+  const [state, setState] = useState<State>({ status: 'idle' });
+  const shield = useFormShield();
+  const loading = state.status === 'loading';
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setState({ status: 'loading' });
+    try {
+      const response = await fetch('/api/ki-check', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ url, ...shield.payload() }),
+      });
+      const data = await response.json();
+      if (!response.ok) setState({ status: 'error', message: data.error ?? 'Die Prüfung ist fehlgeschlagen.' });
+      else setState({ status: 'done', result: data as CheckResult });
+    } catch {
+      setState({ status: 'error', message: 'Keine Verbindung. Bitte versuch es noch einmal.' });
+    }
+  }
+
+  return (
+    <div>
+      <form
+        onSubmit={onSubmit}
+        className='relative flex flex-col gap-3 sm:flex-row'>
+        {shield.fields}
+        <label
+          htmlFor='web-ki-check-url'
+          className='sr-only'>
+          Adresse deiner Website
+        </label>
+        <input
+          id='web-ki-check-url'
+          name='url'
+          type='text'
+          inputMode='url'
+          autoComplete='url'
+          required
+          placeholder='deine-website.de'
+          value={url}
+          onChange={(event) => setUrl(event.target.value)}
+          className='h-12 w-full min-w-0 flex-1 rounded-xl border border-white/20 bg-[#030a13]/80 px-4 text-white placeholder-slate-400 outline-none transition focus:border-accent-web/70 focus-visible:ring-2 focus-visible:ring-accent-web/40'
+        />
+        <button
+          type='submit'
+          disabled={loading}
+          aria-busy={loading}
+          className='web-cta h-12 gap-2 px-6 text-sm font-semibold'>
+          {loading && (
+            <Loader2
+              aria-hidden='true'
+              className='h-4 w-4 animate-spin'
+            />
+          )}
+          {loading ? 'Wird geprüft …' : 'Jetzt prüfen'}
+        </button>
+      </form>
+      <p className='mt-3 text-xs text-slate-400'>
+        Ich rufe nur öffentlich erreichbare Seiten ab und speichere weder die Adresse noch das
+        Ergebnis. Details in der Datenschutzerklärung.
+      </p>
+
+      <div aria-live='polite'>
+        {state.status === 'error' && (
+          <p className='mt-6 rounded-xl border border-red-400/40 bg-red-500/10 p-4 text-sm text-red-100'>
+            {state.message}
+          </p>
+        )}
+
+        {state.status === 'done' && (
+          <div className='mt-10 grid gap-8 lg:grid-cols-[16rem_1fr]'>
+            <div className='flex flex-col items-center text-center'>
+              <div
+                className='grid h-44 w-44 place-items-center rounded-full'
+                style={{
+                  background: `conic-gradient(#2dd4bf ${state.result.score * 3.6}deg, rgba(255,255,255,0.08) 0)`,
+                }}>
+                <div className='grid h-36 w-36 place-items-center rounded-full bg-[#06101c]'>
+                  <div>
+                    <div className='text-5xl font-bold text-white'>{state.result.score}</div>
+                    <div className='text-xs text-slate-400'>von 100</div>
+                  </div>
+                </div>
+              </div>
+              <p className='mt-4 text-lg font-semibold text-white'>{verdict(state.result.score)}</p>
+              <p className='mt-1 break-all text-xs text-slate-400'>{state.result.url}</p>
+            </div>
+
+            <div>
+              {state.result.weaknesses.length > 0 && (
+                <>
+                  <h2 className='text-xl font-semibold text-white'>Die drei größten Hebel</h2>
+                  <ol className='mt-4 grid gap-3'>
+                    {state.result.weaknesses.map((item, index) => (
+                      <li
+                        key={item.id}
+                        className='rounded-2xl border border-white/15 bg-[#030a13]/70 p-5'>
+                        <p className='text-xs font-semibold uppercase tracking-[0.2em] text-accent-web'>
+                          {index + 1} · {item.label}
+                        </p>
+                        <p className='mt-2 text-sm text-white'>{item.fix}</p>
+                        <p className='mt-1 text-xs text-slate-400'>{item.detail}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </>
+              )}
+
+              <h2 className='mt-8 text-xl font-semibold text-white'>Alle Prüfpunkte</h2>
+              <ul className='mt-4 divide-y divide-white/10 rounded-2xl border border-white/15 bg-[#030a13]/70'>
+                {state.result.items.map((item) => (
+                  <li
+                    key={item.id}
+                    className='flex items-start gap-3 px-5 py-3 text-sm'>
+                    {item.points === item.max ? (
+                      <Check
+                        aria-hidden='true'
+                        className='mt-0.5 h-4 w-4 shrink-0 text-[#86C243]'
+                      />
+                    ) : (
+                      <X
+                        aria-hidden='true'
+                        className='mt-0.5 h-4 w-4 shrink-0 text-red-300'
+                      />
+                    )}
+                    <div className='min-w-0 flex-1'>
+                      <p className='text-white'>{item.label}</p>
+                      <p className='text-xs text-slate-400'>{item.detail}</p>
+                    </div>
+                    <span className='shrink-0 text-xs tabular-nums text-slate-400'>
+                      {item.points}/{item.max}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className='mt-8 rounded-2xl border border-accent-web/30 bg-[#030a13]/70 p-6'>
+                <p className='text-lg font-semibold text-white'>Soll ich das für dich lösen?</p>
+                <p className='mt-2 text-sm text-slate-300'>
+                  Schick mir die Adresse – ich sage dir ehrlich, was sich lohnt und was es kostet.
+                </p>
+                <a
+                  href='/webdevelopment#kontakt'
+                  className='web-cta mt-4 w-full px-5 py-3 text-sm font-semibold sm:w-auto'>
+                  Projekt anfragen
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

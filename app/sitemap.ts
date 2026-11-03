@@ -36,6 +36,12 @@ const pages: Page[] = [
     priority: 0.9,
     changeFrequency: 'monthly',
   },
+  {
+    path: '/webdevelopment/ki-check',
+    lastModified: '2026-11-03',
+    priority: 0.7,
+    changeFrequency: 'monthly',
+  },
 
   // Inhaltsseiten
   {
@@ -146,7 +152,7 @@ const pages: Page[] = [
   },
   {
     path: '/webdevelopment/datenschutz',
-    lastModified: '2026-02-13',
+    lastModified: '2026-11-03',
     priority: 0.2,
     changeFrequency: 'yearly',
   },

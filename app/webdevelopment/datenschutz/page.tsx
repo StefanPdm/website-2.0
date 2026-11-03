@@ -69,6 +69,24 @@ export default function DatenschutzPage() {
       </section>
 
       <section className='rounded-2xl border border-white/15 bg-white/5 p-6 ring-1 ring-white/10 mb-6'>
+        <h2 className='text-xl font-semibold text-white mb-3'>KI-Sichtbarkeits-Check</h2>
+        <p className='text-slate-300'>
+          Wenn Sie den KI-Sichtbarkeits-Check nutzen, wird die von Ihnen eingegebene Adresse an
+          unseren Server übermittelt. Der Server ruft damit die öffentlich erreichbare Startseite
+          sowie die Dateien robots.txt, llms.txt und sitemap.xml dieser Website ab, wertet sie aus
+          und sendet Ihnen das Ergebnis zurück. Adresse und Ergebnis werden nicht gespeichert.
+        </p>
+        <p className='mt-3 text-slate-300'>
+          Zum Schutz vor Missbrauch wird Ihre IP-Adresse für höchstens zehn Minuten im
+          Arbeitsspeicher des Servers vorgehalten, um die Zahl der Prüfungen zu begrenzen; sie
+          wird nicht dauerhaft gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (unser
+          berechtigtes Interesse an einem sicheren Betrieb des Werkzeugs). Beim Abruf gibt sich
+          der Check gegenüber der geprüften Website mit einer eigenen Kennung zu erkennen; dabei
+          wird Ihre IP-Adresse nicht an diese Website weitergegeben.
+        </p>
+      </section>
+
+      <section className='rounded-2xl border border-white/15 bg-white/5 p-6 ring-1 ring-white/10 mb-6'>
         <h2 className='text-xl font-semibold text-white mb-3'>Cookies</h2>
         <p className='text-slate-300'>
           Wir verwenden Cookies, um grundlegende Funktionen bereitzustellen und die Nutzung zu

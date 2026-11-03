@@ -165,6 +165,14 @@ export default function XRaySection() {
             Sicherheits-Header. Schalte den Röntgenblick ein – dann siehst du live, was Google,
             ChatGPT &amp; Co. auf genau dieser Seite lesen.
           </p>
+          <p className='mt-3 text-sm text-slate-300'>
+            Und deine eigene Seite?{' '}
+            <a
+              href='/webdevelopment/ki-check'
+              className='rounded font-semibold text-accent-web underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-web'>
+              Zum kostenlosen KI-Sichtbarkeits-Check →
+            </a>
+          </p>
         </div>
         <div className='md:justify-self-end'>
           <button

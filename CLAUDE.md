@@ -13,6 +13,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
 ```
 /                          Welt 0 — Entscheidungs-Hub ("Zwei Welten. Eine Entscheidung.")
 ├── /webdevelopment        Welt B — Webdevelopment            (Marke: Stefan Heinemann)
+│   ├── /ki-check          KI-Sichtbarkeits-Check (Domain prüfen) → WebApplication
 │   └── /impressum  /datenschutz  /cookies
 └── /coaching              Welt A — Coaching                  (Marke: Stefan Heinemann Coaching)
     ├── /wissenschaft      Inhaltsseite: Forschungsstand (DVNLP-Whitepaper)  → Article + citation
@@ -29,6 +30,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
 /api/contact               Kontaktformular → SMTP (nodemailer)
 /api/nlp-guide             Lead-Magnet: HMAC-Token erzeugen + Mail
 /api/nlp-guide/download    Token prüfen → PDF ausliefern
+/api/ki-check              KI-Check: fremde Domain abrufen + bewerten (lib/ki-check.ts, SSRF-geschützt)
 /llms.txt  /sitemap.xml  /robots.txt  /manifest.webmanifest   generiert (§13)
 ```
 
@@ -341,6 +343,7 @@ Das HTML wird trotzdem serverseitig gerendert (SEO unkritisch), nur das JS-Bundl
 | `cases.ts` | Einzige Quelle der Referenzen: Karten, `ItemList`-Schema, `llms.txt`. Felder `tech` (Chips) und `result` (messbarer Beleg in `#86C243`). Reihenfolge = Anzeige |
 | `components/PriceCompass.tsx` | Preis-Kompass unter den Preiskarten: Leistung, Website-Umfang, Inhalte, Sprachen → Richtwert. Staffeln und Aufschläge in `pricing.ts` (`websiteScopes`, `contentSurcharges`, `languageSurcharges`, `estimatePrice`) |
 | `components/LiveMetrics.tsx` | „Live gemessen“ im Hero: LCP, übertragene KB, CLS aus der Performance-API des Besuchers – nichts wird gesendet |
+| `ki-check/` + `lib/ki-check.ts` | KI-Sichtbarkeits-Check: 11 Prüfpunkte, Punktzahl, drei größte Hebel. **Sicherheit:** jede Adresse und jedes Weiterleitungsziel per DNS geprüft, private/lokale IPs abgelehnt, nur Port 80/443, max. 4 Redirects, 8 s, 1,5 MB; eigenes Rate-Limit (8 / 10 min) in der Route; nichts wird gespeichert (Datenschutz Welt B, Abschnitt „KI-Sichtbarkeits-Check“) |
 | `components/XRaySection.tsx` | „Unter die Haube schauen“: Röntgenblick markiert H1–H3 und Bilder (`html[data-xray]` in `globals.css`) und listet live JSON-LD-Typen, KI-Crawler aus `robots.txt`, `llms.txt`-Auszug und Security-Header. Deckt das Keyword „KI-Suchoptimierung“ |
 | `components/AboutDeveloperSection.tsx` | „Wer baut das?" direkt vor den Referenzen. Portrait mit Design-Tool-Auswahlrahmen (dekorativ, `aria-hidden`), Kennzahlen, Schnittstelle Mensch · Unternehmen · Technik, Leitsatz |
 
