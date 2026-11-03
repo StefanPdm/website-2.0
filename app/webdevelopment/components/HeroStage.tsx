@@ -13,7 +13,7 @@ export default function HeroStage({ trustItems }: { trustItems: string[] }) {
   return (
     <section className='relative overflow-hidden'>
       {/* Bühne: Foto randlos */}
-      <div className='hero-xray relative h-[58svh] w-full lg:absolute lg:inset-0 lg:h-auto'>
+      <div className='hero-xray hero-stage__photo relative h-[58svh] w-full lg:absolute lg:inset-0 lg:h-auto'>
         <Image
           src='/images-webdevelopment/stefan-heinemann-arbeitsplatz.webp'
           alt='Stefan Heinemann, Webentwickler aus Potsdam, an seinem Arbeitsplatz vor zwei Monitoren mit Code'

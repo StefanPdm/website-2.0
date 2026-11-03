@@ -187,7 +187,9 @@ const CardNav = ({
                 src={logo}
                 alt={logoAlt}
                 className='logo'
-                width={120}
+                // Patch (2026-11): echtes Seitenverhältnis von logo-web.svg (850×500 = 1,7:1,
+                // CLAUDE.md §12). 120×80 löste die next/image-Warnung „width or height modified“ aus.
+                width={136}
                 height={80}
                 priority
               />
