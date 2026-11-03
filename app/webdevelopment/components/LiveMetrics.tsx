@@ -24,7 +24,7 @@ function supports(type: string) {
   return typeof PerformanceObserver !== 'undefined' && PerformanceObserver.supportedEntryTypes?.includes(type);
 }
 
-export default function LiveMetrics() {
+export default function LiveMetrics({ className = '' }: { className?: string }) {
   const [metrics, setMetrics] = useState<Metrics | null>(null);
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export default function LiveMetrics() {
   // Das Layout steht von Anfang an (feste Kacheln, Platzhalter) – sonst würde
   // ausgerechnet die Messung der Layout-Verschiebung selbst einen Sprung erzeugen.
   return (
-    <div className='live-metrics mt-8 w-full max-w-130'>
+    <div className={`live-metrics w-full ${className}`}>
       <div className='live-metrics__inner rounded-2xl bg-[#040b15] p-5'>
         <p className='flex items-center gap-2 text-sm font-semibold text-white'>
           <span className='relative flex h-2.5 w-2.5'>

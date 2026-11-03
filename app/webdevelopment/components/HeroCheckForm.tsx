@@ -10,7 +10,7 @@ export const KI_CHECK_EVENT = 'ki-check:run';
  * „Unter die Haube schauen“, trägt die Adresse dort ein und prüft sofort.
  * Ohne JavaScript: normales GET an /webdevelopment/ki-check?url=… (prüft dort).
  */
-export default function HeroCheckForm() {
+export default function HeroCheckForm({ className = '' }: { className?: string }) {
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     const url = String(new FormData(event.currentTarget).get('url') ?? '').trim();
     const target = document.getElementById('unter-der-haube');
@@ -26,7 +26,7 @@ export default function HeroCheckForm() {
       action='/webdevelopment/ki-check'
       method='get'
       onSubmit={onSubmit}
-      className='mt-10 w-full max-w-130'>
+      className={`w-full ${className}`}>
       <label
         htmlFor='web-hero-check-url'
         className='text-sm font-semibold text-white'>

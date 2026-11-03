@@ -16,13 +16,13 @@ import Image from 'next/image';
 export default function HeroPortrait() {
   return (
     <figure className='hero-xray relative w-full'>
-      <div className='relative overflow-hidden rounded-3xl border border-white/15 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9),0_0_60px_-20px_rgba(29,111,168,0.6)] max-sm:aspect-4/3 sm:aspect-3/2'>
+      <div className='relative overflow-hidden rounded-3xl border border-white/15 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9),0_0_60px_-20px_rgba(29,111,168,0.6)] max-sm:aspect-4/3 sm:aspect-3/2 lg:aspect-square'>
         <Image
           src='/images-webdevelopment/stefan-heinemann-arbeitsplatz.webp'
           alt='Stefan Heinemann, Webentwickler aus Potsdam, an seinem Arbeitsplatz vor zwei Monitoren mit Code'
           fill
           priority
-          sizes='(min-width: 1024px) 620px, (min-width: 640px) 90vw, 100vw'
+          sizes='(min-width: 1024px) 640px, (min-width: 640px) 90vw, 100vw'
           className='object-cover object-[78%_center]'
         />
         <div
@@ -32,7 +32,7 @@ export default function HeroPortrait() {
             src='/images-webdevelopment/stefan-heinemann-arbeitsplatz-bauplan.webp'
             alt=''
             fill
-            sizes='(min-width: 1024px) 620px, (min-width: 640px) 90vw, 100vw'
+            sizes='(min-width: 1024px) 640px, (min-width: 640px) 90vw, 100vw'
             className='object-cover object-[78%_center]'
           />
           <span className='hero-xray__grid absolute inset-0' />
