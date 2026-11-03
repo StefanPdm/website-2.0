@@ -314,7 +314,7 @@ export default function WebdevelopmentPage() {
               und unverbindlich.
             </p>
           </div>
-          <div className='my-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 z-10 justify-self-center'>
+          <div className='z-10 my-10 grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4'>
             {webServices.map((service) => (
               <PixelCardView
                 key={service.title}
