@@ -339,7 +339,7 @@ export default function WebdevelopmentPage() {
         {/* Digitale Lösungen Section */}
         <section
           id='leistungen'
-          className='relative mx-auto flex min-h-[60vh] max-w-6xl flex-col items-start justify-start gap-10 px-4 overflow-hidden'>
+          className='relative mx-auto flex min-h-[60vh] max-w-6xl flex-col items-start justify-start gap-10 px-4'>
           <div className='max-w-2xl'>
             <h2 className='text-3xl font-bold tracking-tight text-white'>
               Digitale Lösungen mit Struktur.
@@ -401,7 +401,7 @@ export default function WebdevelopmentPage() {
             <PriceCompass />
           </div>
 
-          <div className='z-0 pointer-events-none absolute bottom-0 left-1/2 h-1/2 w-screen -translate-x-1/2 opacity-100'>
+          <div className='z-0 pointer-events-none absolute bottom-0 left-1/2 h-1/2 w-screen -translate-x-1/2 opacity-45'>
             <HyperspeedBand />
           </div>
         </section>
