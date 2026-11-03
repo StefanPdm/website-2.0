@@ -50,8 +50,31 @@ export default function HeroStage({ trustItems }: { trustItems: string[] }) {
         </span>
       </div>
 
+      {/* Raster über dem Auslauf links – wie im Seitenhintergrund, damit links keine
+          Leerfläche entsteht */}
+      <span
+        aria-hidden='true'
+        className='hero-stage__grid pointer-events-none absolute inset-0 hidden lg:block'
+      />
+
+      {/* Editor-Leiste am linken Rand (nur sehr breite Bildschirme): Zeilennummern,
+          Linie mit Lichtpunkt im Takt des Scans, senkrechte Ortszeile. Rein dekorativ. */}
+      <div
+        aria-hidden='true'
+        className='hero-rail pointer-events-none absolute inset-y-0 left-0 hidden 2xl:flex'>
+        <ol className='hero-rail__numbers'>
+          {Array.from({ length: 24 }, (_, i) => (
+            <li key={i}>{String(i + 1).padStart(2, '0')}</li>
+          ))}
+        </ol>
+        <span className='hero-rail__line'>
+          <span className='hero-rail__dot' />
+        </span>
+        <span className='hero-rail__label'>Potsdam · Berlin · Brandenburg — seit 20 Jahren Unternehmer</span>
+      </div>
+
       {/* Text über der Bühne */}
-      <div className='relative z-10 mx-auto flex w-full max-w-6xl flex-col px-4 sm:px-6 md:px-8 lg:justify-center lg:pt-36'>
+      <div className='relative z-10 mx-auto flex w-full max-w-6xl flex-col px-4 sm:px-6 md:px-8 lg:justify-center lg:pt-36 2xl:max-w-[86rem] 2xl:pl-40'>
         <div className='-mt-24 max-w-xl lg:mt-0'>
           <p className='mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 backdrop-blur'>
             Webentwicklung in Potsdam · 20 Jahre Unternehmer
@@ -93,7 +116,7 @@ export default function HeroStage({ trustItems }: { trustItems: string[] }) {
       </div>
 
       {/* Leiste unten: KI-Check + Live-Messung */}
-      <div className='relative z-10 mx-auto mt-12 w-full max-w-6xl px-4 pb-16 sm:px-6 md:px-8 lg:mt-16 lg:pb-10'>
+      <div className='relative z-10 mx-auto mt-12 w-full max-w-6xl px-4 pb-16 sm:px-6 md:px-8 lg:mt-16 lg:pb-10 2xl:max-w-[86rem] 2xl:pl-40'>
         <div className='grid gap-5 rounded-3xl border border-white/10 bg-[#030a13]/75 p-5 backdrop-blur-md md:p-6 lg:grid-cols-2 lg:items-center lg:gap-8'>
           <HeroCheckForm className='lg:px-2' />
           <LiveMetrics />

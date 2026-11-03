@@ -2568,3 +2568,85 @@ html[data-xray] main img {
   color: #1a0f06;
   background: #f6b35a;
 }
+
+/* Hero-Variante B: Raster links über dem Auslauf + Editor-Leiste am Rand */
+.hero-stage__grid {
+  background-image:
+    linear-gradient(rgba(155, 199, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(155, 199, 255, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(90deg, #000 0%, #000 30%, transparent 60%);
+}
+
+.hero-rail {
+  width: 7rem;
+  padding: 11rem 0 8rem 2.5rem;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.hero-rail__numbers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font: 0.68rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: rgba(155, 199, 255, 0.22);
+  text-align: right;
+}
+
+.hero-rail__line {
+  position: relative;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(45, 212, 191, 0.35) 15%, rgba(45, 212, 191, 0.35) 85%, transparent);
+}
+
+.hero-rail__dot {
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2dd4bf;
+  box-shadow: 0 0 12px 3px rgba(45, 212, 191, 0.6);
+  opacity: 0;
+}
+
+.hero-rail__label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  align-self: center;
+  font: 600 0.68rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.35);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Gleicher Takt wie der Röntgen-Scan (7 s, 1,2 s Verzögerung) */
+  .hero-rail__dot {
+    animation: hero-rail-dot 7s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite;
+  }
+}
+
+@keyframes hero-rail-dot {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
