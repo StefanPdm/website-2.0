@@ -81,10 +81,12 @@ const discoverItems: { label: string; href: string; hint: string; match?: string
   {
     label: '20 Regeln fürs Glücklichsein',
     href: '/coaching/regeln/gluecklichsein',
-    // Beide Regelseiten zählen als dasselbe Ziel – sonst gilt das Menü auf
-    // der Umkehrung als inaktiv, obwohl man mitten darin steht.
-    match: '/coaching/regeln',
-    hint: 'Und die ironische Umkehrung',
+    hint: 'Was dich trägt',
+  },
+  {
+    label: '20 Regeln fürs Unglücklichsein',
+    href: '/coaching/regeln/ungluecklichsein',
+    hint: 'Die ironische Umkehrung',
   },
 ];
 
@@ -241,7 +243,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
       href={item.href ?? sectionHref(item.section as string)}
       onClick={() => setIsMenuOpen(false)}
       aria-current={isActive(item) ? 'page' : undefined}
-      className={`rounded-xl px-4 py-3 text-sm font-semibold transition ${
+      className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition ${
         isActive(item)
           ? 'bg-surface text-(--text)'
           : 'text-(--muted) hover:bg-surface hover:text-(--text)'
@@ -364,7 +366,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
             <div
               id='nlp-discover'
               hidden={!isDiscoverOpen}
-              className='absolute left-1/2 top-full z-60 mt-3 w-80 -translate-x-1/2 rounded-2xl border border-border-strong bg-(--bg)/94 p-2 shadow-[0_24px_70px_var(--glow)]'>
+              className='absolute left-1/2 top-full z-60 mt-3 max-h-[calc(100dvh-7rem)] w-80 -translate-x-1/2 overflow-y-auto overscroll-contain rounded-2xl border border-border-strong bg-(--bg)/94 p-2 shadow-[0_24px_70px_var(--glow)]'>
               <ul>
                 {discoverItems.map((item) => {
                   const active = pathname.startsWith(item.match ?? item.href);
@@ -374,7 +376,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
                         href={item.href}
                         onClick={() => setIsDiscoverOpen(false)}
                         aria-current={active ? 'page' : undefined}
-                        className={`block rounded-xl px-4 py-3 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                        className={`block rounded-xl px-4 py-2.5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                           active ? 'bg-surface text-(--text)' : 'hover:bg-surface'
                         }`}>
                         <span className='block text-sm font-semibold text-(--text)'>
@@ -434,8 +436,12 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
         ref={panelRef}
         hidden={!isMenuOpen}
         className='hdr:hidden'>
-        {/* Deckender Hintergrund – Begründung siehe Entdecken-Dropdown oben */}
-        <div className='mx-4 mb-4 rounded-2xl border border-border-strong bg-(--bg)/94 p-3 shadow-[0_20px_60px_var(--glow)]'>
+        {/*
+          Deckender Hintergrund – Begründung siehe Entdecken-Dropdown oben.
+          Eigene Maximalhöhe + Scrollen: Solange das Menü offen ist, ist der
+          Body gesperrt – ohne das wären die unteren Einträge unerreichbar.
+        */}
+        <div className='mx-4 mb-4 max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-border-strong bg-(--bg)/94 p-3 shadow-[0_20px_60px_var(--glow)]'>
           {/*
             Mobil bleibt „Entdecken" aufgeklappt: Platz ist hier kein Problem,
             und ein zweites Aufklappen innerhalb eines Aufklapp-Panels wäre
@@ -448,32 +454,37 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
               <Link
                 href='/coaching'
                 onClick={() => setIsMenuOpen(false)}
-                className='rounded-xl px-4 py-3 text-sm font-semibold text-(--muted) transition hover:bg-surface hover:text-(--text)'>
+                className='rounded-xl px-4 py-2.5 text-sm font-semibold text-(--muted) transition hover:bg-surface hover:text-(--text)'>
                 Start
               </Link>
             )}
 
             {navBefore.map(renderMobileLink)}
 
-            <p className='px-4 pt-4 pb-1 text-xs uppercase tracking-[0.2em] text-(--muted)'>
+            <p className='px-4 pt-3 pb-1 text-xs uppercase tracking-[0.2em] text-(--muted)'>
               Entdecken
             </p>
-            {discoverItems.map((item) => {
-              const active = pathname.startsWith(item.match ?? item.href);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  aria-current={active ? 'page' : undefined}
-                  className={`rounded-xl px-4 py-3 transition ${
-                    active ? 'bg-surface' : 'hover:bg-surface'
-                  }`}>
-                  <span className='block text-sm font-semibold text-(--text)'>{item.label}</span>
-                  <span className='mt-0.5 block text-xs text-(--muted)'>{item.hint}</span>
-                </Link>
-              );
-            })}
+            {/* Ab sm zweispaltig mit Untertitel, darunter einspaltig ohne – sonst zu hoch */}
+            <div className='flex flex-col sm:grid sm:grid-cols-2'>
+              {discoverItems.map((item) => {
+                const active = pathname.startsWith(item.match ?? item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    aria-current={active ? 'page' : undefined}
+                    className={`rounded-xl px-4 py-2.5 transition ${
+                      active ? 'bg-surface' : 'hover:bg-surface'
+                    }`}>
+                    <span className='block text-sm font-semibold text-(--text)'>{item.label}</span>
+                    <span className='mt-0.5 hidden text-xs text-(--muted) sm:block'>
+                      {item.hint}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
 
             <span
               aria-hidden='true'
@@ -488,7 +499,7 @@ export default function NlpHeader({ isWarmTheme, onToggleTheme }: NlpHeaderProps
               type='button'
               onClick={onToggleTheme}
               aria-pressed={isWarmTheme}
-              className='flex w-full cursor-pointer items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-(--muted) transition hover:bg-surface hover:text-(--text)'>
+              className='flex w-full cursor-pointer items-center justify-between rounded-xl px-4 py-2.5 text-sm font-semibold text-(--muted) transition hover:bg-surface hover:text-(--text)'>
               <span>{isWarmTheme ? 'Kühles Design' : 'Warmes Design'}</span>
               {isWarmTheme ? <Moon className='h-4 w-4' /> : <Sun className='h-4 w-4' />}
             </button>
