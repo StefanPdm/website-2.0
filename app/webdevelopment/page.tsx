@@ -49,9 +49,7 @@ import WebBackdrop from '@/components/WebBackdrop';
 import HyperspeedBand from '@/components/HyperspeedBand';
 import { FaqStructuredData, WebStructuredData } from '@/components/StructuredData';
 import FaqSection from '@/app/webdevelopment/FaqSection';
-import HeroSplit from '@/app/webdevelopment/components/HeroSplit';
 import HeroStage from '@/app/webdevelopment/components/HeroStage';
-import HeroSwitch from '@/app/webdevelopment/components/HeroSwitch';
 import PriceCompass from '@/app/webdevelopment/components/PriceCompass';
 import XRaySection from '@/app/webdevelopment/components/XRaySection';
 import AboutDeveloperSection from '@/app/webdevelopment/components/AboutDeveloperSection';
@@ -232,11 +230,8 @@ export default function WebdevelopmentPage() {
       </div>
       {/* content */}
       <main className='relative z-10'>
-        {/* PROVISORISCH: Hero-Varianten vergleichen (siehe HeroSwitch.tsx) */}
-        <HeroSwitch
-          a={<HeroSplit trustItems={trustItems} />}
-          b={<HeroStage trustItems={trustItems} />}
-        />
+        {/* Hero „Foto als Bühne“ (2026-11). Frühere Variante „Split + Beleg-Band“: Git-Tag hero-variante-a */}
+        <HeroStage trustItems={trustItems} />
         {/* Digitale Lösungen Section */}
         <section
           id='leistungen'
