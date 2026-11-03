@@ -78,19 +78,25 @@ export default function HeroStage({ trustItems }: { trustItems: string[] }) {
       {/* Text über der Bühne */}
       <div className='relative z-10 mx-auto flex w-full max-w-6xl flex-col px-4 sm:px-6 md:px-8 lg:justify-center lg:pt-36 2xl:max-w-[86rem] 2xl:pl-40'>
         <div className='-mt-24 max-w-xl lg:mt-0'>
-          <p className='mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 backdrop-blur'>
+          {/* Mobil reduziert: kein Etikett, kein zweiter Button, keine Trust-Zeile –
+              Foto, Kernsatz, eine Aktion. Ab sm wieder vollständig. */}
+          <p className='mb-6 hidden items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200 ring-1 ring-white/10 backdrop-blur sm:inline-flex'>
             Webentwicklung in Potsdam · 20 Jahre Unternehmer
           </p>
-          <h1 className='mb-8 text-[2.1rem] font-extrabold leading-[1.1] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] md:text-[3.1rem]'>
+          <h1 className='mb-5 text-[1.85rem] font-extrabold leading-[1.1] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] sm:mb-8 sm:text-[2.1rem] md:text-[3.1rem]'>
             20 Jahre habe ich ein Unternehmen geführt.
             <br />
             <span className='bg-linear-to-r from-[#9bc7ff] via-accent-web to-white bg-clip-text text-transparent'>
               Heute baue ich die Systeme, die ich damals gebraucht hätte.
             </span>
           </h1>
-          <p className='mb-10 max-w-md text-lg text-slate-300'>
-            Websites, Shops und Kundenportale aus Potsdam – mit Struktur, Performance und
-            Zukunftssicherheit statt Bastellösungen.
+          <p className='mb-8 max-w-md text-base text-slate-300 sm:mb-10 sm:text-lg'>
+            Websites, Shops und Kundenportale aus Potsdam
+            <span className='hidden sm:inline'>
+              {' '}
+              – mit Struktur, Performance und Zukunftssicherheit statt Bastellösungen
+            </span>
+            .
           </p>
           <div className='flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4'>
             <a
@@ -100,11 +106,11 @@ export default function HeroStage({ trustItems }: { trustItems: string[] }) {
             </a>
             <a
               href='#technologien'
-              className='w-full rounded-xl border border-white/20 bg-[#06101c]/60 px-6 py-3.5 text-center text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10 sm:w-auto'>
+              className='hidden w-full rounded-xl border border-white/20 bg-[#06101c]/60 px-6 py-3.5 text-center text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10 sm:block sm:w-auto'>
               Technologien ansehen
             </a>
           </div>
-          <ul className='mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300'>
+          <ul className='mt-8 hidden flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300 sm:flex'>
             {trustItems.map((item) => (
               <li
                 key={item}
