@@ -116,7 +116,7 @@ export default function HeroStage({ trustItems }: { trustItems: string[] }) {
       </div>
 
       {/* Leiste unten: KI-Check + Live-Messung */}
-      <div className='relative z-10 mx-auto mt-12 w-full max-w-6xl px-4 pb-16 sm:px-6 md:px-8 lg:mt-16 lg:pb-10 2xl:max-w-[86rem] 2xl:pl-40'>
+      <div className='relative z-10 mx-auto mt-12 w-full max-w-6xl px-4 pb-16 sm:px-6 md:px-8 lg:mt-16 lg:pb-16 2xl:max-w-[86rem] 2xl:pl-40'>
         <div className='grid gap-5 rounded-3xl border border-white/10 bg-[#030a13]/75 p-5 backdrop-blur-md md:p-6 lg:grid-cols-2 lg:items-center lg:gap-8'>
           <HeroCheckForm className='lg:px-2' />
           <LiveMetrics />

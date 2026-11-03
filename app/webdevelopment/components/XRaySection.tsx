@@ -155,7 +155,7 @@ export default function XRaySection() {
   return (
     <section
       id='unter-der-haube'
-      className='mx-auto max-w-6xl scroll-mt-24 px-4 py-16'>
+      className='mx-auto max-w-6xl scroll-mt-24 px-4 pt-28 pb-20 md:pt-36'>
       <div className='grid items-center gap-8 md:grid-cols-[1.2fr_0.8fr]'>
         <div className='max-w-2xl'>
           <h2 className='text-3xl font-bold tracking-tight text-white'>

@@ -240,7 +240,7 @@ export default function WebdevelopmentPage() {
         {/* Digitale Lösungen Section */}
         <section
           id='leistungen'
-          className='relative mx-auto flex min-h-[60vh] max-w-6xl flex-col items-start justify-start gap-10 px-4'>
+          className='relative mx-auto flex min-h-[60vh] max-w-6xl flex-col items-start justify-start gap-10 px-4 pt-32 md:pt-48'>
           <div className='max-w-2xl'>
             <h2 className='text-3xl font-bold tracking-tight text-white'>
               Digitale Lösungen mit Struktur.
@@ -309,7 +309,7 @@ export default function WebdevelopmentPage() {
         {/* Technologien Section */}
         <section
           id='technologien'
-          className='backdrop-blur-md py-16 ring-1 ring-white/10 min-h-[80vh] flex flex-col justify-center border-y border-white/20'>
+          className='backdrop-blur-md pt-28 pb-20 md:pt-36 ring-1 ring-white/10 min-h-[80vh] flex flex-col justify-center border-y border-white/20'>
           <div className='mx-auto max-w-6xl px-4'>
             <div className='max-w-2xl'>
               <h2 className='text-3xl font-bold tracking-tight text-white'>
@@ -380,7 +380,7 @@ export default function WebdevelopmentPage() {
         {/* Prozess */}
         <section
           id='prozess'
-          className='mx-auto max-w-6xl px-4 py-16 min-h-[70vh] flex flex-col justify-center'>
+          className='mx-auto max-w-6xl px-4 pt-28 pb-20 md:pt-36 min-h-[70vh] flex flex-col justify-center'>
           <div className='max-w-2xl'>
             <h2 className='text-3xl font-bold tracking-tight text-white'>
               Strukturierter Prozess. Klare Kommunikation.
@@ -413,7 +413,7 @@ export default function WebdevelopmentPage() {
         {/* Nicht für jeden */}
         <section
           id='zielgruppe'
-          className='backdrop-blur-md py-16 ring-1 ring-white/10 min-h-[70vh] flex flex-col justify-center border-y border-white/20'>
+          className='backdrop-blur-md pt-28 pb-20 md:pt-36 ring-1 ring-white/10 min-h-[70vh] flex flex-col justify-center border-y border-white/20'>
           <div className='mx-auto max-w-6xl px-4'>
             <div className='max-w-2xl'>
               <h2 className='text-3xl font-bold tracking-tight text-white'>
