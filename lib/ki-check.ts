@@ -233,7 +233,19 @@ export async function runCheck(input: string): Promise<CheckResult> {
   const h1 = (html.match(/<h1[\s>]/gi) ?? []).length;
   const lang = html.match(/<html[^>]*\slang=["']([^"']+)["']/i)?.[1] ?? '';
   const canonical = /<link[^>]+rel=["']canonical["']/i.test(html);
-  const llmsOk = Boolean(llmsRes && llmsRes.status === 200 && llmsRes.body.trim().startsWith('#'));
+  // llms.txt: Status 200, kein HTML (Soft-404-Seiten liefern oft 200 + HTML) und eine
+  // Markdown-Überschrift in den ersten Zeilen. Nicht „erstes Zeichen = #“ – manche
+  // Plugins schreiben Zeilen davor (gefunden bei trafoe.de), die Datei ist trotzdem gültig.
+  const llmsType = llmsRes?.headers.get('content-type') ?? '';
+  const llmsHead = (llmsRes?.body ?? '').split(/\r?\n/).slice(0, 20);
+  const llmsOk = Boolean(
+    llmsRes &&
+      llmsRes.status === 200 &&
+      !/text\/html/i.test(llmsType) &&
+      !/^\s*<(!doctype|html)/i.test(llmsRes.body) &&
+      llmsHead.some((line) => /^#\s+\S/.test(line)),
+  );
+  const llmsClean = llmsOk && /^\s*#\s/.test(llmsRes?.body ?? '');
   const sitemapOk =
     /^\s*sitemap:/im.test(robots) || Boolean(sitemapRes && sitemapRes.status === 200 && /<(urlset|sitemapindex)/i.test(sitemapRes.body));
   const securityHeaders = [
@@ -282,7 +294,11 @@ export async function runCheck(input: string): Promise<CheckResult> {
       label: 'llms.txt für Sprachmodelle',
       ok: llmsOk,
       max: 10,
-      detail: llmsOk ? '/llms.txt vorhanden.' : 'Keine /llms.txt gefunden.',
+      detail: !llmsOk
+        ? 'Keine /llms.txt gefunden.'
+        : llmsClean
+          ? '/llms.txt vorhanden.'
+          : '/llms.txt vorhanden – vor der ersten Überschrift stehen aber Zeilen, die nicht dazugehören.',
       fix: 'Eine /llms.txt anlegen: eine kurze, faktische Beschreibung für Sprachmodelle.',
     }),
     item({
