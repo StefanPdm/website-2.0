@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     // Apple-Touch-Icon muss PNG sein – Safari rendert dort kein SVG.
     icon: [
       { url: '/favicon.ico', sizes: '48x48' },
-      { url: '/logos/logo-sh.svg', type: 'image/svg+xml' },
+      { url: '/logos/logo-zeichen.svg', type: 'image/svg+xml' },
     ],
-    apple: [{ url: '/logos/logo-sh-180.png', type: 'image/png', sizes: '180x180' }],
+    apple: [{ url: '/logos/logo-zeichen-180.png', type: 'image/png', sizes: '180x180' }],
   },
   manifest: '/manifest.webmanifest',
 };

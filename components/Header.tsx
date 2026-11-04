@@ -53,8 +53,10 @@ export default function Header() {
   return (
     <header className='fixed top-0 z-50 w-full bg-transparent'>
       <CardNav
-        logo='/logos/logo-web.svg'
-        logoAlt='Logo'
+        logo='/logos/logo-zeichen.svg'
+        logoAlt=''
+        logoText='Stefan Heinemann'
+        logoSubText='Webentwicklung'
         items={items}
         baseColor='transparent'
         menuColor='#fff'

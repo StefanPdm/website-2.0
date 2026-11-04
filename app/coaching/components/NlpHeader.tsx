@@ -284,7 +284,7 @@ export default function NlpHeader() {
               isScrolled ? 'h-10 w-10' : 'h-11 w-11 hdr:h-12 hdr:w-12'
             }`}>
             <Image
-              src='/logos/logo-nlp.svg'
+              src='/logos/logo-zeichen.svg'
               alt=''
               fill
               sizes='48px'

@@ -247,9 +247,43 @@
 }
 
 .logo {
-  height: 80px;
+  height: 40px;
   width: auto;
-  filter: drop-shadow(0 6px 14px rgba(255, 255, 255, 0.5));
+  /* Patch (2026-11): Zeichen + Wortmarke statt großem Bildlogo */
+  filter: drop-shadow(0 4px 12px rgba(45, 212, 191, 0.25));
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.logo-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #2dd4bf;
+}
+
+.logo-text {
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.logo-subtext {
+  font-weight: 300;
+  color: #2dd4bf;
+}
+
+@media (max-width: 420px) {
+  .logo-subtext {
+    display: none;
+  }
 }
 
 .card-nav-cta-button {

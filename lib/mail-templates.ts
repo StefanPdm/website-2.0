@@ -38,7 +38,7 @@ const BRANDS: Record<MailWorld, Brand> = {
   nlp: {
     name: 'Stefan Heinemann Coaching',
     tagline: 'Stefan Heinemann · Potsdam & Berlin',
-    logo: { src: '/logos/logo-nlp-256.png', width: 48, height: 48, alt: 'Stefan Heinemann Coaching' },
+    logo: { src: '/logos/logo-zeichen-256.png', width: 48, height: 48, alt: 'Stefan Heinemann Coaching' },
     dark: '#140c06',
     accent: '#f6b35a',
     accent2: '#d9853a',
@@ -53,7 +53,7 @@ const BRANDS: Record<MailWorld, Brand> = {
   web: {
     name: 'Stefan Heinemann',
     tagline: 'Webentwicklung · Potsdam & Berlin',
-    logo: { src: '/logos/logo-web-340.png', width: 82, height: 48, alt: 'Stefan Heinemann Webentwicklung' },
+    logo: { src: '/logos/logo-zeichen-256.png', width: 48, height: 48, alt: 'Stefan Heinemann Webentwicklung' },
     dark: '#0b1b2b',
     accent: '#1d6fa8',
     accent2: '#7a2c8e',
@@ -68,7 +68,7 @@ const BRANDS: Record<MailWorld, Brand> = {
   root: {
     name: 'Stefan Heinemann',
     tagline: 'Coach & Webentwickler · Potsdam',
-    logo: { src: '/logos/logo-sh-192.png', width: 48, height: 48, alt: 'Stefan Heinemann' },
+    logo: { src: '/logos/logo-zeichen-256.png', width: 48, height: 48, alt: 'Stefan Heinemann' },
     dark: '#070b12',
     accent: '#1d6fa8',
     accent2: '#f6b35a',

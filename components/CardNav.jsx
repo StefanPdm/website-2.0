@@ -10,6 +10,9 @@ import './CardNav.css';
 const CardNav = ({
   logo,
   logoAlt = 'Logo',
+  // Patch (2026-11): Wortmarke neben dem Zeichen (ein Logo für alle Welten, Name als Text)
+  logoText,
+  logoSubText,
   items,
   className = '',
   ease = 'power3.out',
@@ -182,17 +185,25 @@ const CardNav = ({
           </div>
 
           <div className='logo-container'>
-            <a href='/webdevelopment/'>
+            <a
+              href='/webdevelopment/'
+              className='logo-link'>
               <Image
                 src={logo}
                 alt={logoAlt}
                 className='logo'
-                // Patch (2026-11): echtes Seitenverhältnis von logo-web.svg (850×500 = 1,7:1,
-                // CLAUDE.md §12). 120×80 löste die next/image-Warnung „width or height modified“ aus.
-                width={136}
-                height={80}
+                // Patch (2026-11): echtes Seitenverhältnis von logo-zeichen.svg (550×500 = 1,1:1,
+                // CLAUDE.md §12) – sonst warnt next/image „width or height modified“.
+                width={55}
+                height={50}
                 priority
               />
+              {logoText && (
+                <span className='logo-text'>
+                  {logoText}
+                  {logoSubText && <span className='logo-subtext'> {logoSubText}</span>}
+                </span>
+              )}
             </a>
           </div>
 

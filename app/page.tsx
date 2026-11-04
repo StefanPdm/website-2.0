@@ -160,9 +160,9 @@ export default function Home() {
                 href='/'
                 className='landing-brand hub-brand'>
                 <Image
-                  src='/logos/logo-sh.svg'
+                  src='/logos/logo-zeichen.svg'
                   alt=''
-                  width={52}
+                  width={55}
                   height={50}
                   className='h-11 w-auto'
                 />

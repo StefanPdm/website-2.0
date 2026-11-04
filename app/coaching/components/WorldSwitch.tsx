@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 /**
@@ -10,9 +9,9 @@ import Link from 'next/link';
  * ist er sichtbar etwas anderes als die Navigation: kein Ort *auf* dieser
  * Seite, sondern der Weg *von* ihr weg.
  *
- * Das Zeichen ist bewusst `logo-sh.svg` und kein abstraktes Icon — genau
- * dieses Signet steht auf der Auswahlseite und im Browser-Tab. Wer es
- * anklickt, landet dort, wo es herkommt.
+ * Bewusst nicht das Logo: Das steht schon in der Kopfzeile und führt dort zur
+ * Welt-Startseite. Die zweifarbige Kugel mit Naht steht für die Auswahlseite
+ * mit beiden Welten – dieselbe wie bei „Warum beides?“ auf der Startseite.
  *
  * Barrierefreiheit: 44 px Zielfläche (§11), `aria-label` statt sichtbarem
  * Text, sichtbarer Fokusring. Der Puls liegt in einem eigenen, `aria-hidden`
@@ -31,13 +30,15 @@ export default function WorldSwitch() {
         aria-hidden='true'
         className='world-switch-pulse absolute inset-0 rounded-full border border-(--accent)'
       />
-      <Image
-        src='/logos/logo-sh.svg'
-        alt=''
-        width={520}
-        height={500}
-        className='h-6 w-auto object-contain sm:h-7'
-      />
+      {/* Zweifarbige Kugel mit Naht = die Startseite mit beiden Welten
+          (dieselbe wie bei „Warum beides?“, .info-split* in globals.css) */}
+      <span
+        aria-hidden='true'
+        className='info-split__core split-mini'>
+        <span className='info-split__blob info-split__blob--web' />
+        <span className='info-split__blob info-split__blob--coach' />
+        <span className='info-split__seam' />
+      </span>
       {/* Beschriftung fährt beim Zeigen und bei Tastaturfokus auf */}
       <span
         aria-hidden='true'

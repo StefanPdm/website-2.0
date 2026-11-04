@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 /**
@@ -26,13 +25,15 @@ export default function WorldSwitchWeb() {
         aria-hidden='true'
         className='world-switch-pulse absolute inset-0 rounded-full border border-accent-web'
       />
-      <Image
-        src='/logos/logo-sh.svg'
-        alt=''
-        width={520}
-        height={500}
-        className='h-6 w-auto object-contain sm:h-7'
-      />
+      {/* Zweifarbige Kugel mit Naht = die Startseite mit beiden Welten
+          (dieselbe wie bei „Warum beides?“, .info-split* in globals.css) */}
+      <span
+        aria-hidden='true'
+        className='info-split__core split-mini'>
+        <span className='info-split__blob info-split__blob--web' />
+        <span className='info-split__blob info-split__blob--coach' />
+        <span className='info-split__seam' />
+      </span>
       {/* Beschriftung fährt beim Zeigen und bei Tastaturfokus auf */}
       <span
         aria-hidden='true'

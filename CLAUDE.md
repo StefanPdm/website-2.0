@@ -324,7 +324,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | Komponente | Zweck |
 |---|---|
 | `NlpHeader` | Fixe Kopfzeile, Scroll-Spy auf Sektions-IDs, „Entdecken"-Dropdown für die Inhaltsseiten (`discoverItems`), Burger < `hdr` |
-| `WorldSwitch` | Schwebender Rundbutton (`logo-sh.svg`, 44 px, Puls-Ring) oben links → `/`. **Der** Weltenwechsel in Welt A — nicht zurück in die Nav legen |
+| `WorldSwitch` | Schwebender Rundbutton (zweifarbige Kugel mit Naht, 44 px, Puls-Ring) oben links → `/`. **Der** Weltenwechsel in Welt A — nicht zurück in die Nav legen |
 | `NlpFooter` | Rechtslinks + Weltenwechsel |
 | `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
 | `Motifs` | Dekor-SVGs (§3.2) |
@@ -641,30 +641,39 @@ Das ist die Scanner-Story des Betreibers und ein bewusstes Alleinstellungsmerkma
 
 ### Logos
 
-Drei Marken-SVGs in `public/logos/`, alle mit **unterschiedlichem
-Seitenverhältnis** — das ist die häufigste Fehlerquelle beim Einbinden:
+**Ein Zeichen für alles (seit 2026-11):** `public/logos/logo-zeichen.svg`
+(550×500, 1,1:1) – Kopf aus Blättern und Schaltkreisen, Mensch + Technik. Gilt für
+Startseite, Welt A und Welt B, Visitenkarte und Auftritt nach außen. Früher gab es drei
+Logos (SH-Monogramm, Web-„W“, NLP-Zeichen) – das war für Besucher und Marketing zu viel.
 
-| Datei | Größe | Verhältnis | Verwendung |
-|---|---|---|---|
-| `logo-sh.svg` | 520×500 | 1,04:1 | Welt 0, Favicon, Apple-Touch-Icon |
-| `logo-nlp.svg` | 550×500 | 1,10:1 | Welt A (Kopfzeile, Wahlkachel, Orbit) |
-| `logo-web.svg` | 850×500 | **1,70:1** | Welt B (CardNav), Wahlkachel, Orbit |
+Das Zeichen steht **immer mit dem Namen in Schrift** daneben, die Welt unterscheidet
+sich nur über Zusatz und Farbe:
 
-**Nie quadratische `width`/`height` angeben.** `next/image` verzerrt sonst,
-besonders das breite Web-Logo. Immer die echten Proportionen als
-`width`/`height` setzen und die Darstellung per CSS begrenzen —
-`object-contain` plus `h-*` und `w-auto` passt ein breites Logo unverzerrt
-in einen quadratischen Slot ein.
+| Ort | Wortmarke |
+|---|---|
+| `/` | „Stefan Heinemann“ + Unterzeile |
+| Welt A (`NlpHeader`) | „STEFAN HEINEMANN **Coaching**“ in Bernstein/Creme |
+| Welt B (`CardNav`, Props `logoText`/`logoSubText`) | „STEFAN HEINEMANN **Webentwicklung**“, Zusatz in `#2dd4bf` |
 
-**Raster-Ableitungen** (mit `sharp` aus den SVGs erzeugt, quadratisch mit
-transparentem Rand): `logo-sh-180.png` (Apple-Touch-Icon),
-`logo-sh-192.png` / `logo-sh-512.png` (Web-App-Manifest),
-`logo-nlp-256.png` (E-Mails Welt A), `logo-web-340.png` (E-Mails Welt B, 340×200,
-nicht quadratisch).
+Die runden Weltenwechsel-Buttons (`WorldSwitch`, `WorldSwitchWeb`) zeigen bewusst
+**nicht** das Zeichen (das führt in der Kopfzeile zur Welt-Startseite), sondern die
+zweifarbige Kugel mit Naht (`.info-split__core.split-mini`) = die Auswahlseite.
+
+Ausnahme: Das Startseiten-Foto `portrait-balance-free.webp` zeigt in den Händen noch
+die beiden früheren Welt-Zeichen (W links, Kopf rechts). Bleibt vorerst – ein neues Foto
+ist die saubere Lösung.
+
+**Nie quadratische `width`/`height` angeben.** `next/image` verzerrt sonst. Echte
+Proportionen setzen (55×50) und die Darstellung per CSS begrenzen (`h-*` + `w-auto`).
+
+**Raster-Ableitungen** (mit `sharp` aus dem SVG erzeugt, quadratisch, Zeichen auf 84 %,
+transparenter Rand): `logo-zeichen-180.png` (Apple-Touch-Icon),
+`-192.png` / `-512.png` (Web-App-Manifest), `-256.png` (E-Mails aller Welten,
+Media-Session-Bild im Podcast-Player).
 
 Warum PNG und nicht SVG: Safari rendert im Apple-Touch-Icon kein SVG, das
 Manifest verlangt echte Pixelgrößen, und viele E-Mail-Clients zeigen SVG gar
-nicht an. Ändert sich ein Logo, müssen diese fünf PNG neu erzeugt werden.
+nicht an. Ändert sich das Zeichen, müssen diese vier PNG neu erzeugt werden.
 
 ### Namenskonvention
 

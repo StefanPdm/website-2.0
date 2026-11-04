@@ -63,7 +63,7 @@ export default function PodcastPlayer({ src, type, title, duration: knownDuratio
     navigator.mediaSession.metadata = new MediaMetadata({
       title,
       artist: 'Stefan Heinemann Coaching',
-      artwork: [{ src: '/logos/logo-nlp-256.png', sizes: '256x256', type: 'image/png' }],
+      artwork: [{ src: '/logos/logo-zeichen-256.png', sizes: '256x256', type: 'image/png' }],
     });
   }, [title]);
 
