@@ -10,6 +10,11 @@ type InfoOrbProps = {
   headline: string;
   text: string;
   buttonClassName?: string;
+  /**
+   * Gibt es ein `label`, wird statt der Kugel die Glas-Pille gerendert:
+   * Frage + zweifarbige Glaskugel (`.info-split*` in globals.css, Startseite).
+   */
+  label?: string;
 };
 
 function renderMarkdownLines(value: string) {
@@ -50,7 +55,7 @@ function renderMarkdownLines(value: string) {
   });
 }
 
-export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProps) {
+export default function InfoOrb({ headline, text, buttonClassName, label }: InfoOrbProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [showScrollHint, setShowScrollHint] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -186,6 +191,35 @@ export default function InfoOrb({ headline, text, buttonClassName }: InfoOrbProp
       </div>
     </div>
   );
+
+  const trigger = label ? (
+    <button
+      type='button'
+      className={`info-split ${buttonClassName ?? ''}`}
+      aria-haspopup='dialog'
+      aria-expanded={isOpen}
+      onClick={() => setIsOpen(true)}>
+      <span className='info-split__label'>{label}</span>
+      <span
+        aria-hidden='true'
+        className='info-split__orb'>
+        <span className='info-split__core'>
+          <span className='info-split__blob info-split__blob--web' />
+          <span className='info-split__blob info-split__blob--coach' />
+          <span className='info-split__seam' />
+        </span>
+      </span>
+    </button>
+  ) : null;
+
+  if (trigger) {
+    return (
+      <>
+        {trigger}
+        {canUseDom && isOpen ? createPortal(modal, document.body) : null}
+      </>
+    );
+  }
 
   return (
     <>

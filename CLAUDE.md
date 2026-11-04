@@ -307,7 +307,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | Komponente | Zweck | Einsatz |
 |---|---|---|
 | `GlassCard` | Standard-Karte Welt A. Nutzt `--surface-strong`, `--border-strong`, `--glow`. Hover: `-translate-y-1` | **nur Welt A** |
-| `InfoOrb` | Schwebender Info-Button + Portal-Modal mit Mini-Markdown (`**fett**`) | `/` (Scanner-Story) |
+| `InfoOrb` | Info-Button + Portal-Modal mit Mini-Markdown (`**fett**`). Mit `label` als Glas-Pille „Warum beides?“ + zweifarbige Glaskugel mit Naht (`.info-split*`) | `/` (Scanner-Story) |
 | `ScrollToTop` | Fixed Button ab `scrollY > 240` | Welt B |
 | `CaseCard` | Referenzkarte mit Tilt-Effekt + Video/Bild + Info-Leiste | Welt B |
 | `ContactFormNlp` / `ContactFormWeb` | zwei Varianten desselben Endpunkts (die Startseite hat seit 2026-11 kein Formular mehr) | Welt A / Welt B |

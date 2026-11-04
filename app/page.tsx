@@ -233,7 +233,8 @@ export default function Home() {
               <InfoOrb
                 headline={InfoOrbTitel}
                 text={InfoOrbText}
-                buttonClassName='hub-info orb-3d cursor-pointer'
+                label='Warum beides?'
+                buttonClassName='hub-info'
               />
             </div>
           </section>
