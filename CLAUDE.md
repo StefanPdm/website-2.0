@@ -99,9 +99,12 @@ app/<welt>/components/<Name>Section.tsx   # eine Sektion = eine Datei
 
 Seit 2026-11 als **„Naht + Foto“** (`app/page.tsx`, CSS-Block `.hub-*` in `app/globals.css`):
 Zwei Hälften an einer senkrechten Naht `--split` (per `@property` animiert), links Welt B,
-rechts Welt A, das Freisteller-Foto `portrait-balance-free.webp` steht auf der Naht – die
-Logos in seinen Händen entsprechen den Seiten. Hover/Fokus verschiebt die Naht (CSS `:has`),
-lässt das Logo in der Hand leuchten und dimmt die andere Hand. Klick → `components/HubLink.tsx`
+rechts Welt A, das Freisteller-Foto `portrait-beide-haende.webp` (aus `rohdaten/`, quadratisch
+zugeschnitten) steht auf der Naht. Über den offenen Händen schweben zwei Lichter
+(`HandLights`, `.hub-light*`, 3D per CSS, Maße in `cqw`): links ein gläserner Rasterwürfel
+mit Scan-Ebene (`.hub-cube*`), rechts eine leuchtende Kugel mit schrägen Atem-Ringen
+(`.hub-sun*`) – jeweils das Motiv des Welt-Hintergrunds. Hover/Fokus verschiebt die Naht (CSS `:has`),
+lässt das Licht dieser Seite wachsen und das andere zurücktreten (mobil ebenso beim Kippen). Klick → `components/HubLink.tsx`
 setzt `data-chosen`, die Welt füllt den Schirm (650 ms), dann Navigation. Um das Foto
 kreist ein geneigter **Belege-Orbit** (`facts` in `app/page.tsx`, zwei Ebenen vor/hinter
 dem Foto) – dort nur prüfbare Aussagen (§10). Mobil < 1024 px hochkant: eigenes
@@ -658,10 +661,6 @@ sich nur über Zusatz und Farbe:
 Die runden Weltenwechsel-Buttons (`WorldSwitch`, `WorldSwitchWeb`) zeigen bewusst
 **nicht** das Zeichen (das führt in der Kopfzeile zur Welt-Startseite), sondern die
 zweifarbige Kugel mit Naht (`.info-split__core.split-mini`) = die Auswahlseite.
-
-Ausnahme: Das Startseiten-Foto `portrait-balance-free.webp` zeigt in den Händen noch
-die beiden früheren Welt-Zeichen (W links, Kopf rechts). Bleibt vorerst – ein neues Foto
-ist die saubere Lösung.
 
 **Nie quadratische `width`/`height` angeben.** `next/image` verzerrt sonst. Echte
 Proportionen setzen (55×50) und die Darstellung per CSS begrenzen (`h-*` + `w-auto`).

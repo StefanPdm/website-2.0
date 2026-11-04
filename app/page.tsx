@@ -72,6 +72,64 @@ function FactOrbit({ layer }: { layer: 'back' | 'front' }) {
   );
 }
 
+/** Die sechs Flächen des Web-Würfels (Ausrichtung in globals.css, .hub-cube__face--*) */
+const cubeFaces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
+/** Atem-Ringe um die Coaching-Kugel: Verzögerung in Sekunden */
+const breathRings = [0, 1.6, 3.2];
+
+/**
+ * Lichter über den offenen Händen – je Welt das Motiv ihres Hintergrunds, in 3D
+ * (reines CSS, kein WebGL auf /):
+ * Web = gläserner Rasterwürfel mit Scan-Ebene („Ordnung im System“),
+ * Coaching = warme Kugel mit schrägen Atem-Ringen („Ruhe im Kopf“).
+ * Positionen passen zu portrait-beide-haende.webp (.hub-light in globals.css).
+ */
+function HandLights() {
+  return (
+    <>
+      <span
+        aria-hidden='true'
+        className='hub-light hub-light--web'>
+        <span className='hub-light__spill' />
+        <span className='hub-light__halo' />
+        <span className='hub-light__scene'>
+          <span className='hub-cube'>
+            {cubeFaces.map((face) => (
+              <span
+                key={face}
+                className={`hub-cube__face hub-cube__face--${face}`}
+              />
+            ))}
+            <span className='hub-cube__scan' />
+            <span className='hub-cube__core' />
+          </span>
+        </span>
+      </span>
+
+      <span
+        aria-hidden='true'
+        className='hub-light hub-light--coach'>
+        <span className='hub-light__spill' />
+        <span className='hub-light__halo' />
+        <span className='hub-light__scene'>
+          <span className='hub-sun'>
+            <span className='hub-sun__plane'>
+              {breathRings.map((delay) => (
+                <span
+                  key={delay}
+                  className='hub-sun__ring'
+                  style={{ animationDelay: `${delay}s` }}
+                />
+              ))}
+            </span>
+            <span className='hub-sun__ball' />
+          </span>
+        </span>
+      </span>
+    </>
+  );
+}
+
 export default function Home() {
   return (
     <div className='hub-page'>
@@ -201,10 +259,10 @@ export default function Home() {
               />
               <FactOrbit layer='back' />
               <Image
-                src='/images-startseite/portrait-balance-free.webp'
-                alt='Stefan Heinemann hält in der linken Hand das Logo für Webentwicklung, in der rechten das Logo für Life Coaching'
+                src='/images-startseite/portrait-beide-haende.webp'
+                alt='Stefan Heinemann hält beide Hände offen nach vorn – über der einen schwebt das Licht der Webentwicklung, über der anderen das des Coachings'
                 width={1136}
-                height={1137}
+                height={1136}
                 sizes='(min-width: 1024px) 640px, 90vw'
                 priority
                 className='hub-photo'
@@ -223,6 +281,7 @@ export default function Home() {
                 aria-hidden='true'
                 className='hub-logo-glow hub-logo-glow--coach'
               />
+              <HandLights />
               <FactOrbit layer='front' />
               <HubTilt />
             </div>

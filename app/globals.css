@@ -1631,14 +1631,14 @@ html {
 }
 
 .hub-logo-glow--web {
-  left: 27%;
-  top: 47%;
+  left: 28%;
+  top: 58.5%;
   background: radial-gradient(circle, rgba(45, 212, 191, 0.6), transparent 62%);
 }
 
 .hub-logo-glow--coach {
-  left: 70.5%;
-  top: 49%;
+  left: 72%;
+  top: 58.5%;
   background: radial-gradient(circle, rgba(246, 179, 90, 0.6), transparent 62%);
 }
 
@@ -1648,18 +1648,269 @@ html {
   animation: hub-glow 2.4s ease-in-out infinite;
 }
 
-/* Die andere Hand wird abgedunkelt */
-.hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-logo-glow--coach,
-.hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-logo-glow--web {
-  opacity: 1;
-  mix-blend-mode: multiply;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.6), transparent 60%);
-}
-
 @keyframes hub-glow {
   50% {
     transform: scale(1.12);
   }
+}
+
+/* Lichter (3D) über den offenen Händen (HandLights in app/page.tsx). Positionen passen zu
+   portrait-beide-haende.webp: Handflächen bei ca. 28 % / 72 % Breite, 69 % Höhe. */
+.hub-light {
+  position: absolute;
+  z-index: 4;
+  width: 17%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  pointer-events: none;
+  transition:
+    opacity 400ms ease,
+    scale 400ms cubic-bezier(0.22, 0.8, 0.2, 1);
+  animation: hub-light-float 6s ease-in-out infinite;
+}
+
+.hub-light--web {
+  left: 28%;
+  top: 58.5%;
+}
+
+.hub-light--coach {
+  left: 72%;
+  top: 58.5%;
+  animation-delay: -3s;
+}
+
+.hub-light__halo,
+.hub-light__spill {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+
+.hub-light__halo {
+  inset: -45%;
+  opacity: 0.75;
+}
+
+/* Lichtschein auf der Handfläche darunter */
+.hub-light__spill {
+  left: 50%;
+  top: 112%;
+  width: 150%;
+  height: 45%;
+  translate: -50% -50%;
+  filter: blur(6px);
+  opacity: 0.55;
+}
+
+.hub-light--web .hub-light__halo {
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.42), rgba(29, 111, 168, 0.18) 40%, transparent 68%);
+}
+
+.hub-light--coach .hub-light__halo {
+  background: radial-gradient(circle, rgba(246, 179, 90, 0.45), rgba(217, 133, 58, 0.18) 40%, transparent 68%);
+}
+
+.hub-light--web .hub-light__spill {
+  background: radial-gradient(ellipse, rgba(94, 234, 212, 0.55), transparent 70%);
+}
+
+.hub-light--coach .hub-light__spill {
+  background: radial-gradient(ellipse, rgba(255, 208, 138, 0.6), transparent 70%);
+}
+
+/* 3D-Bühne je Licht. Maße in cqw (Breite des Lichts), damit Würfel und Kugel
+   mit dem Foto mitwachsen – translateZ erlaubt keine Prozente. */
+.hub-light {
+  container-type: inline-size;
+}
+
+.hub-light__scene {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  perspective: 320cqw;
+}
+
+/* Web: gläserner Rasterwürfel, dreht sich langsam, Scan-Ebene läuft durch */
+.hub-cube {
+  position: relative;
+  width: 54cqw;
+  height: 54cqw;
+  transform-style: preserve-3d;
+  transform: rotateX(-24deg) rotateY(38deg);
+  animation: hub-cube-spin 18s linear infinite;
+}
+
+.hub-cube__face {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(110, 240, 220, 0.95);
+  border-radius: 3cqw;
+  background-color: rgba(45, 212, 191, 0.08);
+  background-image:
+    linear-gradient(rgba(94, 234, 212, 0.38) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 234, 212, 0.38) 1px, transparent 1px);
+  background-size: 33.34% 33.34%;
+  background-position: -1px -1px;
+  box-shadow:
+    inset 0 0 9cqw rgba(45, 212, 191, 0.35),
+    0 0 5cqw rgba(45, 212, 191, 0.45);
+}
+
+.hub-cube__face--front {
+  transform: translateZ(27cqw);
+}
+
+.hub-cube__face--back {
+  transform: rotateY(180deg) translateZ(27cqw);
+}
+
+.hub-cube__face--right {
+  transform: rotateY(90deg) translateZ(27cqw);
+}
+
+.hub-cube__face--left {
+  transform: rotateY(-90deg) translateZ(27cqw);
+}
+
+.hub-cube__face--top {
+  transform: rotateX(90deg) translateZ(27cqw);
+}
+
+.hub-cube__face--bottom {
+  transform: rotateX(-90deg) translateZ(27cqw);
+}
+
+.hub-cube__scan {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(210, 255, 248, 0.85);
+  border-radius: 3cqw;
+  background: radial-gradient(circle, rgba(200, 255, 248, 0.55), rgba(45, 212, 191, 0.12) 70%);
+  box-shadow: 0 0 6cqw rgba(94, 234, 212, 0.7);
+  animation: hub-cube-scan 3.2s ease-in-out infinite alternate;
+}
+
+/* Lichtkern in der Mitte, dreht gegen, damit er immer zum Betrachter zeigt */
+.hub-cube__core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11cqw;
+  height: 11cqw;
+  margin: -5.5cqw 0 0 -5.5cqw;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #ffffff, #b8fff3 45%, #2dd4bf);
+  box-shadow:
+    0 0 5cqw 1cqw rgba(94, 234, 212, 0.95),
+    0 0 14cqw rgba(45, 212, 191, 0.6);
+  animation: hub-cube-counter 18s linear infinite;
+}
+
+/* Coaching: warme Kugel, schräge Atem-Ringe laufen hinter ihr durch und vor ihr wieder hervor */
+.hub-sun {
+  position: relative;
+  width: 44cqw;
+  height: 44cqw;
+  transform-style: preserve-3d;
+}
+
+.hub-sun__ball {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  /* Selbstleuchtend: heller Kern, nur leichter Eigenschatten – Licht, kein Planet */
+  background: radial-gradient(circle at 38% 34%, #fffaf0 0%, #ffe2a8 22%, #ffc06a 48%, #e8913c 78%, #b8621f 100%);
+  box-shadow:
+    inset -3cqw -4cqw 7cqw rgba(120, 50, 8, 0.35),
+    0 0 8cqw rgba(255, 196, 110, 0.95),
+    0 0 22cqw rgba(246, 179, 90, 0.55);
+}
+
+.hub-sun__plane {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(74deg) rotateY(-12deg);
+}
+
+.hub-sun__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 205, 140, 0.95);
+  box-shadow:
+    0 0 3cqw rgba(246, 179, 90, 0.7),
+    inset 0 0 3cqw rgba(246, 179, 90, 0.5);
+  opacity: 0;
+  animation: hub-sun-breathe 4.8s ease-out infinite;
+}
+
+@keyframes hub-light-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6%);
+  }
+}
+
+@keyframes hub-cube-spin {
+  from {
+    transform: rotateX(-24deg) rotateY(38deg);
+  }
+  to {
+    transform: rotateX(-24deg) rotateY(398deg);
+  }
+}
+
+@keyframes hub-cube-counter {
+  from {
+    transform: rotateY(-38deg) rotateX(24deg);
+  }
+  to {
+    transform: rotateY(-398deg) rotateX(24deg);
+  }
+}
+
+@keyframes hub-cube-scan {
+  from {
+    transform: translateY(-25cqw) rotateX(90deg);
+  }
+  to {
+    transform: translateY(25cqw) rotateX(90deg);
+  }
+}
+
+@keyframes hub-sun-breathe {
+  0% {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Zeigen / Fokus / Kippen: Licht der gewählten Seite wächst, das andere tritt zurück */
+.hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-light--web,
+.hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-light--coach,
+.hub[data-tilt='web'] .hub-light--web,
+.hub[data-tilt='coach'] .hub-light--coach {
+  scale: 1.2;
+}
+
+.hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-light--coach,
+.hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-light--web,
+.hub[data-tilt='web'] .hub-light--coach,
+.hub[data-tilt='coach'] .hub-light--web {
+  opacity: 0.35;
 }
 
 .hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-rim--web,
@@ -2088,13 +2339,6 @@ html {
 .hub[data-tilt='coach'] .hub-logo-glow--coach {
   opacity: 1;
   animation: hub-glow 2.4s ease-in-out infinite;
-}
-
-.hub[data-tilt='web'] .hub-logo-glow--coach,
-.hub[data-tilt='coach'] .hub-logo-glow--web {
-  opacity: 1;
-  mix-blend-mode: multiply;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.6), transparent 60%);
 }
 
 .hub[data-tilt='web'] .hub-rim--web,
