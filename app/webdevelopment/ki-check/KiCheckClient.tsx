@@ -162,7 +162,8 @@ export default function KiCheckClient({
           placeholder='deine-website.de'
           value={url}
           onChange={(event) => setUrl(event.target.value)}
-          className='h-12 w-full min-w-0 flex-1 rounded-xl border border-white/20 bg-[#030a13]/80 px-4 text-white placeholder-slate-400 outline-none transition focus:border-accent-web/70 focus-visible:ring-2 focus-visible:ring-accent-web/40'
+          // flex-1 erst ab sm (Zeile): untereinander würde es die Höhe auf 0-Basis drücken
+          className='h-12 min-h-12 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-4 py-3 text-white sm:flex-1 placeholder-slate-400 outline-none transition focus:border-accent-web/70 focus-visible:ring-2 focus-visible:ring-accent-web/40'
         />
         <button
           type='submit'

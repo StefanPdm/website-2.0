@@ -224,12 +224,17 @@ export default function Home() {
                 className='hub-logo-glow hub-logo-glow--coach'
               />
               <FactOrbit layer='front' />
+              <HubTilt />
+            </div>
+
+            {/* Infokugel: mobil oben rechts in der Kopfzeile, am Desktop über dem
+                Foto (eigene Ebene in Bühnengröße, siehe .hub-info-slot) */}
+            <div className='hub-stage hub-info-slot'>
               <InfoOrb
                 headline={InfoOrbTitel}
                 text={InfoOrbText}
                 buttonClassName='hub-info orb-3d cursor-pointer'
               />
-              <HubTilt />
             </div>
           </section>
 
@@ -241,18 +246,24 @@ export default function Home() {
                 href='/webdevelopment/ki-check'
                 className='hub-kicheck'>
                 <span className='hub-kicheck__badge'>Kostenlos</span>
-                Findet ChatGPT deine Website?
-                <span className='whitespace-nowrap'>
-                  KI-Check <span aria-hidden='true'>→</span>
+                <span className='hub-kicheck__q'>Findet ChatGPT deine Website?</span>
+                <span className='hub-kicheck__name'>KI-Check</span>
+                <span
+                  aria-hidden='true'
+                  className='hub-kicheck__arrow'>
+                  →
                 </span>
               </Link>
               <Link
                 href='/coaching/persoenlichkeitstest'
                 className='hub-kicheck hub-kicheck--coach'>
                 <span className='hub-kicheck__badge'>Kostenlos</span>
-                Wie tickst du?
-                <span className='whitespace-nowrap'>
-                  Persönlichkeitstest <span aria-hidden='true'>→</span>
+                <span className='hub-kicheck__q'>Wie tickst du?</span>
+                <span className='hub-kicheck__name'>Persönlichkeitstest</span>
+                <span
+                  aria-hidden='true'
+                  className='hub-kicheck__arrow'>
+                  →
                 </span>
               </Link>
             </div>

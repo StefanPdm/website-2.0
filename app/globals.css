@@ -1275,9 +1275,12 @@ html {
   transition: opacity 300ms ease;
 }
 
-.hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-copy--coach,
-.hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-copy--web {
-  opacity: 0.55;
+/* Nur mit Maus: am Handy bleiben die Zeilen unten immer ruhig und voll sichtbar */
+@media (hover: hover) {
+  .hub:has(.hub-half--web:is(:hover, :focus-visible)) .hub-copy--coach,
+  .hub:has(.hub-half--coach:is(:hover, :focus-visible)) .hub-copy--web {
+    opacity: 0.55;
+  }
 }
 
 /* --- Hintergründe der Welten ---------------------------------------------- */
@@ -1708,10 +1711,21 @@ html {
   transform: rotate(1.2deg) translateX(1%);
 }
 
-.hub-info {
+/* Mobil: Infokugel oben rechts, auf Höhe der Marke in der Kopfzeile.
+   Am Desktop ist .hub-info-slot eine leere Ebene in Bühnengröße (siehe unten). */
+.hub-info-slot {
   position: absolute;
-  top: 14%;
-  right: 8%;
+  grid-row: auto;
+  top: 0.625rem;
+  right: var(--gutter);
+  z-index: 6;
+  width: auto;
+  aspect-ratio: auto;
+  margin: 0;
+}
+
+.hub-info {
+  position: relative;
   z-index: 5;
   pointer-events: auto;
 }
@@ -1902,19 +1916,6 @@ html {
   opacity: 1;
 }
 
-.hub[data-tilt='web'] .hub-photo {
-  transform: rotate(-1.2deg) translateX(-1%);
-}
-
-.hub[data-tilt='coach'] .hub-photo {
-  transform: rotate(1.2deg) translateX(1%);
-}
-
-.hub[data-tilt='web'] .hub-copy--coach,
-.hub[data-tilt='coach'] .hub-copy--web {
-  opacity: 0.55;
-}
-
 /* iOS: Freigabe des Bewegungssensors – links neben dem Kopf, Gegenstück zur Infokugel */
 .hub-tilt {
   position: absolute;
@@ -1988,14 +1989,43 @@ html {
   }
 }
 
-/* Sehr schmal: Orbit-Belege passen nicht mehr neben das Foto → Textzeile */
-@media (max-width: 359px) {
-  .hub-orbit {
+/* Mobil (Hochkant) kein Orbit – das Foto steht ruhig. Der Desktop-Block
+   schaltet ihn wieder ein. */
+.hub-orbit {
+  display: none;
+}
+
+/* Mobiles Stapel-Layout (Gegenstück zum Desktop-Block unten): statt Kugel nur
+   ein großer Pfeil in Weltfarbe – die ganze Zeile ist der Link. */
+@media (max-width: 1023.98px) and (orientation: portrait), (max-width: 1023.98px) and (min-height: 600.02px) {
+  .hub-cta,
+  .hub-cta--web,
+  .hub-cta--coach {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.9rem;
+    font-weight: 400;
+    background: none;
+    box-shadow: none;
+    animation: none;
+    transition: transform 200ms ease;
+  }
+
+  .hub-cta::before,
+  .hub-cta::after {
     display: none;
   }
 
-  .hub-facts {
-    display: block;
+  .hub-cta--web {
+    color: #2dd4bf;
+  }
+
+  .hub-cta--coach {
+    color: #f6b35a;
+  }
+
+  .hub-half:active .hub-cta {
+    transform: translateX(6px);
   }
 }
 
@@ -2041,9 +2071,23 @@ html {
   }
 
   .hub-orbit {
+    display: block;
     --tilt: 72deg;
     top: 80%;
     width: 104%;
+  }
+
+  .hub-info-slot {
+    top: auto;
+    right: auto;
+    z-index: 5;
+    aspect-ratio: 1;
+  }
+
+  .hub-info {
+    position: absolute;
+    top: 14%;
+    right: 8%;
   }
 
   .hub-seam {
@@ -2399,6 +2443,10 @@ html[data-xray] main img {
   box-shadow: 0 0 0 2px #2dd4bf;
 }
 
+.hub-kicheck__q {
+  font-weight: 500;
+}
+
 .hub-kicheck__badge {
   padding: 0.1rem 0.5rem;
   border-radius: 999px;
@@ -2567,6 +2615,49 @@ html[data-xray] main img {
 .hub-kicheck--coach .hub-kicheck__badge {
   color: #1a0f06;
   background: #f6b35a;
+}
+
+/* Mobil: zwei gleich gebaute Karten statt Pillen, die je nach Textlänge
+   unterschiedlich umbrechen. Oben Etikett + Name, darunter die Frage, rechts der Pfeil. */
+@media (max-width: 639px) {
+  .hub-freebies {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hub-kicheck {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'badge name arrow'
+      'q q arrow';
+    column-gap: 0.6rem;
+    row-gap: 0.3rem;
+    align-self: stretch;
+    padding: 0.8rem 1rem;
+    border-radius: 1.1rem;
+    text-align: left;
+  }
+
+  .hub-kicheck__badge {
+    grid-area: badge;
+    justify-self: start;
+  }
+
+  .hub-kicheck__name {
+    grid-area: name;
+  }
+
+  .hub-kicheck__q {
+    grid-area: q;
+    font-size: 0.8rem;
+    color: rgba(226, 232, 240, 0.75);
+  }
+
+  .hub-kicheck__arrow {
+    grid-area: arrow;
+    font-size: 1.1rem;
+  }
 }
 
 /* Hero-Variante B: Raster links über dem Auslauf + Editor-Leiste am Rand */

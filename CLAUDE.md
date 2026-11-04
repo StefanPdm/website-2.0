@@ -105,11 +105,12 @@ lässt das Logo in der Hand leuchten und dimmt die andere Hand. Klick → `compo
 setzt `data-chosen`, die Welt füllt den Schirm (650 ms), dann Navigation. Um das Foto
 kreist ein geneigter **Belege-Orbit** (`facts` in `app/page.tsx`, zwei Ebenen vor/hinter
 dem Foto) – dort nur prüfbare Aussagen (§10). Mobil < 1024 px hochkant: eigenes
-Stapel-Layout (Grid) – Kopf, H1, Foto mit Orbit (flacher gekippt, `--tilt`) vor geteiltem
-Grund, darunter beide Welten als volle Zeilen mit rundem Pfeil; Antippen lässt die Welt als
-Kreis vom Finger aus wachsen (`--tap-x/--tap-y`). Unter 360 px Belege als Textzeile. Kein WebGL.
+Stapel-Layout (Grid) – Kopf (Infokugel oben rechts, `.hub-info-slot`), H1, Foto **ohne Orbit**
+vor geteiltem Grund, darunter beide Welten als volle Zeilen mit schlichtem Pfeil in Weltfarbe
+(keine Kugel); Antippen lässt die Welt als Kreis vom Finger aus wachsen (`--tap-x/--tap-y`).
+Darunter die Gratis-Einstiege als zwei gleich gebaute Karten. Kein WebGL.
 Mobil verschiebt außerdem **seitliches Kippen** die Naht (`components/HubTilt.tsx`,
-`deviceorientation` → `--split` 40–60 %, `data-tilt` für das Leuchten). iOS verlangt eine
+`deviceorientation` → `--split` 40–60 %, `data-tilt` für das Leuchten; die Welt-Zeilen unten reagieren bewusst nicht). iOS verlangt eine
 Freigabe per Tippen → Chip „Kippen“ links neben dem Kopf; er verschwindet beim ersten echten
 Sensorwert. Die Neigung bleibt im Browser (keine Speicherung, kein Cookie). Raster und Ringe
 liegen mobil zusätzlich als `.hub-top-bg` hinter Kopf und Foto.
