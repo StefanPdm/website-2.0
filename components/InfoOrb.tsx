@@ -109,7 +109,9 @@ export default function InfoOrb({ headline, text, buttonClassName, label }: Info
         aria-label='Close info box'
         onClick={() => setIsOpen(false)}
       />
-      <div className='relative w-[min(92vw,1280px)] md:mt-48'>
+      {/* Schwebendes Foto + Abstand nur bei genug Höhe – im Querformat am Handy
+          bliebe sonst kein Platz für den Text */}
+      <div className='info-modal-wrap relative w-[min(92vw,1280px)]'>
         <div
           ref={dialogRef}
           tabIndex={-1}
@@ -120,7 +122,7 @@ export default function InfoOrb({ headline, text, buttonClassName, label }: Info
             isOpen ? 'opacity-100 animate-[info-card-in_1000ms_ease-out_forwards]' : 'opacity-0'
           }`}>
           <div
-            className={`absolute left-1/2 -top-75.5 z-3 hidden -translate-x-1/2 pointer-events-none opacity-0 md:block ${
+            className={`info-modal-photo absolute left-1/2 -top-75.5 z-3 hidden -translate-x-1/2 pointer-events-none opacity-0 ${
               isOpen ? 'animate-[info-badge-in_620ms_cubic-bezier(0.22,0.8,0.2,1)_forwards]' : ''
             }`}
             aria-hidden='true'>
@@ -133,7 +135,7 @@ export default function InfoOrb({ headline, text, buttonClassName, label }: Info
               className='min-h-75 h-75 w-auto object-contain object-bottom'
             />
           </div>
-          <div className='relative block w-full px-6 pt-6 md:hidden'>
+          <div className='info-modal-photo-sm relative block w-full px-6 pt-6 md:hidden'>
             <span className='absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00E5FF]/20 blur-3xl' />
             <Image
               src='/images-startseite/portrait-fireballs.webp'
@@ -146,7 +148,7 @@ export default function InfoOrb({ headline, text, buttonClassName, label }: Info
           </div>
           <div
             ref={scrollContainerRef}
-            className='relative z-2 min-h-0 flex-1 overflow-y-auto px-6 pb-7 pt-6 text-[#e8fbff] md:px-7.5 md:pt-14'>
+            className='info-modal-body relative z-2 min-h-0 flex-1 overflow-y-auto px-6 pb-7 pt-6 text-[#e8fbff] md:px-7.5'>
             <span className='text-[11px] uppercase tracking-[0.32em] text-[rgba(125,227,255,0.8)]'>
               Kurzinfo
             </span>

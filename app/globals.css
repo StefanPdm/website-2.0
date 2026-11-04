@@ -1694,6 +1694,28 @@ html {
   pointer-events: auto;
 }
 
+/* Info-Fenster (InfoOrb): schwebendes Foto und großer Abstand nach oben nur,
+   wenn genug Höhe da ist – im Querformat am Handy bliebe sonst kein Platz für den Text */
+@media (min-width: 768px) and (min-height: 720px) {
+  .info-modal-wrap {
+    margin-top: 12rem;
+  }
+
+  .info-modal-photo {
+    display: block;
+  }
+
+  .info-modal-body {
+    padding-top: 3.5rem;
+  }
+}
+
+@media (max-height: 600px) {
+  .info-modal-photo-sm {
+    display: none;
+  }
+}
+
 /* Infokugel „Warum beides?“ (InfoOrb mit `label`): Glas-Pille mit Frage und
    einer Glaskugel, in der beide Welten wabern – geteilt von der Naht. */
 .info-split {
@@ -2410,25 +2432,48 @@ html {
     font-size: 1.5rem;
   }
 
-  /* Wenig Platz: runde Kugel wie mobil */
-  .hub-cta {
+  /* Wenig Platz: nur der Pfeil in Weltfarbe, wie mobil hochkant */
+  .hub-cta,
+  .hub-cta--web,
+  .hub-cta--coach {
+    min-width: 44px;
+    min-height: 44px;
     padding: 0;
-    font-size: 1.1rem;
-    animation: info-orb-float 6s ease-in-out infinite;
+    font-size: 1.9rem;
+    font-weight: 400;
+    background: none;
+    box-shadow: none;
+    animation: none;
   }
 
-  .hub-cta::before {
-    top: 9%;
-    left: 17%;
-    width: 42%;
-    height: 28%;
-    rotate: -28deg;
-    border-radius: 50%;
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 70%);
-  }
-
+  .hub-cta::before,
   .hub-cta::after {
-    display: block;
+    display: none;
+  }
+
+  .hub-cta--web {
+    color: #2dd4bf;
+  }
+
+  .hub-cta--coach {
+    color: #f6b35a;
+  }
+
+  /* „Warum beides?“ oben rechts in die Ecke statt über das (kleine) Foto */
+  .hub-info-slot {
+    top: 0.75rem;
+    right: var(--gutter);
+    bottom: auto;
+    left: auto;
+    width: auto;
+    aspect-ratio: auto;
+    translate: none;
+  }
+
+  .hub-info {
+    position: relative;
+    top: auto;
+    right: auto;
   }
 
   .hub-cta-label {
