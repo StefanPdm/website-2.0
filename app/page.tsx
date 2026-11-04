@@ -80,7 +80,7 @@ const breathRings = [0, 1.6, 3.2];
 /**
  * Lichter über den offenen Händen – je Welt das Motiv ihres Hintergrunds, in 3D
  * (reines CSS, kein WebGL auf /):
- * Web = gläserner Rasterwürfel mit Scan-Ebene („Ordnung im System“),
+ * Web = gläserner Rasterwürfel mit Scan-Ebene (Struktur, Technik),
  * Coaching = warme Kugel mit schrägen Atem-Ringen („Ruhe im Kopf“).
  * Positionen passen zu portrait-beide-haende.webp (.hub-light in globals.css).
  */
@@ -155,11 +155,11 @@ export default function Home() {
               <div className='hub-copy hub-copy--web'>
                 <span className='hub-eyebrow'>Webdevelopment</span>
                 <h2 className='hub-claim'>
-                  Ordnung <br className='hidden lg:inline' />
-                  im System.
+                  Dein digitaler <br className='hidden lg:inline' />
+                  Vorsprung.
                 </h2>
                 <span className='hub-text'>
-                  Websites, Shops und Kundenportale, die tragen – gebaut mit 20 Jahren
+                  Websites, Shops, Kundenportale und Plugins – gebaut mit 20 Jahren
                   Unternehmerblick.
                 </span>
                 <span className='hub-cta hub-cta--web'>
