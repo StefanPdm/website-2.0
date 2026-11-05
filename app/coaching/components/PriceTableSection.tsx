@@ -59,12 +59,12 @@ function OfferCard({ offer }: { offer: CoachingOffer }) {
       <div className='flex items-start justify-between gap-3'>
         <div>
           <span
-            className={`inline-flex items-center rounded-full border border-(--accent)/40 px-3 py-1 text-[0.65rem] uppercase tracking-[0.25em] ${
+            className={`inline-flex items-center rounded-full border border-(--accent)/40 px-3 py-1 text-xs uppercase tracking-[0.25em] ${
               isMentoring ? 'bg-(--accent)/10 font-semibold text-accent' : 'bg-surface text-(--text)/70'
             }`}>
             {isMentoring ? 'Mentoring' : 'Session'}
           </span>
-          <p className='mt-3 text-xs uppercase tracking-[0.3em] text-(--text)/60'>{offer.duration}</p>
+          <p className='mt-3 text-xs uppercase tracking-[0.3em] text-(--subtle)'>{offer.duration}</p>
           <h4 className='mt-2 text-lg font-semibold text-(--text)'>{offer.title}</h4>
         </div>
         <div className='flex flex-col items-end gap-2'>
@@ -75,7 +75,7 @@ function OfferCard({ offer }: { offer: CoachingOffer }) {
             />
           </span>
           {offer.highlight && (
-            <span className='absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border-2 border-border-strong bg-accent px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-black/90'>
+            <span className='absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border-2 border-border-strong bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-(--button-text)'>
               {offer.badge ?? 'Beliebt'}
             </span>
           )}
@@ -83,7 +83,7 @@ function OfferCard({ offer }: { offer: CoachingOffer }) {
       </div>
 
       <div className='mt-6 text-3xl font-semibold text-(--text)'>{offer.price}</div>
-      <p className='mt-2 text-xs text-(--text)/60'>
+      <p className='mt-2 text-xs text-(--subtle)'>
         inkl. MwSt.
         {offer.perSession && <span className='text-accent'> · {offer.perSession}</span>}
       </p>
@@ -103,7 +103,7 @@ function OfferCard({ offer }: { offer: CoachingOffer }) {
         ))}
       </ul>
 
-      <p className='mt-6 text-xs text-(--text)/60'>{offer.note}</p>
+      <p className='mt-6 text-xs text-(--subtle)'>{offer.note}</p>
 
       {offer.highlight ? (
         <PrimaryButton
@@ -150,13 +150,13 @@ export default function PriceTableSection() {
             />
             <div className='flex flex-col gap-6 md:flex-row md:items-center md:justify-between'>
               <div className='max-w-2xl'>
-                <span className='inline-flex items-center rounded-full border border-(--accent)/40 bg-(--accent)/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-accent'>
+                <span className='inline-flex items-center rounded-full border border-(--accent)/40 bg-(--accent)/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-accent'>
                   Einstieg
                 </span>
                 <h3 className='mt-4 text-xl font-semibold text-(--text) sm:text-2xl'>
                   {entryOffer.title}
                 </h3>
-                <p className='mt-2 text-xs uppercase tracking-[0.2em] text-(--text)/60'>
+                <p className='mt-2 text-xs uppercase tracking-[0.2em] text-(--subtle)'>
                   {entryOffer.duration}
                 </p>
                 <ul className='mt-5 space-y-2 text-sm text-(--text)/75'>
@@ -177,14 +177,14 @@ export default function PriceTableSection() {
               <div className='shrink-0 md:text-right'>
                 <div className='flex items-baseline gap-3 md:justify-end'>
                   {entryOffer.regularPrice && (
-                    <s className='text-xl text-(--text)/50'>
+                    <s className='text-xl text-(--subtle)'>
                       <span className='sr-only'>statt </span>
                       {entryOffer.regularPrice}
                     </s>
                   )}
                   <span className='text-4xl font-semibold text-(--text)'>{entryOffer.price}</span>
                 </div>
-                <p className='mt-2 text-xs text-(--text)/60'>
+                <p className='mt-2 text-xs text-(--subtle)'>
                   {entryOffer.regularPrice ? 'Kostenloses Erstgespräch' : 'inkl. MwSt.'}
                 </p>
                 <PrimaryButton
@@ -235,7 +235,7 @@ export default function PriceTableSection() {
           </div>
         </div>
 
-        <p className='mx-auto mt-12 max-w-3xl text-center text-xs text-(--text)/50'>
+        <p className='mx-auto mt-12 max-w-3xl text-center text-xs text-(--subtle)'>
           Welche Variante zu dir passt, klären wir in der kostenlosen Klarheits-Session — auch, ob Coaching
           überhaupt das richtige Mittel für dein Anliegen ist.
         </p>

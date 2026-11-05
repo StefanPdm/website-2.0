@@ -75,7 +75,7 @@ export default function ImpulseSection() {
                 className='group/card block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
                 <GlassCard className='relative flex h-full flex-col overflow-hidden p-6'>
                   <Motif className='pointer-events-none absolute -right-8 -top-8 h-32 w-32 opacity-[0.07]' />
-                  <p className='relative text-[11px] uppercase tracking-[0.2em] text-accent-soft'>
+                  <p className='relative text-xs uppercase tracking-[0.2em] text-accent-soft'>
                     {kicker}
                   </p>
                   <h3 className='relative mt-3 text-lg font-semibold text-(--text)'>{title}</h3>

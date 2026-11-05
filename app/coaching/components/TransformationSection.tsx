@@ -74,7 +74,7 @@ export default function TransformationSection() {
               className='relative'>
               <GlassCard className='h-full p-6'>
                 <div className='flex items-center gap-4'>
-                  <span className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface text-sm font-semibold text-accent shadow-[0_0_20px_var(--glow)] ring-1 ring-border'>
+                  <span className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface text-sm font-semibold text-accent-soft shadow-[0_0_20px_var(--glow)] ring-1 ring-border'>
                     0{index + 1}
                   </span>
                   <h3 className='text-lg font-semibold text-(--text)'>{step.title}</h3>

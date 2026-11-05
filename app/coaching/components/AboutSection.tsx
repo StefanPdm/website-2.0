@@ -197,7 +197,7 @@ export default function AboutSection() {
                 ))}
               </div>
               <GlassCard className='mt-8 p-5'>
-                <p className='text-xs uppercase tracking-[0.2em] text-(--text)/60'>
+                <p className='text-xs uppercase tracking-[0.2em] text-(--subtle)'>
                   Zertifizierungen durch:
                 </p>
                 <div className='mt-2 flex items-center  gap-[10%] justify-start'>
@@ -214,7 +214,7 @@ export default function AboutSection() {
                         height={30}
                         width={120}
                       />
-                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-(--text)/90 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-(--bg) opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-opacity group-hover/tooltip:opacity-100'>
+                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-(--text)/90 px-3 py-1 text-xs uppercase tracking-[0.18em] text-(--bg) opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-opacity group-hover/tooltip:opacity-100'>
                         DVNLP – Deutscher Verband für Neuro-Linguistisches Programmieren
                       </span>
                     </span>
@@ -232,7 +232,7 @@ export default function AboutSection() {
                         height={30}
                         width={120}
                       />
-                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-(--text)/90 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-(--bg) opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-opacity group-hover/tooltip:opacity-100'>
+                      <span className='pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-(--border) bg-(--text)/90 px-3 py-1 text-xs uppercase tracking-[0.18em] text-(--bg) opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-opacity group-hover/tooltip:opacity-100'>
                         Ronny Rohde - Best Life NLP
                       </span>
                     </span>

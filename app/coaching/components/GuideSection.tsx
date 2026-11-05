@@ -76,13 +76,13 @@ export default function GuideSection() {
             <div className='mt-8 grid gap-4 sm:grid-cols-2'>
               <GlassCard className='p-4'>
                 <p className='text-sm text-(--text)/70'>Klarheit im Kopf</p>
-                <p className='mt-2 text-xs text-(--text)/50'>
+                <p className='mt-2 text-xs text-(--subtle)'>
                   Erkenne Muster und fokussiere dich neu.
                 </p>
               </GlassCard>
               <GlassCard className='p-4'>
                 <p className='text-sm text-(--text)/70'>Souveräne Gespräche</p>
-                <p className='mt-2 text-xs text-(--text)/50'>
+                <p className='mt-2 text-xs text-(--subtle)'>
                   Sprache bewusst einsetzen und wirken lassen.
                 </p>
               </GlassCard>
@@ -152,7 +152,7 @@ export default function GuideSection() {
                       setFormState((prev) => ({ ...prev, name: event.target.value }))
                     }
                     onBlur={() => setTouched((prev) => ({ ...prev, name: true }))}
-                    className={`mt-2 w-full rounded-xl border bg-(--bg)/40 px-4 py-3 text-sm text-(--text)/90 placeholder:text-(--text)/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                    className={`mt-2 w-full rounded-xl border bg-(--bg)/40 px-4 py-3 text-sm text-(--text)/90 placeholder:text-(--subtle) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                       hasError('name') ? 'border-red-400/70' : 'border-border'
                     }`}
                     placeholder='Dein Name'
@@ -174,7 +174,7 @@ export default function GuideSection() {
                       setFormState((prev) => ({ ...prev, email: event.target.value }))
                     }
                     onBlur={() => setTouched((prev) => ({ ...prev, email: true }))}
-                    className={`mt-2 w-full rounded-xl border bg-(--bg)/40 px-4 py-3 text-sm text-(--text)/90 placeholder:text-(--text)/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                    className={`mt-2 w-full rounded-xl border bg-(--bg)/40 px-4 py-3 text-sm text-(--text)/90 placeholder:text-(--subtle) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                       hasError('email') ? 'border-red-400/70' : 'border-border'
                     }`}
                     placeholder='dein.name@email.de'
@@ -186,7 +186,7 @@ export default function GuideSection() {
                   erhoben und eine Nachricht versendet. Ohne ausdrückliche
                   Einwilligung ist das nicht zulässig – die fehlte hier bisher.
                 */}
-                <div className='flex items-start gap-2 text-xs text-(--text)/60'>
+                <div className='flex items-start gap-2 text-xs text-(--subtle)'>
                   <input
                     id='lead-privacy'
                     type='checkbox'
@@ -215,7 +215,7 @@ export default function GuideSection() {
                   aria-busy={loading}>
                   {loading ? 'Wird gesendet…' : 'Jetzt Link anfordern'}
                 </PrimaryButton>
-                <p className='text-xs text-(--text)/50'>
+                <p className='text-xs text-(--subtle)'>
                   Kein Spam. Kein Verkauf. Keine weiteren Nachrichten.
                 </p>
               </form>

@@ -122,7 +122,7 @@ export default function ApproachSection() {
               key={key}
               className='relative flex h-full flex-col overflow-hidden p-6'>
               <Motif className='pointer-events-none absolute -right-10 -top-10 h-40 w-40 opacity-[0.07]' />
-              <p className='relative text-[11px] uppercase tracking-[0.2em] text-accent-soft'>
+              <p className='relative text-xs uppercase tracking-[0.2em] text-accent-soft'>
                 {overline}
               </p>
               <h3 className='relative mt-3 text-lg font-semibold text-(--text)'>

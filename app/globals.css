@@ -137,6 +137,8 @@
   --bg: #140c06;
   --text: #f6e9d7;
   --muted: rgba(246, 233, 215, 0.74);
+  /* Meta-Zeilen, Notizen, Streichpreis – ersetzt text-(--text)/50 und /60 */
+  --subtle: rgba(246, 233, 215, 0.6);
   --accent: #f6b35a;
   --accent-2: #d9853a;
   --accent-soft: #ffcf8a;
@@ -174,6 +176,130 @@
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E"),
     linear-gradient(180deg, rgba(255, 220, 180, 0.025), transparent 40%);
   background-attachment: fixed;
+}
+
+/* ------------------------------------------------------------------
+ * PROTOTYP Farbwelt Welt A (Branch experiment/coaching-farbwelt).
+ * Drei Varianten zum Vergleich, umgeschaltet über data-palette am
+ * .theme-coaching-Container (PaletteSwitch.tsx, ?farbe=…).
+ *   aufgehellt – dunkel bleiben, aber Walnuss statt Espresso, mehr Licht, kein Raster
+ *   hell       – Creme/Sand, Espresso als Schrift, Kupfer als Akzent
+ *   mix        – hell, Hero/Ablauf/Über mich/Kontakt/Kopf/Fuß dunkel (aufgehellt)
+ * Ohne data-palette gilt das bisherige Espresso & Bernstein.
+ * ------------------------------------------------------------------ */
+.theme-coaching {
+  --card-shade: rgba(0, 0, 0, 0.4);
+}
+
+/* Variante 1 – und die dunklen Inseln der Mischform */
+.theme-coaching[data-palette='aufgehellt'],
+.theme-coaching[data-palette='mix'] > div > header,
+.theme-coaching[data-palette='mix'] > div > footer,
+.theme-coaching[data-palette='mix'] :is(#start, #ablauf, #ueber, #kontakt) {
+  --bg: #2b1b10;
+  --text: #fbefdf;
+  --muted: rgba(251, 239, 223, 0.86);
+  --subtle: rgba(251, 239, 223, 0.74);
+  --accent: #f6b35a;
+  --accent-2: #e0914a;
+  --accent-soft: #ffd49a;
+  --surface: rgba(255, 220, 180, 0.07);
+  --surface-strong: rgba(255, 220, 180, 0.12);
+  --border: rgba(255, 220, 180, 0.22);
+  --border-strong: rgba(255, 220, 180, 0.42);
+  --button-text: #1a0f06;
+  --glow: rgba(246, 179, 90, 0.26);
+  --glow-strong: rgba(246, 179, 90, 0.4);
+  --hero-glow: rgba(246, 179, 90, 0.36);
+  --hero-fade: rgba(43, 27, 16, 0.55);
+  --section-bg-accent: rgba(255, 200, 140, 0.07);
+  --card-shade: rgba(20, 10, 4, 0.35);
+  color: var(--text);
+}
+.theme-coaching[data-palette='aufgehellt'] {
+  background-color: var(--bg);
+  /* Kerzenlicht statt Raster: drei große warme Lichtflächen + Körnung */
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(255, 190, 110, 0.14), transparent 55%),
+    radial-gradient(ellipse at 90% 35%, rgba(230, 140, 70, 0.13), transparent 50%),
+    radial-gradient(ellipse at 30% 85%, rgba(255, 210, 150, 0.1), transparent 55%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, rgba(255, 210, 160, 0.06), transparent 50%);
+}
+
+/* Variante 2 und Grundton der Mischform */
+.theme-coaching:is([data-palette='hell'], [data-palette='mix']) {
+  --bg: #f7efe4;
+  --text: #2b1a0f;
+  --muted: rgba(43, 26, 15, 0.76);
+  --subtle: rgba(43, 26, 15, 0.7);
+  /* Kupfer so dunkel, dass Links auch auf dem Pfirsich-Glow ≥ 4,5 : 1 halten */
+  --accent: #9a4c17;
+  --accent-2: #7d3b12;
+  --accent-soft: #8f4a1a;
+  --surface: rgba(255, 252, 246, 0.6);
+  --surface-strong: rgba(255, 252, 246, 0.85);
+  --border: rgba(120, 70, 30, 0.16);
+  --border-strong: rgba(120, 70, 30, 0.3);
+  --button-text: #fffaf3;
+  --glow: rgba(214, 140, 70, 0.16);
+  --glow-strong: rgba(214, 140, 70, 0.28);
+  --hero-glow: rgba(246, 179, 90, 0.3);
+  --hero-fade: rgba(247, 239, 228, 0.7);
+  --section-bg-accent: rgba(230, 170, 110, 0.1);
+  --card-shade: rgba(120, 70, 30, 0.1);
+  background-color: var(--bg);
+  color: var(--text);
+  /* Morgensonne: Apricot oben links, Pfirsich rechts, feine Körnung */
+  background-image:
+    radial-gradient(ellipse at 10% 5%, rgba(255, 196, 130, 0.38), transparent 55%),
+    radial-gradient(ellipse at 95% 40%, rgba(244, 170, 120, 0.22), transparent 50%),
+    radial-gradient(ellipse at 25% 90%, rgba(255, 220, 170, 0.3), transparent 55%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+}
+.theme-coaching:is([data-palette='hell'], [data-palette='mix']) select {
+  color-scheme: light;
+}
+.theme-coaching[data-palette='hell'] > div > footer {
+  background-color: rgba(120, 70, 30, 0.06);
+}
+
+/* Mischform: dunkle Inseln bekommen eigenen Grund mit warmem Licht */
+.theme-coaching[data-palette='mix'] > div > footer,
+.theme-coaching[data-palette='mix'] :is(#start, #ablauf, #ueber, #kontakt) {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 15% 20%, rgba(255, 190, 110, 0.14), transparent 55%),
+    radial-gradient(ellipse at 85% 80%, rgba(230, 140, 70, 0.12), transparent 55%);
+}
+.theme-coaching[data-palette='mix'] #kontakt select {
+  color-scheme: dark;
+}
+/* Kopfzeile liegt in der Mischform auch über hellen Sektionen – deckend dunkel */
+.theme-coaching[data-palette='mix'] > div > header {
+  background-color: rgba(43, 27, 16, 0.92);
+}
+
+/* Hell: Creme-Verlauf nur hinter dem Text, das Foto bleibt klar */
+.theme-coaching[data-palette='hell'] #start > div[aria-hidden='true'] {
+  background-image: linear-gradient(
+    0deg,
+    var(--bg) 0%,
+    rgba(247, 239, 228, 0.94) 55%,
+    rgba(247, 239, 228, 0.6) 65%,
+    rgba(247, 239, 228, 0) 80%
+  );
+}
+@media (min-width: 1024px) {
+  .theme-coaching[data-palette='hell'] #start > div[aria-hidden='true'] {
+    background-image: linear-gradient(
+      90deg,
+      var(--bg) 0%,
+      rgba(247, 239, 228, 0.9) 34%,
+      rgba(247, 239, 228, 0.25) 52%,
+      rgba(247, 239, 228, 0) 64%
+    );
+  }
 }
 
 .light-pillar-fallback {

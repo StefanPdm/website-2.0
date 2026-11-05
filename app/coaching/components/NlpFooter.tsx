@@ -4,11 +4,11 @@ import Link from 'next/link';
 
 export default function NlpFooter() {
   return (
-    <footer className='border-t border-border bg-black/20 py-8 text-(--text)/60'>
+    <footer className='border-t border-border bg-black/20 py-8 text-(--subtle)'>
       <div className='container mx-auto flex flex-col gap-4 px-4 md:flex-row md:items-center md:justify-between'>
         <div>
           <p className='text-sm font-semibold text-(--text)'>Stefan Heinemann Coaching</p>
-          <p className='mt-1 text-xs text-(--text)/60'>Wir lieben dein Problem</p>
+          <p className='mt-1 text-xs text-(--subtle)'>Wir lieben dein Problem</p>
         </div>
         <div className='flex flex-wrap items-center gap-6 text-xs'>
           {/*
@@ -53,7 +53,7 @@ export default function NlpFooter() {
           </Link>
         </div>
       </div>
-      <div className='container mx-auto mt-6 px-4 text-xs text-(--text)/60'>
+      <div className='container mx-auto mt-6 px-4 text-xs text-(--subtle)'>
         © {new Date().getFullYear()} Stefan Heinemann Coaching · Life Coaching für Unternehmer in Potsdam & Berlin. Alle Rechte vorbehalten.
       </div>
     </footer>

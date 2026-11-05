@@ -20,6 +20,8 @@ export type RuleSet = {
   /** Verlaufsfarben der Nummern-Badges. */
   badgeFrom: string;
   badgeTo: string;
+  /** Schrift auf den Nummern-Badges – muss auf beiden Verlaufsenden ≥ 4,5 : 1 halten. */
+  badgeText: string;
   rules: string[];
   metaTitle: string;
   metaDescription: string;
@@ -45,6 +47,7 @@ export const gluecklichsein: RuleSet = {
     'Nimm dir eine Regel für eine Woche vor, nicht alle zwanzig auf einmal. Veränderung entsteht durch Wiederholung, nicht durch Einsicht.',
   badgeFrom: 'var(--accent)',
   badgeTo: 'var(--accent-2)',
+  badgeText: 'var(--button-text)',
   rules: [
     'Akzeptiere, was ist, bevor du veränderst, was sein soll.',
     'Übernimm Verantwortung dafür, wie du die Welt erlebst.',
@@ -87,6 +90,7 @@ export const ungluecklichsein: RuleSet = {
     'Ironisch gemeint. Keine dieser Regeln ist ein Rat – jede beschreibt ein Muster, das sich leise einschleicht. Lies sie als Checkliste: Was davon tust du gerade, ohne es zu merken?',
   badgeFrom: '#fb7185',
   badgeTo: '#94a3b8',
+  badgeText: '#04121a',
   rules: [
     'vergleiche dich stets mit anderen',
     'habe an andere Erwartungen',

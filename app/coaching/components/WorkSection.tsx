@@ -82,8 +82,8 @@ export default function WorkSection() {
                 <h3 className='text-lg font-semibold text-(--text)'>{item.title}</h3>
               </div>
               <p className='mt-4 text-sm text-(--text)/70'>{item.text}</p>
-              <p className='mt-3 text-xs text-(--text)/60 leading-relaxed'>{item.detail}</p>
-              <ul className='mt-4 mb-4 space-y-2 text-xs text-(--text)/60'>
+              <p className='mt-3 text-xs text-(--subtle) leading-relaxed'>{item.detail}</p>
+              <ul className='mt-4 mb-4 space-y-2 text-xs text-(--subtle)'>
                 {item.points.map((point) => (
                   <li
                     key={point}
@@ -95,7 +95,7 @@ export default function WorkSection() {
               </ul>
               {/* mt-auto: „So erreichen wir das“ sitzt in allen vier Karten am unteren Rand */}
               <div className='mt-auto rounded-xl border border-border bg-surface p-3'>
-                <p className='text-[11px] uppercase tracking-[0.2em] text-(--text)/50'>
+                <p className='text-xs uppercase tracking-[0.2em] text-(--subtle)'>
                   So erreichen wir das
                 </p>
                 <ul className='mt-2 space-y-2 text-xs text-(--text)/70'>

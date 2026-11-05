@@ -92,8 +92,8 @@ export default function RulesPage({ ruleSet }: { ruleSet: RuleSet }) {
                   className='flex items-start gap-4 border-b border-(--border) py-5 last:border-b-0 lg:[&:nth-last-child(2)]:border-b-0'>
                   <span
                     aria-hidden='true'
-                    className='mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full text-xs font-bold text-[#04121a] tabular-nums'
-                    style={{ background: badge, boxShadow: `0 0 18px ${badge}55` }}>
+                    className='mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full text-xs font-bold tabular-nums'
+                    style={{ background: badge, color: ruleSet.badgeText, boxShadow: `0 0 18px ${badge}55` }}>
                     {index + 1}
                   </span>
                   <p className='text-sm leading-relaxed text-(--text) sm:text-base'>{rule}</p>
