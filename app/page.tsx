@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { CSSProperties } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import HubLichtWahl from '@/components/HubLichtWahl';
 import HubLink from '@/components/HubLink';
 import HubTilt from '@/components/HubTilt';
+import HubSwipe from '@/components/HubSwipe';
 import InfoOrb from '@/components/InfoOrb';
 import { RootStructuredData } from '@/components/StructuredData';
 
@@ -164,7 +167,11 @@ export default function Home() {
                 </span>
                 <span className='hub-cta hub-cta--web'>
                   <span className='hub-cta-label'>Zur Webentwicklung</span>
-                  <span aria-hidden='true'>→</span>
+                  <span
+                    aria-hidden='true'
+                    className='hub-cta-pfeil'>
+                    →
+                  </span>
                 </span>
               </div>
             </HubLink>
@@ -190,7 +197,11 @@ export default function Home() {
                 </span>
                 <span className='hub-cta hub-cta--coach'>
                   <span className='hub-cta-label'>Zum Coaching</span>
-                  <span aria-hidden='true'>→</span>
+                  <span
+                    aria-hidden='true'
+                    className='hub-cta-pfeil'>
+                    →
+                  </span>
                 </span>
               </div>
             </HubLink>
@@ -285,6 +296,16 @@ export default function Home() {
               <FactOrbit layer='front' />
               <HubTilt />
             </div>
+            <HubSwipe />
+            <HubLichtWahl />
+            {/* Mobil: Griff auf der Kreuzung der Nähte – die Naht lässt sich ziehen
+                (HubSwipe), Antippen bleibt Sache der Spalten */}
+            <span
+              aria-hidden='true'
+              className='hub-griff'>
+              <ChevronLeft />
+              <ChevronRight />
+            </span>
 
             {/* Infokugel: mobil oben rechts in der Kopfzeile, am Desktop über dem
                 Foto (eigene Ebene in Bühnengröße, siehe .hub-info-slot) */}

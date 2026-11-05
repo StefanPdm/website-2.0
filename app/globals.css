@@ -1926,6 +1926,59 @@ html {
   transform: rotate(1.2deg) translateX(1%);
 }
 
+/* Lichter wählen ihre Welt (HubLichtWahl) */
+.hub-light {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Mit Maus wirkt das Symbol wie seine Hälfte: Naht rückt, Licht wächst */
+@media (hover: hover) {
+  .hub:has(.hub-light--web:hover) {
+    --split: 57%;
+  }
+
+  .hub:has(.hub-light--coach:hover) {
+    --split: 43%;
+  }
+
+  .hub:has(.hub-light--web:hover) .hub-light--web,
+  .hub:has(.hub-light--coach:hover) .hub-light--coach {
+    scale: 1.2;
+  }
+
+  .hub:has(.hub-light--web:hover) .hub-light--coach,
+  .hub:has(.hub-light--coach:hover) .hub-light--web {
+    opacity: 0.35;
+  }
+}
+
+/* Jede Wahl (Spalte, Naht, Symbol, Desktop-Hälfte): Die Bühne liegt über Kreis
+   bzw. Vorhang, alles außer dem gewählten Licht blendet aus, das Licht gleitet
+   zur Mitte und wächst. */
+.hub[data-chosen] .hub-stage:not(.hub-info-slot) {
+  z-index: 21;
+  opacity: 1;
+}
+
+.hub[data-chosen='web'] .hub-stage > :not(.hub-light--web),
+.hub[data-chosen='coach'] .hub-stage > :not(.hub-light--coach) {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.hub.hub[data-chosen='web'] .hub-light--web,
+.hub.hub[data-chosen='coach'] .hub-light--coach {
+  left: 50%;
+  top: 50%;
+  scale: 2.6;
+  opacity: 1;
+  transition:
+    left 850ms cubic-bezier(0.65, 0, 0.35, 1),
+    top 850ms cubic-bezier(0.65, 0, 0.35, 1),
+    scale 850ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
 /* Mobil: Infokugel oben rechts, auf Höhe der Marke in der Kopfzeile.
    Am Desktop ist .hub-info-slot eine leere Ebene in Bühnengröße (siehe unten). */
 .hub-info-slot {
@@ -2425,16 +2478,96 @@ html {
   display: none;
 }
 
-/* Mobiles Stapel-Layout (Gegenstück zum Desktop-Block unten): statt Kugel nur
-   ein großer Pfeil in Weltfarbe – die ganze Zeile ist der Link. */
+.hub-griff {
+  display: none;
+}
+
+/* Mobiles Layout „Spalten + Griff“ (Gegenstück zum Desktop-Block unten): Die
+   Naht läuft bis nach unten, jede Welt steht in ihrer Hälfte unter der Hand
+   mit ihrem Licht. Antippen: die ganze Spalte, beschriftet mit einer Pille.
+   Ziehen: der Griff auf der Kreuzung der Nähte (HubSwipe). */
 @media (max-width: 1023.98px) and (orientation: portrait), (max-width: 1023.98px) and (min-height: 600.02px) {
+  /* Spalten fest 50/50: Mit der Naht wandern nur Linie und Grund. Folgten die
+     Spalten der Naht, bräche der Text um und das Foto spränge in der Höhe. */
+  .hub {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    /* Querbewegung gehört dem Wischen, senkrecht scrollt die Seite weiter */
+    touch-action: pan-y;
+  }
+
+  .hub > :is(.hub-top, .hub-head, .hub-stage) {
+    grid-column: 1 / -1;
+  }
+
+  /* Geteilter Grund und Naht über die volle Höhe */
+  .hub > :is(.hub-top-bg, .hub-seam) {
+    grid-row: 1 / -1;
+    grid-column: 1 / -1;
+  }
+
+  .hub-half {
+    grid-row: 4;
+    padding-block: 1.1rem 1.6rem;
+  }
+
+  .hub-half > .hub-bg {
+    display: none;
+  }
+
+  .hub-half--web {
+    grid-column: 1;
+    padding-inline: var(--gutter) 0.85rem;
+  }
+
+  .hub-half--coach {
+    grid-column: 2;
+    padding-inline: 0.85rem var(--gutter);
+  }
+
+  .hub-half--coach::before {
+    opacity: 1;
+  }
+
+  /* Pillen beider Spalten auf einer Linie, auch wenn ein Claim umbricht */
+  .hub-copy {
+    height: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      'eyebrow'
+      'claim'
+      'cta';
+    row-gap: 0.35rem;
+    align-items: start;
+  }
+
+  .hub-copy--coach {
+    justify-items: end;
+    text-align: right;
+  }
+
+  .hub-text {
+    display: none;
+  }
+
+  .hub-claim {
+    font-size: clamp(1.2rem, 5.4vw, 1.9rem);
+  }
+
+  /* Pille statt Kugel: Worte in Weltfarbe */
   .hub-cta,
   .hub-cta--web,
   .hub-cta--coach {
-    min-width: 44px;
-    min-height: 44px;
-    font-size: 1.9rem;
-    font-weight: 400;
+    align-self: end;
+    min-width: 0;
+    min-height: 40px;
+    margin-top: 0.4rem;
+    padding: 0 0.8rem;
+    border: 1px solid currentColor;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
     background: none;
     box-shadow: none;
     animation: none;
@@ -2442,8 +2575,13 @@ html {
   }
 
   .hub-cta::before,
-  .hub-cta::after {
+  .hub-cta::after,
+  .hub-cta-pfeil {
     display: none;
+  }
+
+  .hub-cta-label {
+    display: inline;
   }
 
   .hub-cta--web {
@@ -2455,7 +2593,70 @@ html {
   }
 
   .hub-half:active .hub-cta {
-    transform: translateX(6px);
+    transform: scale(0.97);
+  }
+
+  /* Beim Ziehen tritt die verdrängte Welt zurück */
+  .hub[data-wischen='web'] .hub-copy--coach,
+  .hub[data-wischen='coach'] .hub-copy--web {
+    opacity: 0.3;
+  }
+
+  /* Griff: klein auf dem Treffpunkt von senkrechter und waagerechter Naht */
+  .hub-griff {
+    position: relative;
+    z-index: 4;
+    grid-row: 4;
+    grid-column: 1 / -1;
+    align-self: start;
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+    width: 36px;
+    height: 36px;
+    margin-left: var(--split);
+    translate: -50% -50%;
+    border-radius: 999px;
+    color: #f8fafc;
+    background: linear-gradient(90deg, #0d2a44 50%, #3a2410 50%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 0 0 4px rgba(7, 11, 18, 0.5),
+      0 10px 24px rgba(0, 0, 0, 0.5);
+    /* Wippt nach dem Laden zweimal: „Diese Linie lässt sich ziehen“ */
+    animation: hub-griff-wippen 1.4s ease-in-out 1.2s 2;
+    transition: scale 200ms ease;
+  }
+
+  .hub-griff svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .hub[data-wischen] .hub-griff {
+    scale: 1.12;
+  }
+
+  @keyframes hub-griff-wippen {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-8px);
+    }
+    75% {
+      transform: translateX(8px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-griff {
+    animation: none;
   }
 }
 

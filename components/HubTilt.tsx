@@ -58,6 +58,11 @@ export default function HubTilt() {
     };
 
     const tick = () => {
+      // Beim Wischen (HubSwipe) führt der Finger, nicht der Sensor
+      if (hub.dataset.wischen) {
+        frame = 0;
+        return;
+      }
       // Weich nachziehen statt jedem Sensorwert hart zu folgen
       current += (target - current) * 0.18;
       hub.style.setProperty('--split', `${current.toFixed(2)}%`);
@@ -65,7 +70,7 @@ export default function HubTilt() {
     };
 
     const onOrientation = (event: DeviceOrientationEvent) => {
-      if (event.gamma == null || !layout.matches || hub.dataset.chosen) return;
+      if (event.gamma == null || !layout.matches || hub.dataset.chosen || hub.dataset.wischen) return;
       if (!sensorSeen) {
         sensorSeen = true;
         setGranted(true);

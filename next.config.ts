@@ -51,6 +51,13 @@ const nextConfig: NextConfig = {
   // Version im Response-Header verschweigen.
   poweredByHeader: false,
 
+  experimental: {
+    // Kein dauerhafter Turbopack-Cache im Dev-Modus (.next/dev): Er blieb unter
+    // Windows auf altem CSS hängen, auch über Neustarts hinweg. Ohne ihn startet
+    // `pnpm dev` etwas langsamer, zeigt aber nach jedem Neustart den echten Stand.
+    turbopackFileSystemCacheForDev: false,
+  },
+
   images: {
     qualities: [100, 75],
     // Keine remotePatterns: Alle Bilder liegen lokal. Fremd geladene Bilder

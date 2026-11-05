@@ -109,11 +109,14 @@ setzt `data-chosen`, die Welt füllt den Schirm (650 ms), dann Navigation. Um da
 kreist ein geneigter **Belege-Orbit** (`facts` in `app/page.tsx`, zwei Ebenen vor/hinter
 dem Foto) – dort nur prüfbare Aussagen (§10). Mobil < 1024 px hochkant: eigenes
 Stapel-Layout (Grid) – Kopf (Infokugel oben rechts, `.hub-info-slot`), H1, Foto **ohne Orbit**
-vor geteiltem Grund, darunter beide Welten als volle Zeilen mit schlichtem Pfeil in Weltfarbe
-(keine Kugel); Antippen lässt die Welt als Kreis vom Finger aus wachsen (`--tap-x/--tap-y`).
+vor geteiltem Grund. Die Naht läuft bis ganz nach unten (Spalten fest 50/50, nur Linie und Grund folgen `--split` – sonst bräche der Text um und das Foto spränge): Web links,
+Coaching rechts, je Rubrik + Claim + Pille mit Text in Weltfarbe (kein Pfeil, kein Fließtext).
+Antippen der Spalte lässt die Welt als Kreis vom Finger aus wachsen (`--tap-x/--tap-y`).
+Auf der Kreuzung der Nähte sitzt ein Griff ‹ › (`.hub-griff`, wippt nach dem Laden zweimal):
+Die Naht lässt sich ziehen (`components/HubSwipe.tsx`), ab 22 % der Breite gilt die Wahl.
 Darunter die Gratis-Einstiege als zwei gleich gebaute Karten. Kein WebGL.
 Mobil verschiebt außerdem **seitliches Kippen** die Naht (`components/HubTilt.tsx`,
-`deviceorientation` → `--split` 40–60 %, `data-tilt` für das Leuchten; die Welt-Zeilen unten reagieren bewusst nicht). iOS verlangt eine
+`deviceorientation` → `--split` 40–60 %, `data-tilt` für das Leuchten; die Spalten unten bleiben fest 50/50; beim Ziehen wird die verdrängte Seite blass). iOS verlangt eine
 Freigabe per Tippen → Chip „Kippen“ links neben dem Kopf; er verschwindet beim ersten echten
 Sensorwert. Die Neigung bleibt im Browser (keine Speicherung, kein Cookie). Raster und Ringe
 liegen mobil zusätzlich als `.hub-top-bg` hinter Kopf und Foto.
@@ -315,6 +318,8 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `CaseCard` | Referenzkarte mit Tilt-Effekt + Video/Bild + Info-Leiste | Welt B |
 | `ContactFormNlp` / `ContactFormWeb` | zwei Varianten desselben Endpunkts (die Startseite hat seit 2026-11 kein Formular mehr) | Welt A / Welt B |
 | `HubTilt` | Mobil: Handy-Neigung verschiebt die Naht der Startseite; iOS-Freigabe-Chip | Welt 0 |
+| `HubSwipe` | Mobil: Naht der Startseite mit dem Finger ziehen, weit genug = Wahl (klickt den HubLink) | Welt 0 |
+| `HubLichtWahl` | Würfel/Kugel über den Händen wählen ihre Welt (Klick geht an den HubLink). Bei **jeder** Wahl (`data-chosen`) gleitet das Licht der Welt zur Mitte und wächst, Foto und anderes Licht blenden aus | Welt 0 |
 | `HubLink` | Hälfte der Startseite: Klick → Welt füllt den Schirm, dann `router.push` (ohne Verzögerung bei Modifier-Taste und reduzierter Bewegung) | Welt 0 |
 | `FormShield` / `useContactSubmit` / `useModal` / `LazyEffect` | Bot-Schutz und Formular-Ablauf (§8), Modal-Verhalten (§11), Effekt-Hülle (§9) | alle |
 | `WebBackdrop` / `HyperspeedBand` | Client-Wrapper für die WebGL-Effekte von Welt B | Welt B |
