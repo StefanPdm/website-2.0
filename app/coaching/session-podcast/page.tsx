@@ -208,7 +208,7 @@ export default function SessionPodcastPage() {
         <section className='px-4 py-16 sm:py-20'>
           <div className='container mx-auto max-w-4xl'>
             <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>Das Wichtigste</h2>
-            <dl className='mt-8 divide-y divide-border rounded-2xl border border-border bg-surface'>
+            <dl className='mt-8 divide-y divide-border rounded-2xl border border-card-border bg-surface'>
               {facts.map((fact) => (
                 <div
                   key={fact.term}

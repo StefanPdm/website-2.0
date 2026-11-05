@@ -19,7 +19,7 @@ export default function ImpressumPage() {
   return (
     <div className='relative z-10 mx-auto max-w-4xl px-4 py-48'>
       <header className='mb-10'>
-        <p className='inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-medium text-[var(--text)] ring-1 ring-[var(--border)]'>
+        <p className='inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-medium text-[var(--text)]'>
           Rechtliches · Informationen nach § 5 DDG
         </p>
         <h1 className='mt-5 text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--text)]'>
@@ -31,7 +31,7 @@ export default function ImpressumPage() {
         </p>
       </header>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Anbieter</h2>
         <div className='space-y-1 text-[var(--muted)]'>
           <p>Stefan Heinemann</p>
@@ -55,14 +55,14 @@ export default function ImpressumPage() {
         </div>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
           Verantwortlich für den Inhalt (§ 18 Abs. 2 MStV)
         </h2>
         <p className='text-[var(--muted)]'>Stefan Heinemann, Anschrift wie oben.</p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
           EU-Streitschlichtung / Verbraucherschlichtung
         </h2>
@@ -72,7 +72,7 @@ export default function ImpressumPage() {
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Haftung für Inhalte</h2>
         <p className='text-[var(--muted)]'>
           Als Diensteanbieter sind wir nach § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten
@@ -87,7 +87,7 @@ export default function ImpressumPage() {
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Haftung für Links</h2>
         <p className='text-[var(--muted)]'>
           Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
@@ -101,7 +101,7 @@ export default function ImpressumPage() {
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Urheberrecht</h2>
         <p className='text-[var(--muted)]'>
           Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen

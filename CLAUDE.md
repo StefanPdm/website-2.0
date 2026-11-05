@@ -157,28 +157,47 @@ liegen mobil zusätzlich als `.hub-top-bg` hinter Kopf und Foto.
 
 ### 3.2 Welt A — Coaching (Stefan Heinemann Coaching)
 
-Ein festes Farbkonzept **„Espresso & Bernstein“** (seit 2026-11), dieselbe Farbe wie die
-Coaching-Hälfte der Startseite: Man erkennt an der Farbe, in welcher Welt man ist. Es gibt
-**keinen Theme-Umschalter** mehr. Alle Werte als CSS-Variablen auf `.theme-coaching`
-(gesetzt in `NlpLayoutClient`).
+Ein festes Farbkonzept **„Morgenlicht & Bernstein“** (seit 2026-11, löst „Espresso &
+Bernstein“ ab – Rückmeldung „wirkt düster“): **heller, warmer Creme-Grund** mit
+**dunklen, warmen Inseln** (`.tone-dark`). Bernstein bleibt die Erkennungsfarbe der Welt.
+Es gibt **keinen Theme-Umschalter**. Alle Werte als CSS-Variablen auf `.theme-coaching`
+(gesetzt in `NlpLayoutClient`), `.tone-dark` setzt dieselben Tokens für dunkel neu –
+alles darin (GlassCard, Buttons, Formulare) kippt automatisch.
 
-| Token | Wert | Kontrast auf `--bg` |
+**Dunkle Inseln** (Klasse `tone-dark` am Element): Hero, Ablauf (`TransformationSection`,
+LaserFlow braucht dunklen Grund), Über mich, Kontakt, Kopfzeile (`NlpHeader`, deckend),
+Fußzeile. Alle anderen Sektionen sind hell. Neue Sektion: hell, außer sie trägt ein
+Foto/WebGL als Bühne. Nie zwei dunkle Inseln direkt hintereinander.
+
+| Token | hell (Grund) | dunkel (`.tone-dark`) |
 |---|---|---|
-| `--bg` | `#140c06` (Espresso) | – |
-| `--text` | `#f6e9d7` (Creme) | 16,2 : 1 |
-| `--muted` | `rgba(246,233,215,.74)` | 9,0 : 1 |
-| `--accent` | `#f6b35a` (Bernstein) | 10,6 : 1 |
-| `--accent-2` | `#d9853a` (Kupfer) | 6,8 : 1 |
-| `--accent-soft` | `#ffcf8a` | 13,4 : 1 |
-| `--surface` / `--surface-strong` | `rgba(255,214,170,.05)` / `.09` | – |
-| `--border` / `--border-strong` | `rgba(255,214,170,.18)` / `.38` | – |
-| `--button-text` | `#1a0f06` (auf Bernstein 10,3 : 1) | – |
-| `--glow` / `--glow-strong` | `rgba(246,179,90,.22)` / `.36` | – |
-| `--hero-glow` / `--hero-fade` | `rgba(246,179,90,.32)` / `rgba(20,12,6,.62)` | – |
-| `--section-bg-accent` | `rgba(255,200,140,.045)` | – |
-| Textur | Bernstein-/Kupfer-Glows + feine Körnung (SVG-Rauschen), `background-attachment: fixed` | – |
+| `--bg` | `#f7efe4` (Creme) | `#2b1b10` (Walnuss) |
+| `--text` | `#2b1a0f` | `#fbefdf` |
+| `--muted` | `rgba(43,26,15,.76)` | `rgba(251,239,223,.86)` |
+| `--subtle` (Meta, Notizen, Streichpreis) | `rgba(43,26,15,.7)` | `rgba(251,239,223,.74)` |
+| `--accent` | `#9a4c17` (Kupfer) | `#f6b35a` (Bernstein) |
+| `--accent-2` | `#7d3b12` | `#e0914a` |
+| `--accent-soft` (Eyebrows) | `#8f4a1a` | `#ffd49a` |
+| `--button-text` | `#fffaf3` | `#1a0f06` |
+| `--surface` / `--surface-strong` | `rgba(255,252,246,.6)` / `.85` | `rgba(255,220,180,.07)` / `.12` |
+| `--border` / `--border-strong` | `rgba(120,70,30,.16)` / `.3` | `rgba(255,220,180,.22)` / `.42` |
+| `--card-border` (Einheitsrahmen) | `rgba(120,70,30,.22)` | `rgba(255,220,180,.34)` |
+| `--card-shade` | `rgba(120,70,30,.1)` | `rgba(20,10,4,.35)` |
+| `--glow` / `--glow-strong` | `rgba(214,140,70,.16)` / `.28` | `rgba(246,179,90,.26)` / `.4` |
+| `--section-bg-accent` | `rgba(230,170,110,.1)` | `rgba(255,200,140,.07)` |
+| Textur | Apricot-/Pfirsich-Glows + Körnung, `fixed` | zwei Bernstein-Glows (max. `.14`) |
 
-Text mit Deckkraft: `text-(--text)/50` ist die Untergrenze (4,6 : 1), darunter nur Dekor.
+Alle Textfarben halten **≥ 4,5 : 1 an der ungünstigsten Stelle der Glows** (gemessen
+2026-11-06 mit axe + eigener Rechnung über alle Welt-A-Seiten). Deshalb:
+**kein `text-(--text)/50` oder `/60` mehr** – dafür gibt es `--subtle`. Glows in dunklen
+Inseln nicht über `.14` anheben, sonst kippen Bernstein-Links unter 4,5 : 1.
+Die Coaching-Hälfte der Startseite bleibt Espresso `#140c06` (entspricht den dunklen Inseln).
+
+**Karten:** Jede Karte hat denselben Rahmen `border border-card-border` (Tailwind-Kurzform
+`border-card-border`) – die Farbe passt sich dem Grund an, Breite und Form nie. Einzige
+Ausnahme: hervorgehobene Preiskarten (`<GlassCard featured>`: „Beliebt“, „Bester Preis“).
+Keine Akzentleisten (4-px-Streifen oben/links) an Karten, keine Doppelrahmen (Karte in Karte).
+Formularfelder, Menüs, Fehlerkarten und Test-Antworten sind keine Karten.
 
 **Regel Welt A:** In neuen Komponenten **ausschließlich** diese Variablen benutzen.
 Kanonische Tailwind-v4-Schreibweise ist die Klammerform `text-(--text)`,
@@ -194,6 +213,7 @@ häufigsten Tokens gibt es echte Tailwind-Farben — `text-accent`, `text-accent
 `ring-accent`, `shadow-(--glow)`. Sie sind **gleichwertig** zur Klammerform und in
 neuem Code bevorzugt, wo es sie gibt. `--text`, `--muted`, `--bg`, `--section-bg-accent`
 haben keine Kurzform → Klammerform (`text-(--text)`, `bg-(--section-bg-accent)`).
+Dazu `border-card-border` für den Einheitsrahmen der Karten.
 
 **WebGL-Farben** (z. B. `LaserFlow` in `TransformationSection`) stehen fest als Bernstein
 `#f6b35a` im Aufruf — es gibt keinen Theme-State mehr, den sie lesen müssten.
@@ -275,7 +295,7 @@ Font Welt B: global (Plus Jakarta Sans über `--font-sans`, siehe §3.4).
 
 **Sektions-Trenner**
 
-- Welt A: `border-y border-[var(--border)]` + alternierend `bg-[var(--section-bg-accent)]`.
+- Welt A: `border-y border-(--border)` + alternierend `bg-(--section-bg-accent)`; dunkle Inseln über `tone-dark` (§3.2).
 - Welt B: `border-y border-white/20` + `backdrop-blur-md` + `ring-1 ring-white/10`.
 - **Rhythmus-Regel:** nie zwei akzentuierte Sektionen hintereinander. Muster A–B–A–B.
 
@@ -312,7 +332,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 
 | Komponente | Zweck | Einsatz |
 |---|---|---|
-| `GlassCard` | Standard-Karte Welt A. Nutzt `--surface-strong`, `--border-strong`, `--glow`. Hover: `-translate-y-1` | **nur Welt A** |
+| `GlassCard` | Standard-Karte Welt A. Nutzt `--surface-strong`, `--card-border`, `--glow`. Hover: `-translate-y-1`. `featured` = hervorgehobene Preiskarte | **nur Welt A** |
 | `InfoOrb` | Info-Button + Portal-Modal mit Mini-Markdown (`**fett**`). Mit `label` als Glas-Pille „Warum beides?“ + zweifarbige Glaskugel mit Naht (`.info-split*`) | `/` (Scanner-Story) |
 | `ScrollToTop` | Fixed Button ab `scrollY > 240` | Welt B |
 | `CaseCard` | Referenzkarte mit Tilt-Effekt + Video/Bild + Info-Leiste | Welt B |

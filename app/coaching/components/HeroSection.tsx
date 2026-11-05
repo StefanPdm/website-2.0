@@ -46,7 +46,7 @@ export default function HeroSection() {
   return (
     <section
       id='start'
-      className='relative isolate flex min-h-dvh items-end overflow-hidden lg:items-center'>
+      className='tone-dark relative isolate flex min-h-dvh items-end overflow-hidden lg:items-center'>
       <picture className='absolute inset-0 -z-20'>
         <source
           media='(orientation: portrait)'
@@ -109,7 +109,7 @@ export default function HeroSection() {
           {/* Kostenloser Einstieg – Gegenstück zum KI-Check in Welt B */}
           <Link
             href='/coaching/persoenlichkeitstest'
-            className='group mt-8 flex w-full max-w-md items-center gap-4 rounded-2xl border border-(--accent)/40 bg-(--bg)/70 p-4 backdrop-blur transition hover:border-(--accent)/80 hover:bg-(--accent)/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+            className='group mt-8 flex w-full max-w-md items-center gap-4 rounded-2xl border border-card-border bg-(--bg)/70 p-4 backdrop-blur transition hover:border-(--accent)/80 hover:bg-(--accent)/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
             <span className='grid h-11 w-11 shrink-0 place-items-center rounded-full bg-(--accent)/15 text-accent ring-1 ring-(--accent)/40'>
               <Compass
                 aria-hidden='true'

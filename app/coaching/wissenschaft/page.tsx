@@ -101,7 +101,7 @@ export default function WissenschaftPage() {
             </p>
             <ContentDate path='/coaching/wissenschaft' />
 
-            <div className='mt-8 max-w-2xl rounded-2xl border border-(--border) bg-(--surface) p-5'>
+            <div className='mt-8 max-w-2xl rounded-2xl border border-card-border bg-(--surface) p-5'>
               <p className='text-sm leading-relaxed text-(--muted)'>
                 <strong className='font-semibold text-(--text)'>Die Kurzfassung:</strong> NLP als
                 geschlossenes Theoriegebäude ist bis heute nicht umfassend empirisch bestätigt. Die
@@ -164,7 +164,7 @@ export default function WissenschaftPage() {
               {limitations.map((item) => (
                 <li
                   key={item}
-                  className='flex items-start gap-3 rounded-2xl border border-(--border) bg-(--surface) p-4'>
+                  className='flex items-start gap-3 rounded-2xl border border-card-border bg-(--surface) p-4'>
                   <span
                     aria-hidden='true'
                     className='mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400'

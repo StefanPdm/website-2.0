@@ -177,10 +177,6 @@ export default function ApproachSection() {
         */}
         <div className='mx-auto mt-16 grid w-full max-w-6xl gap-6 lg:grid-cols-2'>
           <GlassCard className='relative flex h-full flex-col overflow-hidden p-7 sm:p-9'>
-            <span
-              aria-hidden='true'
-              className='absolute inset-y-0 left-0 w-1 bg-linear-to-b from-accent to-accent-2'
-            />
             <MotifClarity className='pointer-events-none absolute -right-16 -top-16 h-64 w-64 opacity-[0.13]' />
             <p className='relative text-xs uppercase tracking-[0.3em] text-accent-soft'>
               Persönlich
@@ -215,10 +211,6 @@ export default function ApproachSection() {
           </GlassCard>
 
           <GlassCard className='relative flex h-full flex-col overflow-hidden p-7 sm:p-9'>
-            <span
-              aria-hidden='true'
-              className='absolute inset-y-0 left-0 w-1 bg-linear-to-b from-accent-2 to-accent'
-            />
             <MotifEvidence className='pointer-events-none absolute -right-14 -top-14 h-64 w-64 opacity-[0.15]' />
             <p className='relative text-xs uppercase tracking-[0.3em] text-accent-soft'>
               Wissenschaft

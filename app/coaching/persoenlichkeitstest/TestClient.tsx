@@ -321,7 +321,7 @@ function Result({
       )}
 
       {verdict === 'leicht' && (
-        <p className='mt-6 rounded-2xl border border-(--border) bg-(--surface) p-5 text-sm leading-relaxed text-(--muted)'>
+        <p className='mt-6 rounded-2xl border border-card-border bg-(--surface) p-5 text-sm leading-relaxed text-(--muted)'>
           Der Abstand zum zweitstärksten Bereich —{' '}
           <span className='text-(--text)'>{dimensions[ranked[1]].area}</span> — beträgt nur einen
           Punkt. Lies die folgende Beschreibung deshalb als Tendenz, nicht als Einordnung.

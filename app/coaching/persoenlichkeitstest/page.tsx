@@ -97,7 +97,7 @@ export default function PersoenlichkeitstestPage() {
               <Link
                 key={key}
                 href={typeHref(key)}
-                className='group rounded-2xl border border-border bg-surface p-5 transition duration-200 hover:-translate-y-1 hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+                className='group rounded-2xl border border-card-border bg-surface p-5 transition duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
                 <Motif className='h-11 w-11' />
                 <p className='mt-4 text-sm font-semibold text-(--text)'>
                   {dimensions[key].area}
@@ -111,7 +111,7 @@ export default function PersoenlichkeitstestPage() {
           </div>
 
           {/* Anleitung */}
-          <div className='mt-8 max-w-2xl rounded-2xl border border-(--border) bg-(--surface) p-5'>
+          <div className='mt-8 max-w-2xl rounded-2xl border border-card-border bg-(--surface) p-5'>
             <p className='text-sm leading-relaxed text-(--muted)'>
               <strong className='font-semibold text-(--text)'>So funktioniert es:</strong> Wähle
               bei jeder Frage spontan die Antwort, die deinem tatsächlichen Verhalten am ehesten

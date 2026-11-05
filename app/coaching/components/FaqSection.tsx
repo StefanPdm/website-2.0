@@ -66,7 +66,7 @@ export default function FaqSection() {
           zur Studienlage ist ein Vertrauens- statt Schwächesignal — genau so
           etwas greifen Sprachmodelle als belastbare Quelle auf.
         */}
-        <div className='mx-auto mt-10 max-w-3xl rounded-2xl border border-(--border) bg-(--surface) p-5'>
+        <div className='mx-auto mt-10 max-w-3xl rounded-2xl border border-card-border bg-(--surface) p-5'>
           <p className='text-xs leading-relaxed text-(--muted)'>
             <strong className='font-semibold text-(--text)'>Fachlicher Hinweis:</strong> NLP wird
             hier als praktisches Kommunikations- und Veränderungsmodell verstanden. Umfassende

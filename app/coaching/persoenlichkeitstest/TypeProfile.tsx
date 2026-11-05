@@ -88,7 +88,7 @@ export default function TypeProfile({
         </div>
       </div>
 
-      <div className='relative mt-8 rounded-2xl border-l-2 border-(--accent) bg-(--surface) p-5'>
+      <div className='relative mt-8 rounded-2xl border border-card-border bg-(--surface) p-5'>
         <p className='text-xs uppercase tracking-[0.2em] text-accent-soft'>Entwicklungsimpuls</p>
         <p className='mt-3 text-sm leading-relaxed text-(--text) sm:text-base'>{result.impulse}</p>
       </div>

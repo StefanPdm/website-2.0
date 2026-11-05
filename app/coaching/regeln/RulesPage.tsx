@@ -69,7 +69,7 @@ export default function RulesPage({ ruleSet }: { ruleSet: RuleSet }) {
           <ContentDate path={ruleSet.href} />
 
           {/* Einordnung – bei den Anti-Regeln die wichtigste Zeile der Seite */}
-          <div className='mt-8 max-w-2xl rounded-2xl border border-(--border) bg-(--surface) p-5'>
+          <div className='mt-8 max-w-2xl rounded-2xl border border-card-border bg-(--surface) p-5'>
             <p className='text-sm leading-relaxed text-(--muted)'>{ruleSet.framing}</p>
           </div>
         </div>

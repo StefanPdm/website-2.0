@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function NlpFooter() {
   return (
-    <footer className='border-t border-border bg-black/20 py-8 text-(--subtle)'>
+    <footer className='tone-dark border-t border-border py-8 text-(--subtle)'>
       <div className='container mx-auto flex flex-col gap-4 px-4 md:flex-row md:items-center md:justify-between'>
         <div>
           <p className='text-sm font-semibold text-(--text)'>Stefan Heinemann Coaching</p>

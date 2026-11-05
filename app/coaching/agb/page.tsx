@@ -19,7 +19,7 @@ export default function AgbPage() {
   return (
     <div className='relative z-10 mx-auto max-w-4xl px-4 py-48'>
       <header className='mb-10'>
-        <p className='inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-medium text-[var(--text)] ring-1 ring-[var(--border)]'>
+        <p className='inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-medium text-[var(--text)]'>
           Rechtliches · AGB
         </p>
         <h1 className='mt-5 text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--text)]'>
@@ -30,7 +30,7 @@ export default function AgbPage() {
         </p>
       </header>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
           §1 Gegenstand des Vertrages
         </h2>
@@ -40,14 +40,14 @@ export default function AgbPage() {
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>§2 Abgrenzung zu Therapie</h2>
         <p className='text-[var(--muted)]'>
           Coaching ersetzt keine medizinische oder psychotherapeutische Behandlung.
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
           §3 Verantwortung des Klienten
         </h2>
@@ -56,7 +56,7 @@ export default function AgbPage() {
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>§4 Keine Erfolgsgarantie</h2>
         <p className='text-[var(--muted)]'>
           Es wird kein bestimmter wirtschaftlicher, persönlicher oder gesundheitlicher Erfolg
@@ -64,47 +64,47 @@ export default function AgbPage() {
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>§5 Vergütung</h2>
         <p className='text-[var(--muted)]'>
           Die Vergütung ist, sofern nicht anders vereinbart, vor Leistungsbeginn fällig.
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>§6 Haftung</h2>
         <p className='text-[var(--muted)]'>
           Haftung besteht nur bei Vorsatz und grober Fahrlässigkeit.
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>§7 Geltungsbereich</h2>
         <p className='text-[var(--muted)]'>
           Diese AGB gelten für alle Coaching-Leistungen des Coaches.
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>§8 Leistungsbeschreibung</h2>
         <p className='text-[var(--muted)]'>
           Coaching ist ein prozessorientierter Unterstützungsprozess zur Selbstreflexion.
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>§9 Keine Erfolgsgarantie</h2>
         <p className='text-[var(--muted)]'>Es wird kein Erfolg geschuldet.</p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>§10 Eigenverantwortung</h2>
         <p className='text-[var(--muted)]'>
           Der Klient trägt die volle Verantwortung für seine Entscheidungen und Ergebnisse.
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>§11 Widerrufsrecht</h2>
         <p className='text-[var(--muted)]'>
           Verbrauchern steht ein gesetzliches Widerrufsrecht zu.

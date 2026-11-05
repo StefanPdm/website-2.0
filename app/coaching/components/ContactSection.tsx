@@ -15,7 +15,7 @@ export default function ContactSection() {
   return (
     <section
       id='kontakt'
-      className='relative border-t border-border py-16 sm:py-24 lg:py-28'>
+      className='tone-dark relative border-t border-border py-16 sm:py-24 lg:py-28'>
       <div className='container px-4 mx-auto'>
         {/*
           `minmax(0, …)` statt `1.1fr` und `min-w-0` an beiden Spalten:
@@ -75,7 +75,8 @@ export default function ContactSection() {
               .
             </p>
           </div>
-          <div className='min-w-0 rounded-3xl border border-border bg-surface p-4 shadow-[0_30px_80px_var(--glow)]'>
+          {/* Kein eigener Rahmen: ContactFormNlp ist selbst die Karte (Einheitsrahmen). */}
+          <div className='min-w-0'>
             <ContactFormNlp />
           </div>
         </div>

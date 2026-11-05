@@ -146,7 +146,7 @@ export default function FormulaPage() {
             {triggers.map((trigger, index) => (
               <li
                 key={trigger}
-                className='formel-reveal rounded-2xl border border-border bg-surface p-6 text-center'>
+                className='formel-reveal rounded-2xl border border-card-border bg-surface p-6 text-center'>
                 <span className='text-xs font-semibold uppercase tracking-[0.25em] text-accent-soft'>
                   0{index + 1}
                 </span>

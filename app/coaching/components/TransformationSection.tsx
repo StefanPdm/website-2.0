@@ -32,7 +32,7 @@ export default function TransformationSection() {
   return (
     <section
       id='ablauf'
-      className='relative flex min-h-[70dvh] flex-col items-center justify-center border-y border-border py-20'>
+      className='tone-dark relative flex min-h-[70dvh] flex-col items-center justify-center border-y border-border py-20'>
       <div className='container mx-auto px-4'>
         <div className='pointer-events-none absolute inset-0 -z-10 top-0 rotate-180 md:rotate-0 md:bottom-0'>
           <div className='absolute inset-0 opacity-90'>

@@ -9,7 +9,7 @@ export default function ContactFormNlp() {
 
   if (status === 'success') {
     return (
-      <div className='rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] p-6 text-[var(--text)] shadow-[0_20px_60px_var(--glow)] backdrop-blur-xl'>
+      <div className='rounded-3xl border border-card-border bg-[var(--surface-strong)] p-6 text-[var(--text)] shadow-[0_20px_60px_var(--glow)] backdrop-blur-xl'>
         <div className='flex items-start gap-4'>
           <span className='grid h-12 w-12 place-items-center rounded-full bg-(--accent)/15 text-accent ring-1 ring-(--accent)/30'>
             <CheckCircle2 className='h-7 w-7' />

@@ -265,10 +265,10 @@ export default function NlpHeader() {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full border-b transition-all duration-300 ${
+      className={`tone-dark fixed top-0 z-50 w-full border-b transition-all duration-300 ${
         isScrolled
-          ? 'border-border bg-surface-strong backdrop-blur-xl shadow-[0_10px_40px_var(--glow)]'
-          : 'border-transparent bg-surface backdrop-blur-md'
+          ? 'border-border backdrop-blur-xl shadow-[0_10px_40px_var(--glow)]'
+          : 'border-transparent backdrop-blur-md'
       }`}>
       <div
         className={`mx-auto flex w-full max-w-[88rem] items-center gap-3 px-4 transition-all duration-300 ${

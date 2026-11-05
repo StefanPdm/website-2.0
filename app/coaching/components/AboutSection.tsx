@@ -85,7 +85,7 @@ export default function AboutSection() {
     <>
       <section
         id='ueber'
-        className='py-40 relative min-h-[60dvh] flex flex-col justify-center items-center bg-(--section-bg-accent)'>
+        className='tone-dark py-40 relative min-h-[60dvh] flex flex-col justify-center items-center'>
         <div className='container px-4 mx-auto'>
           <div className='grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'>
             {/* left side */}

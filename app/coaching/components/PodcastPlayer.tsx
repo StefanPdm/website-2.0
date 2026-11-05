@@ -101,7 +101,7 @@ export default function PodcastPlayer({ src, type, title, duration: knownDuratio
 
   return (
     <div
-      className={`rounded-3xl border border-border bg-surface p-5 transition-shadow duration-500 sm:p-7 ${
+      className={`rounded-3xl border border-card-border bg-surface p-5 transition-shadow duration-500 sm:p-7 ${
         playing ? 'shadow-[0_0_60px_var(--glow-strong)]' : 'shadow-[0_0_30px_var(--glow)]'
       }`}>
       <audio

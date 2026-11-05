@@ -19,7 +19,7 @@ export default function DatenschutzPage() {
   return (
     <div className='relative z-10 mx-auto max-w-4xl px-4 py-48'>
       <header className='mb-10'>
-        <p className='inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-medium text-[var(--text)] ring-1 ring-[var(--border)]'>
+        <p className='inline-flex items-center gap-2 rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-medium text-[var(--text)]'>
           Rechtliches · DSGVO
         </p>
         <h1 className='mt-5 text-3xl md:text-4xl font-extrabold tracking-tight text-[var(--text)]'>
@@ -31,7 +31,7 @@ export default function DatenschutzPage() {
         </p>
       </header>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Verantwortlicher</h2>
         <div className='space-y-1 text-[var(--muted)]'>
           <p>Stefan Heinemann</p>
@@ -46,7 +46,7 @@ export default function DatenschutzPage() {
         </div>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
           Zugriffsdaten (Server-Logs)
         </h2>
@@ -59,7 +59,7 @@ export default function DatenschutzPage() {
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Kontaktaufnahme</h2>
         <p className='text-[var(--muted)]'>
           Bei der Kontaktaufnahme (z. B. per Formular oder E-Mail) werden die Angaben zur
@@ -70,7 +70,7 @@ export default function DatenschutzPage() {
       </section>
 
       {/* Session-Podcast: nur mit ausdrücklicher Einwilligung (Art. 9 DSGVO), siehe PodcastSection. */}
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
           Session-Podcast (KI-gestützte Zusammenfassung)
         </h2>
@@ -113,12 +113,12 @@ export default function DatenschutzPage() {
         </div>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Cookies</h2>
         <p className='text-[var(--muted)]'>Wir verwenden keine Cookies.</p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
           Rechtsgrundlagen und Zwecke
         </h2>
@@ -129,7 +129,7 @@ export default function DatenschutzPage() {
         </ul>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>
           Drittanbieter / Auftragsverarbeiter
         </h2>
@@ -140,7 +140,7 @@ export default function DatenschutzPage() {
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Speicherdauer</h2>
         <p className='text-[var(--muted)]'>
           Sofern in dieser Erklärung nicht anders angegeben, löschen wir personenbezogene Daten
@@ -149,7 +149,7 @@ export default function DatenschutzPage() {
         </p>
       </section>
 
-      <section className='rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 ring-1 ring-[var(--border)] mb-6'>
+      <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Ihre Rechte</h2>
         <ul className='list-disc pl-5 space-y-1 text-[var(--muted)]'>
           <li>Auskunft (Art. 15 DSGVO)</li>

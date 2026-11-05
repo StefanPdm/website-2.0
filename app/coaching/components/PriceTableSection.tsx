@@ -51,11 +51,8 @@ function OfferCard({ offer }: { offer: CoachingOffer }) {
 
   return (
     <GlassCard
-      className={`relative flex h-full flex-col p-6 text-left ${
-        offer.highlight
-          ? 'border-2 ring-1 ring-(--accent)/45 shadow-[0_0_60px_var(--glow-strong)]'
-          : 'border'
-      }`}>
+      featured={offer.highlight}
+      className='relative flex h-full flex-col p-6 text-left'>
       <div className='flex items-start justify-between gap-3'>
         <div>
           <span
@@ -144,10 +141,6 @@ export default function PriceTableSection() {
         */}
         <div className='mx-auto mt-14 max-w-5xl'>
           <GlassCard className='relative overflow-hidden p-6 sm:p-8'>
-            <span
-              aria-hidden='true'
-              className='absolute inset-x-0 top-0 h-1 bg-linear-to-r from-accent to-accent-2'
-            />
             <div className='flex flex-col gap-6 md:flex-row md:items-center md:justify-between'>
               <div className='max-w-2xl'>
                 <span className='inline-flex items-center rounded-full border border-(--accent)/40 bg-(--accent)/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-accent'>
