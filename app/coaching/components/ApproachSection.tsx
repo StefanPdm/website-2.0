@@ -89,12 +89,16 @@ const pillars = [
   },
 ];
 
-/** Wie die Säulen ineinandergreifen – ein Satz je Säule. */
+/**
+ * Wie die Säulen ineinandergreifen – ein Satz je Säule. `lead` (fett) ist der
+ * Bezug zur Karte darüber. Mobil eine Zeile je Satz, sonst bricht jeder Satz
+ * nur als Ganzes um, nie mitten drin.
+ */
 const interplay = [
-  'Haltung gibt die Richtung.',
-  'Sinn gibt den Grund.',
-  'NLP gibt das Werkzeug.',
-  'Energie bringt es in Bewegung.',
+  { lead: 'Haltung', rest: 'gibt die Richtung.' },
+  { lead: 'Sinn', rest: 'gibt den Grund.' },
+  { lead: 'NLP', rest: 'gibt das Werkzeug.' },
+  { lead: 'Energie', rest: 'bringt es in Bewegung.' },
 ];
 
 export default function ApproachSection() {
@@ -116,11 +120,17 @@ export default function ApproachSection() {
           </p>
         </div>
 
+        {/*
+          Subgrid: Jede Karte belegt vier Zeilen des äußeren Rasters (Überzeile,
+          Titel, Inhalt, Quelle). So liegen Titel und der Strich über der Quelle
+          in allen Karten einer Reihe auf derselben Höhe – egal, ob die Quelle
+          ein- oder dreizeilig ist.
+        */}
         <div className='mt-12 grid w-full max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-4'>
           {pillars.map(({ key, overline, title, claim, text, points, source, Motif }) => (
             <GlassCard
               key={key}
-              className='relative flex h-full flex-col overflow-hidden p-6'>
+              className='relative row-span-4 grid grid-rows-subgrid gap-y-0 overflow-hidden p-6'>
               <Motif className='pointer-events-none absolute -right-10 -top-10 h-40 w-40 opacity-[0.07]' />
               <p className='relative text-xs uppercase tracking-[0.2em] text-accent-soft'>
                 {overline}
@@ -129,29 +139,38 @@ export default function ApproachSection() {
                 {title}
                 <span className='block text-base font-normal text-(--muted)'>{claim}</span>
               </h3>
-              <p className='relative mt-4 text-sm leading-relaxed text-(--muted)'>{text}</p>
-              <ul className='relative mt-5 space-y-2'>
-                {points.map((point) => (
-                  <li
-                    key={point}
-                    className='flex gap-2 text-sm text-(--text)'>
-                    <span
-                      aria-hidden='true'
-                      className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent'
-                    />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-              <div className='relative mt-auto pt-5'>
+              <div className='relative'>
+                <p className='mt-4 text-sm leading-relaxed text-(--muted)'>{text}</p>
+                <ul className='mt-5 space-y-2'>
+                  {points.map((point) => (
+                    <li
+                      key={point}
+                      className='flex gap-2 text-sm text-(--text)'>
+                      <span
+                        aria-hidden='true'
+                        className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent'
+                      />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className='relative pt-5'>
                 <p className='border-t border-border pt-4 text-xs text-(--muted)'>{source}</p>
               </div>
             </GlassCard>
           ))}
         </div>
 
-        <p className='mx-auto mt-10 max-w-3xl text-center text-base text-(--text) sm:text-lg'>
-          {interplay.join(' ')}
+        <p className='mx-auto mt-10 max-w-5xl text-balance text-center text-base text-(--muted) sm:text-lg'>
+          {interplay.map(({ lead, rest }, index) => (
+            <span key={lead}>
+              <span className='block sm:inline-block'>
+                <strong className='font-semibold text-(--text)'>{lead}</strong> {rest}
+              </span>
+              {index < interplay.length - 1 && ' '}
+            </span>
+          ))}
         </p>
 
         {/* Die Säulen in Aktion – echtes Foto (KI-verbessert), §12: WebP < 500 KB. */}
