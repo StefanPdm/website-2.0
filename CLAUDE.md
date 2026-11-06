@@ -71,6 +71,7 @@ und die A11y-Baseline (§11).
 | 3D/WebGL | three.js + postprocessing — **nur Welt A/B-Hintergründe**, nie auf `/` |
 | Mail | nodemailer über SMTP (ENV). Kein externer Mail-Dienst (`resend` 2026-10-03 entfernt) |
 | Paketmanager | **pnpm** (`packageManager: pnpm@9.15.0`) — kein npm/yarn |
+| Dev-Server (Windows) | `pnpm dev` erkennt Änderungen per **Polling** (`watchOptions.pollIntervalMs` in `next.config.ts`, Windows-Dateiereignisse gingen verloren), kein dauerhafter Turbopack-Cache. **Nur ein Dev-Server pro Ordner** (Lock in `.next/dev`). Notfall: Server stoppen, dann `pnpm dev:clean` |
 | Hosting | **Vercel** |
 | Sprache der UI | Deutsch, Duzen (du/dir), außer in Rechtstexten (dort „Sie") |
 
