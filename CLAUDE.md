@@ -524,6 +524,18 @@ const { status, loading, submitted, shieldFields, onSubmit, reset } = useContact
    wäre sie ein Phishing-Werkzeug mit deinem Absender. Tabellen-Layout und
    Inline-Styles, weil Mail-Programme kein externes CSS und kaum Flexbox kennen.
 
+10. **Senden-Button** bleibt optisch deaktiviert, bis die native Formularprüfung
+    (`required`, `type=email`, `maxLength`) besteht – über `ready`/`onFormInput` aus
+    `useContactSubmit`, gesetzt als `aria-disabled` (nicht `disabled`: der Button bleibt
+    fokussierbar, ein Klick markiert die fehlenden Felder) plus sichtbarer Hinweis
+    `#<präfix>-submit-hint`. Echtes `disabled` nur während `loading`.
+11. **Eingangsprüfung** in jeder Formular-Route zuerst über `lib/form-guard.ts`:
+    `assertSameOrigin` (fremde Seiten/Skripte → 403) → `readJsonBody` (nur JSON, max. 16 KB)
+    → `textField`/`emailField`/`assertConsent` (Typen, Längen aus `LIMITS`, Steuerzeichen
+    raus, **genau eine** E-Mail-Adresse – die alte Prüfung ließ Komma-Listen durch, die
+    Bestätigung wäre an alle gegangen) → `mayConfirm` (max. 2 Bestätigungen je Adresse/24 h).
+    Formulare setzen dieselben `LIMITS` als `maxLength`.
+
 Serverseitig entscheidet `lib/anti-spam.ts` (`scoreSubmission`, `isRateLimited`).
 Die Prüfung läuft **vor jedem `sendMail`** — nie danach. Drei Ausgänge:
 

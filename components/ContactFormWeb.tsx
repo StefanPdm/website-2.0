@@ -3,9 +3,11 @@
 import { CheckCircle2, XCircle } from 'lucide-react';
 
 import { useContactSubmit } from '@/components/useContactSubmit';
+import { LIMITS } from '@/lib/form-guard';
 
 export default function ContactFormWeb() {
-  const { status, loading, submitted, shieldFields, onSubmit, reset } = useContactSubmit();
+  const { status, loading, submitted, shieldFields, onSubmit, ready, onFormInput, reset } =
+    useContactSubmit();
 
   if (status === 'success') {
     return (
@@ -61,6 +63,8 @@ export default function ContactFormWeb() {
   return (
     <form
       onSubmit={onSubmit}
+      onInput={onFormInput}
+      onChange={onFormInput}
       className='rounded-2xl border border-white/15 bg-white/5 p-6 text-slate-100 shadow-[0_30px_70px_-60px_rgba(0,0,0,0.6)]'>
       <div className='grid gap-4'>
         {shieldFields}
@@ -72,6 +76,8 @@ export default function ContactFormWeb() {
             id='web-name'
             name='name'
             required
+            maxLength={LIMITS.name}
+            autoComplete='name'
             className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'
           />
         </div>
@@ -84,6 +90,8 @@ export default function ContactFormWeb() {
             name='email'
             type='email'
             required
+            maxLength={LIMITS.email}
+            autoComplete='email'
             className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'
           />
         </div>
@@ -94,6 +102,8 @@ export default function ContactFormWeb() {
           <input
             id='web-company'
             name='company'
+            maxLength={LIMITS.short}
+            autoComplete='organization'
             className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'
           />
         </div>
@@ -105,6 +115,7 @@ export default function ContactFormWeb() {
             id='web-website'
             name='website'
             type='url'
+            maxLength={LIMITS.website}
             placeholder='https://…'
             className='h-11 w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'
           />
@@ -179,6 +190,7 @@ export default function ContactFormWeb() {
             name='message'
             rows={5}
             required
+            maxLength={LIMITS.message}
             className='w-full min-w-0 rounded-xl border border-white/20 bg-[#030a13]/80 px-3 py-2 text-white placeholder-slate-400 outline-none transition focus:border-[#2dd4bf]/70 focus-visible:ring-2 focus-visible:ring-[#2dd4bf]/40'></textarea>
         </div>
         {/* Hinweistext als Label, Link daneben – siehe ContactFormNlp. */}
@@ -203,13 +215,23 @@ export default function ContactFormWeb() {
             </a>
           </p>
         </div>
+        {/* Optisch deaktiviert bis vollständig – Begründung in ContactFormNlp */}
         <button
           type='submit'
           disabled={loading}
           aria-busy={loading}
+          aria-disabled={!ready || undefined}
+          aria-describedby={ready ? undefined : 'web-submit-hint'}
           className='web-cta h-11 text-sm font-semibold disabled:opacity-60'>
           {loading ? 'Wird gesendet…' : 'Anfrage senden'}
         </button>
+        {!ready && (
+          <p
+            id='web-submit-hint'
+            className='-mt-2 text-xs text-slate-300'>
+            Bitte fülle alle Pflichtfelder (*) aus und stimme den Datenschutzhinweisen zu.
+          </p>
+        )}
         <p className='text-xs text-slate-400'>Kein Spam. Kein Weiterverkauf.</p>
       </div>
     </form>

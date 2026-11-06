@@ -3,9 +3,11 @@
 import { CheckCircle2, XCircle } from 'lucide-react';
 
 import { useContactSubmit } from '@/components/useContactSubmit';
+import { LIMITS } from '@/lib/form-guard';
 
 export default function ContactFormNlp() {
-  const { status, loading, submitted, shieldFields, onSubmit, reset } = useContactSubmit();
+  const { status, loading, submitted, shieldFields, onSubmit, ready, onFormInput, reset } =
+    useContactSubmit();
 
   if (status === 'success') {
     return (
@@ -60,6 +62,8 @@ export default function ContactFormNlp() {
   return (
     <form
       onSubmit={onSubmit}
+      onInput={onFormInput}
+      onChange={onFormInput}
       className='rounded-3xl border border-[var(--border)] bg-[var(--surface-strong)] p-6 text-[var(--text)] shadow-[0_20px_60px_var(--glow)] backdrop-blur-xl'>
       <div className='grid gap-4'>
         {shieldFields}
@@ -71,6 +75,8 @@ export default function ContactFormNlp() {
             id='nlp-name'
             name='name'
             required
+            maxLength={LIMITS.name}
+            autoComplete='name'
             className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
           />
         </div>
@@ -83,6 +89,8 @@ export default function ContactFormNlp() {
             name='email'
             type='email'
             required
+            maxLength={LIMITS.email}
+            autoComplete='email'
             className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
           />
         </div>
@@ -94,6 +102,8 @@ export default function ContactFormNlp() {
             id='nlp-phone'
             name='phone'
             type='tel'
+            maxLength={LIMITS.phone}
+            autoComplete='tel'
             className='h-11 w-full min-w-0 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'
           />
         </div>
@@ -163,6 +173,7 @@ export default function ContactFormNlp() {
             name='message'
             rows={5}
             required
+            maxLength={LIMITS.message}
             className='w-full min-w-0 rounded-xl border border-border bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] outline-none transition focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent-soft)]'></textarea>
         </div>
         {/*
@@ -192,13 +203,28 @@ export default function ContactFormNlp() {
             </a>
           </p>
         </div>
+        {/*
+          Unvollständig = optisch deaktiviert, aber bewusst nicht `disabled`:
+          Ein echtes disabled ist für Tastatur und Screenreader unsichtbar, man
+          erfährt nie, warum es nicht weitergeht. aria-disabled + Hinweis +
+          Klick markiert die fehlenden Felder (useContactSubmit).
+        */}
         <button
           type='submit'
           disabled={loading}
           aria-busy={loading}
-          className='h-11 rounded-xl bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] text-sm font-semibold text-[var(--button-text)] shadow-[0_0_24px_var(--glow)] transition hover:shadow-[0_0_32px_var(--glow-strong)] disabled:opacity-60'>
+          aria-disabled={!ready || undefined}
+          aria-describedby={ready ? undefined : 'nlp-submit-hint'}
+          className='h-11 rounded-xl bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] text-sm font-semibold text-[var(--button-text)] shadow-[0_0_24px_var(--glow)] transition hover:shadow-[0_0_32px_var(--glow-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60 aria-disabled:cursor-not-allowed aria-disabled:bg-none aria-disabled:bg-(--surface-strong) aria-disabled:text-(--subtle) aria-disabled:shadow-none aria-disabled:ring-1 aria-disabled:ring-border aria-disabled:hover:shadow-none'>
           {loading ? 'Wird gesendet…' : 'Anfrage senden'}
         </button>
+        {!ready && (
+          <p
+            id='nlp-submit-hint'
+            className='-mt-2 text-xs text-(--subtle)'>
+            Bitte fülle alle Pflichtfelder (*) aus und stimme den Datenschutzhinweisen zu.
+          </p>
+        )}
         <p className='text-xs text-[var(--muted)]'>
           Antwort in der Regel innerhalb von 24–48 Stunden.
         </p>

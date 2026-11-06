@@ -9,6 +9,16 @@ import {
   logVerdict,
   scoreSubmission,
 } from '@/lib/anti-spam';
+import {
+  FormError,
+  LIMITS,
+  assertConsent,
+  assertSameOrigin,
+  emailField,
+  mayConfirm,
+  readJsonBody,
+  textField,
+} from '@/lib/form-guard';
 import { guideCustomerMail, guideOwnerMail, formatTimestamp, type Row } from '@/lib/mail-templates';
 import { SITE_URL } from '@/lib/site';
 
@@ -43,23 +53,9 @@ function resolveSiteUrl(req: Request) {
   return url.origin;
 }
 
-function isValidEmail(email: string) {
-  return /.+@.+\..+/.test(email);
-}
-
 function extractErrorMessage(e: unknown): string {
   return e instanceof Error ? e.message : String(e);
 }
-
-type GuidePayload = {
-  name: string;
-  email: string;
-  /** Einwilligung in die Verarbeitung der E-Mail-Adresse (DSGVO Art. 6 Abs. 1 a). */
-  privacy?: boolean;
-  // Bot-Schutz (siehe lib/anti-spam.ts) – wird nie in die Mail übernommen
-  [HONEYPOT_FIELD]?: string;
-  [ELAPSED_FIELD]?: number | null;
-};
 
 function createDownloadToken(email: string, expiresAt: number) {
   if (!DOWNLOAD_TOKEN_SECRET) {
@@ -77,37 +73,13 @@ function createDownloadToken(email: string, expiresAt: number) {
 
 export async function POST(req: Request) {
   try {
-    const contentType = req.headers.get('content-type') || '';
-    let data: Partial<GuidePayload> = {};
-
-    if (contentType.includes('application/json')) {
-      data = await req.json();
-    } else {
-      const form = await req.formData();
-      form.forEach((value, key) => {
-        (data as Record<string, unknown>)[key] = value as string;
-      });
-    }
-
-    const { name, email, privacy } = data as GuidePayload;
-
-    if (!privacy) {
-      return NextResponse.json(
-        { error: 'Bitte stimme der Verarbeitung deiner Daten zu.' },
-        { status: 400 },
-      );
-    }
-
-    if (!name || !email) {
-      return NextResponse.json(
-        { error: 'Bitte füllen Sie alle Pflichtfelder aus.' },
-        { status: 400 },
-      );
-    }
-
-    if (!isValidEmail(String(email))) {
-      return NextResponse.json({ error: 'Ungültige E-Mail-Adresse.' }, { status: 400 });
-    }
+    // Eingangsprüfung (lib/form-guard.ts) – vor allem genau EINE Adresse:
+    // Die Leitfaden-Mail geht an die eingetragene Adresse.
+    assertSameOrigin(req);
+    const data = await readJsonBody(req);
+    assertConsent(data);
+    const name = textField(data, 'name', LIMITS.name, { required: true })!;
+    const email = emailField(data);
 
     if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
       return NextResponse.json(
@@ -161,9 +133,9 @@ export async function POST(req: Request) {
     // waere das derselbe Relay-Vektor wie beim Kontaktformular.
     const verdict = scoreSubmission({
       headers,
-      honeypot: (data as GuidePayload)[HONEYPOT_FIELD],
-      elapsedMs: (data as GuidePayload)[ELAPSED_FIELD],
-      name: String(name),
+      honeypot: data[HONEYPOT_FIELD],
+      elapsedMs: data[ELAPSED_FIELD],
+      name,
     });
     logVerdict('/api/nlp-guide', verdict, ip);
 
@@ -171,19 +143,22 @@ export async function POST(req: Request) {
       // Still bestaetigen, damit der Bot kein Erkennungssignal bekommt.
       return NextResponse.json({ ok: true });
     }
+    // Bei Verdacht oder zu vielen Mails an dieselbe Adresse: nur an dich,
+    // keine Mail an die (evtl. fremde) eingetragene Adresse (§8).
+    const sendToRequester = verdict.action !== 'suspect' && mayConfirm(email);
     // -------------------------------------------------------------------------
 
     const expiresInSeconds = 7 * 24 * 60 * 60;
     const expiresAt = Math.floor(Date.now() / 1000) + expiresInSeconds;
-    const downloadToken = createDownloadToken(String(email), expiresAt);
+    const downloadToken = createDownloadToken(email, expiresAt);
 
     const siteUrl = resolveSiteUrl(req);
     const guideUrl = `${siteUrl}/coaching/guide-download?token=${encodeURIComponent(downloadToken)}`;
 
-    const customerMail = guideCustomerMail({ name: String(name), guideUrl });
+    const customerMail = guideCustomerMail({ name: name, guideUrl });
     const ownerMail = guideOwnerMail({
-      name: String(name),
-      email: String(email),
+      name: name,
+      email: email,
       guideUrl,
       timestamp: formatTimestamp(),
       clientInfo,
@@ -219,16 +194,16 @@ export async function POST(req: Request) {
       await transporter.sendMail({
         from: SMTP_FROM,
         to: OWNER_EMAIL,
-        replyTo: String(email),
+        replyTo: email,
         subject: ownerMail.subject,
         text: ownerMail.text,
         html: ownerMail.html,
       });
     }
 
-    await transporter.sendMail({
+    if (sendToRequester) await transporter.sendMail({
       from: SMTP_FROM,
-      to: String(email),
+      to: email,
       replyTo: OWNER_EMAIL || SMTP_FROM,
       subject: customerMail.subject,
       text: customerMail.text,
@@ -237,6 +212,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true });
   } catch (err: unknown) {
+    if (err instanceof FormError) {
+      return NextResponse.json({ error: err.message }, { status: err.status });
+    }
     const isProd = process.env.NODE_ENV === 'production';
     const message = isProd
       ? 'Versand fehlgeschlagen.'

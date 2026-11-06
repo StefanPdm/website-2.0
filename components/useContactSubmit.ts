@@ -21,9 +21,26 @@ export function useContactSubmit() {
   const shield = useFormShield();
   const [status, setStatus] = useState<Status>('idle');
   const [submitted, setSubmitted] = useState<{ name: string; email: string } | null>(null);
+  /** Alle Pflichtfelder gültig + Einwilligung gesetzt (native Formularprüfung). */
+  const [ready, setReady] = useState(false);
+
+  /**
+   * An <form onInput onChange>. Nutzt die eingebaute Browser-Prüfung
+   * (required, type=email, maxLength) – keine zweite, eigene Regelsammlung.
+   */
+  function onFormInput(e: FormEvent<HTMLFormElement>) {
+    setReady(e.currentTarget.checkValidity());
+  }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Unvollständig: nichts senden, sondern dem Browser die fehlenden Felder
+    // markieren lassen (inkl. Fokus aufs erste) – der Button ist nur optisch
+    // deaktiviert (aria-disabled), damit er erreichbar und erklärbar bleibt.
+    if (!e.currentTarget.checkValidity()) {
+      e.currentTarget.reportValidity();
+      return;
+    }
     setStatus('loading');
 
     const form = e.currentTarget;
@@ -42,6 +59,7 @@ export function useContactSubmit() {
       setSubmitted({ name: String(data.name || ''), email: String(data.email || '') });
       setStatus('success');
       form.reset();
+      setReady(false);
     } catch {
       setStatus('error');
     }
@@ -53,6 +71,11 @@ export function useContactSubmit() {
     submitted,
     shieldFields: shield.fields,
     onSubmit,
-    reset: () => setStatus('idle'),
+    ready,
+    onFormInput,
+    reset: () => {
+      setReady(false);
+      setStatus('idle');
+    },
   };
 }

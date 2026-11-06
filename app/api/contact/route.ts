@@ -9,6 +9,16 @@ import {
   scoreSubmission,
 } from '@/lib/anti-spam';
 import {
+  FormError,
+  LIMITS,
+  assertConsent,
+  assertSameOrigin,
+  emailField,
+  mayConfirm,
+  readJsonBody,
+  textField,
+} from '@/lib/form-guard';
+import {
   contactCustomerMail,
   contactOwnerMail,
   contactWorld,
@@ -25,87 +35,32 @@ const SMTP_PASS = process.env.SMTP_PASS;
 const SMTP_FROM = process.env.SMTP_FROM;
 const OWNER_EMAIL = process.env.OWNER_EMAIL;
 
-function isValidEmail(email: string) {
-  return /.+@.+\..+/.test(email);
-}
-
 function extractErrorMessage(e: unknown): string {
   return e instanceof Error ? e.message : String(e);
 }
 
-type ContactPayload = {
-  name: string;
-  email: string;
-  projectType?: string; // web
-  budget?: string;
-  timeline?: string;
-  message: string;
-  privacy: string | boolean;
-  // web extras
-  company?: string;
-  website?: string;
-  scope?: string;
-  // nlp extras
-  phone?: string;
-  topic?: string;
-  sessionType?: string;
-  preferredTime?: string;
-  // Bot-Schutz (siehe lib/anti-spam.ts) – wird nie in die Mail übernommen
-  [HONEYPOT_FIELD]?: string;
-  [ELAPSED_FIELD]?: number | null;
-};
 
 export async function POST(req: Request) {
   try {
-    const contentType = req.headers.get('content-type') || '';
-    let data: Partial<ContactPayload> = {};
+    // Eingangsprüfung (lib/form-guard.ts): eigene Seite, JSON, Größe,
+    // Typen, Längen, genau eine E-Mail-Adresse, ausdrückliche Einwilligung.
+    assertSameOrigin(req);
+    const data = await readJsonBody(req);
 
-    if (contentType.includes('application/json')) {
-      data = await req.json();
-    } else if (contentType.includes('application/x-www-form-urlencoded')) {
-      const form = await req.formData();
-      form.forEach((value, key) => {
-        (data as Record<string, unknown>)[key] = value as string;
-      });
-    } else {
-      // try formData fallback
-      try {
-        const form = await req.formData();
-        form.forEach((value, key) => {
-          (data as Record<string, unknown>)[key] = value as string;
-        });
-      } catch {
-        // ignore
-      }
-    }
-
-    const {
-      name,
-      email,
-      projectType,
-      budget,
-      timeline,
-      message,
-      privacy,
-      company,
-      website,
-      scope,
-      phone,
-      topic,
-      sessionType,
-      preferredTime,
-    } = (data || {}) as ContactPayload;
-
-    if (!name || !email || !message || !privacy) {
-      return NextResponse.json(
-        { error: 'Bitte füllen Sie alle Pflichtfelder aus.' },
-        { status: 400 },
-      );
-    }
-
-    if (!isValidEmail(String(email))) {
-      return NextResponse.json({ error: 'Ungültige E-Mail-Adresse.' }, { status: 400 });
-    }
+    const name = textField(data, 'name', LIMITS.name, { required: true })!;
+    const email = emailField(data);
+    const message = textField(data, 'message', LIMITS.message, { required: true, multiline: true })!;
+    assertConsent(data);
+    const projectType = textField(data, 'projectType', LIMITS.short);
+    const budget = textField(data, 'budget', LIMITS.short);
+    const timeline = textField(data, 'timeline', LIMITS.short);
+    const company = textField(data, 'company', LIMITS.short);
+    const website = textField(data, 'website', LIMITS.website);
+    const scope = textField(data, 'scope', LIMITS.scope, { multiline: true });
+    const phone = textField(data, 'phone', LIMITS.phone);
+    const topic = textField(data, 'topic', LIMITS.short);
+    const sessionType = textField(data, 'sessionType', LIMITS.short);
+    const preferredTime = textField(data, 'preferredTime', LIMITS.short);
 
     if (!OWNER_EMAIL) {
       return NextResponse.json(
@@ -159,10 +114,10 @@ export async function POST(req: Request) {
     // potenziell fremde) Adresse geht – ungefiltert wäre das ein Mail-Relay.
     const verdict = scoreSubmission({
       headers,
-      honeypot: (data as ContactPayload)[HONEYPOT_FIELD],
-      elapsedMs: (data as ContactPayload)[ELAPSED_FIELD],
-      name: String(name),
-      message: String(message),
+      honeypot: data[HONEYPOT_FIELD],
+      elapsedMs: data[ELAPSED_FIELD],
+      name,
+      message,
       website,
     });
     logVerdict('/api/contact', verdict, ip);
@@ -176,7 +131,7 @@ export async function POST(req: Request) {
     const isSuspect = verdict.action === 'suspect';
     // ------------------------------------------------------------------------
 
-    const world = contactWorld(data as Record<string, unknown>);
+    const world = contactWorld(data);
     const subjectHint = sessionType || topic || projectType || 'Kontakt';
 
     // Reihenfolge = Anzeige in beiden Mails. Leere Felder fallen weg.
@@ -195,11 +150,11 @@ export async function POST(req: Request) {
 
     const ownerMail = contactOwnerMail({
       world,
-      name: String(name),
-      email: String(email),
+      name: name,
+      email: email,
       rows,
-      message: String(message),
-      subjectHint: String(subjectHint),
+      message: message,
+      subjectHint,
       timestamp: formatTimestamp(),
       clientInfo,
       suspect: isSuspect ? { score: verdict.score, reasons: verdict.reasons } : undefined,
@@ -207,9 +162,9 @@ export async function POST(req: Request) {
 
     const customerMail = contactCustomerMail({
       world,
-      name: String(name),
+      name: name,
       rows,
-      message: String(message),
+      message: message,
     });
 
     const transporter = nodemailer.createTransport({
@@ -244,7 +199,7 @@ export async function POST(req: Request) {
     await transporter.sendMail({
       from: SMTP_FROM,
       to: OWNER_EMAIL,
-      replyTo: String(email),
+      replyTo: email,
       subject: ownerMail.subject,
       text: ownerMail.text,
       html: ownerMail.html,
@@ -253,10 +208,11 @@ export async function POST(req: Request) {
     // Bestätigung an den Absender – nur bei unverdächtigen Anfragen.
     // Bei Verdacht bleibt der Lead für dich sichtbar, aber es geht keine Mail
     // an eine möglicherweise gefälschte fremde Adresse hinaus.
-    if (!isSuspect) {
+    // Zusätzlich je Empfängeradresse höchstens 2 Bestätigungen in 24 h (mayConfirm).
+    if (!isSuspect && mayConfirm(email)) {
       await transporter.sendMail({
         from: SMTP_FROM,
-        to: String(email),
+        to: email,
         replyTo: OWNER_EMAIL,
         subject: customerMail.subject,
         text: customerMail.text,
@@ -266,6 +222,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true });
   } catch (err: unknown) {
+    if (err instanceof FormError) {
+      return NextResponse.json({ error: err.message }, { status: err.status });
+    }
     console.error('Contact error', err);
     const isProd = process.env.NODE_ENV === 'production';
     const message = isProd

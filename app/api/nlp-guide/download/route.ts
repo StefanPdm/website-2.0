@@ -16,7 +16,11 @@ function verifyToken(token: string) {
     .update(payloadB64)
     .digest('base64url');
 
-  if (signature !== expectedSignature) return null;
+  // Zeitkonstanter Vergleich – `!==` verrät über die Laufzeit, ab welchem
+  // Zeichen die Signatur abweicht.
+  const given = Buffer.from(signature);
+  const expected = Buffer.from(expectedSignature);
+  if (given.length !== expected.length || !crypto.timingSafeEqual(given, expected)) return null;
 
   try {
     const payloadJson = Buffer.from(payloadB64, 'base64url').toString('utf8');

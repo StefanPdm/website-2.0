@@ -3066,6 +3066,24 @@ html {
   transform: none;
 }
 
+/* Formular unvollständig: matt, ohne Glanz und Schatten – aber fokussierbar
+   (aria-disabled statt disabled, siehe ContactFormNlp). */
+.web-cta[aria-disabled='true'] {
+  cursor: not-allowed;
+  color: rgba(226, 232, 240, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
+  transform: none;
+}
+.web-cta[aria-disabled='true']::before {
+  display: none;
+}
+.web-cta[aria-disabled='true']:focus-visible {
+  box-shadow:
+    0 0 0 2px #06101c,
+    0 0 0 4px #2dd4bf;
+}
+
 /* Röntgenblick (app/webdevelopment/components/XRaySection.tsx):
    Überschriften und Bilder auf der Seite markieren, solange er an ist. */
 html[data-xray] main :is(h1, h2, h3) {
