@@ -299,7 +299,7 @@ export default function NlpHeader() {
               <span className='font-light text-(--text)'>Coaching</span>
             </span>
             {/* Untertitel kostet ~150px – erst ab xl, wo der Platz da ist. */}
-            <span className='hidden whitespace-nowrap text-xs uppercase tracking-[1.3px] text-(--muted) xl:block'>
+            <span className='hidden whitespace-nowrap text-xs uppercase text-(--muted) xl:block'>
               Life Coaching für Unternehmer
             </span>
           </span>
