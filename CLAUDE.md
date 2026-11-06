@@ -232,11 +232,8 @@ Gruß „Bis bald, Stefan“ im Kontakt. Nicht für Überschriften oder Fließte
 - **Atem-Ringe** (`BreathRings`): konzentrische Kupferlinien, atmen 7 s – das Ring-Motiv der
   Coaching-Kugel auf `/`. Angeschnitten am Rand von „Kennst du das?“, Preise, FAQ und
   zentriert im Zitat-Band. Sektion braucht `relative overflow-hidden`. Höchstens einmal pro Sektion.
-- **Belege-Orbit** (`FactOrbit`, Fakten in `orbitFacts`): vordere Hälfte einer geneigten Bahn
-  unter der Bilderkarte in „Über mich“ – wie der Orbit auf `/`. Ab `lg`; darunter und bei
-  reduzierter Bewegung statische Belegzeile. Nur prüfbare Aussagen (§10).
-- **Sonnenbahn** (`.sun-path` in `NlpLayoutClient`): Lesefortschritt als aufsteigende Kugel am
-  rechten Rand, `animation-timeline: scroll(root)`, nur ab `lg`, ohne Unterstützung unsichtbar.
+- **Sonnenbahn** (`.sun-path` in `NlpLayoutClient`): Lesefortschritt als Kugel am rechten Rand,
+  läuft mit dem Scrollen nach **unten** (wie der Scrollbalken – umgekehrt wirkte es falsch herum), `animation-timeline: scroll(root)`, nur ab `lg`, ohne Unterstützung unsichtbar.
 - **Säulen-Ringe** (`.pillar-ring`): Hover/Fokus der Ansatz-Karten lässt zwei Ringe vom Motiv
   ausgehen.
 

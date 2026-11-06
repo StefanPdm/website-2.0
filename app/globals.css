@@ -3485,70 +3485,8 @@ html[data-xray] main img {
   }
 }
 
-/* Belege-Orbit um die Bilderkarte in „Über mich“ – Bahn liegt am Sockel der
-   Karte, Belege ziehen vorn vorbei und tauchen hinten ab (verdeckt). */
-.coach-orbit {
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  width: 94%;
-  aspect-ratio: 1;
-  --tilt: 76deg;
-  transform: translate(-50%, -50%) rotateX(var(--tilt));
-  transform-style: preserve-3d;
-  pointer-events: none;
-  z-index: 20;
-}
-.coach-orbit__ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
-  /* nur die vordere Hälfte – die hintere läge hinter der Glaskarte */
-  clip-path: inset(50% 0 0 0);
-}
-.coach-orbit__pos {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 0;
-  height: 50%;
-  transform-origin: 50% 100%;
-  transform-style: preserve-3d;
-  animation: hub-orbit 48s linear var(--delay) infinite;
-}
-.coach-orbit__fact {
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform-origin: 0 0;
-  white-space: nowrap;
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text);
-  background: linear-gradient(to bottom, #3a2516, #241509);
-  border: 1px solid var(--card-border);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 220, 180, 0.14),
-    0 10px 24px rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  animation:
-    hub-orbit-counter 48s linear var(--delay) infinite,
-    hub-orbit-front 48s linear var(--delay) infinite;
-}
-/* Ohne Bewegung: Orbit aus, statische Belegzeile an (.coach-orbit-static) */
-@media (prefers-reduced-motion: reduce) {
-  .coach-orbit {
-    display: none;
-  }
-  .coach-orbit-static {
-    display: flex !important;
-  }
-}
-
-/* Sonnenbahn: kleine Kugel am rechten Rand steigt mit dem Lesefortschritt.
+/* Sonnenbahn: kleine Kugel am rechten Rand wandert mit dem Lesefortschritt
+   nach unten – gleiche Richtung wie Scrollen und Scrollbalken.
    Reines CSS (scroll-timeline), ohne Unterstützung einfach nicht da. */
 .sun-path {
   display: none;
@@ -3583,7 +3521,7 @@ html[data-xray] main img {
     .sun-path__ball {
       position: absolute;
       left: 0;
-      bottom: 0;
+      top: 0;
       width: 14px;
       height: 14px;
       border-radius: 50%;
@@ -3591,17 +3529,17 @@ html[data-xray] main img {
       box-shadow:
         0 0 0 4px rgba(246, 179, 90, 0.16),
         0 0 18px rgba(246, 179, 90, 0.7);
-      animation: sun-rise linear both;
+      animation: sun-travel linear both;
       animation-timeline: scroll(root);
     }
   }
 }
-@keyframes sun-rise {
+@keyframes sun-travel {
   from {
     transform: translateY(0) scale(0.8);
   }
   to {
-    transform: translateY(calc(-56vh + 14px)) scale(1.15);
+    transform: translateY(calc(56vh - 14px)) scale(1.15);
   }
 }
 

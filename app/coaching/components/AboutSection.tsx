@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 
 import GlassCard from '@/components/GlassCard';
-import FactOrbit from '@/app/coaching/components/FactOrbit';
 import { useModal } from '@/components/useModal';
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 
@@ -89,68 +88,64 @@ export default function AboutSection() {
         className='tone-dark py-40 relative min-h-[60dvh] flex flex-col justify-center items-center'>
         <div className='container px-4 mx-auto'>
           <div className='grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'>
-            {/* left side – Belege-Orbit wie auf der Startseite */}
-            <div className='order-2 md:order-1'>
-              <FactOrbit>
-                <GlassCard className='p-6'>
-                <div className='relative overflow-hidden rounded-2xl bg-surface'>
-                  <div className='aspect-5/4 w-full overflow-hidden'>
-                    <div
-                      className='flex h-full w-full transition-transform duration-700 ease-out'
-                      style={{ transform: `translateX(-${activeImage * 100}%)` }}>
-                      {images.map((image) => (
-                        <div
-                          key={image.src}
-                          className='relative h-full w-full shrink-0'>
-                          <Image
-                            src={image.src}
-                            alt={image.alt}
-                            fill
-                            className={`object-cover ${image.position ?? 'object-top'}`}
-                            sizes='(min-width: 1024px) 40vw, 80vw'
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className='absolute inset-0 ring-1 ring-border' />
-                  <div className='absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-border bg-surface-strong px-3 py-2 backdrop-blur'>
-                    {images.map((_, index) => (
-                      <button
-                        key={index}
-                        type='button'
-                        onClick={() => setActiveImage(index)}
-                        className={`h-2 w-2 rounded-full transition cursor-pointer ${
-                          index === activeImage
-                            ? 'bg-(--accent) shadow-[0_0_8px_rgba(246,179,90,0.8)]'
-                            : 'bg-(--text)/40 hover:bg-(--text)/70'
-                        }`}
-                        aria-label={`Bild ${index + 1} anzeigen`}
-                      />
+            {/* left side */}
+            <GlassCard className='p-6 order-2 md:order-1'>
+              <div className='relative overflow-hidden rounded-2xl bg-surface'>
+                <div className='aspect-5/4 w-full overflow-hidden'>
+                  <div
+                    className='flex h-full w-full transition-transform duration-700 ease-out'
+                    style={{ transform: `translateX(-${activeImage * 100}%)` }}>
+                    {images.map((image) => (
+                      <div
+                        key={image.src}
+                        className='relative h-full w-full shrink-0'>
+                        <Image
+                          src={image.src}
+                          alt={image.alt}
+                          fill
+                          className={`object-cover ${image.position ?? 'object-top'}`}
+                          sizes='(min-width: 1024px) 40vw, 80vw'
+                        />
+                      </div>
                     ))}
                   </div>
                 </div>
-                <div className='mt-5 space-y-2 text-sm text-(--text)/70 '>
-                  <p>
-                    <span className='font-bold text-(--text)'>Schwerpunkte:</span> Identität
-                    &nbsp;|&nbsp; Entscheidungen &nbsp;|&nbsp; innere Ausrichtung.
-                  </p>
-                  <p>
-                    <span className='font-bold text-(--text)'>Formate:</span> 1:1 Sessions &nbsp;|&nbsp;
-                    Workshops &nbsp;|&nbsp; Keynotes.
-                  </p>
+                <div className='absolute inset-0 ring-1 ring-border' />
+                <div className='absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-border bg-surface-strong px-3 py-2 backdrop-blur'>
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      type='button'
+                      onClick={() => setActiveImage(index)}
+                      className={`h-2 w-2 rounded-full transition cursor-pointer ${
+                        index === activeImage
+                          ? 'bg-(--accent) shadow-[0_0_8px_rgba(246,179,90,0.8)]'
+                          : 'bg-(--text)/40 hover:bg-(--text)/70'
+                      }`}
+                      aria-label={`Bild ${index + 1} anzeigen`}
+                    />
+                  ))}
                 </div>
-                <div className='mt-6 flex flex-wrap gap-3 justify-end '>
-                  <SecondaryButton onClick={() => setAboutModal('before')}>
-                    Mein Weg vor NLP
-                  </SecondaryButton>
-                  <PrimaryButton onClick={() => setAboutModal('education')}>
-                    Aus- & Weiterbildungen
-                  </PrimaryButton>
-                </div>
-                </GlassCard>
-              </FactOrbit>
-            </div>
+              </div>
+              <div className='mt-5 space-y-2 text-sm text-(--text)/70 '>
+                <p>
+                  <span className='font-bold text-(--text)'>Schwerpunkte:</span> Identität
+                  &nbsp;|&nbsp; Entscheidungen &nbsp;|&nbsp; innere Ausrichtung.
+                </p>
+                <p>
+                  <span className='font-bold text-(--text)'>Formate:</span> 1:1 Sessions &nbsp;|&nbsp;
+                  Workshops &nbsp;|&nbsp; Keynotes.
+                </p>
+              </div>
+              <div className='mt-6 flex flex-wrap gap-3 justify-end '>
+                <SecondaryButton onClick={() => setAboutModal('before')}>
+                  Mein Weg vor NLP
+                </SecondaryButton>
+                <PrimaryButton onClick={() => setAboutModal('education')}>
+                  Aus- & Weiterbildungen
+                </PrimaryButton>
+              </div>
+            </GlassCard>
             {/* right side */}
             <div className='order-1 md:order-2'>
               <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Über mich</p>
