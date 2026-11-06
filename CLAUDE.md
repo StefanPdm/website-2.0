@@ -225,13 +225,17 @@ Dazu `border-card-border` für den Einheitsrahmen der Karten.
 Persönlichkeitstest-Sektion. Neue Illustrationen in Welt A: **als Motif, nicht als Bild.**
 
 Font Welt A: `Public_Sans` (in `NlpLayoutClient` geladen). Dazu **Fraunces kursiv** als
-Serif-Akzent (`font-serif`, Variable `--font-fraunces`) – **nur** für das Zitat-Band und den
+Serif-Akzent (`font-serif`, Variable `--font-fraunces`) – **nur** für die Zitat-Bänder und den
 Gruß „Bis bald, Stefan“ im Kontakt. Nicht für Überschriften oder Fließtext.
 
 **Signaturen Welt A** (2026-11, alle CSS, `aria-hidden`, Block „Signaturen“ in `globals.css`):
 - **Atem-Ringe** (`BreathRings`): konzentrische Kupferlinien, atmen 7 s – das Ring-Motiv der
   Coaching-Kugel auf `/`. Angeschnitten am Rand von „Kennst du das?“, Preise, FAQ und
-  zentriert im Zitat-Band. Sektion braucht `relative overflow-hidden`. Höchstens einmal pro Sektion.
+  in den Zitat-Bändern.
+- **Zitat-Bänder** (`QuoteSection`, Props `quote`/`follow`/`caption`/`rings`, Hervorhebung `<Mark>`):
+  nur eigene Sätze oder geprüfte Herkunft. Abwandlungen fremder Sprüche ohne fremden Namen
+  (Mut-Zitat ≈ „Wer kämpft, kann verlieren …“, Brecht zugeschrieben, nicht belegt). Fakten darin
+  belegen (Karriere < frz. *carrière* „Rennbahn, Laufbahn“, Duden). Nie zwei Bänder hintereinander. Sektion braucht `relative overflow-hidden`. Höchstens einmal pro Sektion.
 - **Sonnenbahn** (`.sun-path` in `NlpLayoutClient`): Lesefortschritt als Kugel am rechten Rand,
   läuft mit dem Scrollen nach **unten** (wie der Scrollbalken – umgekehrt wirkte es falsch herum), `animation-timeline: scroll(root)`, nur ab `lg`, ohne Unterstützung unsichtbar.
 - **Säulen-Ringe** (`.pillar-ring`): Hover/Fokus der Ansatz-Karten lässt zwei Ringe vom Motiv
@@ -368,7 +372,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
 | `Motifs` | Dekor-SVGs (§3.2) |
 | `PodcastPlayer` | Audio-Player für `/coaching/session-podcast`: Equalizer-Balken = Fortschritt (CSS `.podcast-eq*` in `globals.css`, pausiert eingefroren), unsichtbarer Range-Regler darüber, ±15 s, Geschwindigkeit, Media-Session-Titel. Länge als Prop, weil `preload='none'` |
-| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort; Karten per Subgrid ausgerichtet) → **Leitgedanke** (`QuoteSection`, dunkles Zitat-Band, nur eigene Sätze) → Themen (`WorkSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
+| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Gedanke Karriere** (`QuoteSection`, dunkles Zitat-Band) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort; Karten per Subgrid ausgerichtet) → Themen (`WorkSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Session-Podcast → **Gedanke Mut** (`QuoteSection`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
 
 Hinweis: `NlpSections.tsx` ist seit dem Wegfall des Theme-Umschalters eine Server
 Component. Früher galt: Weil es `'use client'` war, wurde alles, was es

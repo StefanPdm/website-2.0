@@ -1,35 +1,66 @@
+import type { ReactNode } from 'react';
+
 import BreathRings from '@/app/coaching/components/BreathRings';
 
+type QuoteSectionProps = {
+  /** Für Screenreader: Name der Region, z. B. „Gedanke zur Karriere“. */
+  label: string;
+  /** Großer Satz in Fraunces kursiv; Hervorhebung per <Mark>. */
+  quote: ReactNode;
+  /** Optionaler zweiter, kleinerer Satz darunter. */
+  follow?: ReactNode;
+  /** Zuschreibung – leer lassen, wenn der Satz kein belegbares Zitat ist. */
+  caption?: string;
+  /** Lage der Atem-Ringe, damit zwei Bänder nicht gleich aussehen. */
+  rings?: 'center' | 'left';
+};
+
+/** Hervorgehobener Teil eines Zitats (Bernstein). */
+export function Mark({ children }: { children: ReactNode }) {
+  return <span className='text-accent-soft'>{children}</span>;
+}
+
 /**
- * Zitat-Band zwischen Ansatz und Themen (dunkle Insel). Die Kugel mit den
- * Atem-Ringen ist das Motiv der Coaching-Hälfte der Startseite – so taucht
- * die Entscheidung von „/“ hier wieder auf.
+ * Zitat-Band (dunkle Insel, §3.2). Die Atem-Ringe mit dem weichen Lichthof sind
+ * das Motiv der Coaching-Hälfte der Startseite.
  *
- * Wortlaut nach Stefans eigenem Text in „Was Coaching für mich bedeutet“
- * (ApproachSection). Nur eigene Sätze als Zitat – fremde Zitate brauchen
- * Quelle und Wortlaut-Prüfung.
+ * Inhalte: nur eigene Sätze oder Sätze mit geprüfter Herkunft. Fremde Zitate
+ * mit Wortlaut + Quelle, Abwandlungen ohne fremden Namen darunter (§10).
  */
-export default function QuoteSection() {
+export default function QuoteSection({
+  label,
+  quote,
+  follow,
+  caption,
+  rings = 'center',
+}: QuoteSectionProps) {
+  const ringPos =
+    rings === 'left' ? 'left-[12%] top-1/2 -translate-x-1/2' : 'left-1/2 top-1/2 -translate-x-1/2';
+
   return (
     <section
-      aria-label='Leitgedanke'
+      aria-label={label}
       className='tone-dark relative overflow-hidden border-y border-border py-24 sm:py-32'>
-      <BreathRings className='left-1/2 top-1/2 w-[min(900px,160vw)] -translate-x-1/2 -translate-y-1/2 opacity-70' />
+      <BreathRings className={`${ringPos} w-[min(900px,160vw)] -translate-y-1/2 opacity-70`} />
       <span
         aria-hidden='true'
-        className='quote-sun pointer-events-none absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-28 sm:w-28'
+        className={`quote-sun pointer-events-none absolute ${ringPos} h-24 w-24 -translate-y-1/2 rounded-full sm:h-28 sm:w-28`}
       />
 
       <figure className='container relative mx-auto max-w-4xl px-4 text-center'>
-        <blockquote className='font-serif text-3xl font-light italic leading-snug text-(--text) text-balance sm:text-4xl lg:text-5xl'>
-          <p>
-            „Glück und Erfüllung entstehen nicht im Außen, sondern{' '}
-            <span className='text-accent-soft'>in dir selbst</span>.“
-          </p>
+        <blockquote className='font-serif font-light italic text-(--text) text-balance'>
+          <p className='text-3xl leading-snug sm:text-4xl lg:text-5xl'>{quote}</p>
+          {follow && (
+            <p className='mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-(--muted) sm:text-2xl'>
+              {follow}
+            </p>
+          )}
         </blockquote>
-        <figcaption className='mt-8 text-xs uppercase tracking-[0.3em] text-(--subtle)'>
-          Stefan Heinemann
-        </figcaption>
+        {caption && (
+          <figcaption className='mt-8 text-xs uppercase tracking-[0.3em] text-(--subtle)'>
+            {caption}
+          </figcaption>
+        )}
       </figure>
     </section>
   );
