@@ -240,7 +240,9 @@ Gruß „Bis bald, Stefan“ im Kontakt. Nicht für Überschriften oder Fließte
   lat. *carrus*; „stammt von carrera“ wäre falsch). Nie zwei Bänder hintereinander. Sektion braucht `relative overflow-hidden`. Höchstens einmal pro Sektion.
 - **Sonnenbahn** (`.sun-path` in `NlpLayoutClient`): Lesefortschritt am **linken** Rand unter dem
   `WorldSwitch` (rechts konkurrierte sie mit dem Scrollbalken), feste Endpunkte + gefüllte Strecke,
-  läuft mit dem Scrollen nach **unten**, `animation-timeline: scroll(root)`, nur ab `lg`, ohne Unterstützung unsichtbar.
+  läuft mit dem Scrollen nach **unten**, `animation-timeline: scroll(root)`, ohne Unterstützung unsichtbar.
+  Nur bei Breiten mit ≥ 64 px freiem Rand (1376–1535 und ab 1632 px) – sonst läuft der
+  Container-Inhalt hinein. Neuer Breakpoint → Bereiche in `globals.css` neu berechnen.
 - **Säulen-Ringe** (`.pillar-ring`): Hover/Fokus der Ansatz-Karten lässt zwei Ringe vom Motiv
   ausgehen.
 

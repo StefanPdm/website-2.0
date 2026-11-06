@@ -3489,12 +3489,18 @@ html[data-xray] main img {
    (left-5 + 48 px → Mitte bei 44 px). Links, damit sie nicht mit dem
    Scrollbalken konkurriert. Feste Endpunkte oben und unten, eine gefüllte
    Strecke hinter der Kugel – so ist ablesbar, wie weit man ist.
-   Reines CSS (scroll-timeline), ohne Unterstützung einfach nicht da. */
+   Reines CSS (scroll-timeline), ohne Unterstützung einfach nicht da.
+   Nur wo links ≥ 64 px frei sind: Der Container springt bei 1024 / 1120 (hdr) /
+   1280 / 1536 px auf volle Breite, knapp darüber läge der Inhalt in der Bahn.
+   Frei = Inhaltsbreite + 96–128 px → 1376–1535 und ab 1632 px. (1216–1279 wäre
+   für den Container frei, aber max-w-6xl-Bereiche ragen dort hinein.)
+   Kommt ein Breakpoint dazu, Bereiche neu berechnen (Messskript: Kollisionen 0). */
 .sun-path {
   display: none;
 }
 @supports (animation-timeline: scroll()) {
-  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  @media (min-width: 1376px) and (max-width: 1535.98px) and (prefers-reduced-motion: no-preference),
+    (min-width: 1632px) and (prefers-reduced-motion: no-preference) {
     .sun-path {
       --sun-len: 52vh;
       display: block;
