@@ -58,13 +58,10 @@ const nextConfig: NextConfig = {
     turbopackFileSystemCacheForDev: false,
   },
 
-  // Dateiänderungen per Polling erkennen statt über Windows-Dateiereignisse:
-  // Turbopack verpasste unter Windows wiederholt Änderungen an globals.css,
-  // der Dev-Server zeigte dann altes CSS bis zum Löschen von .next/dev.
-  // Kostet im Dev-Modus etwas CPU, wirkt nur bei `next dev`.
-  watchOptions: {
-    pollIntervalMs: 500,
-  },
+  // KEIN watchOptions.pollIntervalMs: Mit Polling erkannte Turbopack (16.1.6)
+  // unter Windows gar keine Änderung mehr – gemessen 2026-11-06. Ohne Polling
+  // kommen TSX-Änderungen zuverlässig an, globals.css gelegentlich erst beim
+  // nächsten Speichern.
 
   images: {
     qualities: [100, 75],
