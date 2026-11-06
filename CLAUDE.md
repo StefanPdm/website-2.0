@@ -235,9 +235,11 @@ Gruß „Bis bald, Stefan“ im Kontakt. Nicht für Überschriften oder Fließte
 - **Zitat-Bänder** (`QuoteSection`, Props `quote`/`follow`/`caption`/`rings`, Hervorhebung `<Mark>`):
   nur eigene Sätze oder geprüfte Herkunft. Abwandlungen fremder Sprüche ohne fremden Namen
   (Mut-Zitat ≈ „Wer kämpft, kann verlieren …“, Brecht zugeschrieben, nicht belegt). Fakten darin
-  belegen (Karriere < frz. *carrière* „Rennbahn, Laufbahn“, Duden). Nie zwei Bänder hintereinander. Sektion braucht `relative overflow-hidden`. Höchstens einmal pro Sektion.
-- **Sonnenbahn** (`.sun-path` in `NlpLayoutClient`): Lesefortschritt als Kugel am rechten Rand,
-  läuft mit dem Scrollen nach **unten** (wie der Scrollbalken – umgekehrt wirkte es falsch herum), `animation-timeline: scroll(root)`, nur ab `lg`, ohne Unterstützung unsichtbar.
+  belegen (Karriere und span. *carrera* – bekannt als Spielzeug-Rennbahn – haben dieselbe Wurzel,
+  lat. *carrus*; „stammt von carrera“ wäre falsch). Nie zwei Bänder hintereinander. Sektion braucht `relative overflow-hidden`. Höchstens einmal pro Sektion.
+- **Sonnenbahn** (`.sun-path` in `NlpLayoutClient`): Lesefortschritt am **linken** Rand unter dem
+  `WorldSwitch` (rechts konkurrierte sie mit dem Scrollbalken), feste Endpunkte + gefüllte Strecke,
+  läuft mit dem Scrollen nach **unten**, `animation-timeline: scroll(root)`, nur ab `lg`, ohne Unterstützung unsichtbar.
 - **Säulen-Ringe** (`.pillar-ring`): Hover/Fokus der Ansatz-Karten lässt zwei Ringe vom Motiv
   ausgehen.
 

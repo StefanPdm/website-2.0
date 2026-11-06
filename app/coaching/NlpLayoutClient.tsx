@@ -25,10 +25,13 @@ export default function NlpLayoutClient({ children }: { children: React.ReactNod
       <div className='relative isolate overflow-hidden'>
         <NlpHeader />
         <WorldSwitch />
-        {/* Sonnenbahn: Lesefortschritt als aufgehende Sonne (nur CSS, ab lg) */}
+        {/* Sonnenbahn: Lesefortschritt am linken Rand (nur CSS, ab lg) */}
         <div
           aria-hidden='true'
           className='sun-path'>
+          <span className='sun-path__fill' />
+          <span className='sun-path__cap sun-path__cap--top' />
+          <span className='sun-path__cap sun-path__cap--bottom' />
           <span className='sun-path__ball' />
         </div>
         <main>{children}</main>

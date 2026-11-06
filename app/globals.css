@@ -3485,8 +3485,10 @@ html[data-xray] main img {
   }
 }
 
-/* Sonnenbahn: kleine Kugel am rechten Rand wandert mit dem Lesefortschritt
-   nach unten – gleiche Richtung wie Scrollen und Scrollbalken.
+/* Sonnenbahn: Lesefortschritt am linken Rand, unter dem Weltenwechsel-Button
+   (left-5 + 48 px → Mitte bei 44 px). Links, damit sie nicht mit dem
+   Scrollbalken konkurriert. Feste Endpunkte oben und unten, eine gefüllte
+   Strecke hinter der Kugel – so ist ablesbar, wie weit man ist.
    Reines CSS (scroll-timeline), ohne Unterstützung einfach nicht da. */
 .sun-path {
   display: none;
@@ -3494,15 +3496,17 @@ html[data-xray] main img {
 @supports (animation-timeline: scroll()) {
   @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
     .sun-path {
+      --sun-len: 52vh;
       display: block;
       position: fixed;
-      right: 1.1rem;
-      top: 22vh;
-      height: 56vh;
+      left: calc(44px - 7px);
+      top: max(24vh, 176px);
+      height: var(--sun-len);
       width: 14px;
       z-index: 40;
       pointer-events: none;
     }
+    /* Schiene */
     .sun-path::before {
       content: '';
       position: absolute;
@@ -3511,17 +3515,43 @@ html[data-xray] main img {
       bottom: 0;
       width: 1px;
       transform: translateX(-50%);
-      background: linear-gradient(
-        to top,
-        rgba(154, 76, 23, 0.05),
-        rgba(154, 76, 23, 0.35) 50%,
-        rgba(246, 179, 90, 0.05)
-      );
+      background: rgba(214, 140, 70, 0.3);
+    }
+    /* Zurückgelegte Strecke */
+    .sun-path__fill {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      margin-left: -1px;
+      border-radius: 2px;
+      background: linear-gradient(to bottom, #f6b35a, #d9853a);
+      transform-origin: top;
+      animation: sun-fill linear both;
+      animation-timeline: scroll(root);
+    }
+    /* Endpunkte: Anfang und Ende der Seite */
+    .sun-path__cap {
+      position: absolute;
+      left: 50%;
+      width: 7px;
+      height: 7px;
+      margin-left: -3.5px;
+      border-radius: 50%;
+      border: 1px solid rgba(214, 140, 70, 0.7);
+      background: var(--bg);
+    }
+    .sun-path__cap--top {
+      top: -3.5px;
+    }
+    .sun-path__cap--bottom {
+      bottom: -3.5px;
     }
     .sun-path__ball {
       position: absolute;
       left: 0;
-      top: 0;
+      top: -7px;
       width: 14px;
       height: 14px;
       border-radius: 50%;
@@ -3536,10 +3566,18 @@ html[data-xray] main img {
 }
 @keyframes sun-travel {
   from {
-    transform: translateY(0) scale(0.8);
+    transform: translateY(0);
   }
   to {
-    transform: translateY(calc(56vh - 14px)) scale(1.15);
+    transform: translateY(var(--sun-len));
+  }
+}
+@keyframes sun-fill {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
   }
 }
 

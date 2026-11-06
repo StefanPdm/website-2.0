@@ -22,13 +22,17 @@ export default function NlpSections() {
     <>
       <HeroSection />
       <FulfilmentSection />
-      {/* Etymologie laut Duden: frz. carrière „Rennbahn, Laufbahn“ (< ital. carriera < lat. carrus) */}
+      {/*
+        Karriere und carrera (span. „Rennen, Laufbahn“) gehen beide auf lat. carrus
+        (Wagen) zurück – „vom selben Wort“ stimmt, „stammt von carrera“ nicht.
+        Carrera kennt in Deutschland jeder als Spielzeug-Rennbahn.
+      */}
       <QuoteSection
         label='Gedanke zur Karriere'
         quote={
           <>
-            „Wusstest du, dass das Wort Karriere vom französischen <i>carrière</i> stammt – und
-            ursprünglich <Mark>Rennbahn</Mark> bedeutet?“
+            „Wusstest du, dass Karriere vom selben Wort stammt wie <i>Carrera</i> – die{' '}
+            <Mark>Rennbahn</Mark> aus dem Kinderzimmer?“
           </>
         }
         caption='Stefan Heinemann'
