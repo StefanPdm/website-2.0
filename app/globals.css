@@ -22,6 +22,9 @@
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-card-border: var(--card-border);
+
+  /* Serif-Akzent Welt A (Fraunces, geladen in NlpLayoutClient) – nur Zitat & Signatur */
+  --font-serif: var(--font-fraunces), Georgia, 'Times New Roman', serif;
   --color-surface: var(--surface);
   --color-surface-strong: var(--surface-strong);
   --color-glow: var(--glow);
@@ -3445,5 +3448,203 @@ html[data-xray] main img {
       linear-gradient(90deg, #000 0%, #000 30%, transparent 60%),
       linear-gradient(to bottom, #000 72%, transparent 100%);
     mask-composite: intersect;
+  }
+}
+
+
+/* ==========================================================================
+ * Welt A – Signaturen (2026-11): Atem-Ringe, Belege-Orbit, Sonnenbahn,
+ * Säulen-Ringe. Alles dekorativ (aria-hidden), nur transform/opacity (§9).
+ * ========================================================================== */
+
+/* Atem-Ringe: konzentrische Kupferlinien, die nacheinander aufatmen.
+   Motiv der Coaching-Kugel auf der Startseite. */
+.breath-rings {
+  pointer-events: none;
+  position: absolute;
+  aspect-ratio: 1;
+  color: var(--accent);
+}
+.breath-rings circle {
+  fill: none;
+  stroke: currentColor;
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: var(--o, 0.2);
+  animation: breath-ring 7s ease-in-out var(--d, 0s) infinite alternate;
+}
+@keyframes breath-ring {
+  from {
+    transform: scale(0.94);
+    opacity: calc(var(--o, 0.2) * 0.45);
+  }
+  to {
+    transform: scale(1.04);
+    opacity: var(--o, 0.2);
+  }
+}
+
+/* Belege-Orbit um die Bilderkarte in „Über mich“ – Bahn liegt am Sockel der
+   Karte, Belege ziehen vorn vorbei und tauchen hinten ab (verdeckt). */
+.coach-orbit {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 94%;
+  aspect-ratio: 1;
+  --tilt: 76deg;
+  transform: translate(-50%, -50%) rotateX(var(--tilt));
+  transform-style: preserve-3d;
+  pointer-events: none;
+  z-index: 20;
+}
+.coach-orbit__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
+  /* nur die vordere Hälfte – die hintere läge hinter der Glaskarte */
+  clip-path: inset(50% 0 0 0);
+}
+.coach-orbit__pos {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 0;
+  height: 50%;
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  animation: hub-orbit 48s linear var(--delay) infinite;
+}
+.coach-orbit__fact {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  white-space: nowrap;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text);
+  background: linear-gradient(to bottom, #3a2516, #241509);
+  border: 1px solid var(--card-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 220, 180, 0.14),
+    0 10px 24px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  animation:
+    hub-orbit-counter 48s linear var(--delay) infinite,
+    hub-orbit-front 48s linear var(--delay) infinite;
+}
+/* Ohne Bewegung: Orbit aus, statische Belegzeile an (.coach-orbit-static) */
+@media (prefers-reduced-motion: reduce) {
+  .coach-orbit {
+    display: none;
+  }
+  .coach-orbit-static {
+    display: flex !important;
+  }
+}
+
+/* Sonnenbahn: kleine Kugel am rechten Rand steigt mit dem Lesefortschritt.
+   Reines CSS (scroll-timeline), ohne Unterstützung einfach nicht da. */
+.sun-path {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .sun-path {
+      display: block;
+      position: fixed;
+      right: 1.1rem;
+      top: 22vh;
+      height: 56vh;
+      width: 14px;
+      z-index: 40;
+      pointer-events: none;
+    }
+    .sun-path::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(
+        to top,
+        rgba(154, 76, 23, 0.05),
+        rgba(154, 76, 23, 0.35) 50%,
+        rgba(246, 179, 90, 0.05)
+      );
+    }
+    .sun-path__ball {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff4dc, #f6b35a 55%, #d9853a);
+      box-shadow:
+        0 0 0 4px rgba(246, 179, 90, 0.16),
+        0 0 18px rgba(246, 179, 90, 0.7);
+      animation: sun-rise linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+@keyframes sun-rise {
+  from {
+    transform: translateY(0) scale(0.8);
+  }
+  to {
+    transform: translateY(calc(-56vh + 14px)) scale(1.15);
+  }
+}
+
+/* Säulen-Karten: beim Hover/Fokus breiten sich vom Motiv zwei Ringe aus */
+.pillar-ring {
+  pointer-events: none;
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0;
+  transform: scale(0.4);
+}
+.group:is(:hover, :focus-within) .pillar-ring {
+  animation: pillar-ring 1.6s cubic-bezier(0.22, 0.8, 0.2, 1) var(--d, 0s) 1 both;
+}
+@keyframes pillar-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}
+
+/* Zitat-Band: weiche Sonne hinter dem Zitat – bewusst ein Lichthof, kein
+   Ball, damit die Schrift darüber ≥ 4,5 : 1 behält (max. Deckkraft .22). */
+.quote-sun {
+  background: radial-gradient(circle, rgba(246, 179, 90, 0.22), rgba(246, 179, 90, 0.08) 45%, transparent 70%);
+  transform-origin: center;
+  scale: 4;
+  animation: quote-sun 7s ease-in-out infinite alternate;
+}
+@keyframes quote-sun {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
   }
 }

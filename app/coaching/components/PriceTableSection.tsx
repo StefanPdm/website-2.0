@@ -2,9 +2,12 @@
 
 import {
   Backpack,
+  Compass,
+  MessageCircle,
   Package,
   Phone,
   Rocket,
+  ShieldCheck,
   Star,
   Trophy,
   Zap,
@@ -12,6 +15,7 @@ import {
 } from 'lucide-react';
 
 import GlassCard from '@/components/GlassCard';
+import BreathRings from '@/app/coaching/components/BreathRings';
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 import {
   entryOffer,
@@ -44,6 +48,29 @@ const offerIcons: Record<OfferIcon, LucideIcon> = {
  * Begleitung mit Sessions, Support und Roadmap – dort wäre ein Sessionpreis
  * eine irreführende Kennzahl.
  */
+
+/**
+ * „So läuft das Erstgespräch“ – nimmt die Unsicherheit vor dem ersten Kontakt.
+ * Muss zu entryOffer (pricing.ts) passen: ca. 30 Min, Telefon oder Video.
+ * Bewusst ohne Kartenrahmen – drei ruhige Spalten unter der Einstiegskarte.
+ */
+const firstCallSteps = [
+  {
+    Icon: MessageCircle,
+    title: 'Du erzählst',
+    text: 'Was dich gerade beschäftigt, in deinen Worten. Ich höre zu und frage nach.',
+  },
+  {
+    Icon: Compass,
+    title: 'Wir sortieren',
+    text: 'Was im Weg steht und was ein erster sinnvoller Schritt wäre.',
+  },
+  {
+    Icon: ShieldCheck,
+    title: 'Ehrlich, ohne Verkauf',
+    text: 'Kein Verkaufsgespräch. Wenn Coaching nicht das Richtige ist oder wir nicht passen, sage ich das.',
+  },
+];
 
 function OfferCard({ offer }: { offer: CoachingOffer }) {
   const isMentoring = offer.group === 'mentoring';
@@ -123,8 +150,9 @@ export default function PriceTableSection() {
   return (
     <section
       id='preise'
-      className='relative flex min-h-[80dvh] flex-col items-center justify-center bg-(--section-bg-accent) py-20 backdrop-blur-2xl'>
-      <div className='container mx-auto px-4'>
+      className='relative flex min-h-[80dvh] flex-col items-center justify-center overflow-hidden bg-(--section-bg-accent) py-20'>
+      <BreathRings className='-right-64 top-1/3 w-[720px]' />
+      <div className='container relative mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
           <h2 className='text-3xl font-semibold text-(--text) sm:text-4xl'>Preisübersicht</h2>
           <p className='mt-4 text-base text-(--text)/70 sm:text-lg'>
@@ -188,6 +216,30 @@ export default function PriceTableSection() {
               </div>
             </div>
           </GlassCard>
+
+          <div className='mt-10'>
+            <h3 className='text-center text-lg font-semibold text-(--text)'>
+              So läuft das Erstgespräch
+            </h3>
+            <ol className='mt-6 grid gap-6 sm:grid-cols-3'>
+              {firstCallSteps.map(({ Icon, title, text }) => (
+                <li
+                  key={title}
+                  className='flex gap-4 sm:flex-col sm:items-center sm:text-center'>
+                  <span className='grid h-11 w-11 shrink-0 place-items-center rounded-full border border-card-border bg-surface text-accent'>
+                    <Icon
+                      aria-hidden='true'
+                      className='h-5 w-5'
+                    />
+                  </span>
+                  <span>
+                    <span className='block text-sm font-semibold text-(--text)'>{title}</span>
+                    <span className='mt-1 block text-sm text-(--muted)'>{text}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
 
         {/* Ebene 1: Sessions und Kontingente */}

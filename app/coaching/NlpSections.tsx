@@ -8,12 +8,13 @@ import HeroSection from '@/app/coaching/components/HeroSection';
 import ImpulseSection from '@/app/coaching/components/ImpulseSection';
 import PodcastSection from '@/app/coaching/components/PodcastSection';
 import PriceTableSection from '@/app/coaching/components/PriceTableSection';
+import QuoteSection from '@/app/coaching/components/QuoteSection';
 import TransformationSection from '@/app/coaching/components/TransformationSection';
 import WorkSection from '@/app/coaching/components/WorkSection';
 
 /**
  * Reihenfolge entlang der Entscheidung des Besuchers (2026-11):
- * Ansprache → Wiedererkennung → Ansatz → Themen → Ablauf → Session-Podcast → Preis → Person →
+ * Ansprache → Wiedererkennung → Ansatz → Leitgedanke (Zitat) → Themen → Ablauf → Session-Podcast → Preis → Person →
  * Impulse zum Ausprobieren → Leitfaden → Fragen → Kontakt.
  */
 export default function NlpSections() {
@@ -22,6 +23,7 @@ export default function NlpSections() {
       <HeroSection />
       <FulfilmentSection />
       <ApproachSection />
+      <QuoteSection />
       <WorkSection />
       <TransformationSection />
       <PodcastSection />

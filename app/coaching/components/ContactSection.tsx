@@ -5,10 +5,24 @@ import Link from 'next/link';
 
 import ContactFormNlp from '@/components/ContactFormNlp';
 
-const contactPoints = [
-  'Individuelle 1:1 Begleitung mit Fokus auf Entscheidungsklarheit.',
-  'Workshops für Teams & Führungskräfte – praxisnah und messbar.',
-  'Werkzeuge, die du sofort im Alltag anwenden kannst.',
+/**
+ * Was nach dem Absenden passiert – nimmt die Hürde vor der ersten Nachricht.
+ * Antwortzeit 24–48 Stunden ist seitenweit einheitlich (§8). Dauer und Format
+ * der Klarheits-Session aus pricing.ts (entryOffer).
+ */
+const nextSteps = [
+  {
+    title: 'Ich lese selbst',
+    text: 'Deine Nachricht landet direkt bei mir – kein Team, kein Callcenter, vertraulich.',
+  },
+  {
+    title: 'Antwort in 24–48 Stunden',
+    text: 'Persönlich, mit einem Terminvorschlag für das kostenlose Erstgespräch.',
+  },
+  {
+    title: '30 Minuten Klarheit',
+    text: 'Telefon oder Video, unverbindlich. Danach entscheidest du in Ruhe.',
+  },
 ];
 
 export default function ContactSection() {
@@ -46,19 +60,29 @@ export default function ContactSection() {
               />
             </div>
 
-            <ul className='mt-6 space-y-3'>
-              {contactPoints.map((item) => (
+            <h3 className='mt-8 text-lg font-semibold text-(--text)'>
+              Was nach dem Absenden passiert
+            </h3>
+            <ol className='mt-4 space-y-4'>
+              {nextSteps.map((step, index) => (
                 <li
-                  key={item}
-                  className='flex gap-3 text-sm text-(--muted)'>
+                  key={step.title}
+                  className='flex gap-4'>
                   <span
                     aria-hidden='true'
-                    className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent'
-                  />
-                  {item}
+                    className='grid h-8 w-8 shrink-0 place-items-center rounded-full border border-card-border bg-surface text-xs font-semibold text-accent-soft'>
+                    {index + 1}
+                  </span>
+                  <span>
+                    <span className='block text-sm font-semibold text-(--text)'>{step.title}</span>
+                    <span className='mt-0.5 block text-sm text-(--muted)'>{step.text}</span>
+                  </span>
                 </li>
               ))}
-            </ul>
+            </ol>
+            <p className='mt-6 font-serif text-2xl font-light italic text-accent-soft'>
+              Bis bald, Stefan
+            </p>
             <p className='mt-6 text-sm text-(--muted)'>
               Aus der Region? So läuft Coaching in{' '}
               <Link

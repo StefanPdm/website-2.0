@@ -224,7 +224,21 @@ Dazu `border-card-border` für den Einheitsrahmen der Karten.
 `opacity-[0.07]` hinter Karten/Kopfbereichen, als Inhalt nur in der
 Persönlichkeitstest-Sektion. Neue Illustrationen in Welt A: **als Motif, nicht als Bild.**
 
-Font Welt A: `Public_Sans` (in `NlpLayoutClient` geladen).
+Font Welt A: `Public_Sans` (in `NlpLayoutClient` geladen). Dazu **Fraunces kursiv** als
+Serif-Akzent (`font-serif`, Variable `--font-fraunces`) – **nur** für das Zitat-Band und den
+Gruß „Bis bald, Stefan“ im Kontakt. Nicht für Überschriften oder Fließtext.
+
+**Signaturen Welt A** (2026-11, alle CSS, `aria-hidden`, Block „Signaturen“ in `globals.css`):
+- **Atem-Ringe** (`BreathRings`): konzentrische Kupferlinien, atmen 7 s – das Ring-Motiv der
+  Coaching-Kugel auf `/`. Angeschnitten am Rand von „Kennst du das?“, Preise, FAQ und
+  zentriert im Zitat-Band. Sektion braucht `relative overflow-hidden`. Höchstens einmal pro Sektion.
+- **Belege-Orbit** (`FactOrbit`, Fakten in `orbitFacts`): vordere Hälfte einer geneigten Bahn
+  unter der Bilderkarte in „Über mich“ – wie der Orbit auf `/`. Ab `lg`; darunter und bei
+  reduzierter Bewegung statische Belegzeile. Nur prüfbare Aussagen (§10).
+- **Sonnenbahn** (`.sun-path` in `NlpLayoutClient`): Lesefortschritt als aufsteigende Kugel am
+  rechten Rand, `animation-timeline: scroll(root)`, nur ab `lg`, ohne Unterstützung unsichtbar.
+- **Säulen-Ringe** (`.pillar-ring`): Hover/Fokus der Ansatz-Karten lässt zwei Ringe vom Motiv
+  ausgehen.
 
 ### 3.3 Welt B — Webdevelopment
 
@@ -357,7 +371,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
 | `Motifs` | Dekor-SVGs (§3.2) |
 | `PodcastPlayer` | Audio-Player für `/coaching/session-podcast`: Equalizer-Balken = Fortschritt (CSS `.podcast-eq*` in `globals.css`, pausiert eingefroren), unsichtbarer Range-Regler darüber, ±15 s, Geschwindigkeit, Media-Session-Titel. Länge als Prop, weil `preload='none'` |
-| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort) → Themen (`WorkSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
+| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort; Karten per Subgrid ausgerichtet) → **Leitgedanke** (`QuoteSection`, dunkles Zitat-Band, nur eigene Sätze) → Themen (`WorkSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
 
 Hinweis: `NlpSections.tsx` ist seit dem Wegfall des Theme-Umschalters eine Server
 Component. Früher galt: Weil es `'use client'` war, wurde alles, was es

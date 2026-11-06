@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import BreathRings from '@/app/coaching/components/BreathRings';
 import { SecondaryButton } from '@/app/coaching/components/Buttons';
 
 /**
@@ -30,8 +31,9 @@ export default function FulfilmentSection() {
   return (
     <section
       id='erfuellung'
-      className='relative flex min-h-[80dvh] flex-col items-center justify-center border-y border-(--border) py-20'>
-      <div className='container mx-auto px-4'>
+      className='relative flex min-h-[80dvh] flex-col items-center justify-center overflow-hidden border-y border-(--border) py-20'>
+      <BreathRings className='-left-56 -top-40 w-[640px]' />
+      <div className='container relative mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
           <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Kennst du das?</p>
           <h2 className='mt-5 text-3xl font-semibold text-(--text) sm:text-4xl'>

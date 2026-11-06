@@ -132,6 +132,15 @@ export default function ApproachSection() {
               key={key}
               className='relative row-span-4 grid grid-rows-subgrid gap-y-0 overflow-hidden p-6'>
               <Motif className='pointer-events-none absolute -right-10 -top-10 h-40 w-40 opacity-[0.07]' />
+              {/* Hover/Fokus: zwei Ringe breiten sich vom Motiv aus (CSS .pillar-ring) */}
+              <span
+                aria-hidden='true'
+                className='pillar-ring'
+              />
+              <span
+                aria-hidden='true'
+                className='pillar-ring [--d:0.25s]'
+              />
               <p className='relative text-xs uppercase tracking-[0.2em] text-accent-soft'>
                 {overline}
               </p>

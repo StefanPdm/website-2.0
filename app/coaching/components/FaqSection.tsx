@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import GlassCard from '@/components/GlassCard';
+import BreathRings from '@/app/coaching/components/BreathRings';
 import { faqBoth, faqNlp } from '@/app/coaching/faq';
 
 /**
@@ -21,8 +22,9 @@ export default function FaqSection() {
   return (
     <section
       id='faq'
-      className='relative flex min-h-[70dvh] flex-col items-center justify-center border-y border-(--border) py-20'>
-      <div className='container mx-auto px-4'>
+      className='relative flex min-h-[70dvh] flex-col items-center justify-center overflow-hidden border-y border-(--border) py-20'>
+      <BreathRings className='-bottom-64 -left-48 w-[620px]' />
+      <div className='container relative mx-auto px-4'>
         <div className='mx-auto max-w-3xl text-center'>
           <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Häufige Fragen</p>
           <h2 className='mt-5 text-3xl font-semibold text-(--text) sm:text-4xl'>
