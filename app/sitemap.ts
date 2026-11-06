@@ -29,7 +29,7 @@ type Page = {
 const pages: Page[] = [
   // Kernseiten
   { path: '/', lastModified: '2026-11-02', priority: 1, changeFrequency: 'monthly' },
-  { path: '/coaching', lastModified: '2026-11-02', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/coaching', lastModified: '2026-11-06', priority: 0.9, changeFrequency: 'monthly' },
   {
     path: '/webdevelopment',
     lastModified: '2026-11-03',
