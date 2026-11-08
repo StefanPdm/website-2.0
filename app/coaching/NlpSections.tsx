@@ -2,6 +2,7 @@ import AboutSection from '@/app/coaching/components/AboutSection';
 import ApproachSection from '@/app/coaching/components/ApproachSection';
 import BeliefsTeaserSection from '@/app/coaching/components/BeliefsTeaserSection';
 import ContactSection from '@/app/coaching/components/ContactSection';
+import DailyPostsSection from '@/app/coaching/components/DailyPostsSection';
 import FaqSection from '@/app/coaching/components/FaqSection';
 import FulfilmentSection from '@/app/coaching/components/FulfilmentSection';
 import GuideSection from '@/app/coaching/components/GuideSection';
@@ -17,7 +18,7 @@ import WorkSection from '@/app/coaching/components/WorkSection';
 /**
  * Reihenfolge entlang der Entscheidung des Besuchers (2026-11):
  * Ansprache → Wiedererkennung → Gedanke (Karriere) → Ansatz → Themen → Glaubenssätze → Partnerschaft → Ablauf → Session-Podcast → Gedanke (Mut) → Preis → Person →
- * Impulse zum Ausprobieren → Leitfaden → Fragen → Kontakt.
+ * Impulse zum Ausprobieren → tägliche WhatsApp-Impulse (Galerie) → Leitfaden → Fragen → Kontakt.
  */
 export default function NlpSections() {
   return (
@@ -64,6 +65,7 @@ export default function NlpSections() {
       <PriceTableSection />
       <AboutSection />
       <ImpulseSection />
+      <DailyPostsSection />
       <GuideSection />
       <FaqSection />
       <ContactSection />

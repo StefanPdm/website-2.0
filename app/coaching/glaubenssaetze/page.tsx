@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ContentPageStructuredData } from '@/components/StructuredData';
 import { PrimaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
-import { MotifInsight } from '@/app/coaching/components/Motifs';
+import HeroPicture from '@/app/coaching/components/HeroPicture';
 import QuoteSection, { Mark } from '@/app/coaching/components/QuoteSection';
 import BeliefWall from '@/app/coaching/glaubenssaetze/BeliefWall';
 import TopFive from '@/app/coaching/glaubenssaetze/TopFive';
@@ -57,55 +57,60 @@ export default function GlaubenssaetzePage() {
         }}
       />
       <article className='relative z-10'>
-        {/* Kopfbereich */}
-        <section className='relative overflow-hidden border-b border-border px-4 pt-40 pb-16 md:pt-48'>
-          <MotifInsight className='pointer-events-none absolute -right-20 top-24 h-96 w-96 opacity-[0.07]' />
-          <div className='container mx-auto max-w-4xl'>
-            <nav
-              aria-label='Brotkrumen'
-              className='mb-8 flex flex-wrap items-center gap-2 text-xs text-(--muted)'>
-              <Link
-                href='/'
-                className='transition hover:text-(--text)'>
-                Start
-              </Link>
-              <span aria-hidden='true'>/</span>
-              <Link
-                href='/coaching'
-                className='transition hover:text-(--text)'>
-                Coaching
-              </Link>
-              <span aria-hidden='true'>/</span>
-              <span className='text-(--text)'>Glaubenssätze</span>
-            </nav>
+        {/* Kopfbereich: Foto als Bühne – der Spiegel ist das Bild für Glaubenssätze */}
+        <section className='relative overflow-hidden border-b border-border lg:flex lg:min-h-[86dvh] lg:items-center'>
+          <div className='relative h-[62vh] min-h-[360px] lg:absolute lg:inset-0 lg:h-auto'>
+            <HeroPicture
+              wide={{ src: '/images-nlp/glaubenssaetze-spiegel.webp', width: 1672, height: 941 }}
+              tall={{ src: '/images-nlp/glaubenssaetze-spiegel-hoch.webp', width: 900, height: 1125 }}
+              alt='Eine Frau betrachtet nachdenklich ihr Spiegelbild'
+              className='object-cover object-[50%_30%] lg:object-[80%_center]'
+              priority
+            />
+            <span
+              aria-hidden='true'
+              className='absolute inset-0 bg-linear-to-b from-transparent from-55% to-(--bg) lg:bg-linear-to-r lg:from-(--bg) lg:from-25% lg:via-(--bg)/75 lg:via-45% lg:to-transparent lg:to-70%'
+            />
+          </div>
+          <div className='container relative mx-auto -mt-20 max-w-6xl px-4 pb-16 lg:mt-0 lg:pt-40 lg:pb-24'>
+            <div className='max-w-xl'>
+              <nav
+                aria-label='Brotkrumen'
+                className='mb-8 flex flex-wrap items-center gap-2 text-xs text-(--muted)'>
+                <Link
+                  href='/'
+                  className='transition hover:text-(--text)'>
+                  Start
+                </Link>
+                <span aria-hidden='true'>/</span>
+                <Link
+                  href='/coaching'
+                  className='transition hover:text-(--text)'>
+                  Coaching
+                </Link>
+                <span aria-hidden='true'>/</span>
+                <span className='text-(--text)'>Glaubenssätze</span>
+              </nav>
 
-            <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
-              Glaubenssätze erkennen
-            </p>
-            <h1 className='mt-5 text-3xl font-semibold leading-tight text-(--text) sm:text-4xl lg:text-5xl'>
-              Welche Sätze laufen in dir – und halten dich klein?
-            </h1>
-            <p className='mt-6 max-w-2xl text-base leading-relaxed text-(--muted) sm:text-lg'>
-              Viele Menschen leben nicht das Leben, das sie wollen, sondern das, von dem sie
-              glauben, dass sie es leben müssen. Dahinter stehen Glaubenssätze: tief verankerte
-              Überzeugungen über uns selbst, andere und die Welt. Sie wirken meist unbewusst – und
-              steuern trotzdem Gefühle, Entscheidungen und Verhalten.
-            </p>
-            <p className='mt-4 max-w-2xl text-base leading-relaxed text-(--muted) sm:text-lg'>
-              Aus Sicht des NLP sind sie keine Wahrheiten, sondern Deutungen, die wir irgendwann für
-              wahr gehalten haben. Hier findest du {allBeliefs.length} typische, aufgeteilt in{' '}
-              {beliefAreas.length} Lebensbereiche – so formuliert, wie sie im inneren Dialog
-              auftauchen.
-            </p>
-            <ContentDate path={PATH} />
-
-            <div className='mt-10 max-w-2xl rounded-2xl border border-card-border bg-(--surface) p-5'>
-              <p className='text-sm leading-relaxed text-(--muted)'>
-                <strong className='font-semibold text-(--text)'>So geht&apos;s:</strong> Tippe
-                jeden Satz an, der in dir anklingt – auch wenn er sich nur halb wahr anfühlt. Nicht
-                lange überlegen, der erste Impuls zählt. Etwa fünf Minuten, die Auswertung kommt
-                sofort.
+              <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
+                Glaubenssätze erkennen
               </p>
+              <h1 className='mt-5 text-3xl font-semibold leading-tight text-(--text) sm:text-4xl lg:text-5xl'>
+                Welche Sätze laufen in dir – und halten dich klein?
+              </h1>
+              <p className='mt-6 text-base leading-relaxed text-(--muted) sm:text-lg'>
+                Viele Menschen leben nicht das Leben, das sie wollen, sondern das, von dem sie
+                glauben, dass sie es leben müssen. Was du über dich glaubst, ist ein Spiegelbild –
+                nicht die Wahrheit.
+              </p>
+              <ContentDate path={PATH} />
+              <div className='mt-8'>
+                <PrimaryButton
+                  href='#satz-wand'
+                  className='w-full sm:w-auto'>
+                  Zur Satz-Wand
+                </PrimaryButton>
+              </div>
             </div>
           </div>
         </section>
@@ -115,6 +120,20 @@ export default function GlaubenssaetzePage() {
           aria-labelledby='wand-titel'
           className='px-4 py-16 sm:py-20'>
           <div className='container mx-auto max-w-6xl'>
+            <div className='mx-auto mb-12 max-w-3xl text-center'>
+              <p className='text-base leading-relaxed text-(--muted) sm:text-lg'>
+                Glaubenssätze sind tief verankerte Überzeugungen über uns selbst, andere und die
+                Welt. Sie wirken meist unbewusst – und steuern trotzdem Gefühle, Entscheidungen und
+                Verhalten. Aus Sicht des NLP sind sie keine Wahrheiten, sondern Deutungen, die wir
+                irgendwann für wahr gehalten haben. Hier findest du {allBeliefs.length} typische,
+                aufgeteilt in {beliefAreas.length} Lebensbereiche.
+              </p>
+              <p className='mx-auto mt-6 max-w-2xl rounded-2xl border border-card-border bg-(--surface) p-5 text-left text-sm leading-relaxed text-(--muted)'>
+                <strong className='font-semibold text-(--text)'>So geht&apos;s:</strong> Tippe jeden
+                Satz an, der in dir anklingt – auch wenn er sich nur halb wahr anfühlt. Nicht lange
+                überlegen, der erste Impuls zählt. Etwa fünf Minuten, die Auswertung kommt sofort.
+              </p>
+            </div>
             <h2
               id='wand-titel'
               className='mb-10 text-center text-2xl font-semibold text-(--text) sm:text-3xl'>
