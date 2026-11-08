@@ -11,6 +11,7 @@ import {
   type Belief,
 } from '@/app/coaching/glaubenssaetze/data';
 import ReportDownload from '@/app/coaching/glaubenssaetze/ReportDownload';
+import ShareTest from '@/app/coaching/components/ShareTest';
 
 /**
  * Satz-Wand: kein Formular, sondern Sätze zum Antippen. Ein angetippter Satz
@@ -251,6 +252,10 @@ export default function BeliefWall() {
 
           <div className='mt-12 flex flex-col gap-3 border-t border-border pt-8 sm:flex-row sm:items-center'>
             <SecondaryButton href='#fragen'>Die Fragen ausführlich</SecondaryButton>
+            <ShareTest
+              path='/coaching/glaubenssaetze'
+              text='Welche Glaubenssätze halten dich klein? 50 Sätze zum Antippen – finde es in 5 Minuten heraus.'
+            />
             <button
               type='button'
               onClick={reset}

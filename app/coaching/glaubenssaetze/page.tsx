@@ -181,6 +181,13 @@ export default function GlaubenssaetzePage() {
               Gerade bei tief verankerten Überzeugungen hilft es, nicht vorschnell eine positive
               Affirmation dagegenzusetzen, sondern die Überzeugung behutsam zu untersuchen.
             </p>
+            {/* Einfluss offen benennen (Stefan, 2026-11-08) – nur belegbare Aussagen über The Work */}
+            <p className='mt-4 max-w-2xl text-sm leading-relaxed text-(--muted)'>
+              Ein Einfluss, den ich gern nenne: Byron Katie. Ihre Methode „The Work“ prüft
+              Glaubenssätze mit wenigen Fragen und dreht sie anschließend um – sie hat meine
+              Ausbildung geprägt. Die Fragen und Gegenteile auf dieser Seite sind meine eigene
+              Fassung.
+            </p>
           </div>
         </section>
 

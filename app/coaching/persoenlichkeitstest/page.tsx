@@ -3,7 +3,9 @@ import Link from 'next/link';
 
 import GlassCard from '@/components/GlassCard';
 import { PersonalityTestStructuredData } from '@/components/StructuredData';
+import { PrimaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
+import HeroPicture from '@/app/coaching/components/HeroPicture';
 import { MotifAction, MotifInsight, MotifRelation } from '@/app/coaching/components/Motifs';
 import TestClient from '@/app/coaching/persoenlichkeitstest/TestClient';
 import {
@@ -63,35 +65,75 @@ export default function PersoenlichkeitstestPage() {
   return (
     <div className='relative z-10'>
       <PersonalityTestStructuredData test={testSchema} />
-      {/* Kopfbereich */}
-      <section className='relative overflow-hidden border-b border-(--border) px-4 pt-40 pb-16 md:pt-48'>
-        <MotifRelation className='pointer-events-none absolute -right-20 top-28 h-96 w-96 opacity-[0.07]' />
+      {/* Kopfbereich: Foto als Bühne */}
+      <section className='relative overflow-hidden border-b border-border lg:flex lg:min-h-[86dvh] lg:items-center'>
+        <div className='relative h-[62vh] min-h-[360px] lg:absolute lg:inset-0 lg:h-auto'>
+          <HeroPicture
+            wide={{
+              src: '/images-nlp/persoenlichkeitstest-gespraech.webp',
+              width: 1672,
+              height: 941,
+            }}
+            tall={{
+              src: '/images-nlp/persoenlichkeitstest-gespraech-hoch.webp',
+              width: 900,
+              height: 1125,
+            }}
+            alt='Zwei Menschen im Gespräch: Er erklärt lebhaft mit den Händen, sie hört nachdenklich zu'
+            className='object-cover object-[60%_30%] lg:object-[85%_center]'
+            priority
+          />
+          <span
+            aria-hidden='true'
+            className='absolute inset-0 bg-linear-to-b from-transparent from-55% to-(--bg) lg:bg-linear-to-r lg:from-(--bg) lg:from-25% lg:via-(--bg)/75 lg:via-45% lg:to-transparent lg:to-70%'
+          />
+        </div>
+        <div className='container relative mx-auto -mt-20 max-w-6xl px-4 pb-16 lg:mt-0 lg:pt-40 lg:pb-24'>
+          <div className='max-w-xl'>
+            <nav
+              aria-label='Brotkrumen'
+              className='mb-8 flex flex-wrap items-center gap-2 text-xs text-(--muted)'>
+              <Link
+                href='/'
+                className='transition hover:text-(--text)'>
+                Start
+              </Link>
+              <span aria-hidden='true'>/</span>
+              <Link
+                href='/coaching'
+                className='transition hover:text-(--text)'>
+                Coaching
+              </Link>
+              <span aria-hidden='true'>/</span>
+              <span className='text-(--text)'>Persönlichkeitstest</span>
+            </nav>
+
+            <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Psychografie</p>
+            <h1 className='mt-5 text-3xl font-semibold leading-tight text-(--text) sm:text-4xl lg:text-5xl'>
+              Beziehungstyp, Sachtyp oder Handlungstyp?
+            </h1>
+            <p className='mt-6 text-base leading-relaxed text-(--muted) sm:text-lg'>
+              Jeder Mensch kann Beziehungen gestalten, Zusammenhänge erkennen und ins Handeln
+              kommen. Trotzdem gibt es meist einen Bereich, den wir besonders selbstverständlich
+              nutzen — und genau der prägt, wie wir entscheiden, streiten und uns entwickeln.
+            </p>
+            <ContentDate path='/coaching/persoenlichkeitstest' />
+            <div className='mt-8'>
+              <PrimaryButton
+                href='#test'
+                className='w-full sm:w-auto'>
+                Test starten
+              </PrimaryButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Die drei Bereiche, Anleitung, Datenschutz */}
+      <section className='px-4 pt-16 sm:pt-20'>
         <div className='container mx-auto max-w-4xl'>
-          <nav
-            aria-label='Brotkrumen'
-            className='mb-8 flex flex-wrap items-center gap-2 text-xs text-(--muted)'>
-            <Link
-              href='/coaching'
-              className='transition hover:text-(--text)'>
-              Coaching
-            </Link>
-            <span aria-hidden='true'>/</span>
-            <span className='text-(--text)'>Persönlichkeitstest</span>
-          </nav>
-
-          <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Psychografie</p>
-          <h1 className='mt-5 text-3xl font-semibold leading-tight text-(--text) sm:text-4xl lg:text-5xl'>
-            Beziehungstyp, Sachtyp oder Handlungstyp?
-          </h1>
-          <p className='mt-6 max-w-2xl text-base leading-relaxed text-(--muted) sm:text-lg'>
-            Jeder Mensch kann Beziehungen gestalten, Zusammenhänge erkennen und ins Handeln kommen.
-            Trotzdem gibt es meist einen Bereich, den wir besonders selbstverständlich nutzen — und
-            genau der prägt, wie wir entscheiden, streiten und uns entwickeln.
-          </p>
-          <ContentDate path='/coaching/persoenlichkeitstest' />
-
           {/* Die drei Bereiche */}
-          <div className='mt-12 grid gap-4 sm:grid-cols-3'>
+          <div className='grid gap-4 sm:grid-cols-3'>
             {/* Jede Karte führt auf die Typseite – interner Einstieg für Sitemap & Suche */}
             {areas.map(({ key, Motif }) => (
               <Link
@@ -99,9 +141,7 @@ export default function PersoenlichkeitstestPage() {
                 href={typeHref(key)}
                 className='group rounded-2xl border border-card-border bg-surface p-5 transition duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
                 <Motif className='h-11 w-11' />
-                <p className='mt-4 text-sm font-semibold text-(--text)'>
-                  {dimensions[key].area}
-                </p>
+                <p className='mt-4 text-sm font-semibold text-(--text)'>{dimensions[key].area}</p>
                 <p className='mt-1 text-xs text-(--muted)'>{dimensions[key].short}</p>
                 <p className='mt-3 text-xs font-semibold text-accent-soft'>
                   Der {dimensions[key].type} →
@@ -113,8 +153,8 @@ export default function PersoenlichkeitstestPage() {
           {/* Anleitung */}
           <div className='mt-8 max-w-2xl rounded-2xl border border-card-border bg-(--surface) p-5'>
             <p className='text-sm leading-relaxed text-(--muted)'>
-              <strong className='font-semibold text-(--text)'>So funktioniert es:</strong> Wähle
-              bei jeder Frage spontan die Antwort, die deinem tatsächlichen Verhalten am ehesten
+              <strong className='font-semibold text-(--text)'>So funktioniert es:</strong> Wähle bei
+              jeder Frage spontan die Antwort, die deinem tatsächlichen Verhalten am ehesten
               entspricht — nicht die, die du für besonders vernünftig hältst. Es gibt keine
               richtigen oder falschen Antworten. {questions.length} Fragen, etwa fünf Minuten, das
               Ergebnis erscheint sofort.
@@ -131,7 +171,9 @@ export default function PersoenlichkeitstestPage() {
       </section>
 
       {/* Der Test */}
-      <section className='px-4 py-16 sm:py-20'>
+      <section
+        id='test'
+        className='scroll-mt-24 px-4 py-16 sm:py-20'>
         <div className='container mx-auto max-w-3xl'>
           <TestClient />
         </div>
@@ -151,8 +193,7 @@ export default function PersoenlichkeitstestPage() {
             <p className='mt-4 max-w-2xl text-sm leading-relaxed text-(--muted) sm:text-base'>
               Ich nutze das Modell im Coaching als Gesprächseinstieg, nicht als Diagnose. Es macht
               schnell sichtbar, warum zwei Menschen dieselbe Situation völlig unterschiedlich
-              erleben — und das ist häufig der Punkt, an dem ein Konflikt seinen Schrecken
-              verliert.
+              erleben — und das ist häufig der Punkt, an dem ein Konflikt seinen Schrecken verliert.
             </p>
 
             <h3 className='mt-8 text-xs uppercase tracking-[0.2em] text-(--muted)'>

@@ -1,5 +1,7 @@
 'use client';
 
+import type { CSSProperties } from 'react';
+
 import dynamic from 'next/dynamic';
 
 import GlassCard from '@/components/GlassCard';
@@ -67,28 +69,36 @@ export default function TransformationSection() {
             Vier Schritte. Vom ersten Gespräch bis in deinen Alltag.
           </p>
         </div>
-        <div className='mt-12 grid gap-6 lg:grid-cols-4'>
-          {steps.map((step, index) => (
-            <div
-              key={step.title}
-              className='relative'>
-              <GlassCard className='h-full p-6'>
-                <div className='flex items-center gap-4'>
-                  <span className='flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface text-sm font-semibold text-accent-soft shadow-[0_0_20px_var(--glow)] ring-1 ring-border'>
-                    0{index + 1}
-                  </span>
-                  <h3 className='text-lg font-semibold text-(--text)'>{step.title}</h3>
-                </div>
-                <p className='mt-4 text-sm leading-relaxed text-(--muted)'>{step.text}</p>
-              </GlassCard>
-              {index < steps.length - 1 && (
-                <>
-                  <div className='absolute -right-3 top-1/2 hidden h-px w-6 -translate-y-1/2 bg-gradient-to-r from-[var(--accent)] to-transparent lg:block' />
-                  <div className='absolute bottom-0 left-0 h-6 w-px translate-x-12 translate-y-full bg-gradient-to-b from-[var(--accent)] to-transparent lg:hidden' />
-                </>
-              )}
-            </div>
-          ))}
+        {/* Lichtfaden: läuft über die Oberkanten (mobil: linke Kanten) der Karten,
+            ein Puls wandert von Schritt zu Schritt, jede Karte glüht beim Eintreffen auf */}
+        <div className='flow relative mt-12'>
+          <span
+            aria-hidden='true'
+            className='flow__line'>
+            <span className='flow__pulse' />
+          </span>
+          <ol className='relative grid gap-6 lg:grid-cols-4'>
+            {steps.map((step, index) => (
+              <li
+                key={step.title}
+                className='flow__step relative'
+                style={{ '--i': index } as CSSProperties}>
+                <GlassCard className='relative h-full overflow-hidden p-6'>
+                  <span
+                    aria-hidden='true'
+                    className='flow__glow'
+                  />
+                  <div className='relative flex items-center gap-4'>
+                    <span className='flow__badge relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface text-sm font-semibold text-accent-soft shadow-[0_0_20px_var(--glow)] ring-1 ring-border'>
+                      0{index + 1}
+                    </span>
+                    <h3 className='text-lg font-semibold text-(--text)'>{step.title}</h3>
+                  </div>
+                  <p className='relative mt-4 text-sm leading-relaxed text-(--muted)'>{step.text}</p>
+                </GlassCard>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>

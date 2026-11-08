@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import DailyPostsGallery from '@/app/coaching/components/DailyPostsGallery';
 import DownloadAllPosts from '@/app/coaching/components/DownloadAllPosts';
 import { dailyPosts } from '@/app/coaching/daily-posts';
@@ -63,6 +65,13 @@ export default function DailyPostsSection() {
 
       <div className='container relative mx-auto mt-10 px-4'>
         <DownloadAllPosts />
+        <p className='mt-6 text-center text-sm text-(--muted)'>
+          <Link
+            href='/coaching/impulse'
+            className='rounded text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+            Alle Impulse als Text lesen
+          </Link>
+        </p>
       </div>
 
     </section>

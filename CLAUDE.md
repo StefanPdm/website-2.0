@@ -23,6 +23,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
     ├── /regeln/gluecklichsein  /regeln/ungluecklichsein   20-Regeln-Listen → ItemList
     ├── /glaubenssaetze    Satz-Wand (50 Sätze antippen) + Auswertung + PDF im Browser (@react-pdf) → Article
     ├── /partnerschaftstest  5 Fragen (nach Kyle Fuller), bewusst ohne Auswertung → Article
+    ├── /impulse           Alle WhatsApp-Impulse als Text (daily-posts.ts) → Article + ItemList(CreativeWork)
     ├── /impressum  /datenschutz  /cookies  /agb
     ├── /session-podcast   KI-Podcast zur Session (inklusive) + Hörbeispiel   → Article
     ├── /buecher           Buchempfehlungen nach den vier Säulen              → Article + ItemList(Book)
@@ -67,7 +68,7 @@ und die A11y-Baseline (§11).
 |---|---|
 | Framework | Next.js 16 (App Router, Turbopack), React 19 |
 | Sprache | TypeScript strict. Neue Dateien **immer** `.tsx`/`.ts` — nie `.jsx` |
-| Styling | Tailwind CSS v4 (CSS-first, `@import 'tailwindcss'`), zusätzlich `app/globals.css` |
+| Styling | Tailwind CSS v4 (CSS-first, `@import 'tailwindcss'`), zusätzlich `app/globals.css` (Tokens, Startseite, Welt B, 404) und `app/coaching/coaching.css` (nur Welt A, geladen in `app/coaching/layout.tsx`). Neue Coaching-Stile nach `coaching.css` |
 | UI-Primitives | shadcn/ui (`new-york`, baseColor `neutral`), Radix, `lucide-react` |
 | Icons | `lucide-react` (UI-Icons), `react-icons/si` + `/fa6` (Tech-Logos, nur Welt B) |
 | Motion | GSAP (`CardNav`), CSS-Keyframes (Rest) |
@@ -610,6 +611,8 @@ Drei Punkte, die dabei nicht verhandelbar sind:
    2026-10-01). Soll ein Effekt auch mobil laufen: `minWidth={0}`.
    Reine Canvas-2D-Effekte: `requiresWebGL={false}`.
 
+**Endlos-Animationen pausieren:** `components/PauseOffscreen.tsx` (in `NlpLayoutClient`) setzt `data-offscreen` auf Sektionen außerhalb des Bildes, CSS hält dort alle Animationen an. Neue Endlosschleifen in Welt A brauchen nichts weiter – sie liegen in einer `<section>`.
+
 **Animationen ohne WebGL:** Scroll-Einblendungen per CSS (`animation-timeline: view()`
 unter `@supports` und `prefers-reduced-motion: no-preference`) statt
 IntersectionObserver-JavaScript — Vorlage `.formel-reveal` in `globals.css`.
@@ -635,6 +638,8 @@ Dreiklänge als Stilmittel („Kopf. Körper. Fokus." / „klar. sauber. wirksam
 (es ist **eine** Person), Emoji in Fließtext (nur als Icon-Slot in Karten).
 
 **Beweispflicht:** Jede Zahl und jedes Testimonial muss echt und belegbar sein.
+
+**KI-Bilder (seit 2026-11):** Fotorealistische KI-Personenbilder (Heroes der Unterseiten, Podcast/Partnerschaft/Bücher-Abschnitte) sind im Impressum Welt A („Bildnachweis“) und im Footer als Symbolbilder gekennzeichnet. Neue KI-Bilder dort mit aufnehmen. Die WhatsApp-Impulse werden ausdrücklich **nicht** gekennzeichnet (Stefans Entscheidung).
 
 - Preise inkl. MwSt.-Angabe (Welt A) bzw. „zzgl. MwSt." (B2B-Workshop).
 - Testimonials: Vorname + Initiale. **Wenn die Portraits generiert sind, gehört
@@ -919,6 +924,8 @@ Endung. Wird die Datei gelöscht oder umbenannt, lehnt IndexNow jede Meldung
 mit HTTP 403 ab.
 
 ### Open Graph
+
+Geteilte Welt-A-Seiten (Glaubenssätze, Partnertest, Bücher, Podcast, Persönlichkeitstest) nutzen `OgPhotoCard` mit Foto aus `public/og/<slug>.jpg` (JPG/PNG, next/og liest kein WebP).
 
 Die OG-Bilder werden zur Build-Zeit generiert — `app/opengraph-image.tsx`,
 `app/coaching/opengraph-image.tsx`, `app/webdevelopment/opengraph-image.tsx`,

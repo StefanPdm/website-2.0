@@ -54,6 +54,11 @@ const config: LocationConfig = {
     alt: 'Stefan Heinemann im Coaching-Gespräch mit einem Klienten',
     position: 'object-[75%_center]',
   },
+  hero: {
+    src: '/images-nlp/coaching-berlin-panorama.webp',
+    alt: 'Das Brandenburger Tor in Berlin im warmen Abendlicht, im Vordergrund Herbstlaub',
+    position: 'object-[40%_60%]',
+  },
   motif: 'action',
   ctaTitle: 'Lass uns sprechen – in Berlin, Potsdam oder online',
   sibling: { href: '/coaching/potsdam', label: 'Coaching in Potsdam' },

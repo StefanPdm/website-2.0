@@ -625,6 +625,8 @@ type ContentPageInput = {
   about: string;
   /** Optional: Bücherliste als ItemList aus `Book`-Einträgen. */
   books?: { title: string; subtitle?: string; authors: string[]; publisher: string }[];
+  /** Optional: kurze Texte (z. B. tägliche Impulse) als ItemList aus `CreativeWork`. */
+  texts?: string[];
 };
 
 /**
@@ -672,6 +674,23 @@ export function ContentPageStructuredData({ page }: { page: ContentPageInput }) 
           author: book.authors.map((name) => ({ '@type': 'Person', name })),
           publisher: { '@type': 'Organization', name: book.publisher },
           inLanguage: 'de',
+        },
+      })),
+    });
+  }
+  if (page.texts?.length) {
+    graph.push({
+      '@type': 'ItemList',
+      name: page.headline,
+      numberOfItems: page.texts.length,
+      itemListElement: page.texts.map((text, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'CreativeWork',
+          text,
+          inLanguage: 'de',
+          // Kein author: Manche Impulse zitieren andere (steht im Text) – nicht falsch zuschreiben
         },
       })),
     });

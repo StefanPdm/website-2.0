@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import NlpLayoutClient from '@/app/coaching/NlpLayoutClient';
 import { KEYWORDS_NLP, OWNER } from '@/lib/site';
 
+// Stile nur für Welt A (aus globals.css ausgelagert, 2026-11-08)
+import './coaching.css';
+
 // Marke „Stefan Heinemann Coaching“, Oberbegriff „Life Coaching für
 // Unternehmer“ (2026-11). NLP ist eine Methode unter mehreren, nicht die Marke:
 // Klienten suchen „Coaching Potsdam“, kaum „NLP“ (Search Console 2026-11).

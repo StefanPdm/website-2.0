@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { ArrowLeft, RotateCcw } from 'lucide-react';
 
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
+import ShareTest from '@/app/coaching/components/ShareTest';
 import { INTRO, OUTRO, partnerQuestions } from '@/app/coaching/partnerschaftstest/data';
 
 /**
@@ -182,6 +183,10 @@ export default function PartnerTest() {
 
             <div className='mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row'>
               <SecondaryButton href='/coaching#kontakt'>Darüber sprechen</SecondaryButton>
+              <ShareTest
+                path='/coaching/partnerschaftstest'
+                text='Lebenspartner oder Lebenslektion? Fünf ehrliche Fragen – die Antwort spürst du selbst.'
+              />
               <button
                 type='button'
                 onClick={restart}

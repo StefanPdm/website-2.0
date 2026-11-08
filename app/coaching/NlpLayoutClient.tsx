@@ -1,5 +1,6 @@
 import { Fraunces, Public_Sans } from 'next/font/google';
 
+import PauseOffscreen from '@/components/PauseOffscreen';
 import NlpFooter from '@/app/coaching/components/NlpFooter';
 import NlpHeader from '@/app/coaching/components/NlpHeader';
 import WorldSwitch from '@/app/coaching/components/WorldSwitch';
@@ -35,6 +36,7 @@ export default function NlpLayoutClient({ children }: { children: React.ReactNod
           <span className='sun-path__ball' />
         </div>
         <main>{children}</main>
+        <PauseOffscreen />
         <NlpFooter />
       </div>
     </div>

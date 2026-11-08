@@ -87,6 +87,13 @@ const pages: Page[] = [
     changeFrequency: 'monthly',
   },
   {
+    path: '/coaching/impulse',
+    lastModified: '2026-11-08',
+    published: '2026-11-08',
+    priority: 0.7,
+    changeFrequency: 'monthly',
+  },
+  {
     path: '/coaching/partnerschaftstest',
     lastModified: '2026-11-08',
     published: '2026-11-08',

@@ -50,6 +50,11 @@ const config: LocationConfig = {
     alt: 'Stefan Heinemann im Coaching-Gespräch bei einem Spaziergang durch einen Potsdamer Schlosspark',
     position: 'object-[65%_center]',
   },
+  hero: {
+    src: '/images-nlp/coaching-potsdam-panorama.webp',
+    alt: 'Schloss Sanssouci in Potsdam mit den Weinbergterrassen im Abendlicht',
+    position: 'object-[68%_60%]',
+  },
   motif: 'relation',
   ctaTitle: 'Lass uns in Potsdam sprechen',
   sibling: { href: '/coaching/berlin', label: 'Coaching in Berlin' },

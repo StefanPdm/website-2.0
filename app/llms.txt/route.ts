@@ -1,4 +1,5 @@
 import { coachingOffers } from '@/app/coaching/pricing';
+import { dailyPosts } from '@/app/coaching/daily-posts';
 import { allBeliefs, beliefAreas } from '@/app/coaching/glaubenssaetze/data';
 import { dimensionOrder, dimensions, typeHref } from '@/app/coaching/persoenlichkeitstest/data';
 import { webCases } from '@/app/webdevelopment/cases';
@@ -171,6 +172,8 @@ ${typePages}
 - [Limitierende Glaubenssätze erkennen](${absoluteUrl('/coaching/glaubenssaetze')}): ${allBeliefs.length} typische
   Glaubenssätze in ${beliefAreas.length} Lebensbereichen zum Antippen, Auswertung im Browser, dazu fünf
   Grundüberzeugungen (Modell, keine Rangliste) und fünf NLP-Coaching-Fragen zum Hinterfragen
+- [Tägliche NLP-Impulse](${absoluteUrl('/coaching/impulse')}): ${dailyPosts.length} kurze Gedanken aus
+  Stefans WhatsApp-Status als Text, u. a. zu Veränderung, Glaubenssätzen, Kontrolle und Beziehung
 - [Partnerschaftstest – Lebenspartner oder Lebenslektion?](${absoluteUrl('/coaching/partnerschaftstest')}):
   fünf Fragen nach Kyle Fuller, neutral formuliert, bewusst ohne Auswertung (Selbstreflexion). Kein Ersatz für Paarberatung
 - [Deine Formel zum Glück – S² + L + A + C³](${absoluteUrl('/coaching/formel-zum-glueck')}): die

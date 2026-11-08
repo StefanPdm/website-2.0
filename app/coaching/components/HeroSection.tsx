@@ -60,13 +60,14 @@ export default function HeroSection() {
       </picture>
       <div
         aria-hidden='true'
-        className='absolute inset-0 -z-10 bg-linear-to-t from-(--bg) via-(--bg)/85 to-(--bg)/5 lg:bg-linear-to-r lg:from-(--bg) lg:via-(--bg)/70 lg:to-transparent'
+        className='hero-veil absolute inset-0 -z-10'
       />
 
       <div className='container mx-auto px-4 pb-14 pt-[42dvh] lg:pb-24 lg:pt-40'>
         <div className='max-w-xl'>
           {/* Die H1 trägt die Suchfrage, die große Zeile darunter die Ansprache. */}
-          <h1 className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
+          {/* hero-eyebrow: enger dunkler Schatten um die Buchstaben – mobil lag die Zeile bei 3,7 : 1 */}
+          <h1 className='hero-eyebrow text-xs uppercase tracking-[0.3em] text-accent-soft'>
             Life Coaching für Unternehmer · Potsdam, Berlin &amp; online
           </h1>
           <p className='mt-5 text-4xl font-semibold leading-tight text-(--text) sm:text-5xl lg:text-6xl'>

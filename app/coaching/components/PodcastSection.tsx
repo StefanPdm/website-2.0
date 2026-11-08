@@ -87,11 +87,11 @@ export default function PodcastSection() {
           <div className='space-y-6'>
             <div className='relative aspect-3/2 overflow-hidden rounded-3xl border border-border'>
               <Image
-                src='/images-nlp/coaching-schreibtisch.webp'
-                alt='Stefan Heinemann am Schreibtisch mit Notizbuch und Kaffee nach einer Session'
+                src='/images-nlp/session-podcast-zuhoeren.webp'
+                alt='Eine Frau hört lächelnd über Kopfhörer zu und schaut nachdenklich in die Ferne'
                 fill
                 sizes='(min-width: 1024px) 40vw, 100vw'
-                className='object-cover object-[70%_center]'
+                className='object-cover object-[72%_center]'
               />
             </div>
             <GlassCard className='p-7 sm:p-8'>

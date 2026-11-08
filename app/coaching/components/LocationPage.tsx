@@ -7,7 +7,6 @@ import GlassCard from '@/components/GlassCard';
 import { ContentPageStructuredData } from '@/components/StructuredData';
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
-import { MotifAction, MotifRelation } from '@/app/coaching/components/Motifs';
 import { offerByTitle } from '@/app/coaching/pricing';
 
 /**
@@ -37,6 +36,9 @@ export type LocationConfig = {
   formats: LocationFormat[];
   places: string;
   image: { src: string; alt: string; position: string };
+  /** Panorama der Stadt für den Kopfbereich (nur Querformat, Ausschnitt je Stadt). */
+  hero: { src: string; alt: string; position: string };
+  /** Früher Wasserzeichen im Kopf; seit dem Panorama ungenutzt, für spätere Varianten behalten. */
   motif: 'relation' | 'action';
   ctaTitle: string;
   /** Die jeweils andere Standortseite – interne Verlinkung zwischen beiden. */
@@ -81,7 +83,6 @@ export function locationMetadata(config: LocationConfig): Metadata {
 }
 
 export default function LocationPage({ config }: { config: LocationConfig }) {
-  const Motif = config.motif === 'action' ? MotifAction : MotifRelation;
   const facts = [
     {
       term: 'Erstgespräch',
@@ -113,12 +114,32 @@ export default function LocationPage({ config }: { config: LocationConfig }) {
         }}
       />
       <article className='relative z-10'>
-        <section className='relative overflow-hidden border-b border-border px-4 pt-40 pb-16 md:pt-48'>
-          <Motif className='pointer-events-none absolute -right-20 top-24 h-96 w-96 opacity-[0.07]' />
-          <div className='container mx-auto max-w-4xl'>
+        {/* Kopfbereich: Stadtpanorama über dem Text – das Wahrzeichen bleibt frei */}
+        <section className='relative overflow-hidden border-b border-border'>
+          <div className='relative h-[50vh] min-h-[320px] lg:h-[66vh]'>
+            <Image
+              src={config.hero.src}
+              alt={config.hero.alt}
+              fill
+              priority
+              sizes='100vw'
+              className={`object-cover ${config.hero.position}`}
+            />
+            <span
+              aria-hidden='true'
+              className='absolute inset-0 bg-linear-to-b from-transparent from-45% to-(--bg)'
+            />
+          </div>
+          <div className='container relative mx-auto -mt-12 max-w-4xl px-4 pb-16'>
             <nav
               aria-label='Brotkrumen'
               className='mb-8 flex flex-wrap items-center gap-2 text-xs text-(--muted)'>
+              <Link
+                href='/'
+                className='transition hover:text-(--text)'>
+                Start
+              </Link>
+              <span aria-hidden='true'>/</span>
               <Link
                 href='/coaching'
                 className='transition hover:text-(--text)'>

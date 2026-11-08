@@ -70,6 +70,11 @@ const discoverItems: { label: string; href: string; hint: string; match?: string
     hint: 'Lebenspartner oder Lebenslektion?',
   },
   {
+    label: 'Tägliche Impulse',
+    href: '/coaching/impulse',
+    hint: 'Gedanken aus dem WhatsApp-Status',
+  },
+  {
     label: 'Session-Podcast',
     href: '/coaching/session-podcast',
     hint: 'Dein Coaching zum Nachhören',

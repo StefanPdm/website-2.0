@@ -1,10 +1,28 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useSyncExternalStore } from 'react';
 
-/** Zeigt auf der 404-Seite die Adresse, die es nicht gibt (gekürzt). */
+const noop = () => () => {};
+
+/**
+ * Zeigt auf der 404-Seite die Adresse, die es nicht gibt (gekürzt).
+ * Die Seite wird beim Build vorgerendert und kennt die Adresse dort nicht –
+ * der Server liefert deshalb „/…“, der Browser setzt danach die echte ein
+ * (useSyncExternalStore: kein Hydration-Fehler).
+ */
 export default function MissingPath() {
-  const path = usePathname() ?? '/';
-  const short = path.length > 34 ? `${path.slice(0, 31)}…` : path;
-  return <>{short}</>;
+  const path = useSyncExternalStore(
+    noop,
+    () => window.location.pathname,
+    () => null,
+  );
+  if (!path) return <>/…</>;
+  const decoded = (() => {
+    try {
+      return decodeURIComponent(path);
+    } catch {
+      return path;
+    }
+  })();
+  return <>{decoded.length > 34 ? `${decoded.slice(0, 31)}…` : decoded}</>;
 }
