@@ -28,17 +28,22 @@ const isDev = process.env.NODE_ENV !== 'production';
  * Röntgenblick, KI-Check und WebGL-Effekten geprüft – kein Verstoß. Kommt
  * ein fremder Dienst dazu (Analytics, Karte, Video), hier die Quelle ergänzen,
  * sonst blockiert der Browser ihn. Notfall: auf false = nur melden.
+ *
+ * 'wasm-unsafe-eval' + connect-src data: (2026-11-08, freigegeben von Stefan):
+ * Das Glaubenssatz-PDF entsteht im Browser; dessen Layout-Engine (yoga,
+ * WebAssembly) liegt als data:-URL im Bundle. Erlaubt nur das Kompilieren von
+ * WebAssembly, kein eval() für JavaScript.
  */
 const CSP_ENFORCE = true;
 
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${isDev ? " 'unsafe-eval'" : ''}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
   "media-src 'self'",
-  `connect-src 'self'${isDev ? ' ws:' : ''}`,
+  `connect-src 'self' data:${isDev ? ' ws:' : ''}`,
   "worker-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'self'",

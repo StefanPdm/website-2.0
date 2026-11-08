@@ -4,6 +4,7 @@ import GlassCard from '@/components/GlassCard';
 import {
   MotifAction,
   MotifClarity,
+  MotifEvidence,
   MotifInsight,
   MotifRelation,
 } from '@/app/coaching/components/Motifs';
@@ -22,6 +23,22 @@ const impulses = [
     kicker: 'Selbsttest · 5 Minuten',
     title: 'Persönlichkeitstest',
     text: 'Welchen Lebensbereich nutzt du am selbstverständlichsten – Beziehung, Erkennen oder Handeln? 18 Fragen, Auswertung sofort.',
+    cta: 'Test starten',
+    Motif: MotifRelation,
+  },
+  {
+    href: '/coaching/glaubenssaetze',
+    kicker: 'Selbsttest · 5 Minuten',
+    title: 'Glaubenssätze erkennen',
+    text: '50 typische Sätze in zehn Lebensbereichen. Tipp an, was du von dir kennst – und sieh, wo es am lautesten ist.',
+    cta: 'Sätze ansehen',
+    Motif: MotifEvidence,
+  },
+  {
+    href: '/coaching/partnerschaftstest',
+    kicker: 'Selbsttest · 5 Fragen',
+    title: 'Lebenspartner oder Lebenslektion?',
+    text: 'Gibt dir der Mensch an deiner Seite Kraft – oder kostet er welche? Fünf ehrliche Fragen – die Antwort spürst du selbst.',
     cta: 'Test starten',
     Motif: MotifRelation,
   },
@@ -67,7 +84,7 @@ export default function ImpulseSection() {
           </p>
         </div>
 
-        <ul className='mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 xl:grid-cols-4'>
+        <ul className='mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3'>
           {impulses.map(({ href, kicker, title, text, cta, Motif }) => (
             <li key={href}>
               <Link

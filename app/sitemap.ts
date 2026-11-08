@@ -29,7 +29,7 @@ type Page = {
 const pages: Page[] = [
   // Kernseiten
   { path: '/', lastModified: '2026-11-02', priority: 1, changeFrequency: 'monthly' },
-  { path: '/coaching', lastModified: '2026-11-06', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/coaching', lastModified: '2026-11-08', priority: 0.9, changeFrequency: 'monthly' },
   {
     path: '/webdevelopment',
     lastModified: '2026-11-03',
@@ -76,6 +76,20 @@ const pages: Page[] = [
     path: '/coaching/persoenlichkeitstest/handlungstyp',
     lastModified: '2026-10-01',
     published: '2026-10-01',
+    priority: 0.7,
+    changeFrequency: 'monthly',
+  },
+  {
+    path: '/coaching/glaubenssaetze',
+    lastModified: '2026-11-08',
+    published: '2026-11-08',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+  },
+  {
+    path: '/coaching/partnerschaftstest',
+    lastModified: '2026-11-08',
+    published: '2026-11-08',
     priority: 0.7,
     changeFrequency: 'monthly',
   },

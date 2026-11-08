@@ -1,4 +1,5 @@
 import { coachingOffers } from '@/app/coaching/pricing';
+import { allBeliefs, beliefAreas } from '@/app/coaching/glaubenssaetze/data';
 import { dimensionOrder, dimensions, typeHref } from '@/app/coaching/persoenlichkeitstest/data';
 import { webCases } from '@/app/webdevelopment/cases';
 import { HOURLY_RATE, VAT_NOTE, webServices } from '@/app/webdevelopment/pricing';
@@ -167,6 +168,11 @@ ${references}
   Selbsttest mit 18 Fragen nach Dietmar Friedmann — Beziehungstyp, Sachtyp oder Handlungstyp.
   Kein validiertes Testverfahren, ausdrücklich zur Selbstreflexion
 ${typePages}
+- [Limitierende Glaubenssätze erkennen](${absoluteUrl('/coaching/glaubenssaetze')}): ${allBeliefs.length} typische
+  Glaubenssätze in ${beliefAreas.length} Lebensbereichen zum Antippen, Auswertung im Browser, dazu fünf
+  Grundüberzeugungen (Modell, keine Rangliste) und fünf NLP-Coaching-Fragen zum Hinterfragen
+- [Partnerschaftstest – Lebenspartner oder Lebenslektion?](${absoluteUrl('/coaching/partnerschaftstest')}):
+  fünf Fragen nach Kyle Fuller, neutral formuliert, bewusst ohne Auswertung (Selbstreflexion). Kein Ersatz für Paarberatung
 - [Deine Formel zum Glück – S² + L + A + C³](${absoluteUrl('/coaching/formel-zum-glueck')}): die
   S-L-A-C-Formel aus dem Coaching in sieben Schritten – Stop, Smile, Look, Accept, Challenge,
   Choices (mindestens drei Wahlmöglichkeiten), Choose

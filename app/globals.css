@@ -207,9 +207,13 @@
     radial-gradient(ellipse at 15% 20%, rgba(255, 190, 110, 0.14), transparent 55%),
     radial-gradient(ellipse at 85% 80%, rgba(230, 140, 70, 0.12), transparent 55%);
 }
-/* Kopfzeile liegt auch über hellen Sektionen – deckend dunkel */
+/* Kopfzeile liegt auch über hellen Sektionen – dunkles Glas.
+   .8 ist die Untergrenze: Über dem hellsten Grund hält der Bernstein-Schriftzug
+   dann noch 4,8 : 1 (bei .59 fiel sogar der Nav-Text auf 3,8 : 1, 2026-11-08). */
 .theme-coaching header.tone-dark {
-  background-color: rgba(43, 27, 16, 0.92);
+  background-color: rgba(43, 27, 16, 0.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  backdrop-filter: blur(24px) saturate(1.4);
 }
 
 .light-pillar-fallback {
@@ -3646,5 +3650,534 @@ html[data-xray] main img {
   }
   to {
     opacity: 1;
+  }
+}
+
+/* ==========================================================================
+ * Teaser Glaubenssätze + Partnerschaftstest auf /coaching (2026-11).
+ * Dekorativ (aria-hidden), nur transform/opacity. Bei reduzierter Bewegung
+ * stehen die Reihen still und „partner“ bleibt sichtbar.
+ * ========================================================================== */
+
+/* Vorbeiziehende Satz-Reihen hinter der Überschrift */
+.belief-drift {
+  display: flex;
+  width: max-content;
+  animation: belief-drift var(--drift, 80s) linear infinite;
+  animation-direction: var(--dir, normal);
+}
+.belief-drift__item {
+  margin-right: 0.75rem;
+  white-space: nowrap;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  padding: 0.6rem 1.15rem;
+  font-size: 0.9rem;
+  color: var(--subtle);
+  opacity: 0.5;
+}
+.belief-drift__item.is-lit {
+  border-color: var(--border-strong);
+  color: var(--accent-soft);
+  opacity: 0.95;
+  box-shadow: 0 0 26px var(--glow);
+}
+@keyframes belief-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.belief-drift-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+/* Ruhiger Grund hinter dem Text: die Reihen treten dort zurück */
+.belief-halo {
+  background: radial-gradient(closest-side, var(--bg) 55%, transparent);
+}
+/* „nichts als Lügen“: Bernstein-Strich, der beim Hineinscrollen gezogen wird */
+.belief-lie {
+  color: var(--accent);
+  background-image: linear-gradient(90deg, var(--accent), var(--accent-2));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.07em;
+  padding-bottom: 0.05em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .belief-lie {
+      animation: belief-lie-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 45%;
+    }
+  }
+}
+@keyframes belief-lie-draw {
+  from {
+    background-size: 0% 0.07em;
+  }
+}
+
+/* „Lebens-partner / -lektion“: zwei Endungen wechseln sich ab (8 s) */
+.word-flip {
+  display: inline-grid;
+}
+.word-flip > span {
+  grid-area: 1 / 1;
+  text-align: center;
+}
+.word-flip__a {
+  color: var(--accent);
+  animation: word-flip-a 8s ease-in-out infinite;
+}
+.word-flip__b {
+  color: var(--subtle);
+  opacity: 0;
+  animation: word-flip-b 8s ease-in-out infinite;
+}
+@keyframes word-flip-a {
+  0%,
+  42%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+  50%,
+  92% {
+    opacity: 0;
+    transform: translateY(-0.35em);
+  }
+}
+@keyframes word-flip-b {
+  0%,
+  42%,
+  100% {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  50%,
+  92% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Fünf Fragen als Punkte, die nacheinander aufleuchten */
+.partner-step {
+  position: relative;
+  isolation: isolate;
+}
+.partner-step::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  opacity: 0;
+  animation: partner-step 6s ease-in-out var(--delay, 0s) infinite;
+}
+@keyframes partner-step {
+  0%,
+  30%,
+  100% {
+    opacity: 0;
+  }
+  10%,
+  20% {
+    opacity: 0.35;
+  }
+}
+
+/* Glaubenssatz-Auswertung: aufgedecktes Gegenteil blendet weich ein */
+@media (prefers-reduced-motion: no-preference) {
+  .belief-reveal {
+    animation: belief-reveal 450ms cubic-bezier(0.22, 0.8, 0.2, 1) both;
+  }
+}
+@keyframes belief-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Partnerschaftstest: jede neue Frage blendet weich ein */
+@media (prefers-reduced-motion: no-preference) {
+  .partner-question {
+    animation: belief-reveal 450ms cubic-bezier(0.22, 0.8, 0.2, 1) both;
+  }
+}
+
+/* ==========================================================================
+ * 404-Seite (app/not-found.tsx), Welt 0, 2026-11.
+ * Desktop: zwei Hälften an einer senkrechten Naht wie auf der Startseite,
+ * die 404 sitzt halb blau, halb Bernstein darauf. Mobil: neutraler Grund,
+ * die Hälften werden zu zwei Karten in ihren Weltfarben.
+ * ========================================================================== */
+.nf {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: 1.25rem clamp(1rem, 5vw, 4rem) 1.5rem;
+  color: #f8fafc;
+  background:
+    radial-gradient(60% 40% at 10% 0%, rgba(29, 111, 168, 0.3), transparent 70%),
+    radial-gradient(60% 40% at 95% 100%, rgba(245, 158, 11, 0.18), transparent 70%),
+    #070b12;
+}
+.nf-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: none;
+  grid-template-columns: 1fr 1fr;
+}
+.nf-bg__web,
+.nf-bg__coach {
+  position: relative;
+  overflow: hidden;
+}
+.nf-bg__web {
+  background:
+    radial-gradient(55% 45% at 22% 12%, rgba(29, 111, 168, 0.4), transparent 70%),
+    radial-gradient(45% 40% at 70% 75%, rgba(122, 44, 142, 0.28), transparent 70%),
+    #06101c;
+}
+.nf-bg__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(155, 199, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(155, 199, 255, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(90% 80% at 40% 40%, #000 35%, transparent 90%);
+}
+.nf-bg__coach {
+  background:
+    radial-gradient(50% 45% at 70% 30%, rgba(245, 158, 11, 0.22), transparent 70%),
+    radial-gradient(40% 40% at 30% 90%, rgba(217, 138, 58, 0.16), transparent 70%),
+    #140c06;
+}
+.nf-rings {
+  position: absolute;
+  right: -30%;
+  bottom: -35%;
+  width: min(900px, 120%);
+  aspect-ratio: 1;
+  color: #f6b35a;
+}
+.nf-rings circle {
+  --o: 0.22;
+  fill: none;
+  stroke: currentColor;
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: var(--o);
+  animation: breath-ring 7s ease-in-out infinite alternate;
+}
+.nf-seam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.35) 15%, rgba(255, 255, 255, 0.35) 85%, transparent);
+  box-shadow: 0 0 18px rgba(155, 199, 255, 0.3);
+}
+
+.nf-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #f8fafc;
+  text-decoration: none;
+}
+.nf-brand:focus-visible,
+.nf-home:focus-visible,
+.nf-legal a:focus-visible {
+  outline: 2px solid #9bc7ff;
+  outline-offset: 3px;
+}
+
+.nf-hero {
+  margin-top: clamp(1rem, 4vh, 2.5rem);
+  text-align: center;
+}
+/* inline-block + zentriert: Die Farbkante bei 50 % liegt genau auf der Naht */
+.nf-code {
+  display: inline-block;
+  font-size: clamp(6.5rem, 22vw, 15rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  background: linear-gradient(90deg, #9bc7ff, #2dd4bf 30%, #7aa7ff 49.9%, #ffd49a 50.1%, #f6b35a 75%, #d98a3a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 40px rgba(155, 199, 255, 0.12));
+}
+.nf-title {
+  margin-top: 0.75rem;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.nf-lead {
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  color: rgba(226, 232, 240, 0.78);
+}
+
+.nf-halves {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  flex: 1;
+}
+.nf-half {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 1.5rem;
+}
+.nf-half--web {
+  background:
+    radial-gradient(70% 60% at 10% 0%, rgba(29, 111, 168, 0.35), transparent 70%),
+    #06101c;
+}
+.nf-half--coach {
+  background:
+    radial-gradient(70% 60% at 90% 0%, rgba(245, 158, 11, 0.2), transparent 70%),
+    #140c06;
+}
+.nf-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.nf-eyebrow--web {
+  color: #2dd4bf;
+}
+.nf-eyebrow--coach {
+  color: #f6b35a;
+}
+.nf-terminal {
+  margin-top: 1rem;
+  border: 1px solid rgba(155, 199, 255, 0.2);
+  border-radius: 14px;
+  background: rgba(3, 9, 18, 0.7);
+  padding: 0.9rem 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+  word-break: break-all;
+}
+.nf-terminal__prompt {
+  color: #2dd4bf;
+}
+.nf-terminal__error {
+  color: #fca5a5;
+}
+.nf-terminal__note {
+  color: #94a3b8;
+}
+.nf-claim {
+  margin-top: 1.25rem;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.nf-claim--coach {
+  color: #fbefdf;
+}
+.nf-text {
+  margin-top: 0.75rem;
+  max-width: 30rem;
+  color: rgba(251, 239, 223, 0.82);
+  line-height: 1.6;
+}
+.nf-ways {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.nf-way {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 44px;
+  border: 1px solid;
+  border-radius: 16px;
+  padding: 0.85rem 1.1rem;
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease,
+    transform 200ms ease;
+}
+.nf-way:hover {
+  transform: translateY(-2px);
+}
+.nf-way--web {
+  border-color: rgba(155, 199, 255, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+}
+.nf-way--web:hover {
+  border-color: rgba(45, 212, 191, 0.6);
+  background: rgba(45, 212, 191, 0.08);
+}
+.nf-way--coach {
+  border-color: rgba(255, 220, 180, 0.22);
+  background: rgba(255, 220, 180, 0.05);
+}
+.nf-way--coach:hover {
+  border-color: rgba(246, 179, 90, 0.6);
+  background: rgba(246, 179, 90, 0.1);
+}
+.nf-way:focus-visible {
+  outline: 2px solid;
+  outline-offset: 3px;
+}
+.nf-way--web:focus-visible {
+  outline-color: #2dd4bf;
+}
+.nf-way--coach:focus-visible {
+  outline-color: #f6b35a;
+}
+.nf-way__label {
+  display: block;
+  font-weight: 600;
+  color: #f8fafc;
+}
+.nf-way__hint {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.8rem;
+}
+.nf-way--web .nf-way__hint {
+  color: rgba(203, 213, 225, 0.85);
+}
+.nf-way--coach .nf-way__hint {
+  color: rgba(251, 239, 223, 0.78);
+}
+.nf-way__arrow {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  transition: transform 200ms ease;
+}
+.nf-way--web .nf-way__arrow {
+  color: #2dd4bf;
+}
+.nf-way--coach .nf-way__arrow {
+  color: #f6b35a;
+}
+.nf-way:hover .nf-way__arrow {
+  transform: translateX(3px);
+}
+
+.nf-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  font-size: 0.8rem;
+}
+.nf-home {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 0.7rem 1.4rem;
+  background: linear-gradient(120deg, #9bc7ff, #ffffff);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0b1b2b;
+  text-decoration: none;
+  transition: transform 200ms ease;
+}
+.nf-home:hover {
+  transform: translateY(-1px);
+}
+.nf-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+.nf-legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: rgba(226, 232, 240, 0.72);
+  text-decoration: none;
+}
+.nf-legal a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Desktop: geteilter Grund mit Naht, Hälften ohne eigene Karte */
+@media (min-width: 1024px) {
+  .nf {
+    background: none;
+  }
+  .nf-bg {
+    display: grid;
+  }
+  .nf-halves {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 2.5rem;
+  }
+  .nf-half {
+    width: 100%;
+    max-width: 34rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    padding: 0 clamp(1.5rem, 4vw, 4rem);
+  }
+  .nf-half--web {
+    justify-self: end;
+  }
+  .nf-half--coach {
+    justify-self: start;
+  }
+}
+
+/* Partnerschaftstest: feste Bühnenhöhe, damit der Kasten zwischen Einleitung
+   und Fragen nicht springt. Werte = längste Frage + Luft, gemessen 2026-11-08
+   bei 360–1440 px. Der Schluss mit der Antwort-Übersicht darf länger werden.
+   Bei längeren Fragen neu messen. */
+.partner-stage {
+  min-height: 31rem;
+}
+@media (min-width: 640px) {
+  .partner-stage {
+    min-height: 23rem;
+  }
+}
+@media (min-width: 768px) {
+  .partner-stage {
+    min-height: 21rem;
   }
 }

@@ -60,6 +60,16 @@ const discoverItems: { label: string; href: string; hint: string; match?: string
     hint: '18 Fragen, Auswertung sofort',
   },
   {
+    label: 'Glaubenssätze erkennen',
+    href: '/coaching/glaubenssaetze',
+    hint: '50 Sätze zum Antippen',
+  },
+  {
+    label: 'Partnerschaftstest',
+    href: '/coaching/partnerschaftstest',
+    hint: 'Lebenspartner oder Lebenslektion?',
+  },
+  {
     label: 'Session-Podcast',
     href: '/coaching/session-podcast',
     hint: 'Dein Coaching zum Nachhören',

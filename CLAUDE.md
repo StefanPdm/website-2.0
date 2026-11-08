@@ -21,12 +21,15 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
     ├── /persoenlichkeitstest  Selbsttest Psychografie (18 Fragen, Client-Auswertung)
     │   └── /beziehungstyp  /sachtyp  /handlungstyp   Typseiten = Ziel des Teilen-Links
     ├── /regeln/gluecklichsein  /regeln/ungluecklichsein   20-Regeln-Listen → ItemList
+    ├── /glaubenssaetze    Satz-Wand (50 Sätze antippen) + Auswertung + PDF im Browser (@react-pdf) → Article
+    ├── /partnerschaftstest  5 Fragen (nach Kyle Fuller), bewusst ohne Auswertung → Article
     ├── /impressum  /datenschutz  /cookies  /agb
     ├── /session-podcast   KI-Podcast zur Session (inklusive) + Hörbeispiel   → Article
     ├── /buecher           Buchempfehlungen nach den vier Säulen              → Article + ItemList(Book)
     ├── /potsdam  /berlin  Standortseiten (gemeinsame Vorlage LocationPage)  → Article
     └── /guide-download    Token-Landing für Lead-Magnet (noindex)
 /widerruf                  Widerrufsbelehrung (B2C)
+not-found                  404 für alle Welten: Naht wie auf /, Wege in Welt A und B (.nf-* in globals.css)
 /api/contact               Kontaktformular → SMTP (nodemailer)
 /api/nlp-guide             Lead-Magnet: HMAC-Token erzeugen + Mail
 /api/nlp-guide/download    Token prüfen → PDF ausliefern
@@ -377,7 +380,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
 | `Motifs` | Dekor-SVGs (§3.2) |
 | `PodcastPlayer` | Audio-Player für `/coaching/session-podcast`: Equalizer-Balken = Fortschritt (CSS `.podcast-eq*` in `globals.css`, pausiert eingefroren), unsichtbarer Range-Regler darüber, ±15 s, Geschwindigkeit, Media-Session-Titel. Länge als Prop, weil `preload='none'` |
-| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Gedanke Karriere** (`QuoteSection`, dunkles Zitat-Band) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort; Karten per Subgrid ausgerichtet) → Themen (`WorkSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Session-Podcast → **Gedanke Mut** (`QuoteSection`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
+| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Gedanke Karriere** (`QuoteSection`, dunkles Zitat-Band) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort; Karten per Subgrid ausgerichtet) → Themen (`WorkSection`) → **Teaser Glaubenssätze** (`BeliefsTeaserSection`, dunkel) → **Teaser Partnertest** (`PartnerTeaserSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Session-Podcast → **Gedanke Mut** (`QuoteSection`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
 
 Hinweis: `NlpSections.tsx` ist seit dem Wegfall des Theme-Umschalters eine Server
 Component. Früher galt: Weil es `'use client'` war, wurde alles, was es
