@@ -117,9 +117,10 @@ export default function ImpressumPage() {
       <section className='rounded-2xl border border-card-border bg-[var(--surface)] p-6 mb-6'>
         <h2 className='text-xl font-semibold text-[var(--text)] mb-3'>Bildnachweis</h2>
         <p className='text-[var(--muted)]'>
-          Ein Teil der Bilder mit Personen auf diesen Seiten ist mit Künstlicher Intelligenz
-          erzeugt: die Fotos in den Kopfbereichen der Unterseiten sowie die Bilder in den
-          Abschnitten zu Podcast, Partnerschaft und Büchern. Es handelt sich um Symbolbilder; sie
+          Ein Teil der Bilder auf diesen Seiten ist mit Künstlicher Intelligenz erzeugt: die
+          Fotos in den Kopfbereichen der Unterseiten (auch die Stadtansichten von Berlin und
+          Potsdam) sowie die Bilder in den Abschnitten zu Podcast, Partnerschaft und Büchern. Jedes
+          dieser Bilder trägt die Kennzeichnung „KI-Bild“. Es handelt sich um Symbolbilder; sie
           zeigen keine Klientinnen oder Klienten.
         </p>
       </section>

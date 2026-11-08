@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { ContentPageStructuredData } from '@/components/StructuredData';
+import AiBadge from '@/app/coaching/components/AiBadge';
 import { PrimaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
 import HeroPicture from '@/app/coaching/components/HeroPicture';
@@ -57,7 +58,11 @@ export default function PartnerschaftstestPage() {
           <div className='relative h-[62vh] min-h-[360px] lg:absolute lg:inset-0 lg:h-auto'>
             <HeroPicture
               wide={{ src: '/images-nlp/partnerschaft-heimkommen.webp', width: 1672, height: 941 }}
-              tall={{ src: '/images-nlp/partnerschaft-heimkommen-hoch.webp', width: 900, height: 1125 }}
+              tall={{
+                src: '/images-nlp/partnerschaft-heimkommen-hoch.webp',
+                width: 900,
+                height: 1125,
+              }}
               alt='Ein Mann kommt abends aus dem Regen nach Hause, seine Partnerin empfängt ihn an der Tür und hält seine Hand'
               className='object-cover object-[50%_25%] lg:object-[85%_center]'
               priority
@@ -154,14 +159,16 @@ export default function PartnerschaftstestPage() {
                 sizes='(min-width: 1024px) 560px, 100vw'
                 className='object-cover'
               />
+              <AiBadge className='bottom-3 right-3' />
             </div>
             <div className='text-center lg:text-left'>
               <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
                 Erfolg draußen braucht Rückhalt drinnen
               </h2>
               <p className='mt-4 text-base leading-relaxed text-(--muted)'>
-                Im Coaching geht es nicht nur um die Firma. Oft liegt der Hebel zu Hause. Wir schauen
-                gemeinsam hin – in Potsdam, in Berlin oder online. Das Erstgespräch ist kostenlos.
+                Im Coaching geht es nicht nur um die Firma. Oft liegt der Hebel zu Hause. Wir
+                schauen gemeinsam hin – in Potsdam, in Berlin oder online. Das Erstgespräch ist
+                kostenlos.
               </p>
               <div className='mt-8 flex justify-center lg:justify-start'>
                 <PrimaryButton

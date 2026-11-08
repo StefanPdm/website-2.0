@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Headphones, NotebookPen, ShieldCheck, UserRound } from 'lucide-react';
 
 import GlassCard from '@/components/GlassCard';
+import AiBadge from '@/app/coaching/components/AiBadge';
 import { SecondaryButton } from '@/app/coaching/components/Buttons';
 import { MotifInsight } from '@/app/coaching/components/Motifs';
 
@@ -93,6 +94,7 @@ export default function PodcastSection() {
                 sizes='(min-width: 1024px) 40vw, 100vw'
                 className='object-cover object-[72%_center]'
               />
+              <AiBadge className='bottom-3 right-3' />
             </div>
             <GlassCard className='p-7 sm:p-8'>
               <div className='flex items-center gap-3'>

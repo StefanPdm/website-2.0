@@ -30,6 +30,7 @@ export default function PartnerTeaserSection() {
           tall={{ src: '/images-nlp/partnerschaft-paar-hoch.webp', width: 900, height: 1125 }}
           alt='Ein Paar sitzt eng beieinander, sie hält seinen Arm und sieht ihn zugewandt an'
           className='object-cover object-[50%_25%] lg:object-[80%_center]'
+          badgeClassName='top-4 right-4'
         />
       </div>
 

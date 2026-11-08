@@ -7,6 +7,7 @@ import { BookOpen, ExternalLink } from 'lucide-react';
 
 import GlassCard from '@/components/GlassCard';
 import { ContentPageStructuredData } from '@/components/StructuredData';
+import AiBadge from '@/app/coaching/components/AiBadge';
 import { PrimaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
 import HeroPicture from '@/app/coaching/components/HeroPicture';
@@ -206,6 +207,7 @@ export default function BuecherPage() {
                 sizes='(min-width: 1024px) 560px, 100vw'
                 className='object-cover object-[70%_center]'
               />
+              <AiBadge className='bottom-3 right-3' />
             </div>
             <div className='text-center lg:text-left'>
               <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>

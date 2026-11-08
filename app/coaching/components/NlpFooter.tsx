@@ -57,7 +57,7 @@ export default function NlpFooter() {
         © {new Date().getFullYear()} Stefan Heinemann Coaching · Life Coaching für Unternehmer in Potsdam & Berlin. Alle Rechte vorbehalten.
         {/* Transparenz (EU AI Act Art. 50, Manual §10): Symbolbilder mit Menschen sind KI-generiert */}
         <p className='mt-2'>
-          Ein Teil der Personenbilder ist mit KI erzeugt (Symbolbilder) – Details im Impressum.
+          KI-generierte Symbolbilder sind mit „KI-Bild“ gekennzeichnet – Details im Impressum.
         </p>
       </div>
     </footer>

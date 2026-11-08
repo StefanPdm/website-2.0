@@ -5,6 +5,7 @@ import { Footprints, Home, MapPin, Video } from 'lucide-react';
 
 import GlassCard from '@/components/GlassCard';
 import { ContentPageStructuredData } from '@/components/StructuredData';
+import AiBadge from '@/app/coaching/components/AiBadge';
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
 import { offerByTitle } from '@/app/coaching/pricing';
@@ -99,7 +100,10 @@ export default function LocationPage({ config }: { config: LocationConfig }) {
       detail:
         'NLP (DVNLP-zertifiziert), verbunden mit der Haltung von Jens Corssen, der Lebensschule von Dieter Lange und der Energiearbeit von Tony Robbins.',
     },
-    { term: 'Nach der Session', detail: 'Auf Wunsch dein persönlicher Session-Podcast – inklusive.' },
+    {
+      term: 'Nach der Session',
+      detail: 'Auf Wunsch dein persönlicher Session-Podcast – inklusive.',
+    },
   ];
 
   return (
@@ -125,6 +129,7 @@ export default function LocationPage({ config }: { config: LocationConfig }) {
               sizes='100vw'
               className={`object-cover ${config.hero.position}`}
             />
+            <AiBadge className='top-24 right-4 lg:top-28 lg:right-6' />
             <span
               aria-hidden='true'
               className='absolute inset-0 bg-linear-to-b from-transparent from-45% to-(--bg)'
