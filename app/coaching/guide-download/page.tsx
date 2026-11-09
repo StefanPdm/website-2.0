@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import GlassCard from '@/components/GlassCard';
 import { PrimaryButton } from '@/app/coaching/components/Buttons';
 
-type DownloadStatus = 'idle' | 'downloading' | 'success' | 'error' | 'missing';
+type DownloadStatus = 'idle' | 'downloading' | 'success' | 'error';
 
 function GuideDownloadContent() {
   const searchParams = useSearchParams();
@@ -37,12 +37,8 @@ function GuideDownloadContent() {
   }
 
   useEffect(() => {
-    if (!token) {
-      setStatus('missing');
-      return;
-    }
-
-    startDownload(token);
+    // Fehlender Token wird beim Rendern aus `token` abgeleitet, nicht als State.
+    if (token) startDownload(token);
   }, [token]);
 
   return (
@@ -54,7 +50,7 @@ function GuideDownloadContent() {
             Bitte warte einen Moment. Der Leitfaden startet automatisch.
           </p>
 
-          {status === 'missing' && (
+          {!token && (
             <div className='mt-6 rounded-2xl border border-rose-400/40 bg-rose-500/10 p-4 text-sm text-[var(--text)]'>
               Der Download-Link ist unvollständig. Bitte fordere den Link erneut an.
             </div>
@@ -66,7 +62,7 @@ function GuideDownloadContent() {
             </div>
           )}
 
-          {token && status !== 'missing' && (
+          {token && (
             <div className='mt-6 flex flex-wrap items-center gap-3'>
               <PrimaryButton
                 type='button'
