@@ -8,37 +8,44 @@ import { PrimaryButton } from '@/app/coaching/components/Buttons';
 
 type DownloadStatus = 'idle' | 'downloading' | 'success' | 'error';
 
+/** Lädt das PDF und stößt den Browser-Download an. Wirft bei Fehler. */
+async function downloadGuide(token: string) {
+  const res = await fetch(`/api/nlp-guide/download?token=${encodeURIComponent(token)}`);
+  if (!res.ok) throw new Error('download failed');
+
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'NLP-Leitfaden.pdf';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 function GuideDownloadContent() {
   const searchParams = useSearchParams();
   const token = useMemo(() => searchParams.get('token'), [searchParams]);
-  const [status, setStatus] = useState<DownloadStatus>('idle');
+  // Mit Token startet der Download sofort – daher gleich 'downloading'.
+  // Fehlender Token wird beim Rendern aus `token` abgeleitet, nicht als State.
+  const [status, setStatus] = useState<DownloadStatus>(token ? 'downloading' : 'idle');
 
-  async function startDownload(currentToken: string) {
-    setStatus('downloading');
-
-    try {
-      const res = await fetch(`/api/nlp-guide/download?token=${encodeURIComponent(currentToken)}`);
-      if (!res.ok) throw new Error('download failed');
-
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'NLP-Leitfaden.pdf';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setStatus('success');
-    } catch {
-      setStatus('error');
-    }
+  function startDownload(currentToken: string) {
+    return downloadGuide(currentToken).then(
+      () => setStatus('success'),
+      () => setStatus('error'),
+    );
   }
 
   useEffect(() => {
-    // Fehlender Token wird beim Rendern aus `token` abgeleitet, nicht als State.
-    if (token) startDownload(token);
+    if (!token) return;
+    // State nur in den Callbacks setzen (React-Regel: kein setState direkt im Effekt).
+    downloadGuide(token).then(
+      () => setStatus('success'),
+      () => setStatus('error'),
+    );
   }, [token]);
 
   return (
@@ -66,7 +73,10 @@ function GuideDownloadContent() {
             <div className='mt-6 flex flex-wrap items-center gap-3'>
               <PrimaryButton
                 type='button'
-                onClick={() => startDownload(token)}
+                onClick={() => {
+                  setStatus('downloading');
+                  startDownload(token);
+                }}
                 disabled={status === 'downloading'}
                 aria-busy={status === 'downloading'}>
                 {status === 'downloading' ? 'Wird gestartet…' : 'Download erneut starten'}
