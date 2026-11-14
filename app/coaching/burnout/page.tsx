@@ -363,17 +363,25 @@ export default function CoachingBurnoutPage() {
               </h2>
               <div className='mt-6 space-y-4 text-base leading-relaxed text-(--muted)'>
                 <p>
-                  Über 20 Jahre habe ich ein Unternehmen im Interieur Design geführt, mit drei
-                  Filialen und großem Team. Mein Fokus lag auf Leistung und Funktionieren.
+                  Über 20 Jahre war ich Unternehmer im Interieur Design, mit drei Filialen und
+                  großem Team. Ich bin von Erfolg zu Erfolg gelaufen. Von außen sah alles nach
+                  einem erfüllten Leben aus: Firma, Haus, Auto, Familie.
                 </p>
                 <p>
-                  Und dann ging es nicht mehr. Ich wurde krank, depressiv und landete im Burnout –
-                  weil ich mein Glück im Außen gesucht habe. 2024 war mein Wendepunkt: Ich habe mir
-                  Hilfe geholt und mit meiner NLP-Ausbildung begonnen.
+                  Innen fehlten Glück und Erfüllung. Mein Selbstwert hing an Anerkennung von außen,
+                  Selbstliebe kannte ich kaum. Irgendwann stand die Frage im Raum:{' '}
+                  <em className='text-(--text)'>War das alles?</em>
+                </p>
+                <p>
+                  Dann kamen Burnout und Depression – kein bisschen Müdigkeit, sondern ein tiefer
+                  Einbruch. Ein neuer beruflicher Weg brachte erst wieder Licht, doch die alten
+                  Muster kamen mit. 2024 war mein Wendepunkt: Ich habe mir Hilfe geholt und mit
+                  meiner NLP-Ausbildung begonnen.
                 </p>
                 <p className='text-(--text)'>
-                  Dort habe ich das Wichtigste begriffen: Ich muss nicht die Welt um mich herum
-                  ändern, sondern mich selbst. Das gebe ich heute weiter.
+                  Heute weiß ich: Glück entsteht nicht, wenn man ein Ziel erreicht. Es zählt, ob du
+                  das, was du täglich tust, aus eigener Überzeugung tust. Erfolg darf daraus
+                  entstehen – er ist nur nicht mehr der Maßstab.
                 </p>
               </div>
             </div>
@@ -438,14 +446,13 @@ export default function CoachingBurnoutPage() {
           </div>
         </section>
 
-        {/* Eigener Satz (FulfilmentSection) */}
+        {/* Stefans eigener Satz (von ihm geliefert, 2026-11-15) */}
         <QuoteSection
-          label='Gedanke zur Erfüllung'
+          label='Gedanke zum inneren Kampf'
           rings='left'
           quote={
             <>
-              „Erfüllung entsteht nicht durch das nächste Ziel. Sie entsteht durch eine{' '}
-              <Mark>Haltung</Mark>, die man täglich neu wählt.“
+              „Der Kampf fand nicht im Außen statt, sondern <Mark>in mir</Mark>.“
             </>
           }
           caption='Stefan Heinemann'
