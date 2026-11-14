@@ -1,8 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import type { CSSProperties, ReactNode } from 'react';
 import {
-  ArrowRight,
   Battery,
   Cog,
   Hourglass,
@@ -201,16 +199,6 @@ export default function FulfilmentSection() {
               Erfüllung entsteht nicht durch das nächste Ziel. Sie entsteht durch eine Haltung, die
               man täglich neu wählt.
             </p>
-            {/* Brücke zum Schwerpunkt Unternehmer (seit 2026-11) */}
-            <Link
-              href='/coaching/unternehmer'
-              className='group inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-accent underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
-              Du bist selbst Unternehmer? Was ich dir besonders mitgebe
-              <ArrowRight
-                aria-hidden='true'
-                className='h-4 w-4 shrink-0 transition group-hover:translate-x-1'
-              />
-            </Link>
           </div>
         </div>
 

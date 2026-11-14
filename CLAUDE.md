@@ -170,7 +170,7 @@ Es gibt **keinen Theme-Umschalter**. Alle Werte als CSS-Variablen auf `.theme-co
 (gesetzt in `NlpLayoutClient`), `.tone-dark` setzt dieselben Tokens für dunkel neu –
 alles darin (GlassCard, Buttons, Formulare) kippt automatisch.
 
-**Dunkle Inseln** (Klasse `tone-dark` am Element): Hero, Ablauf (`TransformationSection`,
+**Dunkle Inseln** (Klasse `tone-dark` am Element): Hero, Schwerpunkt Unternehmer, Ablauf (`TransformationSection`,
 LaserFlow braucht dunklen Grund), Über mich, Kontakt, Kopfzeile (`NlpHeader`, deckend),
 Fußzeile. Alle anderen Sektionen sind hell. Neue Sektion: hell, außer sie trägt ein
 Foto/WebGL als Bühne. Nie zwei dunkle Inseln direkt hintereinander.
@@ -250,6 +250,11 @@ Gruß „Bis bald, Stefan“ im Kontakt. Nicht für Überschriften oder Fließte
   Container-Inhalt hinein. Neuer Breakpoint → Bereiche in `globals.css` neu berechnen.
 - **Säulen-Ringe** (`.pillar-ring`): Hover/Fokus der Ansatz-Karten lässt zwei Ringe vom Motiv
   ausgehen.
+- **Lichtgrafik dunkler Inseln** (`LightField`, `.light-*` in `coaching.css`, 2026-11-14): helle,
+  dünne Creme-Elemente (`--text` der Insel) lockern die Walnuss-Flächen auf – `orbit` (geneigte
+  Bahnen mit kreisendem Lichtpunkt), `dust` (aufsteigender Lichtstaub), `waves` (feine Linien).
+  Im Einsatz: Schwerpunkt Unternehmer, Ablauf, Über mich, Tägliche Impulse, Kontakt,
+  Herkunft auf `/coaching/unternehmer`. Am Rand platzieren, nie hinter Fließtext verdichten.
 
 ### 3.3 Welt B — Webdevelopment
 
@@ -382,7 +387,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 | `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
 | `Motifs` | Dekor-SVGs (§3.2) |
 | `PodcastPlayer` | Audio-Player für `/coaching/session-podcast`: Equalizer-Balken = Fortschritt (CSS `.podcast-eq*` in `globals.css`, pausiert eingefroren), unsichtbarer Range-Regler darüber, ±15 s, Geschwindigkeit, Media-Session-Titel. Länge als Prop, weil `preload='none'` |
-| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Gedanke Karriere** (`QuoteSection`, dunkles Zitat-Band) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort; Karten per Subgrid ausgerichtet) → Themen (`WorkSection`) → **Teaser Glaubenssätze** (`BeliefsTeaserSection`, dunkel) → **Teaser Partnertest** (`PartnerTeaserSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Session-Podcast → **Gedanke Mut** (`QuoteSection`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → **Tägliche Impulse** (`DailyPostsSection`, dunkel: WhatsApp-Posts als Coverflow-Galerie, Teilen/Kopieren/Speichern als JPG, alle als ZIP bzw. am Handy paketweise; Daten in `daily-posts.ts`, Bilder `public/images-nlp/impulse/`) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
+| `*Section` | Onepager-Sektionen, Reihenfolge in `NlpSections.tsx` (2026-11): Hero (Foto `coaching-gespraech.webp`, kein WebGL) → Erfüllung („Kennst du das?“, `FulfilmentSection`) → **Gedanke Karriere** (`QuoteSection`, dunkles Zitat-Band) → **Ansatz** (`ApproachSection`, vier Säulen: Haltung/Corssen · Sinn/Lange · Werkzeug/NLP · Energie/Robbins — Bezug je Person nur so stark, wie er belegbar ist, siehe Kommentar dort; Karten per Subgrid ausgerichtet) → **Schwerpunkt Unternehmer** (`EntrepreneurTeaserSection`, dunkel, → `/coaching/unternehmer`) → Themen (`WorkSection`) → **Teaser Glaubenssätze** (`BeliefsTeaserSection`, dunkel) → **Teaser Partnertest** (`PartnerTeaserSection`) → Ablauf (`TransformationSection`, `#ablauf`) → Session-Podcast → **Gedanke Mut** (`QuoteSection`) → Preise → Über mich → **Impulse** (`ImpulseSection`: Test, Formel, Regeln als Kartenreihe) → **Tägliche Impulse** (`DailyPostsSection`, dunkel: WhatsApp-Posts als Coverflow-Galerie, Teilen/Kopieren/Speichern als JPG, alle als ZIP bzw. am Handy paketweise; Daten in `daily-posts.ts`, Bilder `public/images-nlp/impulse/`) → Leitfaden → FAQ → Kontakt. Icons: `lucide-react`, keine Emoji |
 
 Hinweis: `NlpSections.tsx` ist seit dem Wegfall des Theme-Umschalters eine Server
 Component. Früher galt: Weil es `'use client'` war, wurde alles, was es

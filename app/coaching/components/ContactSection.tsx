@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import ContactFormNlp from '@/components/ContactFormNlp';
+import LightField from '@/app/coaching/components/LightField';
 
 /**
  * Was nach dem Absenden passiert – nimmt die Hürde vor der ersten Nachricht.
@@ -29,8 +30,16 @@ export default function ContactSection() {
   return (
     <section
       id='kontakt'
-      className='tone-dark relative border-t border-border py-16 sm:py-24 lg:py-28'>
-      <div className='container px-4 mx-auto'>
+      className='tone-dark relative overflow-hidden border-t border-border py-16 sm:py-24 lg:py-28'>
+      <LightField
+        variant='waves'
+        className='inset-x-0 bottom-0 h-40 w-full sm:h-56'
+      />
+      <LightField
+        variant='dust'
+        className='inset-0'
+      />
+      <div className='container relative px-4 mx-auto'>
         {/*
           `minmax(0, …)` statt `1.1fr` und `min-w-0` an beiden Spalten:
           Grid-Items haben standardmäßig `min-width: auto` und können damit

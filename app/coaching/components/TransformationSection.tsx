@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 import GlassCard from '@/components/GlassCard';
 import LazyEffect from '@/components/LazyEffect';
+import LightField from '@/app/coaching/components/LightField';
 
 // Dynamisch statt statisch (CLAUDE.md §9): three.js lädt erst, wenn LazyEffect es freigibt.
 const LaserFlow = dynamic(() => import('@/components/LaserFlow'), { ssr: false });
@@ -35,6 +36,19 @@ export default function TransformationSection() {
     <section
       id='ablauf'
       className='tone-dark relative flex min-h-[70dvh] flex-col items-center justify-center border-y border-border py-20'>
+      {/* Eigene Clip-Ebene: die Sektion selbst bleibt ohne overflow-hidden (LaserFlow) */}
+      <div
+        aria-hidden='true'
+        className='pointer-events-none absolute inset-0 overflow-hidden'>
+        <LightField
+          variant='orbit'
+          className='-right-44 -bottom-64 w-[440px] opacity-70'
+        />
+        <LightField
+          variant='dust'
+          className='inset-0'
+        />
+      </div>
       <div className='container mx-auto px-4'>
         <div className='pointer-events-none absolute inset-0 -z-10 top-0 rotate-180 md:rotate-0 md:bottom-0'>
           <div className='absolute inset-0 opacity-90'>

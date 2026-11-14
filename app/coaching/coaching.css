@@ -1421,6 +1421,138 @@
     0 1px 14px rgba(20, 10, 4, 0.7);
 }
 
+/* ==========================================================================
+ * Helle Grafik in dunklen Inseln (LightField.tsx, 2026-11-14)
+ * Creme = --text der dunklen Insel. Dünn, transparent, nur transform/opacity.
+ * ========================================================================== */
+
+/* Lichtstaub: steigt langsam auf, glimmt auf und verglimmt */
+.light-dust {
+  overflow: hidden;
+}
+.light-dust span {
+  position: absolute;
+  bottom: -8px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 999px;
+  background: var(--text);
+  box-shadow: 0 0 calc(var(--size) * 3) var(--text);
+  opacity: 0;
+  animation: light-rise var(--dur) linear var(--delay) infinite;
+}
+@keyframes light-rise {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  60% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate3d(24px, -560px, 0);
+    opacity: 0;
+  }
+}
+/* Mobil weniger Staub – ruhiger und günstiger */
+@media (max-width: 767px) {
+  .light-dust span:nth-child(2n) {
+    display: none;
+  }
+}
+
+/* Orbit: zwei geneigte Bahnen in 3D, je ein Lichtpunkt kreist.
+   Der Punkt dreht sich gegenläufig zurück, damit er rund bleibt. */
+.light-orbit {
+  transform-style: preserve-3d;
+}
+.light-orbit__core {
+  position: absolute;
+  inset: 44%;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--text) 0%, transparent 70%);
+  opacity: 0.18;
+  animation: light-core 7s ease-in-out infinite alternate;
+}
+@keyframes light-core {
+  from {
+    transform: scale(0.85);
+    opacity: 0.12;
+  }
+  to {
+    transform: scale(1.15);
+    opacity: 0.22;
+  }
+}
+.light-orbit__plane {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateZ(var(--tilt)) rotateX(var(--lean));
+}
+.light-orbit__track {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text) 30%, transparent);
+  transform-style: preserve-3d;
+  animation: light-orbit-spin var(--speed) linear infinite;
+}
+@keyframes light-orbit-spin {
+  from {
+    transform: rotateZ(var(--start));
+  }
+  to {
+    transform: rotateZ(calc(var(--start) + 360deg));
+  }
+}
+.light-orbit__dot {
+  position: absolute;
+  top: -5px;
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--text);
+  box-shadow:
+    0 0 10px var(--text),
+    0 0 26px color-mix(in srgb, var(--accent) 70%, transparent);
+  opacity: 0.85;
+  transform-style: preserve-3d;
+  animation: light-dot-face var(--speed) linear infinite;
+}
+/* Gegenrotation: hebt Umlauf und Kippung auf, der Punkt zeigt immer zum Betrachter */
+@keyframes light-dot-face {
+  from {
+    transform: rotateZ(calc(var(--start) * -1)) rotateX(calc(var(--lean) * -1));
+  }
+  to {
+    transform: rotateZ(calc(var(--start) * -1 - 360deg)) rotateX(calc(var(--lean) * -1));
+  }
+}
+
+/* Wellen: feine Linien, ziehen langsam seitlich durch */
+.light-waves path {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: var(--o);
+  transform-box: fill-box;
+  animation: light-wave var(--dur) linear infinite;
+}
+.light-waves path:nth-child(2) {
+  animation-direction: reverse;
+}
+@keyframes light-wave {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* Animationen außerhalb des Bildes anhalten (components/PauseOffscreen.tsx) */
 [data-offscreen],
 [data-offscreen] *,

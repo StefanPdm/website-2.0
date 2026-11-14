@@ -4,10 +4,14 @@ import Link from 'next/link';
 import { Compass, Home, Lock, Repeat, Scale, UserRound, type LucideIcon } from 'lucide-react';
 
 import GlassCard from '@/components/GlassCard';
-import { ContentPageStructuredData } from '@/components/StructuredData';
+import { ContentPageStructuredData, FaqStructuredData } from '@/components/StructuredData';
+import BreathRings from '@/app/coaching/components/BreathRings';
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
+import LightField from '@/app/coaching/components/LightField';
 import { MotifClarity } from '@/app/coaching/components/Motifs';
+import QuoteSection, { Mark } from '@/app/coaching/components/QuoteSection';
+import { faqEntrepreneur } from '@/app/coaching/faq';
 import { offerByTitle } from '@/app/coaching/pricing';
 
 /**
@@ -89,6 +93,14 @@ const themes: { Icon: LucideIcon; title: string; text: string }[] = [
   },
 ];
 
+/** Kennzahlen wie in AboutSection (belegt, §10). */
+const stats = [
+  { value: '20+', label: 'Jahre Unternehmer' },
+  { value: '3', label: 'Filialen, großes Team' },
+  { value: '2024', label: 'mein Wendepunkt' },
+  { value: '2025', label: 'Coach seit Mitte des Jahres' },
+];
+
 const startersession = offerByTitle('Startersession');
 const folgesession = offerByTitle('Folgesession');
 
@@ -129,6 +141,7 @@ export default function CoachingUnternehmerPage() {
           about: 'Coaching für Unternehmer',
         }}
       />
+      <FaqStructuredData entries={faqEntrepreneur} />
       <article className='relative z-10'>
         {/* Kopfbereich */}
         <section className='relative overflow-hidden border-b border-border px-4 pt-40 pb-16 md:pt-48'>
@@ -168,8 +181,9 @@ export default function CoachingUnternehmerPage() {
         </section>
 
         {/* Themen */}
-        <section className='px-4 py-16 sm:py-20'>
-          <div className='container mx-auto max-w-5xl'>
+        <section className='relative overflow-hidden px-4 py-16 sm:py-20'>
+          <BreathRings className='-right-64 -bottom-48 w-[640px]' />
+          <div className='container relative mx-auto max-w-5xl'>
             <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
               Was Unternehmer anders trifft
             </h2>
@@ -194,8 +208,16 @@ export default function CoachingUnternehmerPage() {
         </section>
 
         {/* Herkunft */}
-        <section className='border-y border-border bg-(--section-bg-accent) px-4 py-16 sm:py-20'>
-          <div className='container mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center'>
+        <section className='tone-dark relative overflow-hidden border-y border-border bg-(--bg) px-4 pt-16 pb-32 sm:pt-24 sm:pb-36'>
+          <LightField
+            variant='waves'
+            className='inset-x-0 bottom-0 h-24 w-full'
+          />
+          <LightField
+            variant='dust'
+            className='inset-0'
+          />
+          <div className='container relative mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center'>
             <div className='relative aspect-4/5 overflow-hidden rounded-3xl border border-border'>
               <Image
                 src='/images-nlp/portrait-flipchart.webp'
@@ -225,6 +247,18 @@ export default function CoachingUnternehmerPage() {
                   schlechter Monat mit dem Schlaf machen. Wir können gleich bei dir anfangen.
                 </p>
               </div>
+              <dl className='mt-8 grid grid-cols-2 gap-x-6 gap-y-5'>
+                {stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className='flex flex-col border-l border-border-strong pl-4'>
+                    <dt className='text-xs leading-snug text-(--subtle)'>{stat.label}</dt>
+                    <dd className='order-first text-2xl font-semibold text-accent sm:text-3xl'>
+                      {stat.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
               <p className='mt-6 text-sm text-(--muted)'>
                 Du bist kein Unternehmer, erkennst dich aber wieder? Dann bist du genauso richtig:{' '}
                 <Link
@@ -238,8 +272,54 @@ export default function CoachingUnternehmerPage() {
           </div>
         </section>
 
-        {/* Fakten */}
+        {/* Fragen von Unternehmern – Text steht auch zugeklappt im HTML (FAQPage) */}
         <section className='px-4 py-16 sm:py-20'>
+          <div className='container mx-auto max-w-3xl'>
+            <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
+              Was Unternehmer mich fragen
+            </h2>
+            <div className='mt-8 space-y-3'>
+              {faqEntrepreneur.map((entry, index) => (
+                <GlassCard
+                  key={entry.question}
+                  className='overflow-hidden p-0'>
+                  <details
+                    className='group'
+                    open={index === 0}>
+                    <summary className='flex cursor-pointer list-none items-start justify-between gap-4 p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:p-6 [&::-webkit-details-marker]:hidden'>
+                      <h3 className='text-base font-semibold text-(--text) sm:text-lg'>
+                        {entry.question}
+                      </h3>
+                      <span
+                        aria-hidden='true'
+                        className='mt-1 shrink-0 text-accent transition-transform duration-200 group-open:rotate-45'>
+                        +
+                      </span>
+                    </summary>
+                    <p className='px-5 pb-5 text-sm leading-relaxed text-(--muted) sm:px-6 sm:pb-6 sm:text-base'>
+                      {entry.answer}
+                    </p>
+                  </details>
+                </GlassCard>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Eigener Satz aus „Mein Weg vor NLP“ (AboutSection) */}
+        <QuoteSection
+          label='Gedanke zur Veränderung'
+          rings='left'
+          quote={
+            <>
+              „Ich muss nicht die Welt um mich herum ändern, sondern <Mark>mich selbst</Mark>.“
+            </>
+          }
+          caption='Stefan Heinemann'
+        />
+
+        {/* Fakten */}
+        <section className='bg-(--section-bg-accent) px-4 py-16 sm:py-20'>
           <div className='container mx-auto max-w-4xl'>
             <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
               So passt es in deinen Kalender

@@ -17,6 +17,7 @@ import {
 
 import GlassCard from '@/components/GlassCard';
 import { useModal } from '@/components/useModal';
+import LightField from '@/app/coaching/components/LightField';
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 
 export default function AboutSection() {
@@ -85,8 +86,16 @@ export default function AboutSection() {
     <>
       <section
         id='ueber'
-        className='tone-dark py-40 relative min-h-[60dvh] flex flex-col justify-center items-center'>
-        <div className='container px-4 mx-auto'>
+        className='tone-dark py-40 relative min-h-[60dvh] flex flex-col justify-center items-center overflow-hidden'>
+        <LightField
+          variant='orbit'
+          className='-right-52 -top-56 w-[480px] opacity-70'
+        />
+        <LightField
+          variant='dust'
+          className='inset-0'
+        />
+        <div className='container relative px-4 mx-auto'>
           <div className='grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]'>
             {/* left side */}
             <GlassCard className='p-6 order-2 md:order-1'>

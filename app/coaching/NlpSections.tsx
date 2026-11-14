@@ -3,6 +3,7 @@ import ApproachSection from '@/app/coaching/components/ApproachSection';
 import BeliefsTeaserSection from '@/app/coaching/components/BeliefsTeaserSection';
 import ContactSection from '@/app/coaching/components/ContactSection';
 import DailyPostsSection from '@/app/coaching/components/DailyPostsSection';
+import EntrepreneurTeaserSection from '@/app/coaching/components/EntrepreneurTeaserSection';
 import FaqSection from '@/app/coaching/components/FaqSection';
 import FulfilmentSection from '@/app/coaching/components/FulfilmentSection';
 import GuideSection from '@/app/coaching/components/GuideSection';
@@ -17,7 +18,7 @@ import WorkSection from '@/app/coaching/components/WorkSection';
 
 /**
  * Reihenfolge entlang der Entscheidung des Besuchers (2026-11):
- * Ansprache → Wiedererkennung → Gedanke (Karriere) → Ansatz → Themen → Glaubenssätze → Partnerschaft → Ablauf → Session-Podcast → Gedanke (Mut) → Preis → Person →
+ * Ansprache → Wiedererkennung → Gedanke (Karriere) → Ansatz → Schwerpunkt Unternehmer → Themen → Glaubenssätze → Partnerschaft → Ablauf → Session-Podcast → Gedanke (Mut) → Preis → Person →
  * Impulse zum Ausprobieren → tägliche WhatsApp-Impulse (Galerie) → Leitfaden → Fragen → Kontakt.
  */
 export default function NlpSections() {
@@ -41,6 +42,7 @@ export default function NlpSections() {
         caption='Stefan Heinemann'
       />
       <ApproachSection />
+      <EntrepreneurTeaserSection />
       <WorkSection />
       <BeliefsTeaserSection />
       <PartnerTeaserSection />

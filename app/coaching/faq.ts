@@ -83,6 +83,33 @@ export const faqNlp: FaqEntry[] = [
 ];
 
 /**
+ * Fragen nur für Unternehmer – auf /coaching/unternehmer (Sektion + FAQPage).
+ * Fakten wie in faqNlp und pricing.ts; keine Steuer- oder Rechtsberatung.
+ */
+export const faqEntrepreneur: FaqEntry[] = [
+  {
+    question: 'Ist das Business Coaching?',
+    answer:
+      'Nein, im Kern geht es um die persönlichen Themen hinter dem Unternehmen, nicht um Strategie, Zahlen oder Vertrieb. Wir arbeiten an dem, was dich als Unternehmer trägt oder bremst: Entscheidungen, Druck, Grenzen, Selbstwert, das Verhältnis von Firma und Familie. Workshops für Teams und Führungskräfte stimme ich davon getrennt ab.',
+  },
+  {
+    question: 'Kommst du auch ins Unternehmen?',
+    answer:
+      'Ja, ich komme zu dir nach Potsdam, Berlin oder Brandenburg – auch ins Unternehmen, wenn Rahmen, Anfahrt und Ziel vorher abgestimmt sind. Alternativ arbeiten wir bei mir in Potsdam, mit Abstand zum Betrieb, oder online per Video.',
+  },
+  {
+    question: 'Bleibt das vertraulich – auch vor Team und Gesellschaftern?',
+    answer:
+      'Ja, was du im Coaching erzählst, behandle ich vertraulich und gebe es ohne deine ausdrückliche Zustimmung an niemanden weiter – weder an Mitarbeitende noch an Gesellschafter oder Familie. Bezahlt das Unternehmen das Coaching, vereinbaren wir vorher klar, welche organisatorischen Informationen geteilt werden dürfen.',
+  },
+  {
+    question: 'Wie passt Coaching in einen vollen Kalender?',
+    answer:
+      `Mit wenigen, langen Terminen statt einer Stunde pro Woche: Eine Session dauert etwa drei Stunden (${offerByTitle('Folgesession').price} inkl. MwSt.), die erste rund vier. Im Mentoring treffen wir uns alle zwei Wochen, weil wöchentliche Termine neben einer Firma selten machbar sind. Das kostenlose Erstgespräch dauert 30 Minuten per Telefon oder Video.`,
+  },
+];
+
+/**
  * Fragen, die beide Geschäftsbereiche betreffen.
  *
  * Stehen bewusst am Ende **beider** FAQ-Sektionen: Wer auf einer der beiden

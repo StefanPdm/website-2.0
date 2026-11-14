@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import DailyPostsGallery from '@/app/coaching/components/DailyPostsGallery';
+import LightField from '@/app/coaching/components/LightField';
 import DownloadAllPosts from '@/app/coaching/components/DownloadAllPosts';
 import { dailyPosts } from '@/app/coaching/daily-posts';
 
@@ -24,6 +25,14 @@ export default function DailyPostsSection() {
       <span
         aria-hidden='true'
         className='dp-glow pointer-events-none absolute left-1/2 top-[58%] h-[560px] w-[min(1100px,160vw)] -translate-x-1/2 -translate-y-1/2'
+      />
+      <LightField
+        variant='waves'
+        className='inset-x-0 top-6 h-32 w-full'
+      />
+      <LightField
+        variant='dust'
+        className='inset-0'
       />
 
       <div className='container relative mx-auto px-4'>
