@@ -449,64 +449,67 @@ export default function CoachingBurnoutPage() {
 
         {/* Wie kommt man wieder heraus */}
         <section className='relative px-4 py-16 sm:py-20'>
-          <div className='container mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12'>
-            {/* Bild läuft am Desktop neben den Schritten mit (sticky), mobil steht es oben */}
-            <aside className='lg:order-2'>
-              <div className='relative mx-auto aspect-4/5 w-full max-w-sm overflow-hidden rounded-3xl border border-card-border lg:sticky lg:top-28'>
-                <Image
-                  src='/images-nlp/burnout-durchatmen.webp'
-                  alt='Ein Mann sitzt im Sessel am Fenster, die Hand auf der Brust, und atmet ruhig durch'
-                  fill
-                  sizes='(min-width: 1024px) 320px, 384px'
-                  className='object-cover object-[40%_center]'
-                />
-                <AiBadge className='top-3 right-3' />
+          <div className='container mx-auto max-w-6xl'>
+            <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
+              Wie kommt man wieder heraus?
+            </h2>
+            <p className='mt-3 max-w-2xl text-sm text-(--muted) sm:text-base'>
+              Erst wieder Boden unter die Füße, dann Richtung. Vier Blickwinkel, die ich im Coaching
+              verbinde – jeder mit einer Frage, die du dir heute schon stellen kannst.
+            </p>
+            {/* Überschrift steht über dem Raster: So schließt die Bildoberkante bündig mit
+                der ersten Karte ab. Bild läuft am Desktop mit (sticky), mobil steht es oben. */}
+            <div className='mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12'>
+              <aside className='lg:order-2'>
+                <div className='relative mx-auto aspect-4/5 w-full max-w-sm overflow-hidden rounded-3xl border border-card-border lg:sticky lg:top-28'>
+                  <Image
+                    src='/images-nlp/burnout-durchatmen.webp'
+                    alt='Ein Mann sitzt im Sessel am Fenster, die Hand auf der Brust, und atmet ruhig durch'
+                    fill
+                    sizes='(min-width: 1024px) 320px, 384px'
+                    className='object-cover object-[40%_center]'
+                  />
+                  <AiBadge className='top-3 right-3' />
+                </div>
+              </aside>
+              <div className='min-w-0 lg:order-1'>
+                <ol className='space-y-6'>
+                  {pathOut.map(({ step, Icon, title: stepTitle, lens, text, question }) => (
+                    <li key={step}>
+                      <GlassCard className='grid gap-5 p-6 sm:grid-cols-[auto_1fr] sm:gap-6 sm:p-8'>
+                        <span className='grid h-14 w-14 place-items-center rounded-2xl border border-border bg-surface text-accent'>
+                          <Icon
+                            aria-hidden='true'
+                            className='h-6 w-6'
+                          />
+                        </span>
+                        <div>
+                          <p className='text-[11px] uppercase tracking-[0.2em] text-(--subtle)'>
+                            Schritt {step} · {lens}
+                          </p>
+                          <h3 className='mt-2 text-lg font-semibold text-(--text) sm:text-xl'>
+                            {stepTitle}
+                          </h3>
+                          <p className='mt-3 text-sm leading-relaxed text-(--muted) sm:text-base'>
+                            {text}
+                          </p>
+                          <p className='mt-4 border-l-2 border-(--accent) pl-4 font-serif text-lg italic text-(--text)'>
+                            {question}
+                          </p>
+                        </div>
+                      </GlassCard>
+                    </li>
+                  ))}
+                </ol>
+                <p className='mt-8 max-w-3xl text-sm leading-relaxed text-(--muted) sm:text-base'>
+                  <strong className='font-semibold text-(--text)'>
+                    Und: Nicht nur die Haltung ändern, auch die Bedingungen.
+                  </strong>{' '}
+                  Wer weiter überlastet ist und nur versucht, positiver zu denken, kommt nicht weit.
+                  Es braucht konkrete Entlastung – Aufgaben abgeben, Erwartungen klären, Grenzen
+                  setzen, Erholung schützen. Genau daran arbeiten wir.
+                </p>
               </div>
-            </aside>
-            <div className='min-w-0 lg:order-1'>
-              <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
-                Wie kommt man wieder heraus?
-              </h2>
-              <p className='mt-3 max-w-2xl text-sm text-(--muted) sm:text-base'>
-                Erst wieder Boden unter die Füße, dann Richtung. Vier Blickwinkel, die ich im
-                Coaching verbinde – jeder mit einer Frage, die du dir heute schon stellen kannst.
-              </p>
-              <ol className='mt-10 space-y-6'>
-                {pathOut.map(({ step, Icon, title: stepTitle, lens, text, question }) => (
-                  <li key={step}>
-                    <GlassCard className='grid gap-5 p-6 sm:grid-cols-[auto_1fr] sm:gap-6 sm:p-8'>
-                      <span className='grid h-14 w-14 place-items-center rounded-2xl border border-border bg-surface text-accent'>
-                        <Icon
-                          aria-hidden='true'
-                          className='h-6 w-6'
-                        />
-                      </span>
-                      <div>
-                        <p className='text-[11px] uppercase tracking-[0.2em] text-(--subtle)'>
-                          Schritt {step} · {lens}
-                        </p>
-                        <h3 className='mt-2 text-lg font-semibold text-(--text) sm:text-xl'>
-                          {stepTitle}
-                        </h3>
-                        <p className='mt-3 text-sm leading-relaxed text-(--muted) sm:text-base'>
-                          {text}
-                        </p>
-                        <p className='mt-4 border-l-2 border-(--accent) pl-4 font-serif text-lg italic text-(--text)'>
-                          {question}
-                        </p>
-                      </div>
-                    </GlassCard>
-                  </li>
-                ))}
-              </ol>
-              <p className='mt-8 max-w-3xl text-sm leading-relaxed text-(--muted) sm:text-base'>
-                <strong className='font-semibold text-(--text)'>
-                  Und: Nicht nur die Haltung ändern, auch die Bedingungen.
-                </strong>{' '}
-                Wer weiter überlastet ist und nur versucht, positiver zu denken, kommt nicht weit.
-                Es braucht konkrete Entlastung – Aufgaben abgeben, Erwartungen klären, Grenzen
-                setzen, Erholung schützen. Genau daran arbeiten wir.
-              </p>
             </div>
           </div>
         </section>
