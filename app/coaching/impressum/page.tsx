@@ -119,7 +119,7 @@ export default function ImpressumPage() {
         <p className='text-[var(--muted)]'>
           Ein Teil der Bilder auf diesen Seiten ist mit Künstlicher Intelligenz erzeugt: die
           Fotos in den Kopfbereichen der Unterseiten (auch die Stadtansichten von Berlin und
-          Potsdam) sowie die Bilder in den Abschnitten zu Podcast, Partnerschaft und Büchern. Jedes
+          Potsdam) sowie die Bilder in den Abschnitten zu Podcast, Partnerschaft, Büchern und zum Schwerpunkt eigene Firma. Jedes
           dieser Bilder trägt die Kennzeichnung „KI-Bild“. Es handelt sich um Symbolbilder; sie
           zeigen keine Klientinnen oder Klienten.
         </p>

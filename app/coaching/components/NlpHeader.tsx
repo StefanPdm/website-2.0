@@ -81,9 +81,9 @@ const discoverItems: { label: string; href: string; hint: string; match?: string
   },
   { label: 'Bücher', href: '/coaching/buecher', hint: 'Was mich geprägt hat' },
   {
-    label: 'Coaching für Unternehmer',
+    label: 'Mit eigener Firma',
     href: '/coaching/unternehmer',
-    hint: 'Von einem, der es selbst war',
+    hint: 'Für Unternehmerinnen & Unternehmer',
   },
   { label: 'Coaching in Potsdam', href: '/coaching/potsdam', hint: 'Vor Ort, im Gehen, online' },
   { label: 'Coaching in Berlin', href: '/coaching/berlin', hint: 'Bei dir, online oder in Potsdam' },

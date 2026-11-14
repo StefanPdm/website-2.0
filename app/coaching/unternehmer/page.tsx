@@ -9,7 +9,7 @@ import BreathRings from '@/app/coaching/components/BreathRings';
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
 import LightField from '@/app/coaching/components/LightField';
-import { MotifClarity } from '@/app/coaching/components/Motifs';
+import HeroPicture from '@/app/coaching/components/HeroPicture';
 import QuoteSection, { Mark } from '@/app/coaching/components/QuoteSection';
 import { faqEntrepreneur } from '@/app/coaching/faq';
 import { offerByTitle } from '@/app/coaching/pricing';
@@ -29,15 +29,16 @@ import { offerByTitle } from '@/app/coaching/pricing';
 
 const PATH = '/coaching/unternehmer';
 
-const title = 'Coaching für Unternehmer in Potsdam & Berlin';
+const title = 'Coaching für Unternehmerinnen & Unternehmer in Potsdam & Berlin';
 const description =
-  'Coaching für Unternehmer und Selbstständige in Potsdam, Berlin und online – von einem Coach, der 20 Jahre selbst ein Unternehmen mit drei Filialen geführt hat. Für die persönlichen Themen hinter der Firma: Einsamkeit an der Spitze, Firma und Familie, Entscheidungen, Übergänge. Erstgespräch kostenlos.';
+  'Coaching für Unternehmerinnen, Unternehmer und Selbstständige in Potsdam, Berlin und online – von einem Coach, der 20 Jahre selbst ein Unternehmen mit drei Filialen geführt hat. Für die persönlichen Themen hinter der Firma: Einsamkeit an der Spitze, Firma und Familie, Entscheidungen, Übergänge. Erstgespräch kostenlos.';
 
 export const metadata: Metadata = {
   title,
   description,
   keywords: [
     'Coaching für Unternehmer',
+    'Coaching für Unternehmerinnen',
     'Life Coaching für Unternehmer',
     'Coaching für Unternehmer Potsdam',
     'Coaching für Unternehmer Berlin',
@@ -137,46 +138,62 @@ export default function CoachingUnternehmerPage() {
           path: PATH,
           headline: title,
           description,
-          shortTitle: 'Unternehmer',
+          shortTitle: 'Unternehmerinnen & Unternehmer',
           about: 'Coaching für Unternehmer',
         }}
       />
       <FaqStructuredData entries={faqEntrepreneur} />
       <article className='relative z-10'>
-        {/* Kopfbereich */}
-        <section className='relative overflow-hidden border-b border-border px-4 pt-40 pb-16 md:pt-48'>
-          <MotifClarity className='pointer-events-none absolute -right-24 top-24 w-[520px] opacity-[0.07]' />
-          <div className='container relative mx-auto max-w-4xl'>
-            <nav
-              aria-label='Brotkrumen'
-              className='mb-8 flex flex-wrap items-center gap-2 text-xs text-(--muted)'>
-              <Link
-                href='/'
-                className='transition hover:text-(--text)'>
-                Start
-              </Link>
-              <span aria-hidden='true'>/</span>
-              <Link
-                href='/coaching'
-                className='transition hover:text-(--text)'>
-                Coaching
-              </Link>
-              <span aria-hidden='true'>/</span>
-              <span className='text-(--text)'>Unternehmer</span>
-            </nav>
+        {/* Kopfbereich: Foto als Bühne (KI-Bild, Unternehmerin am Fenster) – bewusst eine
+            Frau: Das Angebot gilt Unternehmerinnen genauso, und der Onepager-Hero zeigt zwei Männer. */}
+        <section className='relative overflow-hidden border-b border-border lg:flex lg:min-h-[86dvh] lg:items-center'>
+          <div className='relative h-[62vh] min-h-[360px] lg:absolute lg:inset-0 lg:h-auto'>
+            <HeroPicture
+              wide={{ src: '/images-nlp/unternehmerin-fenster.webp', width: 1672, height: 941 }}
+              tall={{ src: '/images-nlp/unternehmerin-fenster-hoch.webp', width: 900, height: 1125 }}
+              alt='Eine Unternehmerin im Blazer steht nachdenklich am Bürofenster und blickt über die Stadt'
+              className='object-cover object-[55%_20%] lg:object-[85%_center]'
+              priority
+            />
+            <span
+              aria-hidden='true'
+              className='absolute inset-0 bg-linear-to-b from-transparent from-55% to-(--bg) lg:bg-linear-to-r lg:from-(--bg) lg:from-25% lg:via-(--bg)/75 lg:via-45% lg:to-transparent lg:to-70%'
+            />
+          </div>
+          <div className='container relative mx-auto -mt-20 max-w-6xl px-4 pb-16 lg:mt-0 lg:pt-40 lg:pb-24'>
+            <div className='max-w-xl'>
+              <nav
+                aria-label='Brotkrumen'
+                className='mb-8 flex flex-wrap items-center gap-2 text-xs text-(--muted)'>
+                <Link
+                  href='/'
+                  className='transition hover:text-(--text)'>
+                  Start
+                </Link>
+                <span aria-hidden='true'>/</span>
+                <Link
+                  href='/coaching'
+                  className='transition hover:text-(--text)'>
+                  Coaching
+                </Link>
+                <span aria-hidden='true'>/</span>
+                <span className='text-(--text)'>Unternehmerinnen &amp; Unternehmer</span>
+              </nav>
 
-            <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
-              Schwerpunkt Unternehmer
-            </p>
-            <h1 className='mt-5 text-3xl font-semibold leading-tight text-(--text) sm:text-4xl lg:text-5xl'>
-              Coaching für Unternehmer in Potsdam &amp; Berlin
-            </h1>
-            <p className='mt-6 max-w-2xl text-base leading-relaxed text-(--muted) sm:text-lg'>
-              Über 20 Jahre habe ich selbst ein Unternehmen geführt – drei Filialen, großes Team.
-              Ich weiß, wie es ist, wenn alle etwas von dir wollen und du für alle stark sein musst.
-              Hier sprichst du mit jemandem, der das von innen kennt.
-            </p>
-            <ContentDate path={PATH} />
+              <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
+                Schwerpunkt eigene Firma
+              </p>
+              <h1 className='mt-5 text-3xl font-semibold leading-tight text-(--text) sm:text-4xl lg:text-5xl'>
+                Coaching für Unternehmerinnen und Unternehmer
+              </h1>
+              <p className='mt-6 text-base leading-relaxed text-(--muted) sm:text-lg'>
+                Über 20 Jahre habe ich selbst ein Unternehmen geführt – drei Filialen, großes Team.
+                Ich weiß, wie es ist, wenn alle etwas von dir wollen und du für alle stark sein
+                musst. Hier sprichst du mit jemandem, der das von innen kennt. In Potsdam, Berlin
+                und online.
+              </p>
+              <ContentDate path={PATH} />
+            </div>
           </div>
         </section>
 
@@ -185,7 +202,7 @@ export default function CoachingUnternehmerPage() {
           <BreathRings className='-right-64 -bottom-48 w-[640px]' />
           <div className='container relative mx-auto max-w-5xl'>
             <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
-              Was Unternehmer anders trifft
+              Was dich mit eigener Firma anders trifft
             </h2>
             <p className='mt-3 max-w-2xl text-sm text-(--muted) sm:text-base'>
               Die Themen sind menschlich. Aber mit eigener Firma haben sie mehr Gewicht.
@@ -260,7 +277,7 @@ export default function CoachingUnternehmerPage() {
                 ))}
               </dl>
               <p className='mt-6 text-sm text-(--muted)'>
-                Du bist kein Unternehmer, erkennst dich aber wieder? Dann bist du genauso richtig:{' '}
+                Du führst keine eigene Firma, erkennst dich aber wieder? Dann bist du genauso richtig:{' '}
                 <Link
                   href='/coaching'
                   className={linkClass}>
@@ -276,7 +293,7 @@ export default function CoachingUnternehmerPage() {
         <section className='px-4 py-16 sm:py-20'>
           <div className='container mx-auto max-w-3xl'>
             <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
-              Was Unternehmer mich fragen
+              Was mich Unternehmerinnen und Unternehmer fragen
             </h2>
             <div className='mt-8 space-y-3'>
               {faqEntrepreneur.map((entry, index) => (
@@ -361,7 +378,7 @@ export default function CoachingUnternehmerPage() {
         <section className='border-t border-border px-4 py-16 sm:py-20'>
           <div className='container mx-auto max-w-4xl text-center'>
             <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
-              Einmal offen reden. Unternehmer unter sich.
+              Einmal offen reden. Auf Augenhöhe.
             </h2>
             <p className='mx-auto mt-4 max-w-xl text-sm text-(--muted) sm:text-base'>
               30 Minuten, kostenlos, per Telefon oder Video. Danach weißt du, ob wir zusammenpassen.
