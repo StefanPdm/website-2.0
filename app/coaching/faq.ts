@@ -126,6 +126,11 @@ export const faqBurnout: FaqEntry[] = [
       'Der richtige Zeitpunkt ist, wenn die akute Erschöpfung ärztlich abgeklärt ist und du wieder etwas Energie für Veränderung spürst – oft in der Phase, in der die Rückkehr in den Alltag, den Job oder die eigene Firma ansteht. Im kostenlosen Erstgespräch klären wir offen, ob Coaching jetzt passt oder ob ein anderer Schritt zuerst dran ist.',
   },
   {
+    question: 'Was kann ich tun, bis ich einen Therapieplatz habe?',
+    answer:
+      'Bis zum Therapieplatz hilft vor allem, Druck und Reize zu senken: Termine und Aufgaben reduzieren, Verpflichtungen für ein paar Tage abgeben, digitalen Dauerinput begrenzen. Dazu die Grundlagen sichern – Tageslicht, regelmäßig essen und trinken, ein fester Schlafrhythmus – und sanfte Bewegung, die zur aktuellen Kraft passt. Das ersetzt keine Behandlung; wenn es schlechter wird, gehören Hausarztpraxis, 116 117 oder bei akuter Gefahr der Notruf 112 an erste Stelle.',
+  },
+  {
     question: 'Zahlt die Krankenkasse das Coaching?',
     answer:
       `Nein, Coaching ist eine private Leistung und wird von der gesetzlichen Krankenkasse nicht übernommen. Eine Session dauert etwa drei Stunden und kostet ${offerByTitle('Folgesession').price} inkl. MwSt.; das Erstgespräch ist kostenlos. Ärztliche und psychotherapeutische Behandlung läuft dagegen über die Krankenkasse – sie hat bei akuten Beschwerden immer Vorrang.`,

@@ -1750,6 +1750,233 @@
   transform: translateX(0);
 }
 
+/* ==========================================================================
+ * Trampolin-Motiv (TrampolineMotif.tsx, 2026-11-15) – ein Sprung = 1,4 s.
+ * Landen: Figur staucht, Tuch gibt nach. Absprung: Figur streckt sich,
+ * Tuch federt zurück. Oben: Arme auf, Funken steigen. Nur transform/opacity.
+ * ========================================================================== */
+.tramp {
+  overflow: visible;
+  color: var(--accent);
+  --tramp-t: 1.4s;
+}
+.tramp__fill {
+  fill: currentColor;
+}
+.tramp__arm,
+.tramp__leg,
+.tramp__frame,
+.tramp__dip {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.tramp__frame {
+  stroke: var(--accent-2);
+  stroke-width: 3;
+}
+.tramp__dip {
+  stroke: var(--accent-2);
+  stroke-width: 2.5;
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  transform: scaleY(0);
+  animation: tramp-dip var(--tramp-t) infinite;
+}
+.tramp__shadow {
+  fill: var(--accent-2);
+  opacity: 0.25;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tramp-shadow var(--tramp-t) infinite;
+}
+.tramp__body {
+  transform-box: view-box;
+  transform-origin: 80px 119px;
+  animation: tramp-jump var(--tramp-t) infinite;
+}
+.tramp__arm {
+  transform-box: view-box;
+  animation: tramp-arm-l var(--tramp-t) infinite;
+}
+.tramp__arm--l {
+  transform-origin: 73px 86px;
+}
+.tramp__arm--r {
+  transform-origin: 87px 86px;
+  animation-name: tramp-arm-r;
+}
+.tramp__spark {
+  fill: var(--accent-soft);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tramp-spark var(--tramp-t) infinite;
+}
+.tramp__spark--b {
+  animation-delay: 0.08s;
+}
+.tramp__spark--c {
+  animation-delay: 0.16s;
+}
+
+.tramp__spark--d {
+  animation-delay: 0.12s;
+}
+.tramp__spark--e {
+  animation-delay: 0.04s;
+}
+.tramp__glow {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0.15;
+  animation: tramp-glow var(--tramp-t) infinite;
+}
+.tramp__ripple {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tramp-ripple var(--tramp-t) infinite;
+}
+.tramp__spring {
+  fill: none;
+  stroke: var(--accent-2);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  opacity: 0.8;
+}
+@keyframes tramp-glow {
+  0%,
+  20%,
+  80%,
+  100% {
+    opacity: 0.12;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+}
+@keyframes tramp-ripple {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.35, 1);
+  }
+  25% {
+    opacity: 0;
+    transform: scale(1.05, 1.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05, 1.6);
+  }
+}
+
+/* Figur: Landen (gestaucht) → Absprung (gestreckt) → Scheitel → Fall */
+@keyframes tramp-jump {
+  0% {
+    transform: translateY(6px) scale(1.12, 0.84);
+    animation-timing-function: ease-out;
+  }
+  12% {
+    transform: translateY(0) scale(0.94, 1.08);
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
+  }
+  50% {
+    transform: translateY(-44px) scale(1, 1);
+    animation-timing-function: cubic-bezier(0.6, 0, 0.8, 0.3);
+  }
+  88% {
+    transform: translateY(0) scale(0.95, 1.06);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(6px) scale(1.12, 0.84);
+  }
+}
+/* Tuch: Delle nur beim Kontakt */
+@keyframes tramp-dip {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  12%,
+  88% {
+    transform: scaleY(0);
+  }
+}
+@keyframes tramp-shadow {
+  0%,
+  100% {
+    transform: scale(1.15);
+    opacity: 0.32;
+  }
+  50% {
+    transform: scale(0.55);
+    opacity: 0.12;
+  }
+}
+/* Arme: unten am Tuch, oben weit geöffnet */
+@keyframes tramp-arm-l {
+  0%,
+  15%,
+  85%,
+  100% {
+    transform: rotate(0);
+  }
+  42%,
+  58% {
+    transform: rotate(86deg);
+  }
+}
+@keyframes tramp-arm-r {
+  0%,
+  15%,
+  85%,
+  100% {
+    transform: rotate(0);
+  }
+  42%,
+  58% {
+    transform: rotate(-86deg);
+  }
+}
+/* Funken: blühen am Scheitel auf und steigen */
+@keyframes tramp-spark {
+  0%,
+  35% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.3) rotate(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0) scale(1.1) rotate(45deg);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.6) rotate(90deg);
+  }
+}
+
+/* Reduzierte Bewegung: Figur steht ruhig auf dem Tuch, keine Funken */
+@media (prefers-reduced-motion: reduce) {
+  .tramp__body,
+  .tramp__arm,
+  .tramp__dip,
+  .tramp__shadow,
+  .tramp__spark,
+  .tramp__glow,
+  .tramp__ripple {
+    animation: none !important;
+  }
+}
+
 /* Animationen außerhalb des Bildes anhalten (components/PauseOffscreen.tsx) */
 [data-offscreen],
 [data-offscreen] *,

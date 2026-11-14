@@ -3,15 +3,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   BatteryLow,
+  BellOff,
   CircleCheck,
   CircleX,
+  Feather,
   Compass,
   Footprints,
   Gauge,
+  House,
   type LucideIcon,
   Phone,
   ShieldAlert,
   Stethoscope,
+  Sun,
   TrendingDown,
   UserMinus,
 } from 'lucide-react';
@@ -25,6 +29,7 @@ import ContentDate from '@/app/coaching/components/ContentDate';
 import HeroPicture from '@/app/coaching/components/HeroPicture';
 import LightField from '@/app/coaching/components/LightField';
 import QuoteSection, { Mark } from '@/app/coaching/components/QuoteSection';
+import TrampolineMotif from '@/app/coaching/components/TrampolineMotif';
 import { faqBurnout } from '@/app/coaching/faq';
 import { offerByTitle } from '@/app/coaching/pricing';
 
@@ -165,6 +170,34 @@ const pathOut: {
     lens: 'Sinn · nach Dieter Lange',
     text: 'Bevor du wieder Gas gibst, die Frage, die vor jedem Ziel steht: Wer willst du sein? Was soll in deinem Leben wieder Platz bekommen – Gesundheit, Beziehungen, Ruhe, Freude, eine andere Art zu arbeiten? Keine schnelle Reparatur, sondern die Grundlage, damit es nicht wieder passiert.',
     question: 'Wofür tue ich das eigentlich – und passt mein Alltag noch dazu?',
+  },
+];
+
+/**
+ * Bis zum Therapieplatz (2026-11-15, Punkte von Stefan): einfache Entlastung,
+ * keine Behandlung. Bewusst vorsichtig formuliert – kein Vitamin-D-Rezept,
+ * kein Glückshormon-Versprechen (HWG), Stille nur dosiert.
+ */
+const bridge: { Icon: LucideIcon; title: string; text: string }[] = [
+  {
+    Icon: BellOff,
+    title: 'Reize und Druck senken',
+    text: 'Termine und Aufgaben reduzieren, Verpflichtungen für ein paar Tage abgeben, digitale Reize begrenzen. „Detox“ heißt hier: Abstand vom Dauerinput – keine Entgiftungskur.',
+  },
+  {
+    Icon: House,
+    title: 'An einen sicheren Ort gehen',
+    text: 'Ein vertrauter Ort mit guten Erinnerungen kann Halt geben. Eine Reise hilft nur, wenn sie wirklich entlastet – und nicht selbst zur nächsten anstrengenden Aufgabe wird.',
+  },
+  {
+    Icon: Feather,
+    title: 'Stille vorsichtig dosieren',
+    text: 'Ruhe kann helfen, wieder bei dir anzukommen. Wenn Alleinsein das Grübeln verstärkt, verbinde kurze stille Momente lieber mit einem Menschen, dem du vertraust.',
+  },
+  {
+    Icon: Sun,
+    title: 'Die Grundlagen sichern',
+    text: 'Tageslicht, regelmäßig essen und trinken, ein fester Schlafrhythmus – das rutscht in der Krise als Erstes weg. Sonne tut gut; Vitamin D ist aber kein schnelles Burnout-Mittel.',
   },
 ];
 
@@ -395,6 +428,73 @@ export default function CoachingBurnoutPage() {
           </div>
         </section>
 
+        {/* Bis zum Therapieplatz – Entlastung, keine Behandlung */}
+        <section
+          id='bis-zur-therapie'
+          className='relative overflow-hidden px-4 py-16 sm:py-20'>
+          <div className='container relative mx-auto max-w-6xl'>
+            <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Erste Entlastung</p>
+            <h2 className='mt-4 text-2xl font-semibold text-(--text) sm:text-3xl'>
+              Bis zum Therapieplatz: Was jetzt entlasten kann
+            </h2>
+            <p className='mt-3 max-w-3xl text-sm leading-relaxed text-(--muted) sm:text-base'>
+              Auf einen Therapieplatz wartet man oft Wochen. Diese Zeit musst du nicht einfach
+              aushalten. Fünf einfache Dinge, die vielen guttun – keine Behandlung, sondern Boden
+              unter den Füßen, bis die Hilfe da ist.
+            </p>
+            <ul className='mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+              {bridge.map(({ Icon, title: bridgeTitle, text }) => (
+                <li key={bridgeTitle}>
+                  <GlassCard className='h-full p-6'>
+                    <Icon
+                      aria-hidden='true'
+                      className='h-6 w-6 text-accent'
+                    />
+                    <h3 className='mt-4 text-lg font-semibold text-(--text)'>{bridgeTitle}</h3>
+                    <p className='mt-2 text-sm leading-relaxed text-(--muted)'>{text}</p>
+                  </GlassCard>
+                </li>
+              ))}
+              {/* Bewegung: hervorgehoben, mit Trampolin-Animation */}
+              <li className='md:col-span-2 lg:col-span-2'>
+                <GlassCard className='grid h-full items-center gap-6 p-6 sm:grid-cols-[12rem_1fr] sm:p-8'>
+                  <TrampolineMotif className='mx-auto h-44 w-44 sm:h-48 sm:w-48' />
+                  <div>
+                    <p className='text-[11px] uppercase tracking-[0.2em] text-(--subtle)'>
+                      Mein Tipp
+                    </p>
+                    <h3 className='mt-2 text-lg font-semibold text-(--text) sm:text-xl'>
+                      Sanft bewegen statt Leistung bringen
+                    </h3>
+                    <p className='mt-2 text-sm leading-relaxed text-(--muted) sm:text-base'>
+                      Ein kurzer Spaziergang, leichtes Schwingen oder ein paar Minuten auf dem
+                      Trampolin. Das Federn macht vielen einfach Freude – und Bewegung kann die
+                      Stimmung heben. Kein Trainingsplan, keine Ziele: nur so viel, wie deine Kraft
+                      heute hergibt, und nur, wenn es sich gut anfühlt.
+                    </p>
+                  </div>
+                </GlassCard>
+              </li>
+            </ul>
+            <p className='mt-8 flex items-start gap-3 text-sm leading-relaxed text-(--muted)'>
+              <ShieldAlert
+                aria-hidden='true'
+                className='mt-0.5 h-5 w-5 shrink-0 text-accent'
+              />
+              <span>
+                Wenn es schlechter wird oder du dir nicht mehr sicher bist:{' '}
+                <a
+                  href='#hilfe'
+                  className={linkClass}>
+                  Hilfe-Nummern weiter unten
+                </a>
+                . Die Hausarztpraxis oder der ärztliche Bereitschaftsdienst sind jederzeit der
+                richtige erste Schritt.
+              </span>
+            </p>
+          </div>
+        </section>
+
         {/* Eigene Geschichte – dunkle Insel mit echtem Foto */}
         <section className='tone-dark relative overflow-hidden bg-(--bg) px-4 py-16 sm:py-24'>
           <LightField
@@ -622,7 +722,9 @@ export default function CoachingBurnoutPage() {
         {/* Hilfe sofort + Abschluss */}
         <section className='px-4 py-16 sm:py-20'>
           <div className='container mx-auto max-w-4xl'>
-            <div className='rounded-2xl border border-border-strong bg-surface p-6 sm:p-8'>
+            <div
+              id='hilfe'
+              className='scroll-mt-28 rounded-2xl border border-border-strong bg-surface p-6 sm:p-8'>
               <h2 className='flex items-center gap-3 text-lg font-semibold text-(--text) sm:text-xl'>
                 <Phone
                   aria-hidden='true'
