@@ -234,6 +234,11 @@ export default function LocationPage({ config }: { config: LocationConfig }) {
                 href='/coaching/unternehmer'
                 className={linkClass}>
                 Mehr zum Schwerpunkt Unternehmer
+              </Link> ·{' '}
+              <Link
+                href='/coaching/burnout'
+                className={linkClass}>
+                Coaching nach Burnout
               </Link>
             </p>
           </div>

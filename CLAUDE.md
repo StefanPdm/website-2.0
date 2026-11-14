@@ -28,6 +28,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
     ├── /session-podcast   KI-Podcast zur Session (inklusive) + Hörbeispiel   → Article
     ├── /buecher           Buchempfehlungen nach den vier Säulen              → Article + ItemList(Book)
     ├── /potsdam  /berlin  Standortseiten (gemeinsame Vorlage LocationPage)  → Article
+    ├── /burnout           Inhaltsseite „Coaching nach Burnout“ (WHO ICD-11, Weg zurück, keine Behandlung!) → Article + FAQPage
     ├── /unternehmer       Schwerpunktseite „Coaching für Unternehmer“ (trägt die Unternehmer-Keywords) → Article
     └── /guide-download    Token-Landing für Lead-Magnet (noindex)
 /widerruf                  Widerrufsbelehrung (B2C)

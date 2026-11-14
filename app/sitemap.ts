@@ -150,6 +150,13 @@ const pages: Page[] = [
     changeFrequency: 'monthly',
   },
   {
+    path: '/coaching/burnout',
+    lastModified: '2026-11-15',
+    published: '2026-11-15',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+  },
+  {
     path: '/coaching/unternehmer',
     lastModified: '2026-11-14',
     published: '2026-11-14',

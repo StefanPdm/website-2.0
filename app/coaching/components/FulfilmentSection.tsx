@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import type { CSSProperties, ReactNode } from 'react';
 import {
   Battery,
@@ -193,7 +194,12 @@ export default function FulfilmentSection() {
             <p className='text-base leading-relaxed text-(--muted) sm:text-lg'>
               Ich kenne das nicht aus Büchern. Über zwanzig Jahre habe ich ein Unternehmen
               aufgebaut, das nach jedem messbaren Maßstab erfolgreich war – und bin trotzdem in
-              Erschöpfung und Depression gelandet. Weil ich mein Glück im Außen gesucht habe.
+              Erschöpfung und Depression gelandet. Weil ich mein Glück im Außen gesucht habe.{' '}
+              <Link
+                href='/coaching/burnout'
+                className='rounded font-semibold text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+                Mehr zu Coaching nach Burnout
+              </Link>
             </p>
             <p className='text-base leading-relaxed text-(--text) sm:text-lg'>
               Erfüllung entsteht nicht durch das nächste Ziel. Sie entsteht durch eine Haltung, die

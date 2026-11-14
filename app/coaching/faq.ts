@@ -110,6 +110,39 @@ export const faqEntrepreneur: FaqEntry[] = [
 ];
 
 /**
+ * Fragen zu Coaching nach Burnout – auf /coaching/burnout (Sektion + FAQPage).
+ * Rechtlicher Rahmen: Coaching behandelt keine Krankheit (HeilprG, HWG) –
+ * keine Heilversprechen, immer Verweis auf ärztliche Abklärung.
+ */
+export const faqBurnout: FaqEntry[] = [
+  {
+    question: 'Ist Coaching eine Burnout-Behandlung?',
+    answer:
+      'Nein, Coaching ist keine Behandlung und ersetzt weder Ärztin, Arzt noch Psychotherapie. Es setzt dort an, wo die akute Erschöpfung ärztlich abgeklärt ist und du wieder Kraft für Veränderung hast: bei Haltung, Grenzen, Entscheidungen und der Frage, wie du künftig arbeiten und leben willst. Begleitend zu einer Behandlung ist Coaching möglich, wenn deine Ärztin oder dein Therapeut zustimmt.',
+  },
+  {
+    question: 'Wann ist der richtige Zeitpunkt für Coaching nach einem Burnout?',
+    answer:
+      'Der richtige Zeitpunkt ist, wenn die akute Erschöpfung ärztlich abgeklärt ist und du wieder etwas Energie für Veränderung spürst – oft in der Phase, in der die Rückkehr in den Alltag, den Job oder die eigene Firma ansteht. Im kostenlosen Erstgespräch klären wir offen, ob Coaching jetzt passt oder ob ein anderer Schritt zuerst dran ist.',
+  },
+  {
+    question: 'Zahlt die Krankenkasse das Coaching?',
+    answer:
+      `Nein, Coaching ist eine private Leistung und wird von der gesetzlichen Krankenkasse nicht übernommen. Eine Session dauert etwa drei Stunden und kostet ${offerByTitle('Folgesession').price} inkl. MwSt.; das Erstgespräch ist kostenlos. Ärztliche und psychotherapeutische Behandlung läuft dagegen über die Krankenkasse – sie hat bei akuten Beschwerden immer Vorrang.`,
+  },
+  {
+    question: 'Wie unterscheidet sich Burnout von einer Depression?',
+    answer:
+      'Burnout beschreibt nach der WHO eine Erschöpfung durch chronischen, nicht bewältigten Stress am Arbeitsplatz; eine Depression ist eine Erkrankung, die alle Lebensbereiche betreffen kann. Die Beschwerden überschneiden sich stark – Schlafprobleme, Antriebslosigkeit, Erschöpfung –, deshalb gehört die Unterscheidung in ärztliche Hände und nicht ins Coaching.',
+  },
+  {
+    question: 'Kommst du auch zu mir, oder können wir draußen arbeiten?',
+    answer:
+      'Ja, wir können bei mir in Potsdam arbeiten, im Gehen durch einen der Potsdamer Parks, bei dir vor Ort in Potsdam, Berlin oder Brandenburg oder online per Video. Gerade nach einer Erschöpfung empfinden viele das Gehen als entlastend – manche Gedanken sortieren sich in Bewegung leichter.',
+  },
+];
+
+/**
  * Fragen, die beide Geschäftsbereiche betreffen.
  *
  * Stehen bewusst am Ende **beider** FAQ-Sektionen: Wer auf einer der beiden

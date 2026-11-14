@@ -163,6 +163,10 @@ ${references}
 - [Session-Podcast](${absoluteUrl('/coaching/session-podcast')}): Auf Wunsch zu jeder Session inklusive –
   ein KI-Podcast (Google NotebookLM, aus einem lokal pseudonymisierten Transkript der Session), der die Session
   aus der Metaperspektive reflektiert.
+- [Coaching nach Burnout](${absoluteUrl('/coaching/burnout')}): Wie man in einen Burnout kommt, was
+  Burnout laut WHO (ICD-11, berufsbezogenes Phänomen) ist, der Weg zurück in vier Schritten und wann Coaching
+  passt. Ausdrücklich keine Behandlung, sondern der Schritt nach ärztlicher Abklärung; Stefan hat den
+  Burnout selbst erlebt.
 - [Coaching in Potsdam](${absoluteUrl('/coaching/potsdam')}): Formate vor Ort (bei Stefan in Potsdam,
   im Gehen, beim Klienten in Potsdam, Berlin oder Brandenburg) und online, typische Anliegen, Preise.
 - [Coaching in Berlin](${absoluteUrl('/coaching/berlin')}): Termine beim Klienten in Berlin, online oder

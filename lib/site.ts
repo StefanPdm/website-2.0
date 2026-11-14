@@ -80,6 +80,7 @@ export const KEYWORDS_NLP = [
   'Grenzen setzen lernen',
   'Emotionen regulieren',
   'Coaching nach Burnout',
+  'Burnout Coaching Potsdam',
   // Methode & Nachweis
   'Neuro Linguistisches Programmieren',
   'Reframing',

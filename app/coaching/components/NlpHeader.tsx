@@ -12,6 +12,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowRight,
+  BatteryCharging,
   BookOpen,
   Briefcase,
   Castle,
@@ -145,6 +146,13 @@ const discoverItems: DiscoverItem[] = [
     hint: 'Der Forschungsstand 2026',
     Icon: FlaskConical,
     group: 'lesen',
+  },
+  {
+    label: 'Coaching nach Burnout',
+    href: '/coaching/burnout',
+    hint: 'Der Weg danach – von einem, der dort war',
+    Icon: BatteryCharging,
+    group: 'fuer-dich',
   },
   {
     label: 'Mit eigener Firma',
