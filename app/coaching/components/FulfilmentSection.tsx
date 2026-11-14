@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import type { CSSProperties, ReactNode } from 'react';
 import {
+  ArrowRight,
   Battery,
   Cog,
   Hourglass,
@@ -38,7 +40,7 @@ import { SecondaryButton } from '@/app/coaching/components/Buttons';
  */
 const symptoms = [
   {
-    text: 'Die Firma läuft. Du funktionierst – aber innen fühlt es sich nach Pflichtprogramm an.',
+    text: 'Alles läuft. Du funktionierst – aber innen fühlt es sich nach Pflichtprogramm an.',
     Icon: Cog,
     motion: 'spin',
   },
@@ -53,7 +55,8 @@ const symptoms = [
     motion: 'typing',
   },
   {
-    text: 'Der nächste Erfolg soll es richten – und tut es dann doch nicht.',
+    // Bewusst der eine unternehmerische Satz: Signal, dass Stefan diese Welt kennt.
+    text: 'Die Firma wächst. Der nächste Erfolg soll es richten – und tut es dann doch nicht.',
     Icon: Trophy,
     motion: 'cheer',
   },
@@ -153,7 +156,7 @@ export default function FulfilmentSection() {
         <div className='mx-auto max-w-3xl text-center'>
           <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>Kennst du das?</p>
           <h2 className='mt-5 text-3xl font-semibold text-(--text) sm:text-4xl'>
-            Beruflich erfolgreich – und trotzdem nicht erfüllt?
+            Nach außen erfolgreich – und trotzdem nicht erfüllt?
           </h2>
           <p className='mt-5 text-base leading-relaxed text-(--muted) sm:text-lg'>
             Es ist die Frage, die kaum jemand laut stellt: Warum fühlt sich ein Leben, das von außen
@@ -198,6 +201,16 @@ export default function FulfilmentSection() {
               Erfüllung entsteht nicht durch das nächste Ziel. Sie entsteht durch eine Haltung, die
               man täglich neu wählt.
             </p>
+            {/* Brücke zum Schwerpunkt Unternehmer (seit 2026-11) */}
+            <Link
+              href='/coaching/unternehmer'
+              className='group inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-accent underline-offset-4 transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'>
+              Du bist selbst Unternehmer? Was ich dir besonders mitgebe
+              <ArrowRight
+                aria-hidden='true'
+                className='h-4 w-4 shrink-0 transition group-hover:translate-x-1'
+              />
+            </Link>
           </div>
         </div>
 

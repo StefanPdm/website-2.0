@@ -80,6 +80,11 @@ const discoverItems: { label: string; href: string; hint: string; match?: string
     hint: 'Dein Coaching zum Nachhören',
   },
   { label: 'Bücher', href: '/coaching/buecher', hint: 'Was mich geprägt hat' },
+  {
+    label: 'Coaching für Unternehmer',
+    href: '/coaching/unternehmer',
+    hint: 'Von einem, der es selbst war',
+  },
   { label: 'Coaching in Potsdam', href: '/coaching/potsdam', hint: 'Vor Ort, im Gehen, online' },
   { label: 'Coaching in Berlin', href: '/coaching/berlin', hint: 'Bei dir, online oder in Potsdam' },
   { label: 'Warum NLP wirkt', href: '/coaching/wissenschaft', hint: 'Der Forschungsstand 2026' },
@@ -315,7 +320,7 @@ export default function NlpHeader() {
             </span>
             {/* Untertitel kostet ~150px – erst ab xl, wo der Platz da ist. */}
             <span className='hidden whitespace-nowrap text-xs uppercase text-(--muted) xl:block'>
-              Life Coaching für Unternehmer
+              Life Coaching · Potsdam &amp; Berlin
             </span>
           </span>
         </Link>

@@ -30,7 +30,7 @@ function hasCover(book: Book) {
   }
 }
 
-const title = 'Buchempfehlungen – Haltung, Sinn und Beziehung für Unternehmer';
+const title = 'Buchempfehlungen – Haltung, Sinn und Beziehung';
 const description = `${allBooks.length} Bücher, die Life Coach Stefan Heinemann aus Potsdam selbst geprägt haben – von Jens Corssen, Dieter Lange, Tony Robbins, Viktor Frankl, Hermann Hesse und anderen. Jeweils mit ein, zwei Sätzen, warum es sich lohnt.`;
 
 export const metadata: Metadata = {

@@ -32,7 +32,7 @@ export default function AboutSection() {
     },
     {
       src: '/images-nlp/portrait-treppe.webp',
-      alt: 'Portrait von Stefan Heinemann, Life Coach für Unternehmer aus Potsdam',
+      alt: 'Portrait von Stefan Heinemann, Life Coach aus Potsdam',
     },
     {
       src: '/images-nlp/portrait-firewalk.webp',
@@ -153,12 +153,14 @@ export default function AboutSection() {
                 Stefan Heinemann
               </h2>
               <p className='mt-4 text-base text-(--text)/70 sm:text-lg'>
-                Ich begleite vor allem Unternehmer dabei, aus innerem Chaos klare Entscheidungen zu formen. NLP
-                nutze ich pragmatisch: als Werkzeugkasten für Fokus, emotionale Stabilität und
-                zielgerichtetes Handeln – ohne leere Versprechen.
+                Ich war über 20 Jahre Unternehmer, mit drei Filialen und großem Team. Ich weiß, wie
+                es ist, wenn alle etwas von dir wollen und du für alle stark sein musst. Das hilft
+                Unternehmern – und allen, die viel tragen. NLP nutze ich pragmatisch: als
+                Werkzeugkasten für Fokus, emotionale Stabilität und zielgerichtetes Handeln – ohne
+                leere Versprechen.
               </p>
               <div className='mt-6 flex flex-wrap gap-3'>
-                {['Life Coach für Unternehmer', 'Identität & Entscheidungen', 'Potsdam'].map((item) => (
+                {['Life Coach', '20 Jahre Unternehmer', 'Identität & Entscheidungen', 'Potsdam'].map((item) => (
                   <span
                     key={item}
                     className='rounded-full border border-(--border) bg-surface px-4 py-2 text-xs text-(--text)/80'>

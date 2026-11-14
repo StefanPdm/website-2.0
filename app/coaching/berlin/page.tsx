@@ -12,20 +12,19 @@ import LocationPage, {
 const config: LocationConfig = {
   path: '/coaching/berlin',
   city: 'Berlin',
-  title: 'Coaching in Berlin – Life Coaching für Unternehmer',
-  description: `Coaching für Unternehmer in Berlin: Ich komme zu dir, wir arbeiten online oder bei mir im nahen Potsdam. ${SESSION_FACTS}`,
+  title: 'Coaching in Berlin – Life Coaching',
+  description: `Life Coaching in Berlin, Schwerpunkt Unternehmer: Ich komme zu dir, wir arbeiten online oder bei mir im nahen Potsdam. ${SESSION_FACTS}`,
   keywords: [
     'Coaching Berlin',
     'Coach Berlin',
     'Life Coach Berlin',
     'Life Coaching Berlin',
-    'Coaching für Unternehmer Berlin',
     'Business Coaching Berlin',
     'Personal Coaching Berlin',
     'Online Coaching Berlin',
   ],
-  h1: 'Life Coaching für Unternehmer in Berlin',
-  lead: 'Ich bin Stefan Heinemann, Coach aus Potsdam – direkt vor den Toren Berlins. Ich begleite Berliner Unternehmer, die nach außen funktionieren und innen wieder Klarheit, Ruhe und Richtung suchen: bei dir in Berlin, online oder mit etwas Abstand bei mir in Potsdam.',
+  h1: 'Life Coaching in Berlin',
+  lead: 'Ich bin Stefan Heinemann, Coach aus Potsdam – direkt vor den Toren Berlins. Ich begleite Menschen in Berlin, die nach außen funktionieren und innen wieder Klarheit, Ruhe und Richtung suchen: bei dir in Berlin, online oder mit etwas Abstand bei mir in Potsdam.',
   formats: [
     {
       icon: 'visit',

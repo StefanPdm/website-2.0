@@ -1,0 +1,306 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Compass, Home, Lock, Repeat, Scale, UserRound, type LucideIcon } from 'lucide-react';
+
+import GlassCard from '@/components/GlassCard';
+import { ContentPageStructuredData } from '@/components/StructuredData';
+import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
+import ContentDate from '@/app/coaching/components/ContentDate';
+import { MotifClarity } from '@/app/coaching/components/Motifs';
+import { offerByTitle } from '@/app/coaching/pricing';
+
+/**
+ * Schwerpunktseite „Coaching für Unternehmer“ (2026-11-14).
+ *
+ * Seit der Öffnung von Welt A („Life Coaching“ statt „Life Coaching für
+ * Unternehmer“) sind Unternehmer Herkunft und Schwerpunkt, nicht Filter. Diese
+ * Seite trägt die Unternehmer-Keywords und sagt, was der Onepager bewusst
+ * nicht mehr zuspitzt.
+ *
+ * Nur Belegbares: Stefans Werdegang wie in AboutSection, Preise aus
+ * pricing.ts, Formate wie in faq.ts. Keine Klientengeschichten, keine
+ * Erfolgsversprechen.
+ */
+
+const PATH = '/coaching/unternehmer';
+
+const title = 'Coaching für Unternehmer in Potsdam & Berlin';
+const description =
+  'Coaching für Unternehmer und Selbstständige in Potsdam, Berlin und online – von einem Coach, der 20 Jahre selbst ein Unternehmen mit drei Filialen geführt hat. Für die persönlichen Themen hinter der Firma: Einsamkeit an der Spitze, Firma und Familie, Entscheidungen, Übergänge. Erstgespräch kostenlos.';
+
+export const metadata: Metadata = {
+  title,
+  description,
+  keywords: [
+    'Coaching für Unternehmer',
+    'Life Coaching für Unternehmer',
+    'Coaching für Unternehmer Potsdam',
+    'Coaching für Unternehmer Berlin',
+    'Coaching für Selbstständige',
+    'Unternehmercoaching',
+    'Coaching Geschäftsführer',
+    'Einsamkeit an der Spitze',
+    'Unternehmer Burnout',
+  ],
+  alternates: { canonical: PATH },
+  openGraph: {
+    title,
+    description,
+    url: PATH,
+    type: 'article',
+    locale: 'de_DE',
+    siteName: 'Stefan Heinemann Coaching',
+  },
+  twitter: { card: 'summary_large_image', title, description },
+};
+
+/** Was Unternehmer anders trifft als Angestellte – Themen, keine Fallgeschichten. */
+const themes: { Icon: LucideIcon; title: string; text: string }[] = [
+  {
+    Icon: UserRound,
+    title: 'Allein an der Spitze',
+    text: 'Im Team musst du stark sein, zu Hause willst du niemanden belasten. Mit wem sprichst du eigentlich über dich?',
+  },
+  {
+    Icon: Home,
+    title: 'Firma und Familie',
+    text: 'Du sitzt am Abendbrottisch, aber im Kopf bist du noch im Betrieb. Und die Menschen, für die du das alles tust, merken es.',
+  },
+  {
+    Icon: Compass,
+    title: 'Wer bist du ohne die Firma?',
+    text: 'Wenn das Unternehmen dein Lebenswerk ist, wird jede Krise der Firma zu einer Krise deines Selbstwerts.',
+  },
+  {
+    Icon: Scale,
+    title: 'Entscheidungen mit Tragweite',
+    text: 'Es geht um Arbeitsplätze, um Geld, um Existenzen. Da drehen sich Gedanken nachts im Kreis, statt zu Entscheidungen zu werden.',
+  },
+  {
+    Icon: Repeat,
+    title: 'Übergänge',
+    text: 'Verkauf, Nachfolge, Neuanfang oder die Frage, ob du so weitermachen willst. Der Wechsel ist selten ein Rechenproblem.',
+  },
+  {
+    Icon: Lock,
+    title: 'Erfolg, der nicht erfüllt',
+    text: 'Umsatz, Filialen, Team: alles gewachsen. Und trotzdem fühlt es sich innen nach Pflichtprogramm an.',
+  },
+];
+
+const startersession = offerByTitle('Startersession');
+const folgesession = offerByTitle('Folgesession');
+
+const facts = [
+  {
+    term: 'Erstgespräch',
+    detail:
+      'Kostenlos und unverbindlich: die Klarheits-Session, ca. 30 Minuten per Telefon oder Video.',
+  },
+  {
+    term: 'Sessions',
+    detail: `Wenige, lange Termine statt einer Stunde pro Woche: erste Session (Startersession) ca. 4 Stunden für ${startersession.price}, jede weitere ca. 3 Stunden für ${folgesession.price} – inkl. MwSt.`,
+  },
+  {
+    term: 'Orte',
+    detail:
+      'Bei mir in Potsdam, bei dir vor Ort in Potsdam, Berlin oder Brandenburg – auch im Unternehmen, wenn Rahmen und Ziel vorher abgestimmt sind – oder online per Video.',
+  },
+  {
+    term: 'Vertraulichkeit',
+    detail:
+      'Was du erzählst, bleibt bei mir – auch gegenüber Team, Gesellschaftern und Familie.',
+  },
+];
+
+const linkClass =
+  'rounded text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent';
+
+export default function CoachingUnternehmerPage() {
+  return (
+    <>
+      <ContentPageStructuredData
+        page={{
+          path: PATH,
+          headline: title,
+          description,
+          shortTitle: 'Unternehmer',
+          about: 'Coaching für Unternehmer',
+        }}
+      />
+      <article className='relative z-10'>
+        {/* Kopfbereich */}
+        <section className='relative overflow-hidden border-b border-border px-4 pt-40 pb-16 md:pt-48'>
+          <MotifClarity className='pointer-events-none absolute -right-24 top-24 w-[520px] opacity-[0.07]' />
+          <div className='container relative mx-auto max-w-4xl'>
+            <nav
+              aria-label='Brotkrumen'
+              className='mb-8 flex flex-wrap items-center gap-2 text-xs text-(--muted)'>
+              <Link
+                href='/'
+                className='transition hover:text-(--text)'>
+                Start
+              </Link>
+              <span aria-hidden='true'>/</span>
+              <Link
+                href='/coaching'
+                className='transition hover:text-(--text)'>
+                Coaching
+              </Link>
+              <span aria-hidden='true'>/</span>
+              <span className='text-(--text)'>Unternehmer</span>
+            </nav>
+
+            <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
+              Schwerpunkt Unternehmer
+            </p>
+            <h1 className='mt-5 text-3xl font-semibold leading-tight text-(--text) sm:text-4xl lg:text-5xl'>
+              Coaching für Unternehmer in Potsdam &amp; Berlin
+            </h1>
+            <p className='mt-6 max-w-2xl text-base leading-relaxed text-(--muted) sm:text-lg'>
+              Über 20 Jahre habe ich selbst ein Unternehmen geführt – drei Filialen, großes Team.
+              Ich weiß, wie es ist, wenn alle etwas von dir wollen und du für alle stark sein musst.
+              Hier sprichst du mit jemandem, der das von innen kennt.
+            </p>
+            <ContentDate path={PATH} />
+          </div>
+        </section>
+
+        {/* Themen */}
+        <section className='px-4 py-16 sm:py-20'>
+          <div className='container mx-auto max-w-5xl'>
+            <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
+              Was Unternehmer anders trifft
+            </h2>
+            <p className='mt-3 max-w-2xl text-sm text-(--muted) sm:text-base'>
+              Die Themen sind menschlich. Aber mit eigener Firma haben sie mehr Gewicht.
+            </p>
+            <ul className='mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+              {themes.map(({ Icon, title: themeTitle, text }) => (
+                <li key={themeTitle}>
+                  <GlassCard className='h-full p-6'>
+                    <Icon
+                      aria-hidden='true'
+                      className='h-6 w-6 text-accent'
+                    />
+                    <h3 className='mt-4 text-lg font-semibold text-(--text)'>{themeTitle}</h3>
+                    <p className='mt-2 text-sm leading-relaxed text-(--muted)'>{text}</p>
+                  </GlassCard>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Herkunft */}
+        <section className='border-y border-border bg-(--section-bg-accent) px-4 py-16 sm:py-20'>
+          <div className='container mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center'>
+            <div className='relative aspect-4/5 overflow-hidden rounded-3xl border border-border'>
+              <Image
+                src='/images-nlp/portrait-flipchart.webp'
+                alt='Stefan Heinemann am Flipchart in einem Workshopraum'
+                fill
+                sizes='(min-width: 1024px) 440px, 100vw'
+                className='object-cover object-[55%_center]'
+              />
+            </div>
+            <div>
+              <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
+                Warum ich das verstehe
+              </h2>
+              <div className='mt-6 space-y-4 text-base leading-relaxed text-(--muted)'>
+                <p>
+                  Über 20 Jahre war ich Unternehmer im Interieur Design, in Berlin und Hamburg, mit
+                  drei Filialen und großem Team. Nach jedem messbaren Maßstab erfolgreich.
+                </p>
+                <p>
+                  Und trotzdem bin ich in Erschöpfung, Depression und Burnout gelandet – weil ich
+                  mein Glück im Außen gesucht habe. 2024 war mein Wendepunkt. Ich habe mir Hilfe
+                  geholt und meine NLP-Ausbildung begonnen. Seit Mitte 2025 begleite ich als Coach
+                  andere Menschen.
+                </p>
+                <p className='text-(--text)'>
+                  Ich muss dir nicht erklären lassen, was Lohnlauf, Personalgespräch oder ein
+                  schlechter Monat mit dem Schlaf machen. Wir können gleich bei dir anfangen.
+                </p>
+              </div>
+              <p className='mt-6 text-sm text-(--muted)'>
+                Du bist kein Unternehmer, erkennst dich aber wieder? Dann bist du genauso richtig:{' '}
+                <Link
+                  href='/coaching'
+                  className={linkClass}>
+                  Life Coaching für alle, die viel tragen
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Fakten */}
+        <section className='px-4 py-16 sm:py-20'>
+          <div className='container mx-auto max-w-4xl'>
+            <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
+              So passt es in deinen Kalender
+            </h2>
+            <dl className='mt-8 divide-y divide-border rounded-2xl border border-card-border bg-surface'>
+              {facts.map((fact) => (
+                <div
+                  key={fact.term}
+                  className='grid gap-1 px-5 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6'>
+                  <dt className='text-sm font-semibold text-(--text)'>{fact.term}</dt>
+                  <dd className='text-sm text-(--muted)'>{fact.detail}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className='mt-4 text-sm text-(--muted)'>
+              Mehr dazu:{' '}
+              <Link
+                href='/coaching#ansatz'
+                className={linkClass}>
+                wie ich arbeite
+              </Link>{' '}
+              ·{' '}
+              <Link
+                href='/coaching/potsdam'
+                className={linkClass}>
+                Coaching in Potsdam
+              </Link>{' '}
+              ·{' '}
+              <Link
+                href='/coaching/berlin'
+                className={linkClass}>
+                Coaching in Berlin
+              </Link>
+            </p>
+          </div>
+        </section>
+
+        {/* Abschluss */}
+        <section className='border-t border-border px-4 py-16 sm:py-20'>
+          <div className='container mx-auto max-w-4xl text-center'>
+            <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
+              Einmal offen reden. Unternehmer unter sich.
+            </h2>
+            <p className='mx-auto mt-4 max-w-xl text-sm text-(--muted) sm:text-base'>
+              30 Minuten, kostenlos, per Telefon oder Video. Danach weißt du, ob wir zusammenpassen.
+            </p>
+            <div className='mt-8 flex flex-col justify-center gap-3 sm:flex-row'>
+              <PrimaryButton
+                href='/coaching#kontakt'
+                className='w-full sm:w-auto'>
+                Kostenloses Erstgespräch
+              </PrimaryButton>
+              <SecondaryButton
+                href='/coaching#preise'
+                className='w-full sm:w-auto'>
+                Preise ansehen
+              </SecondaryButton>
+            </div>
+          </div>
+        </section>
+      </article>
+    </>
+  );
+}

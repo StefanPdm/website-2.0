@@ -42,7 +42,7 @@ export const AREA_SERVED = ['Potsdam', 'Berlin', 'Brandenburg', 'Deutschland'] a
 // behandelt werden. Bewusst auf Begriffe beschränkt, die die Seite auch
 // wirklich einlöst – Keywords ohne passenden Inhalt schaden mehr als sie nützen.
 
-/** Welt A – Stefan Heinemann Coaching (Life Coaching für Unternehmer). Lokal + Thema + Format. */
+/** Welt A – Stefan Heinemann Coaching (Life Coaching, Schwerpunkt Unternehmer). Lokal + Thema + Format. */
 export const KEYWORDS_NLP = [
   // Kern + Ort
   'NLP Coaching Potsdam',
@@ -56,6 +56,9 @@ export const KEYWORDS_NLP = [
   'Coaching Berlin',
   'Life Coach Potsdam',
   'Life Coach Berlin',
+  'Life Coaching Potsdam',
+  'Life Coaching Berlin',
+  // Schwerpunkt – eingelöst auf /coaching/unternehmer
   'Life Coaching für Unternehmer',
   'Coaching für Unternehmer Potsdam',
   'Coaching für Unternehmer Berlin',

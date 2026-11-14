@@ -68,16 +68,22 @@ export default function HeroSection() {
           {/* Die H1 trägt die Suchfrage, die große Zeile darunter die Ansprache. */}
           {/* hero-eyebrow: enger dunkler Schatten um die Buchstaben – mobil lag die Zeile bei 3,7 : 1 */}
           <h1 className='hero-eyebrow text-xs uppercase tracking-[0.3em] text-accent-soft'>
-            Life Coaching für Unternehmer · Potsdam, Berlin &amp; online
+            Life Coaching · Potsdam, Berlin &amp; online
           </h1>
+          {/* Seit 2026-11 breiter: Unternehmer sind Herkunft und Schwerpunkt, nicht Filter
+              (Schwerpunktseite /coaching/unternehmer). */}
           <p className='mt-5 text-4xl font-semibold leading-tight text-(--text) sm:text-5xl lg:text-6xl'>
-            Dein Unternehmen läuft.
+            Alles läuft.
             <br />
             Und du?
           </p>
-          <p className='mt-6 text-base text-(--muted) sm:text-lg'>
-            Für Unternehmer, die nach außen funktionieren – und innen wieder Klarheit, Ruhe und
-            Richtung brauchen. Ohne esoterischen Nebel.
+          <p className='mt-5 text-sm font-semibold uppercase tracking-[0.2em] text-accent-soft'>
+            Firma. Familie. Kopf.
+          </p>
+          <p className='mt-4 text-base text-(--muted) sm:text-lg'>
+            Für Menschen, die viel tragen und nach außen funktionieren – und innen wieder Klarheit,
+            Ruhe und Richtung brauchen. Von jemandem, der 20 Jahre selbst Unternehmer war. Ohne
+            esoterischen Nebel.
           </p>
 
           <div className='mt-8 flex flex-col gap-3 sm:flex-row'>

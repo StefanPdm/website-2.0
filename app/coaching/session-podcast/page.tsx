@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     'Coaching Podcast',
     'KI Podcast Coaching',
     'Coaching Nachbereitung',
-    'Life Coaching für Unternehmer',
+    'Life Coaching Potsdam',
     'Coaching Potsdam',
   ],
   alternates: { canonical: PATH },

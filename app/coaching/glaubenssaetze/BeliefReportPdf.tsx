@@ -163,7 +163,7 @@ function Brand({ onDark }: { onDark?: boolean }) {
           <Text style={{ fontWeight: 400, color: onDark ? C.amber : C.copper }}>COACHING</Text>
         </Text>
         <Text style={{ fontSize: 7.5, letterSpacing: 1.2, color: onDark ? C.mutedOnDark : C.muted, marginTop: 1 }}>
-          LIFE COACHING FÜR UNTERNEHMER
+          LIFE COACHING · POTSDAM & BERLIN
         </Text>
       </View>
     </View>
@@ -415,7 +415,7 @@ export default function BeliefReportPdf({ picked, created }: BeliefReportProps) 
             <Text style={[s.eyebrow, { color: C.amberSoft }]}>Lass uns darüber sprechen</Text>
             <Text style={{ fontSize: 17, fontWeight: 600, marginTop: 6, color: C.creamOnDark }}>{OWNER.name}</Text>
             <Text style={{ fontSize: 9.5, color: C.mutedOnDark, marginTop: 2 }}>
-              Life Coaching für Unternehmer · Potsdam, Berlin und online
+              Life Coaching · Potsdam, Berlin und online
             </Text>
             <Text style={{ fontSize: 9.5, color: C.mutedOnDark, marginTop: 10 }}>
               Die hartnäckigsten Glaubenssätze fühlen sich wie Tatsachen an. Im Coaching untersuchen

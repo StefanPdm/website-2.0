@@ -53,15 +53,15 @@ function build() {
 
   return `# ${OWNER.name}
 
-> Life Coach für Unternehmer und Webentwickler aus ${OWNER.city}. Zwei eigenständige
+> Life Coach und Webentwickler aus ${OWNER.city}. Zwei eigenständige
 > Geschäftsbereiche unter einer Person: Stefan Heinemann Coaching (Life Coaching für
-> Unternehmer mit persönlichen Themen) und
+> Menschen, die viel Verantwortung tragen, Schwerpunkt Unternehmer) und
 > Webentwicklung für digitale Systeme. Tätig in ${AREA_SERVED.join(', ')} sowie remote.
 
 ## Person
 
 - Name: ${OWNER.name}
-- Rollen: Life Coach für Unternehmer (DVNLP-zertifizierter NLP Coach), Webentwickler
+- Rollen: Life Coach (DVNLP-zertifizierter NLP Coach, Schwerpunkt Unternehmer), Webentwickler
 - Standort: ${OWNER.street}, ${OWNER.postalCode} ${OWNER.city}, Deutschland
 - Einzugsgebiet: ${AREA_SERVED.join(', ')}, zusätzlich remote/online
 - Kontakt Coaching: ${OWNER.emailCoaching}
@@ -71,11 +71,15 @@ function build() {
 - Hintergrund: über 20 Jahre Unternehmer im Interieur Design, danach Wechsel in
   die Fullstack-Entwicklung, seit 2024 NLP-Ausbildung, seit Mitte 2025 als Coach tätig.
 
-## Geschäftsbereich 1 — Stefan Heinemann Coaching (Life Coaching für Unternehmer)
+## Geschäftsbereich 1 — Stefan Heinemann Coaching (Life Coaching)
 
 URL: ${absoluteUrl('/coaching')}
 
-Zielgruppe: Unternehmer, Selbstständige und Führungskräfte mit persönlichen Themen.
+Zielgruppe: Menschen, die viel Verantwortung tragen – im Beruf, im eigenen
+Unternehmen oder in der Familie – und nach außen funktionieren, innen aber
+Klarheit, Ruhe und Richtung suchen. Schwerpunkt: Unternehmer und Selbstständige
+(eigene Seite: ${absoluteUrl('/coaching/unternehmer')}), weil Stefan Heinemann über
+20 Jahre selbst Unternehmer war.
 
 Coaching-Ansatz aus vier Säulen:
 - Haltung: Selbstverantwortung, Gestalter statt Opfer – geprägt von den Büchern
@@ -149,7 +153,10 @@ ${references}
 ## Seiten
 
 - [Startseite](${SITE_URL}): Auswahl zwischen beiden Geschäftsbereichen
-- [Stefan Heinemann Coaching – Life Coaching für Unternehmer](${absoluteUrl('/coaching')}): Angebot, Persönlichkeitstest, Preise, Kontakt
+- [Stefan Heinemann Coaching – Life Coaching in Potsdam & Berlin](${absoluteUrl('/coaching')}): Angebot, Persönlichkeitstest, Preise, Kontakt
+- [Coaching für Unternehmer](${absoluteUrl('/coaching/unternehmer')}): Schwerpunkt – Themen, die Unternehmer
+  besonders treffen (Einsamkeit an der Spitze, Firma und Familie, Identität und Firma, Übergänge),
+  und warum Stefan sie aus 20 Jahren eigener Unternehmerschaft kennt.
 - [Webentwicklung](${absoluteUrl('/webdevelopment')}): Leistungen, Technologien, Referenzen, Kontakt
 - [KI-Sichtbarkeits-Check](${absoluteUrl('/webdevelopment/ki-check')}): kostenloses Werkzeug – prüft eine Website auf
   KI-Crawler in der robots.txt, llms.txt, strukturierte Daten, Meta-Angaben und Sicherheits-Header, mit Punktzahl.

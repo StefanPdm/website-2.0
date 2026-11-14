@@ -44,9 +44,11 @@ export const faqNlp: FaqEntry[] = [
       'Coaching richtet sich an grundsätzlich psychisch stabile Menschen, die ein konkretes Ziel, einen Konflikt oder ein persönliches Entwicklungsthema bearbeiten möchten; es diagnostiziert und behandelt keine psychischen Erkrankungen. Bei akuten Krisen, Suizidgedanken, schweren Traumafolgen, Suchterkrankungen oder anderen Störungen mit Krankheitswert ist eine ärztliche oder psychotherapeutische Behandlung der richtige Weg. Coaching ersetzt weder Psychotherapie noch medizinische Behandlung und sollte eine notwendige Behandlung niemals verzögern.',
   },
   {
+    // Schärfung über Haltung statt Beruf (2026-11-14): Wer passt, entscheidet
+    // nicht der Job, sondern die Erwartung an das Coaching.
     question: 'Für wen ist mein Coaching nicht geeignet?',
     answer:
-      'Coaching ist nicht geeignet, wenn du eine Diagnose oder Heilbehandlung erwartest, dich in einer akuten psychischen Krise befindest oder aktuell nicht in der Lage bist, eigenverantwortlich am Prozess mitzuwirken. Es passt auch nicht, wenn du nur eine schnelle Technik suchst, die andere Menschen verändert, ohne dass du deine eigene Haltung und deinen Anteil betrachten möchtest. Im Zweifel klären wir im Erstgespräch offen, ob Coaching der passende Rahmen ist.',
+      'Mein Coaching passt nicht, wenn du eine Therapie brauchst, fertige Ratschläge erwartest oder Esoterik suchst – ob du Unternehmer bist oder nicht, spielt dafür keine Rolle. Coaching ist nicht geeignet, wenn du eine Diagnose oder Heilbehandlung erwartest, dich in einer akuten psychischen Krise befindest oder aktuell nicht in der Lage bist, eigenverantwortlich am Prozess mitzuwirken. Ich gebe dir keine Rezepte, sondern arbeite mit dir an deinen eigenen Mustern und Entscheidungen; Orakel oder Heilversprechen gibt es bei mir nicht. Es passt auch nicht, wenn du nur eine schnelle Technik suchst, die andere Menschen verändert, ohne dass du deine eigene Haltung und deinen Anteil betrachten möchtest. Im Zweifel klären wir im Erstgespräch offen, ob Coaching der passende Rahmen ist.',
   },
   {
     question: 'Was passiert im kostenlosen Erstgespräch?',

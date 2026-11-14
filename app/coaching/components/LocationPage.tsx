@@ -53,7 +53,7 @@ const folgesession = offerByTitle('Folgesession');
 export const SESSION_FACTS = `DVNLP-zertifiziert, Erstgespräch kostenlos, Sessions ca. 180 Minuten für ${folgesession.price} inkl. MwSt.`;
 
 const topics = [
-  'Die Firma läuft, aber du fühlst dich leer oder erschöpft.',
+  'Alles läuft, aber du fühlst dich leer oder erschöpft.',
   'Entscheidungen drehen sich nachts im Kopf, statt getroffen zu werden.',
   'Ärger, Unruhe oder Druck steuern dich – statt du sie.',
   'Du willst Grenzen setzen – bei Kunden, im Team, in der Familie.',
@@ -211,7 +211,7 @@ export default function LocationPage({ config }: { config: LocationConfig }) {
         <section className='border-y border-border bg-(--section-bg-accent) px-4 py-16 sm:py-20'>
           <div className='container mx-auto max-w-4xl'>
             <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
-              Mit welchen Themen Unternehmer zu mir kommen
+              Mit welchen Themen Menschen zu mir kommen
             </h2>
             <ul className='mt-8 grid gap-x-8 sm:grid-cols-2'>
               {topics.map((topic) => (
@@ -229,7 +229,12 @@ export default function LocationPage({ config }: { config: LocationConfig }) {
             <p className='mt-8 text-base leading-relaxed text-(--text)'>
               Ich kenne das von innen: Über zwanzig Jahre habe ich selbst ein Unternehmen geführt –
               erfolgreich nach jedem Maßstab und trotzdem bis in die Erschöpfung. Heute begleite ich
-              andere auf dem Weg zurück zu sich.
+              andere auf dem Weg zurück zu sich.{' '}
+              <Link
+                href='/coaching/unternehmer'
+                className={linkClass}>
+                Mehr zum Schwerpunkt Unternehmer
+              </Link>
             </p>
           </div>
         </section>

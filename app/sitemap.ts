@@ -29,7 +29,7 @@ type Page = {
 const pages: Page[] = [
   // Kernseiten
   { path: '/', lastModified: '2026-11-02', priority: 1, changeFrequency: 'monthly' },
-  { path: '/coaching', lastModified: '2026-11-08', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/coaching', lastModified: '2026-11-14', priority: 0.9, changeFrequency: 'monthly' },
   {
     path: '/webdevelopment',
     lastModified: '2026-11-03',
@@ -144,14 +144,21 @@ const pages: Page[] = [
   },
   {
     path: '/coaching/potsdam',
-    lastModified: '2026-11-02',
+    lastModified: '2026-11-14',
     published: '2026-11-02',
     priority: 0.8,
     changeFrequency: 'monthly',
   },
   {
+    path: '/coaching/unternehmer',
+    lastModified: '2026-11-14',
+    published: '2026-11-14',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+  },
+  {
     path: '/coaching/berlin',
-    lastModified: '2026-11-02',
+    lastModified: '2026-11-14',
     published: '2026-11-02',
     priority: 0.8,
     changeFrequency: 'monthly',

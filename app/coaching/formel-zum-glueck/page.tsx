@@ -338,7 +338,7 @@ export default function FormulaPage() {
           <div className='formel-reveal relative mx-auto w-full max-w-sm overflow-hidden rounded-3xl ring-1 ring-border'>
             <Image
               src='/images-nlp/portrait-treppe.webp'
-              alt='Stefan Heinemann, Life Coach für Unternehmer aus Potsdam, lehnt an einem Treppengeländer'
+              alt='Stefan Heinemann, Life Coach aus Potsdam, lehnt an einem Treppengeländer'
               width={732}
               height={585}
               sizes='(min-width: 768px) 34vw, 90vw'

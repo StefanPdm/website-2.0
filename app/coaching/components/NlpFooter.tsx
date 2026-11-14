@@ -54,7 +54,7 @@ export default function NlpFooter() {
         </div>
       </div>
       <div className='container mx-auto mt-6 px-4 text-xs text-(--subtle)'>
-        © {new Date().getFullYear()} Stefan Heinemann Coaching · Life Coaching für Unternehmer in Potsdam & Berlin. Alle Rechte vorbehalten.
+        © {new Date().getFullYear()} Stefan Heinemann Coaching · Life Coaching in Potsdam & Berlin. Alle Rechte vorbehalten.
         {/* Transparenz (EU AI Act Art. 50, Manual §10): Symbolbilder mit Menschen sind KI-generiert */}
         <p className='mt-2'>
           KI-generierte Symbolbilder sind mit „KI-Bild“ gekennzeichnet – Details im Impressum.

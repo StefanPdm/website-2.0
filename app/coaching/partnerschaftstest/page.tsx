@@ -14,7 +14,7 @@ const PATH = '/coaching/partnerschaftstest';
 
 const title = 'Partnerschaftstest: Lebenspartner oder Lebenslektion? 5 Fragen';
 const description =
-  'Fünf ehrliche Fragen zu deiner Beziehung: Gibt dir dieser Mensch Kraft, oder ist er eine weitere Lebenslektion? Die Antwort spürst du am Ende selbst. Für Unternehmer, die zu Hause Rückhalt brauchen. Von Life Coach Stefan Heinemann aus Potsdam, kostenlos und ohne Anmeldung.';
+  'Fünf ehrliche Fragen zu deiner Beziehung: Gibt dir dieser Mensch Kraft, oder ist er eine weitere Lebenslektion? Die Antwort spürst du am Ende selbst. Für alle, die viel tragen und zu Hause Rückhalt brauchen. Von Life Coach Stefan Heinemann aus Potsdam, kostenlos und ohne Anmeldung.';
 
 export const metadata: Metadata = {
   title,

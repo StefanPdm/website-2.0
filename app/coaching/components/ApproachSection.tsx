@@ -50,7 +50,7 @@ const pillars = [
     overline: 'Lebensschule · Dieter Lange',
     title: 'Sinn',
     claim: 'Erst dich führen, dann andere',
-    text: 'Viele Unternehmer haben viel erreicht – und fragen sich trotzdem, wofür. Aus Dieter Langes Lebensschule bringe ich die Frage mit, die vor jedem Ziel steht: Wer willst du sein?',
+    text: 'Viele Menschen haben viel erreicht – und fragen sich trotzdem, wofür. Aus Dieter Langes Lebensschule bringe ich die Frage mit, die vor jedem Ziel steht: Wer willst du sein?',
     points: [
       'Werte und Lebensrichtung klären',
       'Selbstführung vor Mitarbeiterführung',

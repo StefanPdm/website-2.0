@@ -8,20 +8,19 @@ import LocationPage, {
 const config: LocationConfig = {
   path: '/coaching/potsdam',
   city: 'Potsdam',
-  title: 'Coaching in Potsdam – Life Coaching für Unternehmer',
-  description: `Coaching in Potsdam für Unternehmer mit persönlichen Themen: bei mir in Potsdam, bei dir vor Ort oder online. ${SESSION_FACTS}`,
+  title: 'Coaching in Potsdam – Life Coaching',
+  description: `Life Coaching in Potsdam für Menschen, die viel tragen – Schwerpunkt Unternehmer: bei mir in Potsdam, bei dir vor Ort oder online. ${SESSION_FACTS}`,
   keywords: [
     'Coaching Potsdam',
     'Coach Potsdam',
     'Life Coach Potsdam',
     'Life Coaching Potsdam',
-    'Coaching für Unternehmer Potsdam',
     'Business Coaching Potsdam',
     'Personal Coaching Potsdam',
     'NLP Coaching Potsdam',
   ],
-  h1: 'Life Coaching für Unternehmer in Potsdam',
-  lead: 'Ich bin Stefan Heinemann, Coach in Potsdam. Ich begleite Unternehmer, die nach außen funktionieren und innen wieder Klarheit, Ruhe und Richtung suchen – bei mir in Potsdam, bei dir vor Ort in Potsdam und Berlin oder online.',
+  h1: 'Life Coaching in Potsdam',
+  lead: 'Ich bin Stefan Heinemann, Coach in Potsdam. Ich begleite Menschen, die nach außen funktionieren und innen wieder Klarheit, Ruhe und Richtung suchen – bei mir in Potsdam, bei dir vor Ort in Potsdam und Berlin oder online.',
   formats: [
     {
       icon: 'home',

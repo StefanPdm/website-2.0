@@ -28,6 +28,7 @@ Ein Betreiber (**Stefan Heinemann**, Potsdam), **zwei Geschäftsbereiche**, **dr
     ├── /session-podcast   KI-Podcast zur Session (inklusive) + Hörbeispiel   → Article
     ├── /buecher           Buchempfehlungen nach den vier Säulen              → Article + ItemList(Book)
     ├── /potsdam  /berlin  Standortseiten (gemeinsame Vorlage LocationPage)  → Article
+    ├── /unternehmer       Schwerpunktseite „Coaching für Unternehmer“ (trägt die Unternehmer-Keywords) → Article
     └── /guide-download    Token-Landing für Lead-Magnet (noindex)
 /widerruf                  Widerrufsbelehrung (B2C)
 not-found                  404 für alle Welten: Naht wie auf /, Wege in Welt A und B (.nf-* in globals.css)
@@ -629,7 +630,7 @@ Pause beim Verlassen des Viewports, bei reduzierter Bewegung gar nicht laden.
 ## 10. Content, Tonalität & Beweisführung
 
 **Stimme:** Direkt, reduziert, ehrlich. Duzen. Kurze Hauptsätze.
-Dreiklänge als Stilmittel („Kopf. Körper. Fokus." / „klar. sauber. wirksam.").
+Dreiklänge als Stilmittel („Firma. Familie. Kopf." / „klar. sauber. wirksam.").
 
 **Erlaubt:** „Ich melde mich ehrlich zurück." · „Wenn es nicht passt, sage ich das." ·
 „Ohne esoterischen Nebel." · „Kein Overengineering. Kein Plugin-Chaos."
@@ -785,12 +786,18 @@ Dateinamen: kebab-case, beschreibend, ASCII, **ohne Leerzeichen und ohne Datum**
 - PDFs in `public/dokumente/` bekommen per `Link`-Header ein Canonical auf ihre
   Inhaltsseite (`pdfCanonicals` in `next.config.ts`) — neues PDF dort eintragen.
 - **Title und Description tragen immer Leistung + Ort.** Nicht „Coaching",
-  sondern „Life Coaching für Unternehmer in Potsdam & Berlin".
-- **Benennung Welt A (seit 2026-11):** Marke **„Stefan Heinemann Coaching“**,
-  Oberbegriff **„Life Coaching für Unternehmer“**, Zielgruppe Unternehmer mit
-  persönlichen Themen. NLP ist eine Methode unter mehreren (plus Nachweis
-  DVNLP) — nie mehr Marke oder Titelanfang. Zertifikatsnamen („NLP Coach“,
-  „NLP Master“) bleiben, wie sie ausgestellt sind.
+  sondern „Life Coaching in Potsdam & Berlin".
+- **Benennung Welt A (seit 2026-11-14):** Marke **„Stefan Heinemann Coaching“**,
+  Oberbegriff **„Life Coaching“** (Potsdam & Berlin). Zielgruppe ist ein **Muster,
+  kein Beruf**: Menschen, die viel tragen und nach außen funktionieren. Unternehmer
+  sind **Herkunft** (20 Jahre eigene Firma = Glaubwürdigkeit) und **Schwerpunkt**
+  (`/coaching/unternehmer`, dort die Unternehmer-Keywords im Titel) – nie mehr Filter
+  im Onepager, Header oder Titel. Claim „Alles läuft. Und du?“, Dreiklang
+  „Firma. Familie. Kopf.“ Keine Aufzählung von Zielgruppen (wirkt beliebig);
+  geschärft wird über Haltung (FAQ „Für wen nicht geeignet“: keine Therapie,
+  keine fertigen Ratschläge, keine Esoterik). NLP ist eine Methode unter mehreren
+  (plus Nachweis DVNLP) — nie mehr Marke oder Titelanfang. Zertifikatsnamen
+  („NLP Coach“, „NLP Master“) bleiben, wie sie ausgestellt sind.
   Das ist der Hebel für lokale Suche.
 - Neue Route → Eintrag in `app/sitemap.ts` **und** ein interner Link.
   Eine Seite ohne Einstiegs-Link gehört nicht in die Sitemap, sondern entfernt.
@@ -805,7 +812,7 @@ Drei Achsen, jeweils kombiniert:
 | Achse | Welt A | Welt B |
 |---|---|---|
 | **Ort** | Potsdam, Berlin, Brandenburg | Potsdam, Berlin, Brandenburg |
-| **Leistung** | Life Coaching für Unternehmer, NLP Coaching, Business Coaching, Mentaltraining, Kommunikationstraining, Führungskräfte-Coaching | Webentwicklung, Webdesign, Web App, Kundenportal, Headless CMS, API |
+| **Leistung** | Life Coaching, Life Coaching für Unternehmer (nur `/coaching/unternehmer`), NLP Coaching, Business Coaching, Mentaltraining, Kommunikationstraining, Führungskräfte-Coaching | Webentwicklung, Webdesign, Web App, Kundenportal, Headless CMS, API |
 | **Technologie / Methode** | NLP, Reframing, Timeline, DVNLP | Next.js, React, Angular, TypeScript, WordPress |
 | **Anliegen** (stärkster Long-Tail) | Gedankenkarussell stoppen, Grenzen setzen, Klarheit im Kopf, Coaching nach Burnout | Website Relaunch, Performance-Optimierung, Landingpage erstellen lassen |
 
