@@ -24,7 +24,10 @@ const fraunces = Fraunces({
 export default function NlpLayoutClient({ children }: { children: React.ReactNode }) {
   return (
     <div className={`${publicSans.className} ${fraunces.variable} theme-coaching relative min-h-dvh`}>
-      <div className='relative isolate overflow-hidden'>
+      {/* overflow: clip statt hidden (2026-11-15): schneidet genauso ab, macht aber keinen
+          Scroll-Container – sonst funktioniert position: sticky in Welt A nirgends.
+          Ältere Browser ohne clip bekommen hidden. */}
+      <div className='relative isolate overflow-hidden supports-[overflow:clip]:overflow-clip'>
         <NlpHeader />
         <WorldSwitch />
         {/* Sonnenbahn: Lesefortschritt am linken Rand (nur CSS, ab lg) */}

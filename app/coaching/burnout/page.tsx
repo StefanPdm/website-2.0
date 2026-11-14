@@ -18,9 +18,11 @@ import {
 
 import GlassCard from '@/components/GlassCard';
 import { ContentPageStructuredData, FaqStructuredData } from '@/components/StructuredData';
+import AiBadge from '@/app/coaching/components/AiBadge';
 import BreathRings from '@/app/coaching/components/BreathRings';
 import { PrimaryButton, SecondaryButton } from '@/app/coaching/components/Buttons';
 import ContentDate from '@/app/coaching/components/ContentDate';
+import HeroPicture from '@/app/coaching/components/HeroPicture';
 import LightField from '@/app/coaching/components/LightField';
 import QuoteSection, { Mark } from '@/app/coaching/components/QuoteSection';
 import { faqBurnout } from '@/app/coaching/faq';
@@ -124,7 +126,14 @@ const dimensions: { Icon: LucideIcon; title: string; text: string }[] = [
 ];
 
 /** Der Weg zurück: erst Boden, dann Richtung. Vier Blickwinkel, die ich verbinde. */
-const pathOut: { step: string; Icon: LucideIcon; title: string; lens: string; text: string; question: string }[] = [
+const pathOut: {
+  step: string;
+  Icon: LucideIcon;
+  title: string;
+  lens: string;
+  text: string;
+  question: string;
+}[] = [
   {
     step: '01',
     Icon: Stethoscope,
@@ -175,8 +184,16 @@ const notFits = [
 
 const helpNumbers = [
   { label: 'Notruf', number: '112', note: 'bei akuter Gefahr, rund um die Uhr' },
-  { label: 'Telefonseelsorge', number: '0800 111 0 111', note: 'oder 0800 111 0 222, kostenlos, anonym, rund um die Uhr' },
-  { label: 'Ärztlicher Bereitschaftsdienst', number: '116 117', note: 'wenn die Praxis geschlossen ist' },
+  {
+    label: 'Telefonseelsorge',
+    number: '0800 111 0 111',
+    note: 'oder 0800 111 0 222, kostenlos, anonym, rund um die Uhr',
+  },
+  {
+    label: 'Ärztlicher Bereitschaftsdienst',
+    number: '116 117',
+    note: 'wenn die Praxis geschlossen ist',
+  },
 ];
 
 const folgesession = offerByTitle('Folgesession');
@@ -215,10 +232,27 @@ export default function CoachingBurnoutPage() {
       />
       <FaqStructuredData entries={faqBurnout} />
       <article className='relative z-10'>
-        {/* Kopfbereich: ruhig, ohne Foto – große Atem-Ringe als Bild für „wieder durchatmen“ */}
-        <section className='relative overflow-hidden border-b border-border px-4 pt-40 pb-16 md:pt-48 md:pb-24'>
-          <BreathRings className='-right-72 top-10 w-[860px] sm:-right-48 lg:-right-24' />
-          <div className='container relative mx-auto max-w-5xl'>
+        {/* Kopfbereich: Foto als Bühne (KI-Bild: Spaziergang am See im Morgenlicht –
+            Ruhe statt Verzweiflung). lg:top-20: Bild beginnt unter der fixen Kopfzeile. */}
+        <section className='relative overflow-hidden border-b border-border lg:flex lg:min-h-[90dvh] lg:items-center'>
+          <div className='relative h-[58vh] min-h-[340px] lg:absolute lg:inset-x-0 lg:bottom-0 lg:top-20 lg:h-auto'>
+            <HeroPicture
+              wide={{ src: '/images-nlp/burnout-spaziergang-see.webp', width: 1672, height: 941 }}
+              tall={{
+                src: '/images-nlp/burnout-spaziergang-see-hoch.webp',
+                width: 900,
+                height: 1125,
+              }}
+              alt='Ein Mann geht im Morgenlicht entspannt an einem Seeufer entlang und blickt in die Ferne'
+              className='object-cover object-[50%_15%] lg:object-[85%_top]'
+              priority
+            />
+            <span
+              aria-hidden='true'
+              className='absolute inset-0 bg-linear-to-b from-transparent from-50% to-(--bg) lg:bg-linear-to-r lg:from-(--bg) lg:from-30% lg:via-(--bg)/80 lg:via-50% lg:to-transparent lg:to-75%'
+            />
+          </div>
+          <div className='container relative mx-auto -mt-16 max-w-6xl px-4 pb-16 lg:mt-0 lg:pt-36 lg:pb-20'>
             <nav
               aria-label='Brotkrumen'
               className='mb-8 flex flex-wrap items-center gap-2 text-xs text-(--muted)'>
@@ -237,7 +271,7 @@ export default function CoachingBurnoutPage() {
               <span className='text-(--text)'>Burnout</span>
             </nav>
 
-            <div className='max-w-2xl'>
+            <div className='max-w-xl'>
               <p className='text-xs uppercase tracking-[0.3em] text-accent-soft'>
                 Coaching nach Burnout · Potsdam, Berlin &amp; online
               </p>
@@ -288,9 +322,9 @@ export default function CoachingBurnoutPage() {
               Wie kommt man in einen Burnout?
             </h2>
             <p className='mt-3 max-w-2xl text-sm text-(--muted) sm:text-base'>
-              Nicht über Nacht. Und selten nur durch zu viel Arbeit: Dieter Lange nennt drei
-              Dinge, die Menschen wirklich ausbrennen lassen – Widerstand, fehlender Sinn und
-              fehlende Würdigung.
+              Nicht über Nacht. Und selten nur durch zu viel Arbeit: Dieter Lange nennt drei Dinge,
+              die Menschen wirklich ausbrennen lassen – Widerstand, fehlender Sinn und fehlende
+              Würdigung.
             </p>
             <ol className='mt-10 grid gap-6 sm:grid-cols-2'>
               {pathIn.map((item, index) => (
@@ -380,8 +414,8 @@ export default function CoachingBurnoutPage() {
               <div className='mt-6 space-y-4 text-base leading-relaxed text-(--muted)'>
                 <p>
                   Über 20 Jahre war ich Unternehmer im Interieur Design, mit drei Filialen und
-                  großem Team. Ich bin von Erfolg zu Erfolg gelaufen. Von außen sah alles nach
-                  einem erfüllten Leben aus: Firma, Haus, Auto, Familie.
+                  großem Team. Ich bin von Erfolg zu Erfolg gelaufen. Von außen sah alles nach einem
+                  erfüllten Leben aus: Firma, Haus, Auto, Familie.
                 </p>
                 <p>
                   Innen fehlten Glück und Erfüllung. Mein Selbstwert hing an Anerkennung von außen,
@@ -414,51 +448,66 @@ export default function CoachingBurnoutPage() {
         </section>
 
         {/* Wie kommt man wieder heraus */}
-        <section className='relative overflow-hidden px-4 py-16 sm:py-20'>
-          <div className='container mx-auto max-w-5xl'>
-            <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
-              Wie kommt man wieder heraus?
-            </h2>
-            <p className='mt-3 max-w-2xl text-sm text-(--muted) sm:text-base'>
-              Erst wieder Boden unter die Füße, dann Richtung. Vier Blickwinkel, die ich im
-              Coaching verbinde – jeder mit einer Frage, die du dir heute schon stellen kannst.
-            </p>
-            <ol className='mt-10 space-y-6'>
-              {pathOut.map(({ step, Icon, title: stepTitle, lens, text, question }) => (
-                <li key={step}>
-                  <GlassCard className='grid gap-5 p-6 sm:grid-cols-[auto_1fr] sm:gap-6 sm:p-8'>
-                    <span className='grid h-14 w-14 place-items-center rounded-2xl border border-border bg-surface text-accent'>
-                      <Icon
-                        aria-hidden='true'
-                        className='h-6 w-6'
-                      />
-                    </span>
-                    <div>
-                      <p className='text-[11px] uppercase tracking-[0.2em] text-(--subtle)'>
-                        Schritt {step} · {lens}
-                      </p>
-                      <h3 className='mt-2 text-lg font-semibold text-(--text) sm:text-xl'>
-                        {stepTitle}
-                      </h3>
-                      <p className='mt-3 text-sm leading-relaxed text-(--muted) sm:text-base'>
-                        {text}
-                      </p>
-                      <p className='mt-4 border-l-2 border-(--accent) pl-4 font-serif text-lg italic text-(--text)'>
-                        {question}
-                      </p>
-                    </div>
-                  </GlassCard>
-                </li>
-              ))}
-            </ol>
-            <p className='mt-8 max-w-3xl text-sm leading-relaxed text-(--muted) sm:text-base'>
-              <strong className='font-semibold text-(--text)'>
-                Und: Nicht nur die Haltung ändern, auch die Bedingungen.
-              </strong>{' '}
-              Wer weiter überlastet ist und nur versucht, positiver zu denken, kommt nicht weit. Es
-              braucht konkrete Entlastung – Aufgaben abgeben, Erwartungen klären, Grenzen setzen,
-              Erholung schützen. Genau daran arbeiten wir.
-            </p>
+        <section className='relative px-4 py-16 sm:py-20'>
+          <div className='container mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12'>
+            {/* Bild läuft am Desktop neben den Schritten mit (sticky), mobil steht es oben */}
+            <aside className='lg:order-2'>
+              <div className='relative mx-auto aspect-4/5 w-full max-w-sm overflow-hidden rounded-3xl border border-card-border lg:sticky lg:top-28'>
+                <Image
+                  src='/images-nlp/burnout-durchatmen.webp'
+                  alt='Ein Mann sitzt im Sessel am Fenster, die Hand auf der Brust, und atmet ruhig durch'
+                  fill
+                  sizes='(min-width: 1024px) 320px, 384px'
+                  className='object-cover object-[40%_center]'
+                />
+                <AiBadge className='top-3 right-3' />
+              </div>
+            </aside>
+            <div className='min-w-0 lg:order-1'>
+              <h2 className='text-2xl font-semibold text-(--text) sm:text-3xl'>
+                Wie kommt man wieder heraus?
+              </h2>
+              <p className='mt-3 max-w-2xl text-sm text-(--muted) sm:text-base'>
+                Erst wieder Boden unter die Füße, dann Richtung. Vier Blickwinkel, die ich im
+                Coaching verbinde – jeder mit einer Frage, die du dir heute schon stellen kannst.
+              </p>
+              <ol className='mt-10 space-y-6'>
+                {pathOut.map(({ step, Icon, title: stepTitle, lens, text, question }) => (
+                  <li key={step}>
+                    <GlassCard className='grid gap-5 p-6 sm:grid-cols-[auto_1fr] sm:gap-6 sm:p-8'>
+                      <span className='grid h-14 w-14 place-items-center rounded-2xl border border-border bg-surface text-accent'>
+                        <Icon
+                          aria-hidden='true'
+                          className='h-6 w-6'
+                        />
+                      </span>
+                      <div>
+                        <p className='text-[11px] uppercase tracking-[0.2em] text-(--subtle)'>
+                          Schritt {step} · {lens}
+                        </p>
+                        <h3 className='mt-2 text-lg font-semibold text-(--text) sm:text-xl'>
+                          {stepTitle}
+                        </h3>
+                        <p className='mt-3 text-sm leading-relaxed text-(--muted) sm:text-base'>
+                          {text}
+                        </p>
+                        <p className='mt-4 border-l-2 border-(--accent) pl-4 font-serif text-lg italic text-(--text)'>
+                          {question}
+                        </p>
+                      </div>
+                    </GlassCard>
+                  </li>
+                ))}
+              </ol>
+              <p className='mt-8 max-w-3xl text-sm leading-relaxed text-(--muted) sm:text-base'>
+                <strong className='font-semibold text-(--text)'>
+                  Und: Nicht nur die Haltung ändern, auch die Bedingungen.
+                </strong>{' '}
+                Wer weiter überlastet ist und nur versucht, positiver zu denken, kommt nicht weit.
+                Es braucht konkrete Entlastung – Aufgaben abgeben, Erwartungen klären, Grenzen
+                setzen, Erholung schützen. Genau daran arbeiten wir.
+              </p>
+            </div>
           </div>
         </section>
 
