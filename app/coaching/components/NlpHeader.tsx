@@ -1,9 +1,35 @@
 'use client';
 
-import { useEffect, useRef, useState, useSyncExternalStore, type PointerEvent as ReactPointerEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
+} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import {
+  ArrowRight,
+  BookOpen,
+  Briefcase,
+  Castle,
+  ChevronDown,
+  Fingerprint,
+  FlaskConical,
+  Frown,
+  Headphones,
+  HeartHandshake,
+  Landmark,
+  type LucideIcon,
+  Menu,
+  MessageSquareQuote,
+  Sigma,
+  Smile,
+  Sparkles,
+  X,
+} from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { PrimaryButton } from '@/app/coaching/components/Buttons';
@@ -53,60 +79,133 @@ const navAfter: NavItem[] = [
  * schon einmal umgebrochen ist. Jede weitere Inhaltsseite kommt hier dazu,
  * nicht in die Hauptleiste.
  */
-const discoverItems: { label: string; href: string; hint: string; match?: string }[] = [
+type DiscoverGroup = 'tests' | 'lesen' | 'fuer-dich' | 'regeln';
+type DiscoverItem = {
+  label: string;
+  href: string;
+  hint: string;
+  Icon: LucideIcon;
+  group: DiscoverGroup;
+  match?: string;
+};
+
+const discoverItems: DiscoverItem[] = [
   {
     label: 'Persönlichkeitstest',
     href: '/coaching/persoenlichkeitstest',
     hint: '18 Fragen, Auswertung sofort',
+    Icon: Fingerprint,
+    group: 'tests',
   },
   {
     label: 'Glaubenssätze erkennen',
     href: '/coaching/glaubenssaetze',
     hint: '50 Sätze zum Antippen',
+    Icon: MessageSquareQuote,
+    group: 'tests',
   },
   {
     label: 'Partnerschaftstest',
     href: '/coaching/partnerschaftstest',
     hint: 'Lebenspartner oder Lebenslektion?',
+    Icon: HeartHandshake,
+    group: 'tests',
+  },
+  {
+    label: 'Formel zum Glück',
+    href: '/coaching/formel-zum-glueck',
+    hint: 'Die S-L-A-C-Formel',
+    Icon: Sigma,
+    group: 'tests',
   },
   {
     label: 'Tägliche Impulse',
     href: '/coaching/impulse',
     hint: 'Gedanken aus dem WhatsApp-Status',
+    Icon: Sparkles,
+    group: 'lesen',
   },
   {
     label: 'Session-Podcast',
     href: '/coaching/session-podcast',
     hint: 'Dein Coaching zum Nachhören',
+    Icon: Headphones,
+    group: 'lesen',
   },
-  { label: 'Bücher', href: '/coaching/buecher', hint: 'Was mich geprägt hat' },
+  {
+    label: 'Bücher',
+    href: '/coaching/buecher',
+    hint: 'Was mich geprägt hat',
+    Icon: BookOpen,
+    group: 'lesen',
+  },
+  {
+    label: 'Warum NLP wirkt',
+    href: '/coaching/wissenschaft',
+    hint: 'Der Forschungsstand 2026',
+    Icon: FlaskConical,
+    group: 'lesen',
+  },
   {
     label: 'Mit eigener Firma',
     href: '/coaching/unternehmer',
     hint: 'Für Unternehmerinnen & Unternehmer',
+    Icon: Briefcase,
+    group: 'fuer-dich',
   },
-  { label: 'Coaching in Potsdam', href: '/coaching/potsdam', hint: 'Vor Ort, im Gehen, online' },
-  { label: 'Coaching in Berlin', href: '/coaching/berlin', hint: 'Bei dir, online oder in Potsdam' },
-  { label: 'Warum NLP wirkt', href: '/coaching/wissenschaft', hint: 'Der Forschungsstand 2026' },
   {
-    label: 'Formel zum Glück',
-    href: '/coaching/formel-zum-glueck',
-    hint: 'Die S-L-A-C-Formel',
+    label: 'Coaching in Potsdam',
+    href: '/coaching/potsdam',
+    hint: 'Vor Ort, im Gehen, online',
+    Icon: Castle,
+    group: 'fuer-dich',
+  },
+  {
+    label: 'Coaching in Berlin',
+    href: '/coaching/berlin',
+    hint: 'Bei dir, online oder in Potsdam',
+    Icon: Landmark,
+    group: 'fuer-dich',
   },
   {
     label: '20 Regeln fürs Glücklichsein',
     href: '/coaching/regeln/gluecklichsein',
     hint: 'Was dich trägt',
+    Icon: Smile,
+    group: 'regeln',
   },
   {
     label: '20 Regeln fürs Unglücklichsein',
     href: '/coaching/regeln/ungluecklichsein',
     hint: 'Die ironische Umkehrung',
+    Icon: Frown,
+    group: 'regeln',
   },
 ];
 
+/** Spalten des Entdecken-Panels (Desktop). Reihenfolge = Anzeige. */
+const discoverColumns: { key: DiscoverGroup; title: string }[][] = [
+  [{ key: 'tests', title: 'Selbst ausprobieren' }],
+  [{ key: 'lesen', title: 'Lesen & Hören' }],
+  [
+    { key: 'fuer-dich', title: 'Für dich & vor Ort' },
+    { key: 'regeln', title: 'Gedankenspiele' },
+  ],
+];
+
 /** Abschnitte, die für die aktive Markierung beobachtet werden. */
-const spySections = ['start', 'erfuellung', 'ansatz', 'ablauf', 'podcast', 'preise', 'ueber', 'impulse', 'leitfaden', 'kontakt'];
+const spySections = [
+  'start',
+  'erfuellung',
+  'ansatz',
+  'ablauf',
+  'podcast',
+  'preise',
+  'ueber',
+  'impulse',
+  'leitfaden',
+  'kontakt',
+];
 
 /** Abonnement für useSyncExternalStore – außerhalb der Komponente, damit die
  *  Referenz stabil bleibt und React nicht bei jedem Render neu abonniert. */
@@ -119,7 +218,11 @@ export default function NlpHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // useSyncExternalStore statt Effekt: liest den Scrollstand direkt aus dem
   // Browser, ohne beim Mounten einen zusätzlichen Render auszulösen.
-  const isScrolled = useSyncExternalStore(subscribeToScroll, () => window.scrollY > 24, () => false);
+  const isScrolled = useSyncExternalStore(
+    subscribeToScroll,
+    () => window.scrollY > 24,
+    () => false,
+  );
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -405,38 +508,100 @@ export default function NlpHeader() {
             </button>
 
             {/*
+              Entdecken-Panel (2026-11-14): drei Spalten mit Icon-Kacheln.
+              Öffnen als Choreografie (.discover* in coaching.css): Panel klappt aus
+              der Tiefe auf, eine Bernstein-Naht zieht oben von der Mitte nach außen,
+              Spalten und Punkte laufen gestaffelt ein (--i). Schließen schnell, ohne
+              Staffel. Bleibt gemountet; zu ist es per visibility unsichtbar und
+              nicht fokussierbar.
+
               Fast deckender Hintergrund statt bg-surface-strong + backdrop-blur:
               Die Kopfzeile hat selbst schon backdrop-filter, ein verschachtelter
-              wird vom Browser ignoriert. Mit 10 % Weiß schien die Hero-Headline
-              ungefiltert durch – das Menü wirkte, als läge es dahinter.
+              wird vom Browser ignoriert.
             */}
             <div
               id='nlp-discover'
-              hidden={!isDiscoverOpen}
-              className='absolute left-1/2 top-full z-60 mt-3 max-h-[calc(100dvh-7rem)] w-80 -translate-x-1/2 overflow-y-auto overscroll-contain rounded-2xl border border-border-strong bg-(--bg)/94 p-2 shadow-[0_24px_70px_var(--glow)]'>
-              <ul>
-                {discoverItems.map((item) => {
-                  const active = pathname.startsWith(item.match ?? item.href);
-                  return (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsDiscoverOpen(false)}
-                        aria-current={active ? 'page' : undefined}
-                        className={`block rounded-xl px-4 py-2.5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                          active ? 'bg-surface text-(--text)' : 'hover:bg-surface'
-                        }`}>
-                        <span className='block text-sm font-semibold text-(--text)'>
-                          {item.label}
-                        </span>
-                        <span className='mt-0.5 block text-xs font-normal text-(--muted)'>
-                          {item.hint}
-                        </span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
+              data-open={isDiscoverOpen ? '' : undefined}
+              aria-hidden={!isDiscoverOpen}
+              className='discover absolute left-1/2 top-full z-60 w-[min(54rem,calc(100vw-2rem))] -translate-x-1/2 pt-3'>
+              <div className='discover__panel relative max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain rounded-3xl border border-border-strong bg-(--bg) p-3 shadow-[0_30px_90px_-20px_rgba(20,10,4,0.65),0_0_60px_var(--glow)]'>
+                <span
+                  aria-hidden='true'
+                  className='discover__seam'
+                />
+                <span
+                  aria-hidden='true'
+                  className='discover__glow'
+                />
+                <div className='relative grid gap-2 md:grid-cols-3'>
+                  {discoverColumns.map((column, columnIndex) => (
+                    <div
+                      key={column[0].key}
+                      className='discover__col'>
+                      {column.map((group, groupIndex) => {
+                        const items = discoverItems.filter((item) => item.group === group.key);
+                        const offset = discoverItems.findIndex((item) => item.group === group.key);
+                        return (
+                          <div
+                            key={group.key}
+                            className={groupIndex > 0 ? 'mt-2 border-t border-border pt-2' : ''}>
+                            <p
+                              className='discover__title px-3 pt-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-soft'
+                              style={
+                                {
+                                  '--i': columnIndex + groupIndex * 2,
+                                } as CSSProperties
+                              }>
+                              {group.title}
+                            </p>
+                            <ul>
+                              {items.map((item, index) => {
+                                const active = pathname.startsWith(item.match ?? item.href);
+                                const { Icon } = item;
+                                return (
+                                  <li
+                                    key={item.href}
+                                    className='discover__item'
+                                    style={{ '--i': offset + index } as CSSProperties}>
+                                    <Link
+                                      href={item.href}
+                                      tabIndex={isDiscoverOpen ? undefined : -1}
+                                      onClick={() => setIsDiscoverOpen(false)}
+                                      aria-current={active ? 'page' : undefined}
+                                      className={`discover__link flex items-center gap-3 rounded-2xl px-3 py-2.5 transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                                        active
+                                          ? 'is-active bg-surface'
+                                          : 'hover:bg-surface focus-visible:bg-surface'
+                                      }`}>
+                                      <span
+                                        aria-hidden='true'
+                                        className='discover__icon grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-border bg-surface text-accent'>
+                                        <Icon className='h-[18px] w-[18px]' />
+                                      </span>
+                                      <span className='min-w-0 flex-1'>
+                                        <span className='block text-sm font-semibold leading-snug text-(--text)'>
+                                          {item.label}
+                                        </span>
+                                        <span className='mt-0.5 block text-xs font-normal leading-snug text-(--muted)'>
+                                          {item.hint}
+                                        </span>
+                                      </span>
+                                      <ArrowRight
+                                        aria-hidden='true'
+                                        className='discover__arrow h-4 w-4 shrink-0 text-accent'
+                                      />
+                                    </Link>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -511,12 +676,20 @@ export default function NlpHeader() {
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
                     aria-current={active ? 'page' : undefined}
-                    className={`rounded-xl px-4 py-2.5 transition ${
+                    className={`flex items-center gap-3 rounded-xl px-4 py-2.5 transition ${
                       active ? 'bg-surface' : 'hover:bg-surface'
                     }`}>
-                    <span className='block text-sm font-semibold text-(--text)'>{item.label}</span>
-                    <span className='mt-0.5 hidden text-xs text-(--muted) sm:block'>
-                      {item.hint}
+                    <item.Icon
+                      aria-hidden='true'
+                      className='h-4 w-4 shrink-0 text-accent'
+                    />
+                    <span className='min-w-0'>
+                      <span className='block text-sm font-semibold text-(--text)'>
+                        {item.label}
+                      </span>
+                      <span className='mt-0.5 hidden text-xs text-(--muted) sm:block'>
+                        {item.hint}
+                      </span>
                     </span>
                   </Link>
                 );

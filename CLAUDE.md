@@ -381,7 +381,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 
 | Komponente | Zweck |
 |---|---|
-| `NlpHeader` | Fixe Kopfzeile, Scroll-Spy auf Sektions-IDs, „Entdecken"-Dropdown für die Inhaltsseiten (`discoverItems`), Burger < `hdr` |
+| `NlpHeader` | Fixe Kopfzeile, Scroll-Spy auf Sektions-IDs, „Entdecken"-Panel für die Inhaltsseiten (`discoverItems` mit Icon + Gruppe, Spalten in `discoverColumns`; öffnet bei Maus-Hover, Choreografie `.discover*` in `coaching.css`), Burger < `hdr` |
 | `WorldSwitch` | Schwebender Rundbutton (zweifarbige Kugel mit Naht, 44 px, Puls-Ring) oben links → `/`. **Der** Weltenwechsel in Welt A — nicht zurück in die Nav legen |
 | `NlpFooter` | Rechtslinks + Weltenwechsel |
 | `Buttons` | `PrimaryButton` / `SecondaryButton` (§7) |
