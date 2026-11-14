@@ -77,22 +77,30 @@ export const metadata: Metadata = {
 };
 
 /** Wie man hineinkommt – ein schleichender Weg, kein einzelnes Ereignis. */
-const pathIn = [
+/**
+ * Wie man hineinkommt. Punkt 1 allgemein, Punkte 2–4 nach Dieter Lange
+ * (von Stefan so vorgegeben, 2026-11-15): nicht die Menge an Arbeit allein
+ * brennt aus, sondern Widerstand, fehlender Sinn und fehlende Würdigung.
+ */
+const pathIn: { title: string; text: string; lens?: string }[] = [
   {
     title: 'Die Belastung wird dauerhaft größer als die Erholung',
     text: 'Selten ist es der eine große Zusammenbruch. Meist ist es ein langer Zeitraum, in dem Arbeit und Verantwortung mehr Kraft kosten, als Pausen zurückgeben.',
   },
   {
-    title: 'Die Warnsignale werden übergangen',
-    text: 'Müdigkeit, schlechter Schlaf, Gereiztheit, innerer Abstand – alles wird kleingeredet: „Nur noch diese Woche, dann wird es ruhiger.“ Es wird nicht ruhiger.',
+    title: 'Du bist innerlich dagegen',
+    text: 'Du tust jeden Tag etwas, gegen das sich in dir alles sträubt. Dieser stille Widerstand kostet mehr Kraft als die Arbeit selbst – Tag für Tag, ohne dass es jemand sieht.',
+    lens: 'nach Dieter Lange',
   },
   {
-    title: 'Der eigene Wert hängt am Funktionieren',
-    text: 'Dann fühlt sich eine Pause wie Schwäche an und ein Nein wie Versagen. Wer sich nur über Leistung spürt, kann nicht aufhören, ohne sich selbst zu verlieren.',
+    title: 'Es ergibt für dich keinen Sinn',
+    text: 'Die Aufgabe mag für andere wichtig sein – für dich selbst ist sie es nicht. Wer nicht weiß, wofür er sich verausgabt, hat nichts, woraus er Kraft zurückbekommt.',
+    lens: 'nach Dieter Lange',
   },
   {
-    title: 'Der Blick verengt sich auf „durchhalten“',
-    text: 'Alternativen verschwinden aus dem Sichtfeld. Es gibt nur noch weiter – bis der Körper die Entscheidung trifft, die man selbst nicht treffen wollte.',
+    title: 'Niemand schaut hin',
+    text: 'Keiner merkt, was du leistest, und niemand würdigt es – weder die Arbeit noch dich. Ohne Wertschätzung läuft der Tank leer, egal wie viel du hineingibst.',
+    lens: 'nach Dieter Lange',
   },
 ];
 
@@ -280,16 +288,24 @@ export default function CoachingBurnoutPage() {
               Wie kommt man in einen Burnout?
             </h2>
             <p className='mt-3 max-w-2xl text-sm text-(--muted) sm:text-base'>
-              Nicht über Nacht. Es ist ein schleichender Weg – und die meisten gehen ihn mit
-              besten Absichten.
+              Nicht über Nacht. Und selten nur durch zu viel Arbeit: Dieter Lange nennt drei
+              Dinge, die Menschen wirklich ausbrennen lassen – Widerstand, fehlender Sinn und
+              fehlende Würdigung.
             </p>
             <ol className='mt-10 grid gap-6 sm:grid-cols-2'>
               {pathIn.map((item, index) => (
                 <li key={item.title}>
                   <GlassCard className='h-full p-6'>
-                    <span className='text-sm font-semibold text-accent'>
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
+                    <p className='flex items-baseline gap-3'>
+                      <span className='text-sm font-semibold text-accent'>
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      {item.lens && (
+                        <span className='text-[11px] uppercase tracking-[0.2em] text-(--subtle)'>
+                          {item.lens}
+                        </span>
+                      )}
+                    </p>
                     <h3 className='mt-2 text-lg font-semibold text-(--text)'>{item.title}</h3>
                     <p className='mt-2 text-sm leading-relaxed text-(--muted)'>{item.text}</p>
                   </GlassCard>
