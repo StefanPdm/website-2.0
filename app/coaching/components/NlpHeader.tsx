@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore, type PointerEvent as ReactPointerEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown, Menu, X } from 'lucide-react';
@@ -126,6 +126,28 @@ export default function NlpHeader() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const discoverRef = useRef<HTMLDivElement>(null);
   const discoverButtonRef = useRef<HTMLButtonElement>(null);
+  // Hover öffnet „Entdecken“ (2026-11-14, nur Maus): kurze Schließ-Verzögerung,
+  // damit der Zeiger die Lücke zwischen Button und Panel überqueren kann.
+  const discoverCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openedByHover = useRef(false);
+  const cancelDiscoverClose = () => {
+    if (discoverCloseTimer.current) clearTimeout(discoverCloseTimer.current);
+    discoverCloseTimer.current = null;
+  };
+  const onDiscoverPointerEnter = (event: ReactPointerEvent) => {
+    if (event.pointerType !== 'mouse') return;
+    cancelDiscoverClose();
+    if (!isDiscoverOpen) openedByHover.current = true;
+    setIsDiscoverOpen(true);
+  };
+  const onDiscoverPointerLeave = (event: ReactPointerEvent) => {
+    if (event.pointerType !== 'mouse') return;
+    cancelDiscoverClose();
+    discoverCloseTimer.current = setTimeout(() => {
+      openedByHover.current = false;
+      setIsDiscoverOpen(false);
+    }, 220);
+  };
 
   const pathname = usePathname();
   const router = useRouter();
@@ -347,11 +369,21 @@ export default function NlpHeader() {
           {/* Aufklapp-Menü für die eigenen Seiten */}
           <div
             ref={discoverRef}
+            onPointerEnter={onDiscoverPointerEnter}
+            onPointerLeave={onDiscoverPointerLeave}
             className='relative'>
             <button
               ref={discoverButtonRef}
               type='button'
-              onClick={() => setIsDiscoverOpen((prev) => !prev)}
+              onClick={() => {
+                // Schon per Hover geöffnet: der erste Klick soll es nicht gleich wieder zuklappen.
+                if (openedByHover.current) {
+                  openedByHover.current = false;
+                  setIsDiscoverOpen(true);
+                  return;
+                }
+                setIsDiscoverOpen((prev) => !prev);
+              }}
               aria-expanded={isDiscoverOpen}
               aria-controls='nlp-discover'
               className={`${linkClass({ label: 'Entdecken' })} inline-flex cursor-pointer items-center gap-1 ${

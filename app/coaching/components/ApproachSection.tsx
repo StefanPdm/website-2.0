@@ -115,7 +115,7 @@ export default function ApproachSection() {
             Vier Schulen. Ein Ziel.
           </h2>
           <p className='mt-4 text-base text-(--muted) sm:text-lg'>
-            Du führst ein Unternehmen. Hier geht es darum, wie du dich selbst führst. Dafür verbinde
+            Du trägst Verantwortung – im Job, in der Firma, in der Familie. Hier geht es darum, wie du dich selbst führst. Dafür verbinde
             ich vier Ansätze, die sich ergänzen – damit Veränderung nicht im Kopf stecken bleibt.
           </p>
         </div>

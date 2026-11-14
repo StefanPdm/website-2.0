@@ -1,6 +1,7 @@
 import { Fraunces, Public_Sans } from 'next/font/google';
 
 import PauseOffscreen from '@/components/PauseOffscreen';
+import ScrollToTop from '@/components/ScrollToTop';
 import NlpFooter from '@/app/coaching/components/NlpFooter';
 import NlpHeader from '@/app/coaching/components/NlpHeader';
 import WorldSwitch from '@/app/coaching/components/WorldSwitch';
@@ -38,6 +39,7 @@ export default function NlpLayoutClient({ children }: { children: React.ReactNod
         <main>{children}</main>
         <PauseOffscreen />
         <NlpFooter />
+        <ScrollToTop variant='coaching' />
       </div>
     </div>
   );

@@ -76,9 +76,9 @@ export default function BuecherPage() {
         <section className='relative overflow-hidden border-b border-border lg:flex lg:min-h-[86dvh] lg:items-center'>
           <div className='relative h-[62vh] min-h-[360px] lg:absolute lg:inset-0 lg:h-auto'>
             <HeroPicture
-              wide={{ src: '/images-nlp/buecher-lesen.webp', width: 1672, height: 941 }}
-              tall={{ src: '/images-nlp/buecher-lesen-hoch.webp', width: 900, height: 1125 }}
-              alt='Ein Mann sitzt im Sessel und liest vertieft in einem Buch'
+              wide={{ src: '/images-nlp/buecher-lesende-frau.webp', width: 1672, height: 941 }}
+              tall={{ src: '/images-nlp/buecher-lesende-frau-hoch.webp', width: 900, height: 1125 }}
+              alt='Eine Frau sitzt mit einem aufgeschlagenen Buch im Sessel und denkt lächelnd über das Gelesene nach'
               className='object-cover object-[60%_25%] lg:object-[80%_center]'
               priority
             />

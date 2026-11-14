@@ -27,7 +27,7 @@ const steps = [
   },
   {
     title: 'Alltag',
-    text: 'Neue Routinen verankern, bis sie ohne Anstrengung tragen. Auch im Trubel des Unternehmens.',
+    text: 'Neue Routinen verankern, bis sie ohne Anstrengung tragen. Auch im Trubel des Alltags.',
   },
 ];
 

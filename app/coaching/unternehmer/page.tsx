@@ -147,12 +147,13 @@ export default function CoachingUnternehmerPage() {
         {/* Kopfbereich: Foto als Bühne (KI-Bild, Unternehmerin am Fenster) – bewusst eine
             Frau: Das Angebot gilt Unternehmerinnen genauso, und der Onepager-Hero zeigt zwei Männer. */}
         <section className='relative overflow-hidden border-b border-border lg:flex lg:min-h-[86dvh] lg:items-center'>
-          <div className='relative h-[62vh] min-h-[360px] lg:absolute lg:inset-0 lg:h-auto'>
+          {/* lg:top-20: Bild beginnt unter der fixen Kopfzeile – auf breiten Schirmen (27") lag der Kopf sonst dahinter */}
+          <div className='relative h-[62vh] min-h-[360px] lg:absolute lg:inset-x-0 lg:bottom-0 lg:top-20 lg:h-auto'>
             <HeroPicture
               wide={{ src: '/images-nlp/unternehmerin-fenster.webp', width: 1672, height: 941 }}
               tall={{ src: '/images-nlp/unternehmerin-fenster-hoch.webp', width: 900, height: 1125 }}
               alt='Eine Unternehmerin im Blazer steht nachdenklich am Bürofenster und blickt über die Stadt'
-              className='object-cover object-[55%_20%] lg:object-[85%_center]'
+              className='object-cover object-[55%_20%] lg:object-[85%_top]'
               priority
             />
             <span

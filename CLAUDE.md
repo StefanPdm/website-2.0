@@ -364,7 +364,7 @@ und die `BreadcrumbList` im JSON-LD müssen dieselben Stufen zeigen.
 |---|---|---|
 | `GlassCard` | Standard-Karte Welt A. Nutzt `--surface-strong`, `--card-border`, `--glow`. Hover: `-translate-y-1`. `featured` = hervorgehobene Preiskarte | **nur Welt A** |
 | `InfoOrb` | Info-Button + Portal-Modal mit Mini-Markdown (`**fett**`). Mit `label` als Glas-Pille „Warum beides?“ + zweifarbige Glaskugel mit Naht (`.info-split*`) | `/` (Scanner-Story) |
-| `ScrollToTop` | Fixed Button ab `scrollY > 240` | Welt B |
+| `ScrollToTop` | „Nach oben“-Button unten rechts ab `scrollY > 240`, Prop `variant` (`web`/`coaching`) wählt die Weltfarben; eingebunden in `app/webdevelopment/layout.tsx` und `NlpLayoutClient` | Welt A + B |
 | `CaseCard` | Referenzkarte mit Tilt-Effekt + Video/Bild + Info-Leiste | Welt B |
 | `ContactFormNlp` / `ContactFormWeb` | zwei Varianten desselben Endpunkts (die Startseite hat seit 2026-11 kein Formular mehr) | Welt A / Welt B |
 | `HubTilt` | Mobil: Handy-Neigung verschiebt die Naht der Startseite; iOS-Freigabe-Chip | Welt 0 |

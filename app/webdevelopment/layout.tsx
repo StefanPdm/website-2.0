@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
+import ScrollToTop from '@/components/ScrollToTop';
 import WorldSwitchWeb from '@/components/WorldSwitchWeb';
 import { KEYWORDS_WEB, OWNER } from '@/lib/site';
 
@@ -42,6 +43,7 @@ export default function WebdevelopmentLayout({
       <Header />
       <WorldSwitchWeb />
       <div className=''>{children}</div>
+      <ScrollToTop variant='web' />
     </div>
   );
 }

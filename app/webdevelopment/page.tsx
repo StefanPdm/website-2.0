@@ -44,7 +44,6 @@ import ContactFormWeb from '@/components/ContactFormWeb';
 
 import PixelCard from '@/components/PixelCard';
 import CaseCard from '../../components/CaseCard';
-import ScrollToTop from '@/components/ScrollToTop';
 import WebBackdrop from '@/components/WebBackdrop';
 import HyperspeedBand from '@/components/HyperspeedBand';
 import { FaqStructuredData, WebStructuredData } from '@/components/StructuredData';
@@ -590,7 +589,6 @@ export default function WebdevelopmentPage() {
           </div>
         </div>
       </footer>
-      <ScrollToTop />
     </div>
   );
 }
