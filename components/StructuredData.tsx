@@ -61,7 +61,7 @@ const person = {
   // greifen `description` bevorzugt auf, und eine erste Person mit klarer
   // Position ist unterscheidbarer als eine Aufzählung von Leistungen.
   description:
-    'Life Coach für Unternehmer und Webentwickler aus Potsdam. Nach über 20 Jahren als Unternehmer im Interieur Design und einem Wechsel in die Fullstack-Entwicklung begleitet er seit 2025 Menschen als Coach. NLP versteht er nicht als Sammlung von Techniken, sondern als Haltung: bewusst wahrnehmen statt urteilen, wählen statt reagieren, Verantwortung für das eigene Leben übernehmen. Veränderung und Unsicherheit gehören für ihn zum Wesen des Lebens – es geht um Vertrauen in die eigene Fähigkeit, mit dem Unbekannten umzugehen, nicht um Kontrolle.',
+    'Life Coach und Webentwickler aus Potsdam. Nach über 20 Jahren als Unternehmer im Interieur Design und einem Wechsel in die Fullstack-Entwicklung begleitet er seit 2025 Menschen als Coach. NLP versteht er nicht als Sammlung von Techniken, sondern als Haltung: bewusst wahrnehmen statt urteilen, wählen statt reagieren, Verantwortung für das eigene Leben übernehmen. Veränderung und Unsicherheit gehören für ihn zum Wesen des Lebens – es geht um Vertrauen in die eigene Fähigkeit, mit dem Unbekannten umzugehen, nicht um Kontrolle.',
   address: postalAddress,
   sameAs: [OWNER.linkedIn],
   jobTitle: ['Life Coach', 'NLP Coach', 'Webentwickler'],
@@ -105,7 +105,7 @@ export function RootStructuredData() {
             '@id': `${SITE_URL}/#business`,
             name: `${OWNER.name} – Coaching & Webentwicklung`,
             description:
-              'Life Coaching für Unternehmer und Webentwicklung aus Potsdam. Coaching für Klarheit, Entscheidungen und Selbstführung sowie Websites, Web Apps und Kundenportale für Unternehmen in Potsdam, Berlin und Brandenburg.',
+              'Life Coaching und Webentwicklung aus Potsdam. Coaching für Klarheit, Entscheidungen und Selbstführung sowie Websites, Web Apps und Kundenportale für Unternehmen in Potsdam, Berlin und Brandenburg.',
             url: SITE_URL,
             email: `mailto:${OWNER.email}`,
             address: postalAddress,
@@ -134,10 +134,10 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
           {
             '@type': 'Service',
             '@id': `${SITE_URL}/coaching#service`,
-            name: 'Stefan Heinemann Coaching – Life Coaching für Unternehmer',
+            name: 'Stefan Heinemann Coaching – Life Coaching in Potsdam & Berlin',
             serviceType: 'Life Coaching, Coaching für Unternehmer, Personal Coaching, Business Coaching, NLP Coaching',
             description:
-              'Life Coaching für Unternehmer in Potsdam, Berlin und online: Klarheit im Kopf, Entscheidungen ohne Grübeln, Selbstwert und Grenzen, Emotionsregulation. Sessions in Potsdam, beim Klienten vor Ort oder per Video. Einzelcoaching, Mentoring und Workshops für Unternehmen.',
+              'Life Coaching in Potsdam, Berlin und online für Menschen, die viel Verantwortung tragen – Schwerpunkt Unternehmerinnen und Unternehmer: Klarheit im Kopf, Entscheidungen ohne Grübeln, Selbstwert und Grenzen, Emotionsregulation. Sessions in Potsdam, beim Klienten vor Ort oder per Video. Einzelcoaching, Mentoring und Workshops für Unternehmen.',
             url: absoluteUrl('/coaching'),
             provider: { '@id': PERSON_ID },
             // Welt A hat eine eigene Kontaktadresse.
@@ -146,7 +146,7 @@ export function NlpStructuredData({ offers }: { offers: OfferInput[] }) {
             audience: {
               '@type': 'Audience',
               audienceType:
-                'Unternehmer, Selbstständige und Führungskräfte mit persönlichen Themen',
+                'Menschen mit viel Verantwortung in Beruf, eigener Firma oder Familie; Schwerpunkt Unternehmerinnen, Unternehmer und Selbstständige',
             },
             hasOfferCatalog: {
               '@type': 'OfferCatalog',
