@@ -786,6 +786,8 @@
  * <div> im NLP-Layout und blieb damit wirkungslos – die Header-Links sprangen
  * hart. scroll-padding-top hält Platz für den fixierten Header frei, sonst
  * verdeckt er die Überschrift des angesprungenen Abschnitts.
+ * Gehört zusammen mit `data-scroll-behavior='smooth'` an <html> (app/layout.tsx):
+ * Nur damit scrollt Next.js beim Seitenwechsel sofort statt weich.
  */
 html {
   scroll-behavior: smooth;

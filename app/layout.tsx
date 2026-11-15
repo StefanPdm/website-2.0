@@ -72,7 +72,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='de'>
+    // data-scroll-behavior: Next.js schaltet das weiche Scrollen aus globals.css beim
+    // Seitenwechsel nur mit diesem Attribut ab. Ohne es überlagerten sich auf /coaching
+    // ~20 weiche Scroll-Animationen (Fragment mit vielen Sektionen + scroll-padding-top),
+    // und die Seite blieb nach dem Wechsel von / bei „Kennst du das?“ stehen (2026-11-15).
+    <html
+      lang='de'
+      data-scroll-behavior='smooth'>
       <body className={`${bodyFont.variable} antialiased`}>{children}</body>
     </html>
   );
