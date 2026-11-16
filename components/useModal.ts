@@ -92,12 +92,18 @@ export function useModal<T extends HTMLElement = HTMLDivElement>(
     };
 
     document.addEventListener('keydown', onKeyDown);
+    // Auch <html> sperren: iOS Safari scrollt die Seite sonst trotz gesperrtem
+    // <body> mit, sobald ein Wisch im Dialog an dessen Ende ankommt.
+    const html = document.documentElement;
     const previousOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = html.style.overflow;
     document.body.style.overflow = 'hidden';
+    html.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = previousOverflow;
+      html.style.overflow = previousHtmlOverflow;
       // Zurück zum Auslöser – sonst beginnt die Tastaturnavigation wieder oben.
       previouslyFocused?.focus?.({ preventScroll: true });
     };

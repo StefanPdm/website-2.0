@@ -1766,11 +1766,12 @@ html {
 }
 
 /* Mobil: Infokugel oben rechts, auf Höhe der Marke in der Kopfzeile.
+   top = Innenabstand von .hub-top (1rem) → Oberkante Button = Oberkante Logo.
    Am Desktop ist .hub-info-slot eine leere Ebene in Bühnengröße (siehe unten). */
 .hub-info-slot {
   position: absolute;
   grid-row: auto;
-  top: 0.625rem;
+  top: 1rem;
   right: var(--gutter);
   z-index: 6;
   width: auto;
@@ -1782,6 +1783,21 @@ html {
   position: relative;
   z-index: 5;
   pointer-events: auto;
+}
+
+/* Info-Fenster (InfoOrb): Höhe an der sichtbaren Fläche messen. 90vh ist am
+   iPhone die Höhe ohne Browserleisten – das Fenster ragte unter die Leiste.
+   dvh folgt den Leisten; ältere Browser bleiben bei vh. */
+.info-modal {
+  max-height: 90vh;
+  max-height: 88dvh;
+}
+
+@media (min-width: 768px) {
+  .info-modal {
+    max-height: 80vh;
+    max-height: 80dvh;
+  }
 }
 
 /* Info-Fenster (InfoOrb): schwebendes Foto und großer Abstand nach oben nur,
